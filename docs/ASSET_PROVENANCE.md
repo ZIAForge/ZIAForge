@@ -17,3 +17,15 @@ Unused Vite, Electron-Vite and React template artwork has been removed. Public b
 ## Contributions
 
 New media must be original or have a recorded compatible source, version, license and any required notices. Include the provenance alongside the asset. Dependency notices are collected separately during packaging; that collector does not establish ownership of media.
+
+## Documentation presentation — 2026-10-04
+
+The owner required the project's existing icon and loading-screen artwork for the website. Their source hashes above are identical in the current checkout and the retained original project trees. The website's small icon is a resize/encoding derivative of that inherited asset; its mark has not been redrawn. The separate Studio landing and films remain local until their hosting step.
+
+| Public documentation asset | SHA-256 | Origin and license |
+| --- | --- | --- |
+| `website/assets/brand-logo.jpg` | `4351bacb85f298f1a0d3a7aa1bee2a29225c4972a4f5f5cccc0ab8b5c03b4b7d` | 96 px JPEG resize of inherited `public/app-logo.jpeg`; same project-owner release authorization |
+| `website/assets/fonts/BebasNeue-Regular.ttf` | `08e4623805102d819f58601e46e345648846075e363b2ceb23313c2d1c83ec73` | Dharma Type, Google Fonts `ofl/bebasneue`, SIL Open Font License 1.1; bundled `BebasNeue-OFL.txt` |
+| `website/assets/fonts/Manrope-Variable.ttf` | `3ae11c49db0455a3cc33e37d380f20fdb8c7f8b41dc07625c177e3d87a9d6ae6` | The Manrope Project Authors, Google Fonts `ofl/manrope`, SIL Open Font License 1.1; bundled `Manrope-OFL.txt` |
+
+Font distribution sources: [Bebas Neue](https://github.com/google/fonts/tree/main/ofl/bebasneue), [Manrope](https://github.com/google/fonts/tree/main/ofl/manrope). Original copyright and OFL texts are retained unchanged alongside the files. The guide makes no external font requests. Languages outside the fonts' glyph coverage use the visitor's normal system fallbacks.

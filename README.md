@@ -211,6 +211,12 @@ English is the canonical help source. The other 55 guides are currently **machin
 
 [English guide](docs/USER_GUIDE.md) · [Language coverage and manuals](docs/help/LOCALES.md) · [Help maintenance](docs/HELP_MAINTENANCE.md) · [Localization](docs/LOCALIZATION.md)
 
+## Documentation website
+
+The [documentation website](https://ziaforge.github.io/ZIAForge/) presents the same product guide in all 56 application languages with searchable navigation, a responsive reading layout and the project's inherited visual identity. Machine translation and native-speaker review remain separate statuses.
+
+Run `node scripts/website/serve.cjs --port 4173` and open `http://127.0.0.1:4173/website/guide.html` to read it locally. See [website setup](website/README.md) and [documentation delivery](docs/WEBSITE.md). A new Studio landing and local infographic films are being prepared separately for future independent hosting at `ziaforge.studio`.
+
 ## Data, permissions and updates
 
 Task state and history are local. Using a selected model sends the relevant prompt/context to that provider under its own account and service rules. Remote control and Telegram can transmit project information and screenshots to their configured destinations.
