@@ -1,0 +1,118 @@
+name: macOS quality and package verification
+
+on:
+  pull_request:
+  push:
+    branches: [main, 'codex/**']
+  workflow_dispatch:
+    inputs:
+      package_verify:
+        description: Also build and test disposable unsigned packages on Intel and Apple Silicon
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    runs-on: macos-15-intel
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 24.21.0
+          cache: npm
+      - run: npm ci
+      - name: Static checks, unit tests, build, real Electron fixture flows
+        run: npm run qa:check -- --e2e
+      - name: Keep bounded fixture evidence; never upload profiles or live-provider logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: quality-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 14
+          path: |
+            test-results/qa/**/result.json
+            test-results/qa/**/manifest.json
+            test-results/qa/**/screenshots/*.png
+            test-results/qa/**/playwright/**/*.png
+            test-results/qa/**/tooling.log
+            test-results/qa/**/typescript*.log
+            test-results/qa/**/lint.log
+            test-results/qa/**/unit.log
+            test-results/qa/**/build.log
+            test-results/qa/**/e2e.log
+
+  package-verification:
+    if: github.event_name == 'workflow_dispatch' && inputs.package_verify
+    needs: quality
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-15-intel
+            arch: x64
+          - runner: macos-15
+            arch: arm64
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 24.21.0
+          cache: npm
+      - run: npm ci
+      - name: Build disposable CI package (source base version; never a delivery version)
+        id: package
+        run: |
+          npm run package:mac -- --ci-verify
+          node - <<'NODE'
+          const fs = require('node:fs'), path = require('node:path')
+          const base = 'release/macos-ci'
+          const results = fs.readdirSync(base).map(name => JSON.parse(fs.readFileSync(path.join(base, name, 'result.json'))))
+          if (results.length !== 1 || results[0].status !== 'passed') throw new Error('Expected one successful fresh CI package')
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `app=${results[0].app}\n`)
+          NODE
+      - name: Launch the exact packaged app and verify native geometry and normal Quit
+        env:
+          PACKAGED_APP: ${{ steps.package.outputs.app }}
+        run: npm run qa:package -- "$PACKAGED_APP"
+      - name: Verify packaged CLI catalogs, direct model selection and full restart
+        env:
+          ZIAFORGE_E2E_PACKAGED_APP: ${{ steps.package.outputs.app }}
+          ZIAFORGE_QA_OUTPUT: test-results/qa/packaged-model-catalog-${{ matrix.arch }}-${{ github.run_id }}-${{ github.run_attempt }}/playwright
+          PLAYWRIGHT_HTML_OUTPUT_DIR: test-results/qa/packaged-model-catalog-${{ matrix.arch }}-${{ github.run_id }}-${{ github.run_attempt }}/html
+        run: node node_modules/@playwright/test/cli.js test e2e/model-catalog.spec.ts
+      - name: Verify real packaged workflow supervisor, failure, review, full restart and Quit
+        env:
+          PACKAGED_APP: ${{ steps.package.outputs.app }}
+        run: node scripts/mac/workflow-smoke.cjs "$PACKAGED_APP"
+      - name: Retain verification receipts only (no .app or DMG distribution)
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: package-verification-${{ matrix.arch }}-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 14
+          path: |
+            release/macos-ci/*/result.json
+            release/macos-ci/*/build-identity.json
+            release/macos-ci/*/native-pty.json
+            release/macos-ci/*/SHA256SUMS
+            test-results/qa/**/result.json
+            test-results/qa/**/manifest.json
+            test-results/qa/**/screenshots/*.png
+            test-results/qa/**/playwright/**/*.png
+
+# No provider credentials, signing credentials, self-hosted runner, release upload,
+# pull_request_target or write-capable token is used by this workflow.

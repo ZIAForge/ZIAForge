@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "description": "Explicitly reviewed declaration-based supplements for missing upstream notice files. This allowlist is not public legal clearance. Actual upstream notice files always take precedence.",
+  "notices": [
+    {
+      "packagePath": "node_modules/lazy-val",
+      "name": "lazy-val",
+      "version": "1.0.5",
+      "license": "MIT",
+      "author": "Vladimir Krivosheev",
+      "resolved": "https://registry.npmjs.org/lazy-val/-/lazy-val-1.0.5.tgz",
+      "integrity": "sha512-0/BnGCCfyUMkBpeDgWihanIAF9JmZhHBgUhEqzvf+adhNGLoP6TaiI5oF8oyb3I45P+PcnrqihSf01M0l0G5+Q==",
+      "packageJsonSha256": "a5096f95098452cf6fe5c8ac9be8f13f59ab7c9f605ba5ef92c91b2c505744f0",
+      "file": "docs/licenses/lazy-val-1.0.5-supplemental.txt",
+      "sha256": "e3849304e8939ca4e2537b7277b6d6f56258f4eeff3754c0b101ac0169ba816f",
+      "review": {
+        "date": "2026-10-03",
+        "decision": "Explicit project release-engineering exception for unsigned preview notice collection only; no original copyright attribution or year is asserted.",
+        "limits": "Missing upstream copyright/license notice remains unresolved for public legal clearance. This supplement is not an upstream-authored notice or a new license grant.",
+        "metadataUrl": "https://registry.npmjs.org/lazy-val/1.0.5",
+        "sourceRevision": "b69ad4119f1b19bdab13c61ee2fcc88d46b89071",
+        "sourceMetadataUrl": "https://github.com/develar/lazy-val/blob/b69ad4119f1b19bdab13c61ee2fcc88d46b89071/package.json",
+        "sourceTreeUrl": "https://api.github.com/repos/develar/lazy-val/git/trees/b69ad4119f1b19bdab13c61ee2fcc88d46b89071?recursive=1",
+        "observedTarballFiles": [
+          "package/out/main.js",
+          "package/package.json",
+          "package/out/main.js.map",
+          "package/readme.md",
+          "package/out/main.d.ts"
+        ],
+        "observation": "Neither the integrity-verified published tarball nor the complete source tree at the npm gitHead contains a license/copyright notice file. Published and installed package.json bytes have the same SHA256.",
+        "mitTemplateUrl": "https://raw.githubusercontent.com/spdx/license-list-data/v3.27.0/text/MIT.txt",
+        "mitTemplateSha256": "b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5",
+        "mitTemplateTransformation": "Preserve MIT title and permission/warranty paragraphs; omit only the generic unfilled copyright placeholder and surrounding blank line; prepend explicit supplement provenance."
+      }
+    }
+  ]
+}

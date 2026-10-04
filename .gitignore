@@ -1,0 +1,82 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# IDEs and editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node / Electron outputs
+node_modules/
+dist/
+dist-electron/
+release/
+out/
+dist-ssr/
+*.log
+npm-debug.log*
+.eslintcache
+builder-debug.yml
+latest-mac.yml
+latest-linux.yml
+latest-windows.yml
+coverage/
+.task-*-audit/
+test-results/
+playwright-report/
+screenshots/
+
+# Local credentials and private research inputs (never a publication allowlist)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.har
+/research/
+/captures/
+/private-research/
+/.ziaforge-profiles/
+
+# TypeScript incremental metadata
+*.tsbuildinfo

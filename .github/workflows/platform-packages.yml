@@ -1,0 +1,101 @@
+name: Native platform package verification
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: platform-verification-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  native-package:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-15-intel
+            platform: darwin
+            arch: x64
+          - runner: macos-15
+            platform: darwin
+            arch: arm64
+          - runner: windows-2025
+            platform: win32
+            arch: x64
+          - runner: windows-11-arm
+            platform: win32
+            arch: arm64
+          - runner: ubuntu-24.04
+            platform: linux
+            arch: x64
+          - runner: ubuntu-24.04-arm
+            platform: linux
+            arch: arm64
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 50
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Preserve committed source bytes on the disposable runner
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 24.21.0
+          architecture: ${{ matrix.arch }}
+          cache: npm
+      - name: Linux packaging and window dependencies
+        if: matrix.platform == 'linux'
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends rpm libopenjp2-tools libfuse2t64 xvfb dbus-x11 libgtk-3-0t64 libnss3 libasound2t64 libsecret-1-0
+      - run: npm ci --no-audit --no-fund
+      - name: Verify packaging contracts
+        run: node --test scripts/platform/__tests__/*.test.cjs
+      - name: Build verification-only artifacts and run packaged native PTY
+        run: node scripts/platform/package.cjs --ci-verify --platform ${{ matrix.platform }} --arch ${{ matrix.arch }}
+      - name: Locate the one completed package
+        id: result
+        run: |
+          node - <<'NODE'
+          const fs = require('fs'), path = require('path')
+          const base = 'release/platform-ci'
+          const files = fs.readdirSync(base).map(p => path.join(base, p, 'result.json'))
+          if (files.length !== 1) throw Error('Expected one fresh result')
+          const result = JSON.parse(fs.readFileSync(files[0]))
+          if (result.status !== 'passed' || result.nativeExecution !== 'passed') throw Error('Native package did not pass')
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `path=${files[0]}\n`)
+          NODE
+      - name: Actual native window, reload and normal Quit
+        if: matrix.platform != 'linux'
+        env:
+          PACKAGE_RESULT: ${{ steps.result.outputs.path }}
+        run: node scripts/platform/smoke.cjs "$PACKAGE_RESULT"
+      - name: Actual Linux X11 window, reload and normal Quit
+        if: matrix.platform == 'linux'
+        env:
+          PACKAGE_RESULT: ${{ steps.result.outputs.path }}
+        run: xvfb-run -a dbus-run-session -- node scripts/platform/smoke.cjs "$PACKAGE_RESULT"
+      - name: Retain receipts only; CI packages are not official deliverables
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: platform-${{ matrix.platform }}-${{ matrix.arch }}-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 14
+          path: |
+            release/platform-ci/*/result.json
+            release/platform-ci/*/build-identity.json
+            release/platform-ci/*/source-manifest.json
+            release/platform-ci/*/native-pty.json
+            release/platform-ci/*/native-binary-inventory.json
+            release/platform-ci/*/SHA256SUMS
+            release/platform-ci/*/*.log
+            release/platform-ci/*/native-gui-*/result.json
+            release/platform-ci/*/native-gui-*/desktop.png
+
+# No release publishing, provider/signing credentials, write-capable token,
+# self-hosted runner or pull_request_target. A defined job is not a passing run.

@@ -1,0 +1,487 @@
+<!-- Generated from docs/help/en.json; source SHA-256 19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947. Do not edit this output.
+Run node scripts/help/generate.cjs after changing the canonical help.
+Requested locale: id; served locale: id; status: machine-translated. -->
+# Panduan pengguna ZIAForge
+
+Dari niat hingga hasil yang terverifikasi. Panduan praktis untuk Code, Work, dan kontrol aplikasi.
+
+Bahasa Inggris bersifat kanonik. Bantuan terjemahan mesin diberi label terpisah dari terjemahan yang ditinjau manusia. Pemeriksaan otomatis tidak menjamin keakuratan bahasa alami.
+
+> Panduan ini diterjemahkan mesin dari sumber bahasa Inggris saat ini. Tinjauan manusia tetap diterima.
+
+## Bagian panduan
+
+- [Langkah awal](#start)
+- [Instal paket desktop yang benar](#install-platforms)
+- [Code: lima rute](#code)
+- [Diskusi Forge](#forge)
+- [Dokumen dan keputusan](#decisions)
+- [Eksekusi dan peninjauan](#execution)
+- [Tim peninjau paralel dan arsitek laporan](#review-teams)
+- [Spesialisasi agen dan kebijakan prompt](#specializations)
+- [Work: dari pertanyaan hingga dokumen](#work)
+- [Preset, model, dan akses](#models)
+- [Obrolan, Berhenti, dan antrean](#chat)
+- [Berkas, Git, dan penyelesaian](#files)
+- [Koneksi API](#api)
+- [Pengaturan, bahasa, dan penyetelan ulang yang aman](#settings)
+- [Tanyakan kepada asisten Bantuan](#help-assistant)
+- [Asisten dan Telegram](#assistant-control)
+- [Operasikan bot Telegram pribadi Anda](#telegram)
+- [Izin komputer native khusus pemilik](#native-permissions)
+- [Browser dan instans jarak jauh](#remote)
+- [OpenClaw, Hermes, dan agen eksternal lainnya](#external-agents)
+- [CLI lokal dan batasan otomatisasi](#local-cli)
+- [Versi dan pembaruan](#updates)
+- [Mulai ulang dan pemulihan](#restart)
+- [Pemecahan masalah](#troubleshooting)
+- [Laporkan masalah dan periksa bukti](#diagnostics)
+- [Data lokal dan batasan](#privacy)
+- [Pahami dan ubah proyek sumber terbuka ini](#project-contributors)
+
+<a id="start"></a>
+
+## Langkah awal
+
+ZIAForge mempertahankan diskusi, perencanaan, eksekusi, dan verifikasi dalam satu tugas. Pilih Code untuk proyek Git, atau Work untuk dokumen, riset, dan hasil lainnya dalam folder biasa.
+
+Mulailah dengan tugas kecil di proyek terpisah. Jika Anda memilih CLI native, instal dan masuklah dengan akunnya sendiri di terminal terlebih dahulu. Atau, konfigurasikan koneksi API. Langganan CLI dan API berbayar adalah metode koneksi terpisah; ZIAForge tidak memasukkan Anda atau mentransfer kredit di antara keduanya.
+
+1. Buka Pengaturan lalu periksa folder ruang kerja dan bahasa. Tentang menampilkan identitas persis dari build yang sedang berjalan.
+2. Untuk Code, tambahkan repositori Git di bar samping. Untuk Work, pilih folder terpisah saat membuat tugas.
+3. Simpan preset dengan CLI, model, upaya penalaran, dan tingkat akses. Anda juga dapat memilih Kustom secara langsung tanpa preset yang tersimpan.
+4. Buat tugas, pilih rute, peran, serta pemajuan manual atau otomatis. Tinjau pilihan tersebut sebelum Mulai.
+
+> Gunakan artefak dan checksum yang disediakan oleh pengelola. Pratinjau mungkin belum ditandatangani atau tidak memiliki umpan pembaruan yang dipublikasikan. Dukungan desktop dan penyedia native harus diverifikasi untuk OS, arsitektur, dan artefak yang tepat; dukungan kode sumber saja bukanlah sertifikasi rilis.
+
+Instruksi terkait: [Ikhtisar proyek](../../../README.md) · [Kompatibilitas penyedia](../../PROVIDER_COMPATIBILITY.md).
+
+<a id="install-platforms"></a>
+
+## Instal paket desktop yang benar
+
+Pilih paket untuk sistem operasi dan arsitektur CPU Anda: x64 atau arm64. Pipa build dapat menghasilkan format macOS DMG/ZIP, penginstal Windows NSIS/ZIP, dan Linux DEB/RPM/AppImage/tar.gz/ZIP. Berkas yang dihasilkan atau cross-build bukanlah bukti bahwa penginstal dan UI native-nya lulus di komputer Anda; lihat catatan verifikasi rilis tersebut.
+
+Build macOS yang menggunakan Electron 44 memerlukan macOS 13 atau lebih baru. Gunakan paket arm64 pada Apple Silicon dan paket x64 untuk Intel. Keluar sepenuhnya dari aplikasi yang lebih lama sebelum penggantian. Paket pratinjau mungkin tidak ditandatangani dan tidak dinotarisasi; jangan salah mengira artefak pengembangan sebagai rilis publik yang ditandatangani.
+
+Windows memerlukan sistem operasi yang didukung oleh versi Electron yang dibundel dan Git yang tersedia di PATH. Pilih arsitektur yang cocok. Pratinjau yang tidak ditandatangani tidak memiliki sertifikasi Authenticode. ZIP portabel harus mempertahankan direktori aplikasi lengkap dan berkas runtime, bukan hanya berkas eksekusinya saja.
+
+Linux memerlukan desktop grafis yang kompatibel, pustaka sistem yang dibutuhkan oleh Electron, dan Git. Untuk kredensial kontrol terenkripsi, sediakan Secret Service yang berfungsi seperti gnome-libsecret atau KWallet; backend basic_text yang tidak aman tidak diterima. Bukti smoke headless/kontainer tidak mensertifikasi setiap desktop atau distribusi.
+
+Instal DEB dengan apt install ./file.deb, atau instal RPM melalui pengelola paket distribusi Anda. AppImage memerlukan izin eksekusi dan dukungan FUSE yang sesuai; --appimage-extract-and-run adalah alternatif jika didukung. Ekstrak paket tar.gz dan ZIP bersama semua berkas runtime-nya. Jaga data pengguna dan berkas aplikasi tetap terpisah saat mengganti paket.
+
+Untuk membangun dari kode sumber, gunakan Node 24, Git, dan npm ci, termasuk penginstal Electron normal. Pembangunan ulang native memerlukan alat platform: alat baris perintah Xcode di macOS; MSVC C++, Windows SDK, dan Python di Windows; kompiler, make, Python, pkg-config, dan alat pengemasan yang diperlukan di Linux. Ikuti PLATFORM_BUILDS.md untuk perintah tepat dan batasan platform saat ini.
+
+Versi rilis dicadangkan secara terpusat dan keluarannya tidak dapat diubah (immutable). Build verifikasi CI bukanlah penginstal yang dipublikasikan. Arsip sumber berisi kode sumber, lockfile, dokumentasi, dan skrip; dependensi, kredensial, profil pengguna, dan riset privat dikecualikan. Jangan pernah menyimpulkan validasi native ARM atau Windows dari build x64 yang berhasil.
+
+Instruksi terkait: [Paket platform, prasyarat, dan batasan verifikasi](../../PLATFORM_BUILDS.md) · [Identitas build dan pemeriksaan rilis](../../RELEASE_READINESS.md).
+
+<a id="code"></a>
+
+## Code: lima rute
+
+Auto menilai cakupan: pertanyaan sederhana dapat diselesaikan dengan jawaban, sedangkan tugas yang lebih besar membutuhkan persiapan. Perbaiki bug menyelidiki penyebab dan menyiapkan perbaikan. Spesifikasi dahulu dimulai dengan solusi teknis; Persyaratan dahulu dimulai dengan persyaratan dan kriteria penerimaan.
+
+Multi-model menggunakan konteks terpisah untuk eksplorasi, perancangan, implementasi, dan peninjauan. Nama rute tidak memerlukan penyedia yang berbeda: setiap peran menggunakan konfigurasi preset atau Kustom yang Anda pilih.
+
+Worktree mengisolasi perubahan Git suatu tugas. Cabang bekerja di checkout yang dipilih. Periksa proyek, cabang, dan model sebelum memulai; deskripsi tugas tidak dikirimkan juga ke obrolan biasa.
+
+Untuk ide dengan pilihan produk atau teknis yang belum terselesaikan, gunakan Persyaratan dahulu dan bangun fondasinya dalam diskusi. Auto mengklasifikasikan permintaan; ini bukan perintah untuk langsung mengimplementasikan setiap frasa pendek. Simpan draf menyimpan permintaan tanpa menghubungi model; Mulai menyimpan dan meluncurkan alur terkelola satu kali. Satu hingga empat salinan tugas memiliki ID pembuatan dan pengaturan peran yang independen.
+
+Instruksi terkait: [Kontrak alur kerja Code](../../WORKFLOWS.md) · [Profil prompt Code](../../CODE_WORKFLOW_PROMPTS.md).
+
+<a id="forge"></a>
+
+## Diskusi Forge
+
+Mulai membuka diskusi pusat. Balas secara alami, ajukan pertanyaan balik, tambahkan batasan, dan diskusikan pilihan teknis. Percakapan dan pertanyaan tetap tersimpan bersama tugas.
+
+Mengirim teks tidak berarti menyetujui dokumen atau mengotorisasi rencana implementasi baru. Klarifikasi selama eksekusi awalnya menjeda giliran terkelola dan meninjau kembali cakupan yang terpengaruh. Jawaban atas pertanyaan dalam langkah yang sudah disetujui dapat melanjutkan langkah tersebut.
+
+Untuk sengaja meninjau kembali fondasi, pilih Persyaratan, Spesifikasi, atau Perencanaan. Versi baru memerlukan persetujuan baru terhadap keputusan yang bergantung padanya. Langkah-langkah yang telah selesai dan buktinya tetap ada; fase-fase belum selesai yang digantikan tetap tersimpan dalam riwayat.
+
+Sesi fase terkelola berbeda dari obrolan bebas. Gunakan diskusi Forge alih-alih mengirim prompt manual langsung ke sesi milik alur kerja.
+
+Instruksi terkait: [Kontrak diskusi Forge](../../WORKFLOWS.md).
+
+<a id="decisions"></a>
+
+## Dokumen dan keputusan
+
+Buka dokumen, periksa versinya, dan buat pengeditan bila diperlukan. Mengirimkan pengeditan melalui diskusi akan menghasilkan versi baru; laporan dan hasil terverifikasi tidak ditulis ulang secara retrospektif.
+
+Sebelum menyetujui rencana yang diajukan, edit urutan, instruksi, kriteria penerimaan, dan perintah verifikasi. Berikan otorisasi pada perintah konkret yang Anda pahami: perintah tersebut berjalan di folder tugas. Multi-model mengusulkan satu langkah implementasi untuk keseluruhan tugas, dengan rincian dalam dokumen dan instruksinya.
+
+Setujui adalah keputusan tersendiri yang disengaja. Auto tidak melewati pertanyaan atau persetujuan atas persyaratan, spesifikasi, dan rencana. Dokumen yang diubah secara eksternal tidak dapat menggunakan kembali persetujuan lama.
+
+Berkas persiapan muncul sebagai artefak. Versi, fase penghasil, dan hash mengikat berkas tersebut ke suatu hasil. Dokumen Code disimpan di luar worktree dan tidak secara otomatis masuk ke dalam commit.
+
+Periksa dokumen dan keputusan yang ditampilkan sebelum menyetujui. Persetujuan mengikat ID gerbang saat ini, revisi rencana, dan hash dokumen yang dipertahankan. Minta perubahan jika cakupan atau bukti salah. Jika suatu keputusan sudah basi, muat ulang status tersimpan sebelum membuat pilihan baru; berkas yang diubah tidak dapat disetujui di bawah versi sebelumnya.
+
+Instruksi terkait: [Gerbang alur kerja dan versi dokumen](../../WORKFLOWS.md).
+
+<a id="execution"></a>
+
+## Eksekusi dan peninjauan
+
+Daftar tugas menampilkan langkah-langkah nyata, upaya saat ini, verifikasi, dan hasil peninjauan. Agen yang menyatakan "selesai" tidak serta-merta menyelesaikan suatu langkah: bukti yang diwajibkan oleh rencana harus ada.
+
+Mode manual menjeda di antara langkah-langkah yang memenuhi syarat. Auto memajukan langkah-langkah yang terverifikasi dan memungkinkan percobaan ulang yang dibatasi. Berhenti setelah selalu membuat titik pemeriksaan. Jeda menghentikan pekerjaan aktif alur kerja; menutup panel tidak menghentikannya.
+
+Peninjau independen menggunakan konteks terpisah dengan berkas dan hasil verifikasi. Setiap temuan pemblokir yang diwajibkan harus diselesaikan; beberapa peninjau tidak dapat melakukan pemungutan suara untuk menyingkirkan kesalahan pemblokir.
+
+Dalam Multi-model, mengoreksi temuan membutuhkan keputusan eksplisit. Koreksi tidak secara diam-diam memulai peninjauan lain: Tinjau lagi membuka siklus baru. Komentar peninjauan dapat meminta pertimbangan ulang koordinator tanpa mengulangi implementasi.
+
+Langkah yang telah selesai tidak dapat diedit secara diam-diam. Dengan TDD, Merah harus benar-benar gagal karena alasan yang diharapkan, kemudian Hijau harus berhasil. Percobaan yang dibatasi mencegah percobaan ulang tanpa batas.
+
+Simpan peninjau CLI/API independen di Pengaturan → Tim peninjau, lalu pilih tim di Code atau Work. Peninjau berjalan secara paralel, diikuti oleh arsitek laporan tim. Anda juga dapat mengonfigurasi peninjau independen tanpa tim tersimpan. Arsitek laporan hanya menerima laporan terstruktur anonim, tanpa berkas proyek atau alat; isolasi ini saat ini memerlukan Claude Code atau API.
+
+Setiap langkah implementasi memerlukan pemeriksaan yang dapat dieksekusi, peninjauan independen yang diwajibkan, atau keduanya. Fase persiapan justru mempertahankan hasil yang divalidasi dan tanda terima artefak; hal ini tidak berpura-pura bahwa pengujian implementasi telah dijalankan. Suatu perintah berhasil hanya jika status keluar sebenarnya dan pembersihan proses yang dimilikinya telah terkonfirmasi. Pemeriksaan Merah untuk TDD harus gagal secara normal sebelum implementasi dan verifikasi Hijau; ketiadaan berkas eksekusi atau waktu habis bukanlah hasil Merah yang valid.
+
+Pemutus sirkuit bawaan berhenti setelah tiga upaya gagal pada satu langkah atau lima puluh upaya secara total. Interupsi menghabiskan satu upaya tetapi tidak dihitung sebagai upaya gagal. Batasan dan bukti yang telah selesai tetap bertahan setelah mulai ulang; Coba lagi tidak menyetel ulang batasan tersebut. Baca kegagalan yang tersimpan sebelum mengotorisasi upaya lain.
+
+Instruksi terkait: [Verifikasi dan peninjauan](../../WORKFLOWS.md).
+
+<a id="review-teams"></a>
+
+## Tim peninjau paralel dan arsitek laporan
+
+Buka Pengaturan → Tim peninjau dan simpan tim. Tambahkan peninjau independen dengan CLI atau API, model, upaya penalaran, dan spesialisasi mereka sendiri, lalu pilih arsitek laporan. Pilih tim dalam konfigurasi peninjauan tugas. Preset pelaksana juga dapat digunakan oleh peninjau, dan Kustom tetap tersedia; peran independen tetap memiliki konteks terpisah.
+
+Peninjau berjalan secara paralel pada bukti tugas yang sama. Setiap laporan, kesalahan, dan putusan yang diwajibkan akan dipertahankan. Arsitek menerima laporan bernomor anonim tanpa nama peninjau, identitas model atau penyedia, konten tugas asli, akses repositori, atau alat. Ini membandingkan laporan dan mengembalikan satu putusan terstruktur; itu tidak melakukan peninjauan sumber baru.
+
+Temuan pemblokir atau penolakan peninjau yang diwajibkan tidak dapat dikesampingkan oleh pemungutan suara mayoritas atau preferensi arsitek. Laporan yang hilang atau salah format mencegah persetujuan. Periksa masing-masing temuan dan keputusan agregat sebelum menerima atau mengotorisasi koreksi. Tim yang tersimpan diselesaikan dan dibekukan untuk eksekusi tersebut; mengedit presetnya tidak menulis ulang bukti yang telah selesai.
+
+Arsitek khusus laporan saat ini menggunakan konfigurasi bebas alat Claude atau API yang didukung. Codex dan Antigravity tetap tersedia sebagai peninjau tetapi ditolak untuk peran arsitek terisolasi ini sampai ada kontrak bebas alat yang terverifikasi. Prompt yang hanya bertuliskan "tanpa alat" tidaklah cukup.
+
+> Pipa perancangan/peninjauan Multi-model Code dan tim peninjau paralel tersimpan adalah kontrol terpisah. Pertahankan kebijakan peninjauan kustom yang dipilih; jangan berasumsi satu rute mengaktifkan setiap fitur peninjauan.
+
+Instruksi terkait: [Konfigurasi tim bertipe](../../../shared/review-team.ts) · [Agregasi peninjauan](../../../electron/workflow/ReviewAggregation.ts).
+
+<a id="specializations"></a>
+
+## Spesialisasi agen dan kebijakan prompt
+
+Model adalah mesin eksekusi; spesialisasi adalah profil instruksi. Pilih Tidak Ada untuk tanpa spesialisasi tambahan, Standar untuk panduan bawaan, Auto untuk panduan bawaan yang relevan, atau Manual untuk panduan yang dipilih dan instruksi terbatas Anda sendiri. Preset dapat mempertahankan pilihan tersebut.
+
+Katalog asli mencakup pengodean umum, arsitektur, keamanan, keandalan, performa, pengujian, dan kegunaan antarmuka. Auto menggunakan teks tugas/langkah yang tersedia untuk memilih panduan; ini tidak secara diam-diam memanggil model lain atau mensertifikasi keahlian. Saran perencanaan dapat diperiksa dan diubah sebelum menyetujui rencana implementasi.
+
+Spesialisasi peninjauan membantu mengarahkan perhatian tetapi tidak pernah menggantikan bukti independen, batas akses, atau putusan terstruktur. Perlakukan instruksi kustom sebagai bagian dari cakupan tugas: jangan menggunakannya untuk melewati penerimaan dokumen, kebijakan alat, autentikasi, atau kegagalan peninjau.
+
+Instruksi terkait: [Katalog prompt asli](../../../shared/specializations.ts).
+
+<a id="work"></a>
+
+## Work: dari pertanyaan hingga dokumen
+
+Work tidak memerlukan Git. Bawaan membuat folder tugas terpisah; Kustom memilih folder yang ada melalui pemilih native. Simpan draf menyimpan pengaturan tanpa inferensi; Mulai menjalankan fase pertama.
+
+Auto menjawab secara langsung atau mengusulkan rencana yang sesuai dengan Daftar Tugas nyata. Curah pendapat membuat ideas.md sebelum Anda memilih lebih banyak ide atau evaluasi. Riset menyimpan findings.md, sumber, dan batasan. Tulis beralih dari niat dan, jika berguna, outline.md ke dokumen deskriptif atau draft.md; revisi mempertahankan versi sebelumnya.
+
+Pilih berkas masukan melalui pemilih native dan rujuk dengan @. Aplikasi menyalinnya sebagai masukan tugas yang tidak dapat diubah (immutable) dan memvalidasi identitasnya sebelum eksekusi. Bawaan membuat folder tugas milik aplikasi; Akses folder Kustom adalah izin pemilik yang disimpan. Draf yang disimpan dan belum dimulai dapat mengubah foldernya.
+
+Buat 1–4 salinan dengan pengaturan pelaksana independen. Tugas yang menggunakan folder yang tumpang tindih tidak dapat menulis secara bersamaan. Koordinasi ini berlaku untuk operasi ZIAForge, bukan program eksternal sembarang.
+
+Curah Pendapat Mendalam secara bawaan menggunakan tiga pekerja independen dan mendukung hingga delapan. Pilih urutan dan konfigurasinya, termasuk penggunaan kembali preset dalam konteks terpisah. Pertanyaan pekerja mempertahankan asalnya; laporan yang salah format mendapatkan satu upaya perbaikan format. Kegagalan parsial tetap terlihat alih-alih ditampilkan sebagai keberhasilan bulat.
+
+Mendalam menggabungkan laporan pekerja yang tersimpan ke dalam brainstorm_report.md dan selalu meminta keputusan pengguna. Tindak lanjut kecil merevisi laporan melalui koordinator; perubahan besar memulai babak lain dari pekerja yang dibekukan. Artefak mempertahankan versinya.
+
+Peran yang terselesaikan dibekukan saat pembuatan tugas atau penyimpanan draf eksplisit. Setelah pemanggilan pertama, hanya pemajuan otomatis/manual yang dapat berubah; gunakan tugas baru untuk pengaturan peran atau model yang berbeda. Mengedit preset global tidak secara diam-diam mengubah fase selanjutnya.
+
+Mode manual menjeda di antara fase yang memenuhi syarat, termasuk kerangka Tulis yang substansial. Auto dapat melanjutkan melalui kerangka tersebut. Pertanyaan, rencana terarah yang dapat dieksekusi, arah Curah pendapat, dan peninjauan laporan Mendalam tetap merupakan keputusan eksplisit bahkan di Auto. Kutipan saja tidak membuktikan penelusuran terjadi, dan berkas biner yang disimpan saja tidak membuktikan perenderannya.
+
+Instruksi terkait: [Mode dan keputusan Work](../../WORK_WORKFLOWS.md).
+
+<a id="models"></a>
+
+## Preset, model, dan akses
+
+Preset menyimpan CLI/API, model, upaya penalaran, dan izin. Footer obrolan memiliki segmen preset, CLI, model, dan opsi. Kustom berfungsi tanpa preset; Buat preset menyimpan pilihan saat ini.
+
+Katalog berasal dari CLI atau API terinstal yang dipilih jika didukung. Segarkan memperbarui daftar tanpa mengubah pilihan. Jika penemuan tidak tersedia, masukkan ID model secara eksplisit; penyedia harus tetap mendukungnya. Tingkat penalaran bergantung pada model dan CLI. Bawaan penyedia berbeda dari token none eksplisit.
+
+Terapkan perubahan hanya setelah konfirmasi backend. Peralihan dibatasi selama giliran aktif atau antrean tidak kosong. Draf dan riwayat yang terlihat tetap ada, tetapi mengubah penyedia tidak mentransfer status internal privat mereka.
+
+Dalam Forge, label peran sangat penting: persiapan dapat menggunakan Perencana terpisah. Footer mengubah peran yang ditampilkan; peninjau dan pembantu dipilih dalam pengaturan alur kerja. Kebijakan untuk implementasi yang telah diverifikasi mungkin dikunci.
+
+Izin berbeda antar penyedia. Hanya baca dan Tulis ruang kerja tersedia jika adaptor mendukungnya. Antigravity menggunakan pengaturan CLI native atau akses penuh yang dipilih secara eksplisit. Akses penuh bukanlah kotak pasir (sandbox).
+
+Spesialisasi menambahkan panduan prompt, bukan model atau izin lain. Preset dan peran mendukung Tidak Ada, Standar, Auto, dan Manual. Auto memilih profil dari teks langkah tanpa panggilan model tambahan; Manual menerima hingga empat spesialisasi dan instruksi khusus. Penugasan yang diusulkan Perencana dapat diedit sebelum menyetujui rencana.
+
+ID model atau upaya yang dimasukkan secara manual tetap merupakan pilihan Anda, tetapi penyedia dapat menolaknya. Mengedit preset global tidak secara retroaktif mengubah obrolan yang sedang berjalan atau rencana yang telah disetujui. Untuk mengubah percakapan yang menganggur secara sengaja, gunakan kontrol konfigurasinya sendiri dan tunggu konfirmasi. Opsi yang dinonaktifkan harus dibaca sebagai batas kemampuan atau siklus proses, bukan dilewati dengan mengedit JSON yang tersimpan.
+
+Instruksi terkait: [Kemampuan penyedia](../../PROVIDER_COMPATIBILITY.md).
+
+<a id="chat"></a>
+
+## Obrolan, Berhenti, dan antrean
+
+Tab terbuka, Terkini, dan draf berada dalam satu tugas. Menutup tab akan menghapusnya dari Terbuka tetapi menyimpannya di Terkini dan tidak menghentikan proses penyedianya atau alur kerja terkelola. Cari riwayat, buka kembali obrolan, atau tutup semua tab tambahan dari menu riwayat.
+
+Hentikan menyela giliran saat ini. Tunggu hingga proses penghentian selesai sebelum Kirim berikutnya: pengakuan interupsi bukanlah penyelesaian proses. Anda dapat mengetik draf berikutnya sementara itu.
+
+Dalam obrolan biasa, Antrean menyimpan permintaan nanti secara terpisah dari draf saat ini. Jeda antrean menahan pengiriman lebih lanjut. Hentikan dan Keluar menjeda antrean. Setelah mulai ulang, Lanjutkan terlebih dahulu, lalu secara eksplisit Lanjutkan antrean.
+
+Tidak pasti berarti pengiriman tidak diketahui. Pesan seperti itu tidak dikirim ulang secara otomatis: periksa riwayat, salin teks jika sesuai, dan hapus item yang diantrekan. Mengirimnya lagi merupakan permintaan baru yang disengaja.
+
+Obrolan fase terkelola menggunakan alur kerjanya, bukan antrean biasa. Ikuti tahap menampilkan fase saat ini; memilih tab lain secara manual akan menghentikan pelacakan. Log CLI menampilkan diagnostik secara terpisah dari respons.
+
+Respons Markdown merender judul, daftar, tabel, tautan, dan blok kode. Kartu alat dan diagnostik CLI tetap terpisah dari jawaban. Pemikiran yang dilaporkan model dan metrik token hanya muncul saat penyedia benar-benar mengeksposnya; jangan menyimpulkan penalaran privat atau penggunaan dari animasi.
+
+Setelah pengiriman yang tidak pasti atau tanda terima antrean, periksa riwayat dan coba lagi hanya permintaan tersimpan yang sama jika ditawarkan. Tanda terima antrean berarti penyimpanan telah menerima item tersebut, bukan inferensi telah selesai. Hapus item antrean yang tidak pasti hanya sebagai pengabaian eksplisit; tindakan ini tidak dapat menarik kembali prompt yang sudah terkirim.
+
+Instruksi terkait: [Antrean pesan persisten](../../MESSAGE_QUEUE.md).
+
+<a id="files"></a>
+
+## Berkas, Git, dan penyelesaian
+
+Berkas menampilkan folder tugas. Bandingkan hasil dengan persyaratan, buka dokumen, dan periksa diff. Menyimpan berkas biner tidak membuktikan perenderan yang benar dalam aplikasi targetnya.
+
+Git menyediakan status, perubahan, dan operasi dengan hasil yang tercatat. Commit, penggabungan, dan push bersifat manual secara bawaan; operasi otomatis adalah pilihan terpisah untuk rencana yang terverifikasi penuh.
+
+Jangan mengubah berkas kerja antara verifikasi dan publikasi: persetujuan terikat pada bita yang tepat. Konflik, push yang gagal, dan hasil operasi yang tidak diketahui memblokir kemajuan hingga keputusan eksplisit diambil. Auto tidak secara diam-diam mengotorisasi penerbitan.
+
+Work tidak membuat cabang Git dan tidak memiliki finalisasi Git. Simpan dokumen yang diperlukan dari folder yang dipilih, termasuk versi dan sumbernya.
+
+Editor berkas menyediakan penyorotan sintaksis berdasarkan ekstensi, pencarian dan penggantian, riwayat pembatalan, pemotongan baris, dan draf per tab. Tindakan penyimpanan mempertahankan penyandian UTF-8/UTF-16 yang didukung dan menolak konflik modifikasi eksternal. Penyandian lain dan konten biner memerlukan editor eksternal. Draf yang belum disimpan mencegah Keluar aplikasi sampai pemilik menyimpan atau membuangnya.
+
+Sintaksis penuh diaktifkan hingga 8 MiB. Berkas teks yang lebih besar dibuka dalam jendela 256 KiB; 8–64 MiB dapat dimuat penuh secara eksplisit tanpa sintaksis. Di atas 64 MiB, gunakan pengeditan jendela dan pencarian kecocokan berikutnya yang dibatasi. Ini adalah mode berkas besar yang terbatas, bukan kesetaraan Sublime Text untuk dokumen yang sangat besar tanpa batas.
+
+Buka folder menggunakan konteks tugas atau cabang/worktree saat ini, daripada secara diam-diam hanya membuka repositori asli. Baris berkas dapat menampilkan direktori induk berkas tersebut. Jalur divalidasi oleh backend terhadap izin tugas yang terdaftar. Berkas biner tidak dapat diedit sebagai teks biasa; gunakan penampil targetnya dan pertahankan bita aslinya.
+
+Penghapusan worktree adalah tindakan terpisah yang terlindungi. Akhiri sesi terstruktur dan terminal yang terpasang sebelum menghapusnya, termasuk sesi yang sedang menganggur. Periksa hasil Git dan status pemulihan yang tersimpan; menghapus catatan tugas bukanlah pengganti untuk mempertahankan pekerjaan yang belum di-commit secara aman.
+
+Instruksi terkait: [Kontrak editor bertipe](../../../shared/editor.ts) · [Kebijakan Git](../../WORKFLOWS.md).
+
+<a id="api"></a>
+
+## Koneksi API
+
+Koneksi menambahkan titik akhir kompatibel OpenAI yang dipilih secara eksplisit. Masukkan nama, URL dasar, model, dan kunci jika diperlukan. Banyak server memerlukan URL dasar yang berakhiran /v1; lihat dokumentasi titik akhir Anda.
+
+HTTPS diperlukan kecuali untuk loopback HTTP. Gunakan titik akhir polos tanpa kredensial yang disematkan di dalam URL. Kunci menggunakan enkripsi OS yang didukung dan tidak dikembalikan ke UI. Mengubah titik akhir memerlukan pemasukan ulang kuncinya. Mengosongkan bidang kunci akan mempertahankan kunci yang tersimpan; Hapus kunci yang tersimpan secara eksplisit menghapusnya.
+
+Panggilan API tidak menggunakan langganan CLI. Alat dan model berbeda dari sesi native, dan penemuan model yang berhasil tidak membuktikan inferensi. Penggunaan token hanya muncul saat penyedia benar-benar mengembalikannya.
+
+Simpan kredensial di Koneksi daripada di prosa tugas atau instruksi preset. Peninjau hanya-baca hanya menerima alat berkas API yang diizinkan; arsitek laporan tidak memiliki alat. Panggilan alat yang tidak didukung akan ditolak, bukan dieksekusi secara diam-diam. Server bervariasi dalam parameter penalaran, dukungan alat, dan daftar model; bandingkan kesalahan dengan kontrak titik akhir Anda sendiri.
+
+Instruksi terkait: [Koneksi API](../../API_CONNECTIONS.md).
+
+<a id="settings"></a>
+
+## Pengaturan, bahasa, dan penyetelan ulang yang aman
+
+Pengaturan umum memilih ruang kerja, bahasa antarmuka, dan pengaturan bawaan. Koneksi mengelola titik akhir API. Preset dan Tim peninjau mempertahankan konfigurasi peran. Kontrol jarak jauh mengelola kredensial lokal, cakupan server, dan izin pemilik; Pembaruan mengelola sumber/saluran rilis. Tentang menampilkan build yang sedang berjalan secara tepat.
+
+Bahasa antarmuka terpisah dari bahasa prompt dan status tinjauan dokumentasi. Nama produk, ID perintah, ekstensi berkas, ID model penyedia, dan nama buatan pengguna tetap berupa pengidentifikasi. Bantuan mengikuti bahasa antarmuka yang dipilih jika terjemahan saat ini tersedia; terjemahan mesin diberi label dan bahasa Inggris tetap menjadi referensi kanonik.
+
+Simpan menerapkan konfigurasi yang ditampilkan. Reset basis data atau reset pabrik dapat menghapus metadata aplikasi; amankan berkas dan cadangan yang telah teruji sebelum sengaja menggunakan reset. Operasi ini adalah tindakan pemilik lokal. Jangan menggunakannya sebagai jalan pintas untuk menyelidiki alur kerja yang gagal atau rekaman yang rusak.
+
+Instruksi terkait: [Petunjuk lokalisasi](../../LOCALIZATION.md) · [Pemulihan data](../../DATA_RECOVERY.md).
+
+<a id="help-assistant"></a>
+
+## Tanyakan kepada asisten Bantuan
+
+Buka Bantuan, pilih preset terhubung yang tersimpan di panel asistennya, dan tanyakan tentang ZIAForge. Jawaban menggunakan panduan bahasa Inggris kanonik saat ini dan bahasa antarmuka yang Anda pilih. Tombol rujukan bagian membuka topik panduan yang relevan, sehingga Anda dapat membandingkan penjelasan dengan referensi.
+
+Asisten ini menyimpan percakapan pribadi terpisah hingga 100 entri tersimpan dan 3 MiB. Masukkan pertanyaan hingga 12,000 karakter; Kirim untuk mengajukannya, Hentikan untuk membatalkan jawaban aktif sekaligus mempertahankan ketersediaan pertanyaan Anda, dan Bersihkan untuk menghapus percakapan Bantuan ini. Draf yang belum dikirim serta pilihan preset Anda tetap bertahan saat menutup atau membuka kembali Bantuan dalam sesi aplikasi yang sama, tetapi draf tersebut tidak disimpan ke disk. Asisten tidak mengirimkan perintah aplikasi, mengubah alur kerja, atau menyetujui gate. Saran bukanlah verifikasi langsung terhadap tugas, akun, atau koneksi eksternal.
+
+Sesi Bantuan Claude Code dan API menegakkan kebijakan tanpa alat yang didukung. Sesi Bantuan native Codex dan Antigravity memerlukan izin komputer native pemilik lokal yang sudah ada. Jika dinonaktifkan, aplikasi akan menjelaskan prasyarat tersebut alih-alih memilih penyedia lain. Hanya pemilik yang dapat mengaktifkannya di pengaturan kontrol lokal; asisten tidak dapat mengaktifkannya sendiri.
+
+Bantuan Codex menggunakan sandbox hanya-baca dan menolak permintaan persetujuan alat. Antigravity menggunakan mode plan dan flag sandbox native-nya. Mode native ini bukan jaminan universal atas pembatasan sistem operasi. Hash panduan sumber mengidentifikasi referensi yang digunakan untuk jawaban; penjelasan yang dihasilkan masih bisa keliru, jadi periksa bagian terkaitnya sebelum bertindak. Jawaban yang lebih lama ditandai ketika versi panduan sumbernya berbeda dari panduan saat ini.
+
+Instruksi terkait: [Panduan kanonik dan pemeliharaan terjemahan](../../HELP_MAINTENANCE.md) · [Asisten aplikasi dan izin](../../AGENT_CONTROL.md).
+
+<a id="assistant-control"></a>
+
+## Asisten dan Telegram
+
+Asisten menggunakan preset yang dipilih dan API kontrol aplikasi yang sama. Izin untuk memeriksa status dan izin untuk melakukan operasi bersifat terpisah. Periksa perintah dan hasil: narasi asisten bukan bukti bahwa suatu tindakan telah selesai.
+
+Telegram hanya diaktifkan oleh pemilik lokal, dengan token bot yang ada dan ID pemilik numerik. Kontrol ditujukan untuk obrolan pribadi pemilik tersebut. Bot yang tidak terkonfigurasi atau tidak aktif tidak boleh menerima pesan aplikasi.
+
+Jangan tempel token bot ke dalam obrolan biasa. Mengonfigurasi integrasi tidak membuktikan konektivitas Telegram dan tidak membuat bot secara otomatis. Tangkapan layar dan respons dapat berisi data ruang kerja pribadi.
+
+Pilih preset asisten dan berikan izin operasi aplikasi secara terpisah dari pemeriksaan. Eksekusi asisten Codex dan Antigravity memerlukan izin native pemilik; keduanya tidak digantikan secara diam-diam dengan sesi API atau Claude tanpa alat. Tangkapan layar dapat ditampilkan dalam percakapan asisten, tetapi input model saat ini tidak menyertakan analisis gambar. Jangan menganggap asisten telah memeriksa gambar secara visual hanya karena ia menampilkannya.
+
+Asisten dapat memeriksa ringkasan, tugas, obrolan, status alur kerja, konteks proses, dan jendela aplikasi melalui alat bertipe. Asisten dapat mengubah pengaturan biasa yang diizinkan dan meluncurkan operasi aplikasi yang diotorisasi. Asisten tidak dapat memberikan hak native, mengungkap kredensial yang tersimpan, mengubah izin root ruang kerja dari jarak jauh, atau menyetujui gerbang Forge hanya karena praktis.
+
+Instruksi terkait: [Kontrak kontrol aplikasi](../../AGENT_CONTROL.md).
+
+<a id="telegram"></a>
+
+## Operasikan bot Telegram pribadi Anda
+
+Buat atau dapatkan bot Anda sendiri, mulai obrolan pribadinya, lalu masukkan tokennya beserta ID pengguna Telegram numerik Anda di pengaturan kontrol lokal. Aktifkan integrasi hanya jika Anda bermaksud agar aplikasi terhubung. ID pemilik adalah pengidentifikasi pengguna, bukan nama pengguna atau ID bot. Hanya pesan dari pengguna tersebut di obrolan pribadi yang sama yang diterima.
+
+Gunakan /start, /menu, atau /status untuk ikhtisar versi yang sedang berjalan, jumlah proyek/tugas, dan status tugas. Tombol akan membuka Proyek, Tugas, Tangkapan Layar, Bantuan, dan Bahasa. Daftar menampilkan delapan item per halaman, dengan navigasi Kembali, Segarkan, Beranda, dan Sebelumnya/Berikutnya. Tombol proyek memfilter daftar tugas. Kartu tugas menampilkan progres alur kerja yang tersimpan, model/preset, dan pertanyaan yang tertunda jika ada.
+
+Buka Obrolan tugas untuk melihat pratinjau percakapan terbuka/terbaru dan obrolan fase alur kerja. Setiap pratinjau menampilkan hingga enam pesan pengguna/asisten terbaru, dipersingkat secara jelas menjadi masing-masing 200 karakter. Penalaran pribadi tidak ditampilkan. Membaca riwayat tidak memulai penyedia. Pratinjau bersifat hanya-baca: teks biasa dan /ask TEXT tetap ditujukan ke asisten aplikasi, tidak pernah secara implisit ke obrolan tugas yang sedang Anda lihat.
+
+Jalankan / Lanjutkan membaca ulang alur kerja Code atau Work saat ini dan memulai alur kerja tersimpan yang memenuhi syarat. Jeda meminta jeda. Keduanya tidak menerima persyaratan, spesifikasi, rencana, temuan tinjauan, atau pertanyaan; keputusan yang tertunda mencegah Jalankan. Buat keputusan di aplikasi, atau gunakan perintah bertipe yang diotorisasi secara eksplisit dengan gerbang dan revisi yang tepat saat ini.
+
+Gunakan Bahasa atau /language untuk memilih salah satu dari 56 bahasa antarmuka berdasarkan nama aslinya. Ini menyimpan preferensi untuk bot dan pemilik ini saja. Gunakan bahasa aplikasi akan menghapus preferensi tersebut. Tindakan ini tidak mengubah bahasa aplikasi maupun izin akses; pesan yang ada tidak dikirim ulang secara otomatis.
+
+Navigasi biasanya memperbarui pesan menu yang sama yang diterbitkan. Tombol memiliki identitas buram yang kedaluwarsa setelah 15 menit dan dapat digunakan sekali; mengubah kartu akan membatalkan tombol lamanya. Tombol yang kedaluwarsa, terpakai, pesan yang tidak cocok, dan proses sebelumnya tidak dapat melakukan tindakan. Pesan yang pasti tidak dapat diedit dapat diganti dengan kartu baru; kesalahan jaringan yang tidak diketahui tidak dicoba ulang sebagai pesan baru.
+
+Saat aktivasi, poller membuang tumpukan sebelumnya dan mencatat penerimaan pembaruan sebelum pengiriman sehingga perintah yang terputus tidak diputar ulang secara otomatis saat mulai ulang. Ini mencegah pemutaran ulang; ini tidak menjamin penyelesaian. Periksa status/konteks sebelum sengaja mengeluarkan pekerjaan baru setelah terjadi kesalahan. Tidak ada pemberitahuan status tugas otomatis.
+
+Perintah eksplisit tetap tersedia: /projects, /tasks, /task TASK_ID, /run TASK_ID, /pause TASK_ID, /screenshot, dan /ask TEXT. /new {JSON} membuat tugas melalui createTask bertipe; /command {JSON} mengirim perintah katalog eksplisit. Baca katalog langsung untuk bentuk argumen. Otorisasi backend dan izin folder yang sama berlaku seperti dalam aplikasi.
+
+Aplikasi tidak pernah mengirim nilai token bot yang tersimpan ke asisten. Namun, tangkapan layar, ringkasan, dan teks percakapan mungkin berisi informasi proyek pribadi. Hentikan integrasi secara lokal jika bot atau akun pemilik tidak lagi tepercaya. Putar token yang bocor dengan penyedia bot, lalu perbarui konfigurasi terenkripsi lokalnya.
+
+Instruksi terkait: [Bot pribadi dan perintah](../../AGENT_CONTROL.md).
+
+<a id="native-permissions"></a>
+
+## Izin komputer native khusus pemilik
+
+Akses komputer native awalnya dinonaktifkan. Hanya pemilik yang dapat mengaktifkannya di Pengaturan lokal → Remote control. Asisten dan perintah HTTP/MCP/Telegram tidak dapat mengaktifkan flag ini untuk dirinya sendiri. Jika suatu operasi ditolak, asisten harus menjelaskan pengaturan tersebut dan membiarkan pemilik memutuskan.
+
+Ketika diaktifkan secara eksplisit, computer.run menerima program yang dapat dieksekusi, larik argumen, dan direktori kerja absolut opsional. Perintah ini tidak menggunakan interpolasi shell, memiliki batas 30 detik, dan membatasi output hingga 1 MiB. Direktori yang diberikan yang hilang atau tidak valid akan ditolak; menghilangkan cwd menggunakan direktori pengaturan milik aplikasi, bukan HOME. Keluar membatalkan perintah aktif milik aplikasi dan menunggu pembersihan prosesnya.
+
+Cakupan baca/operasi aplikasi dan akses native adalah keputusan terpisah. Worktree tidak membatasi akses sistem berkas penyedia yang tidak dibatasi. Cabut akses native setelah tugas selesai jika tidak lagi diperlukan, dan periksa tanda terima perintah daripada menerima narasi asisten sebagai bukti.
+
+Instruksi terkait: [Kontrak kontrol khusus pemilik](../../../shared/control.ts).
+
+<a id="remote"></a>
+
+## Browser dan instans jarak jauh
+
+Pemilik lokal mengaktifkan server dan memilih alamat, port, dan cakupannya: baca untuk inspeksi atau operasikan untuk tindakan. Alamat default 127.0.0.1 hanya tersedia di komputer ini. 0.0.0.0 mendengarkan pada antarmuka jaringan; tinjau akses jaringan sebelum mengaktifkannya.
+
+Browser membuka antarmuka yang sama setelah masuk dengan token. Jangan sertakan token dalam tautan publik atau tangkapan layar. HTTP saja tidak mengenkripsi lalu lintas; gunakan saluran yang dilindungi melalui jaringan yang tidak tepercaya.
+
+Pemilik mengonfigurasi instans lain berdasarkan URL dan token. Backend memproksi permintaan; ini tidak menyalin proyek mereka ke mesin lokal. Periksa instans yang dipilih sebelum setiap tindakan.
+
+Perintah dan peristiwa bertipe membawa kontrol aplikasi. Cakupan baca tidak mengotorisasi mutasi tugas. Kontrol komputer native adalah pilihan pemilik lokal terpisah dan awalnya dinonaktifkan.
+
+Aplikasi harus tetap berjalan untuk browser, Telegram, dan kontrol agen eksternal. Setiap instans memiliki profil pribadi, status tugas, token, dan port servernya sendiri. Jangan menggunakan kembali satu profil secara bersamaan di antara instans independen. Peristiwa browser dan respons perintah dicakupkan ke instans yang dipilih; beralih UI tidak memindahkan berkas atau menyalin login native.
+
+Instruksi terkait: [Kontrol HTTP dan instans](../../AGENT_CONTROL.md).
+
+<a id="external-agents"></a>
+
+## OpenClaw, Hermes, dan agen eksternal lainnya
+
+Gunakan API kontrol aplikasi yang terotentikasi atau jembatan stdio MCP bawaan. Aktifkan server secara lokal, pilih baca atau operasikan, dan konfigurasikan setiap klien dengan URL dan token instans tersebut. Node.js 22 atau yang lebih baru diperlukan untuk menjalankan jembatan MCP mandiri; aplikasi Electron tidak memasang klien agen Anda. URL browser bukan titik akhir HTTP MCP Streamable: sediakan sebagai ZIAFORGE_URL ke jembatan stdio.
+
+Jembatan mengekspos ziaforge_status, ziaforge_commands, ziaforge_command, dan ziaforge_screenshot. Mulailah dengan status dan katalog perintah langsung, lalu baca system.context untuk tugas yang dipilih. Perintah bertipe mengikuti pemeriksaan revisi, gerbang, folder tugas, dan pembersihan yang sama seperti UI lokal.
+
+Katalog perintah langsung menyertakan documentation.guide, bantuan bahasa Inggris kanonik, beserta jalur sumber dan sourceSha256 miliknya. Arsitek aplikasi internal menerima referensi yang sama melalui alatnya. Ini memberi agen seluruh konteks produk tanpa bergantung pada catatan lama; dokumentasi tidak pernah memberikan akses atau menggantikan keputusan manusia saat ini.
+
+Agen harus mendiskusikan persyaratan, keputusan teknis, dan perencanaan dari ide manusia yang singkat. Mereka harus mempertahankan gerbang eksplisit manusia, model yang dipilih, kebijakan manual/Auto, dan tinjauan yang diperlukan. Mereka tidak boleh mengarang persetujuan, memutar ulang perintah yang tidak pasti dengan ID baru, atau memublikasikan perubahan Git tanpa maksud pemilik.
+
+Konfigurasikan beberapa server MCP bernama untuk beberapa instalasi. Peralihan instans adalah keputusan perutean, bukan sinkronisasi. Contoh konfigurasi OpenClaw dan Hermes ada di AGENT_CONTROL.md; penyiapan dan kompatibilitas khusus klien harus diperiksa untuk versi klien yang terpasang.
+
+Cache requestId luar hanya menghapus duplikat kumpulan permintaan terbatas selama aplikasi berjalan. Operasi persisten menggunakan identitasnya sendiri: createRequestId untuk pembuatan tugas, commandId untuk keputusan alur kerja, clientMessageId untuk pesan, dan operationId untuk mutasi Git. Pertahankan identitas asli dan muatan setelah pengakuan yang tidak diketahui; baca status yang tersimpan sebelum dengan sengaja mengeluarkan pekerjaan baru.
+
+Instruksi terkait: [Petunjuk klien MCP](../../AGENT_CONTROL.md).
+
+<a id="local-cli"></a>
+
+## CLI lokal dan batasan otomatisasi
+
+Dispatcher ziaf mengontrol aplikasi berjalan dan alur kerja tersimpan yang sama. Dari kode sumber, gunakan npm run ziaf -- list, npm run ziaf -- status --task TASK_ID --json, npm run ziaf -- start --task TASK_ID, atau npm run ziaf -- pause --task TASK_ID. Pengakuan Mulai yang berhasil bukan berarti tugas telah selesai.
+
+--until-success dengan sengaja mengaktifkan Auto untuk alur kerja yang tersimpan, tetapi pertanyaan, peninjauan, gerbang penerimaan, batas, dan titik pemeriksaan tetap berlaku. Ctrl+C keluar dari dispatcher yang mengamati; tindakan ini tidak secara implisit menghentikan alur kerja aplikasi. Lihat CLI.md untuk kode keluar, titik akhir lokal, dan penanganan profil.
+
+Antarmuka Automasi saat ini menyimpan definisi tampilan dan penghitung eksekusi lokal. Ini bukan penjadwal berulang bersertifikasi dan tidak membuktikan bahwa giliran model latar belakang telah berjalan. Untuk eksekusi sebenarnya, gunakan kontrol alur kerja yang tersimpan, ziaf, atau API yang terotentikasi dan periksa tanda terimanya. Jangan mengira panel demonstrasi sebagai penjadwalan tanpa pengawasan.
+
+Instruksi terkait: [Perintah dispatcher](../../CLI.md).
+
+<a id="updates"></a>
+
+## Versi dan pembaruan
+
+Tentang menunjukkan versi berjalan yang tepat. Pembaruan publik memerlukan repositori rilis GitHub yang tepercaya dan saluran stabil atau pratinjau. Pemeriksaan, pengunduhan, dan pemasangan memiliki status terpisah; kesalahan bukan berarti pembaruan telah terpasang.
+
+Pemasangan otomatis ditujukan untuk rilis macOS yang bertanda tangan. Build pengembangan yang tidak ditandatangani tidak dipasang secara otomatis melalui mekanisme ini. Untuk penggantian manual, keluar sepenuhnya dari aplikasi saat ini dan gunakan artefak yang terverifikasi.
+
+Pemeriksaan otomatis berjalan segera setelah diaktifkan, kemudian setiap enam jam.
+
+Stabil mengecualikan rilis pratinjau; pratinjau juga memungkinkan rilis pengembangan. Pemeriksaan yang berhasil hanya menetapkan metadata rilis yang tersedia. Pengunduhan dan pemasangan memerlukan paket platform dan umpan rilis yang dikonfigurasi. Pengiriman Linux DEB adalah jalur penginstal terpisah; jangan menganggap DEB ditingkatkan secara otomatis oleh mekanisme pembaruan macOS.
+
+Instruksi terkait: [Kesiapan rilis](../../RELEASE_READINESS.md).
+
+<a id="restart"></a>
+
+## Mulai ulang dan pemulihan
+
+Di macOS, gunakan Keluar / ⌘Q untuk penonaktifan penuh. Menutup jendela dapat membiarkan aplikasi tetap berjalan. Keluar sepenuhnya dari versi lama sebelum mengganti aplikasi.
+
+Setelah peluncuran, pilih tugas yang sama. Riwayat dan draf akan kembali. Lanjutkan memulihkan konteks native/lokal tetapi tidak mengirim draf, membatalkan jeda antrean, atau mengotorisasi pengulangan operasi yang tidak diketahui.
+
+Jika Pemulihan muncul, jangan edit JSON secara manual. Periksa jenis dokumen yang terpengaruh, pertahankan berkas asli, dan pilih cadangan yang tervalidasi. Memulihkan antrean yang lebih lama akan menandai itemnya tidak pasti.
+
+Ketika pengiriman tidak diketahui, alur kerja terkelola mungkin memerlukan izin eksplisit untuk konteks baru. Pekerjaan sebelumnya dan upaya yang gagal tetap ada; penolakan yang terlihat lebih aman daripada keberhasilan yang dibuat-buat.
+
+Cadangkan berkas tugas dan profil aplikasi dengan semua instans aplikasi tertutup. Folder yang disalin bukan pemulihan yang teruji. Jika pemulihan meminta Anda memilih cadangan yang tervalidasi, simpan juga berkas rusak yang sama persis. Memulihkan alur kerja atau antrean yang lebih lama tidak mengotorisasi pemutaran ulang operasi inferensi atau Git yang tidak pasti.
+
+Instruksi terkait: [Kontrak pemulihan](../../DATA_RECOVERY.md).
+
+<a id="troubleshooting"></a>
+
+## Pemecahan masalah
+
+CLI tidak ditemukan: periksa instalasi dan versinya di terminal biasa, lalu mulai ulang ZIAForge. Adanya executable bukan berarti Anda sudah masuk. Gunakan mekanisme masuk milik penyedia itu sendiri.
+
+Model tidak tersedia atau otorisasi gagal: segarkan penemuan, pilih ID yang tersedia, dan periksa akun serta batas Anda. Jangan mengulangi permintaan yang tidak pasti sebelum memeriksa riwayatnya.
+
+Alur kerja terhenti: buka fase saat ini, pertanyaan, tanda terima verifikasi, atau log CLI. Tangani penyebab spesifik: pertanyaan yang belum terjawab, perintah, izin folder, atau batas percobaan. Lanjutkan tidak dapat mengubah pemeriksaan yang gagal menjadi berhasil.
+
+Folder hilang atau diganti: pulihkan akses ke folder asli atau buat tugas baru. Aplikasi tidak boleh melanjutkan dari HOME. Jika Anda melihat cwd lain, hentikan giliran dan simpan diagnostik.
+
+Untuk laporan, sertakan versi Tentang, rute, CLI/model, perilaku yang diharapkan dan aktual, tangkapan layar, serta kutipan log yang aman. Hapus rahasia, konten pribadi, dan jalur yang tidak dapat dipublikasikan.
+
+Halaman jarak jauh tidak tersedia: pastikan pemilik telah mengaktifkan server, periksa alamat dan port yang mendengarkan, lalu autentikasi dengan token instans yang benar. 401 menunjukkan autentikasi; mutasi yang ditolak mungkin karena cakupan baca atau kontrol khusus pemilik. Mengubah token akan menutup klien browser yang ada. Jangan memaparkan port inspeksi DevTools terpisah sebagai kontrol aplikasi jarak jauh.
+
+Penyimpanan editor ditolak: pertahankan draf, periksa berkas saat ini di disk, dan selesaikan konflik perubahan eksternal. Jangan melewati perbandingan dengan menulis ulang metadata aplikasi. Jika pemuatan penuh berkas besar tidak tersedia, gunakan pengeditan/pencarian jendela yang didukung atau editor eksternal.
+
+Telegram tidak tersedia: konfirmasikan token bot, pemilik numerik, obrolan pribadi, dan status secara lokal. Webhook atau poller yang bersaing dapat memblokir polling; ZIAForge tidak secara otomatis menghapus webhook atau mengambil alih poller lain. Perintah yang ditolak atau terputus pada batas yang tidak diketahui tidak diputar ulang secara otomatis.
+
+Instruksi terkait: [Pengujian dan diagnosis](../../TESTING.md).
+
+<a id="diagnostics"></a>
+
+## Laporkan masalah dan periksa bukti
+
+Catat build berjalan yang tepat dari Tentang, OS/arsitektur, mode tugas, penyedia/model yang dipilih, dan langkah-langkah yang mereproduksi masalah. Jelaskan hasil yang diharapkan dan hasil yang diamati. Sertakan tangkapan layar yang aman dan tanda terima verifikasi atau perintah tersimpan yang relevan, daripada keseluruhan profil pribadi.
+
+Log CLI, jurnal peristiwa, transkrip model, jejak browser, dan tangkapan layar dapat mengekspos kode sumber, jalur pribadi, atau token. Periksa dan redaksi sebelum membagikan. Alat peredaksi log berbasis upaya terbaik tidak menjamin bahwa tangkapan layar atau arsip layak dipublikasikan.
+
+Bagi kontributor, qa:doctor membaca identitas lingkungan/build; qa:inspect membuka profil terisolasi dengan stub penyedia. Sebuah fixture membuktikan jalur aplikasi yang diuji tanpa menghubungi model. Inferensi langsung, konektivitas Telegram, desktop Linux native, penandatanganan, dan pemeriksaan artefak terpaket adalah bukti terpisah. Lihat TESTING.md untuk perintah yang dapat direproduksi dan pembersihan.
+
+Instruksi terkait: [Perintah bukti](../../TESTING.md).
+
+<a id="privacy"></a>
+
+## Data lokal dan batasan
+
+Proyek, riwayat, rencana, dokumen, dan diagnostik dapat berisi teks pribadi. Jangan mempublikasikan profil, rekaman mentah, kunci, atau log lengkap dengan kode sumber.
+
+Di Linux, penyimpanan kredensial API, kontrol, Telegram, dan instans memerlukan GNOME Secret Service atau KWallet yang tidak terkunci; tanpa penyimpanan rahasia yang didukung, ZIAForge menolak untuk menyimpan rahasia ini alih-alih menggunakan cadangan Electron basic_text.
+
+Penyimpanan lokal bukan berarti permintaan tetap berada di komputer Anda: CLI/API yang dipilih mengirimkannya ke penyedianya. Folder kerja dan pengawasan proses bukanlah isolasi OS. Periksa izin yang dipilih.
+
+Bedakan jenis bukti: fixture menguji aplikasi tanpa model; native live menguji CLI/akun nyata; pemeriksaan terpaket mensertifikasi artefak tertentu. Lolos satu pengujian tidak menjamin yang lain.
+
+Cakupan aplikasi, worktree, dan prompt hanya-baca berbeda dari penegakan sistem operasi. Kebijakan peninjau/pembantu Antigravity mendeteksi perubahan dalam bukti ruang kerja yang dikumpulkan alih-alih menegakkan akses hanya-baca sistem berkas. Kontrol komputer native menjalankan program yang diotorisasi pemilik di luar batas alat aplikasi biasa; matikan ketika tidak lagi diperlukan.
+
+Instruksi terkait: [Asal-usul dan publikasi](../../RELEASE_READINESS.md).
+
+<a id="project-contributors"></a>
+
+## Pahami dan ubah proyek sumber terbuka ini
+
+Baca AGENTS.md dan CONTRIBUTING.md terlebih dahulu, lalu PROJECT_MAP.md untuk batas kode sumber saat ini. Kontrak bertipe yang diterapkan dan dokumen alur kerja/penyedia saat ini mengatur perilaku. CONCEPT.md dan bagian yang mengutamakan terminal pada ARCHITECTURE.md mempertahankan tujuan historis dan tidak boleh disalahartikan sebagai klaim rilis saat ini.
+
+Sumber bantuan bahasa Inggris adalah docs/help/en.json. Jangan mengedit secara manual USER_GUIDE.md atau website/guide.html yang dihasilkan. Ubah bagian kanonik, perbarui kontrak yang terpengaruh, dan jalankan node scripts/help/generate.cjs. Bantuan dalam aplikasi membaca sumber yang sama. Tinjau penambahan dengan implementasi sebenarnya, termasuk batas, izin, dan jalur yang tidak didukung.
+
+Masing-masing dari 56 lokal antarmuka memiliki status bantuan terpisah di docs/help/locales.json. Bantuan yang hilang atau tidak lengkap akan kembali ke bahasa Inggris. Isi terjemahan mesin yang lengkap diberi label dan diikat ke hash sumber bahasa Inggris, tanpa klaim peninjauan manusia. Terjemahan yang ditinjau manusia juga mencatat peninjaunya. Setiap terjemahan harus mempertahankan ID bagian, tindakan, pengidentifikasi berkas/perintah, dan batas teknis, menggunakan arah yang benar, dan diperbarui saat sumber bahasa Inggrisnya berubah.
+
+Sebelum merilis, jalankan node scripts/help/generate.cjs --check untuk mendeteksi keluaran yang dihasilkan yang usang, perancah lokal yang tidak valid, atau tautan kontrak lokal yang rusak. Pemeriksaan terjemahan UI dan pemeriksaan perilaku aplikasi tetap terpisah. HELP_MAINTENANCE.md memberikan prosedur pembaruan untuk kontributor dan AI; dokumentasi tidak boleh mengklaim pengujian yang lolos padahal belum dijalankan.
+
+Instruksi terkait: [Peta proyek saat ini](../../PROJECT_MAP.md) · [Pemeliharaan dokumentasi](../../HELP_MAINTENANCE.md) · [Petunjuk kontributor](../../../CONTRIBUTING.md) · [Petunjuk agen](../../../AGENTS.md).

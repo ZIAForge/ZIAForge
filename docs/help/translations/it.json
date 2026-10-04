@@ -1,0 +1,519 @@
+{
+  "schemaVersion": 1,
+  "locale": "it",
+  "title": "Guida utente di ZIAForge",
+  "description": "Dall'intento a un risultato verificato. Una guida pratica a Code, Work e al controllo dell'applicazione.",
+  "sourcePolicy": "L'inglese è la versione canonica. La guida tradotta automaticamente è etichettata separatamente dalle traduzioni revisionate da persone. I controlli automatizzati non certificano l'accuratezza nella lingua madre.",
+  "sections": [
+    {
+      "id": "start",
+      "title": "Primi passi",
+      "paragraphs": [
+        "ZIAForge racchiude discussione, pianificazione, esecuzione e verifica in un'unica attività. Scegli Code per un progetto Git oppure Work per documenti, ricerche e altri risultati in una cartella ordinaria.",
+        "Inizia con una piccola attività in un progetto separato. Se scegli una CLI nativa, installala ed effettua prima l'accesso con il rispettivo account in un terminale. In alternativa, configura una connessione API. Un abbonamento CLI e un'API a pagamento sono metodi di connessione distinti; ZIAForge non effettua l'accesso né trasferisce crediti tra di essi."
+      ],
+      "steps": [
+        "Apri Impostazioni e verifica la cartella dell'area di lavoro e la lingua. Informazioni mostra l'esatta identità della build in esecuzione.",
+        "Per Code, aggiungi un repository Git nella barra laterale. Per Work, scegli una cartella separata durante la creazione dell'attività.",
+        "Salva un preset con CLI, modello, livello di ragionamento e livello di accesso. Puoi anche selezionare direttamente Personalizzato senza un preset salvato.",
+        "Crea un'attività, scegli il percorso, i ruoli e l'avanzamento manuale o automatico. Rivedi le scelte prima di fare clic su Avvia."
+      ],
+      "note": "Usa l'artefatto e il checksum forniti dal manutentore. Un'anteprima potrebbe non essere firmata o essere priva di un feed di aggiornamento pubblicato. Il supporto per desktop e provider nativi deve essere verificato per il rispettivo OS, l'architettura e l'artefatto specifici; il solo supporto nel codice sorgente non costituisce una certificazione di rilascio.",
+      "links": [
+        {
+          "label": "Panoramica del progetto",
+          "path": "README.md"
+        },
+        {
+          "label": "Compatibilità dei provider",
+          "path": "docs/PROVIDER_COMPATIBILITY.md"
+        }
+      ]
+    },
+    {
+      "id": "install-platforms",
+      "title": "Installa il pacchetto desktop corretto",
+      "paragraphs": [
+        "Scegli un pacchetto per il tuo sistema operativo e per l'architettura della CPU: x64 o arm64. La pipeline di compilazione può produrre formati macOS DMG/ZIP, programmi di installazione Windows NSIS/ZIP e Linux DEB/RPM/AppImage/tar.gz/ZIP. Un file generato o una cross-compilazione non provano che il relativo programma di installazione e l'UI nativa abbiano superato i test sulla tua macchina; consulta il registro di verifica di quel rilascio.",
+        "Le compilazioni per macOS basate su Electron 44 richiedono macOS 13 o versioni successive. Usa il pacchetto arm64 su Apple Silicon e il pacchetto x64 per Intel. Chiudi completamente un'applicazione precedente prima di sostituirla. I pacchetti di anteprima potrebbero non essere firmati né autenticati tramite notarizzazione; non scambiare un artefatto di sviluppo per un rilascio pubblico firmato.",
+        "Windows richiede un sistema operativo supportato dalla versione inclusa di Electron e la disponibilità di Git nel PATH. Scegli l'architettura corrispondente. Un'anteprima non firmata non dispone della certificazione Authenticode. Uno ZIP portabile deve conservare l'intera cartella dell'applicazione e i file di runtime, non soltanto il relativo eseguibile.",
+        "Linux richiede un ambiente grafico compatibile, le librerie di sistema richieste da Electron e Git. Per credenziali di controllo crittografate, fornisci un Secret Service funzionante come gnome-libsecret o KWallet; il backend non sicuro basic_text non è accettato. I test di fumo headless o in container non certificano ogni ambiente desktop o distribuzione.",
+        "Installa un DEB con apt install ./file.deb oppure installa un RPM tramite il gestore di pacchetti della tua distribuzione. Un'AppImage necessita dei permessi di esecuzione e di un supporto FUSE adeguato; --appimage-extract-and-run rappresenta un'alternativa dove supportata. Estrai i pacchetti tar.gz e ZIP con tutti i relativi file di runtime. Mantieni distinti i dati utente e i file dell'applicazione durante la sostituzione di un pacchetto.",
+        "Per compilare dal sorgente, utilizza Node 24, Git e npm ci, compreso il normale programma di installazione di Electron. Le ricompilazioni native richiedono strumenti di piattaforma: gli strumenti da riga di comando di Xcode su macOS; MSVC C++, Windows SDK e Python su Windows; compilatore, make, Python, pkg-config e gli strumenti di pacchettizzazione richiesti su Linux. Segui PLATFORM_BUILDS.md per i comandi esatti e gli attuali limiti di piattaforma.",
+        "Le versioni di rilascio sono riservate centralmente e gli output sono immutabili. Una build di verifica CI non costituisce un programma di installazione pubblicato. Gli archivi dei sorgenti contengono sorgenti, file di lock, documentazione e script; dipendenze, credenziali, profili utente e ricerche private sono esclusi. Non desumere mai la convalida nativa per ARM o Windows da una compilazione x64 riuscita."
+      ],
+      "links": [
+        {
+          "label": "Pacchetti di piattaforma, prerequisiti e limiti di verifica",
+          "path": "docs/PLATFORM_BUILDS.md"
+        },
+        {
+          "label": "Identità di compilazione e controlli di rilascio",
+          "path": "docs/RELEASE_READINESS.md"
+        }
+      ]
+    },
+    {
+      "id": "code",
+      "title": "Code: cinque percorsi",
+      "paragraphs": [
+        "Auto valuta l'ambito: una domanda semplice può concludersi con una risposta, mentre un'attività più ampia richiede preparazione. Correggi bug esamina una causa e predispone una correzione. Prima le specifiche parte dalla soluzione tecnica; Prima i requisiti parte dai requisiti e dai criteri di accettazione.",
+        "Multi-modello impiega contesti separati per esplorazione, progettazione, implementazione e revisione. Il nome del percorso non richiede provider differenti: ogni ruolo usa il preset o la configurazione Personalizzato che scegli.",
+        "Un worktree isola le modifiche Git di un'attività. Ramo opera nel checkout selezionato. Controlla il progetto, il ramo e il modello prima di iniziare; la descrizione dell'attività non viene inviata anche a una chat ordinaria.",
+        "Per un'idea con scelte di prodotto o tecniche non definite, usa Prima i requisiti e getta le basi nella discussione. Auto classifica la richiesta; non è un comando per implementare immediatamente ogni breve frase. Salva bozza memorizza la richiesta senza contattare alcun modello; Avvia salva e avvia il flusso gestito una sola volta. Da una a quattro copie dell'attività possiedono ID di creazione e impostazioni dei ruoli indipendenti."
+      ],
+      "links": [
+        {
+          "label": "Contratto del flusso di lavoro Code",
+          "path": "docs/WORKFLOWS.md"
+        },
+        {
+          "label": "Profili di prompt per Code",
+          "path": "docs/CODE_WORKFLOW_PROMPTS.md"
+        }
+      ]
+    },
+    {
+      "id": "forge",
+      "title": "Discussione di Forge",
+      "paragraphs": [
+        "Avvia apre la discussione centrale. Rispondi in modo naturale, poni controdomande, aggiungi vincoli e discuti le scelte tecniche. La conversazione e le domande restano associate all'attività.",
+        "L'invio di testo non comporta l'accettazione di un documento né l'autorizzazione di un nuovo piano di implementazione. Un chiarimento durante l'esecuzione mette prima in pausa il turno gestito e riesamina l'ambito interessato. La risposta a una domanda all'interno di un passaggio già accettato può far proseguire quel passaggio.",
+        "Per riesaminare deliberatamente le basi, seleziona Requisiti, Specifica o Pianificazione. Una nuova versione richiede una nuova accettazione delle decisioni dipendenti. I passaggi completati e le relative prove rimangono; le fasi non completate sostituite restano nella cronologia.",
+        "Le sessioni di fase gestite differiscono dalla chat libera. Usa la discussione di Forge invece di inviare prompt manuali direttamente a una sessione controllata dal flusso di lavoro."
+      ],
+      "links": [
+        {
+          "label": "Contratto di discussione di Forge",
+          "path": "docs/WORKFLOWS.md"
+        }
+      ]
+    },
+    {
+      "id": "decisions",
+      "title": "Documenti e decisioni",
+      "paragraphs": [
+        "Apri un documento, ispezionane la versione e apporta modifiche quando necessario. L'invio di modifiche tramite la discussione genera una nuova versione; i report e i risultati verificati non vengono riscritti retroattivamente.",
+        "Prima di accettare un piano proposto, modifica l'ordine, le istruzioni, i criteri di accettazione e i comandi di verifica. Autorizza comandi concreti che comprendi: vengono eseguiti nella cartella dell'attività. Multi-modello propone un unico passaggio di implementazione per l'intera attività, con dettagli nei relativi documenti e nelle istruzioni.",
+        "Approva è una decisione separata e deliberata. Auto non ignora le domande né l'accettazione di requisiti, specifiche e piani. Un documento modificato esternamente non può riutilizzare una precedente approvazione.",
+        "I file di preparazione compaiono come artefatti. La loro versione, la fase di generazione e l'hash li vincolano a un risultato. I documenti di Code sono conservati all'esterno del worktree e non entrano automaticamente in un commit.",
+        "Verifica sia il documento sia la decisione visualizzata prima di accettare. L'accettazione vincola l'ID del gate corrente, la revisione del piano e gli hash dei documenti memorizzati. Richiedi modifiche quando l'ambito o le prove non sono corretti. Se una decisione è diventata obsoleta, ricarica lo stato salvato prima di effettuare una nuova scelta; un file modificato non può essere accettato con una versione precedente."
+      ],
+      "links": [
+        {
+          "label": "Gate del flusso di lavoro e versioni dei documenti",
+          "path": "docs/WORKFLOWS.md"
+        }
+      ]
+    },
+    {
+      "id": "execution",
+      "title": "Esecuzione e revisione",
+      "paragraphs": [
+        "Attività mostra i passaggi effettivi, il tentativo corrente, i risultati della verifica e della revisione. L'affermazione di un agente che dice “fatto” non completa un passaggio: le prove richieste dal piano devono esistere.",
+        "La modalità manuale si ferma tra passaggi idonei. Auto fa avanzare i passaggi verificati e consente tentativi delimitati. Ferma dopo crea sempre un punto di ripristino. Pausa arresta il lavoro attivo del flusso di lavoro; chiudere un pannello non lo interrompe.",
+        "Un revisore indipendente utilizza un contesto separato con file e risultati di verifica. Ogni rilievo bloccante obbligatorio deve essere risolto; la presenza di più revisori non annulla a maggioranza un errore bloccante.",
+        "In Multi-modello, la correzione dei rilievi richiede una decisione esplicita. Una correzione non avvia silenziosamente un'altra revisione: Rivedi apre un nuovo ciclo. I commenti di revisione possono richiedere il riesame del coordinatore senza ripetere l'implementazione.",
+        "I passaggi completati non possono essere modificati silenziosamente. Con TDD, Red deve fallire effettivamente per il motivo previsto, quindi Green deve avere successo. Il limite di tentativi previene ripetizioni infinite.",
+        "Salva revisori indipendenti CLI/API in Impostazioni → Team di revisione, quindi seleziona il team in Code o Work. I revisori operano in parallelo, seguiti dall'architetto del report del team. È inoltre possibile configurare revisori indipendenti senza un team salvato. L'architetto del report riceve solo report strutturati anonimi, senza file di progetto né strumenti; tale isolamento richiede attualmente Claude Code o API.",
+        "Ciascun passaggio di implementazione necessita di un controllo eseguibile, di una revisione indipendente obbligatoria o di entrambi. Le fasi di preparazione conservano invece risultati convalidati e ricevute degli artefatti; questi non simulano l'avvenuta esecuzione dei test di implementazione. Un comando ha successo solo quando vengono confermati il suo stato di uscita effettivo e la pulizia dei processi di sua pertinenza. Un controllo Red per TDD deve fallire regolarmente prima dell'implementazione e della verifica Green; un eseguibile mancante o un timeout non costituisce un risultato Red valido.",
+        "Gli interruttori di sicurezza predefiniti si arrestano dopo tre tentativi falliti su un singolo passaggio o cinquanta tentativi complessivi. Un'interruzione consuma un tentativo ma non conta di per sé come tentativo fallito. I limiti e le prove completate persistono al riavvio; Riprova non li azzera. Leggi l'errore registrato prima di autorizzare un altro tentativo."
+      ],
+      "links": [
+        {
+          "label": "Verifica e revisione",
+          "path": "docs/WORKFLOWS.md"
+        }
+      ]
+    },
+    {
+      "id": "review-teams",
+      "title": "Team di revisione parallela e l'architetto del report",
+      "paragraphs": [
+        "Apri Impostazioni → Team di revisione e salva un team. Aggiungi revisori indipendenti con i rispettivi CLI o API, modello, livello di ragionamento e specializzazione, quindi scegli un architetto del report. Seleziona il team nella configurazione di revisione dell'attività. Un preset dell'esecutore può anche essere utilizzato da un revisore, e Personalizzato rimane disponibile; i ruoli indipendenti mantengono comunque contesti separati.",
+        "I revisori operano in parallelo sulle stesse prove dell'attività. Ogni report richiesto, errore e verdetto viene conservato. L'architetto riceve report numerati anonimi senza nomi dei revisori, identità di modelli o provider, contenuti originali dell'attività, accesso al repository o strumenti. Confronta i report e restituisce un unico verdetto strutturato; non conduce una nuova revisione del codice sorgente.",
+        "Un rilievo bloccante o il rifiuto di un revisore obbligatorio non possono essere annullati tramite voto di maggioranza o preferenza dell'architetto. Report mancanti o non validi impediscono l'approvazione. Esamina i singoli rilievi e la decisione aggregata prima di accettare o autorizzare correzioni. Un team salvato viene risolto e congelato per l'esecuzione; la modifica del suo preset non riscrive le prove completate.",
+        "L'architetto di soli report impiega attualmente configurazioni supportate prive di strumenti con Claude o API. Codex e Antigravity rimangono disponibili come revisori, ma vengono rifiutati per questo ruolo isolato di architetto finché non esisterà un contratto verificato privo di strumenti. Un prompt che indichi unicamente “nessuno strumento” non è sufficiente."
+      ],
+      "note": "La pipeline di progettazione/revisione di Multi-modello in Code e un team di revisione parallela salvato sono controlli separati. Mantieni i criteri di revisione personalizzati selezionati; non dare per scontato che un unico percorso abiliti tutte le funzionalità di revisione.",
+      "links": [
+        {
+          "label": "Configurazione del team tipizzato",
+          "path": "shared/review-team.ts"
+        },
+        {
+          "label": "Aggregazione delle revisioni",
+          "path": "electron/workflow/ReviewAggregation.ts"
+        }
+      ]
+    },
+    {
+      "id": "specializations",
+      "title": "Specializzazioni degli agenti e criteri dei prompt",
+      "paragraphs": [
+        "Un modello costituisce il motore di esecuzione; una specializzazione è un profilo di istruzioni. Scegli Nessuna per nessuna specializzazione aggiuntiva, Standard per la guida predefinita, Auto per una guida integrata pertinente o Manuale per le guide selezionate e per le tue istruzioni delimitate. I preset possono memorizzare la selezione.",
+        "Il catalogo originale copre programmazione generale, architettura, sicurezza, affidabilità, prestazioni, test e usabilità dell'interfaccia. Auto usa il testo disponibile dell'attività/fase per selezionare una guida; non chiama di nascosto un altro modello né certifica competenza. I suggerimenti di pianificazione possono essere esaminati e modificati prima di accettare il piano di implementazione.",
+        "Le specializzazioni di revisione aiutano a orientare l'attenzione, ma non sostituiscono mai le prove indipendenti, i limiti di accesso o il verdetto strutturato. Tratta le istruzioni personalizzate come parte dell'ambito dell'attività: non utilizzarle per eludere l'accettazione dei documenti, i criteri degli strumenti, l'autenticazione o gli errori riscontrati dai revisori."
+      ],
+      "links": [
+        {
+          "label": "Catalogo originale dei prompt",
+          "path": "shared/specializations.ts"
+        }
+      ]
+    },
+    {
+      "id": "work",
+      "title": "Work: dalla domanda al documento",
+      "paragraphs": [
+        "Work non richiede Git. Predefinito crea una cartella dedicata per l'attività; Personalizzato seleziona una cartella esistente tramite il selettore nativo. Salva bozza memorizza le impostazioni senza inferenza; Avvia esegue la prima fase.",
+        "Auto risponde direttamente o propone un piano adeguato con attività effettive. Brainstorm crea ideas.md prima che tu scelga ulteriori idee o una valutazione. Ricerca conserva findings.md, fonti e limitazioni. Scrivi muove dall'intento e, se utile, da outline.md verso un documento descrittivo o draft.md; le revisioni conservano le versioni precedenti.",
+        "Seleziona i file di input tramite il selettore nativo e fai riferimento a essi con @. L'applicazione li copia come input immutabili dell'attività e ne convalida l'identità prima dell'esecuzione. Predefinito crea una cartella dell'attività gestita dall'applicazione; l'accesso alla cartella in Personalizzato è un'autorizzazione del proprietario salvata. Una bozza salvata e non avviata consente di modificare la cartella.",
+        "Crea da 1 a 4 copie con impostazioni dell'esecutore indipendenti. Le attività che condividono cartelle sovrapposte non possono scrivere contemporaneamente. Questo coordinamento si applica alle operazioni di ZIAForge, non a programmi esterni arbitrari.",
+        "Brainstorm approfondito è impostato in modo predefinito su tre worker indipendenti e ne supporta fino a otto. Seleziona il loro ordine e le configurazioni, compreso il riutilizzo di un preset in contesti separati. Le domande dei worker mantengono la loro origine; ai report con formato non valido viene concesso un tentativo di ripristino. Un fallimento parziale rimane visibile anziché essere presentato come un successo unanime.",
+        "Approfondito unisce i report conservati dei worker in brainstorm_report.md e richiede sempre una decisione dell'utente. Un piccolo approfondimento corregge il report tramite il coordinatore; una modifica rilevante avvia un nuovo ciclo con i worker congelati. Gli artefatti mantengono le rispettive versioni.",
+        "I ruoli definiti vengono congelati alla creazione dell'attività o al salvataggio esplicito della bozza. Dopo la prima invocazione, solo l'avanzamento automatico/manuale può essere modificato; crea una nuova attività per impostazioni di ruoli o modelli differenti. La modifica di un preset globale non modifica silenziosamente le fasi successive.",
+        "La modalità manuale si ferma tra fasi idonee, inclusa una struttura Scrivi sostanziale. Auto può proseguire attraverso tale struttura. Domande, piani eseguibili proposti, direzione del Brainstorm e revisione del report Approfondito rimangono decisioni esplicite anche in Auto. Una sola citazione non prova che sia avvenuta la navigazione web, e un file binario conservato non prova da solo il corretto rendering."
+      ],
+      "links": [
+        {
+          "label": "Modalità e decisioni di Work",
+          "path": "docs/WORK_WORKFLOWS.md"
+        }
+      ]
+    },
+    {
+      "id": "models",
+      "title": "Preset, modelli e accesso",
+      "paragraphs": [
+        "Un preset memorizza CLI/API, modello, livello di ragionamento e permessi. Il piè di pagina della chat contiene le sezioni per preset, CLI, modello e opzioni. Personalizzato funziona senza un preset; Crea preset salva la selezione corrente.",
+        "Il catalogo proviene dalla CLI o dall'API installata e selezionata, ove supportato. Aggiorna rinnova l'elenco senza modificare la selezione. Se il rilevamento non è disponibile, inserisci un ID di modello esplicito; il provider deve comunque supportarlo. I livelli di ragionamento dipendono dal modello e dalla CLI. Il valore predefinito del provider è distinto dal token esplicito none.",
+        "Applica le modifiche solo dopo la conferma del backend. Il passaggio ad altro provider è limitato durante un turno attivo o con una coda non vuota. Le bozze e la cronologia visibile rimangono, ma il cambio di provider non trasferisce il loro stato interno privato.",
+        "In Forge, l'etichetta del ruolo ha importanza: la preparazione può impiegare un Pianificatore dedicato. Il piè di pagina modifica il ruolo visualizzato; i revisori e gli assistenti vengono selezionati nelle impostazioni del flusso di lavoro. I criteri per un'implementazione già verificata potrebbero essere bloccati.",
+        "I permessi variano a seconda dei provider. Sola lettura e Scrittura nell'area di lavoro sono disponibili dove l'adattatore li supporta. Antigravity utilizza le impostazioni native della CLI o l'accesso completo selezionato esplicitamente. L'accesso completo non costituisce una sandbox.",
+        "La specializzazione aggiunge linee guida al prompt, non un altro modello o permesso. I preset e i ruoli supportano Nessuno, Standard, Auto e Manuale. Auto seleziona i profili dal testo del passaggio senza un'ulteriore chiamata al modello; Manuale accetta fino a quattro specializzazioni e istruzioni personalizzate. Le assegnazioni proposte dal Pianificatore possono essere modificate prima di accettare il piano.",
+        "L'ID del modello o il livello di ragionamento inseriti manualmente restano una tua scelta, ma il provider potrebbe rifiutarli. La modifica di un preset globale non cambia retroattivamente una chat in esecuzione o un piano accettato. Per modificare deliberatamente una conversazione inattiva, usa i relativi controlli di configurazione e attendi la conferma. Un'opzione disabilitata deve essere interpretata come un limite di funzionalità o di ciclo di vita, non aggirata modificando il JSON salvato."
+      ],
+      "links": [
+        {
+          "label": "Funzionalità dei provider",
+          "path": "docs/PROVIDER_COMPATIBILITY.md"
+        }
+      ]
+    },
+    {
+      "id": "chat",
+      "title": "Chat, Arresta e la coda",
+      "paragraphs": [
+        "Le schede aperte, Recenti e le bozze appartengono a una singola attività. Chiudere una scheda la rimuove da Aperte ma la conserva in Recenti e non interrompe il processo del relativo provider né il flusso di lavoro gestito. Cerca nella cronologia, riapri una chat o chiudi tutte le schede aggiuntive dal menu della cronologia.",
+        "Arresta interrompe il turno corrente. Attendi che l'interruzione sia completata prima del successivo Invia: la conferma di un'interruzione non corrisponde al completamento del processo. Nel frattempo puoi digitare la bozza successiva.",
+        "Nella chat ordinaria, Accoda salva una richiesta successiva separatamente dalla bozza corrente. Sospendi coda blocca l'ulteriore recapito. Arresta ed Esci mettono in pausa la coda. Dopo il riavvio, esegui prima Riprendi, quindi esplicitamente Continua coda.",
+        "Incerto significa che l'esito del recapito è sconosciuto. Un messaggio di questo tipo non viene reinviato automaticamente: esamina la cronologia, copia il testo se appropriato ed elimina l'elemento in coda. Inviarlo di nuovo costituisce una nuova richiesta deliberata.",
+        "Le chat di fase gestite utilizzano il proprio flusso di lavoro, non la coda ordinaria. Segui fase mostra la fase corrente; selezionare manualmente un'altra scheda interrompe il monitoraggio. I log della CLI mostrano la diagnostica separatamente dalla risposta.",
+        "Le risposte in Markdown eseguono il rendering di intestazioni, elenchi, tabelle, collegamenti e blocchi di codice delimitati. Le schede degli strumenti e la diagnostica della CLI rimangono separate dalla risposta. Il ragionamento e le metriche dei token riportati dal modello compaiono solo quando il provider li espone effettivamente; non dedurre il ragionamento privato o il consumo da un'animazione.",
+        "Dopo un invio incerto o una conferma di accodamento, esamina la cronologia e riprova solo la stessa richiesta memorizzata, se offerto. Una ricevuta di coda indica che l'archiviazione ha accettato l'elemento, non che l'inferenza sia terminata. Rimuovi un elemento incerto in coda solo come scarto deliberato; tale azione non può revocare un prompt già recapitato."
+      ],
+      "links": [
+        {
+          "label": "Coda messaggi persistente",
+          "path": "docs/MESSAGE_QUEUE.md"
+        }
+      ]
+    },
+    {
+      "id": "files",
+      "title": "File, Git e completamento",
+      "paragraphs": [
+        "File mostra la cartella dell'attività. Confronta i risultati con i requisiti, apri i documenti ed esamina i diff. Conservare un file binario non dimostra il corretto rendering nell'applicazione di destinazione.",
+        "Git fornisce stato, modifiche e operazioni con esiti registrati. Commit, merge e push sono manuali per impostazione predefinita; le operazioni automatiche sono scelte separate per un piano completamente verificato.",
+        "Non modificare i file di lavoro tra la verifica e la pubblicazione: l'approvazione è legata ai byte esatti. Conflitti, push non riusciti ed esiti operativi sconosciuti bloccano l'avanzamento fino a una decisione esplicita. Auto non autorizza la pubblicazione in modo silenzioso.",
+        "Work non crea rami Git e non prevede alcuna finalizzazione in Git. Mantieni i documenti richiesti dalla cartella selezionata, incluse le versioni e le fonti.",
+        "L'editor di file offre evidenziazione della sintassi per estensione, cerca e sostituisci, cronologia degli annullamenti, a capo automatico e bozze per scheda. I salvataggi preservano la codifica supportata UTF-8/UTF-16 e respingono i conflitti di modifica esterna. Le altre codifiche e i contenuti binari richiedono un editor esterno. Le bozze non salvate impediscono la chiusura dell'applicazione finché l'utente non le salva o le elimina.",
+        "La sintassi completa è abilitata fino a 8 MiB. I file di testo più grandi si aprono in finestre da 256 KiB; i file tra 8 e 64 MiB possono essere caricati esplicitamente per intero senza sintassi. Al di sopra di 64 MiB usa la modifica a finestre e la ricerca delimitata della corrispondenza successiva. Si tratta di una modalità limitata per file di grandi dimensioni, non di una parità con Sublime Text per documenti arbitrariamente grandi.",
+        "Apri cartella utilizza il contesto corrente dell'attività o del ramo/worktree, anziché aprire silenziosamente solo il repository originale. Una riga di file può mostrare la cartella principale di quel file. I percorsi vengono convalidati dal backend a fronte delle autorizzazioni registrate dell'attività. I file binari non sono modificabili come testo normale; usa il visualizzatore di destinazione e conserva i byte originali.",
+        "La rimozione del worktree è un'azione protetta separata. Termina le sessioni strutturate e i terminali collegati prima di rimuoverlo, comprese le sessioni inattive. Esamina il risultato Git salvato e lo stato di ripristino; eliminare il record di un'attività non sostituisce la conservazione sicura del lavoro non sottoposto a commit."
+      ],
+      "links": [
+        {
+          "label": "Contratto dell'editor tipizzato",
+          "path": "shared/editor.ts"
+        },
+        {
+          "label": "Criteri di Git",
+          "path": "docs/WORKFLOWS.md"
+        }
+      ]
+    },
+    {
+      "id": "api",
+      "title": "Connessioni API",
+      "paragraphs": [
+        "Connessioni aggiunge un endpoint compatibile con OpenAI selezionato esplicitamente. Inserisci un nome, un URL di base, il modello e una chiave se richiesta. Molti server richiedono un URL di base che termina con /v1; consulta la documentazione del tuo endpoint.",
+        "HTTPS è obbligatorio, ad eccezione di HTTP su loopback. Usa un endpoint semplice senza credenziali incorporate nell'URL. Le chiavi utilizzano la crittografia supportata dal OS e non vengono restituite all'UI. La modifica dell'endpoint richiede il reinserimento della relativa chiave. Lasciare vuoto il campo della chiave mantiene la chiave salvata; Rimuovi cancella esplicitamente la chiave salvata.",
+        "Le chiamate API non utilizzano un abbonamento CLI. Gli strumenti e i modelli differiscono dalle sessioni native e l'esito positivo del rilevamento dei modelli non dimostra l'avvenuta inferenza. Il consumo di token viene mostrato solo quando il provider lo restituisce effettivamente.",
+        "Conserva le credenziali in Connessioni anziché nel testo dell'attività o nelle istruzioni dei preset. I revisori di sola lettura ricevono solo gli strumenti file API consentiti; l'architetto del report non dispone di strumenti. Le chiamate a strumenti non supportati vengono rifiutate anziché eseguite silenziosamente. I server variano nei parametri di ragionamento, nel supporto degli strumenti e negli elenchi dei modelli; confronta qualsiasi errore con il contratto specifico del tuo endpoint."
+      ],
+      "links": [
+        {
+          "label": "Connessioni API",
+          "path": "docs/API_CONNECTIONS.md"
+        }
+      ]
+    },
+    {
+      "id": "settings",
+      "title": "Impostazioni, lingue e ripristino sicuro",
+      "paragraphs": [
+        "Le impostazioni generali selezionano l'area di lavoro, la lingua dell'interfaccia e le impostazioni predefinite. Connessioni gestisce gli endpoint API. Preset e Team di revisione memorizzano le configurazioni dei ruoli. Controllo remoto gestisce le credenziali locali, l'ambito del server e i permessi del proprietario; Aggiornamenti gestisce la sorgente/canale di rilascio. Informazioni mostra l'esatta build in esecuzione.",
+        "La lingua dell'interfaccia è separata dalla lingua del prompt e dallo stato di revisione della documentazione. I nomi dei prodotti, gli ID dei comandi, le estensioni dei file, gli ID dei modelli dei provider e i nomi creati dall'utente rimangono identificatori. La Guida segue la lingua dell'interfaccia selezionata quando è disponibile una traduzione aggiornata; le traduzioni automatiche sono etichettate e l'inglese rimane il riferimento canonico.",
+        "Salva applica la configurazione visualizzata. Un ripristino del database o un ripristino alle impostazioni di fabbrica può rimuovere i metadati dell'applicazione; conserva i file e un backup verificato prima di utilizzare intenzionalmente il ripristino. Queste operazioni sono azioni riservate al proprietario locale. Non usarle come scorciatoia per analizzare un flusso di lavoro non riuscito o un record corrotto."
+      ],
+      "links": [
+        {
+          "label": "Istruzioni di localizzazione",
+          "path": "docs/LOCALIZATION.md"
+        },
+        {
+          "label": "Recupero dati",
+          "path": "docs/DATA_RECOVERY.md"
+        }
+      ]
+    },
+    {
+      "id": "help-assistant",
+      "title": "Chiedi all'assistente della Guida",
+      "paragraphs": [
+        "Apri la Guida, scegli un preset connesso salvato nel pannello dell'assistente e fai domande su ZIAForge. Le risposte utilizzano la guida canonica attuale in inglese e la lingua dell'interfaccia selezionata. I pulsanti di riferimento alle sezioni aprono gli argomenti pertinenti della guida, consentendoti di confrontare la spiegazione con il testo di riferimento.",
+        "Questo assistente mantiene una conversazione privata separata con un massimo di 100 voci salvate e 3 MiB. Inserisci una domanda composta al massimo da 12,000 caratteri; Invia la pone, Interrompi annulla la risposta attiva mantenendo disponibile la domanda, e Cancella rimuove questa conversazione della Guida. La bozza non inviata e la selezione del preset persistono alla chiusura o riapertura della Guida nella stessa sessione dell'app, ma la bozza non viene salvata su disco. L'assistente non invia comandi dell'applicazione, non modifica un flusso di lavoro né accetta un gate. I consigli non costituiscono una verifica in tempo reale di un'attività, di un account o di una connessione esterna.",
+        "Le sessioni della Guida con Claude Code e API applicano la politica supportata senza strumenti. Le sessioni native della Guida con Codex e Antigravity richiedono l'autorizzazione computer nativa esistente del proprietario locale. Se è disabilitata, l'app spiega il prerequisito invece di scegliere un provider diverso. Solo il proprietario può abilitarla nelle impostazioni di controllo locale; l'assistente non può abilitarla autonomamente.",
+        "La Guida di Codex utilizza una sandbox di sola lettura e rifiuta le richieste di approvazione degli strumenti. Antigravity utilizza la modalità pianificazione e il relativo flag di sandbox nativa. Queste modalità native non costituiscono una garanzia universale di confinamento a livello di sistema operativo. L'hash della guida sorgente identifica il testo di riferimento utilizzato per la risposta; una spiegazione generata può comunque essere errata, quindi esamina le sezioni collegate prima di agire. Le risposte meno recenti vengono contrassegnate quando la versione della guida sorgente differisce da quella attuale."
+      ],
+      "links": [
+        {
+          "label": "Guida canonica e manutenzione delle traduzioni",
+          "path": "docs/HELP_MAINTENANCE.md"
+        },
+        {
+          "label": "Assistente dell'applicazione e autorizzazioni",
+          "path": "docs/AGENT_CONTROL.md"
+        }
+      ]
+    },
+    {
+      "id": "assistant-control",
+      "title": "Assistente e Telegram",
+      "paragraphs": [
+        "L'assistente utilizza il preset selezionato e la medesima API di controllo dell'applicazione. L'autorizzazione a esaminare lo stato e quella a eseguire operazioni sono separate. Ispeziona i comandi e i risultati: il testo dell'assistente non costituisce una prova del completamento di un'azione.",
+        "Telegram viene abilitato solo dal proprietario locale, con un token bot esistente e un ID numerico del proprietario. Il controllo è riservato alla chat privata di tale proprietario. Un bot non configurato o inattivo non deve ricevere messaggi dell'applicazione.",
+        "Non incollare il token del bot in una chat ordinaria. Configurare l'integrazione non dimostra la connettività di Telegram e non crea automaticamente un bot. Gli screenshot e le risposte possono contenere dati privati dell'area di lavoro.",
+        "Seleziona un preset dell'assistente e concedi l'autorizzazione a eseguire operazioni nell'applicazione separatamente dall'ispezione. L'esecuzione dell'assistente con Codex e Antigravity richiede l'autorizzazione nativa del proprietario; non vengono sostituiti silenziosamente con una sessione senza strumenti di API o Claude. Gli screenshot possono essere mostrati nella conversazione con l'assistente, ma l'input del modello attuale non include l'analisi delle immagini. Non dare per scontato che l'assistente abbia esaminato visivamente un'immagine solo perché l'ha mostrata.",
+        "L'assistente può esaminare riepiloghi, attività, chat, stato del flusso di lavoro, contesto del processo e finestre dell'applicazione tramite strumenti tipizzati. Può modificare le impostazioni ordinarie consentite e avviare operazioni autorizzate dell'applicazione. Non può concedere privilegi nativi, rivelare credenziali memorizzate, modificare da remoto la concessione dell'area di lavoro radice né approvare un gate di Forge per mera comodità."
+      ],
+      "links": [
+        {
+          "label": "Contratto di controllo dell'applicazione",
+          "path": "docs/AGENT_CONTROL.md"
+        }
+      ]
+    },
+    {
+      "id": "telegram",
+      "title": "Gestisci il tuo bot privato Telegram",
+      "paragraphs": [
+        "Crea o ottieni il tuo bot, avvia la sua chat privata e inserisci il relativo token e il tuo ID utente numerico di Telegram nelle impostazioni di controllo locale. Abilita l'integrazione solo quando desideri che l'app si connetta. L'ID del proprietario è un identificatore utente, non un nome utente o un ID del bot. Vengono accettati solo i messaggi provenienti da quell'utente nella medesima chat privata.",
+        "Usa /start, /menu o /status per una panoramica della versione in esecuzione, dei conteggi di progetti/attività e degli stati delle attività. I pulsanti aprono Progetti, Attività, Screenshot, Guida e Lingua. Gli elenchi mostrano otto elementi per pagina, con navigazione Indietro, Aggiorna, Home e Precedente/Successivo. I pulsanti dei progetti filtrano l'elenco delle attività. Una scheda attività mostra l'avanzamento salvato del flusso di lavoro, il modello/preset e le eventuali domande in sospeso.",
+        "Apri Chat di un'attività per visualizzare l'anteprima delle conversazioni aperte/recenti e delle chat delle fasi del flusso di lavoro. Ciascuna anteprima mostra fino a sei messaggi recenti dell'utente/assistente, visibilmente abbreviati a 200 caratteri ciascuno. Il ragionamento privato non viene mostrato. La lettura della cronologia non avvia un provider. Le anteprime sono di sola lettura: il testo ordinario e /ask TEXT si rivolgono sempre all'assistente dell'applicazione, mai implicitamente alla chat dell'attività che stai visualizzando.",
+        "Esegui / Continua rilegge il flusso di lavoro corrente di Code o Work e avvia un flusso di lavoro salvato idoneo. Pausa ne richiede la sospensione. Nessuno dei due accetta requisiti, una specifica, un piano, rilievi di revisione o domande; una decisione in sospeso impedisce Esegui. Prendi le decisioni nell'applicazione oppure utilizza un comando tipizzato esplicitamente autorizzato indicando esattamente il gate e la revisione correnti.",
+        "Usa Lingua o /language per selezionare una qualsiasi delle 56 lingue dell'interfaccia tramite il suo nome nativo. Questo memorizza una preferenza valida solo per questo bot e proprietario. Usa lingua dell'app cancella tale preferenza. Non modifica la lingua dell'applicazione né le autorizzazioni di accesso; i messaggi esistenti non vengono reinviati automaticamente.",
+        "La navigazione aggiorna normalmente lo stesso messaggio di menu pubblicato. I pulsanti hanno identità opache che scadono dopo 15 minuti e possono essere utilizzati una sola volta; la modifica di una scheda invalida i suoi vecchi pulsanti. I pulsanti scaduti, già utilizzati, non corrispondenti al messaggio o relativi a un processo precedente non possono eseguire alcuna azione. Un messaggio definitivamente non modificabile può essere sostituito con una nuova scheda; un errore di rete sconosciuto non viene ritentato come nuovo messaggio.",
+        "All'attivazione, il poller elimina il backlog precedente e registra l'accettazione dell'aggiornamento prima dell'inoltro, in modo che i comandi interrotti non vengano rieseguiti automaticamente al riavvio. Ciò impedisce la riesecuzione; non garantisce il completamento. Verifica lo stato/contesto prima di assegnare deliberatamente nuovo lavoro dopo un errore. Non sono previste notifiche automatiche sullo stato delle attività.",
+        "I comandi espliciti rimangono disponibili: /projects, /tasks, /task TASK_ID, /run TASK_ID, /pause TASK_ID, /screenshot e /ask TEXT. /new {JSON} crea un'attività tramite il comando tipizzato createTask; /command {JSON} invia un comando esplicito del catalogo. Consulta il catalogo in tempo reale per la struttura degli argomenti. Si applicano le stesse autorizzazioni di backend e concessioni di cartelle dell'applicazione.",
+        "L'app non invia mai i valori memorizzati dei token del bot all'assistente. Gli screenshot, i riepiloghi e il testo delle conversazioni potrebbero tuttavia contenere informazioni private sui progetti. Interrompi l'integrazione a livello locale se il bot o l'account proprietario non sono più ritenuti attendibili. Rigenera un token compromesso presso il provider del bot, quindi aggiorna la configurazione crittografata locale."
+      ],
+      "links": [
+        {
+          "label": "Bot privato e comandi",
+          "path": "docs/AGENT_CONTROL.md"
+        }
+      ]
+    },
+    {
+      "id": "native-permissions",
+      "title": "Autorizzazione computer nativa riservata al proprietario",
+      "paragraphs": [
+        "L'accesso al computer nativo è inizialmente disabilitato. Solo il proprietario può abilitarlo nelle Impostazioni locali → Controllo remoto. L'assistente e i comandi HTTP/MCP/Telegram non possono abilitare questo flag per se stessi. Se un'operazione viene negata, l'assistente deve descrivere l'impostazione e lasciare che sia il proprietario a decidere.",
+        "Quando esplicitamente abilitato, computer.run accetta un eseguibile, un array di argomenti e una directory di lavoro assoluta facoltativa. Non utilizza interpolazione della shell, ha un limite di 30 secondi e delimita l'output a 1 MiB. Se viene fornita una directory mancante o non valida, questa viene rifiutata; omettendo cwd si utilizza la directory delle impostazioni appartenente all'app, non HOME. Esci annulla i comandi attivi di proprietà e attende la pulizia dei relativi processi.",
+        "L'ambito di lettura/operazione dell'applicazione e l'accesso nativo sono decisioni separate. Un worktree non vincola l'accesso al file system di un provider senza restrizioni. Revoca l'accesso nativo al termine dell'attività se non è più necessario ed esamina le ricevute dei comandi invece di considerare il testo dell'assistente come prova."
+      ],
+      "links": [
+        {
+          "label": "Contratto di controllo riservato al proprietario",
+          "path": "shared/control.ts"
+        }
+      ]
+    },
+    {
+      "id": "remote",
+      "title": "Browser e istanze remote",
+      "paragraphs": [
+        "Il proprietario locale abilita il server e ne sceglie l'indirizzo, la porta e l'ambito: lettura per l'ispezione o operazione per le azioni. L'indirizzo predefinito 127.0.0.1 è disponibile solo su questo computer. 0.0.0.0 ascolta sulle interfacce di rete; verifica l'accesso alla rete prima di abilitarlo.",
+        "Un browser apre la medesima interfaccia dopo l'accesso tramite token. Non includere i token in link pubblici o screenshot. HTTP da solo non crittografa il traffico; utilizza un canale protetto su reti non attendibili.",
+        "Il proprietario configura altre istanze tramite URL e token. Il backend fa da proxy per le richieste; questo non copia i relativi progetti sulla macchina locale. Verifica l'istanza selezionata prima di ogni azione.",
+        "I comandi tipizzati e gli eventi veicolano il controllo dell'applicazione. L'ambito di lettura non autorizza modifiche alle attività. Il controllo nativo del computer è una scelta separata del proprietario locale ed è inizialmente disabilitato.",
+        "L'app deve rimanere in esecuzione per il controllo da browser, Telegram e agenti esterni. Ciascuna istanza ha il proprio profilo privato, stato delle attività, token e porta del server. Non riutilizzare contemporaneamente un profilo tra istanze indipendenti. Gli eventi del browser e le risposte ai comandi sono limitati all'istanza selezionata; cambiare la UI non sposta i file né copia l'accesso nativo."
+      ],
+      "links": [
+        {
+          "label": "HTTP e controllo delle istanze",
+          "path": "docs/AGENT_CONTROL.md"
+        }
+      ]
+    },
+    {
+      "id": "external-agents",
+      "title": "OpenClaw, Hermes e altri agenti esterni",
+      "paragraphs": [
+        "Utilizza l'API autenticata di controllo dell'applicazione o il bridge stdio MCP incluso. Abilita il server localmente, scegli lettura o operazione e configura ciascun client con l'URL e il token di quell'istanza. È richiesto Node.js 22 o versione successiva per eseguire il bridge MCP autonomo; l'app Electron non installa il client del tuo agente. L'URL del browser non è un endpoint HTTP MCP di tipo Streamable: forniscilo come ZIAFORGE_URL al bridge stdio.",
+        "Il bridge espone ziaforge_status, ziaforge_commands, ziaforge_command e ziaforge_screenshot. Inizia con lo stato e il catalogo comandi in tempo reale, quindi leggi system.context per l'attività selezionata. I comandi tipizzati seguono gli stessi controlli di revisione, gate, cartella dell'attività e pulizia della UI locale.",
+        "Il catalogo comandi in tempo reale include documentation.guide, la guida canonica in inglese, con il relativo percorso sorgente e sourceSha256. L'architetto interno dell'applicazione riceve il medesimo testo di riferimento tramite i suoi strumenti. Questo offre agli agenti l'intero contesto del prodotto senza dipendere da note obsolete; la documentazione non concede mai accessi né si sostituisce a una decisione umana attuale.",
+        "Gli agenti devono discutere i requisiti, le decisioni tecniche e la pianificazione a partire da una breve idea umana. Devono rispettare i gate umani espliciti, i modelli selezionati, le policy manuale/Auto e la revisione richiesta. Non devono inventare approvazioni, rieseguire comandi incerti con un nuovo ID né pubblicare modifiche Git senza l'intento esplicito del proprietario.",
+        "Configura diversi server MCP con nome per installazioni multiple. Il passaggio da un'istanza all'altra è una decisione di instradamento, non di sincronizzazione. Esempi di configurazione per OpenClaw ed Hermes sono disponibili in AGENT_CONTROL.md; l'impostazione specifica del client e la compatibilità devono essere verificate per la versione del client installata.",
+        "La cache esterna dei requestId deduplica solo un insieme limitato di richieste durante l'esecuzione dell'app. Le operazioni persistenti utilizzano identità proprie: createRequestId per la creazione di attività, commandId per le decisioni sul flusso di lavoro, clientMessageId per i messaggi e operationId per le modifiche di Git. Mantieni l'identità e il payload originali dopo una conferma sconosciuta; leggi lo stato salvato prima di assegnare deliberatamente nuovo lavoro."
+      ],
+      "links": [
+        {
+          "label": "Istruzioni per il client MCP",
+          "path": "docs/AGENT_CONTROL.md"
+        }
+      ]
+    },
+    {
+      "id": "local-cli",
+      "title": "CLI locale e limiti di automazione",
+      "paragraphs": [
+        "Il dispatcher ziaf controlla la stessa app in esecuzione e il flusso di lavoro salvato. Dai sorgenti, usa npm run ziaf -- list, npm run ziaf -- status --task TASK_ID --json, npm run ziaf -- start --task TASK_ID oppure npm run ziaf -- pause --task TASK_ID. Una conferma di avvio avvenuto con successo non significa che l'attività sia stata completata.",
+        "--until-success abilita deliberatamente Auto per il flusso di lavoro salvato, ma domande, revisione, gate di accettazione, limiti e checkpoint rimangono applicabili. Ctrl+C interrompe l'osservazione del dispatcher; non arresta implicitamente il flusso di lavoro dell'applicazione. Consulta CLI.md per i codici di uscita, gli endpoint locali e la gestione dei profili.",
+        "L'interfaccia Automazioni memorizza attualmente definizioni di visualizzazione e contatori di esecuzione locali. Non è uno scheduler ricorrente certificato e non dimostra che un turno del modello in background sia stato eseguito. Per l'esecuzione effettiva usa i controlli del flusso di lavoro salvato, ziaf o l'API autenticata e ispeziona le relative ricevute. Non confondere il pannello dimostrativo con una pianificazione autonoma non presidiata."
+      ],
+      "links": [
+        {
+          "label": "Comandi del dispatcher",
+          "path": "docs/CLI.md"
+        }
+      ]
+    },
+    {
+      "id": "updates",
+      "title": "Versione e aggiornamenti",
+      "paragraphs": [
+        "Informazioni mostra l'esatta versione in esecuzione. Gli aggiornamenti pubblici richiedono un repository dei rilasci di GitHub attendibile e un canale stabile o di anteprima. Il controllo, il download e l'installazione hanno stati distinti; un errore non significa che un aggiornamento sia stato installato.",
+        "L'installazione automatica è riservata alle versioni firmate di macOS. Le build di sviluppo non firmate non vengono installate automaticamente tramite questo meccanismo. Per la sostituzione manuale, chiudi completamente l'app corrente e usa un elemento generato verificato.",
+        "Il controllo automatico viene eseguito immediatamente dopo l'abilitazione, quindi ogni sei ore.",
+        "Il canale Stabile esclude le versioni di anteprima; Anteprima consente anche le versioni di sviluppo. Un controllo riuscito stabilisce unicamente i metadati del rilascio disponibile. Il download e l'installazione richiedono il pacchetto per la piattaforma e il feed dei rilasci configurato. La distribuzione DEB per Linux è un percorso di installazione separato; non dare per scontato che un pacchetto DEB venga aggiornato automaticamente dal meccanismo di aggiornamento di macOS."
+      ],
+      "links": [
+        {
+          "label": "Idoneità al rilascio",
+          "path": "docs/RELEASE_READINESS.md"
+        }
+      ]
+    },
+    {
+      "id": "restart",
+      "title": "Riavvio e ripristino",
+      "paragraphs": [
+        "Su macOS, usa Esci / ⌘Q per un arresto completo. La chiusura della finestra potrebbe lasciare l'app in esecuzione. Chiudi completamente la vecchia versione prima di sostituire l'applicazione.",
+        "Dopo l'avvio, seleziona la stessa attività. La cronologia e le bozze vengono ripristinate. Riprendi ripristina un contesto nativo/locale, ma non invia una bozza, non riattiva la coda in pausa né autorizza la ripetizione di un'operazione sconosciuta.",
+        "Se compare Ripristino, non modificare il file JSON manualmente. Ispeziona il tipo di documento interessato, preserva i file originali e seleziona un backup convalidato. Il ripristino di una coda precedente contrassegna i suoi elementi come incerti.",
+        "Quando la consegna è sconosciuta, un flusso di lavoro gestito potrebbe richiedere un'autorizzazione esplicita per un nuovo contesto. Il lavoro precedente e i tentativi falliti rimangono; un rifiuto visibile è più sicuro di un successo fabbricato.",
+        "Esegui il backup dei file dell'attività e del profilo dell'app con tutte le istanze dell'applicazione chiuse. Una cartella copiata non costituisce un ripristino verificato. Se la procedura di ripristino richiede di selezionare un backup convalidato, conserva anche gli esatti file danneggiati. Il ripristino di un flusso di lavoro o di una coda precedente non autorizza la riesecuzione di inferenze incerte o di operazioni Git."
+      ],
+      "links": [
+        {
+          "label": "Contratto di ripristino",
+          "path": "docs/DATA_RECOVERY.md"
+        }
+      ]
+    },
+    {
+      "id": "troubleshooting",
+      "title": "Risoluzione dei problemi",
+      "paragraphs": [
+        "CLI non trovata: controlla la sua installazione e versione in un normale terminale, quindi riavvia ZIAForge. La presenza di un eseguibile non indica che hai effettuato l'accesso. Utilizza il meccanismo di autenticazione del provider stesso.",
+        "Modello non disponibile o autorizzazione non riuscita: aggiorna il rilevamento, seleziona un ID disponibile e controlla il tuo account e i limiti. Non ripetere una richiesta incerta prima di averne esaminato la cronologia.",
+        "Flusso di lavoro interrotto: apri la fase corrente, la domanda, la ricevuta di verifica o i log della CLI. Risolvi la causa specifica: una domanda senza risposta, un comando, i permessi della cartella o il superamento dei tentativi massimi. Continua non può trasformare un controllo fallito in un successo.",
+        "Cartella mancante o sostituita: ripristina l'accesso alla cartella originale o crea una nuova attività. L'app non deve proseguire da HOME. Se rilevi un'altra cwd, interrompi il turno e conserva i dati di diagnostica.",
+        "Per una segnalazione, includi la versione indicata in Informazioni, il percorso, la CLI/modello, il comportamento previsto ed effettivo, uno screenshot e un estratto sicuro dei log. Rimuovi segreti, dati personali e percorsi che non possono essere pubblicati.",
+        "Pagina remota non disponibile: verifica che il proprietario abbia abilitato il server, controlla l'indirizzo e la porta di ascolto, quindi autenticati con il token dell'istanza corretto. Un errore 401 indica problemi di autenticazione; una modifica negata può dipendere dall'ambito di sola lettura o da un controllo riservato al proprietario. La modifica del token disconnette i client browser esistenti. Non esporre la porta di ispezione separata di DevTools come controllo remoto dell'applicazione.",
+        "Salvataggio dell'editor rifiutato: conserva la bozza, esamina il file attuale sul disco e risolvi il conflitto di modifica esterna. Non aggirare il confronto riscrivendo i metadati dell'applicazione. Se il caricamento completo di file di grandi dimensioni non è disponibile, usa la modalità di modifica/ricerca per finestre supportata o un editor esterno.",
+        "Telegram non disponibile: verifica localmente il token del bot, il proprietario numerico, la chat privata e lo stato. Un webhook o un poller concorrente può bloccare il polling; ZIAForge non cancella automaticamente un webhook né assume il controllo di un altro poller. I comandi rifiutati o interrotti a una soglia sconosciuta non vengono rieseguiti automaticamente."
+      ],
+      "links": [
+        {
+          "label": "Test e diagnosi",
+          "path": "docs/TESTING.md"
+        }
+      ]
+    },
+    {
+      "id": "diagnostics",
+      "title": "Segnala problemi ed esamina le evidenze",
+      "paragraphs": [
+        "Registra l'esatta build in esecuzione da Informazioni, OS/architettura, modalità dell'attività, provider/modello selezionato e i passaggi per riprodurre il problema. Descrivi il risultato previsto e quello osservato. Includi uno screenshot sicuro e la ricevuta pertinente del comando conservato o della verifica, anziché un intero profilo privato.",
+        "I log della CLI, i registri degli eventi, le trascrizioni dei modelli, le tracce del browser e gli screenshot possono esporre codice sorgente, percorsi personali o token. Esaminali e rimuovi le informazioni riservate prima di condividerli. Uno strumento di oscuramento dei log senza garanzie non certifica che uno screenshot o un archivio siano pubblicabili.",
+        "Per i collaboratori, qa:doctor legge l'identità dell'ambiente/build; qa:inspect apre un profilo isolato con stub del provider. Una fixture verifica il percorso dell'applicazione testato senza contattare un modello. L'inferenza in tempo reale, la connettività di Telegram, il desktop Linux nativo, la firma e le verifiche dei pacchetti generati costituiscono evidenze distinte. Consulta TESTING.md per i comandi riproducibili e la pulizia."
+      ],
+      "links": [
+        {
+          "label": "Comandi di evidenza",
+          "path": "docs/TESTING.md"
+        }
+      ]
+    },
+    {
+      "id": "privacy",
+      "title": "Dati locali e limiti",
+      "paragraphs": [
+        "I progetti, la cronologia, i piani, i documenti e la diagnostica possono contenere testo privato. Non pubblicare profili, acquisizioni non elaborate, chiavi o log completi contenenti codice sorgente.",
+        "Su Linux, il salvataggio delle credenziali per API, controllo, Telegram e istanze richiede un servizio segreto GNOME sbloccato o KWallet; senza un gestore di segreti supportato, ZIAForge rifiuta di salvare questi segreti anziché ricorrere al fallback basic_text di Electron.",
+        "L'archiviazione locale non significa che le richieste rimangano sul tuo computer: la CLI/API selezionata le invia al relativo provider. Una cartella di lavoro e la supervisione dei processi non costituiscono un isolamento dell'OS. Esamina le autorizzazioni selezionate.",
+        "Distingui i tipi di evidenza: le fixture testano l'applicazione senza un modello; le verifiche native in tempo reale utilizzano un account/CLI reali; i controlli sui pacchetti certificano uno specifico elemento generato. Il superamento di uno non garantisce gli altri.",
+        "L'ambito dell'applicazione, un worktree e un prompt di sola lettura sono diversi da un'applicazione a livello di sistema operativo. Le policy di revisione/assistenza di Antigravity rilevano le modifiche nelle evidenze raccolte nell'area di lavoro anziché imporre un accesso in sola lettura al file system. Il controllo nativo del computer esegue programmi autorizzati dal proprietario al di fuori del consueto limite degli strumenti dell'app; disattivalo quando non è più necessario."
+      ],
+      "links": [
+        {
+          "label": "Provenienza e pubblicazione",
+          "path": "docs/RELEASE_READINESS.md"
+        }
+      ]
+    },
+    {
+      "id": "project-contributors",
+      "title": "Comprendere e modificare questo progetto open source",
+      "paragraphs": [
+        "Leggi prima AGENTS.md e CONTRIBUTING.md, quindi PROJECT_MAP.md per i limiti attuali del codice sorgente. I contratti tipizzati implementati e i documenti correnti su flussi di lavoro/provider ne regolano il comportamento. CONCEPT.md e le parti orientate al terminale di ARCHITECTURE.md conservano l'intento storico e non devono essere scambiati per caratteristiche della versione attuale.",
+        "La sorgente della guida in inglese è docs/help/en.json. Non modificare manualmente i file generati USER_GUIDE.md o website/guide.html. Modifica la sezione canonica, aggiorna il contratto interessato ed esegui node scripts/help/generate.cjs. La Guida integrata nell'app legge la medesima sorgente. Esamina le aggiunte confrontandole con l'effettiva implementazione, inclusi limiti, autorizzazioni e percorsi non supportati.",
+        "Ciascuna delle 56 impostazioni internazionali dell'interfaccia ha uno stato della guida distinto in docs/help/locales.json. Le guide mancanti o incomplete ricorrono all'inglese come fallback. I testi completi tradotti automaticamente sono etichettati e vincolati all'hash del testo sorgente inglese, senza alcuna pretesa di revisione umana. Una traduzione revisionata da un essere umano registra inoltre il relativo revisore. Ogni traduzione deve preservare gli ID di sezione, le azioni, gli identificatori di file/comandi e i limiti tecnici, usare la direzione di scrittura corretta ed essere aggiornata quando cambia il relativo testo sorgente inglese.",
+        "Prima della distribuzione, esegui node scripts/help/generate.cjs --check per rilevare output generati obsoleti, scaffold di localizzazione non validi o collegamenti a contratti locali interrotti. Le verifiche delle traduzioni della UI e i controlli del comportamento dell'applicazione rimangono distinti. HELP_MAINTENANCE.md descrive la procedura di aggiornamento per i collaboratori e l'AI; la documentazione non deve dichiarare superato un test che non è stato eseguito."
+      ],
+      "links": [
+        {
+          "label": "Mappa attuale del progetto",
+          "path": "docs/PROJECT_MAP.md"
+        },
+        {
+          "label": "Manutenzione della documentazione",
+          "path": "docs/HELP_MAINTENANCE.md"
+        },
+        {
+          "label": "Istruzioni per i collaboratori",
+          "path": "CONTRIBUTING.md"
+        },
+        {
+          "label": "Istruzioni per gli agenti",
+          "path": "AGENTS.md"
+        }
+      ]
+    }
+  ]
+}

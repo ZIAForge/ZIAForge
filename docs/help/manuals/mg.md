@@ -1,0 +1,487 @@
+<!-- Generated from docs/help/en.json; source SHA-256 19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947. Do not edit this output.
+Run node scripts/help/generate.cjs after changing the canonical help.
+Requested locale: mg; served locale: mg; status: machine-translated. -->
+# Torolalan'ny mpampiasa ZIAForge
+
+Avy amin'ny fikasana mankany amin'ny vokatra voamarina. Torolalana azo ampiharina ho an'ny Code, Work ary ny fifehezana ny rindranasa.
+
+Ny teny anglisy no fototra manan-kery. Ny fanampiana nadika tamin'ny milina dia voatondro mitokana amin'ny fandikan-teny nozahan'olombelona toetra. Ny fanamarinana mandeha ho azy dia tsy manome antoka ny fahamarinan'ny teny natoraly.
+
+> Ity torolalana ity dia nadikan'ny milina avy amin'ny loharano teny Anglisy ankehitriny. Mbola raisina an-tanan-droa hatrany ny famerenana mandinika ataon'olombelona.
+
+## Fizaran'ny torolalana
+
+- [Dingana voalohany](#start)
+- [Mametraka ny pakejy birao marina](#install-platforms)
+- [Code: lalan-kizorana dimy](#code)
+- [Fifanakalozan-kevitra Forge](#forge)
+- [Tahirin-kevitra sy fanapahan-kevitra](#decisions)
+- [Fampiharana sy famerenana](#execution)
+- [Ekipa mpamerina mifanitsy sy ny mpamolavola tatitra](#review-teams)
+- [Fahaizana manokan'ny mpisehatra sy ny politikan'ny fampidirana](#specializations)
+- [Work: avy amin'ny fanontaniana mankany amin'ny tahirin-kevitra](#work)
+- [Tolotra mialoha, maodely ary fidirana](#models)
+- [Resaka, Mijanona ary ny filaharana](#chat)
+- [Rakitra, Git ary fahavitana](#files)
+- [Fifandraisana API](#api)
+- [Fikirana, fiteny ary famerenana amin'ny laoniny azo antoka](#settings)
+- [Manontania ny mpanampy amin'ny Fanampiana](#help-assistant)
+- [Mpanampy sy Telegram](#assistant-control)
+- [Ampandehano ny bot Telegram manokana anao](#telegram)
+- [Alalana amin'ny solosaina teratany ho an'ny tompony ihany](#native-permissions)
+- [Mpitety tranonkala sy toe-javatra lavidavitra](#remote)
+- [OpenClaw, Hermes ary ireo mpanampy ivelany hafa](#external-agents)
+- [FETRAN'NY CLI EO AN-TOERANA SY NY FAMPIASANA HO AZY](#local-cli)
+- [Dikan-teny sy fanavaozana](#updates)
+- [Famerenana mampandeha sy famerenana amin'ny laoniny](#restart)
+- [Famahana olana](#troubleshooting)
+- [Manao tatitra momba ny olana sy mandinika porofo](#diagnostics)
+- [Tahirin-kevitra eo an-toerana sy sisin-tany](#privacy)
+- [Mahatakatra sy manova ity tetikasa loharano misokatra ity](#project-contributors)
+
+<a id="start"></a>
+
+## Dingana voalohany
+
+ZIAForge dia mitazona ny fifanakalozan-kevitra, ny fandrindrana, ny fampiharana ary ny fanamarinana ao anatin'ny asa iray. Mifidiana Code ho an'ny tetikasa Git, na Work ho an'ny tahirin-kevitra, fikarohana ary vokatra hafa ao anaty fampirimana mahazatra.
+
+Manomboka amin'ny asa kely ao anatin'ny tetikasa misaraka. Raha mifidy CLI natoraly ianao, apetraho izany ary midira amin'ny kaontiny manokana ao amin'ny terminal aloha. Raha tsy izany, amboary ny fifandraisana API. Fomba fifandraisana misaraka ny famandrihana CLI sy ny API voaloa vola; ZIAForge dia tsy mampiditra anao na mamindra sara eo amin'izy ireo.
+
+1. Sokafy ny Fikirana ary jereo ny fampirimana sehatr'asa sy ny fiteny. Ny Momba dia mampiseho ny tena mombamomba ny fananganana mandeha.
+2. Ho an'ny Code, manampia tahiry Git ao amin'ny bara an-tsisin-dalana. Ho an'ny Work, mifidiana fampirimana misaraka rehefa mamorona ny asa.
+3. Tehirizo ny tolotra mialoha misy CLI, maodely, ezaka fisainana ary haavon'ny fidirana. Azonao atao koa ny mifidy Manokana mivantana tsy misy tolotra mialoha voatahiry.
+4. Mamoròna asa iray, safidio ny lalan-kizorany, ny anjara asany ary ny fandrosoana amin'ny tanana na mandeha ho azy. Avereno jerena ireo safidy alohan'ny Hanomboka.
+
+> Ampiasao ny tahirin-javatra sy ny checksum nomen'ny mpikarakara. Mety tsy ho voasonia ny topy maso na tsy manana fampahafantarana vaovao navoaka. Ny fanohanana ny birao sy ny mpamatsy natoraly dia tsy maintsy hamarinina ho an'ny OS, firafitra ary tahirin-javatra marina; ny fanohanan'ny loharano fotsiny dia tsy fanamarinana famoahana.
+
+Torolalana mifandraika: [Topimaso momba ny tetikasa](../../../README.md) · [Fifanarahan'ny mpamatsy](../../PROVIDER_COMPATIBILITY.md).
+
+<a id="install-platforms"></a>
+
+## Mametraka ny pakejy birao marina
+
+Mifidiana pakejy ho an'ny rafitra fiasanao sy ny firafitry ny CPU: x64 na arm64. Ny fantsona fananganana dia afaka mamokatra endrika macOS DMG/ZIP, mpanentana Windows NSIS/ZIP, ary Linux DEB/RPM/AppImage/tar.gz/ZIP. Ny rakitra novokarina na ny fananganana miampita dia tsy porofo fa nahomby tamin'ny milinanao ny mpanentana azy sy ny UI natoraly; jereo ny firaketana fanamarinana an'io famoahana io.
+
+Ny fananganana macOS mampiasa Electron 44 dia mitaky macOS 13 na aoriana. Ampiasao ny pakejy arm64 amin'ny Apple Silicon ary ny pakejy x64 ho an'ny Intel. Ajanony tanteraka ny rindranasa tranainy alohan'ny hanoloana azy. Mety tsy ho voasonia sy tsy nahazo fankatoavana notarialy ny pakejy topy maso; aza afangaro amin'ny famoahana ho an'ny daholobe voasonia ny tahirin-javatry ny fampandrosoana.
+
+Windows dia mila rafitra fiasa tohanan'ny kinovan'ny Electron ampiarahina ary Git azo ampiasaina ao amin'ny PATH. Safidio ny firafitra mifanaraka aminy. Ny topy maso tsy voasonia dia tsy manana fanamarinana Authenticode. Ny ZIP azo entina dia tsy maintsy mitazona ny lahatahiry feno an'ny rindranasa sy ny rakitra runtime, fa tsy ny rakitra azo tanterahina fotsiny.
+
+Linux dia mila sehatr'asa ara-tsary mifanaraka, ireo tranombokin'ny rafitra takin'ny Electron, ary Git. Ho an'ny mari-pamantarana fifehezana voaaro amin'ny fanafenana, manomeza Secret Service miasa toy ny gnome-libsecret na KWallet; tsy ekena ny tolotra aoriana basic_text tsy azo antoka. Ny porofo fitsapana headless/container dia tsy manamarina ny sehatr'asa na fizarana rehetra.
+
+Mametraha DEB miaraka amin'ny apt install ./file.deb, na mametraha RPM amin'ny alalan'ny mpitantana pakejin'ny fizaranao. Ny AppImage dia mila alalana azo tanterahina sy fanohanana FUSE mifanaraka; safidy hafa azo ampiasaina ny --appimage-extract-and-run raha tohanana. Esory ny pakejy tar.gz sy ZIP miaraka amin'ny rakitra runtime rehetra. Saraho mazava tsara ny angon'ny mpampiasa sy ny rakitry ny rindranasa rehefa manolo pakejy.
+
+Raha hanorina avy amin'ny loharano, ampiasao ny Node 24, Git ary npm ci, anisan'izany ny mpanentana Electron mahazatra. Ny fananganana indray natoraly dia mitaky fitaovana sehatra: fitaovana baiko an-tsoratra Xcode amin'ny macOS; MSVC C++, Windows SDK ary Python amin'ny Windows; mpandrafitra compiler, make, Python, pkg-config ary ireo fitaovana famonosana takina amin'ny Linux. Araho ny PLATFORM_BUILDS.md ho an'ny baiko marina sy ny fetran'ny sehatra ankehitriny.
+
+Voatokana foibe ny kinovan'ny famoahana ary tsy miova ny vokatra. Ny fananganana fanamarinana CI dia tsy mpanentana navoaka. Ny tahirin-drakitra loharano dia misy loharano, rakitra hidy lockfile, tahirin-kevitra ary soratra fandaharana; voahilika ny fiankinan-doha, ny mari-pamantarana, ny mombamomba ny mpampiasa ary ny fikarohana manokana. Aza manatsoaka hevitra mihitsy momba ny fanamarinana ARM na Windows natoraly avy amin'ny fananganana x64 nahomby.
+
+Torolalana mifandraika: [Pakejin'ny sehatra, fepetra takina mialoha ary fetran'ny fanamarinana](../../PLATFORM_BUILDS.md) · [Famantarana ny fananganana sy fanamarinana famoahana](../../RELEASE_READINESS.md).
+
+<a id="code"></a>
+
+## Code: lalan-kizorana dimy
+
+Auto dia manombana ny haben'ny asa: mety hifarana amin'ny valiny ny fanontaniana tsotra, fa ny asa lehibe kokoa kosa dia mila fiomanana. Ny Fanamboarana kilema dia manadihady antony ary manomana fanitsiana. Ny Famaritana ara-teknika aloha dia manomboka amin'ny vahaolana ara-teknika; ny Fepetra takina aloha dia manomboka amin'ny fepetra takina sy ny masontsivana fanekena.
+
+Ny Maodely maro dia mampiasa sehatra manokana misaraka ho an'ny fikarohana, famolavolana, fampiharana ary famerenana. Ny anaran'ny lalan-kizorana dia tsy mitaky mpamatsy samihafa: ny anjara asa tsirairay dia mampiasa ny tolotra mialoha na ny fandrindrana Manokana nofidinao.
+
+Ny Worktree dia manasaraka ny fanovana Git an'ny asa iray. Ny Rantsana dia miasa ao anatin'ny fizahana nofidina. Jereo ny tetikasa, ny rantsana ary ny maodely alohan'ny hanombohana; ny famaritana ny asa dia tsy alefa any amin'ny resaka mahazatra koa.
+
+Ho an'ny hevitra mbola tsy voavaha safidy momba ny vokatra na ara-teknika, ampiasao ny Fepetra takina aloha ary amboary eo amin'ny fifanakalozan-kevitra ny fototra. Auto dia manasokajy ny fangatahana; tsy baiko hampihatra avy hatrany ny fehezan-teny fohy rehetra izany. Ny Tehirizo ny drafitra dia mitazona ny fangatahana tsy misy fifandraisana amin'ny maodely; ny Manomboka dia mitahiry sy mandefa ny fikorianana tantanana indray mandeha. Ny dika mitovy amin'ny asa iray ka hatramin'ny efatra dia manana famantarana famoronana sy fandrindrana anjara asa tsy miankina.
+
+Torolalana mifandraika: [Fifanarahana fikorian'asa Code](../../WORKFLOWS.md) · [Mombamomba ny fampidirana Code](../../CODE_WORKFLOW_PROMPTS.md).
+
+<a id="forge"></a>
+
+## Fifanakalozan-kevitra Forge
+
+Ny Manomboka dia manokatra ny fifanakalozan-kevitra foibe. Mamalia amin'ny fomba natoraly, mametraha fanontaniana mifanohitra, manampia fepetra ary ifanakalozy hevitra ny safidy ara-teknika. Mijanona miaraka amin'ny asa ny resaka sy ny fanontaniana.
+
+Ny fandefasana lahatsoratra dia tsy manaiky tahirin-kevitra na manome alalana drafi-piasana vaovao. Ny fanazavana mandritra ny fampiharana dia mampiato aloha ny anjara tantanana ary mamerina mandinika ny velarana voakasika. Ny valin'ny fanontaniana ao anatin'ny dingana efa nekena dia afaka manohy io dingana io.
+
+Mba hamerenana niniana natao ny fototra, safidio ny Fepetra takina, Famaritana ara-teknika na Fandrindrana. Ny kinova vaovao dia mitaky fanekena vaovao amin'ireo fanapahan-kevitra miankina aminy. Mijanona ny dingana vita sy ny porofon'izy ireo; ny dingana tsy vita nosoloina dia mijanona ao amin'ny tantara.
+
+Tsy mitovy amin'ny resaka malalaka ny fotoam-piasana dingana tantanana. Ampiasao ny fifanakalozan-kevitra Forge fa aza mandefa fampidirana amin'ny tanana mivantana any amin'ny fotoam-piasan'ny fikorian'asa.
+
+Torolalana mifandraika: [Fifanarahana fifanakalozan-kevitra Forge](../../WORKFLOWS.md).
+
+<a id="decisions"></a>
+
+## Tahirin-kevitra sy fanapahan-kevitra
+
+Sokafy ny tahirin-kevitra iray, diniho ny kinovany ary manaova fanitsiana rehefa ilaina. Ny fandefasana fanitsiana amin'ny alalan'ny fifanakalozan-kevitra dia mamoaka kinova vaovao; ny tatitra sy ny vokatra voamarina dia tsy averina soratana aoriana.
+
+Alohan'ny hanekena drafi-piasana naroso, ovay ny filaharana, ny torolalana, ny masontsivana fanekena ary ny baiko fanamarinana. Omeo alalana ny baiko mivaingana azonao: mandeha ao amin'ny fampirimana asa izy ireo. Ny Maodely maro dia manolotra dingana fampiharana iray ho an'ny asa manontolo, miaraka amin'ny antsipiriany ao amin'ny tahirin-keviny sy ny torolalany.
+
+Fanapahan-kevitra niniana natao misaraka ny Ekena. Auto dia tsy mandingana ny fanontaniana na ny fanekena ny fepetra takina, ny famaritana ara-teknika ary ny drafi-piasana. Ny tahirin-kevitra niova avy any ivelany dia tsy afaka mampiasa indray fankatoavana taloha.
+
+Miseho ho tahirin-javatra novokarina ny rakitra fanomanana. Ny kinovany, ny dingana namokatra azy ary ny hash dia mamatotra azy ireo amin'ny vokatra iray. Ny tahirin-kevitra Code dia voatahiry ivelan'ny worktree ary tsy miditra ho azy anaty fampidirana commit.
+
+Jereo na ny tahirin-kevitra na ny fanapahan-kevitra aseho alohan'ny hanekena. Mamatotra ny vavahady ID ankehitriny, ny fanavaozana ny drafi-piasana ary ny hash voatazon'ny tahirin-kevitra ny fanekena. Mangataha fanovana rehefa diso ny velarana na ny porofo. Raha lany andro ny fanapahan-kevitra iray, avereno ampidirina ny toetra voatahiry alohan'ny hanaovana safidy vaovao; tsy azo ekena amin'ny kinova teo aloha ny rakitra niova.
+
+Torolalana mifandraika: [Vavahadin'ny fikorian'asa sy ny kinovan'ny tahirin-kevitra](../../WORKFLOWS.md).
+
+<a id="execution"></a>
+
+## Fampiharana sy famerenana
+
+Ny Tokony hatao dia mampiseho dingana tena izy, ny andrana ankehitriny, ny fanamarinana ary ny vokatry ny famerenana. Ny mpisehatra milaza hoe "vita" dia tsy mahavita dingana iray: tsy maintsy misy ny porofo takina amin'ny drafi-piasana.
+
+Miato eo anelanelan'ny dingana mahafeno fepetra ny maody amin'ny tanana. Auto dia mampandroso ny dingana voamarina ary mamela andrana voafetra. Ny Mijanona aorian'ny dia mamorona toerana fizahana foana. Ny Mampiato dia mampitsahatra ny asa mavitrika amin'ny fikorian'asa; ny fanakatonana tontonana dia tsy mampitsahatra izany.
+
+Ny mpamerina tsy miankina dia mampiasa sehatra misaraka misy rakitra sy vokatry ny fanamarinana. Ny fikarohana manakana rehetra takina dia tsy maintsy vahana; ny mpamerina maro dia tsy manafoana hadisoana manakana amin'ny alalan'ny latsa-bato.
+
+Ao amin'ny Maodely maro, mitaky fanapahan-kevitra mazava tsara ny fanitsiana ny fikarohana. Ny fanitsiana dia tsy manomboka famerenana hafa mangina: ny Famerenana indray dia manokatra tsingerina vaovao. Ny fanehoan-kevitry ny famerenana dia afaka mangataka fandinihana indray avy amin'ny mpandrindra tsy mila mamerina ny fampiharana.
+
+Tsy azo ovaina mangina ny dingana vita. Miaraka amin'ny TDD, ny Mena dia tsy maintsy tena tsy mahomby noho ny antony nampoizina, avy eo ny Maitso dia tsy maintsy mahomby. Ny andrana voafetra dia misoroka ny fiverimberenana tsy misy fiafarana.
+
+Tehirizo ao amin'ny Fikirana → Ekipa mpamerina ny mpamerina CLI/API tsy miankina, avy eo safidio ny ekipa ao amin'ny Code na Work. Mandeha miaraka ny mpamerina, arahin'ny mpamolavola tatitra an'ny ekipa. Azonao atao koa ny mandrindra mpamerina tsy miankina tsy misy ekipa voatahiry. Tsy mandray afa-tsy tatitra voarafitra tsy mitonona anarana ny mpamolavola tatitra, tsy misy rakitra na fitaovana momba ny tetikasa; io fanokanana io dia mitaky Claude Code na API amin'izao fotoana izao.
+
+Ny dingana fampiharana tsirairay dia mila fanamarinana azo tanterahina, famerenana tsy miankina takina, na izy roa. Ny dingana fanomanana kosa dia mitazona vokatra voamarina sy tapakila tahirin-javatra; ireo dia tsy miseho ho toy ny nandeha ny fitsapana fampiharana. Ny baiko iray dia tsy mahomby raha tsy rehefa voamarina ny tena toetry ny fivoahany sy ny fanadiovana ny fizotran'ny dingana tompony. Ny fanamarinana Mena ho an'ny TDD dia tsy maintsy tsy mahomby amin'ny fomba mahazatra alohan'ny fampiharana sy ny fanamarinana Maitso; ny tsy fisian'ny rakitra azo tanterahina na ny fahataperan'ny fotoana dia tsy voka-tsoa Mena manan-kery.
+
+Mijanona aorian'ny andrana telo tsy nahomby amin'ny dingana iray na andrana dimampolo amin'ny fitambarany ny fitaovana mpanapaka mahazatra. Mandany andrana iray ny fahatapahana saingy tsy isaina ho andrana tsy nahomby izany. Mijanona aorian'ny famerenana alefa ny fetra sy ny porofo vita; tsy mamerina azy ireo ny Andramo indray. Vakio ny tsy fahombiazana voatahiry alohan'ny hanomezana alalana andrana hafa.
+
+Torolalana mifandraika: [Fanamarinana sy famerenana](../../WORKFLOWS.md).
+
+<a id="review-teams"></a>
+
+## Ekipa mpamerina mifanitsy sy ny mpamolavola tatitra
+
+Sokafy ny Fikirana → Ekipa mpamerina ary mitahiry ekipa iray. Manampia mpamerina tsy miankina manana ny CLI na API, maodely, ezaka fisainana ary fahaizana manokana azy manokana, avy eo mifidiana mpamolavola tatitra. Safidio ny ekipa ao amin'ny fandrindrana ny famerenana ny asa. Ny tolotra mialoha an'ny mpanatanteraka dia azon'ny mpamerina ampiasaina koa, ary mbola azo ampiasaina ny Manokana; ny anjara asa tsy miankina dia mbola manana sehatra misaraka.
+
+Mandeha mifanitsy amin'ny porofon'asa mitovy ny mpamerina. Voatahiry ny tatitra takina tsirairay, ny hadisoana ary ny didim-pitsarana. Mandray tatitra misy laharana tsy mitonona anarana ny mpamolavola tatitra, tsy misy anaran'ny mpamerina, maodely na famantarana mpamatsy, votoatin'ny asa tany am-boalohany, fidirana amin'ny tahiry na fitaovana. Mampitaha ny tatitra izy ary mamerina didim-pitsarana voarafitra iray; tsy manao famerenana loharano vaovao izy.
+
+Ny fikarohana manakana na fandavan'ny mpamerina takina dia tsy azo ialana amin'ny vato maro an'isa na safidin'ny mpamolavola tatitra. Misakana ny fankatoavana ny tatitra tsy hita na tsy manara-penitra. Diniho ny fikarohana tsirairay sy ny fanapahan-kevitra natambatra alohan'ny hanekena na hanomezana alalana ny fanitsiana. Voavaha sy afatotra ho an'ny fandehanana ny ekipa voatahiry; ny fanovana ny tolotra mialoha azy dia tsy manova ny porofo efa vita.
+
+Ny mpamolavola tatitra mandray tatitra fotsiny dia mampiasa ny fandrindrana tsy misy fitaovana tohanana an'ny Claude na API amin'izao fotoana izao. Mbola azo ampiasaina ho mpamerina ny Codex sy Antigravity saingy nolavina amin'ity anjara asa mpamolavola tatitra voatokana ity mandra-pisian'ny fifanarahana tsy misy fitaovana voamarina. Tsy ampy ny fampidirana milaza fotsiny hoe "tsy misy fitaovana".
+
+> Fifehezana misaraka ny fantsona famolavolana/famerenana an'ny Code Maodely maro sy ny ekipa mpamerina mifanitsy voatahiry. Tazomy ny politika famerenana manokana voafidy; aza mieritreritra fa ny lalan-kizorana iray dia mampandeha ny endri-javatra famerenana rehetra.
+
+Torolalana mifandraika: [Fandrindrana ekipa voafaritra karazana](../../../shared/review-team.ts) · [Fampivondronana famerenana](../../../electron/workflow/ReviewAggregation.ts).
+
+<a id="specializations"></a>
+
+## Fahaizana manokan'ny mpisehatra sy ny politikan'ny fampidirana
+
+Ny maodely no milina mpanatanteraka; ny fahaizana manokana dia mombamomba ny torolalana. Mifidiana Tsy misy mba tsy hisy fahaizana manokana ampiana, Mahazatra ho an'ny torolalana mahazatra, Auto ho an'ny torolalana miorina mifandraika, na Amin'ny tanana ho an'ny torolalana voafantina sy ny torolalanao manokana voafetra. Afaka mitazona ny safidy ny tolotra mialoha.
+
+Ny katalaogy tany am-boalohany dia mirakitra ny fanaovana kaody ankapobeny, maritrano, fiarovana, fahamendrehana, fampandehanana tsara, fitsapana ary fampiasana ny interface. Auto dia mampiasa ny lahatsoratry ny asa/dingana misy mba hisafidianana torolalana; tsy miantso maodely hafa mangina izany na manome toky ny fahaizana. Azo dinihina sy ovaina ny tolo-kevitry ny fandrindrana alohan'ny hanekena ny drafi-pampiharana.
+
+Ny fahaizana manokana amin'ny famerenana dia manampy amin'ny fitarihana ny saina saingy tsy manolo mihitsy ny porofo tsy miankina, ny fetran'ny fidirana na ny didim-pitsarana voarafitra. Raiso ho ampahany amin'ny velaran'ny asa ny torolalana manokana: aza ampiasaina handalovana ny fanekena tahirin-kevitra, ny politikan'ny fitaovana, ny fanamarinana na ny tsy fahombiazan'ny mpamerina.
+
+Torolalana mifandraika: [Katalaogy fampidirana tany am-boalohany](../../../shared/specializations.ts).
+
+<a id="work"></a>
+
+## Work: avy amin'ny fanontaniana mankany amin'ny tahirin-kevitra
+
+Work dia tsy mitaky Git. Ny Mahazatra dia mamorona fampirimana asa misaraka; ny Manokana dia mifidy fampirimana efa misy amin'ny alalan'ny mpisafidy natoraly. Ny Tehirizo ny drafitra dia mitahiry ny fandrindrana tsy misy faminavinana; ny Manomboka dia mampandeha ny dingana voalohany.
+
+Auto dia mamaly mivantana na manolotra drafi-piasana mifanaraka misy Tokony hatao tena izy. Ny Fampisondrotana hevitra dia mamorona ideas.md alohan'ny hisafidiananao hevitra maro kokoa na fanombanana. Ny Fikarohana dia mitazona findings.md, loharano ary fetra. Ny Fanoratana dia mihetsika avy amin'ny fikasana ary, rehefa ilaina, outline.md mankany amin'ny tahirin-kevitra manazava na draft.md; ny fanitsiana dia mitazona ny kinova teo aloha.
+
+Safidio ny fampidirana rakitra amin'ny alalan'ny mpisafidy natoraly ary manondroa azy ireo amin'ny @. Mandika azy ireo ho fampidirana asa tsy miova ny rindranasa ary manamarina ny maha-izy azy ireo alohan'ny fandehanana. Ny Mahazatra dia mamorona fampirimana asa an'ny rindranasa; ny fidirana fampirimana Manokana dia fanomezana alalana voatahirin'ny tompony. Ny drafitra voatahiry nefa mbola tsy natomboka dia afaka manova ny fampirimany.
+
+Mamoròna dika mitovy 1–4 miaraka amin'ny fandrindrana mpanatanteraka tsy miankina. Ny asa mampiasa fampirimana mifanindry dia tsy afaka manoratra miaraka. Mihatra amin'ny asan'ny ZIAForge ity fandrindrana ity, fa tsy amin'ny fandaharana ivelany tsy voafaritra.
+
+Ny Fampisondrotana hevitra lalina dia manana mpiasa telo tsy miankina amin'ny fomba mahazatra ary mahazaka hatramin'ny valo. Safidio ny filaharany sy ny fandrindrany, anisan'izany ny fampiasana indray tolotra mialoha amin'ny sehatra misaraka. Ny fanontanian'ny mpiasa dia mitazona ny fiaviany; ny tatitra tsy manara-penitra dia mahazo andrana fanamboarana endrika iray. Mijanona ho hita maso ny tsy fahombiazana amin'ny ampahany fa tsy aseho ho fahombiazana ifanarahana tanteraka.
+
+Ny Lalina dia manambatra ny tatitry ny mpiasa voatahiry ho brainstorm_report.md ary mangataka fanapahan-kevitry ny mpampiasa foana. Ny fanarahana kely dia manitsy ny tatitra amin'ny alalan'ny mpandrindra; ny fanovana lehibe dia manomboka fihodinana hafa amin'ireo mpiasa voatondro. Mitazona ny kinovany ny tahirin-javatra novokarina.
+
+Ireo anjara asa voavaha dia afatotra amin'ny famoronana ny asa na fitehirizana mazava ny drafitra. Aorian'ny fiantsoana voalohany, ny fandrosoana mandeha ho azy/amin'ny tanana ihany no afaka miova; mampiasà asa vaovao ho an'ny fandrindrana anjara asa na maodely hafa. Ny fanovana tolotra mialoha maneran-tany dia tsy manova mangina ny dingana manaraka.
+
+Miato eo anelanelan'ny dingana mahafeno fepetra ny maody amin'ny tanana, anisan'izany ny rindran-damina matanjaka amin'ny Fanoratana. Auto dia afaka manohy mamakivaky io rindran-damina io. Ny fanontaniana, ny drafi-piasana azo tanterahina naroso, ny fitarihana ny Fampisondrotana hevitra ary ny famerenana ny tatitra Lalina dia mijanona ho fanapahan-kevitra mazava tsara na dia ao amin'ny Auto aza. Ny fanamarihana loharano fotsiny dia tsy manaporofo fa nisy fitetezana tranonkala, ary ny rakitra binary voatahiry fotsiny dia tsy manaporofo ny fisehoany marina.
+
+Torolalana mifandraika: [Fomba fiasa sy fanapahan-kevitra Work](../../WORK_WORKFLOWS.md).
+
+<a id="models"></a>
+
+## Tolotra mialoha, maodely ary fidirana
+
+Ny tolotra mialoha dia mitahiry CLI/API, maodely, ezaka fisainana ary alalana. Ny farany ambany amin'ny resaka dia misy fizarana tolotra mialoha, CLI, maodely ary safidy. Miasa tsy misy tolotra mialoha ny Manokana; ny Mamorona tolotra mialoha dia mitahiry ny safidy ankehitriny.
+
+Avy amin'ny CLI na API voafantina napetraka ny katalaogy raha tohanana. Ny Havaozy dia manavao ny lisitra nefa tsy manova ny safidy. Raha tsy azo ampiasaina ny fitadiavana, mampidira ID maodely mazava tsara; tsy maintsy mbola tohanan'ny mpamatsy izany. Miankina amin'ny maodely sy ny CLI ny haavon'ny fisainana. Miavaka amin'ny famantarana tsy misy mazava ny safidy mahazatra an'ny mpamatsy.
+
+Ampiharo ny fanovana raha tsy aorian'ny faneken'ny backend. Voafetra ny fifindrana mandritra ny anjara mavitrika na filaharana tsy foana. Mijanona ny drafitra sy ny tantara hita maso, saingy ny fanovana mpamatsy dia tsy mamindra ny toetrany manokana ao anatiny.
+
+Ao amin'ny Forge, misy dikany ny anaran'ny anjara asa: afaka mampiasa Mpandrindra misaraka ny fanomanana. Ny farany ambany dia manova ny anjara asa aseho; voafidy ao amin'ny firafitry ny fikorian'asa ny mpamerina sy ny mpanampy. Mety hohidiana ny politika ho an'ny fampiharana efa voamarina.
+
+Tsy mitovy ny alalana isaky ny mpamatsy. Azo ampiasaina ny Mamaky fotsiny sy ny Manoratra amin'ny sehatr'asa raha tohanan'ny adaptatera. Antigravity dia mampiasa ny firafitry ny CLI natoraly na fidirana feno voafidy mazava tsara. Ny fidirana feno dia tsy toeram-piarovana sandbox.
+
+Ny fahaizana manokana dia manampy tari-dalana amin'ny fampidirana, fa tsy maodely na alalana hafa. Manohana ny Tsy misy, Mahazatra, Auto ary Amin'ny tanana ny tolotra mialoha sy ny anjara asa. Auto dia mifidy mombamomba avy amin'ny lahatsoratry ny dingana tsy misy antso maodely fanampiny; ny Amin'ny tanana dia manaiky fahaizana manokana hatramin'ny efatra sy torolalana manokana. Azo ovaina ny asa natolotry ny Mpandrindra alohan'ny hanekena ny drafi-piasana.
+
+Ny ID maodely na ezaka nampidirina tamin'ny tanana dia mijanona ho safidinao, fa mety holavin'ny mpamatsy izany. Ny fanovana tolotra mialoha maneran-tany dia tsy manova mihemotra ny resaka mandeha na ny drafi-piasana efa nekena. Mba hanovana niniana natao ny resaka tsy miasa, ampiasao ny fifehezana ny firafiny manokana ary andraso ny fanekena. Ny safidy tsy azo ampiasaina dia tokony ho raisina ho fetran'ny fahaiza-manao na ny tsingerim-piainana, fa tsy lalovana amin'ny alalan'ny fanovana ny JSON voatahiry.
+
+Torolalana mifandraika: [Fahaiza-manaon'ny mpamatsy](../../PROVIDER_COMPATIBILITY.md).
+
+<a id="chat"></a>
+
+## Resaka, Mijanona ary ny filaharana
+
+Ny tabilao misokatra, ny Vao haingana ary ny drafi-tserasera dia an'ny asa iray ihany. Ny fanakatonana tabilao iray dia manala azy amin'ny Misokatra fa mitazona azy ao amin'ny Vao haingana ary tsy mampitsahatra ny fizotran'ny mpamatsy azy na ny fikorian'ny asa tantanana. Mitadiava tantara, sokafy indray ny resaka na akatony ny tabilao fanampiny rehetra avy amin'ny safidin'ny tantara.
+
+Ny Mijanona dia manapaka ny anjara ankehitriny. Andraso ho vita ny fiatoana alohan'ny Handefa manaraka: ny fanekena fanapahana dia tsy fahavitan'ny fizotra. Azonao atao ny manoratra ny drafitra manaraka mandritra izany fotoana izany.
+
+Ao amin'ny resaka mahazatra, ny Filaharana dia mitahiry fangatahana aoriana misaraka amin'ny drafitra ankehitriny. Ny Mampiato ny filaharana dia manatona ny fandefasana manaraka. Ny Mijanona sy Mivoaka dia mampiato ny filaharana. Rehefa averina alefa dia Tohizo aloha, avy eo Tohizo mazava tsara ny filaharana.
+
+Ny hoe Tsy azo antoka dia midika fa tsy fantatra ny fandefasana. Tsy alefa indray ho azy ny hafatra toy izany: diniho ny tantara, adikao ny lahatsoratra raha mety ary esory ilay singa milahatra. Fangatahana vaovao niniana natao ny fandefasana azy indray.
+
+Ny resaka dingana tantanana dia mampiasa ny fikorian'asany fa tsy ny filaharana mahazatra. Ny Manaraka dingana dia mampiseho ny dingana ankehitriny; ny fisafidianana tabilao hafa amin'ny tanana dia mampitsahatra ny fanarahana. Ny firaketan'ny CLI dia mampiseho fitiliana misaraka amin'ny valiny.
+
+Ny valin-kafatra Markdown dia mampiseho lohateny, lisitra, tabilao, rohy ary kaody voafefy. Ny karatra fitaovana sy ny fitiliana CLI dia mijanona ho misaraka amin'ny valiny. Ny fisainana notaterin'ny maodely sy ny refin'ny token dia tsy miseho raha tsy rehefa tena mampiseho azy ireo ny mpamatsy; aza tsoahina avy amin'ny sarimiaina ny fisainana manokana na ny fampiasana.
+
+Aorian'ny fandefasana tsy azo antoka na fanekena filaharana, diniho ny tantara ary avereno ilay fangatahana voatahiry ihany raha atolotra. Ny tapakila filaharana dia midika fa neken'ny fitehirizana ilay singa, fa tsy hoe vita ny faminavinana. Esory ny singa milahatra tsy azo antoka amin'ny alalan'ny fanafoanana mazava fotsiny; tsy afaka manafoana fampidirana efa naterina izany.
+
+Torolalana mifandraika: [Filaharan-hafatra mateza](../../MESSAGE_QUEUE.md).
+
+<a id="files"></a>
+
+## Rakitra, Git ary fahavitana
+
+Ny Rakitra dia mampiseho ny fampirimana asa. Ampitahao amin'ny fepetra takina ny vokatra, sokafy ny tahirin-kevitra ary diniho ny fahasamihafana. Ny fitazonana rakitra binary dia tsy manaporofo ny fisehoana marina ao amin'ny rindranasa kendrena azy.
+
+Git dia manome toetra, fanovana ary asa miaraka amin'ny vokatra voarakitra. Ny Commit, merge ary push dia atao amin'ny tanana amin'ny fomba mahazatra; ny hetsika mandeha ho azy dia safidy misaraka ho an'ny drafi-piasana voamarina tanteraka.
+
+Aza ovaina ny rakitra iasana eo anelanelan'ny fanamarinana sy ny famoahana: mifamatotra amin'ny byte marina ny fankatoavana. Manakana ny fandrosoana ny fifandirana, ny fanosehana tsy nahomby ary ny vokatry ny hetsika tsy fantatra mandra-pahatongan'ny fanapahan-kevitra mazava tsara. Auto dia tsy manome alalana mangina amin'ny famoahana.
+
+Work dia tsy mamorona rantsana Git ary tsy manana famaranana Git. Tazomy ny tahirin-kevitra takina avy amin'ny fampirimana nofidina, anisan'izany ny kinova sy ny loharano.
+
+Ny mpamoaka rakitra dia manome fandrafetana araka ny tovana, fikarohana sy fanoloana, tantara fanafoanana, fampidinana andalana ary drafi-tserasera isaky ny tabilao. Ny fitehirizana dia mitazona ny fanafenana UTF-8/UTF-16 tohanana ary mandà ny fifandirana amin'ny fanovana avy any ivelany. Ny fanafenana hafa sy ny votoaty binary dia mitaky mpamoaka rakitra ivelany. Ny drafitra tsy voatahiry dia manakana ny fivoahan'ny rindranasa Mivoaka mandra-pitahirizan'ny tompony na anariany azy ireo.
+
+Alefa hatramin'ny 8 MiB ny fandrafetana feno. Ny rakitra lahatsoratra lehibe kokoa dia misokatra amin'ny fikandrana 256 KiB; ny 8–64 MiB dia azo ampidirina feno mazava tsara tsy misy fandrafetana. Mihoatra ny 64 MiB dia mampiasa fanitsiana am-pikandrana sy fikarohana voafetra ny fitoviana manaraka. Maody rakitra lehibe voafetra ity fa tsy fitoviana amin'ny Sublime Text ho an'ny tahirin-kevitra lehibe tsy misy fetra.
+
+Ny Sokafy ny fampirimana dia mampiasa ny asa ankehitriny na ny sehatry ny rantsana/worktree, fa tsy manokatra mangina ny tahiry voalohany fotsiny. Ny andalana rakitra iray dia afaka mampiseho ny lahatahiry ray an'io rakitra io. Ny lalan-drakitra dia hamarinin'ny backend amin'ny alalan'ny fanomezana alalana amin'ny asa voasoratra anarana. Ny rakitra binary dia tsy azo amboarina toy ny lahatsoratra tsotra; ampiasao ny mpijery kendrena azy ireo ary tazomy ny byte voalohany.
+
+Hetsika voaaro misaraka ny fanesorana worktree. Farano ny fotoam-piasana voarafitra sy ny terminal mifandray alohan'ny hanesorana azy, anisan'izany ny fotoam-piasana tsy miasa. Diniho ny vokatry ny Git voatahiry sy ny toetry ny fanarenana; ny famafana ny firaketana asa dia tsy mahasolo ny fitahirizana azo antoka ny asa tsy voapetraka.
+
+Torolalana mifandraika: [Fifanarahana fanitsiana voafaritra karazana](../../../shared/editor.ts) · [Politika Git](../../WORKFLOWS.md).
+
+<a id="api"></a>
+
+## Fifandraisana API
+
+Ny Fifandraisana dia manampy teboka fidirana mifanaraka amin'ny OpenAI nofidina mazava tsara. Mampidira anarana, URL fototra, maodely ary lakile raha ilaina. Mpizara maro no mitaky URL fototra mifarana amin'ny /v1; jereo ny tahirin-kevitry ny teboka fidiranao.
+
+Ilaina ny HTTPS afa-tsy amin'ny HTTP loopback. Mampiasà teboka fidirana tsotra tsy misy mari-pamantarana fanamarinana mifototra ao anatin'ny URL. Mampiasa fanafenana OS tohanana ny lakile ary tsy averina any amin'ny UI. Ny fanovana ny teboka fidirana dia mitaky fampidirana indray ny lakileny. Ny famelana ny sahan'ny lakile ho foana dia mitazona lakile voatahiry; ny Esory ny lakile voatahiry dia mamafa izany mazava tsara.
+
+Ny antso API dia tsy mampiasa famandrihana CLI. Tsy mitovy amin'ny fotoam-piasana natoraly ny fitaovana sy ny maodely, ary ny fahitana maodely nahomby dia tsy porofon'ny faminavinana. Ny fampiasana token dia tsy miseho raha tsy rehefa tena mamerina izany ny mpamatsy.
+
+Tazomy ao amin'ny Fifandraisana ny mari-pamantarana fa aza atao anaty lahatsoratry ny asa na torolalan'ny tolotra mialoha. Ny mpamerina mamaky fotsiny dia tsy mahazo afa-tsy ny fitaovana rakitra API navela ho azy ireo; tsy manana fitaovana ny mpamolavola tatitra. Nolavina ny antso fitaovana tsy tohanana fa tsy tanterahina mangina. Miovaova arakaraka ny mpizara ny masontsivana fisainana, ny fanohanan'ny fitaovana ary ny lisitry ny maodely; ampitahao amin'ny fifanarahana manokan'ny teboka fidiranao ny hadisoana.
+
+Torolalana mifandraika: [Fifandraisana API](../../API_CONNECTIONS.md).
+
+<a id="settings"></a>
+
+## Fikirana, fiteny ary famerenana amin'ny laoniny azo antoka
+
+Ny fikirana ankapobeny dia mifidy sehatr'asa, fitenin'ny interface ary safidy mahazatra. Ny Fifandraisana dia mitantana teboka fidirana API. Ny Tolotra mialoha sy ny Ekipa mpamerina dia mitazona ny fandrindrana ny anjara asa. Ny Fifehezana lavitra dia mitantana mari-pamantarana eo an-toerana, velaran'ny mpizara ary alalan'ny tompony; ny Fanavaozana dia mitantana ny loharano/fantsona famoahana. Ny Momba dia mampiseho ny tena fananganana mandeha.
+
+Misaraka amin'ny fitenin'ny toromarika sy ny toetry ny famerenana mandinika ny antontan-taratasy ny fitenin'ny fifandraisana. Mijanona ho famantarana foana ny anaran'ny vokatra, ny ID an'ny baiko, ny tovana anaran-drakitra, ny ID an'ny maodelin'ny mpanome tolotra ary ny anarana noforonin'ny mpampiasa. Manaraka ny fitenin'ny fifandraisana voafidy ny Fanampiana rehefa misy fandikan-teny ankehitriny azo ampiasaina; asiana marika manokana ny fandikan-tenin'ny milina ary mijanona ho loharano fototra azo antoka ny teny Anglisy.
+
+Mampihatra ny fanitsiana aseho eo ny Tehirizo. Mety hanala ny metadata an'ny rindranasa ny famerenana ny banky angona na ny famerenana amin'ny toetry ny orinasa; tahirizo ny rakitra sy ny tahiry nosedraina alohan'ny hampiasana an-tsitrapo ny famerenana amin'ny laoniny. Asan'ny tompony eo an-toerana ihany ireo fandidiana ireo. Aza ampiasaina ho toy ny lalan-kely hanaovana famotorana ny fizotry ny asa tsy nahomby na firaketana simba izy ireo.
+
+Torolalana mifandraika: [Torolalana momba ny fandikan-teny ho amin'ny fiteny an-toerana](../../LOCALIZATION.md) · [Famerenana tahirin-kevitra](../../DATA_RECOVERY.md).
+
+<a id="help-assistant"></a>
+
+## Manontania ny mpanampy amin'ny Fanampiana
+
+Sokafy ny Fanampiana, mifidiana famaritana mialoha efa voatahiry sady mifandray ao amin'ny fizarana mpanampy azy, ary manontania momba ny ZIAForge. Mampiasa ny torolalana fototra amin'ny teny Anglisy ankehitriny sy ny fitenin'ny fifandraisana nofidinao ny valinteny. Manokatra ireo lohahevitra mifandraika amin'ny torolalana ny bokotra fanondroana fizarana, mba hahafahanao mampitaha ny fanazavana amin'ny loharano fototra.
+
+Mitahiry resaka manokana misaraka hatramin'ny fidirana voatahiry miisa 100 sy 3 MiB ity mpanampy ity. Mampidira fanontaniana misy tarehin-tsoratra hatramin'ny 12,000; mandefa ny fanontaniana ny Handefa, manafoana ny valinteny mbola miasa ny Hijanona nefa mitazona ny fanontanianao ho vonona, ary manaisotra ity resaka Fanampiana ity ny Hamafa. Tsy very ny volavolan-kevitra mbola tsy lasa sy ny safidy famaritana mialoha rehefa manidy na manokatra indray ny Fanampiana mandritra io fotoam-piasana iray amin'ny rindranasa io, saingy tsy voatahiry anaty kapila ny volavolan-kevitra. Tsy mandefa baikon'ny rindranasa, tsy manova fikorianan'ny asa, na manaiky vavahady ny mpanampy. Ny torohevitra dia tsy fanamarinana mivantana ny asa, ny kaonty, na ny fifandraisana ivelany.
+
+Mampihatra ny politika tohanana tsy mampiasa fitaovana ny fotoam-piasana Fanampiana Claude Code sy API. Mitaky ny alalana teratany ananan'ny solosaina efa misy an'ny tompony eo an-toerana ny fotoam-piasana Fanampiana teratany Codex sy Antigravity. Raha toa ka tsy velona izany, manazava ny fepetra takiana mialoha ny rindranasa fa tsy mifidy mpanome tolotra hafa. Ny tompony ihany no afaka mampandeha izany ao amin'ny fandrindrana ny fanaraha-maso eo an-toerana; tsy afaka mampandeha izany ho azy ny mpanampy.
+
+Mampiasa boaty fasika vakiana fotsiny ny Fanampiana Codex ary mandà ny fangatahana fankatoavana fitaovana. Mampiasa fomba fandrafetana drafitra sy ny faneva boaty fasika teratany azy kosa ny Antigravity. Ireo fomba teratany ireo dia tsy antoka feno ho an'ny fihazonana voatokana ao anatin'ny rafitra miasa. Ny hash an'ny torolalana loharano no mamantatra ny loharano nampiasaina tamin'ny valinteny; mety ho diso ihany anefa ny fanazavana novolavolaina, koa diniho tsara ireo fizarana mifandray aminy alohan'ny handraisana fepetra. Asiana marika manokana ireo valinteny taloha rehefa tsy mitovy amin'ny torolalana ankehitriny ny dikan'ny torolalana loharanon'izy ireo.
+
+Torolalana mifandraika: [Torolalana fototra sy fikarakarana fandikan-teny](../../HELP_MAINTENANCE.md) · [Mpanampy amin'ny rindranasa sy alalana](../../AGENT_CONTROL.md).
+
+<a id="assistant-control"></a>
+
+## Mpanampy sy Telegram
+
+Mampiasa ny famaritana mialoha voafidy sy ny API mitovy amin'ny fanaraha-maso ny rindranasa ny mpanampy. Misaraka ny alalana hijery ny toetry ny rafitra sy ny alalana hanatanteraka asa. Diniho tsara ireo baiko sy vokany: ny lahatsoratry ny mpanampy dia tsy porofo manamarina fa vita ny asa iray.
+
+Ny tompony eo an-toerana ihany no afaka mampandeha ny Telegram, amin'ny alalan'ny mariky ny bot efa misy sy ny ID nomerikan'ny tompony. Ho an'ny resaka mangingina an'io tompony io ihany ny fanaraha-maso. Tsy tokony handray hafatra avy amin'ny rindranasa ny bot iray mbola tsy namboarina na tsy miasa.
+
+Aza mametaka ny mariky ny bot amin'ny resaka tsotra andavanandro. Ny fametrahana ny fampifandraisana dia tsy manaporofo ny fisian'ny fifandraisana amin'ny Telegram ary tsy mamorona bot ho azy avy hatrany. Mety hisy tahirin-kevitra manokan'ny toeram-piasana ny pikantsary sy ny valinteny.
+
+Mifidiana famaritana mialoha ho an'ny mpanampy ary omeo misaraka amin'ny fizahana ny alalana hanao asa amin'ny rindranasa. Mila ny alalana teratany ananan'ny tompony ny fampandehanana ny mpanampy Codex sy Antigravity; tsy soloina mangingina amin'ny fivoriana API na Claude tsy mampiasa fitaovana izy ireo. Azo aseho ao amin'ny resaky ny mpanampy ny pikantsary, saingy ny fampidirana ankehitriny ho an'ny maodely dia tsy ahitana famakafakana sary. Aza mieritreritra hoe nandinika sary tamin'ny maso ny mpanampy satria fotsiny hoe nampiseho izany izy.
+
+Afaka mandinika famintinana, asa, resaka, toetry ny fizotry ny asa, teny manodidina ny fizotran'ny rafitra ary fikandran'ny rindranasa ny mpanampy amin'ny alalan'ny fitaovana voafaritra karazana. Afaka manova fandrindrana tsotra azo ekena izy ary afaka mandefa asa nahazoana alalana amin'ny rindranasa. Tsy afaka manome zo teratany izy, tsy afaka mampiseho mari-pamantarana miafina notehirizina, tsy afaka manova avy lavidavitra ny alalana amin'ny faka toeram-piasana, na manaiky vavahady Forge satria fotsiny hoe manamora zavatra izany.
+
+Torolalana mifandraika: [Fifanarahana mifehy ny fanaraha-maso ny rindranasa](../../AGENT_CONTROL.md).
+
+<a id="telegram"></a>
+
+## Ampandehano ny bot Telegram manokana anao
+
+Mamoròna na makà bot anao manokana, atombohy ny resaka manokana miaraka aminy, ary ampidiro ao amin'ny fandrindrana ny fanaraha-maso eo an-toerana ny marika famantarana azy sy ny ID nomerikan'ny mpampiasa Telegram anao. Aza velomina ny fampifandraisana raha tsy rehefa tianao hifandray marina ny rindranasa. Famantarana mpampiasa ny ID an'ny tompony, fa tsy solonanarana na ID an'ny bot. Ny hafatra avy amin'io mpampiasa io ao amin'io resaka manokana io ihany no ekena.
+
+Ampiasao ny /start, /menu na /status hahitana topimaso momba ny dikan-teny mandeha, ny isan'ny tetikasa/asa ary ny toetry ny asa. Manokatra ny Tetikasa, Asa, Pikantsary, Fanampiana ary Fiteny ny bokotra. Mampiseho zavatra valo isaky ny pejy ny lisitra, miaraka amin'ny fitetezana Miverina, Havaozy, Fandraisana ary Teo aloha/Manaraka. Manasivana ny lisitry ny asa ny bokotry ny tetikasa. Mampiseho ny fandrosoan'ny fizotry ny asa voatahiry, ny maodely/famaritana mialoha ary ireo fanontaniana miandry raha misy ny karatra asa.
+
+Sokafy ny Resaky ny asa iray hijerena mialoha ireo resaka misokatra/vao haingana sy ny resaka isaky ny dingan'ny fizotry ny asa. Mampiseho hatramin'ny hafatra enina farany avy amin'ny mpampiasa/mpanampy ny fijerena mialoha tsirairay, nohafohezina hita maso ho tarehin-tsoratra 200 avy. Tsy aseho ny fisainana anatiny manokana. Ny famakiana ny tantara dia tsy mampandeha mpanome tolotra. Vakiana fotsiny ny fijerena mialoha: ny lahatsoratra tsotra sy ny /ask TEXT dia mbola miantefa amin'ny mpanampy amin'ny rindranasa hatrany, fa tsy miantefa an-kolaka amin'ny resaky ny asa jerenao akory.
+
+Mamerina mamaky ny fizotry ny asa Code na Work ankehitriny ny Alefaso / Tohizo ary manomboka fizotry ny asa voatahiry mahafeno fepetra. Mangataka ny fiatoany kosa ny Miato. Tsy misy amin'izy ireo manaiky fepetra takiana, famaritana, drafitra, valin'ny famerenana mandinika na fanontaniana; manakana ny Alefaso ny fanapahan-kevitra miandry. Mandraisa fanapahan-kevitra ao anatin'ny rindranasa, na mampiasà baiko voafaritra karazana nahazoana alalana mazava miaraka amin'ny vavahady sy fanitsiana marina ankehitriny.
+
+Ampiasao ny Fiteny na ny /language mba hisafidianana ny iray amin'ireo fitenin'ny fifandraisana miisa 56 amin'ny alalan'ny anarany natoraly. Mitahiry safidy ho an'ity bot sy ity tompony ity ihany izany. Manafoana io safidy manokana io ny Hampiasa ny fitenin'ny rindranasa. Tsy manova ny fitenin'ny rindranasa na ny alalana fidirana izany; tsy averina alefa ho azy ireo hafatra efa nisy.
+
+Manavao io hafatra menio navoaka io ihany ny fitetezana amin'ny ankapobeny. Manana famantarana manjavozavo izay lany andro aorian'ny 15 minitra ary azo ampiasaina indray mandeha monja ireo bokotra; manafoana ireo bokotra tranainy ny fanovana karatra. Tsy afaka manao asa intsony ny bokotra lany andro, efa nampiasaina, tsy mifanaraka amin'ny hafatra, na an'ny fizotran-drafitra teo aloha. Azo soloina karatra vaovao ny hafatra iray tena tsy azo ovaina intsony; ny fahadisoana amin'ny tambajotra tsy fantatra kosa dia tsy averina andramana toy ny hafatra vaovao.
+
+Rehefa velomina, manary ireo asa niandry teo aloha ny mpisintona vaovao ary mirakitra ny fandraisana ny fanavaozana alohan'ny handefasana azy mba tsy hamerenana ho azy ireo baiko tapaka rehefa mamerina mampandeha. Misoroka ny famerenana izany; tsy manome antoka ny fahavitan'ny asa kosa anefa izany. Hamarino ny toetra/teny manodidina alohan'ny handefasana asa vaovao am-pahalalana aorian'ny fahadisoana. Tsy misy fampahafantarana mandeha ho azy momba ny toetry ny asa.
+
+Mbola azo ampiasaina hatrany ireo baiko mazava: /projects, /tasks, /task TASK_ID, /run TASK_ID, /pause TASK_ID, /screenshot ary /ask TEXT. Ny /new {JSON} dia mamorona asa amin'ny alalan'ny createTask voafaritra karazana; ny /command {JSON} kosa dia mandefa baiko katalaogy mazava. Vakio ny katalaogy mivantana hahitana ny firafitry ny tondro hevitra. Mihatra eto ihany koa ny fanomezan-dalana sy ny fahazoan-dalana amin'ny lahatahiry mitovy amin'ny ao amin'ny rindranasa.
+
+Tsy mandefa velively ny sandan'ny mariky ny bot voatahiry any amin'ny mpanampy ny rindranasa. Na izany aza, mety hisy fampahalalana momba ny tetikasa manokana ny pikantsary, ny famintinana ary ny lahatsoratry ny resaka. Atsaharo eo an-toerana ny fampifandraisana raha tsy azo itokisana intsony ny bot na ny kaontin'ny tompony. Soloy amin'ny alalan'ny mpanome tolotra bot ny marika nisy nivoaka, avy eo havaozy ny fandrindrana voaaro eo an-toerana.
+
+Torolalana mifandraika: [Bot manokana sy baiko](../../AGENT_CONTROL.md).
+
+<a id="native-permissions"></a>
+
+## Alalana amin'ny solosaina teratany ho an'ny tompony ihany
+
+Mikatona hatrany am-boalohany ny fidirana amin'ny solosaina teratany. Ny tompony ihany no afaka mampandeha izany ao amin'ny Fandrindrana eo an-toerana → Fanaraha-maso lavidavitra. Tsy afaka mampandeha io faneva io ho an'ny tenany ny mpanampy sy ny baikon'ny HTTP/MCP/Telegram. Raha misy asa lavina, tokony hanazava ny fandrindrana ny mpanampy ary hamela ny tompony hanapa-kevitra.
+
+Rehefa ampidirina mazava, ny computer.run dia mandray rakitra azo tanterahina, laharan'ny tondro hevitra ary safidy amin'ny lahatahiry fiasana feno. Tsy mampiasa fampidirana teny anaty akorandriaka (shell) izy, manana fetra 30 segondra ary mametra ny vokatra ho 1 MiB. Lavina ny lahatahiry nomena raha tsy hita na tsy mitombina; ny fandaozana ny cwd dia mampiasa ny lahatahiry fandrindrana an'ny rindranasa, fa tsy ny HOME. Manafoana ireo baiko mbola mandeha ananan'ny tena ny Hiala ary miandry ny fanadiovana ny fizotry ny asan'izy ireo.
+
+Fanapahan-kevitra misaraka ny sehatra famakiana/fanaovana asa amin'ny rindranasa sy ny fidirana teratany. Ny hazo fiasana dia tsy mametra ny fidirana amin'ny rafi-drakitra ho an'ny mpanome tolotra tsy manana fameperana. Esory ny fidirana teratany aorian'ny asa raha tsy ilaina intsony izany, ary diniho tsara ny tapakila fandraisana baiko fa aza manaiky ny lahatsoratry ny mpanampy ho toy ny porofo.
+
+Torolalana mifandraika: [Fifanarahana fanaraha-maso an'ny tompony ihany](../../../shared/control.ts).
+
+<a id="remote"></a>
+
+## Mpitety tranonkala sy toe-javatra lavidavitra
+
+Mampandeha ny mpizara ny tompony eo an-toerana ary misafidy ny adiresy, ny seranana ary ny sehatra: vakiana ho an'ny fanaraha-maso na miasa ho an'ny fanaovan-javatra. Ny adiresy mahazatra 127.0.0.1 dia tsy azo ampiasaina afa-tsy amin'ity solosaina ity ihany. Mihaino amin'ny tambajotra kosa ny 0.0.0.0; diniho tsara ny fidirana amin'ny tambajotra alohan'ny hampandehanana azy.
+
+Manokatra io sehatra fifandraisana io ihany ny mpitety tranonkala rehefa avy nampiditra ny marika fidirana. Aza ampidirina amin'ny rohy azon'ny besinimaro jerena na amin'ny pikantsary ny marika fidirana. Ny HTTP fotsiny dia tsy manafina ny fifamoivoizan'ny angona; mampiasà lalan-tserasera voaaro raha amin'ny tambajotra tsy azo antoka.
+
+Manamboatra toe-javatra hafa amin'ny alalan'ny URL sy marika ny tompony. Mampita ny fangatahana ny rafitra ambadika; tsy mandika ny tetikasan'izy ireo ho ao amin'ny milina eo an-toerana akory izany. Hamarino tsara ny toe-javatra voafidy alohan'ny hanaovana asa rehetra.
+
+Mitondra ny fanaraha-maso ny rindranasa ny baiko sy fisehoan-javatra voafaritra karazana. Ny sehatra famakiana dia tsy manome alalana hanova asa. Safidy misaraka an'ny tompony eo an-toerana ny fanaraha-maso ny solosaina teratany ary mikatona hatrany am-boalohany.
+
+Tsy maintsy avela mandeha hatrany ny rindranasa mba hahafahana manara-maso amin'ny mpitety tranonkala, ny Telegram ary ny mpanampy ivelany. Samy manana ny kaonty manokana, ny toetry ny asa, ny marika fidirana ary ny seranan'ny mpizara azy ny toe-javatra tsirairay. Aza mampiasa kaonty iray miaraka amin'ny toe-javatra mahaleotena maro samihafa. Voafetra amin'ny toe-javatra voafidy ihany ny fisehoan-javatra amin'ny mpitety tranonkala sy ny valin'ny baiko; tsy mamindra rakitra na mandika ny fidirana teratany ny fanovana ny UI.
+
+Torolalana mifandraika: [HTTP sy fanaraha-maso toe-javatra](../../AGENT_CONTROL.md).
+
+<a id="external-agents"></a>
+
+## OpenClaw, Hermes ary ireo mpanampy ivelany hafa
+
+Ampiasao ny API fanaraha-maso ny rindranasa efa voamarina na ny tetezana stdio MCP miaraka aminy. Alefaso eo an-toerana ny mpizara, safidio ny famakiana fotsiny na ny fanaovana asa, ary amboary ny mpanjifa tsirairay miaraka amin'ny URL sy ny mariky ny toe-javatra misy azy. Ilaina ny Node.js 22 na vaovao kokoa mba hampandehanana ny tetezana MCP mahaleotena; ny rindranasa Electron dia tsy mametraka ny mpanjifa mpanampy anao. Ny URL an'ny mpitety tranonkala dia tsy teboka fiafarana HTTP MCP azo alefa mivantana: omeo ho ZIAFORGE_URL izany ho an'ny tetezana stdio.
+
+Mampiseho ny ziaforge_status, ziaforge_commands, ziaforge_command ary ziaforge_screenshot ny tetezana. Manomboha amin'ny toetry ny rafitra sy ny katalaogin'ny baiko mivantana, avy eo vakio ny system.context ho an'ny asa voafidy. Manaraka ny fanamarinana fanavaozana, vavahady, lahatahirin'ny asa ary fanadiovana mitovy amin'ny an'ny UI eo an-toerana ireo baiko voafaritra karazana.
+
+Ahitana ny documentation.guide ny katalaogin'ny baiko mivantana, izay torolalana fototra amin'ny teny Anglisy, miaraka amin'ny lalan'ny loharanony sy ny sourceSha256. Mandray io loharano fanondroana io ihany koa ny mpandrafitra anatiny an'ny rindranasa amin'ny alalan'ny fitaovany. Manome ny mpanampy ny zava-misy feno momba ny vokatra izany nefa tsy mila miantehitra amin'ny naoty tranainy; ny tahirin-kevitra dia tsy manome alalana mihitsy na manolo ny fanapahan-kevitry ny olombelona amin'izao fotoana izao.
+
+Tokony hiresaka momba ny fepetra takiana, ny fanapahan-kevitra ara-teknika ary ny drafitra miainga amin'ny hevitra tsotra avy amin'ny olombelona ny mpanampy. Tsy maintsy mitandrina ny vavahady mazava napetraky ny olombelona, ny maodely voafidy, ny fitsipika tanana/Auto ary ny famerenana ilaina izy ireo. Tsy tokony hamorona fankatoavana tsy nisy izy ireo, na hamerina baiko tsy azo antoka amin'ny alalan'ny ID vaovao, na hamoaka fanovana Git tsy araka ny sitrapon'ny tompony.
+
+Amboary ny mpizara MCP maromaro manana anarana ho an'ny fametrahana maro samihafa. Fanapahan-kevitra momba ny fampitana zotra ny fifindrana toe-javatra fa tsy fampitoviana tahiry. Ny ohatra amin'ny fampandehanana ny OpenClaw sy ny Hermes dia ao amin'ny AGENT_CONTROL.md; tsy maintsy hojerena ny fomba fametrahana manokana sy ny fifanarahan'ny dikan'ny mpanjifa napetraka.
+
+Ny fitehirizana vonjimaika ivelany ho an'ny requestId dia manala ny fangatahana miverina voafetra ihany mandritra ny fandehanan'ny rindranasa. Mampiasa ny famantarana azy manokana ireo asa maharitra: createRequestId ho an'ny famoronana asa, commandId ho an'ny fanapahan-kevitra momba ny fikorianan'ny asa, clientMessageId ho an'ny hafatra ary operationId ho an'ny fanovana Git. Hazòny ny famantarana sy ny votoaty voalohany aorian'ny fandraisana fanekena tsy fantatra mazava; vakio ny toetra voatahiry alohan'ny handefasana asa vaovao amin'ny sitrapo.
+
+Torolalana mifandraika: [Torolalana ho an'ny mpanjifa MCP](../../AGENT_CONTROL.md).
+
+<a id="local-cli"></a>
+
+## FETRAN'NY CLI EO AN-TOERANA SY NY FAMPIASANA HO AZY
+
+Mifehy io rindranasa mandeha sy ny fizotry ny asa voatahiry io ihany ny mpandefa ziaf. Avy amin'ny kaody loharano, ampiasao ny npm run ziaf -- list, npm run ziaf -- status --task TASK_ID --json, npm run ziaf -- start --task TASK_ID, na npm run ziaf -- pause --task TASK_ID. Ny fandraisana fanekena fahombiazana amin'ny Start dia tsy midika akory hoe vita ny asa.
+
+Mampandeha an-tsitrapo ny Auto ho an'ny fizotry ny asa voatahiry ny --until-success, saingy mbola mihatra hatrany ny fanontaniana, ny famerenana mandinika, ny vavahadim-pankatoavana, ny fetra ary ny teboka fanaraha-maso. Manakatona ny mpandefa manara-maso ny Ctrl+C; tsy manajanona an-kolaka ny fizotry ny asan'ny rindranasa izany. Jereo ny CLI.md hahitana ny kaodin'ny fivoahana, ny teboka fiafarana eo an-toerana ary ny fitantanana ny kaonty.
+
+Mitahiry famaritana fampisehoana sy kaontera fampandehanana eo an-toerana fotsiny ny sehatra fandrindrana ny Fampandehanana ho azy amin'izao fotoana izao. Tsy fandaharam-potoana miverimberina voamarina izy io ary tsy manaporofo fa nisy fihodinana maodely tany ambadika nandeha. Ho an'ny fanatanterahana tena izy, ampiasao ny fitaovam-pitantanana ny fizotry ny asa voatahiry, ny ziaf na ny API efa voamarina ary diniho ny tapakilan'izy ireo. Aza afangaro amin'ny fandaharam-potoana tsy mila fanaraha-maso ny tontonana fampisehoana fotsiny.
+
+Torolalana mifandraika: [Baikon'ny mpandefa asa](../../CLI.md).
+
+<a id="updates"></a>
+
+## Dikan-teny sy fanavaozana
+
+Mampiseho ny tena dikan-drafitra mandeha ny Mombamomba ny rindranasa. Mitaky tahiry famoahana GitHub azo itokisana sy fantsona maharitra na santatra ny fanavaozana ho an'ny besinimaro. Misaraka ny toetry ny fizahana, ny fampidinana ary ny fametrahana; ny fahadisoana dia tsy midika akory hoe voapetraka ny fanavaozana.
+
+Ho an'ny dikan-drafitra macOS misy sonia ny fametrahana ho azy. Tsy apetraka ho azy amin'ny alalan'ity fomba ity ireo dikan-drafitra fampandrosoana tsy misy sonia. Ho an'ny fanoloana amin'ny tanana, akatony tanteraka ny rindranasa ankehitriny ary mampiasà tahiry voamarina.
+
+Mandeha avy hatrany ny fizahana ho azy rehefa velomina, avy eo isaky ny adiny enina.
+
+Manilika ireo dikan-tsantatra ny maharitra; mamela ireo dikan-drafitra fampandrosoana koa ny santatra. Ny fizahana nahomby dia tsy mametraka afa-tsy ny metadata momba ny dikan-drafitra azo ampiasaina. Mila ny fonosana ho an'ny rafitra sy ny loharanom-pamoahana voalamina ny fampidinana sy ny fametrahana. Zotra fametrahana misaraka ny fandefasana Linux DEB; aza mihevitra fa havaozin'ny fomba fanavaozana macOS ho azy ny DEB.
+
+Torolalana mifandraika: [Fahavononan'ny dikan-drafitra havoaka](../../RELEASE_READINESS.md).
+
+<a id="restart"></a>
+
+## Famerenana mampandeha sy famerenana amin'ny laoniny
+
+Ao amin'ny macOS, ampiasao ny Quit / ⌘Q mba hanakatonana tanteraka ny rindranasa. Mety havelan'ny fanakatonana ny fikandrana handeha ihany ny rindranasa. Akatony tanteraka ny dikan-teny taloha alohan'ny hanoloana ny rindranasa.
+
+Aorian'ny fandefasana, safidio io asa io ihany. Hiverina ny tantara sy ny volavolan-kevitra. Mamerina ny toe-javatra teratany/eo an-toerana ny Tohizo fa tsy mandefa volavolan-kevitra, tsy manala ny fiatoan'ny filaharana, na manome alalana hamerina asa tsy fantatra mazava.
+
+Raha miseho ny Famerenana amin'ny laoniny, aza amboarina amin'ny tanana ny JSON. Diniho ny karazana antontan-taratasy voakasika, tahirizo ireo rakitra tany am-boalohany ary mifidiana tahiry voamarina. Ny famerenana filaharana tranainy kokoa dia manisy marika ireo singa ao aminy ho tsy azo antoka.
+
+Rehefa tsy fantatra mazava ny fahatongavana, mety mila alalana mazava ny fizotry ny asa tantanana mba hahazoana teny manodidina vaovao. Mijanona eo foana ny asa teo aloha sy ny andrana tsy nahomby; azo antoka kokoa ny fandavana hita maso noho ny fahombiazana noforonina.
+
+Ataovy tahiry ny rakitry ny asa sy ny kaontin'ny rindranasa rehefa mihidy ny dikan'ny rindranasa rehetra. Ny lahatahiry nadika fotsiny dia tsy famerenana efa nosedraina. Raha mangataka anao hisafidy tahiry voamarina ny famerenana amin'ny laoniny, hazòny ihany koa ireo rakitra simba marina. Ny famerenana fizotry ny asa na filaharana tranainy kokoa dia tsy manome alalana hamerina fanatsoahan-kevitra tsy azo antoka na asa Git.
+
+Torolalana mifandraika: [Fifanarahana famerenana amin'ny laoniny](../../DATA_RECOVERY.md).
+
+<a id="troubleshooting"></a>
+
+## Famahana olana
+
+Tsy hita ny CLI: jereo ny fametrahana azy sy ny dikan-teniny ao amin'ny terminal tsotra, avy eo avereno velomina ny ZIAForge. Ny fisian'ny rakitra azo tanterahina dia tsy midika akory hoe tafiditra amin'ny kaonty ianao. Ampiasao ny fomba fidirana an'ilay mpanome tolotra azy manokana.
+
+Tsy azo ampiasaina ny maodely na tsy nahomby ny fanomezana alalana: havaozy ny fahitana, mifidiana ID azo ampiasaina ary jereo ny kaontinao sy ny fetranao. Aza mamerina fangatahana tsy azo antoka alohan'ny handinihana ny tantarany.
+
+Nijanona ny fizotry ny asa: sokafy ny dingana ankehitriny, ny fanontaniana, ny tapakila fanamarinana na ny laha-tahirin'ny CLI. Valio ny antony manokana: fanontaniana tsy voavaly, baiko, alalana amin'ny lahatahiry na fetran'ny andrana. Tsy afaka mamadika ny fanamarinana tsy nahomby ho fahombiazana ny Tohizo.
+
+Tsy hita na nosoloina ny lahatahiry: avereno ny fidirana amin'ny lahatahiry tany am-boalohany na mamoròna asa vaovao. Tsy tokony hitohy avy amin'ny HOME ny rindranasa. Raha mahita cwd hafa ianao, ajanony ny fihodinana ary tehirizo ny fitiliana olana.
+
+Ho an'ny tatitra, ampidiro ny dikan-teny ao amin'ny Mombamomba ny rindranasa, ny zotra, ny CLI/maodely, ny fihetsika nantenaina sy ny tena niseho, pikantsary ary ampahan-daha-tahiry azo antoka. Esory ny tsiambaratelo, ny votoaty manokana ary ny lalan-tahiry tsy azo avoaka ampahibemaso.
+
+Tsy azo idirana ny pejy lavidavitra: hamarino fa nampandeha ny mpizara ny tompony, jereo ny adiresy sy ny seranana fihainoana, avy eo manomeza alalana amin'ny alalan'ny mariky ny toe-javatra marina. Ny 401 dia manondro olana amin'ny fanamarinana; ny fanovana nolavina kosa dia mety ho vokatry ny sehatra famakiana fotsiny na fanaraha-maso voatokana ho an'ny tompony ihany. Manakatona ireo mpitety tranonkala efa misy ny fanovana ny marika. Aza avela hisokatra toy ny fanaraha-maso ny rindranasa lavidavitra ny seranana fanaraha-maso DevTools misaraka.
+
+Nolavina ny fitehirizana ao amin'ny mpanova soratra: hazòny ny volavolan-kevitra, diniho ny rakitra ankehitriny ao amin'ny kapila ary vahao ny fifanolanana vokatry ny fanovana ivelany. Aza lalovana ny fampitahana amin'ny alalan'ny fanoratana indray ny metadata an'ny rindranasa. Raha tsy azo atao ny mampiditra feno rakitra lehibe, ampiasao ny fanovana/fikarohana anaty fikandrana tohanana na mpanova soratra ivelany.
+
+Tsy azo ampiasaina ny Telegram: hamafiso eo an-toerana ny mariky ny bot, ny tompony nomerika, ny resaka manokana ary ny toetry ny rafitra. Mety hanakana ny fisintonana vaovao ny webhook na mpisintona mifaninana; ny ZIAForge dia tsy mamafa ho azy ny webhook na mandray an-tanana mpisintona hafa. Tsy averina alefa ho azy ireo baiko nolavina na tapaka tamin'ny sisin-tany tsy fantatra.
+
+Torolalana mifandraika: [Fitsapana sy fitiliana olana](../../TESTING.md).
+
+<a id="diagnostics"></a>
+
+## Manao tatitra momba ny olana sy mandinika porofo
+
+Raketo ny tena dikan-drafitra mandeha avy ao amin'ny Mombamomba ny rindranasa, ny OS/maritrano, ny fomba fiasan'ny asa, ny mpanome tolotra/maodely voafidy ary ireo dingana mamerina ilay olana. Farito ny vokatra nantenaina sy ny vokatra hita maso. Asio pikantsary azo antoka sy ny baiko voatahiry mifandraika amin'izany na ny tapakila fanamarinana, fa aza manome ny mombamomba manokana feno.
+
+Mety hampiharihary kaody loharano, lalan-tahiry manokana na marika miafina ny laha-tahirin'ny CLI, ny firaketan-java-miseho, ny sora-dresaky ny maodely, ny dian'ny mpitety tranonkala ary ny pikantsary. Diniho tsara ary esory ny tsiambaratelo alohan'ny hizarana azy. Ny fitaovana fanesorana tsiambaratelo araka izay azo atao amin'ny laha-tahiry dia tsy manome antoka fa azo avoaka ampahibemaso ny pikantsary na ny tahiry iray.
+
+Ho an'ireo mpandray anjara, ny qa:doctor dia mamaky ny tontolo iainana/maha-izy azy ny rafitra; ny qa:inspect dia manokatra kaonty voatokana misy solon-drafitra ho an'ny mpanome tolotra. Ny santionany fanandramana dia manaporofo ny zotran'ny rindranasa nosedraina nefa tsy mila mifandray amin'ny maodely. Porofo misaraka ny fanatsoahan-kevitra mivantana, ny fifandraisana amin'ny Telegram, ny birao teratanin'ny Linux, ny fanaovan-tsonia ary ny fanamarinana ny tahiry nofonosina. Jereo ny TESTING.md hahitana baiko azo averina sy fomba fanadiovana.
+
+Torolalana mifandraika: [Baiko fakana porofo](../../TESTING.md).
+
+<a id="privacy"></a>
+
+## Tahirin-kevitra eo an-toerana sy sisin-tany
+
+Mety hisy lahatsoratra manokana ny tetikasa, ny tantara, ny drafitra, ny antontan-taratasy ary ny fitiliana olana. Aza mamoaka kaonty, sary azo mivantana tsy voasivana, fanalahidy na laha-tahiry feno miaraka amin'ny kaody loharano.
+
+Ao amin'ny Linux, ny fitehirizana ny mari-pamantarana API, fanaraha-maso, Telegram ary toe-javatra misy dia mitaky GNOME Secret Service na KWallet voavoha; raha tsy misy fitehirizana tsiambaratelo tohanana, mandà tsy hitahiry ireo tsiambaratelo ireo ny ZIAForge fa tsy mampiasa ny fomba fiverenana amin'ny basic_text an'ny Electron.
+
+Ny fitehirizana eo an-toerana dia tsy midika fa mijanona ao amin'ny solosainao ny fangatahana: mandefa azy ireo any amin'ny mpanome tolotra azy ny CLI/API voafidy. Ny lahatahiry fiasana sy ny fanaraha-maso ny fizotran'ny asa dia tsy fitokanana araka ny OS. Diniho tsara ireo alalana voafidy.
+
+Avaho ireo karazana porofo: ny santionany voafaritra mialoha dia mitsapa ny rindranasa nefa tsy misy maodely; ny fitsapana teratany mivantana kosa dia mampiasa CLI/kaonty tena izy; ny fanamarinana nofonosina dia manamarina tahiry manokana. Ny fahombiazana amin'ny iray dia tsy miantoka ny hafa.
+
+Hafa noho ny fampiharana araka ny rafitra miasa ny sehatry ny rindranasa, ny hazo fiasana ary ny toromarika vakiana fotsiny. Ny politikan'ny mpandinika/mpanampy Antigravity dia mamantatra fanovana amin'ny porofo voaangona tao amin'ny toeram-piasana fa tsy mampihatra fameperana vakiana fotsiny amin'ny rafi-drakitra. Manatanteraka fandaharana nahazo alalana avy amin'ny tompony ivelan'ny sisin-tanin'ny fitaovana tsotra amin'ny rindranasa ny fanaraha-maso ny solosaina teratany; vonoy izany rehefa tsy ilaina intsony.
+
+Torolalana mifandraika: [Fiaviana sy famoahana](../../RELEASE_READINESS.md).
+
+<a id="project-contributors"></a>
+
+## Mahatakatra sy manova ity tetikasa loharano misokatra ity
+
+Vakio aloha ny AGENTS.md sy ny CONTRIBUTING.md, avy eo ny PROJECT_MAP.md hahitana ny sisin-tanin'ny loharano ankehitriny. Ireo fifanarahana voafaritra karazana nampiharina sy ny antontan-taratasin'ny fizotry ny asa/mpanome tolotra ankehitriny no mifehy ny fihetsiky ny rafitra. Mitahiry ny fikasana teo aloha ny CONCEPT.md sy ireo ampahany mifantoka amin'ny terminal ao amin'ny ARCHITECTURE.md ary tsy tokony hafangaro amin'ny filazana momba ny dikan-drafitra ankehitriny.
+
+Ny loharanon'ny fanampiana amin'ny teny Anglisy dia docs/help/en.json. Aza amboarina amin'ny tanana ny USER_GUIDE.md na ny website/guide.html namboarina ho azy. Ovay ny fizarana fototra, havaozy ny fifanarahana voakasika ary alefaso ny node scripts/help/generate.cjs. Mamaky io loharano io ihany koa ny Fanampiana ao anatin'ny rindranasa. Avereno dinihina miaraka amin'ny fampiharana tena izy ny fanampiana vaovao, anisan'izany ny fetra, ny alalana ary ny lalan-kizorana tsy tohanana.
+
+Samy manana ny toetry ny fanampiana misaraka ao amin'ny docs/help/locales.json ny fiteny 56 ampiasaina amin'ny fifandraisana tsirairay. Miverina amin'ny teny Anglisy ny fanampiana tsy ampy na tsy feno. Asiana marika manokana ary ampifandraisina amin'ny hash an'ny loharano Anglisy ny lahatsoratra feno nadikan'ny milina, nefa tsy milaza fa nisy olombelona nandinika azy. Ny fandikan-teny nodinihin'ny olombelona dia manampy amin'ny firaketana ny anaran'ny mpandinika azy. Tsy maintsy mitazona ny ID an'ny fizarana, ny asa, ny famantarana ny rakitra/baiko ary ny fetra ara-teknika ny fandikan-teny tsirairay, mampiasa ny fomba fitodika marina, ary havaozina rehefa miova ny loharano Anglisy.
+
+Alohan'ny fandefasana, alefaso ny node scripts/help/generate.cjs --check mba hahitana ny vokatra nivoaka efa lany andro, ny firafitry ny fiteny tsy manan-kery na ny rohy fifanarahana eo an-toerana tapaka. Misaraka hatrany ny fizahana ny fandikan-tenin'ny UI sy ny fizahana ny fihetsiky ny rindranasa. Manome ny fomba fiasa fanavaozana ho an'ny mpandray anjara sy ny AI ny HELP_MAINTENANCE.md; ny antontan-taratasy dia tsy tokony hilaza fanandramana ho nahomby nefa mbola tsy nandeha akory.
+
+Torolalana mifandraika: [Sarin-tany ankehitriny momba ny tetikasa](../../PROJECT_MAP.md) · [Fikarakarana ny antontan-taratasy](../../HELP_MAINTENANCE.md) · [Torolalana ho an'ny mpandray anjara](../../../CONTRIBUTING.md) · [Torolalana ho an'ny mpanampy](../../../AGENTS.md).

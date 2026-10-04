@@ -1,0 +1,485 @@
+<!-- Generated from docs/help/en.json; source SHA-256 19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947. Do not edit this output.
+Run node scripts/help/generate.cjs after changing the canonical help.
+Requested locale: en; served locale: en; status: source. -->
+# ZIAForge user guide
+
+From intent to a verified result. A practical guide to Code, Work and application control.
+
+English is canonical. Machine-translated help is labelled separately from human-reviewed translations. Automated checks do not certify native-language accuracy.
+
+## Guide sections
+
+- [First steps](#start)
+- [Install the correct desktop package](#install-platforms)
+- [Code: five routes](#code)
+- [Forge discussion](#forge)
+- [Documents and decisions](#decisions)
+- [Execution and review](#execution)
+- [Parallel review teams and the report architect](#review-teams)
+- [Agent specializations and prompt policy](#specializations)
+- [Work: from question to document](#work)
+- [Presets, models and access](#models)
+- [Chats, Stop and the queue](#chat)
+- [Files, Git and completion](#files)
+- [API connections](#api)
+- [Settings, languages and safe reset](#settings)
+- [Ask the Help assistant](#help-assistant)
+- [Assistant and Telegram](#assistant-control)
+- [Operate your private Telegram bot](#telegram)
+- [Owner-only native computer permission](#native-permissions)
+- [Browser and remote instances](#remote)
+- [OpenClaw, Hermes and other external agents](#external-agents)
+- [Local CLI and automation limits](#local-cli)
+- [Version and updates](#updates)
+- [Restart and recovery](#restart)
+- [Troubleshooting](#troubleshooting)
+- [Report problems and inspect evidence](#diagnostics)
+- [Local data and boundaries](#privacy)
+- [Understand and change this open-source project](#project-contributors)
+
+<a id="start"></a>
+
+## First steps
+
+ZIAForge keeps discussion, planning, execution and verification in one task. Choose Code for a Git project, or Work for documents, research and other results in an ordinary folder.
+
+Start with a small task in a separate project. If you choose a native CLI, install it and sign in with its own account in a terminal first. Alternatively, configure an API connection. A CLI subscription and a paid API are separate connection methods; ZIAForge does not sign you in or transfer credits between them.
+
+1. Open Settings and check the workspace folder and language. About shows the exact identity of the running build.
+2. For Code, add a Git repository in the sidebar. For Work, choose a separate folder when creating the task.
+3. Save a preset with a CLI, model, reasoning effort and access level. You can also select Custom directly without a saved preset.
+4. Create a task, choose its route, roles and manual or automatic advancement. Review the choices before Start.
+
+> Use the artifact and checksum supplied by the maintainer. A preview may be unsigned or lack a published update feed. Desktop and native-provider support must be verified for the exact OS, architecture and artifact; source support alone is not release certification.
+
+Related instructions: [Project overview](../README.md) · [Provider compatibility](PROVIDER_COMPATIBILITY.md).
+
+<a id="install-platforms"></a>
+
+## Install the correct desktop package
+
+Choose a package for your operating system and CPU architecture: x64 or arm64. The build pipeline can produce macOS DMG/ZIP, Windows NSIS installer/ZIP, and Linux DEB/RPM/AppImage/tar.gz/ZIP formats. A generated file or cross-build is not proof that its installer and native UI passed on your machine; consult that release’s verification record.
+
+macOS builds using Electron 44 require macOS 13 or later. Use the arm64 package on Apple Silicon and the x64 package for Intel. Fully quit an older app before replacement. Preview packages may be unsigned and not notarized; do not mistake a development artifact for a signed public release.
+
+Windows needs an operating system supported by the bundled Electron version and Git available in PATH. Choose the matching architecture. An unsigned preview does not have Authenticode certification. A portable ZIP must retain the complete application directory and runtime files, not only its executable.
+
+Linux needs a compatible graphical desktop, the system libraries required by Electron, and Git. For encrypted control credentials, provide a working Secret Service such as gnome-libsecret or KWallet; the insecure basic_text backend is not accepted. Headless/container smoke evidence does not certify every desktop or distribution.
+
+Install a DEB with apt install ./file.deb, or install an RPM through your distribution’s package manager. An AppImage needs executable permission and suitable FUSE support; --appimage-extract-and-run is an alternative where supported. Extract tar.gz and ZIP packages with all their runtime files. Keep user data and application files distinct when replacing a package.
+
+To build from source, use Node 24, Git and npm ci, including the normal Electron installer. Native rebuilds require platform tools: Xcode command-line tools on macOS; MSVC C++, Windows SDK and Python on Windows; compiler, make, Python, pkg-config and the required packaging tools on Linux. Follow PLATFORM_BUILDS.md for the exact commands and current platform limits.
+
+Release versions are reserved centrally and outputs are immutable. A CI verification build is not a published installer. Source archives contain source, lockfile, documentation and scripts; dependencies, credentials, user profiles and private research are excluded. Never infer native ARM or Windows validation from a successful x64 build.
+
+Related instructions: [Platform packages, prerequisites and verification limits](PLATFORM_BUILDS.md) · [Build identity and release checks](RELEASE_READINESS.md).
+
+<a id="code"></a>
+
+## Code: five routes
+
+Auto assesses scope: a simple question may finish with an answer, while a larger task needs preparation. Fix a bug investigates a cause and prepares a correction. Spec first starts with the technical solution; Requirements first starts with requirements and acceptance criteria.
+
+Multi-model uses separate contexts for exploration, design, implementation and review. The route name does not require different providers: each role uses the preset or Custom configuration you choose.
+
+A Worktree isolates a task’s Git changes. Branch works in the selected checkout. Check the project, branch and model before starting; the task description is not also sent to an ordinary chat.
+
+For an idea with unresolved product or technical choices, use Requirements first and build the foundation in discussion. Auto classifies the request; it is not a command to implement every short phrase immediately. Save draft retains the request without contacting a model; Start saves and launches the managed flow once. One to four task copies have independent creation IDs and role settings.
+
+Related instructions: [Code workflow contract](WORKFLOWS.md) · [Code prompt profiles](CODE_WORKFLOW_PROMPTS.md).
+
+<a id="forge"></a>
+
+## Forge discussion
+
+Start opens the central discussion. Reply naturally, ask counterquestions, add constraints and discuss technical choices. The conversation and questions stay with the task.
+
+Sending text does not accept a document or authorize a new implementation plan. A clarification during execution first pauses the managed turn and revisits the affected scope. An answer to a question within an already accepted step can continue that step.
+
+To deliberately revisit the foundation, select Requirements, Specification or Planning. A new version requires fresh acceptance of dependent decisions. Completed steps and their evidence remain; superseded unfinished phases stay in history.
+
+Managed phase sessions differ from free chat. Use Forge discussion instead of sending manual prompts directly to a workflow-owned session.
+
+Related instructions: [Forge discussion contract](WORKFLOWS.md).
+
+<a id="decisions"></a>
+
+## Documents and decisions
+
+Open a document, inspect its version and make edits when needed. Submitting edits through discussion produces a new version; reports and verified results are not rewritten retrospectively.
+
+Before accepting a proposed plan, edit the order, instructions, acceptance criteria and verification commands. Authorize concrete commands you understand: they run in the task folder. Multi-model proposes one whole-task implementation step, with details in its documents and instructions.
+
+Approve is a separate deliberate decision. Auto does not bypass questions or acceptance of requirements, specifications and plans. An externally changed document cannot reuse an old approval.
+
+Preparation files appear as artifacts. Their version, producing phase and hash bind them to a result. Code documents are kept outside the worktree and do not automatically enter a commit.
+
+Check both the document and the displayed decision before accepting. Acceptance binds the current gate ID, plan revision and retained document hashes. Request changes when scope or evidence is wrong. If a decision became stale, reload the saved state before making a new choice; a changed file cannot be accepted under an earlier version.
+
+Related instructions: [Workflow gates and document versions](WORKFLOWS.md).
+
+<a id="execution"></a>
+
+## Execution and review
+
+To-do shows real steps, the current attempt, verification and review outcomes. An agent saying “done” does not complete a step: the plan’s required evidence must exist.
+
+Manual mode pauses between eligible steps. Auto advances verified steps and allows bounded retries. Stop after always creates a checkpoint. Pause stops the workflow’s active work; closing a panel does not stop it.
+
+An independent reviewer uses a separate context with files and verification results. Every required blocking finding must be resolved; multiple reviewers do not vote away a blocking error.
+
+In Multi-model, correcting findings requires an explicit decision. A correction does not silently start another review: Review again opens a fresh cycle. Review comments can request coordinator reconsideration without repeating implementation.
+
+Completed steps cannot be silently edited. With TDD, Red must actually fail for the expected reason, then Green must pass. Bounded attempts prevent endless retries.
+
+Save independent CLI/API reviewers in Settings → Review teams, then select the team in Code or Work. Reviewers run in parallel, followed by the team’s report architect. You can also configure independent reviewers without a saved team. The report architect receives anonymous structured reports only, with no project files or tools; this isolation currently requires Claude Code or API.
+
+Each implementation step needs an executable check, required independent review, or both. Preparation phases instead retain validated results and artifact receipts; these do not pretend that implementation tests ran. A command succeeds only when its actual exit status and owned-process cleanup are confirmed. A Red check for TDD must fail normally before implementation and Green verification; a missing executable or a timeout is not a valid Red result.
+
+Default circuit breakers stop after three failed attempts on one step or fifty attempts in total. Interruption consumes an attempt but does not itself count as a failed attempt. Limits and completed evidence survive restart; Retry does not reset them. Read the retained failure before authorizing another attempt.
+
+Related instructions: [Verification and review](WORKFLOWS.md).
+
+<a id="review-teams"></a>
+
+## Parallel review teams and the report architect
+
+Open Settings → Review teams and save a team. Add independent reviewers with their own CLI or API, model, reasoning effort and specialization, then choose a report architect. Select the team in the task’s review configuration. An executor preset can also be used by a reviewer, and Custom remains available; independent roles still have separate contexts.
+
+Reviewers run in parallel on the same task evidence. Each required report, error and verdict is retained. The architect receives anonymous numbered reports without reviewer names, model or provider identities, original task contents, repository access or tools. It compares reports and returns one structured verdict; it does not conduct a fresh source review.
+
+A blocking finding or a required reviewer’s rejection cannot be waived by majority vote or architect preference. Missing or malformed reports prevent approval. Inspect the individual findings and aggregate decision before accepting or authorizing corrections. A saved team is resolved and frozen for the run; editing its preset does not rewrite completed evidence.
+
+The report-only architect currently uses supported Claude or API tool-free configurations. Codex and Antigravity remain available as reviewers but are refused for this isolated architect role until a verified tool-free contract exists. A prompt saying “no tools” alone is not sufficient.
+
+> Code Multi-model’s design/review pipeline and a saved parallel review team are separate controls. Keep the selected custom review policy; do not assume one route enables every review feature.
+
+Related instructions: [Typed team configuration](../shared/review-team.ts) · [Review aggregation](../electron/workflow/ReviewAggregation.ts).
+
+<a id="specializations"></a>
+
+## Agent specializations and prompt policy
+
+A model is the execution engine; a specialization is an instruction profile. Choose None for no added specialization, Standard for the default guide, Auto for a relevant built-in guide, or Manual for selected guides and your own bounded instructions. Presets can retain the selection.
+
+The original catalog covers general coding, architecture, security, reliability, performance, testing and interface usability. Auto uses the available task/step text to select a guide; it does not secretly call another model or certify expertise. Planning suggestions can be inspected and changed before accepting the implementation plan.
+
+Review specializations help direct attention but never replace independent evidence, access limits or the structured verdict. Treat custom instructions as part of the task scope: do not use them to bypass document acceptance, tool policy, authentication or reviewer failures.
+
+Related instructions: [Original prompt catalog](../shared/specializations.ts).
+
+<a id="work"></a>
+
+## Work: from question to document
+
+Work does not require Git. Default creates a separate task folder; Custom selects an existing folder through the native picker. Save draft stores settings without inference; Start runs the first phase.
+
+Auto answers directly or proposes a suitable plan with real To-dos. Brainstorm creates ideas.md before you choose more ideas or evaluation. Research retains findings.md, sources and limitations. Write moves from intent and, when useful, outline.md to a descriptive document or draft.md; revisions retain previous versions.
+
+Select file inputs through the native picker and reference them with @. The app copies them as immutable task inputs and validates their identity before a run. Default creates an application-owned task folder; Custom folder access is a saved owner grant. A saved, unstarted draft can change its folder.
+
+Create 1–4 copies with independent executor settings. Tasks using overlapping folders cannot write concurrently. This coordination applies to ZIAForge operations, not arbitrary external programs.
+
+Deep Brainstorm defaults to three independent workers and supports up to eight. Select their order and configurations, including reuse of a preset in separate contexts. Worker questions retain their origins; malformed reports get one format-repair attempt. Partial failure stays visible rather than being presented as unanimous success.
+
+Deep combines retained worker reports into brainstorm_report.md and always asks for a user decision. A small follow-up revises the report through the coordinator; a major change starts another round of the frozen workers. Artifacts keep their versions.
+
+Resolved roles freeze at task creation or explicit draft save. After the first invocation, only automatic/manual advancement can change; use a new task for different role or model settings. Editing a global preset does not silently change later phases.
+
+Manual mode pauses between eligible phases, including a substantial Write outline. Auto can continue through that outline. Questions, proposed executable plans, Brainstorm direction and Deep report review remain explicit decisions even in Auto. A citation alone does not prove browsing happened, and a retained binary file alone does not prove its rendering.
+
+Related instructions: [Work modes and decisions](WORK_WORKFLOWS.md).
+
+<a id="models"></a>
+
+## Presets, models and access
+
+A preset saves a CLI/API, model, reasoning effort and permissions. The chat footer has preset, CLI, model and options segments. Custom works without a preset; Create preset saves the current selection.
+
+The catalog comes from the selected installed CLI or API where supported. Refresh updates the list without changing the selection. If discovery is unavailable, enter an explicit model ID; the provider must still support it. Reasoning levels depend on the model and CLI. Provider default is distinct from the explicit none token.
+
+Apply changes only after backend acknowledgement. Switching is restricted during an active turn or nonempty queue. Drafts and visible history remain, but changing providers does not transfer their private internal state.
+
+In Forge, the role label matters: preparation can use a separate Planner. The footer changes the displayed role; reviewers and helpers are selected in workflow settings. Policy for already verified implementation may be locked.
+
+Permissions differ between providers. Read only and Workspace write are available where the adapter supports them. Antigravity uses native CLI settings or explicitly selected full access. Full access is not a sandbox.
+
+Specialization adds prompt guidance, not another model or permission. Presets and roles support None, Standard, Auto and Manual. Auto selects profiles from step text without an extra model call; Manual accepts up to four specialties and custom instructions. Planner-proposed assignments can be edited before accepting the plan.
+
+A manually entered model ID or effort remains your choice, but the provider may reject it. Editing a global preset does not retroactively change a running chat or accepted plan. To change an idle conversation deliberately, use its own configuration controls and wait for acknowledgement. A disabled option should be read as a capability or lifecycle limit, not bypassed by editing saved JSON.
+
+Related instructions: [Provider capabilities](PROVIDER_COMPATIBILITY.md).
+
+<a id="chat"></a>
+
+## Chats, Stop and the queue
+
+Open tabs, Recent and drafts belong to one task. Closing a tab removes it from Open but retains it in Recent and does not stop its provider process or managed workflow. Search history, reopen a chat or close all additional tabs from the history menu.
+
+Stop interrupts the current turn. Wait for stopping to finish before the next Send: an interrupt acknowledgement is not process completion. You can type the next draft meanwhile.
+
+In ordinary chat, Queue saves a later request separately from the current draft. Pause queue holds further delivery. Stop and Quit pause the queue. After restart, Resume first, then explicitly Continue queue.
+
+Uncertain means delivery is unknown. Such a message is not automatically resent: inspect the history, copy text if appropriate and dismiss the queued item. Sending it again is a new deliberate request.
+
+Managed phase chats use their workflow, not the ordinary queue. Follow stage shows the current phase; manually selecting another tab stops following. CLI logs show diagnostics separately from the response.
+
+Markdown responses render headings, lists, tables, links and fenced code. Tool cards and CLI diagnostics remain separate from the answer. Model-reported thinking and token metrics appear only when the provider actually exposes them; do not infer private reasoning or usage from animation.
+
+After an uncertain send or queue acknowledgement, inspect history and retry only the same retained request where offered. A queue receipt means storage accepted the item, not that inference finished. Remove an uncertain queued item only as an explicit dismissal; it cannot retract a prompt already delivered.
+
+Related instructions: [Durable message queue](MESSAGE_QUEUE.md).
+
+<a id="files"></a>
+
+## Files, Git and completion
+
+Files shows the task folder. Compare results with requirements, open documents and inspect diffs. Retaining a binary file does not prove correct rendering in its target application.
+
+Git provides status, changes and operations with recorded outcomes. Commit, merge and push are manual by default; automatic operations are separate choices for a fully verified plan.
+
+Do not change working files between verification and publication: approval is tied to exact bytes. Conflicts, failed pushes and unknown operation outcomes block progress until an explicit decision. Auto does not silently authorize publishing.
+
+Work creates no Git branches and has no Git finalization. Keep the required documents from the selected folder, including versions and sources.
+
+The file editor provides syntax by extension, search and replace, undo history, line wrapping and per-tab drafts. Saves preserve supported UTF-8/UTF-16 encoding and reject external modification conflicts. Other encodings and binary content need an external editor. Unsaved drafts prevent application Quit until the owner saves or discards them.
+
+Full syntax is enabled up to 8 MiB. Larger text files open in 256 KiB windows; 8–64 MiB can be explicitly loaded in full without syntax. Above 64 MiB use window editing and bounded next-match search. This is a limited large-file mode, not Sublime Text parity for arbitrarily large documents.
+
+Open folder uses the current task or branch/worktree context, rather than silently opening only the original repository. A file row can reveal that file’s parent directory. Paths are validated by the backend against registered task grants. Binary files are not editable as plain text; use their target viewer and retain the original bytes.
+
+Worktree removal is a separate guarded action. End attached structured sessions and terminals before removing it, including sessions that are idle. Inspect the saved Git result and recovery state; deleting a task record is not a substitute for safely preserving uncommitted work.
+
+Related instructions: [Typed editor contract](../shared/editor.ts) · [Git policies](WORKFLOWS.md).
+
+<a id="api"></a>
+
+## API connections
+
+Connections adds an explicitly selected OpenAI-compatible endpoint. Enter a name, base URL, model and a key if needed. Many servers require a base URL ending in /v1; consult your endpoint documentation.
+
+HTTPS is required except for loopback HTTP. Use a plain endpoint without credentials embedded in the URL. Keys use supported OS encryption and are not returned to the UI. Changing the endpoint requires re-entering its key. Leaving the key field blank preserves a saved key; Remove the saved key explicitly clears it.
+
+API calls do not use a CLI subscription. Tools and models differ from native sessions, and successful model discovery does not prove inference. Token usage appears only when the provider actually returns it.
+
+Keep credentials in Connections rather than task prose or preset instructions. Read-only reviewers receive only their permitted API file tools; the report architect has no tools. Unsupported tool calls are rejected rather than silently executed. Servers vary in reasoning parameters, tool support and model listings; compare an error with your endpoint’s own contract.
+
+Related instructions: [API connections](API_CONNECTIONS.md).
+
+<a id="settings"></a>
+
+## Settings, languages and safe reset
+
+General settings select workspace, interface language and defaults. Connections manages API endpoints. Presets and Review teams retain role configurations. Remote control manages local credentials, server scope and owner permissions; Updates manages the release source/channel. About shows the exact running build.
+
+Interface language is separate from prompt language and documentation review status. Product names, command IDs, file extensions, provider model IDs and user-created names remain identifiers. Help follows the selected interface language when a current translation is available; machine translations are labelled and English remains the canonical reference.
+
+Save applies the displayed configuration. A database reset or factory reset can remove application metadata; preserve files and a tested backup before intentionally using reset. These operations are local-owner actions. Do not use them as a shortcut to investigate a failed workflow or corrupt record.
+
+Related instructions: [Localization instructions](LOCALIZATION.md) · [Data recovery](DATA_RECOVERY.md).
+
+<a id="help-assistant"></a>
+
+## Ask the Help assistant
+
+Open Help, choose a saved connected preset in its assistant panel and ask about ZIAForge. Answers use the current canonical English guide and your selected interface language. Section-reference buttons open the relevant guide topics, so you can compare the explanation with the reference.
+
+This assistant keeps a separate private conversation of up to 100 saved entries and 3 MiB. Enter a question of up to 12,000 characters; Send asks it, Stop cancels the active answer while keeping your question available, and Clear removes this Help conversation. Your unsent draft and preset selection survive closing or reopening Help in the same app session, but the draft is not saved to disk. The assistant does not send application commands, change a workflow or accept a gate. Advice is not live verification of a task, account or external connection.
+
+Claude Code and API Help sessions enforce the supported no-tools policy. Native Codex and Antigravity Help sessions require the existing local-owner native computer permission. If it is disabled, the app explains the prerequisite instead of choosing a different provider. Only the owner can enable it in local control settings; the assistant cannot enable it itself.
+
+Codex Help uses a read-only sandbox and refuses tool-approval requests. Antigravity uses plan mode and its native sandbox flag. These native modes are not a universal guarantee of operating-system confinement. The source-guide hash identifies the reference used for the answer; a generated explanation can still be mistaken, so inspect its linked sections before acting. Older answers are marked when their source-guide version differs from the current guide.
+
+Related instructions: [Canonical guide and translation maintenance](HELP_MAINTENANCE.md) · [Application assistant and permissions](AGENT_CONTROL.md).
+
+<a id="assistant-control"></a>
+
+## Assistant and Telegram
+
+The assistant uses the selected preset and the same application control API. Permission to inspect state and permission to perform operations are separate. Inspect commands and results: assistant prose is not proof that an action completed.
+
+Telegram is enabled only by the local owner, with an existing bot token and a numeric owner ID. Control is for that owner’s private chat. An unconfigured or inactive bot must not receive application messages.
+
+Do not paste a bot token into ordinary chat. Configuring the integration does not prove Telegram connectivity and does not automatically create a bot. Screenshots and responses can contain private workspace data.
+
+Select an assistant preset and grant application-operation permission separately from inspection. Codex and Antigravity assistant execution require the owner’s native permission; they are not silently substituted for a tool-free API or Claude session. Screenshots can be displayed in the assistant conversation, but the current model input does not include image analysis. Do not assume the assistant visually inspected an image merely because it displayed it.
+
+The assistant can inspect summaries, tasks, chats, workflow state, process context and application windows through typed tools. It can change permitted ordinary settings and launch authorized application operations. It cannot grant native rights, reveal stored credentials, change the root workspace grant remotely or approve a Forge gate simply because it is convenient.
+
+Related instructions: [Application control contract](AGENT_CONTROL.md).
+
+<a id="telegram"></a>
+
+## Operate your private Telegram bot
+
+Create or obtain your own bot, start its private chat, and enter its token and your numeric Telegram user ID in local control settings. Enable the integration only when you intend the app to connect. The owner ID is a user identifier, not a username or bot ID. Only messages from that user in that same private chat are accepted.
+
+Use /start, /menu or /status for an overview of the running version, project/task counts and task statuses. Buttons open Projects, Tasks, Screenshot, Help and Language. Lists show eight items per page, with Back, Refresh, Home and Previous/Next navigation. Project buttons filter the task list. A task card shows its saved workflow progress, model/preset and pending questions when present.
+
+Open a task's Chats to preview open/recent conversations and workflow phase chats. Each preview shows up to six latest user/assistant messages, shortened visibly to 200 characters each. Private reasoning is not shown. Reading history does not start a provider. Previews are read-only: ordinary text and /ask TEXT still address the application assistant, never implicitly the task chat you are viewing.
+
+Run / Continue rereads the current Code or Work workflow and starts an eligible saved workflow. Pause requests its pause. Neither accepts requirements, a specification, a plan, review findings or questions; a pending decision prevents Run. Make decisions in the application, or use an explicitly authorized typed command with its exact current gate and revision.
+
+Use Language or /language to select any of the 56 interface languages by its native name. This persists a preference for this bot and owner only. Use app language clears that preference. It changes neither the application's language nor access permissions; existing messages are not automatically resent.
+
+Navigation normally updates the same published menu message. Buttons have opaque identities that expire after 15 minutes and can be used once; changing a card invalidates its old buttons. Expired, consumed, mismatched-message and previous-process buttons cannot perform an action. A definitively uneditable message can be replaced with a new card; an unknown network error is not retried as a new message.
+
+On activation the poller discards earlier backlog and records update acceptance before dispatch so interrupted commands are not automatically replayed on restart. This prevents replay; it does not guarantee completion. Check status/context before deliberately issuing new work after an error. There are no automatic task-status notifications.
+
+Explicit commands remain available: /projects, /tasks, /task TASK_ID, /run TASK_ID, /pause TASK_ID, /screenshot and /ask TEXT. /new {JSON} creates a task through typed createTask; /command {JSON} sends an explicit catalog command. Read the live catalog for argument shapes. The same backend authorization and folder grants apply as in the application.
+
+The app never sends stored bot-token values to the assistant. Screenshots, summaries and conversation text may nevertheless contain private project information. Stop the integration locally if the bot or owner account is no longer trusted. Rotate a leaked token with the bot provider, then update its local encrypted configuration.
+
+Related instructions: [Private bot and commands](AGENT_CONTROL.md).
+
+<a id="native-permissions"></a>
+
+## Owner-only native computer permission
+
+Native computer access starts disabled. Only the owner can enable it in local Settings → Remote control. The assistant and HTTP/MCP/Telegram commands cannot enable this flag for themselves. If an operation is denied, the assistant should describe the setting and let the owner decide.
+
+When explicitly enabled, computer.run accepts an executable, argument array and optional absolute working directory. It uses no shell interpolation, has a 30-second limit and bounds output to 1 MiB. A supplied missing or invalid directory is refused; omitting cwd uses the app-owned settings directory, not HOME. Quit cancels active owned commands and waits for their process cleanup.
+
+Application read/operate scope and native access are separate decisions. A worktree does not constrain an unrestricted provider’s filesystem access. Revoke native access after the task if it is no longer required, and inspect command receipts rather than accepting assistant prose as proof.
+
+Related instructions: [Owner-only control contract](../shared/control.ts).
+
+<a id="remote"></a>
+
+## Browser and remote instances
+
+The local owner enables the server and chooses its address, port and scope: read for inspection or operate for actions. The default 127.0.0.1 address is available only on this computer. 0.0.0.0 listens on network interfaces; review network access before enabling it.
+
+A browser opens the same interface after token login. Do not include tokens in public links or screenshots. HTTP alone does not encrypt traffic; use a protected channel over an untrusted network.
+
+The owner configures other instances by URL and token. The backend proxies requests; this does not copy their projects onto the local machine. Check the selected instance before every action.
+
+Typed commands and events carry application control. Read scope does not authorize task mutations. Native computer control is a separate local-owner choice and starts disabled.
+
+The app must stay running for browser, Telegram and external-agent control. Each instance has its own private profile, task state, token and server port. Do not reuse one profile concurrently between independent instances. Browser events and command responses are scoped to the selected instance; switching the UI does not relocate files or copy native login.
+
+Related instructions: [HTTP and instance control](AGENT_CONTROL.md).
+
+<a id="external-agents"></a>
+
+## OpenClaw, Hermes and other external agents
+
+Use the authenticated application-control API or the bundled MCP stdio bridge. Enable the server locally, choose read or operate and configure each client with that instance URL and token. Node.js 22 or newer is needed to run the standalone MCP bridge; the Electron app does not install your agent client. The browser URL is not a Streamable HTTP MCP endpoint: supply it as ZIAFORGE_URL to the stdio bridge.
+
+The bridge exposes ziaforge_status, ziaforge_commands, ziaforge_command and ziaforge_screenshot. Begin with status and the live command catalog, then read system.context for the selected task. Typed commands follow the same revision, gate, task-folder and cleanup checks as the local UI.
+
+The live command catalog includes documentation.guide, the canonical English help, with its source path and sourceSha256. The internal application architect receives the same reference through its tools. This gives agents the whole product context without relying on older notes; documentation never grants access or substitutes for a current human decision.
+
+Agents should discuss requirements, technical decisions and planning from a short human idea. They must preserve explicit human gates, selected models, manual/Auto policy and required review. They must not invent approval, replay uncertain commands under a new ID, or publish Git changes without the owner’s intent.
+
+Configure several named MCP servers for several installations. Instance switching is a routing decision, not synchronization. OpenClaw and Hermes configuration examples are in AGENT_CONTROL.md; client-specific setup and compatibility must be checked for the installed client version.
+
+The outer requestId cache only deduplicates a bounded set of requests while the app runs. Durable operations use their own identities: createRequestId for task creation, commandId for workflow decisions, clientMessageId for messages and operationId for Git mutations. Preserve the original identity and payload after an unknown acknowledgement; read saved state before deliberately issuing new work.
+
+Related instructions: [MCP client instructions](AGENT_CONTROL.md).
+
+<a id="local-cli"></a>
+
+## Local CLI and automation limits
+
+The ziaf dispatcher controls the same running app and saved workflow. From source, use npm run ziaf -- list, npm run ziaf -- status --task TASK_ID --json, npm run ziaf -- start --task TASK_ID, or npm run ziaf -- pause --task TASK_ID. A successful Start acknowledgement does not mean the task completed.
+
+--until-success deliberately enables Auto for the saved workflow, but questions, review, acceptance gates, limits and checkpoints still apply. Ctrl+C exits the observing dispatcher; it does not implicitly stop the application workflow. See CLI.md for exit codes, local endpoint and profile handling.
+
+The Automations interface currently stores display definitions and local run counters. It is not a certified recurring scheduler and does not prove that a background model turn ran. For actual execution use the saved workflow controls, ziaf or the authenticated API and inspect their receipts. Do not mistake the demonstration panel for unattended scheduling.
+
+Related instructions: [Dispatcher commands](CLI.md).
+
+<a id="updates"></a>
+
+## Version and updates
+
+About shows the exact running version. Public updates require a trusted GitHub release repository and a stable or preview channel. Checking, downloading and installation have separate states; an error does not mean an update installed.
+
+Automatic installation is for signed macOS releases. Unsigned development builds are not automatically installed through this mechanism. For manual replacement, fully quit the current app and use a verified artifact.
+
+Automatic checking runs immediately when enabled, then every six hours.
+
+Stable excludes preview releases; preview allows development releases as well. A successful check only establishes the available release metadata. Download and installation need the platform package and configured release feed. Linux DEB delivery is a separate installer path; do not assume a DEB is automatically upgraded by the macOS update mechanism.
+
+Related instructions: [Release readiness](RELEASE_READINESS.md).
+
+<a id="restart"></a>
+
+## Restart and recovery
+
+On macOS, use Quit / ⌘Q for a full shutdown. Closing the window may leave the app running. Fully quit the old version before replacing the application.
+
+After launch, select the same task. History and drafts return. Resume restores a native/local context but does not send a draft, unpause the queue or authorize repeating an unknown operation.
+
+If Recovery appears, do not edit JSON by hand. Inspect the affected document type, preserve the original files and select a validated backup. Restoring an older queue marks its items uncertain.
+
+When delivery is unknown, a managed workflow may need explicit permission for a fresh context. Earlier work and failed attempts remain; a visible refusal is safer than fabricated success.
+
+Back up the task files and app profile with all app instances closed. A copied folder is not a tested restore. If recovery asks you to select a validated backup, retain the exact damaged files too. Restoring an older workflow or queue does not authorize replaying uncertain inference or Git operations.
+
+Related instructions: [Recovery contract](DATA_RECOVERY.md).
+
+<a id="troubleshooting"></a>
+
+## Troubleshooting
+
+CLI not found: check its installation and version in an ordinary terminal, then restart ZIAForge. An executable being present does not mean you are signed in. Use the provider’s own sign-in mechanism.
+
+Model unavailable or authorization failed: refresh discovery, select an available ID and check your account and limits. Do not repeat an uncertain request before inspecting its history.
+
+Workflow stopped: open the current phase, question, verification receipt or CLI logs. Address the specific cause: an unanswered question, command, folder permission or attempt limit. Continue cannot turn a failed check into success.
+
+Folder missing or replaced: restore access to the original folder or create a new task. The app must not continue from HOME. If you observe another cwd, stop the turn and preserve diagnostics.
+
+For a report, include the About version, route, CLI/model, expected and actual behavior, a screenshot and a safe log excerpt. Remove secrets, personal content and paths that cannot be published.
+
+Remote page unavailable: verify the owner enabled the server, check the listening address and port, then authenticate with the correct instance token. A 401 indicates authentication; a denied mutation may be read scope or an owner-only control. Changing the token closes existing browser clients. Do not expose the separate DevTools inspection port as remote application control.
+
+Editor save refused: keep the draft, inspect the current file on disk and resolve the external-change conflict. Do not bypass the comparison by rewriting application metadata. If large-file full loading is unavailable, use the supported window editing/search or an external editor.
+
+Telegram unavailable: confirm the bot token, numeric owner, private chat and status locally. A competing webhook or poller can block polling; ZIAForge does not automatically delete a webhook or take over another poller. Commands rejected or interrupted at an unknown boundary are not automatically replayed.
+
+Related instructions: [Testing and diagnosis](TESTING.md).
+
+<a id="diagnostics"></a>
+
+## Report problems and inspect evidence
+
+Record the exact running build from About, OS/architecture, task mode, selected provider/model and the steps that reproduce the problem. Describe the expected result and the observed result. Include a safe screenshot and the relevant retained command or verification receipt, rather than an entire private profile.
+
+CLI logs, event journals, model transcripts, browser traces and screenshots may expose source, personal paths or tokens. Inspect and redact before sharing. A best-effort log redactor does not certify a screenshot or archive as publishable.
+
+For contributors, qa:doctor reads environment/build identity; qa:inspect opens an isolated profile with provider stubs. A fixture proves the tested application path without contacting a model. Live inference, Telegram connectivity, native Linux desktop, signing and packaged artifact checks are separate evidence. See TESTING.md for reproducible commands and cleanup.
+
+Related instructions: [Evidence commands](TESTING.md).
+
+<a id="privacy"></a>
+
+## Local data and boundaries
+
+Projects, history, plans, documents and diagnostics may contain private text. Do not publish profiles, raw captures, keys or complete logs with source code.
+
+On Linux, saving API, control, Telegram and instance credentials requires an unlocked GNOME Secret Service or KWallet; without a supported secret store, ZIAForge refuses to save these secrets instead of using Electron’s basic_text fallback.
+
+Local storage does not mean requests stay on your computer: the selected CLI/API sends them to its provider. A working folder and process supervision are not OS isolation. Inspect selected permissions.
+
+Distinguish evidence types: fixtures test the application without a model; native live exercises a real CLI/account; packaged checks certify a specific artifact. Passing one does not guarantee the others.
+
+Application scope, a worktree and a read-only prompt are different from operating-system enforcement. Antigravity reviewer/helper policies detect changes in collected workspace evidence rather than enforcing filesystem read-only access. Native computer control executes owner-authorized programs outside the ordinary app-tool boundary; turn it off when it is no longer needed.
+
+Related instructions: [Provenance and publication](RELEASE_READINESS.md).
+
+<a id="project-contributors"></a>
+
+## Understand and change this open-source project
+
+Read AGENTS.md and CONTRIBUTING.md first, then PROJECT_MAP.md for the current source boundaries. The implemented typed contracts and current workflow/provider documents govern behavior. CONCEPT.md and the terminal-first portions of ARCHITECTURE.md preserve historical intent and must not be mistaken for current release claims.
+
+The English help source is docs/help/en.json. Do not hand-edit the generated USER_GUIDE.md or website/guide.html. Change the canonical section, update the affected contract and run node scripts/help/generate.cjs. In-app Help reads the same source. Review additions with the actual implementation, including limits, permissions and unsupported paths.
+
+Each of the 56 interface locales has separate help status in docs/help/locales.json. Missing or incomplete help falls back to English. Complete machine-translated bodies are labelled and bound to the English source hash, without a claim of human review. A human-reviewed translation additionally records its reviewer. Every translation must preserve section IDs, actions, file/command identifiers and technical limits, use the correct direction, and be refreshed when its English source changes.
+
+Before shipping, run node scripts/help/generate.cjs --check to detect stale generated output, invalid locale scaffolds or broken local contract links. UI translation checks and application behavior checks remain separate. HELP_MAINTENANCE.md gives the contributor and AI update procedure; documentation must not claim a passed test that has not run.
+
+Related instructions: [Current project map](PROJECT_MAP.md) · [Documentation maintenance](HELP_MAINTENANCE.md) · [Contributor instructions](../CONTRIBUTING.md) · [Agent instructions](../AGENTS.md).

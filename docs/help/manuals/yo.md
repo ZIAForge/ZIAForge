@@ -1,0 +1,487 @@
+<!-- Generated from docs/help/en.json; source SHA-256 19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947. Do not edit this output.
+Run node scripts/help/generate.cjs after changing the canonical help.
+Requested locale: yo; served locale: yo; status: machine-translated. -->
+# Ìwé amọ̀nà aṣeamúlò ZIAForge
+
+Láti èròǹgbà dé àbájáde tí a fìdí rẹ̀ múlẹ̀. Ìwé amọ̀nà gidi fún Code, Work àti ìṣàkóso ìṣàfilọ́lẹ̀.
+
+Èdè Gẹ̀ẹ́sì ni orísun pàtàkì tí a gbékarí. Ìrànwọ́ tí ẹ̀rọ túmọ̀ ni a sàmì sí lọ́tọ̀ kúrò lára àwọn ìtumọ̀ tí ènìyàn ti yẹ̀wò. Àwọn àyẹ̀wò aládàáṣiṣẹ́ kì í jẹ́ ẹ̀rí ìpéye èdè abínibí.
+
+> Ìtọ́sọ́nà yìí jẹ́ títúmọ̀ nípasẹ̀ ẹ̀rọ láti orísun Gẹ̀ẹ́sì lọ́wọ́lọ́wọ́. Àtúnyẹ̀wò ènìyàn ṣì wà ní títẹ́wọ́gbà.
+
+## Àwọn abala ìtọ́sọ́nà
+
+- [Àwọn ìgbésẹ̀ àkọ́kọ́](#start)
+- [Fi àkójọ-èròjà ẹ̀rọ-orí-tábìlì tí ó tọ́ sori ẹ̀rọ](#install-platforms)
+- [Code: àwọn ipa-ọ̀nà márùn-ún](#code)
+- [Ìfọ̀rọ̀wérọ̀ Forge](#forge)
+- [Àwọn àkọsílẹ̀ àti àwọn ìpinnu](#decisions)
+- [Ìmúṣẹ àti àtúnyẹ̀wò](#execution)
+- [Àwọn ẹgbẹ́ àtúnyẹ̀wò ẹ̀gbẹ́gbẹ̀gbẹ́ àti ayàwòrán ìròyìn](#review-teams)
+- [Àwọn ìmọ̀-àkànṣe aṣojú àti ìlànà àkọsílẹ̀-ìtọ́ni](#specializations)
+- [Work: láti ìbéèrè sí àkọsílẹ̀](#work)
+- [Àwọn ètò-ìtòtẹ́lẹ̀, àwọn àwòṣe àti àyè-ìwọlé](#models)
+- [Àwọn ìfọ̀rọ̀wérọ̀, Dídúró àti ìlà-ìdúró](#chat)
+- [Àwọn fáìlì, Git àti ìparí](#files)
+- [Àwọn ìsopọ̀ API](#api)
+- [Ètò, àwọn èdè àti àtúnbẹ̀rẹ̀ aláìléwu](#settings)
+- [Béèrè lọ́wọ́ olùrànlọ́wọ́ Ìrànlọ́wọ́](#help-assistant)
+- [Olùrànlọ́wọ́ àti Telegram](#assistant-control)
+- [Ṣiṣẹ́ bot Telegram àdáni rẹ](#telegram)
+- [Ìyọ̀nda kọ̀mpútà abínibí ti olówó nìkan](#native-permissions)
+- [Aṣàwákiri àti àwọn ẹ̀rọ jíjìnnà](#remote)
+- [OpenClaw, Hermes àti àwọn aṣojú òde mìíràn](#external-agents)
+- [CLI agbègbè àti àwọn ààlà ìmúdàṣe](#local-cli)
+- [Ẹ̀yà àti àwọn ìsọdọtun](#updates)
+- [Tún bẹ̀rẹ̀ àti ìmúbọ̀sípo](#restart)
+- [Ìwádìí àti ìyanjú ìṣòro](#troubleshooting)
+- [Ròyìn àwọn ìṣòro kí o sì ṣàyẹ̀wò ẹ̀rí](#diagnostics)
+- [Dátà agbègbè àti àwọn ààlà](#privacy)
+- [Lóye kí o sì yí iṣẹ́ àkànṣe orísun-ṣíṣí yìí padà](#project-contributors)
+
+<a id="start"></a>
+
+## Àwọn ìgbésẹ̀ àkọ́kọ́
+
+ZIAForge ń pa ìfọ̀rọ̀wérọ̀, ìpètepèrò, ìmúṣẹ àti ìfìdí-múlẹ̀ mọ́ nínú iṣẹ́ kan ṣoṣo. Yan Code fún iṣẹ́-àkànṣe Git, tàbí Work fún àwọn àkọsílẹ̀, ìwádìí àti àwọn àbájáde míràn nínú àpò-ìwé lásán.
+
+Bẹ̀rẹ̀ pẹ̀lú iṣẹ́ kékeré kan nínú iṣẹ́-àkànṣe ọ̀tọ̀. Tí o bá yan CLI abínibí, fi sori ẹ̀rọ kí o sì kọ́kọ́ wọlé pẹ̀lú àkópamọ́ ti ara rẹ̀ nínú tèmínà. Lọ́nà míràn, ṣètò ìsopọ̀ API. Ìforúkọsílẹ̀ CLI àti API sísanwó jẹ́ àwọn ọ̀nà ìsopọ̀ ọ̀tọ̀ọ̀tọ̀; ZIAForge kì í wọlé fún ọ tàbí gbé àwọn kírẹ́díìtì láàárín wọn.
+
+1. Ṣí Ètò kí o sì ṣàyẹ̀wò àpò-ìwé ibi-iṣẹ́ àti èdè. Ẹ̀ka Nípa ń fi ìdánimọ̀ gangan ti ẹ̀yà àgbékalẹ̀ tí ń ṣiṣẹ́ hàn.
+2. Fún Code, fi ibi-ipamọ́ Git kún un ní pákó ẹ̀gbẹ́. Fún Work, yan àpò-ìwé ọ̀tọ̀ nígbà tí o bá ń ṣẹ̀dá iṣẹ́ náà.
+3. Fi ètò-ìtòtẹ́lẹ̀ pamọ́ pẹ̀lú CLI, àwòṣe, ìsapá ìrònú àti ìpele àyè-ìwọlé. O tún le yan Àkànṣe tààrà láìsí ètò-ìtòtẹ́lẹ̀ tí a fi pamọ́.
+4. Ṣẹ̀dá iṣẹ́ kan, yan ipa-ọ̀nà rẹ̀, àwọn ojúṣe àti ìtẹ̀síwájú ti afọwọ́ṣe tàbí ti aládàáṣiṣẹ́. Yẹ àwọn àṣàyàn wò ṣáájú Bíbẹ̀rẹ̀.
+
+> Lo ohun-àgbékalẹ̀ àti àyẹ̀wò-nọ́ńbà tí olùtọ́jú pèsè. Àkọ́kọ́wò le jẹ́ aláìfọwọ́sí tàbí kí ó ṣe aláìní ìròyìn ìsọdọ̀tun tí a tẹ̀jáde. Ìtìlẹ́yìn fún ẹ̀rọ-orí-tábìlì àti olùpèsè abínibí gbọ́dọ̀ jẹ́ fífìdí-múlẹ̀ fún OS, ìṣètò ẹ̀rọ àti ohun-àgbékalẹ̀ gangan; ìtìlẹ́yìn orísun nìkan kì í ṣe ẹ̀rí ìfọwọ́sí ìtúsílẹ̀.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Àkópọ̀ iṣẹ́-àkànṣe](../../../README.md) · [Ìbáramu olùpèsè](../../PROVIDER_COMPATIBILITY.md).
+
+<a id="install-platforms"></a>
+
+## Fi àkójọ-èròjà ẹ̀rọ-orí-tábìlì tí ó tọ́ sori ẹ̀rọ
+
+Yan àkójọ-èròjà fún ètò ìṣiṣẹ́ rẹ àti ìṣètò CPU: x64 tàbí arm64. Ọ̀nà ìgbékalẹ̀ le mú àwọn ọ̀nà-ìtò macOS DMG/ZIP, Windows afi-sori-ẹ̀rọ NSIS/ZIP, àti Linux DEB/RPM/AppImage/tar.gz/ZIP jáde. Fáìlì tí a ṣẹ̀dá tàbí àgbékalẹ̀ àkọjá kì í ṣe ẹ̀rí pé afi-sori-ẹ̀rọ rẹ̀ àti UI abínibí kọjá lórí ẹ̀rọ rẹ; wo àkọsílẹ̀ ìfìdí-múlẹ̀ ti ìtúsílẹ̀ yẹn.
+
+Àwọn àgbékalẹ̀ macOS tí ń lo Electron 44 nílò macOS 13 tàbí tí ó tẹ̀lé e. Lo àkójọ-èròjà arm64 lórí Apple Silicon àti àkójọ-èròjà x64 fún Intel. Pa ìṣàfilọ́lẹ̀ àtijọ́ pátápátá kí o tó rọ́pò rẹ̀. Àwọn àkójọ-èròjà àkọ́kọ́wò le jẹ́ aláìfọwọ́sí tí a kò sì ṣe àkọsílẹ̀-òfin fún; má ṣe ṣì ohun-àgbékalẹ̀ ìdàgbàsókè gbà bí ìtúsílẹ̀ gbogbogbò tí a fọwọ́sí.
+
+Windows nílò ètò ìṣiṣẹ́ tí ẹ̀yà Electron tí a dì pọ̀ tì lẹ́yìn, àti Git tí ó wà nínú PATH. Yan ìṣètò ẹ̀rọ tí ó bá a mu. Àkọ́kọ́wò aláìfọwọ́sí kò ní ẹ̀rí Authenticode. ZIP tí a le gbé kiri gbọ́dọ̀ pa gbogbo àpò-ìwé ìṣàfilọ́lẹ̀ àti àwọn fáìlì àkókò-ìṣiṣẹ́ mọ́, kì í ṣe fáìlì aṣeéṣe rẹ̀ nìkan.
+
+Linux nílò ojú-ẹ̀rọ ayaworan tí ó bá a mu, àwọn kábí-ìwé ètò tí Electron ń béèrè, àti Git. Fún àwọn ẹ̀rí ìṣàkóso tí a fi àkóòdù pamọ́, pèsè Secret Service tí ń ṣiṣẹ́ bíi gnome-libsecret tàbí KWallet; a kò gba ẹ̀yìn-ètò basic_text tí kò ní àbò wọlé. Ẹ̀rí àyẹ̀wò orí ẹ̀rọ aláìloju/inú-àpótí kì í ṣe ẹ̀rí fún gbogbo ojú-ẹ̀rọ orí-tábìlì tàbí ìpínkiri.
+
+Fi DEB sori ẹ̀rọ pẹ̀lú apt install ./file.deb, tàbí kí o fi RPM sori ẹ̀rọ nípasẹ̀ olùṣàkóso àkójọ-èròjà ti ìpínkiri rẹ. AppImage nílò àyè aṣeéṣe àti ìtìlẹ́yìn FUSE tí ó yẹ; --appimage-extract-and-run jẹ́ àṣàyàn míràn níbi tí a ti tì í lẹ́yìn. Yọ àwọn àkójọ-èròjà tar.gz àti ZIP pẹ̀lú gbogbo àwọn fáìlì àkókò-ìṣiṣẹ́ wọn. Pa dátà aṣeamúlò àti àwọn fáìlì ìṣàfilọ́lẹ̀ mọ́ lọ́tọ̀ọ̀tọ̀ nígbà tí o bá ń rọ́pò àkójọ-èròjà.
+
+Láti kọ́ láti inú orísun, lo Node 24, Git àti npm ci, pẹ̀lú afi-sori-ẹ̀rọ Electron déédéé. Àwọn àtúnkọ́ abínibí nílò àwọn irinṣẹ́ àkàbà: àwọn irinṣẹ́ ìlà-àṣẹ Xcode lórí macOS; MSVC C++, Windows SDK àti Python lórí Windows; amúkọ́dù-jọ, make, Python, pkg-config àti àwọn irinṣẹ́ ìpòpọ̀ tí a béèrè lórí Linux. Tẹ̀lé PLATFORM_BUILDS.md fún àwọn àṣẹ gangan àti àwọn ààlà àkàbà lọ́wọ́lọ́wọ́.
+
+Àwọn ẹ̀yà ìtúsílẹ̀ ni a fi pamọ́ láti àárín gbùngbùn bẹ́ẹ̀ sì ni àwọn àbájáde kì í yípadà. Àgbékalẹ̀ ìfìdí-múlẹ̀ CI kì í ṣe afi-sori-ẹ̀rọ tí a tẹ̀jáde. Àwọn àpamọ́ orísun ní orísun, fáìlì-ìtìpa, àwọn àkọsílẹ̀ àti àwọn ìwé-àṣẹ; a yọ àwọn ìgbẹ́kẹ̀lé, àwọn ẹ̀rí ìdánimọ̀, àwọn àkópamọ́ aṣeamúlò àti ìwádìí àdáni kúrò. Má ṣe fojú sọ àsọtẹ́lẹ̀ ìfọwọ́sí ARM tàbí Windows abínibí láti ara àgbékalẹ̀ x64 tí ó yọrí sí rere.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Àwọn àkójọ-èròjà àkàbà, àwọn ohun-ìbẹ̀rẹ̀ àti àwọn ààlà ìfìdí-múlẹ̀](../../PLATFORM_BUILDS.md) · [Ìdánimọ̀ àgbékalẹ̀ àti àwọn àyẹ̀wò ìtúsílẹ̀](../../RELEASE_READINESS.md).
+
+<a id="code"></a>
+
+## Code: àwọn ipa-ọ̀nà márùn-ún
+
+Auto ń ṣàyẹ̀wò ìwọ̀n iṣẹ́: ìbéèrè tí ó rọrùn le parí pẹ̀lú ìdáhùn, nígbà tí iṣẹ́ tí ó tóbi nílò ìmúrasílẹ̀. Ṣàtúnṣe àṣìṣe ń ṣe ìwádìí orísun tí ó fà á ó sì ń pèsè àtúnṣe sílẹ̀. Àkọ́kọ́ Àkọsílẹ̀-ètò ń bẹ̀rẹ̀ pẹ̀lú ojútùú ìmọ̀-ẹ̀rọ; Àkọ́kọ́ Ohun-ìbéèrè ń bẹ̀rẹ̀ pẹ̀lú àwọn ohun-ìbéèrè àti àwọn ìlànà ìtẹ́wọ́gbà.
+
+Àpọ̀-àwòṣe ń lo àwọn àyíká-ọ̀rọ̀ ọ̀tọ̀ọ̀tọ̀ fún àwárí, àgbékalẹ̀, ìmúṣẹ àti àtúnyẹ̀wò. Orúkọ ipa-ọ̀nà náà kò béèrè àwọn olùpèsè ọ̀tọ̀ọ̀tọ̀: ipa kọ̀ọ̀kan ń lo ètò-ìtòtẹ́lẹ̀ tàbí ìṣètò Àkànṣe tí o bá yàn.
+
+Ibi-iṣẹ́-ẹ̀ka ń ya àwọn àyípadà Git ti iṣẹ́ kan sọ́tọ̀. Ẹ̀ka ń ṣiṣẹ́ nínú ẹ̀yà àyẹ̀wò tí a yàn. Ṣàyẹ̀wò iṣẹ́-àkànṣe, ẹ̀ka àti àwòṣe kí o tó bẹ̀rẹ̀; a kò fi àpèjúwe iṣẹ́ náà ránṣẹ́ sí ìfọ̀rọ̀wérọ̀ lásán pẹ̀lú.
+
+Fún èrò tí àwọn àṣàyàn ọjà tàbí ti ìmọ̀-ẹ̀rọ rẹ̀ kò tíì yanjú, lo Àkọ́kọ́ Ohun-ìbéèrè kí o sì kọ́ ìpìlẹ̀ nínú ìfọ̀rọ̀wérọ̀. Auto ń pín ìbéèrè náà sí ìsọ̀rí; kì í ṣe àṣẹ láti mú gbogbo gbólóhùn kúkúrú ṣẹ lẹ́sẹ̀kẹsẹ̀. Fipamọ́ gẹ́gẹ́ bí àkọsílẹ̀-àkọ́kọ́ ń pa ìbéèrè náà mọ́ láìsí kàn sí àwòṣe; Bíbẹ̀rẹ̀ ń fi pamọ́ ó sì ń ṣe ìfilọ́lẹ̀ ìṣàn-iṣẹ́ tí a ń darí lẹ́ẹ̀kan ṣoṣo. Àdàkọ iṣẹ́ láti ọ̀kan sí mẹ́rin ní àwọn ID ìṣẹ̀dá àti àwọn ètò ipa tí ó dá dúró.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Àdéhùn ìṣàn-iṣẹ́ Code](../../WORKFLOWS.md) · [Àwọn profaili àkọsílẹ̀-ìtọ́ni Code](../../CODE_WORKFLOW_PROMPTS.md).
+
+<a id="forge"></a>
+
+## Ìfọ̀rọ̀wérọ̀ Forge
+
+Bíbẹ̀rẹ̀ ń ṣí ìfọ̀rọ̀wérọ̀ àárín gbùngbùn. Dá lójú lọ́nà àdánidá, bi àwọn ìbéèrè mìíràn, fi àwọn ìkálọ́wọ́kò kún un kí o sì jíròrò àwọn àṣàyàn ìmọ̀-ẹ̀rọ. Ìfọ̀rọ̀sọ̀rọ̀ àti àwọn ìbéèrè wà pọ̀ pẹ̀lú iṣẹ́ náà.
+
+Fífiránṣẹ́ ọ̀rọ̀ kì í gba àkọsílẹ̀ wọlé tàbí fún ètò ìmúṣẹ tuntun ní àṣẹ. Àlàyé lásìkò ìmúṣẹ yóò kọ́kọ́ da ìdánudúró sí ìpele tí a ń darí yóò sì tún ìwọ̀n tí ó kàn yẹ̀wò. Ìdáhùn sí ìbéèrè nínú ìgbésẹ̀ tí a ti tẹ́wọ́gbà tẹ́lẹ̀ le tẹ̀síwájú nínú ìgbésẹ̀ yẹn.
+
+Láti mọ̀ọ́nmọ̀ tún ìpìlẹ̀ yẹ̀wò, yan Àwọn Ohun-ìbéèrè, Àkọsílẹ̀-ètò tàbí Ìpètepèrò. Ẹ̀yà tuntun nílò ìtẹ́wọ́gbà tuntun ti àwọn ìpinnu tí ó gbẹ́kẹ̀lé e. Àwọn ìgbésẹ̀ tí a parí àti ẹ̀rí wọn wà síbẹ̀; àwọn ipele tí a kò parí tí a rọ́pò wà nínú ìtàn.
+
+Àwọn àkókò ipele tí a ń darí yàtọ̀ sí ìfọ̀rọ̀wérọ̀ ọ̀fẹ́. Lo ìfọ̀rọ̀wérọ̀ Forge dípò fífiranṣẹ́ àwọn àkọsílẹ̀-ìtọ́ni pẹ̀lú ọwọ́ tààrà sí àkókò tí ó jẹ́ ti ìṣàn-iṣẹ́.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Àdéhùn ìfọ̀rọ̀wérọ̀ Forge](../../WORKFLOWS.md).
+
+<a id="decisions"></a>
+
+## Àwọn àkọsílẹ̀ àti àwọn ìpinnu
+
+Ṣí àkọsílẹ̀ kan, ṣàyẹ̀wò ẹ̀yà rẹ̀ kí o sì ṣe àwọn àtúnṣe nígbà tí ó bá pọndandan. Fífisilẹ̀ àwọn àtúnṣe nípasẹ̀ ìfọ̀rọ̀wérọ̀ ń mú ẹ̀yà tuntun jáde; a kì í tún àwọn ìròyìn àti àwọn àbájáde tí a fìdí rẹ̀ múlẹ̀ kọ láti ẹ̀yìn.
+
+Kí o tó gba ètò tí a dábàá wọlé, ṣàtúnṣe sí ètò-ìtẹ̀léra, àwọn ìtọ́ni, àwọn ìlànà ìtẹ́wọ́gbà àti àwọn àṣẹ ìfìdí-múlẹ̀. Fún àwọn àṣẹ gidi tí o yé ọ ní àṣẹ: wọ́n ń ṣiṣẹ́ nínú àpò-ìwé iṣẹ́ náà. Àpọ̀-àwòṣe ń dábàá ìgbésẹ̀ ìmúṣẹ iṣẹ́ gbogbo kan ṣoṣo, pẹ̀lú àwọn kúlẹ̀kúlẹ̀ nínú àwọn àkọsílẹ̀ àti àwọn ìtọ́ni rẹ̀.
+
+Fífọwọ́sí jẹ́ ìpinnu ọ̀tọ̀ tí a mọ̀ọ́nmọ̀ ṣe. Auto kì í fojú fo àwọn ìbéèrè tàbí ìtẹ́wọ́gbà àwọn ohun-ìbéèrè, àwọn àkọsílẹ̀-ètò àti àwọn ètò. Àkọsílẹ̀ tí a yípadà láti òde kò le tún ìfọwọ́sí àtijọ́ lò.
+
+Àwọn fáìlì ìmúrasílẹ̀ máa ń fara hàn gẹ́gẹ́ bí ohun-àgbékalẹ̀. Ẹ̀yà wọn, ipele tí ó gbé wọn jáde àti háàṣì wọn so wọ́n mọ́ àbájáde kan. Àwọn àkọsílẹ̀ Code ni a ń tọ́jú sí ẹ̀yìn ibi-iṣẹ́-ẹ̀ka wọn kì í sì í wọ inú ìfipamọ́-kóòdù fúnra wọn.
+
+Ṣàyẹ̀wò àkọsílẹ̀ àti ìpinnu tí a fi hàn kí o tó tẹ́wọ́gbà á. Ìtẹ́wọ́gbà so ID ẹnubodè lọ́wọ́lọ́wọ́, àtúnyẹ̀wò ètò àti àwọn háàṣì àkọsílẹ̀ tí a pa mọ́ pọ̀. Béèrè fún àwọn àyípadà nígbà tí ìwọ̀n iṣẹ́ tàbí ẹ̀rí bá jẹ́ àṣìṣe. Tí ìpinnu kan bá ti di àtijọ́, tún ipò tí a fi pamọ́ gbé wọlé kí o tó ṣe àṣàyàn tuntun; a kò le gba fáìlì tí a ti yípadà wọlé lábẹ́ ẹ̀yà ti tẹ́lẹ̀.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Àwọn ẹnubodè ìṣàn-iṣẹ́ àti àwọn ẹ̀yà àkọsílẹ̀](../../WORKFLOWS.md).
+
+<a id="execution"></a>
+
+## Ìmúṣẹ àti àtúnyẹ̀wò
+
+Àkójọ-iṣẹ́ ń fi àwọn ìgbésẹ̀ gidi, ìgbìyànjú lọ́wọ́lọ́wọ́, àwọn àbájáde ìfìdí-múlẹ̀ àti ti àtúnyẹ̀wò hàn. Aṣojú kan sísọ pé “ó ti parí” kì í mú ìgbésẹ̀ kan parí: ẹ̀rí tí a béèrè nínú ètò gbọ́dọ̀ wà.
+
+Ipo afọwọ́ṣe ń dánudúró láàárín àwọn ìgbésẹ̀ tí ó yẹ. Auto ń mú àwọn ìgbésẹ̀ tí a ti fìdí rẹ̀ múlẹ̀ tẹ̀síwájú ó sì ń gba àwọn àtúnṣe tí a dínkù láyè. Dúró lẹ́yìn máa ń dá ojú-àyẹ̀wò sílẹ̀ nígbà gbogbo. Dánudúró ń dá iṣẹ́ tí ń lọ lọ́wọ́ nínú ìṣàn-iṣẹ́ dúró; títì pákó kan kò ní dá a dúró.
+
+Olùtúnyẹ̀wò tí ó dá dúró ń lo àyíká-ọ̀rọ̀ ọ̀tọ̀ pẹ̀lú àwọn fáìlì àti àwọn àbájáde ìfìdí-múlẹ̀. Gbogbo àwárí ìdènà tí a béèrè gbọ́dọ̀ jẹ́ yíyanjú; ọ̀pọ̀lọpọ̀ olùtúnyẹ̀wò kò le dìbò láti pa àṣìṣe ìdènà rẹ́.
+
+Ní Àpọ̀-àwòṣe, ṣíṣe àtúnṣe sí àwọn àwárí nílò ìpinnu tí ó hàn kedere. Àtúnṣe kì í bẹ̀rẹ̀ àtúnyẹ̀wò mìíràn ní kọ̀rọ̀: Tún yẹ̀wò lẹ́ẹ̀kan síi ń ṣí àkókò tuntun. Àwọn àfikún ọ̀rọ̀ àtúnyẹ̀wò le béèrè fún àtúnyẹ̀wò olùṣàkóso láìtún ìmúṣẹ ṣe.
+
+A kò le ṣe àtúnṣe ní kọ̀rọ̀ sí àwọn ìgbésẹ̀ tí a ti parí. Pẹ̀lú TDD, Pupa gbọ́dọ̀ kùnà ní ti gidi fún ìdí tí a fojú sọ́nà fún, lẹ́yìn náà Aláwọ̀-ewé gbọ́dọ̀ kọjá. Àwọn ìgbìyànjú tí a dínkù ń dènà àtúnṣe aláìlópin.
+
+Fi àwọn olùtúnyẹ̀wò CLI/API tí ó dá dúró pamọ́ sí Ètò → Àwọn ẹgbẹ́ àtúnyẹ̀wò, lẹ́yìn náà yan ẹgbẹ́ náà nínú Code tàbí Work. Àwọn olùtúnyẹ̀wò ń ṣiṣẹ́ ní ẹ̀gbẹ́gbẹ̀gbẹ́, tí ayàwòrán ìròyìn ti ẹgbẹ́ náà yóò sì tẹ̀lé e. O tún le ṣètò àwọn olùtúnyẹ̀wò tí ó dá dúró láìsí ẹgbẹ́ tí a fi pamọ́. Ayàwòrán ìròyìn ń gba àwọn ìròyìn alálàyé tí kò lórúkọ nìkan, láìsí àwọn fáìlì iṣẹ́-àkànṣe tàbí irinṣẹ́; ìyàsọ́tọ̀ yìí nílò Claude Code tàbí API lọ́wọ́lọ́wọ́.
+
+Ìgbésẹ̀ ìmúṣẹ kọ̀ọ̀kan nílò àyẹ̀wò aṣeéṣe, àtúnyẹ̀wò òmìnira tí a béèrè, tàbí méjèèjì. Àwọn ipele ìmúrasílẹ̀ dípò bẹ́ẹ̀ ń pa àwọn àbájáde tí a fọwọ́sí àti àwọn ẹ̀rí ohun-àgbékalẹ̀ mọ́; àwọn wọ̀nyí kì í ṣe bí ẹni pé àwọn àyẹ̀wò ìmúṣẹ ti ṣiṣẹ́. Àṣẹ kan ń yọrí sí rere kìkì nígbà tí a bá ti fìdí ipò àbájáde gidi àti ìpalẹ̀mọ́ ìlànà-iṣẹ́ ti ara rẹ̀ múlẹ̀. Àyẹ̀wò Pupa fún TDD gbọ́dọ̀ kùnà déédéé ṣáájú ìmúṣẹ àti ìfìdí-múlẹ̀ Aláwọ̀-ewé; fáìlì aṣeéṣe tí ó sọnù tàbí àkókò tí ó kọjá kì í ṣe àbájáde Pupa tí ó wúlò.
+
+Àwọn adènà-àkóbá àyànfẹ́ ń dúró lẹ́yìn ìgbìyànjú mẹ́ta tí ó kùnà lórí ìgbésẹ̀ kan tàbí ìgbìyànjú àádọ́ta ní àpapọ̀. Ìdílọ́wọ́ ń jẹ ìgbìyànjú kan ṣùgbọ́n kì í ṣe ìgbìyànjú tí ó kùnà fúnra rẹ̀. Àwọn ààlà àti ẹ̀rí tí a parí ń wà síbẹ̀ lẹ́yìn àtúnbẹ̀rẹ̀; Gbìyànjú lẹ́ẹ̀kan síi kì í pa wọ́n rẹ́. Ka ìkùnà tí a pa mọ́ kí o tó fún ìgbìyànjú mìíràn ní àṣẹ.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Ìfìdí-múlẹ̀ àti àtúnyẹ̀wò](../../WORKFLOWS.md).
+
+<a id="review-teams"></a>
+
+## Àwọn ẹgbẹ́ àtúnyẹ̀wò ẹ̀gbẹ́gbẹ̀gbẹ́ àti ayàwòrán ìròyìn
+
+Ṣí Ètò → Àwọn ẹgbẹ́ àtúnyẹ̀wò kí o sì fi ẹgbẹ́ kan pamọ́. Fi àwọn olùtúnyẹ̀wò tí ó dá dúró kún un pẹ̀lú CLI tàbí API, àwòṣe, ìsapá ìrònú àti ìmọ̀-ìpele ti ara wọn, lẹ́yìn náà yan ayàwòrán ìròyìn. Yan ẹgbẹ́ náà nínú ìṣètò àtúnyẹ̀wò ti iṣẹ́ náà. Olùtúnyẹ̀wò tún le lo ètò-ìtòtẹ́lẹ̀ aṣeṣẹ́, Àkànṣe sì wà síbẹ̀; àwọn ojúṣe tí ó dá dúró ṣì ní àwọn àyíká-ọ̀rọ̀ ọ̀tọ̀ọ̀tọ̀.
+
+Àwọn olùtúnyẹ̀wò ń ṣiṣẹ́ ní ẹ̀gbẹ́gbẹ̀gbẹ́ lórí ẹ̀rí iṣẹ́ kan náà. A pa gbogbo ìròyìn, àṣìṣe àti ìdájọ́ tí a béèrè mọ́. Ayàwòrán ń gba àwọn ìròyìn tí a fún ní nọ́ńbà láìsí orúkọ, láìsí orúkọ olùtúnyẹ̀wò, àwòṣe tàbí ìdánimọ̀ olùpèsè, àkóónú iṣẹ́ àkọ́kọ́, àyè sí ibi-ipamọ́ tàbí àwọn irinṣẹ́. Ó ń fi àwọn ìròyìn wé ara wọn ó sì ń dá ìdájọ́ kan tí ó nítò lẹ́sẹẹsẹ padà; kì í ṣe àtúnyẹ̀wò orísun tuntun.
+
+A kò le fojú fo àwárí ìdènà kan tàbí ìkọ̀sílẹ̀ olùtúnyẹ̀wò tí a béèrè nípasẹ̀ ìbò tọ̀pọ̀ tàbí ìfẹ́ ayàwòrán. Àwọn ìròyìn tí ó sọnù tàbí tí kò tò dáadáa ń dí ìfọwọ́sí lọ́wọ́. Ṣàyẹ̀wò àwọn àwárí ẹnìkọ̀ọ̀kan àti ìpinnu àpapọ̀ kí o tó tẹ́wọ́gbà á tàbí fún àwọn àtúnṣe ní àṣẹ. Ẹgbẹ́ tí a fi pamọ́ ni a ti yanjú tí a sì dì mọ́lẹ̀ fún iṣẹ́ ṣíṣe náà; ṣíṣe àtúnṣe sí ètò-ìtòtẹ́lẹ̀ rẹ̀ kì í tún ẹ̀rí tí a ti parí kọ.
+
+Ayàwòrán fún ìròyìn nìkan ń lo àwọn ìṣètò aláìlo-irinṣẹ́ tí a tì lẹ́yìn ti Claude tàbí API lọ́wọ́lọ́wọ́. Codex àti Antigravity ṣì wà fún lílò gẹ́gẹ́ bí àwọn olùtúnyẹ̀wò ṣùgbọ́n a kọ̀ wọ́n fún ojúṣe ayàwòrán tí a yà sọ́tọ̀ yìí títí di ìgbà tí àdéhùn aláìlo-irinṣẹ́ tí a fìdí rẹ̀ múlẹ̀ yóò fi wà. Àkọsílẹ̀-ìtọ́ni tí ó sọ pé “kò sí irinṣẹ́” nìkan kò tó.
+
+> Ọ̀nà àgbékalẹ̀/àtúnyẹ̀wò ti Àpọ̀-àwòṣe Code àti ẹgbẹ́ àtúnyẹ̀wò ẹ̀gbẹ́gbẹ̀gbẹ́ tí a fi pamọ́ jẹ́ àwọn ìṣàkóso ọ̀tọ̀ọ̀tọ̀. Pa ìlànà àtúnyẹ̀wò àkànṣe tí a yàn mọ́; má ṣe rò pé ipa-ọ̀nà kan ń mú gbogbo àwọn àbùdá àtúnyẹ̀wò ṣiṣẹ́.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Ìṣètò ẹgbẹ́ tí ó ní irúfẹ́](../../../shared/review-team.ts) · [Àkójọpọ̀ àtúnyẹ̀wò](../../../electron/workflow/ReviewAggregation.ts).
+
+<a id="specializations"></a>
+
+## Àwọn ìmọ̀-àkànṣe aṣojú àti ìlànà àkọsílẹ̀-ìtọ́ni
+
+Àwòṣe jẹ́ ẹ̀rọ ìmúṣẹ; ìmọ̀-àkànṣe jẹ́ profaili ìtọ́ni. Yan Kò sí fún àìsí ìmọ̀-àkànṣe àfikún, Déédéé fún amọ̀nà àyànfẹ́, Auto fún amọ̀nà abẹ́nú tí ó bá a mu, tàbí Afọwọ́ṣe fún àwọn amọ̀nà tí a yàn àti àwọn ìtọ́ni tí a dínkù ti ara rẹ. Àwọn ètò-ìtòtẹ́lẹ̀ le pa àṣàyàn náà mọ́.
+
+Àtòjọ àkọ́kọ́ bo kíkọ-kóòdù gbogbogbò, ìṣètò ẹ̀rọ, àbò, ìgbẹ́kẹ̀lé, iṣẹ́-ṣíṣe, àyẹ̀wò àti ìwúlò ojú-ìbáṣepọ̀. Auto ń lo ọ̀rọ̀ iṣẹ́/ìgbésẹ̀ tí ó wà láti yan amọ̀nà kan; kì í pe àwòṣe mìíràn ní kọ̀rọ̀ tàbí jẹ́ ẹ̀rí fún ìmọ̀-ìjìnlẹ̀. A le ṣàyẹ̀wò àwọn àbá ìpètepèrò kí a sì yí wọn padà kí a tó gba ètò ìmúṣẹ wọlé.
+
+Àwọn ìmọ̀-àkànṣe àtúnyẹ̀wò ń ran ìkíyèsí lọ́wọ́ ṣùgbọ́n wọn kì í rọ́pò ẹ̀rí òmìnira, àwọn ààlà àyè-ìwọlé tàbí ìdájọ́ tí a tò lẹ́sẹẹsẹ. Wo àwọn ìtọ́ni àkànṣe bí apá kan nínú ìwọ̀n iṣẹ́ náà: má ṣe lò wọ́n láti fo ìtẹ́wọ́gbà àkọsílẹ̀, ìlànà irinṣẹ́, ìfìdí-ìdánimọ̀ múlẹ̀ tàbí àwọn ìkùnà olùtúnyẹ̀wò dá.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Àtòjọ àkọsílẹ̀-ìtọ́ni àkọ́kọ́](../../../shared/specializations.ts).
+
+<a id="work"></a>
+
+## Work: láti ìbéèrè sí àkọsílẹ̀
+
+Work kò béèrè Git. Àyànfẹ́ ń dá àpò-ìwé iṣẹ́ ọ̀tọ̀ sílẹ̀; Àkànṣe ń yan àpò-ìwé tí ó wà tẹ́lẹ̀ nípasẹ̀ aṣàyàn abínibí. Fipamọ́ gẹ́gẹ́ bí àkọsílẹ̀-àkọ́kọ́ ń tọ́jú àwọn ètò láìsí àyẹ̀wò-ìmọ̀; Bíbẹ̀rẹ̀ ń ṣiṣẹ́ ipele àkọ́kọ́.
+
+Auto ń dáhùn tààrà tàbí dábàá ètò tí ó bá a mu pẹ̀lú Àkójọ-iṣẹ́ gidi. Ìrònú-jinlẹ̀ ń ṣẹ̀dá ideas.md kí o tó yan àwọn èrò síi tàbí ìgbéléwọ̀n. Ìwádìí ń pa findings.md, àwọn orísun àti àwọn ààlà mọ́. Ìkọ̀wé ń bọ̀ láti inú èròǹgbà àti, nígbà tí ó bá wúlò, outline.md sí àkọsílẹ̀ àlàyé tàbí draft.md; àwọn àtúnyẹ̀wò ń pa àwọn ẹ̀yà ti tẹ́lẹ̀ mọ́.
+
+Yan àwọn àfikún fáìlì nípasẹ̀ aṣàyàn abínibí kí o sì tọ́ka sí wọn pẹ̀lú @. Ìṣàfilọ́lẹ̀ ń da àwọn àdàkọ wọn kọ bí àwọn àfikún iṣẹ́ tí kì í yípadà ó sì ń fìdí ìdánimọ̀ wọn múlẹ̀ kí ó tó ṣiṣẹ́. Àyànfẹ́ ń ṣẹ̀dá àpò-ìwé iṣẹ́ tí ó jẹ́ ti ìṣàfilọ́lẹ̀; àyè àpò-ìwé Àkànṣe jẹ́ àṣẹ olùní tí a fi pamọ́. Àkọsílẹ̀-àkọ́kọ́ tí a fi pamọ́ tí a kò tíì bẹ̀rẹ̀ le yí àpò-ìwé rẹ̀ padà.
+
+Ṣẹ̀dá àdàkọ 1–4 pẹ̀lú àwọn ètò aṣeṣẹ́ tí ó dá dúró. Àwọn iṣẹ́ tí ń lo àwọn àpò-ìwé tí ó léra kò le kọ̀wé ní àkókò kan náà. Ìṣàkóso yìí kan àwọn iṣẹ́ ZIAForge, kì í ṣe àwọn ètò òde lásán.
+
+Ìrònú-jinlẹ̀ Tó Jinlẹ̀ bẹ̀rẹ̀ pẹ̀lú àwọn òṣìṣẹ́ mẹ́ta tí ó dá dúró ó sì ń tìlẹ́yìn títí dé mẹ́jọ. Yan ètò-ìtẹ̀léra àti àwọn ìṣètò wọn, pẹ̀lú títún ètò-ìtòtẹ́lẹ̀ lò nínú àwọn àyíká-ọ̀rọ̀ ọ̀tọ̀ọ̀tọ̀. Àwọn ìbéèrè òṣìṣẹ́ ń pa orísun wọn mọ́; àwọn ìròyìn tí kò tò dáadáa ń rí ìgbìyànjú àtúnṣe-ìtò kan. Ìkùnà apá kan wà ní gbangba dípò kí a gbé e kalẹ̀ bí àṣeyọrí gbogbo.
+
+Deep ń da àwọn ìròyìn òṣìṣẹ́ tí a pa mọ́ pọ̀ sí brainstorm_report.md ó sì máa ń béèrè fún ìpinnu aṣeamúlò nígbà gbogbo. Ìtẹ̀lé kékeré ń ṣe àtúnyẹ̀wò sí ìròyìn náà nípasẹ̀ olùṣàkóso; àyípadà pàtàkì ń bẹ̀rẹ̀ àkókò mìíràn fún àwọn òṣìṣẹ́ tí a ti dì mọ́lẹ̀. Àwọn ohun-àgbékalẹ̀ ń pa àwọn ẹ̀yà wọn mọ́.
+
+Àwọn ojúṣe tí a yanjú ń di dídìmọ́lẹ̀ nígbà ìṣẹ̀dá iṣẹ́ tàbí fífipamọ́ àkọsílẹ̀-àkọ́kọ́ kedere. Lẹ́yìn ìpè àkọ́kọ́, kìkì ìtẹ̀síwájú ti aládàáṣiṣẹ́/ti afọwọ́ṣe ni ó le yípadà; lo iṣẹ́ tuntun fún ojúṣe tàbí ètò àwòṣe ọ̀tọ̀. Ṣíṣe àtúnṣe sí ètò-ìtòtẹ́lẹ̀ àpapọ̀ kì í yí àwọn ipele tí ń bọ̀ padà ní kọ̀rọ̀.
+
+Ipo afọwọ́ṣe ń dánudúró láàárín àwọn ipele tí ó yẹ, pẹ̀lú àkójọ-orí-ọ̀rọ̀ Ìkọ̀wé pàtàkì kan. Auto le tẹ̀síwájú la àkójọ-orí-ọ̀rọ̀ yẹn já. Àwọn ìbéèrè, àwọn ètò aṣeéṣe tí a dábàá, ìtọ́sọ́nà Ìrònú-jinlẹ̀ àti àtúnyẹ̀wò ìròyìn Deep ṣì jẹ́ àwọn ìpinnu kedere pàápàá nínú Auto. Ìtọ́kasí nìkan kò fìdí rẹ̀ múlẹ̀ pé a ṣe àwárí lórí ayélujára, bẹ́ẹ̀ sì ni fáìlì bíbìnárì tí a pa mọ́ nìkan kò fìdí ìfihàn rẹ̀ múlẹ̀.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Àwọn ipo àti àwọn ìpinnu Work](../../WORK_WORKFLOWS.md).
+
+<a id="models"></a>
+
+## Àwọn ètò-ìtòtẹ́lẹ̀, àwọn àwòṣe àti àyè-ìwọlé
+
+Ètò-ìtòtẹ́lẹ̀ ń fi CLI/API, àwòṣe, ìsapá ìrònú àti àwọn àyè-ìwọlé pamọ́. Ìsàlẹ̀ ìfọ̀rọ̀wérọ̀ ní àwọn abala ètò-ìtòtẹ́lẹ̀, CLI, àwòṣe àti àwọn àṣàyàn. Àkànṣe ń ṣiṣẹ́ láìsí ètò-ìtòtẹ́lẹ̀; Ṣẹ̀dá ètò-ìtòtẹ́lẹ̀ ń fi àṣàyàn lọ́wọ́lọ́wọ́ pamọ́.
+
+Àtòjọ náà ń wá láti inú CLI tàbí API tí a fi sori ẹ̀rọ tí a yàn níbi tí a ti tì í lẹ́yìn. Ṣàtúnbẹ̀rẹ̀ ń sọ àtòjọ di tuntun láìyí àṣàyàn padà. Tí àwárí kò bá sí, tẹ ID àwòṣe pàtó; olùpèsè gbọ́dọ̀ ṣì tì í lẹ́yìn. Àwọn ìpele ìrònú sinmi lórí àwòṣe àti CLI. Àyànfẹ́ olùpèsè yàtọ̀ sí àmì-ìdánimọ̀ kò-sí pàtó.
+
+Mú àwọn àyípadà ṣiṣẹ́ kìkì lẹ́yìn ìfìdí-múlẹ̀ ẹ̀yìn-ètò. Yíyípadà jẹ́ dídènà lásìkò àkókò tí ń ṣiṣẹ́ tàbí lórí ìlà-ìdúró tí kò ṣófo. Àwọn àkọsílẹ̀-àkọ́kọ́ àti ìtàn tí a le rí wà síbẹ̀, ṣùgbọ́n yíyí àwọn olùpèsè padà kì í gbé ipò inú ti àdáni wọn kọjá.
+
+Ní Forge, àlẹ̀mọ́ ojúṣe ṣe pàtàkì: ìmúrasílẹ̀ le lo Olùpètepèrò ọ̀tọ̀. Ìsàlẹ̀ ń yí ojúṣe tí a fi hàn padà; a ń yan àwọn olùtúnyẹ̀wò àti àwọn olùrànlọ́wọ́ nínú àwọn ètò ìṣàn-iṣẹ́. Ìlànà fún ìmúṣẹ tí a ti fìdí rẹ̀ múlẹ̀ tẹ́lẹ̀ le jẹ́ dídìpọ̀.
+
+Àwọn àyè-ìwọlé yàtọ̀ láàárín àwọn olùpèsè. Kíka nìkan àti Kíkọ sí ibi-iṣẹ́ wà níbi tí olùbáramu ti tì wọ́n lẹ́yìn. Antigravity ń lo àwọn ètò CLI abínibí tàbí àyè-ìwọlé kíkún tí a yan kedere. Àyè-ìwọlé kíkún kì í ṣe àpótí-àbò.
+
+Ìmọ̀-àkànṣe ń fi ìtọ́sọ́nà àkọsílẹ̀-ìtọ́ni kún un, kì í ṣe àwòṣe tàbí àyè-ìwọlé mìíràn. Àwọn ètò-ìtòtẹ́lẹ̀ àti àwọn ojúṣe ń tìlẹ́yìn Kò sí, Déédéé, Auto àti Afọwọ́ṣe. Auto ń yan àwọn profaili láti inú ọ̀rọ̀ ìgbésẹ̀ láìsí ìpè àwòṣe àfikún; Afọwọ́ṣe ń gba títí dé ìmọ̀-àkànṣe mẹ́rin àti àwọn ìtọ́ni àkànṣe. A le ṣàtúnṣe sí àwọn iṣẹ́ tí Olùpètepèrò dábàá kí a tó gba ètò náà wọlé.
+
+ID àwòṣe tàbí ìsapá tí a tẹ̀ pẹ̀lú afọwọ́ṣe ṣì jẹ́ àṣàyàn rẹ, ṣùgbọ́n olùpèsè le kọ̀ ọ́. Ṣíṣe àtúnṣe sí ètò-ìtòtẹ́lẹ̀ àpapọ̀ kì í yí ìfọ̀rọ̀wérọ̀ tí ń ṣiṣẹ́ tàbí ètò tí a ti tẹ́wọ́gbà padà láti ẹ̀yìn. Láti mọ̀ọ́nmọ̀ yí ìfọ̀rọ̀sọ̀rọ̀ tí kò ṣiṣẹ́ padà, lo àwọn ìṣàkóso ìṣètò ti ara rẹ̀ kí o sì dúró de ìfìdí-múlẹ̀. Àṣàyàn tí a pa tì gbọ́dọ̀ jẹ́ kíkà bí ààlà agbára tàbí àkókò-ìwàláàyè, kì í ṣe ohun tí a le fo dá nípa ṣíṣe àtúnṣe sí JSON tí a fi pamọ́.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Àwọn agbára olùpèsè](../../PROVIDER_COMPATIBILITY.md).
+
+<a id="chat"></a>
+
+## Àwọn ìfọ̀rọ̀wérọ̀, Dídúró àti ìlà-ìdúró
+
+Àwọn táàbù tí ó ṣí sílẹ̀, Àwọn Lọ́ọ́lọ́ọ́ àti àwọn àkọsílẹ̀-àkọ́kọ́ jẹ́ ti iṣẹ́ kan ṣoṣo. Títì táàbù kan ń yọ ọ́ kúrò ní Ṣíṣí ṣùgbọ́n ó ń pa á mọ́ sí Àwọn Lọ́ọ́lọ́ọ́ kò sì ní dá ìlànà olùpèsè rẹ̀ tàbí ìṣàn-iṣẹ́ tí a ń darí dúró. Wá ìtàn, tún ìfọ̀rọ̀wérọ̀ ṣí tàbí ti gbogbo àwọn táàbù àfikún láti inú àtòjọ-àṣàyàn ìtàn.
+
+Dídúró ń dí àkókò lọ́wọ́lọ́wọ́ lọ́wọ́. Dúró de dídúró náà láti parí kí o tó Firanṣẹ́ lẹ́ẹ̀kan síi: ìfìdí-múlẹ̀ ìdílọ́wọ́ kì í ṣe ìparí ìlànà-iṣẹ́. O le kọ àkọsílẹ̀-àkọ́kọ́ tí ó tẹ̀lé e lákòókò náà.
+
+Ní ìfọ̀rọ̀wérọ̀ lásán, Ìlà-ìdúró ń fi ìbéèrè ìgbẹ̀yìn pamọ́ lọ́tọ̀ kúrò nínú àkọsílẹ̀-àkọ́kọ́ lọ́wọ́lọ́wọ́. Dánudúró ìlà-ìdúró ń da ìfiranṣẹ́ síwájú dúró. Dúró àti Jáde ń da ìlà-ìdúró dúró. Lẹ́yìn àtúnbẹ̀rẹ̀, kọ́kọ́ Tẹ̀síwájú, lẹ́yìn náà Tẹ̀síwájú nínú ìlà-ìdúró kedere.
+
+Aláìdánilójú túmọ̀ sí pé a kò mọ̀ bóyá ó dé. A kì í tún irú ifiranṣẹ́ bẹ́ẹ̀ ránṣẹ́ lágbára ara rẹ̀: ṣàyẹ̀wò ìtàn, da ọ̀rọ̀ kọ tí ó bá yẹ kí o sì yọ ohun inú ìlà-ìdúró kúrò. Fífiránṣẹ́ lẹ́ẹ̀kan síi jẹ́ ìbéèrè tuntun tí a mọ̀ọ́nmọ̀ ṣe.
+
+Àwọn ìfọ̀rọ̀wérọ̀ ipele tí a ń darí ń lo ìṣàn-iṣẹ́ tiwọn, kì í ṣe ìlà-ìdúró lásán. Tẹ̀lé ipele ń fi ipele lọ́wọ́lọ́wọ́ hàn; yíyan táàbù mìíràn pẹ̀lú afọwọ́ṣe ń dá títẹ̀lé dúró. Àwọn àkọsílẹ̀ CLI ń fi àwọn àyẹ̀wò-àìsàn hàn lọ́tọ̀ kúrò lára ìdáhùn.
+
+Àwọn ìdáhùn Markdown ń fi àwọn àkọlé, àtòjọ, tábìlì, àwọn àjápọ̀ àti kóòdù tí a sọgbà hàn. Àwọn káàdì irinṣẹ́ àti àyẹ̀wò-àìsàn CLI wà lọ́tọ̀ kúrò nínú ìdáhùn. Ìrònú tí àwòṣe ròyìn àti àwọn òṣùwọ̀n àmì-ìdánimọ̀ ń hàn kìkì nígbà tí olùpèsè bá ṣí wọn sílẹ̀ ní ti gidi; má ṣe fojú sọ àsọtẹ́lẹ̀ ìrònú àdáni tàbí ìlò láti ara àwòrán tí ń rìn.
+
+Lẹ́yìn ìfiranṣẹ́ aláìdánilójú tàbí ìfìdí-múlẹ̀ ìlà-ìdúró, ṣàyẹ̀wò ìtàn kí o sì tún ìbéèrè kan náà tí a pa mọ́ gbìyànjú nìkan níbi tí a bá ti fúnni ní àyè rẹ̀. Ìwé-ẹ̀rí ìlà-ìdúró túmọ̀ sí pé ibi-ipamọ́ gba ohun náà wọlé, kì í ṣe pé àyẹ̀wò-ìmọ̀ ti parí. Yọ ohun inú ìlà-ìdúró tí kò dánilójú kúrò kìkì gẹ́gẹ́ bí ìyọkúrò pàtó; kò le fa àkọsílẹ̀-ìtọ́ni tí a ti fi ránṣẹ́ tẹ́lẹ̀ sẹ́yìn.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Ìlà-ìdúró ifiranṣẹ́ tí ó péye](../../MESSAGE_QUEUE.md).
+
+<a id="files"></a>
+
+## Àwọn fáìlì, Git àti ìparí
+
+Àwọn fáìlì ń fi àpò-ìwé iṣẹ́ hàn. Fi àwọn àbájáde wé àwọn ohun-ìbéèrè, ṣí àwọn àkọsílẹ̀ kí o sì ṣàyẹ̀wò àwọn ìyàtọ̀. Pípa fáìlì bíbìnárì mọ́ kò fìdí ìfihàn tí ó tọ́ múlẹ̀ nínú ìṣàfilọ́lẹ̀ tí a pinnu fún un.
+
+Git ń pèsè ipò, àwọn àyípadà àti àwọn iṣẹ́ pẹ̀lú àwọn àbájáde tí a gbà sílẹ̀. Ìfipamọ́, ìdàpọ̀ àti títìsíwájú jẹ́ ti afọwọ́ṣe ní àyànfẹ́; àwọn iṣẹ́ aládàáṣiṣẹ́ jẹ́ àṣàyàn ọ̀tọ̀ fún ètò tí a ti fìdí rẹ̀ múlẹ̀ ní kíkún.
+
+Má ṣe yí àwọn fáìlì iṣẹ́ padà láàárín ìfìdí-múlẹ̀ àti ìtẹ̀jáde: ìfọwọ́sí wà ní dídì mọ́ àwọn báìtì gangan. Àwọn ìforígbárí, títìsíwájú tí ó kùnà àti àwọn àbájáde iṣẹ́ tí a kò mọ̀ ń dènà ìtẹ̀síwájú títí di ìgbà tí ìpinnu kedere yóò fi wà. Auto kì í fún ìtẹ̀jáde ní àṣẹ ní kọ̀rọ̀.
+
+Work kì í dá àwọn ẹ̀ka Git sílẹ̀ kò sì ní ìparí Git. Pa àwọn àkọsílẹ̀ tí a béèrè mọ́ láti inú àpò-ìwé tí a yàn, pẹ̀lú àwọn ẹ̀yà àti àwọn orísun.
+
+Olùṣàtúnṣe fáìlì ń pèsè ìrísí-kóòdù nípasẹ̀ ìparí orúkọ fáìlì, wíwá àti rírọ́pò, ìtàn àtúnṣe-sẹ́yìn, ìwé-kíkọ káàkiri àti àwọn àkọsílẹ̀-àkọ́kọ́ fún táàbù kọ̀ọ̀kan. Fífipamọ́ ń dáàbò bo àkóòdù UTF-8/UTF-16 tí a tì lẹ́yìn ó sì ń kọ àwọn ìforígbárí àyípadà láti òde. Àwọn àkóòdù mìíràn àti àkóónú bíbìnárì nílò olùṣàtúnṣe ti òde. Àwọn àkọsílẹ̀-àkọ́kọ́ tí a kò fi pamọ́ ń dènà Ìjáde ìṣàfilọ́lẹ̀ títí tí olùní yóò fi fi wọ́n pamọ́ tàbí sọ wọ́n nù.
+
+Ìrísí-kóòdù kíkún wà ní gbígbà láyè títí dé 8 MiB. Àwọn fáìlì ọ̀rọ̀ tí ó tóbi jù ń ṣí nínú àwọn fèrèsé 256 KiB; a le gbé 8–64 MiB wọlé ní kíkún kedere láìsí ìrísí-kóòdù. Lókè 64 MiB lo àtúnṣe ojú-fèrèsé àti wíwá-ìbáramu tí ó tẹ̀lé e tí a dínkù. Èyí jẹ́ ipo fáìlì-nlá tí ó ní ààlà, kì í ṣe ìdọ́gba Sublime Text fún àwọn àkọsílẹ̀ tí ó tóbi lọ́nàkọnà.
+
+Ṣí àpò-ìwé ń lo àyíká-ọ̀rọ̀ iṣẹ́ lọ́wọ́lọ́wọ́ tàbí ẹ̀ka/ibi-iṣẹ́-ẹ̀ka, dípò kí ó kàn ṣí ibi-ipamọ́ àkọ́kọ́ nìkan ní kọ̀rọ̀. Ìlà fáìlì kan le fi àpò-ìwé òbí fáìlì yẹn hàn. Ẹ̀yìn-ètò ń fìdí àwọn ipa-ọ̀nà múlẹ̀ lòdì sí àwọn àṣẹ iṣẹ́ tí a forúkọsílẹ̀. A kò le ṣàtúnṣe sí àwọn fáìlì bíbìnárì bí ọ̀rọ̀ lásán; lo olùwòran tí a pinnu fún wọn kí o sì pa àwọn báìtì àkọ́kọ́ mọ́.
+
+Yíyọ ibi-iṣẹ́-ẹ̀ka kúrò jẹ́ ìgbésẹ̀ ọ̀tọ̀ tí a ṣọ́. Parí àwọn àkókò tí a tò lẹ́sẹẹsẹ àti àwọn tèmínà tí a so mọ́ ọn kí o tó yọ ọ́ kúrò, pẹ̀lú àwọn àkókò tí kò ṣiṣẹ́. Ṣàyẹ̀wò àbájáde Git tí a fi pamọ́ àti ipò ìmúbọ̀sípò; pípa àkọsílẹ̀ iṣẹ́ rẹ́ kọ kì í ṣe àrọ́pò fún pípa iṣẹ́ tí kò tíì wọ inú ìfipamọ́-kóòdù mọ́ láìléwu.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Àdéhùn olùṣàtúnṣe tí ó ní irúfẹ́](../../../shared/editor.ts) · [Àwọn ìlànà Git](../../WORKFLOWS.md).
+
+<a id="api"></a>
+
+## Àwọn ìsopọ̀ API
+
+Àwọn Ìsopọ̀ ń fi ojú-ìsopọ̀ tí ó bá OpenAI mu tí a yan kedere kún un. Tẹ orúkọ, URL ìpìlẹ̀, àwòṣe àti kọ́kọ́rọ́ kan tí ó bá pọndandan. Ọ̀pọ̀lọpọ̀ ẹ̀rọ-ìpèsè nílò URL ìpìlẹ̀ tí ó parí sí /v1; wo àwọn àkọsílẹ̀ ojú-ìsopọ̀ rẹ.
+
+HTTPS jẹ́ dandan àyàfi fún HTTP aláyípadà-sínú. Lo ojú-ìsopọ̀ lásán láìsí àwọn ẹ̀rí ìdánimọ̀ tí a fi sínú URL. Àwọn kọ́kọ́rọ́ ń lo àkóòdù ìpamọ́ OS tí a tì lẹ́yìn a kì í sì í dá wọn padà sí UI. Yíyí ojú-ìsopọ̀ padà nílò títún kọ́kọ́rọ́ rẹ̀ tẹ̀. Fífò pápá kọ́kọ́rọ́ dákẹ́ ń pa kọ́kọ́rọ́ tí a fi pamọ́ mọ́; Yọ kọ́kọ́rọ́ tí a fi pamọ́ kúrò ń pa á rẹ́ kedere.
+
+Àwọn ìpè API kì í lo ìforúkọsílẹ̀ CLI. Àwọn irinṣẹ́ àti àwọn àwòṣe yàtọ̀ sí àwọn àkókò abínibí, bẹ́ẹ̀ sì ni àwárí àwòṣe tí ó yọrí sí rere kò fìdí àyẹ̀wò-ìmọ̀ múlẹ̀. Ìlò àmì-ìdánimọ̀ ń hàn kìkì nígbà tí olùpèsè bá dá a padà ní ti gidi.
+
+Tọ́jú àwọn ẹ̀rí ìdánimọ̀ sí inú Àwọn Ìsopọ̀ dípò ọ̀rọ̀ iṣẹ́ tàbí àwọn ìtọ́ni ètò-ìtòtẹ́lẹ̀. Àwọn olùtúnyẹ̀wò kíkà-nìkan ń gba àwọn irinṣẹ́ fáìlì API tí a gbà láyè nìkan; ayàwòrán ìròyìn kò ní irinṣẹ́ kankan. A máa ń kọ àwọn ìpè irinṣẹ́ tí a kò tì lẹ́yìn dípò kí a ṣe wọ́n ní kọ̀rọ̀. Àwọn ẹ̀rọ-ìpèsè yàtọ̀ síra nínú àwọn pàrámítà ìrònú, ìtìlẹ́yìn irinṣẹ́ àti àtòjọ àwòṣe; fi àṣìṣe wé àdéhùn ojú-ìsopọ̀ ti ara rẹ.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Àwọn ìsopọ̀ API](../../API_CONNECTIONS.md).
+
+<a id="settings"></a>
+
+## Ètò, àwọn èdè àti àtúnbẹ̀rẹ̀ aláìléwu
+
+Àwọn ètò gbogbogbò ń yan ibi-iṣẹ́, èdè ojú-ìbáṣepọ̀ àti àwọn àyànfẹ́. Àwọn Ìsopọ̀ ń ṣàkóso àwọn ojú-ìsopọ̀ API. Àwọn ètò-ìtòtẹ́lẹ̀ àti àwọn ẹgbẹ́ Àtúnyẹ̀wò ń pa àwọn ìṣètò ojúṣe mọ́. Ìṣàkóso láti ọ̀nà jíjìn ń ṣàkóso àwọn ẹ̀rí ìdánimọ̀ agbègbè, ìwọ̀n ẹ̀rọ-ìpèsè àti àwọn àyè-ìwọlé olùní; Àwọn Ìsọdọ̀tun ń ṣàkóso orísun/ìkànnì ìtúsílẹ̀. Ẹ̀ka Nípa ń fi ẹ̀yà àgbékalẹ̀ gangan tí ń ṣiṣẹ́ hàn.
+
+Èdè ojú-ọ̀nà yàtọ̀ sí èdè ìbéèrè àti ipò àtúnyẹ̀wò àkọsílẹ̀ ìtọ́ni. Àwọn orúkọ ọjà, àwọn ID àṣẹ, àwọn ìfìsẹ́yìn fáìlì, àwọn ID àwòṣe olùpèsè àti àwọn orúkọ tí olùmúlò dá wà gẹ́gẹ́ bí àwọn olùdánimọ̀. Ìrànlọ́wọ́ ń tẹ̀lé èdè ojú-ọ̀nà tí a yàn nígbà tí ìtumọ̀ lọ́wọ́lọ́wọ́ bá wà; àwọn ìtumọ̀ ẹ̀rọ ni a sàmì sí bẹ́ẹ̀ sì ni Gẹ̀ẹ́sì jẹ́ ìtọ́kasí gidi tí ó dúró ṣinṣin.
+
+Fipamọ́ (Save) ń mú ìṣètò tí a fihàn ṣiṣẹ́. Ìtúnṣe àkójọ-dátà tàbí ìtúnṣe ilé-iṣẹ́ lè yọ dátà àlàyé àgbékalẹ̀ ètò kúrò; tọ́jú àwọn fáìlì àti àkójọ àtìlẹ́yìn tí a dánwò kí o tó mọ̀ọ́mọ̀ lo ìtúnṣe. Àwọn iṣẹ́ wọ̀nyí jẹ́ ìgbésẹ̀ olówó agbègbè. Má ṣe lò wọ́n gẹ́gẹ́ bí ọ̀nà àbùjá láti ṣèwádìí ìṣiṣẹ́ tí ó kùnà tàbí àkọsílẹ̀ tí ó bàjẹ́.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Àwọn ìtọ́ni ìtumọ̀ èdè agbègbè](../../LOCALIZATION.md) · [Ìmúbọ̀sípo dátà](../../DATA_RECOVERY.md).
+
+<a id="help-assistant"></a>
+
+## Béèrè lọ́wọ́ olùrànlọ́wọ́ Ìrànlọ́wọ́
+
+Ṣí Ìrànlọ́wọ́ (Help), yan ètò tẹ́lẹ̀ tí a fipamọ́ tí ó sì so pọ̀ nínú pánẹ́ẹ̀lì olùrànlọ́wọ́ rẹ̀ kí o sì béèrè nípa ZIAForge. Àwọn ìdáhùn ń lo ìtọ́sọ́nà Gẹ̀ẹ́sì gidi lọ́wọ́lọ́wọ́ àti èdè ojú-ọ̀nà tí o yàn. Àwọn bọ́tìnì ìtọ́kasí-abala ń ṣí àwọn kókó ìtọ́sọ́nà tí ó bá a mu, kí o lè fi àlàyé wé ìtọ́kasí náà.
+
+Olùrànlọ́wọ́ yìí ń tọ́jú ìfọ̀rọ̀wérọ̀ àdáni ọ̀tọ̀ tí ó tó 100 àwọn àkọsílẹ̀ tí a fipamọ́ àti 3 MiB. Tẹ ìbéèrè tí kò ju 12,000 àwọn lẹ́tà lọ; Firanṣẹ́ (Send) ń béèrè rẹ̀, Dúró (Stop) ń fagilé ìdáhùn tí ń lọ lọ́wọ́ nígbà tí ó ń fi ìbéèrè rẹ sílẹ̀ fún lílò, bẹ́ẹ̀ sì ni Pa rẹ́ (Clear) ń yọ ìfọ̀rọ̀wérọ̀ Ìrànlọ́wọ́ yìí kúrò. Ìkọ̀wé àkọ́kọ́ rẹ tí a kò tíì fi ránṣẹ́ àti àṣàyàn ètò tẹ́lẹ̀ yóò wà síbẹ̀ tí o bá ti tàbí tún Ìrànlọ́wọ́ ṣí nínú ìgbìmọ̀ àgbékalẹ̀ ètò kan náà, ṣùgbọ́n a kì í fi ìkọ̀wé àkọ́kọ́ pamọ́ sórí àwo-ìtọ́jú. Olùrànlọ́wọ́ náà kì í fi àṣẹ àgbékalẹ̀ ètò ránṣẹ́, yí ìṣiṣẹ́ padà tàbí gba ẹnubodè kan. Ìmọ̀ràn kì í ṣe ìfìdírinlẹ̀ tààrà ti iṣẹ́ kan, àkántì tàbí ìsopọ̀ òde.
+
+Àwọn ìgbìmọ̀ Ìrànlọ́wọ́ Claude Code àti API ń fipá mú ìlànà àìlo-irinṣẹ́ tí a tì lẹ́yìn ṣiṣẹ́. Àwọn ìgbìmọ̀ Ìrànlọ́wọ́ abínibí Codex àti Antigravity nílò ìyọ̀nda kọ̀mpútà abínibí ti olówó ibi-ìtọ́jú tí ó wà tẹ́lẹ̀. Bí a bá pa á tí, àgbékalẹ̀ ètò náà yóò ṣàlàyé ohun tí a nílò dípò yíyàn olùpèsè mìíràn. Olówó nìkan ló lè mú un ṣiṣẹ́ nínú àwọn ètò ìdarí agbègbè; olùrànlọ́wọ́ náà kò lè mú un ṣiṣẹ́ fúnra rẹ̀.
+
+Ìrànlọ́wọ́ Codex ń lo àyè ààbò kíkà-nìkan (read-only sandbox) ó sì ń kọ àwọn ìbéèrè ìfọwọ́sí-irinṣẹ́. Antigravity ń lo ipò ètò (plan mode) àti àmì àyè ààbò abínibí rẹ̀. Àwọn ipò abínibí wọ̀nyí kì í ṣe ìdánilójú gbogbogbò ti ìdènà ètò ìṣiṣẹ́ (operating system). Kóòdù àkójọpọ̀ orísun-ìtọ́sọ́nà (source-guide hash) ń ṣe ìdámọ̀ ìtọ́kasí tí a lò fún ìdáhùn náà; àlàyé tí a ṣe jáde ṣì lè ní àṣìṣe, nítorí náà ṣàyẹ̀wò àwọn abala tí ó ní ìsopọ̀ mọ́ ọn kí o tó gbé ìgbésẹ̀. A ń sàmì sí àwọn ìdáhùn àtijọ́ nígbà tí ẹ̀yà orísun-ìtọ́sọ́nà wọn bá yàtọ̀ sí ìtọ́sọ́nà lọ́wọ́lọ́wọ́.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Ìtọ́sọ́nà gidi àti ìtọ́jú ìtumọ̀ èdè](../../HELP_MAINTENANCE.md) · [Olùrànlọ́wọ́ àgbékalẹ̀ ètò àti àwọn ìyọ̀nda](../../AGENT_CONTROL.md).
+
+<a id="assistant-control"></a>
+
+## Olùrànlọ́wọ́ àti Telegram
+
+Olùrànlọ́wọ́ náà ń lo ètò àṣàkóso tẹ́lẹ̀ tí a yàn àti API ìdarí àgbékalẹ̀ ètò kan náà. Ìyọ̀nda láti ṣàyẹ̀wò ipò àti ìyọ̀nda láti ṣe àwọn iṣẹ́-ṣíṣe jẹ́ ọ̀tọ̀ọ̀tọ̀. Ṣàyẹ̀wò àwọn àṣẹ àti àwọn àbájáde: ọ̀rọ̀ tí olùrànlọ́wọ́ kọ kì í ṣe ẹ̀rí pé iṣẹ́ kan parí.
+
+Telegram jẹ́ mímúṣiṣẹ́ kìkì nípasẹ̀ olówó ibi-ìtọ́jú náà, pẹ̀lú àmì-ìdánimọ̀ bot tí ó wà tẹ́lẹ̀ àti nọ́mbà ID olówó. Ìdarí wà fún ìfọ̀rọ̀wérọ̀ àdáni ti olówó yẹn nìkan. Bot tí a kò ṣètò tàbí tí kò ṣiṣẹ́ kò gbọdọ̀ gba àwọn ìfiránṣẹ́ àgbékalẹ̀ ètò rárá.
+
+Má ṣe lẹ àmì-ìdánimọ̀ bot sínú ìfọ̀rọ̀wérọ̀ lásán. Ṣíṣe ìṣètò ìsopọ̀ náà kò fi ẹ̀rí ìsopọ̀ Telegram hàn, bẹ́ẹ̀ ni kò sì dá bot sílẹ̀ fúnra rẹ̀. Àwọn àwòrán ìbòjú àti àwọn ìdáhùn lè ní àwọn dátà àdáni ti àyè-iṣẹ́ nínú.
+
+Yan ètò olùrànlọ́wọ́ tẹ́lẹ̀ kí o sì fún ní ìyọ̀nda iṣẹ́-ṣíṣe àgbékalẹ̀ ètò lọ́tọ̀ kúrò nínú ìyọ̀nda àyẹ̀wò. Ìmúṣẹ olùrànlọ́wọ́ Codex àti Antigravity nílò ìyọ̀nda kọ̀mpútà abínibí ti olówó; a kì í fi wọ́n rọ́pò ìgbìmọ̀ API tàbí Claude tí kò lo irinṣẹ́ láìsọ. Àwọn àwòrán ìbòjú lè hàn nínú ìfọ̀rọ̀wérọ̀ olùrànlọ́wọ́, ṣùgbọ́n ìtẹ̀wọlé àwòṣe lọ́wọ́lọ́wọ́ kò pẹ̀lú ìtúpalẹ̀ àwòrán. Má ṣe rò pé olùrànlọ́wọ́ ṣàyẹ̀wò àwòrán pẹ̀lú ojú nítorí pé ó fi hàn nìkan.
+
+Olùrànlọ́wọ́ náà lè ṣàyẹ̀wò àwọn àkópọ̀, àwọn iṣẹ́, àwọn ìfọ̀rọ̀wérọ̀, ipò ìṣiṣẹ́, àkóónú ìgbésẹ̀ àti àwọn fèrèsé àgbékalẹ̀ ètò nípasẹ̀ àwọn irinṣẹ́ tí a tẹ̀wọlé ní pàtó. Ó lè yí àwọn ètò gbogbogbò tí a gba láàyè padà kí ó sì bẹ̀rẹ̀ àwọn iṣẹ́ àgbékalẹ̀ ètò tí a fún láṣẹ. Kò lè fúnni ní àwọn ẹ̀tọ́ abínibí, fi àwọn ẹ̀rí ìdánimọ̀ tí a pamọ́ hàn, yí ẹ̀bùn àyè-iṣẹ́ gbongbo padà láti ọ̀nà jíjìn tàbí fọwọ́ sí ẹnubodè Forge kìkì nítorí pé ó rọrùn.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Àdéhùn ìdarí àgbékalẹ̀ ètò](../../AGENT_CONTROL.md).
+
+<a id="telegram"></a>
+
+## Ṣiṣẹ́ bot Telegram àdáni rẹ
+
+Dá tàbí gba bot tirẹ̀, bẹ̀rẹ̀ ìfọ̀rọ̀wérọ̀ àdáni rẹ̀, kí o sì tẹ àmì-ìdánimọ̀ rẹ̀ àti nọ́mbà Telegram olùmúlò ID rẹ sínú àwọn ètò ìdarí agbègbè. Mú ìṣètò náà ṣiṣẹ́ kìkì nígbà tí o bá fẹ́ kí àgbékalẹ̀ ètò náà sopọ̀. ID olówó jẹ́ olùdánimọ̀ olùmúlò, kì í ṣe orúkọ olùmúlò tàbí ID bot. Àwọn ìfiránṣẹ́ láti ọ̀dọ̀ olùmúlò yẹn nínú ìfọ̀rọ̀wérọ̀ àdáni kan náà nìkan ni a ń tẹ́wọ́gbà.
+
+Lo /start, /menu tàbí /status fún àkópọ̀ ẹ̀yà tí ń ṣiṣẹ́, iye iṣẹ́ àkànṣe/iṣẹ́ àti àwọn ipò iṣẹ́. Àwọn bọ́tìnì ń ṣí Àwọn Iṣẹ́ Àkànṣe, Àwọn Iṣẹ́, Àwòrán Ìbòjú, Ìrànlọ́wọ́ àti Èdè. Àwọn àkójọ ń fi ohun mẹ́jọ hàn fún ojú-ewé kọ̀ọ̀kan, pẹ̀lú ìrìn-àjò Padà, Tún sọ di ọ̀tun, Ilé àti Ti tẹ́lẹ̀/Tókàn. Àwọn bọ́tìnì iṣẹ́ àkànṣe ń ṣe àlẹ̀mọ́ àkójọ iṣẹ́. Káàdì iṣẹ́ kan ń fi ìtẹ̀síwájú ìṣiṣẹ́ tí a fipamọ́, àwòṣe/ètò tẹ́lẹ̀ àti àwọn ìbéèrè tí ń dúró hàn nígbà tí wọ́n bá wà.
+
+Ṣí Àwọn Ìfọ̀rọ̀wérọ̀ (Chats) ti iṣẹ́ kan láti wo àwọn ìfọ̀rọ̀wérọ̀ tí ó ṣí/tuntun àti àwọn ìfọ̀rọ̀wérọ̀ ìpele ìṣiṣẹ́ tẹ́lẹ̀. Àkọ́kọ́wò kọ̀ọ̀kan ń fi àwọn ìfiránṣẹ́ olùmúlò/olùrànlọ́wọ́ tí ó kẹ́yìn tí ó tó mẹ́fà hàn, tí a ké kúrù ní kedere sí 200 lẹ́tà fún kọ̀ọ̀kan. A kò fi ìrònú àdáni hàn. Kíkà ìtàn kì í bẹ̀rẹ̀ olùpèsè kan. Àwọn àkọ́kọ́wò jẹ́ kíkà-nìkan: àkọsílẹ̀ lásán àti /ask TEXT ṣì ń kàn sí olùrànlọ́wọ́ àgbékalẹ̀ ètò, kì í ṣe sí ìfọ̀rọ̀wérọ̀ iṣẹ́ tí o ń wò láìsọ.
+
+Ṣiṣẹ́ / Tẹ̀síwájú (Run / Continue) ń tún ka ìṣiṣẹ́ Code tàbí Work lọ́wọ́lọ́wọ́ ó sì ń bẹ̀rẹ̀ ìṣiṣẹ́ tí a fipamọ́ tí ó yẹ. Dánudúró (Pause) ń béèrè fún dídánudúró rẹ̀. Kò sí èyí tí ń gba àwọn ohun tí a nílò, àkọsílẹ̀ ìmọ̀-ẹ̀rọ, ètò kan, àwọn àbájáde àtúnyẹ̀wò tàbí àwọn ìbéèrè; ìpinnu tí ń dúró ń dí Ṣiṣẹ́ lọ́wọ́. Ṣe àwọn ìpinnu nínú àgbékalẹ̀ ètò náà, tàbí lo àṣẹ tí a tẹ̀wọlé tí a fún láṣẹ ní pàtó pẹ̀lú ẹnubodè àti àtúnyẹ̀wò rẹ̀ gangan lọ́wọ́lọ́wọ́.
+
+Lo Èdè (Language) tàbí /language láti yan èyíkéyìí nínú àwọn èdè ojú-ọ̀nà 56 nípasẹ̀ orúkọ àbínibí rẹ̀. Èyí ń fi ààyò pamọ́ fún bot àti olówó yìí nìkan. Lo èdè àgbékalẹ̀ ètò (Use app language) ń pa ààyò yẹn rẹ́. Kò yí èdè àgbékalẹ̀ ètò tàbí àwọn ìyọ̀nda ìwọlé padà; àwọn ìfiránṣẹ́ tí ó wà tẹ́lẹ̀ kò ní di fífiránṣẹ́ padà fúnra wọn.
+
+Ìrìn-àjò máa ń sọ ìfiránṣẹ́ àkójọ àṣẹ kan náà tí a tẹ̀jáde di ọ̀tun. Àwọn bọ́tìnì ní àwọn ìdánimọ̀ tí kò hàn kedere tí ń parí lẹ́yìn ìṣẹ́jú 15 tí a sì lè lò lẹ́ẹ̀kan ṣoṣo; yíyí káàdì kan padà ń sọ àwọn bọ́tìnì àtijọ́ rẹ̀ di aláìlọ́wọ́. Àwọn bọ́tìnì tí ó ti kọjá àkókò, tí a ti lò, tí ìfiránṣẹ́ wọn kò bá a mu àti ti ìgbésẹ̀ tẹ́lẹ̀ kò lè ṣe ìgbésẹ̀ kankan. Ìfiránṣẹ́ tí kò ṣeé ṣàtúnṣe rárá ni a lè fi káàdì tuntun rọ́pò; a kì í tún ìṣòro nẹ́tíwọ́ọ̀kì tí a kò mọ̀ gbìyànjú gẹ́gẹ́ bí ìfiránṣẹ́ tuntun.
+
+Nígbà ìmúṣiṣẹ́, olùgbà-ìwífún (poller) ń sọ àwọn iṣẹ́ àtijọ́ nù ó sì ń kọ ìtẹ́wọ́gbà ìsọdọtun sílẹ̀ kí ó tó pín in kí àwọn àṣẹ tí a dí lọ́wọ́ má baà di títúnṣe fúnra wọn nígbà tí a bá tún bẹ̀rẹ̀. Èyí ń dènà àtúnṣe; kò ṣe ìdánilójú ìparí. Ṣàyẹ̀wò ipò/àkóónú kí o tó mọ̀ọ́mọ̀ gbé iṣẹ́ tuntun kalẹ̀ lẹ́yìn àṣìṣe kan. Kò sí àwọn ìfitónilétí ipò iṣẹ́ aládàáṣiṣẹ́.
+
+Àwọn àṣẹ pàtó ṣì wà fún lílò: /projects, /tasks, /task TASK_ID, /run TASK_ID, /pause TASK_ID, /screenshot àti /ask TEXT. /new {JSON} ń dá iṣẹ́ sílẹ̀ nípasẹ̀ createTask tí a tẹ̀wọlé; /command {JSON} ń fi àṣẹ àkójọ pàtó ránṣẹ́. Ka àkójọ àṣẹ tí ń ṣiṣẹ́ lọ́wọ́ fún àwọn àbùdá àlàyé. Ìfọwọ́sí ẹ̀yìn àti àwọn ẹ̀bùn àpò-fáìlì kan náà ló ń ṣiṣẹ́ gẹ́gẹ́ bí ó ti wà nínú àgbékalẹ̀ ètò.
+
+Àgbékalẹ̀ ètò náà kì í fi àwọn iye àmì-ìdánimọ̀ bot tí a fipamọ́ ránṣẹ́ sí olùrànlọ́wọ́ náà láé. Àwọn àwòrán ìbòjú, àwọn àkópọ̀ àti àkọsílẹ̀ ìfọ̀rọ̀wérọ̀ lè ní àwọn ìsọfúnni iṣẹ́ àkànṣe àdáni nínú síbẹ̀. Dá ìṣọ̀kan náà dúró láti ibi-ìtọ́jú rẹ bí a kò bá gbẹ́kẹ̀lé àkántì bot tàbí ti olówó mọ́. Yí àmì-ìdánimọ̀ tí ó jo padà pẹ̀lú olùpèsè bot, lẹ́yìn náà sọ ìṣètò àkọsílẹ̀ tí a kódàwọle di ọ̀tun.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Bot àdáni àti àwọn àṣẹ](../../AGENT_CONTROL.md).
+
+<a id="native-permissions"></a>
+
+## Ìyọ̀nda kọ̀mpútà abínibí ti olówó nìkan
+
+Ìwọlé kọ̀mpútà abínibí ń bẹ̀rẹ̀ ní pípa-tì. Olówó nìkan ló lè mú un ṣiṣẹ́ nínú Ètò agbègbè → Ìdarí láti ọ̀nà jíjìn. Olùrànlọ́wọ́ àti àwọn àṣẹ HTTP/MCP/Telegram kò lè mú àmì yìí ṣiṣẹ́ fún ara wọn. Bí a bá kọ iṣẹ́ kan, olùrànlọ́wọ́ gbọdọ̀ ṣàpèjúwe ètò náà kí ó sì jẹ́ kí olówó pinnu.
+
+Nígbà tí a bá mú un ṣiṣẹ́ ní pàtó, computer.run ń gba fáìlì iṣẹ́, àkójọ àwọn àlàyé àti àpò-fáìlì iṣẹ́ pípé tí ó yàn láàyè. Kò lo ìyípadà ètò ìbánisọ̀rọ̀ (shell interpolation), ó ní ààlà ìṣẹ́jú-àáyá 30 ó sì ń díwọ̀n àbájáde sí 1 MiB. Bí a bá pèsè àpò-fáìlì tí kò sí tàbí tí kò tọ́, a ń kọ̀ ọ́; fífò cwd dání ń lo àpò-fáìlì àwọn ètò ti àgbékalẹ̀ ètò fúnra rẹ̀, kì í ṣe HOME. Jáde (Quit) ń fagilé àwọn àṣẹ tí ń ṣiṣẹ́ tí ó jẹ́ ti ara rẹ̀ ó sì ń dúró de ìfọ̀mọ́ ìgbésẹ̀ wọn.
+
+Àyè kíkà/iṣẹ́-ṣíṣe àgbékalẹ̀ ètò àti ìwọlé abínibí jẹ́ àwọn ìpinnu ọ̀tọ̀ọ̀tọ̀. Igi-iṣẹ́ (worktree) kì í dènà ìwọlé ètò fáìlì ti olùpèsè tí kò ní ààlà. Fagilé ìwọlé abínibí lẹ́yìn iṣẹ́ tí kò bá nílò rẹ̀ mọ́, kí o sì ṣàyẹ̀wò àwọn ẹ̀rí àṣẹ dípò gbígbé ọ̀rọ̀ olùrànlọ́wọ́ kà bí ẹ̀rí.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Àdéhùn ìdarí ti olówó nìkan](../../../shared/control.ts).
+
+<a id="remote"></a>
+
+## Aṣàwákiri àti àwọn ẹ̀rọ jíjìnnà
+
+Olówó agbègbè ń mú ẹ̀rọ-ìpèsè ṣiṣẹ́ ó sì ń yan àdírẹ́sì rẹ̀, ibùdó (port) àti àyè rẹ̀: kíkà fún àyẹ̀wò tàbí iṣẹ́-ṣíṣe fún àwọn ìgbésẹ̀. Àdírẹ́sì àkọ́kọ́ 127.0.0.1 wà lórí kọ̀mpútà yìí nìkan. 0.0.0.0 ń gbọ́ lórí àwọn ojú-ọ̀nà nẹ́tíwọ́ọ̀kì; tún àyè wọlé nẹ́tíwọ́ọ̀kì yẹ̀wò kí o tó mú un ṣiṣẹ́.
+
+Aṣàwákiri kan ń ṣí ojú-ọ̀nà kan náà lẹ́yìn àmì-ìdánimọ̀ wíwọlé. Má ṣe fi àwọn àmì-ìdánimọ̀ kún àwọn ìsopọ̀ tàbí àwọn àwòrán ìbòjú tí gbogbo ènìyàn ń rí. HTTP nìkan kì í kódàwọle ìrìn-àjò dátà; lo ojú-ọ̀nà tí a dáàbò bò lórí nẹ́tíwọ́ọ̀kì tí a kò gbẹ́kẹ̀lé.
+
+Olówó ń ṣètò àwọn ẹ̀rọ mìíràn nípasẹ̀ URL àti àmì-ìdánimọ̀. Ibi-ìṣiṣẹ́ ẹ̀yìn ń ṣojú fún àwọn ìbéèrè; èyí kì í da àwọn iṣẹ́ àkànṣe wọn kọ sórí ẹ̀rọ agbègbè. Ṣàyẹ̀wò ẹ̀rọ tí a yàn kí o tó ṣe ìgbésẹ̀ kọ̀ọ̀kan.
+
+Àwọn àṣẹ àti àwọn ìṣẹ̀lẹ̀ tí a tẹ̀wọlé ní pàtó ń gbé ìdarí àgbékalẹ̀ ètò dání. Àyè kíkà kì í fúnni ní àṣẹ láti yí iṣẹ́ padà. Ìdarí kọ̀mpútà abínibí jẹ́ àṣàyàn ọ̀tọ̀ ti olówó agbègbè ó sì ń bẹ̀rẹ̀ ní pípa-tì.
+
+Àgbékalẹ̀ ètò gbọdọ̀ wà ní ṣíṣiṣẹ́ fún aṣàwákiri, Telegram àti ìdarí aṣojú òde. Ẹ̀rọ kọ̀ọ̀kan ní àkọsílẹ̀ àdáni tiwọn, ipò iṣẹ́, àmì-ìdánimọ̀ àti ibùdó ẹ̀rọ-ìpèsè. Má ṣe tún àkọsílẹ̀ kan lò lẹ́ẹ̀kan náà láàárín àwọn ẹ̀rọ adúró-dáradára. Àwọn ìṣẹ̀lẹ̀ aṣàwákiri àti àwọn ìdáhùn àṣẹ wà fún ẹ̀rọ tí a yàn nìkan; yíyí UI padà kì í kó àwọn fáìlì lọ sí ibòmíràn tàbí kọ ìwọlé abínibí kọ.
+
+Àwọn ìtọ́ni tó jẹmọ́: [HTTP àti ìdarí ẹ̀rọ](../../AGENT_CONTROL.md).
+
+<a id="external-agents"></a>
+
+## OpenClaw, Hermes àti àwọn aṣojú òde mìíràn
+
+Lo API ìdarí àgbékalẹ̀ ètò tí a fọwọ́ sí tàbí afárá stdio MCP tí ó wá pẹ̀lú rẹ̀. Mú ẹ̀rọ-ìpèsè ṣiṣẹ́ ní agbègbè rẹ, yan kíkà tàbí iṣẹ́-ṣíṣe kí o sì ṣètò oníbàárà kọ̀ọ̀kan pẹ̀lú URL àti àmì-ìdánimọ̀ ẹ̀rọ yẹn. Node.js 22 tàbí èyí tí ó jẹ́ tuntun ni a nílò láti ṣiṣẹ́ afárá MCP adúró-dáradára; àgbékalẹ̀ ètò Electron kò fi oníbàárà aṣojú rẹ sípò. URL aṣàwákiri kì í ṣe ojú-ọ̀nà MCP HTTP tí ń ṣàn: pèsè rẹ̀ gẹ́gẹ́ bí ZIAFORGE_URL sí afárá stdio.
+
+Afárá náà ń fi ziaforge_status, ziaforge_commands, ziaforge_command àti ziaforge_screenshot hàn. Bẹ̀rẹ̀ pẹ̀lú ipò àti àkójọ àṣẹ tí ń ṣiṣẹ́ lọ́wọ́, lẹ́yìn náà ka system.context fún iṣẹ́ tí a yàn. Àwọn àṣẹ tí a tẹ̀wọlé ní pàtó ń tẹ̀lé àtúnyẹ̀wò kan náà, ẹnubodè, àpò-fáìlì iṣẹ́ àti àwọn àyẹ̀wò ìfọ̀mọ́ gẹ́gẹ́ bí UI agbègbè náà.
+
+Àkójọ àṣẹ tí ń ṣiṣẹ́ pẹ̀lú documentation.guide, ìrànlọ́wọ́ Gẹ̀ẹ́sì gidi, pẹ̀lú ipa-ọ̀nà orísun rẹ̀ àti sourceSha256. Olùtòjọ àgbékalẹ̀ ètò inú ń gba ìtọ́kasí kan náà nípasẹ̀ àwọn irinṣẹ́ rẹ̀. Èyí ń fún àwọn aṣojú ní gbogbo àkóónú ọjà láìgbẹ́kẹ̀lé àwọn àkọsílẹ̀ àtijọ́; àwọn àkọsílẹ̀ ìtọ́ni kì í fúnni ní àyè láé tàbí rọ́pò ìpinnu ènìyàn lọ́wọ́lọ́wọ́.
+
+Àwọn aṣojú gbọdọ̀ jíròrò àwọn ohun tí a nílò, àwọn ìpinnu ìmọ̀-ẹ̀rọ àti ìfètòsílẹ̀ láti inú èrò ènìyàn kúkúrú. Wọ́n gbọdọ̀ tọ́jú àwọn ẹnubodè ènìyàn tí ó ṣe kedere, àwọn àwòṣe tí a yàn, ìlànà pẹ̀lú ọwọ́/Auto àti àtúnyẹ̀wò tí a nílò. Wọn kò gbọdọ̀ hùmọ̀ ìfọwọ́sí, tún àwọn àṣẹ tí kò dájú ṣe lábẹ́ ID tuntun, tàbí tẹ àwọn ìyípadà Git jáde láìsí èròńgbà olówó.
+
+Ṣètò ọ̀pọ̀lọpọ̀ àwọn ẹ̀rọ-ìpèsè MCP tí a sọ lórúkọ fún àwọn ìfìsípò púpọ̀. Yíyí ẹ̀rọ padà jẹ́ ìpinnu ìdarí ipa-ọ̀nà, kì í ṣe ìṣiṣẹ́pọ̀. Àwọn àpẹẹrẹ ìṣètò OpenClaw àti Hermes wà nínú AGENT_CONTROL.md; ìṣètò àti ìbáradọ́gba pàtó fún oníbàárà gbọdọ̀ jẹ́ ṣíṣàyẹ̀wò fún ẹ̀yà oníbàárà tí a fi sípò.
+
+Àkójọ ìpamọ́ requestId lóde ń yọ àtúnṣe kúrò kìkì fún àkójọ àwọn ìbéèrè tí ó ní opin nígbà tí àgbékalẹ̀ ètò ń ṣiṣẹ́. Àwọn iṣẹ́ tí ń pẹ́ ń lo àwọn ìdánimọ̀ tiwọn: createRequestId fún ìdásílẹ̀ iṣẹ́, commandId fún àwọn ìpinnu ìṣiṣẹ́, clientMessageId fún àwọn ìfiránṣẹ́ àti operationId fún àwọn ìyípadà Git. Tọ́jú ìdánimọ̀ àti àkóónú ìpilẹ̀ṣẹ̀ lẹ́yìn ìmọ̀rírí tí kò dájú; ka ipò tí a fipamọ́ kí o tó mọ̀ọ́mọ̀ gbé iṣẹ́ tuntun kalẹ̀.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Àwọn ìtọ́ni oníbàárà MCP](../../AGENT_CONTROL.md).
+
+<a id="local-cli"></a>
+
+## CLI agbègbè àti àwọn ààlà ìmúdàṣe
+
+Olùpínkiri ziaf ń darí àgbékalẹ̀ ètò kan náà tí ń ṣiṣẹ́ àti ìṣiṣẹ́ tí a fipamọ́. Láti inú orísun, lo npm run ziaf -- list, npm run ziaf -- status --task TASK_ID --json, npm run ziaf -- start --task TASK_ID, tàbí npm run ziaf -- pause --task TASK_ID. Ìmọ̀rírí Bẹ̀rẹ̀ (Start) tí ó kẹ́sẹjárí kò túmọ̀ sí pé iṣẹ́ náà ti parí.
+
+--until-success ń mọ̀ọ́mọ̀ mú Auto ṣiṣẹ́ fún ìṣiṣẹ́ tí a fipamọ́, ṣùgbọ́n àwọn ìbéèrè, àtúnyẹ̀wò, àwọn ẹnubodè ìtẹ́wọ́gbà, àwọn ààlà àti àwọn ibi-àyẹ̀wò ṣì wà ní lílò. Ctrl+C ń jáde kúrò nínú olùpínkiri tí ń ṣàkíyèsí; kò dá ìṣiṣẹ́ àgbékalẹ̀ ètò dúró láìsọ. Wo CLI.md fún àwọn kóòdù ìjáde, ojú-ọ̀nà agbègbè àti ìtọ́jú àkọsílẹ̀.
+
+Ojú-ọ̀nà Àwọn Ìmúdàṣe (Automations) ń tọ́jú àwọn ìtumọ̀ ìfihàn àti àwọn kíkà ìsáré agbègbè lọ́wọ́lọ́wọ́. Kì í ṣe olùṣètò àkókò tí a fọwọ́ sí tí ń tún wáyé, kò sì fi ẹ̀rí hàn pé ìyípo àwòṣe abẹ́lẹ̀ ṣiṣẹ́. Fún ìmúṣẹ gidi, lo àwọn ìdarí ìṣiṣẹ́ tí a fipamọ́, ziaf tàbí API tí a fọwọ́ sí kí o sì ṣàyẹ̀wò àwọn ẹ̀rí wọn. Má ṣe gbé pánẹ́ẹ̀lì àṣefihàn kà sí ìṣètò àkókò láìsí ènìyàn.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Àwọn àṣẹ olùpínkiri (dispatcher)](../../CLI.md).
+
+<a id="updates"></a>
+
+## Ẹ̀yà àti àwọn ìsọdọtun
+
+Nípa (About) ń fi ẹ̀yà gangan tí ń ṣiṣẹ́ hàn. Àwọn ìsọdọtun fún gbogbo ènìyàn nílò ibi-ìkójọ ìtújáde GitHub tí a gbẹ́kẹ̀lé àti ojú-ọ̀nà iduroṣinṣin (stable) tàbí àkọ́kọ́wò (preview). Ṣíṣàyẹ̀wò, gbígba sílẹ̀ àti fífisípò ní àwọn ipò ọ̀tọ̀ọ̀tọ̀; àṣìṣe kò túmọ̀ sí pé ìsọdọtun ti fi sípò.
+
+Fífisípò aládàáṣiṣẹ́ wà fún àwọn ìtújáde macOS tí a fọwọ́ sí. Àwọn ìkọ́kọ́ ìdàgbàsókè tí a kò fọwọ́ sí kì í fi sípò fúnra wọn nípasẹ̀ ọ̀nà yìí. Fún rírọ́pò pẹ̀lú ọwọ́, pa àgbékalẹ̀ ètò lọ́wọ́lọ́wọ́ pátápátá kí o sì lo ohun-èlò tí a fìdí rẹ̀ múlẹ̀.
+
+Àyẹ̀wò aládàáṣiṣẹ́ ń ṣiṣẹ́ lẹ́sẹ̀kẹsẹ̀ nígbà tí a bá mú un ṣiṣẹ́, lẹ́yìn náà ní gbogbo wákàtí mẹ́fà.
+
+Iduroṣinṣin (Stable) ń yọ àwọn ìtújáde àkọ́kọ́wò kúrò; àkọ́kọ́wò (preview) ń gba àwọn ìtújáde ìdàgbàsókè pẹ̀lú láàyè. Àyẹ̀wò tí ó kẹ́sẹjárí ń fi ìmọ̀ dátà ìtújáde tí ó wà múlẹ̀ nìkan. Gbígba sílẹ̀ àti fífisípò nílò àpò-iṣẹ́ pẹpẹ náà àti àkójọ ìtújáde tí a ṣètò. Ìpèsè Linux DEB jẹ́ ipa-ọ̀nà olùfisípò ọ̀tọ̀; má ṣe rò pé a ń gbé DEB ga fúnra rẹ̀ nípasẹ̀ ọ̀nà ìsọdọtun macOS.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Ìmúrasílẹ̀ ìtújáde](../../RELEASE_READINESS.md).
+
+<a id="restart"></a>
+
+## Tún bẹ̀rẹ̀ àti ìmúbọ̀sípo
+
+Lórí macOS, lo Jáde / ⌘Q fún pípa gbogbo rẹ̀ pátápátá. Títì fèrèsé lè fi àgbékalẹ̀ ètò sílẹ̀ ní ṣíṣiṣẹ́. Pa ẹ̀yà àtijọ́ pátápátá kí o tó rọ́pò àgbékalẹ̀ ètò náà.
+
+Lẹ́yìn ìbẹ̀rẹ̀, yan iṣẹ́ kan náà. Ìtàn àti àwọn àkọsílẹ̀ àkọ́kọ́ ń padà wá. Tún bẹ̀rẹ̀ (Resume) ń mú àkóónú abínibí/agbègbè bọ̀ sípò ṣùgbọ́n kò fi àkọsílẹ̀ àkọ́kọ́ ránṣẹ́, kò yọ ìdúró lórí ìlà iṣẹ́ kúrò bẹ́ẹ̀ ni kò sì fúnni ní àṣẹ láti tún iṣẹ́ tí a kò mọ̀ ṣe.
+
+Bí Ìmúbọ̀sípo (Recovery) bá yọjú, má ṣe fi ọwọ́ ṣàtúnṣe JSON. Ṣàyẹ̀wò irú àkọsílẹ̀ tí ó ní ìṣòro, tọ́jú àwọn fáìlì ìpilẹ̀ṣẹ̀ kí o sì yan àkójọ àtìlẹ́yìn tí a fọwọ́ sí. Mímú ìlà iṣẹ́ àtijọ́ bọ̀ sípò ń sàmì sí àwọn ohun inú rẹ̀ gẹ́gẹ́ bí èyí tí kò dájú.
+
+Nígbà tí a kò bá mọ̀ bóyá iṣẹ́ dé, ìṣiṣẹ́ tí a ń bójútó lè nílò ìyọ̀nda pàtó fún àkóónú tuntun. Iṣẹ́ àtijọ́ àti àwọn ìgbìyànjú tí ó kùnà yóò wà síbẹ̀; kíkọ̀ tí a lè rí láàyè ní ààbò ju àṣeyọrí àròsọ lọ.
+
+Ṣe àtìlẹ́yìn fún àwọn fáìlì iṣẹ́ àti àkọsílẹ̀ àgbékalẹ̀ ètò pẹ̀lú gbogbo àwọn ẹ̀yà àgbékalẹ̀ ètò tí a tì pa. Àpò-fáìlì tí a kọ kò túmọ̀ sí ìmúbọ̀sípo tí a dánwò. Bí ìmúbọ̀sípo bá ní kí o yan àkójọ àtìlẹ́yìn tí a fọwọ́ sí, tọ́jú àwọn fáìlì gangan tí ó bàjẹ́ pẹ̀lú. Mímú ìṣiṣẹ́ tàbí ìlà iṣẹ́ àtijọ́ bọ̀ sípò kì í fúnni ní àṣẹ láti tún àwọn iṣẹ́ ìròyìn tí kò dájú tàbí Git ṣe.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Àdéhùn ìmúbọ̀sípo](../../DATA_RECOVERY.md).
+
+<a id="troubleshooting"></a>
+
+## Ìwádìí àti ìyanjú ìṣòro
+
+CLI kò sí: ṣàyẹ̀wò ìfìsípò àti ẹ̀yà rẹ̀ nínú ebute-ọ̀rọ̀ (terminal) lásán, lẹ́yìn náà tún ZIAForge bẹ̀rẹ̀. Fáìlì iṣẹ́ wíwà níbẹ̀ kò túmọ̀ sí pé o ti wọlé. Lo ọ̀nà ìwọlé ti olùpèsè fúnra rẹ̀.
+
+Àwòṣe kò sí tàbí ìfọwọ́sí kùnà: sọ àwárí di ọ̀tun, yan ID tí ó wà kí o sì ṣàyẹ̀wò àkántì rẹ pẹ̀lú àwọn ààlà rẹ. Má ṣe tún ìbéèrè tí kò dájú ṣe kí o tó ṣàyẹ̀wò ìtàn rẹ̀.
+
+Ìṣiṣẹ́ dúró: ṣí ìpele lọ́wọ́lọ́wọ́, ìbéèrè, ẹ̀rí ìfìdírinlẹ̀ tàbí àwọn àkọsílẹ̀ CLI. Kọjú ohun tí ó fà á gangan: ìbéèrè tí a kò dáhùn, àṣẹ, ìyọ̀nda àpò-fáìlì tàbí ààlà ìgbìyànjú. Tẹ̀síwájú (Continue) kò lè sọ àyẹ̀wò tí ó kùnà di àṣeyọrí.
+
+Àpò-fáìlì kò sí tàbí a ti rọ́pò rẹ̀: mú ìwọlé sí àpò-fáìlì ìpilẹ̀ṣẹ̀ bọ̀ sípò tàbí dá iṣẹ́ tuntun sílẹ̀. Àgbékalẹ̀ ètò náà kò gbọdọ̀ tẹ̀síwájú láti HOME. Bí o bá rí cwd mìíràn, dá ìyípo náà dúró kí o sì tọ́jú àwọn ẹ̀rí ìwádìí-ìṣòro.
+
+Fún ìròyìn kan, fi ẹ̀yà Nípa (About), ipa-ọ̀nà, CLI/àwòṣe, ìhùwàsí tí a ń retí àti èyí tí a rí, àwòrán ìbòjú àti àyọkà àkọsílẹ̀ tí kò léwu kún un. Yọ àwọn àṣírí, àkóónú àdáni àti àwọn ipa-ọ̀nà tí a kò lè tẹ̀jáde kúrò.
+
+Ojú-ewé jíjìnnà kò sí: fìdí rẹ̀ múlẹ̀ pé olówó mú ẹ̀rọ-ìpèsè ṣiṣẹ́, ṣàyẹ̀wò àdírẹ́sì tí ń tẹ́tí àti ibùdó, lẹ́yìn náà ṣe ìfọwọ́sí pẹ̀lú àmì-ìdánimọ̀ ẹ̀rọ tí ó tọ́. 401 ń tọ́ka sí ìfọwọ́sí; ìyípadà tí a kọ̀ lè jẹ́ àyè kíkà tàbí ìdarí ti olówó nìkan. Yíyí àmì-ìdánimọ̀ padà ń ti àwọn oníbàárà aṣàwákiri tí ó wà lẹ́yìn. Má ṣe fi ibùdó àyẹ̀wò DevTools ọ̀tọ̀ hàn gẹ́gẹ́ bí ìdarí àgbékalẹ̀ ètò láti ọ̀nà jíjìn.
+
+Fífipamọ́ olóòtú kò gbà: tọ́jú àkọsílẹ̀ àkọ́kọ́ rẹ, ṣàyẹ̀wò fáìlì lọ́wọ́lọ́wọ́ lórí àwo-ìtọ́jú kí o sì yanjú ìforígbárí ìyípadà láti òde. Má ṣe fo ìfiwéra náà nípa kíkọ àwọn dátà àlàyé àgbékalẹ̀ ètò padà. Bí gbígbé fáìlì ńlá ní kíkún kò bá sí, lo àtúnṣe/ìwárí fèrèsé tí a tì lẹ́yìn tàbí olóòtú òde.
+
+Telegram kò sí: fìdí àmì-ìdánimọ̀ bot, nọ́mbà olówó, ìfọ̀rọ̀wérọ̀ àdáni àti ipò múlẹ̀ ní agbègbè. Webhook tàbí poller mìíràn tí ń bá a díje lè dí ìgbà-ìwífún lọ́wọ́; ZIAForge kì í pa webhook rẹ́ fúnra rẹ̀ tàbí gba poller mìíràn. Àwọn àṣẹ tí a kọ̀ tàbí tí a dí lọ́wọ́ ní ààlà tí a kò mọ̀ kò ní di títúnṣe fúnra wọn.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Àdánwò àti ìwádìí-ìṣòro](../../TESTING.md).
+
+<a id="diagnostics"></a>
+
+## Ròyìn àwọn ìṣòro kí o sì ṣàyẹ̀wò ẹ̀rí
+
+Ṣe àkọsílẹ̀ ẹ̀yà ìkọ́kọ́ gangan tí ń ṣiṣẹ́ láti Nípa (About), OS/ìṣètò ẹ̀rọ, ipò iṣẹ́, olùpèsè/àwòṣe tí a yàn àti àwọn ìgbésẹ̀ tí ń tún ìṣòro náà gbé wá. Ṣàpèjúwe àbájáde tí a ń retí àti àbájáde tí a rí. Fi àwòrán ìbòjú tí kò léwu àti àkọsílẹ̀ àṣẹ tí a dá dúró tàbí ẹ̀rí ìfìdírinlẹ̀ tí ó bá a mu kún un, dípò gbogbo àkọsílẹ̀ àdáni.
+
+Àwọn àkọsílẹ̀ CLI, àwọn ìwé-ìròyìn ìṣẹ̀lẹ̀, àwọn àkọsílẹ̀ àwòṣe, àwọn ipa-ọ̀nà aṣàwákiri àti àwọn àwòrán ìbòjú lè fi orísun, àwọn ipa-ọ̀nà àdáni tàbí àwọn àmì-ìdánimọ̀ hàn. Ṣàyẹ̀wò kí o sì yọ àwọn àṣírí kúrò kí o tó pín. Olùyọ-àṣírí àkọsílẹ̀ tí ń sa gbogbo ipá rẹ̀ kò fìdí rẹ̀ múlẹ̀ pé àwòrán ìbòjú tàbí àkójọ-fáìlì ṣeé tẹ̀jáde.
+
+Fún àwọn olùkópa, qa:doctor ń ka ìdánimọ̀ àyíká/ìkọ́kọ́; qa:inspect ń ṣí àkọsílẹ̀ tí a yà sọ́tọ̀ pẹ̀lú àwọn àpẹẹrẹ olùpèsè. Àpẹẹrẹ àdánwò kan ń fi ipa-ọ̀nà àgbékalẹ̀ ètò tí a dánwò hàn láìsí kíkàn sí àwòṣe. Ìfọ̀rọ̀wérọ̀ tààrà, ìsopọ̀ Telegram, ojú-iṣẹ́ abínibí Linux, ìfọwọ́sí àti àwọn àyẹ̀wò ohun-èlò tí a dipọ̀ jẹ́ àwọn ẹ̀rí ọ̀tọ̀ọ̀tọ̀. Wo TESTING.md fún àwọn àṣẹ tí a lè tún ṣe àti ìfọ̀mọ́.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Àwọn àṣẹ ẹ̀rí](../../TESTING.md).
+
+<a id="privacy"></a>
+
+## Dátà agbègbè àti àwọn ààlà
+
+Àwọn iṣẹ́ àkànṣe, ìtàn, àwọn ètò, àwọn àkọsílẹ̀ àti àwọn ìwádìí-ìṣòro lè ní àkọsílẹ̀ àdáni nínú. Má ṣe tẹ àwọn àkọsílẹ̀, àwọn àwòrán àìṣètò, àwọn kókó-kọ́kọ́rọ́ tàbí àwọn àkọsílẹ̀ pípé jáde pẹ̀lú kóòdù orísun.
+
+Lórí Linux, fífipamọ́ API, ìdarí, Telegram àti àwọn ẹ̀rí ìdánimọ̀ ẹ̀rọ nílò GNOME Secret Service tàbí KWallet tí a ṣí; láìsí ibi-ìtọ́jú àṣírí tí a tì lẹ́yìn, ZIAForge ń kọ̀ láti fi àwọn àṣírí wọ̀nyí pamọ́ dípò lílo àṣàyàn àtìlẹ́yìn basic_text ti Electron.
+
+Ìfipamọ́ agbègbè kò túmọ̀ sí pé àwọn ìbéèrè dúró sórí kọ̀mpútà rẹ: CLI/API tí a yàn ń fi wọ́n ránṣẹ́ sí olùpèsè rẹ̀. Àpò-fáìlì iṣẹ́ àti àbójútó ìgbésẹ̀ kì í ṣe ìyàsọ́tọ̀ OS. Ṣàyẹ̀wò àwọn ìyọ̀nda tí a yàn.
+
+Mọ àwọn oríṣi ẹ̀rí yàtọ̀: àwọn àpẹẹrẹ àdánwò (fixtures) ń dán àgbékalẹ̀ ètò wò láìsí àwòṣe; ìṣiṣẹ́ abínibí tààrà ń lo CLI/àkántì gidi; àwọn àyẹ̀wò tí a dipọ̀ ń fìdí ohun-èlò pàtó múlẹ̀. Píye nínú ọ̀kan kì í ṣe ìdánilójú fún àwọn yòókù.
+
+Àyè àgbékalẹ̀ ètò, igi-iṣẹ́ (worktree) àti ìbéèrè kíkà-nìkan yàtọ̀ sí ìmúṣẹ ètò ìṣiṣẹ́. Àwọn ìlànà olùtúnyẹ̀wò/olùrànlọ́wọ́ Antigravity ń ṣàwárí àwọn ìyípadà nínú ẹ̀rí àyè-iṣẹ́ tí a gbà dípò fífipá mú ìwọlé kíkà-nìkan ti ètò fáìlì ṣiṣẹ́. Ìdarí kọ̀mpútà abínibí ń ṣiṣẹ́ àwọn ètò tí olówó fọwọ́ sí lẹ́yìn ààlà irinṣẹ́ àgbékalẹ̀ ètò lásán; pa á nígbà tí kò bá nílò rẹ̀ mọ́.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Orísun àti ìtẹ̀jáde](../../RELEASE_READINESS.md).
+
+<a id="project-contributors"></a>
+
+## Lóye kí o sì yí iṣẹ́ àkànṣe orísun-ṣíṣí yìí padà
+
+Ka AGENTS.md àti CONTRIBUTING.md kọ́kọ́, lẹ́yìn náà PROJECT_MAP.md fún àwọn ààlà orísun lọ́wọ́lọ́wọ́. Àwọn àdéhùn tí a tẹ̀wọlé tí a múṣẹ àti àwọn àkọsílẹ̀ ìṣiṣẹ́/olùpèsè lọ́wọ́lọ́wọ́ ló ń ṣe àkóso ìhùwàsí. CONCEPT.md àti àwọn apá ibi tí ó kan ebute-ọ̀rọ̀ ní ARCHITECTURE.md ń tọ́jú èròńgbà àtijọ́, a kò sì gbọdọ̀ kà wọ́n sí àwọn ẹ̀rí ìtújáde lọ́wọ́lọ́wọ́.
+
+Orísun ìrànlọ́wọ́ Gẹ̀ẹ́sì ni docs/help/en.json. Má ṣe fi ọwọ́ ṣàtúnṣe USER_GUIDE.md tàbí website/guide.html tí a ṣe jáde. Yí abala gidi padà, sọ àdéhùn tí ó kàn di ọ̀tun kí o sì sáré node scripts/help/generate.cjs. Ìrànlọ́wọ́ inú àgbékalẹ̀ ètò ń ka orísun kan náà. Tún àwọn àfikún yẹ̀wò pẹ̀lú ìmúṣe gidi, títí kan àwọn ààlà, àwọn ìyọ̀nda àti àwọn ipa-ọ̀nà tí a kò tì lẹ́yìn.
+
+Ọ̀kọ̀ọ̀kan àwọn èdè ojú-ọ̀nà 56 ní ipò ìrànlọ́wọ́ ọ̀tọ̀ nínú docs/help/locales.json. Ìrànlọ́wọ́ tí kò sí tàbí tí kò pé ń padà sí Gẹ̀ẹ́sì. Àwọn àkóónú pípé tí ẹ̀rọ túmọ̀ ni a sàmì sí tí a sì so mọ́ kóòdù orísun Gẹ̀ẹ́sì, láìsí ẹ̀tọ́ ti àtúnyẹ̀wò ènìyàn. Ìtumọ̀ tí ènìyàn tún yẹ̀wò ń ṣe àkọsílẹ̀ olùtúnyẹ̀wò rẹ̀ síwájú sí i. Gbogbo ìtumọ̀ gbọdọ̀ tọ́jú àwọn ID abala, àwọn iṣẹ́, àwọn olùdánimọ̀ fáìlì/àṣẹ àti àwọn ààlà ìmọ̀-ẹ̀rọ, lo ìtọ́sọ́nà tí ó tọ́, kí a sì sọ wọ́n di tuntun nígbà tí orísun Gẹ̀ẹ́sì wọn bá yípadà.
+
+Kí o tó tẹ̀ ẹ́ jáde, sáré node scripts/help/generate.cjs --check láti ṣàwárí àbájáde tí a ṣe jáde tí ó ti gbó, àwọn àkójọ èdè tí kò tọ́ tàbí àwọn ìsopọ̀ àdéhùn agbègbè tí ó bàjẹ́. Àwọn àyẹ̀wò ìtumọ̀ UI àti àwọn àyẹ̀wò ìhùwàsí àgbékalẹ̀ ètò wà lọ́tọ̀ọ̀tọ̀. HELP_MAINTENANCE.md ń fúnni ní ìlànà ìsọdọtun ti olùkópa àti AI; àkọsílẹ̀ ìtọ́ni kò gbọdọ̀ sọ pé àdánwò kan yege nígbà tí kò tíì ṣiṣẹ́.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Àwòrán iṣẹ́ àkànṣe lọ́wọ́lọ́wọ́](../../PROJECT_MAP.md) · [Ìtọ́jú àwọn àkọsílẹ̀ ìtọ́ni](../../HELP_MAINTENANCE.md) · [Àwọn ìtọ́ni olùkópa](../../../CONTRIBUTING.md) · [Àwọn ìtọ́ni aṣojú](../../../AGENTS.md).

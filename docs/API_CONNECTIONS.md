@@ -1,0 +1,15 @@
+# Explicit API connections
+
+Native subscription CLIs and API usage remain separate choices. An API connection uses OpenAI-compatible Chat Completions over HTTP streaming. It does not convert a subscription into an API, silently proxy native login, or imply compatibility with every gateway or local model server.
+
+Create an API connection with a name, base URL, model and enabled state, then select it deliberately for a task/chat or saved preset. HTTPS is required except for loopback HTTP. The URL must not contain userinfo, a query string or fragment; redirects are refused. The configured base URL is used for `/models` discovery and `/chat/completions`, so a conventional base includes `/v1` where the server requires it.
+
+Credentials are write-only over IPC. The main process uses Electron `safeStorage` encryption and private files; listing a connection returns only `hasApiKey`. Omit a key while editing to preserve it, or explicitly save an empty key to remove it. An endpoint change with an existing key requires re-entry, avoiding silent credential transfer to another server. If OS encryption is unavailable, saving a key fails rather than writing plaintext. Local no-key endpoints can be configured without inventing credentials.
+
+The adapter consumes bounded SSE, validates completion/tool-call structure, reports actual returned token usage when present and surfaces premature EOF, malformed streams, HTTP errors, timeouts and output limits. Error reporting excludes raw server bodies/headers that may echo secrets. A connection/model name and HTTP status are diagnostic metadata; they are not evidence of successful inference.
+
+API tools are bounded workspace `read_file`, `list_files`, `search_text` and `write_file`. They accept relative paths inside the backend-resolved task cwd, reject traversal/links/special files and exclude `.git`, `.ssh` and `.aws` path components. Writes require explicit approval and an expected SHA-256 (or null for a new file), then recheck the bytes before atomic replacement. There is no general terminal tool. Read-only review exposes only read tools. File checks are not an OS sandbox against a hostile process running as the same user.
+
+An API conversation has a private local history identity. Full app restart preserves visible history; Resume is explicit and uses the same connection/history binding. Interrupted or failed turns are not silently resent. Changing provider/connection is an explicit transition with visible history retained; it does not migrate a provider's private internal state. Context, rounds, tools, output, file sizes and turn duration are bounded.
+
+Fixture coverage uses a loopback HTTP server and synthetic credentials. Real account access, endpoint compatibility, billing behavior, model availability and inference quality require separate authorized evidence. No real API key is needed for CI, and key values must never enter screenshots, transcripts or fixture manifests. See [provider extension contract](PROVIDER_EXTENSION.md) for integration invariants.

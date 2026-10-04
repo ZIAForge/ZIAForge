@@ -1,0 +1,55 @@
+.markdown-message {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  line-height: 1.65;
+}
+.markdown-message > :first-child { margin-top: 0; }
+.markdown-message > :last-child { margin-bottom: 0; }
+.markdown-message :is(h1, h2, h3, h4, h5, h6) {
+  margin: 1.1em 0 .5em;
+  color: #e4e4e7;
+  font-weight: 650;
+  line-height: 1.4;
+}
+.markdown-message h1 { font-size: 1.6em; }
+.markdown-message h2 { font-size: 1.35em; }
+.markdown-message h3 { font-size: 1.15em; }
+.markdown-message :is(h4, h5, h6) { font-size: 1em; }
+.markdown-message p { margin: .65em 0; white-space: pre-wrap; }
+.markdown-message strong { color: #e4e4e7; font-weight: 650; }
+.markdown-message em { font-style: italic; }
+.markdown-message del { text-decoration: line-through; }
+.markdown-message :is(ul, ol) { margin: .65em 0; padding-left: 1.7em; }
+.markdown-message ul { list-style: disc; }
+.markdown-message ol { list-style: decimal; }
+.markdown-message li { margin: .2em 0; }
+.markdown-message li > :is(ul, ol) { margin: .2em 0; }
+.markdown-message li > p { margin: .3em 0; }
+.markdown-message .task-list-item { list-style: none; }
+.markdown-message input[type="checkbox"] { margin-right: .5em; accent-color: #ff6b00; }
+.markdown-message blockquote { margin: .8em 0; border-left: 3px solid #52525b; padding-left: 1em; color: #a1a1aa; }
+.markdown-message hr { margin: 1em 0; border: 0; border-top: 1px solid #34373d; }
+.markdown-message a { color: #fb923c; text-decoration: underline; text-underline-offset: 3px; }
+.markdown-message a:hover { color: #fdba74; }
+.markdown-message a:focus-visible { outline: 2px solid #ff6b00; outline-offset: 2px; border-radius: 2px; }
+.markdown-message code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .95em; }
+.markdown-message :not(pre) > code { padding: .1em .35em; background: #24262b; color: #e4e4e7; border-radius: 4px; }
+.markdown-message pre {
+  max-width: 100%;
+  margin: .8em 0;
+  padding: .8em 1em;
+  overflow-x: auto;
+  white-space: pre;
+  overflow-wrap: normal;
+  border: 1px solid #2b2e33;
+  border-radius: 6px;
+  background: #0b0c0e;
+  color: #d4d4d8;
+}
+.markdown-table-scroll { max-width: 100%; margin: .8em 0; overflow-x: auto; }
+.markdown-message table { width: 100%; border-collapse: collapse; font-size: .95em; }
+.markdown-message :is(th, td) { border: 1px solid #34373d; padding: .45em .75em; text-align: left; }
+.markdown-message th { font-weight: 650; color: #e4e4e7; background: #202227; }
+.markdown-message tr:nth-child(even) { background: #ffffff04; }

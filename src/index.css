@@ -1,0 +1,109 @@
+@import "tailwindcss";
+@import "./App.css";
+
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #0b0c0e;
+    color: #e2e8f0;
+    color-scheme: dark;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Electron Window Drag Regions */
+.drag-region {
+  -webkit-app-region: drag;
+}
+.no-drag-region {
+  -webkit-app-region: no-drag;
+}
+
+/* Custom scrollbars — ultra-dark to match app chrome */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #35383f;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2b2e33;
+}
+/* The thumb remains visible for discoverable long panels. */
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Custom native select/option styling for dark theme (Electron/Chromium) */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+select option {
+  background-color: #15171a;
+  color: #e2e8f0;
+  padding: 8px 12px;
+}
+
+/* Splash screen animation */
+@keyframes splash-fade-out {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes splash-logo-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+@keyframes splash-progress {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+.splash-screen {
+  animation: splash-fade-out 3.5s ease-out forwards;
+}
+
+.splash-logo {
+  animation: splash-logo-pulse 2s ease-in-out infinite;
+}
+
+.splash-progress-bar {
+  animation: splash-progress 3s ease-out forwards;
+}
+
+/* Resize handle dark styling */
+::-webkit-resizer {
+  background: linear-gradient(135deg, transparent 60%, #2b2e33 60%, #2b2e33 70%, transparent 70%, transparent 80%, #2b2e33 80%);
+}
+
+/* Override highlight.js bg to match editor */
+.hljs {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+/* Interface direction follows the selected locale. Source code, identifiers and CLI logs do not. */
+html[dir="rtl"] .text-left:not(pre):not(code):not(.font-mono) { text-align: right; }
+html[dir="rtl"] .text-right:not(pre):not(code):not(.font-mono) { text-align: left; }
+pre, code, .font-mono, input[type="url"], input[type="email"] { direction: ltr; unicode-bidi: isolate; }

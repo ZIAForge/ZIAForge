@@ -1,0 +1,487 @@
+<!-- Generated from docs/help/en.json; source SHA-256 19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947. Do not edit this output.
+Run node scripts/help/generate.cjs after changing the canonical help.
+Requested locale: ro; served locale: ro; status: machine-translated. -->
+# Ghid de utilizare ZIAForge
+
+De la intenție la un rezultat verificat. Un ghid practic pentru Code, Work și controlul aplicației.
+
+Versiunea în engleză este canonică. Asistența tradusă automat este etichetată separat de traducerile revizuite de oameni. Verificările automate nu certifică acuratețea în limba maternă.
+
+> Acest ghid este tradus automat din sursa actuală în limba engleză. Revizuirea umană este în continuare binevenită.
+
+## Secțiunile ghidului
+
+- [Primii pași](#start)
+- [Instalarea pachetului desktop corect](#install-platforms)
+- [Code: cinci rute](#code)
+- [Discuție Forge](#forge)
+- [Documente și decizii](#decisions)
+- [Execuție și revizuire](#execution)
+- [Echipe de revizuire paralele și arhitectul de rapoarte](#review-teams)
+- [Specializări ale agenților și politica privind prompturile](#specializations)
+- [Work: de la întrebare la document](#work)
+- [Presetări, modele și acces](#models)
+- [Chaturi, Stop și coada](#chat)
+- [Fișiere, Git și finalizare](#files)
+- [Conexiuni API](#api)
+- [Setări, limbi și resetare sigură](#settings)
+- [Întrebați asistentul de Ajutor](#help-assistant)
+- [Asistentul și Telegram](#assistant-control)
+- [Operați botul privat de Telegram](#telegram)
+- [Permisiune nativă de acces la computer doar pentru proprietar](#native-permissions)
+- [Browser și instanțe la distanță](#remote)
+- [OpenClaw, Hermes și alți agenți externi](#external-agents)
+- [CLI local și limitele de automatizare](#local-cli)
+- [Versiune și actualizări](#updates)
+- [Repornire și recuperare](#restart)
+- [Depanare](#troubleshooting)
+- [Raportați probleme și inspectați dovezile](#diagnostics)
+- [Date locale și limite](#privacy)
+- [Înțelegeți și modificați acest proiect open-source](#project-contributors)
+
+<a id="start"></a>
+
+## Primii pași
+
+ZIAForge păstrează discuția, planificarea, execuția și verificarea într-o singură sarcină. Alegeți Code pentru un proiect Git sau Work pentru documente, cercetare și alte rezultate într-un dosar obișnuit.
+
+Începeți cu o sarcină mică într-un proiect separat. Dacă alegeți un CLI nativ, instalați-l și conectați-vă mai întâi cu propriul cont într-un terminal. Alternativ, configurați o conexiune API. Un abonament CLI și un API plătit sunt metode de conectare separate; ZIAForge nu vă conectează și nu transferă credite între ele.
+
+1. Deschideți Setări și verificați dosarul spațiului de lucru și limba. Despre afișează identitatea exactă a versiunii de compilare care rulează.
+2. Pentru Code, adăugați un depozit Git în bara laterală. Pentru Work, alegeți un dosar separat la crearea sarcinii.
+3. Salvați o presetare cu un CLI, modelul, efortul de raționament și nivelul de acces. Puteți selecta și Personalizat direct, fără o presetare salvată.
+4. Creați o sarcină, alegeți ruta, rolurile și avansarea manuală sau automată. Examinați opțiunile înainte de Pornire.
+
+> Utilizați artefactul și suma de control furnizate de persoana responsabilă de mentenanță. O versiune preliminară poate fi nesemnată sau poate să nu aibă un flux de actualizare publicat. Suportul pentru versiunea desktop și furnizorii nativi trebuie verificat pentru OS-ul, arhitectura și artefactul exact; suportul pentru codul sursă în sine nu constituie o certificare a versiunii lansate.
+
+Instrucțiuni asociate: [Prezentare generală a proiectului](../../../README.md) · [Compatibilitatea furnizorilor](../../PROVIDER_COMPATIBILITY.md).
+
+<a id="install-platforms"></a>
+
+## Instalarea pachetului desktop corect
+
+Alegeți un pachet pentru sistemul dumneavoastră de operare și arhitectura CPU: x64 sau arm64. Fluxul de compilare poate genera formate macOS DMG/ZIP, Windows program de instalare NSIS/ZIP și Linux DEB/RPM/AppImage/tar.gz/ZIP. Un fișier generat sau o compilare încrucișată nu reprezintă o dovadă că programul său de instalare și interfața UI nativă au trecut verificările pe calculatorul dumneavoastră; consultați raportul de verificare al acelei versiuni.
+
+Versiunile pentru macOS care utilizează Electron 44 necesită macOS 13 sau o versiune ulterioară. Utilizați pachetul arm64 pe Apple Silicon și pachetul x64 pentru Intel. Închideți complet o aplicație mai veche înainte de înlocuire. Pachetele de previzualizare pot fi nesemnate și nenotarizate; nu confundați un artefact de dezvoltare cu o lansare publică semnată.
+
+Windows necesită un sistem de operare acceptat de versiunea Electron inclusă și Git disponibil în PATH. Alegeți arhitectura corespunzătoare. O previzualizare nesemnată nu are certificare Authenticode. Un pachet portabil ZIP trebuie să păstreze întregul director al aplicației și fișierele de runtime, nu doar executabilul său.
+
+Linux necesită un desktop grafic compatibil, bibliotecile de sistem cerute de Electron și Git. Pentru credențialele de control criptate, asigurați un serviciu Secret Service funcțional, cum ar fi gnome-libsecret sau KWallet; backend-ul nesigur basic_text nu este acceptat. Testele sumare fără interfață grafică/în container nu certifică fiecare mediu desktop sau distribuție.
+
+Instalați un DEB cu apt install ./file.deb sau instalați un RPM prin managerul de pachete al distribuției dumneavoastră. Un AppImage necesită permisiune de execuție și suport FUSE adecvat; --appimage-extract-and-run este o alternativă acolo unde este acceptată. Extrageți pachetele tar.gz și ZIP cu toate fișierele lor de runtime. Păstrați datele utilizatorului și fișierele aplicației distincte atunci când înlocuiți un pachet.
+
+Pentru a compila din sursă, utilizați Node 24, Git și npm ci, inclusiv programul de instalare obișnuit Electron. Recompilările native necesită instrumente specifice platformei: instrumentele de linie de comandă Xcode pe macOS; MSVC C++, Windows SDK și Python pe Windows; compilator, make, Python, pkg-config și instrumentele de împachetare necesare pe Linux. Urmați PLATFORM_BUILDS.md pentru comenzile exacte și limitele actuale ale platformelor.
+
+Versiunile de lansare sunt rezervate central, iar rezultatele sunt imuabile. O versiune de verificare din CI nu este un program de instalare publicat. Arhivele sursă conțin sursele, fișierul lock, documentația și scripturile; dependențele, credențialele, profilurile de utilizator și cercetările private sunt excluse. Nu deduceți niciodată validarea nativă pentru ARM sau Windows dintr-o compilare reușită pe x64.
+
+Instrucțiuni asociate: [Pachete de platformă, cerințe prealabile și limite de verificare](../../PLATFORM_BUILDS.md) · [Identitatea versiunii de compilare și verificări de lansare](../../RELEASE_READINESS.md).
+
+<a id="code"></a>
+
+## Code: cinci rute
+
+Auto evaluează anvergura: o întrebare simplă se poate finaliza cu un răspuns, în timp ce o sarcină mai amplă necesită pregătire. Rezolvă un defect investighează o cauză și pregătește o corecție. Mai întâi specificația începe cu soluția tehnică; Mai întâi cerințele începe cu cerințele și criteriile de acceptare.
+
+Multi-model utilizează contexte separate pentru explorare, proiectare, implementare și revizuire. Numele rutei nu impune furnizori diferiți: fiecare rol utilizează presetarea sau configurația Personalizat pe care o alegeți.
+
+Un Worktree izolează modificările Git ale unei sarcini. Ramură lucrează în checkoutul selectat. Verificați proiectul, ramura și modelul înainte de a începe; descrierea sarcinii nu este trimisă și într-un chat obișnuit.
+
+Pentru o idee cu opțiuni de produs sau tehnice nerezolvate, utilizați Mai întâi cerințele și construiți baza în discuție. Auto clasifică solicitarea; nu este o comandă de a implementa imediat fiecare frază scurtă. Salvează ciorna păstrează solicitarea fără a contacta un model; Pornire salvează și lansează fluxul gestionat o singură dată. De la una la patru copii ale sarcinii au ID-uri de creare și setări de rol independente.
+
+Instrucțiuni asociate: [Contractul fluxului de lucru Code](../../WORKFLOWS.md) · [Profiluri de prompturi Code](../../CODE_WORKFLOW_PROMPTS.md).
+
+<a id="forge"></a>
+
+## Discuție Forge
+
+Pornire deschide discuția centrală. Răspundeți natural, puneți contraîntrebări, adăugați constrângeri și discutați alegerile tehnice. Conversația și întrebările rămân asociate sarcinii.
+
+Trimiterea de text nu acceptă un document și nu autorizează un nou plan de implementare. O clarificare în timpul execuției pune mai întâi pe pauză tura gestionată și reanalizează domeniul afectat. Un răspuns la o întrebare din cadrul unui pas deja acceptat poate continua acel pas.
+
+Pentru a reanaliza deliberat baza, selectați Cerințe, Specificație sau Planificare. O versiune nouă necesită o nouă acceptare a deciziilor dependente. Pașii finalizați și dovezile acestora rămân; fazele nefinalizate înlocuite rămân în istoric.
+
+Sesiunile fazelor gestionate diferă de chatul liber. Utilizați discuția Forge în loc să trimiteți prompturi manuale direct către o sesiune deținută de fluxul de lucru.
+
+Instrucțiuni asociate: [Contractul discuției Forge](../../WORKFLOWS.md).
+
+<a id="decisions"></a>
+
+## Documente și decizii
+
+Deschideți un document, inspectați-i versiunea și efectuați modificări atunci când este necesar. Trimiterea modificărilor prin discuție generează o nouă versiune; rapoartele și rezultatele verificate nu sunt rescrise retrospectiv.
+
+Înainte de a accepta un plan propus, editați ordinea, instrucțiunile, criteriile de acceptare și comenzile de verificare. Autorizați comenzi concrete pe care le înțelegeți: acestea rulează în dosarul sarcinii. Multi-model propune un pas de implementare pentru întreaga sarcină, cu detalii în documentele și instrucțiunile sale.
+
+Aprobă este o decizie deliberată separată. Auto nu ocolește întrebările sau acceptarea cerințelor, specificațiilor și planurilor. Un document modificat extern nu poate reutiliza o aprobare veche.
+
+Fișierele de pregătire apar ca artefacte. Versiunea lor, faza care le-a produs și hash-ul le leagă de un rezultat. Documentele Code sunt păstrate în afara worktree-ului și nu intră automat într-un commit.
+
+Verificați atât documentul, cât și decizia afișată înainte de acceptare. Acceptarea leagă ID-ul punctului de control curent, revizia planului și hash-urile documentelor reținute. Solicitați modificări atunci când anvergura sau dovezile sunt incorecte. Dacă o decizie a devenit perimată, reîncărcați starea salvată înainte de a face o nouă alegere; un fișier modificat nu poate fi acceptat sub o versiune anterioară.
+
+Instrucțiuni asociate: [Puncte de control ale fluxului de lucru și versiuni de documente](../../WORKFLOWS.md).
+
+<a id="execution"></a>
+
+## Execuție și revizuire
+
+De făcut afișează pașii reali, încercarea curentă, verificarea și rezultatele revizuirii. Faptul că un agent spune „gata” nu finalizează un pas: dovezile cerute de plan trebuie să existe.
+
+Modul manual face pauză între pașii eligibili. Auto avansează pașii verificați și permite reîncercări limitate. Oprește după creează întotdeauna un punct de control. Pauză oprește activitatea în desfășurare a fluxului de lucru; închiderea unui panou nu o oprește.
+
+Un revizor independent utilizează un context separat, cu fișiere și rezultate de verificare. Fiecare constatare blocantă obligatorie trebuie rezolvată; mai mulți revizori nu pot anula o eroare blocantă prin vot.
+
+În Multi-model, corectarea constatărilor necesită o decizie explicită. O corecție nu pornește silențios o altă revizuire: Revizuiește din nou deschide un ciclu nou. Comentariile de revizuire pot solicita reexaminarea de către coordonator fără a repeta implementarea.
+
+Pașii finalizați nu pot fi editați silențios. Cu TDD, Roșu trebuie să eșueze efectiv din motivul așteptat, apoi Verde trebuie să treacă. Încercările limitate previn reîncercările la nesfârșit.
+
+Salvați revizori independenți CLI/API în Setări → Echipe de revizuire, apoi selectați echipa în Code sau Work. Revizorii rulează în paralel, urmați de arhitectul de rapoarte al echipei. De asemenea, puteți configura revizori independenți fără o echipă salvată. Arhitectul de rapoarte primește exclusiv rapoarte structurate anonime, fără fișiere de proiect sau instrumente; această izolare necesită în prezent Claude Code sau API.
+
+Fiecare pas de implementare necesită o verificare executabilă, o revizuire independentă obligatorie sau ambele. Fazele de pregătire rețin în schimb rezultate validate și recipise de artefacte; acestea nu pretind că testele de implementare au rulat. O comandă reușește numai atunci când starea sa reală de ieșire și curățarea proceselor deținute sunt confirmate. O verificare Roșu pentru TDD trebuie să eșueze normal înainte de implementare și de verificarea Verde; un executabil lipsă sau o expirare a timpului limită nu reprezintă un rezultat Roșu valid.
+
+Disjunctoarele implicite se opresc după trei încercări eșuate la un pas sau cincizeci de încercări în total. O întrerupere consumă o încercare, dar nu contează ea însăși ca o încercare eșuată. Limitele și dovezile finalizate rezistă repornirii; Reîncearcă nu le resetează. Citiți eșecul reținut înainte de a autoriza o altă încercare.
+
+Instrucțiuni asociate: [Verificare și revizuire](../../WORKFLOWS.md).
+
+<a id="review-teams"></a>
+
+## Echipe de revizuire paralele și arhitectul de rapoarte
+
+Deschideți Setări → Echipe de revizuire și salvați o echipă. Adăugați revizori independenți cu propriul lor CLI sau API, model, efort de raționament și specializare, apoi alegeți un arhitect de rapoarte. Selectați echipa în configurația de revizuire a sarcinii. O presetare de executor poate fi utilizată și de un revizor, iar opțiunea Personalizat rămâne disponibilă; rolurile independente au în continuare contexte separate.
+
+Revizorii rulează în paralel pe aceleași dovezi ale sarcinii. Fiecare raport necesar, eroare și verdict sunt reținute. Arhitectul primește rapoarte numerotate anonime, fără numele revizorilor, identitatea modelelor sau a furnizorilor, conținutul inițial al sarcinii, acces la depozit sau instrumente. Acesta compară rapoartele și returnează un singur verdict structurat; nu realizează o revizuire nouă a surselor.
+
+O constatare blocantă sau respingerea unui revizor obligatoriu nu pot fi anulate prin vot majoritar sau prin preferința arhitectului. Rapoartele lipsă sau formate incorect împiedică aprobarea. Inspectați constatările individuale și decizia agregată înainte de a accepta sau de a autoriza corecții. O echipă salvată este rezolvată și înghețată pentru rulare; editarea presetării sale nu rescrie dovezile finalizate.
+
+Arhitectul doar pentru rapoarte utilizează în prezent configurații fără instrumente acceptate pentru Claude sau API. Codex și Antigravity rămân disponibile ca revizori, dar sunt refuzate pentru acest rol izolat de arhitect până când va exista un contract verificat fără instrumente. Un simplu prompt care menționează „fără instrumente” nu este suficient.
+
+> Procesul de proiectare/revizuire din Code Multi-model și o echipă de revizuire paralelă salvată sunt controale separate. Păstrați politica de revizuire personalizată selectată; nu presupuneți că o singură rută activează fiecare funcție de revizuire.
+
+Instrucțiuni asociate: [Configurație tipizată a echipei](../../../shared/review-team.ts) · [Agregarea revizuirilor](../../../electron/workflow/ReviewAggregation.ts).
+
+<a id="specializations"></a>
+
+## Specializări ale agenților și politica privind prompturile
+
+Un model este motorul de execuție; o specializare este un profil de instrucțiuni. Alegeți Fără pentru nicio specializare adăugată, Standard pentru ghidul implicit, Auto pentru un ghid integrat relevant sau Manual pentru ghiduri selectate și propriile instrucțiuni delimitate. Presetările pot păstra selecția.
+
+Catalogul inițial acoperă programarea generală, arhitectura, securitatea, fiabilitatea, performanța, testarea și ușurința de utilizare a interfeței. Auto utilizează textul disponibil al sarcinii/pasului pentru a selecta un ghid; nu apelează în secret un alt model și nu certifică expertiza. Sugestiile de planificare pot fi inspectate și modificate înainte de a accepta planul de implementare.
+
+Specializările de revizuire ajută la direcționarea atenției, dar nu înlocuiesc niciodată dovezile independente, limitele de acces sau verdictul structurat. Tratați instrucțiunile personalizate ca parte a ariei sarcinii: nu le utilizați pentru a ocoli acceptarea documentelor, politica privind instrumentele, autentificarea sau eșecurile revizorilor.
+
+Instrucțiuni asociate: [Catalogul original de prompturi](../../../shared/specializations.ts).
+
+<a id="work"></a>
+
+## Work: de la întrebare la document
+
+Work nu necesită Git. Implicit creează un dosar de sarcină separat; Personalizat selectează un dosar existent prin selectorul nativ. Salvează ciorna stochează setările fără inferență; Pornire rulează prima fază.
+
+Auto răspunde direct sau propune un plan adecvat cu elemente De făcut reale. Brainstorm creează ideas.md înainte de a alege mai multe idei sau evaluarea. Cercetare reține findings.md, sursele și limitările. Scriere trece de la intenție și, când este util, outline.md la un document descriptiv sau draft.md; revizuirile păstrează versiunile anterioare.
+
+Selectați fișierele de intrare prin selectorul nativ și referiți-le cu @. Aplicația le copiază ca intrări imuabile ale sarcinii și le validează identitatea înainte de rulare. Implicit creează un dosar de sarcină deținut de aplicație; accesul la dosarul Personalizat este o autorizare salvată a proprietarului. O ciornă salvată și nepornită își poate schimba dosarul.
+
+Creați 1–4 copii cu setări independente ale executorului. Sarcinile care folosesc dosare ce se suprapun nu pot scrie concurent. Această coordonare se aplică operațiunilor ZIAForge, nu programelor externe arbitrare.
+
+Deep Brainstorm folosește implicit trei lucrători independenți și acceptă până la opt. Selectați ordinea și configurațiile acestora, inclusiv reutilizarea unei presetări în contexte separate. Întrebările lucrătorilor își păstrează originea; rapoartele formate incorect beneficiază de o singură încercare de reparare a formatului. Eșecul parțial rămâne vizibil, în loc să fie prezentat ca un succes unanim.
+
+Deep combină rapoartele reținute ale lucrătorilor în brainstorm_report.md și solicită întotdeauna decizia utilizatorului. O mică etapă de urmărire revizuiește raportul prin intermediul coordonatorului; o modificare majoră declanșează o nouă rundă cu lucrătorii înghețați. Artefactele își păstrează versiunile.
+
+Rolurile stabilite se blochează la crearea sarcinii sau la salvarea explicită a ciornei. După prima invocare, se poate modifica doar avansarea automată/manuală; utilizați o sarcină nouă pentru alte setări de rol sau de model. Editarea unei presetări globale nu modifică silențios fazele ulterioare.
+
+Modul manual face pauză între fazele eligibile, inclusiv la o structură extinsă de Scriere. Auto poate continua prin acea structură. Întrebările, planurile executabile propuse, direcția Brainstorm și revizuirea raportului Deep rămân decizii explicite chiar și în Auto. O simplă citare nu dovedește că navigarea a avut loc, iar un fișier binar păstrat nu dovedește randarea acestuia.
+
+Instrucțiuni asociate: [Moduri și decizii în Work](../../WORK_WORKFLOWS.md).
+
+<a id="models"></a>
+
+## Presetări, modele și acces
+
+O presetare salvează un CLI/API, modelul, efortul de raționament și permisiunile. Subsolul chatului conține secțiuni pentru presetare, CLI, model și opțiuni. Personalizat funcționează fără o presetare; Creează presetare salvează selecția curentă.
+
+Catalogul provine de la instrumentul CLI sau API instalat și selectat, acolo unde este acceptat. Reîmprospătează actualizează lista fără a schimba selecția. Dacă descoperirea nu este disponibilă, introduceți un ID de model explicit; furnizorul trebuie să îl accepte în continuare. Nivelurile de raționament depind de model și de CLI. Valoarea implicită a furnizorului este distinctă de jetonul explicit fără.
+
+Aplicați modificările numai după confirmarea din partea backend-ului. Comutarea este restricționată în timpul unei ture active sau al unei cozi nevide. Ciornele și istoricul vizibil se păstrează, dar schimbarea furnizorilor nu transferă starea internă privată a acestora.
+
+În Forge, eticheta rolului contează: pregătirea poate utiliza un Planificator separat. Subsolul schimbă rolul afișat; revizorii și asistenții sunt selectați în setările fluxului de lucru. Politica pentru implementarea deja verificată poate fi blocată.
+
+Permisiunile diferă între furnizori. Doar citire și Scriere în spațiul de lucru sunt disponibile acolo unde adaptorul le acceptă. Antigravity utilizează setările native CLI sau accesul complet selectat explicit. Accesul complet nu este un sandbox.
+
+Specializarea adaugă ghidare prin prompturi, nu un alt model sau o altă permisiune. Presetările și rolurile acceptă Fără, Standard, Auto și Manual. Auto selectează profiluri din textul pasului fără un apel suplimentar de model; Manual acceptă până la patru specializări și instrucțiuni personalizate. Atribuirile propuse de Planificator pot fi editate înainte de a accepta planul.
+
+Un ID de model sau un nivel de efort introdus manual rămâne alegerea dumneavoastră, dar furnizorul îl poate respinge. Editarea unei presetări globale nu modifică retroactiv un chat în derulare sau un plan acceptat. Pentru a modifica deliberat o conversație inactivă, utilizați propriile sale comenzi de configurare și așteptați confirmarea. O opțiune dezactivată trebuie interpretată ca o limită de capabilitate sau de ciclu de viață, nu ocolită prin editarea fișierului JSON salvat.
+
+Instrucțiuni asociate: [Capabilități ale furnizorilor](../../PROVIDER_COMPATIBILITY.md).
+
+<a id="chat"></a>
+
+## Chaturi, Stop și coada
+
+Filele Deschise, Recente și ciornele aparțin unei singure sarcini. Închiderea unei file o elimină din Deschise, dar o păstrează în Recente și nu oprește procesul furnizorului său sau fluxul de lucru gestionat. Căutați în istoric, redeschideți un chat sau închideți toate filele suplimentare din meniul istoricului.
+
+Stop întrerupe tura curentă. Așteptați finalizarea opririi înainte de următorul Trimite: o confirmare a întreruperii nu înseamnă finalizarea procesului. Între timp, puteți tasta următoarea ciornă.
+
+În chatul obișnuit, Adaugă în coadă salvează o solicitare ulterioară separat de ciorna curentă. Pune coada pe pauză suspendă trimiterea ulterioară. Stop și Închide pun coada pe pauză. După repornire, mai întâi Reluați, apoi selectați explicit Continuă coada.
+
+Nesigur înseamnă că starea livrării este necunoscută. Un astfel de mesaj nu este retrimis automat: inspectați istoricul, copiați textul dacă este cazul și respingeți elementul din coadă. Trimiterea lui din nou reprezintă o nouă solicitare deliberată.
+
+Chaturile fazelor gestionate își utilizează fluxul de lucru propriu, nu coada obișnuită. Urmărește etapa afișează faza curentă; selectarea manuală a altei file oprește urmărirea. Jurnalele CLI afișează diagnosticele separat de răspuns.
+
+Răspunsurile Markdown randează titluri, liste, tabele, linkuri și blocuri de cod delimitate. Cardurile de instrumente și diagnosticele CLI rămân separate de răspuns. Raționamentul raportat de model și valorile de tokenuri apar doar atunci când furnizorul le expune efectiv; nu deduceți raționamentul privat sau consumul dintr-o animație.
+
+După o trimitere nesigură sau o confirmare de adăugare în coadă, inspectați istoricul și reîncercați doar aceeași solicitare păstrată, acolo unde este oferită opțiunea. O confirmare de punere în coadă înseamnă că stocarea a acceptat elementul, nu că inferența s-a încheiat. Eliminați un element nesigur din coadă doar ca o respingere explicită; aceasta nu poate retrage un prompt deja livrat.
+
+Instrucțiuni asociate: [Coadă de mesaje durabilă](../../MESSAGE_QUEUE.md).
+
+<a id="files"></a>
+
+## Fișiere, Git și finalizare
+
+Fișiere afișează dosarul sarcinii. Comparați rezultatele cu cerințele, deschideți documente și inspectați diferențele. Reținerea unui fișier binar nu dovedește randarea corectă în aplicația sa țintă.
+
+Git oferă stare, modificări și operațiuni cu rezultate înregistrate. Commit, îmbinare și push sunt manuale în mod implicit; operațiunile automate sunt opțiuni separate pentru un plan verificat complet.
+
+Nu modificați fișierele de lucru între verificare și publicare: aprobarea este legată de octeții exacți. Conflictele, trimiterile push eșuate și rezultatele necunoscute ale operațiunilor blochează progresul până la o decizie explicită. Auto nu autorizează silențios publicarea.
+
+Work nu creează ramuri Git și nu are o finalizare Git. Păstrați documentele necesare din dosarul selectat, inclusiv versiunile și sursele.
+
+Editorul de fișiere oferă evidențiere sintactică după extensie, căutare și înlocuire, istoric de anulare, încadrare a rândurilor și ciorne per filă. Salvările păstrează codificarea acceptată UTF-8/UTF-16 și resping conflictele de modificare externă. Alte codificări și conținutul binar necesită un editor extern. Ciornele nesalvate împiedică Închiderea aplicației până când proprietarul le salvează sau le abandonează.
+
+Sintaxa completă este activată până la 8 MiB. Fișierele text mai mari se deschid în ferestre de 256 KiB; între 8 și 64 MiB pot fi încărcate explicit integral fără sintaxă. Peste 64 MiB se utilizează editarea pe ferestre și căutarea mărginită a următoarei potriviri. Acesta este un mod limitat pentru fișiere mari, nu o paritate cu Sublime Text pentru documente oricât de mari.
+
+Deschide dosarul utilizează contextul sarcinii curente sau al ramurii/worktree-ului, în loc să deschidă silențios doar depozitul original. Un rând de fișier poate dezvălui directorul părinte al acelui fișier. Căile sunt validate de backend în raport cu permisiunile înregistrate ale sarcinii. Fișierele binare nu sunt editabile ca text simplu; utilizați vizualizatorul lor dedicat și păstrați octeții originali.
+
+Eliminarea unui worktree este o acțiune protejată separată. Încheiați sesiunile structurate și terminalele atașate înainte de a-l elimina, inclusiv sesiunile inactive. Inspectați rezultatul Git salvat și starea de recuperare; ștergerea unei înregistrări de sarcină nu înlocuiește păstrarea în siguranță a lucrului necomis.
+
+Instrucțiuni asociate: [Contractul editorului tipizat](../../../shared/editor.ts) · [Politici Git](../../WORKFLOWS.md).
+
+<a id="api"></a>
+
+## Conexiuni API
+
+Conexiuni adaugă un punct terminal compatibil OpenAI selectat explicit. Introduceți un nume, un URL de bază, modelul și o cheie dacă este necesar. Multe servere necesită un URL de bază care se termină în /v1; consultați documentația punctului dumneavoastră terminal.
+
+Este necesar HTTPS, cu excepția HTTP pe loopback. Utilizați un punct terminal simplu, fără credențiale incluse în URL. Cheile folosesc criptarea suportată de OS și nu sunt returnate în UI. Schimbarea punctului terminal necesită reintroducerea cheii sale. Lăsarea câmpului pentru cheie necompletat păstrează o cheie salvată; Elimină cheia salvată o șterge în mod explicit.
+
+Apelurile API nu utilizează un abonament CLI. Instrumentele și modelele diferă de sesiunile native, iar descoperirea cu succes a modelului nu dovedește inferența. Utilizarea tokenurilor apare doar atunci când furnizorul o returnează efectiv.
+
+Păstrați credențialele în Conexiuni, nu în textul sarcinilor sau în instrucțiunile presetărilor. Revizorii în mod doar-citire primesc doar instrumentele de fișiere API permise; arhitectul de rapoarte nu are instrumente. Apelurile de instrumente neacceptate sunt respinse, nu executate silențios. Serverele variază în privința parametrilor de raționament, suportului pentru instrumente și listelor de modele; comparați o eroare cu contractul propriu al punctului dumneavoastră terminal.
+
+Instrucțiuni asociate: [Conexiuni API](../../API_CONNECTIONS.md).
+
+<a id="settings"></a>
+
+## Setări, limbi și resetare sigură
+
+Setările generale permit selectarea spațiului de lucru, a limbii interfeței și a valorilor implicite. Conexiuni gestionează punctele terminale API. Presetările și Echipele de revizuire păstrează configurațiile rolurilor. Control la distanță gestionează credențialele locale, anvergura serverului și permisiunile proprietarului; Actualizări gestionează sursa/canalul versiunii. Despre afișează versiunea exactă care rulează.
+
+Limba interfeței este separată de limba prompturilor și de starea de revizuire a documentației. Numele de produse, ID-urile de comenzi, extensiile de fișiere, ID-urile de modele ale furnizorilor și numele create de utilizator rămân identificatori. Ajutorul respectă limba de interfață selectată atunci când este disponibilă o traducere actuală; traducerile automate sunt etichetate, iar engleza rămâne referința canonică.
+
+Salvare aplică configurația afișată. O resetare a bazei de date sau o revenire la setările din fabrică poate elimina metadatele aplicației; păstrați fișierele și o copie de rezervă testată înainte de a utiliza resetarea în mod intenționat. Aceste operațiuni sunt acțiuni ale proprietarului local. Nu le utilizați ca o scurtătură pentru a investiga un flux de lucru eșuat sau o înregistrare coruptă.
+
+Instrucțiuni asociate: [Instrucțiuni de localizare](../../LOCALIZATION.md) · [Recuperarea datelor](../../DATA_RECOVERY.md).
+
+<a id="help-assistant"></a>
+
+## Întrebați asistentul de Ajutor
+
+Deschideți Ajutorul, alegeți un preset conectat salvat în panoul asistentului și întrebați despre ZIAForge. Răspunsurile utilizează ghidul canonic actual în limba engleză și limba de interfață selectată de dumneavoastră. Butoanele de referință către secțiuni deschid subiectele relevante din ghid, astfel încât să puteți compara explicația cu referința.
+
+Acest asistent păstrează o conversație privată separată de până la 100 de intrări salvate și 3 MiB. Introduceți o întrebare de până la 12,000 de caractere; Trimitere o adresează, Oprire anulează răspunsul activ păstrând întrebarea disponibilă, iar Golire elimină această conversație de Ajutor. Ciorna netrimisă și selecția presetului persistă la închiderea sau redeschiderea Ajutorului în aceeași sesiune a aplicației, dar ciorna nu este salvată pe disc. Asistentul nu trimite comenzi ale aplicației, nu modifică un flux de lucru și nu acceptă o poartă de aprobare. Recomandările nu reprezintă o verificare în timp real a unei sarcini, a unui cont sau a unei conexiuni externe.
+
+Sesiunile de Ajutor Claude Code și API aplică politica acceptată fără instrumente. Sesiunile native de Ajutor Codex și Antigravity necesită permisiunea nativă de acces la computer a proprietarului local existentă. Dacă aceasta este dezactivată, aplicația explică cerința prealabilă în loc să aleagă un furnizor diferit. Numai proprietarul o poate activa în setările locale de control; asistentul nu o poate activa el însuși.
+
+Ajutorul Codex utilizează un sandbox doar pentru citire și refuză cererile de aprobare a instrumentelor. Antigravity utilizează modul plan și indicatorul său nativ de sandbox. Aceste moduri native nu reprezintă o garanție universală a izolării la nivel de sistem de operare. Hash-ul ghidului sursă identifică referința utilizată pentru răspuns; o explicație generată poate fi totuși eronată, așa că inspectați secțiunile asociate înainte de a acționa. Răspunsurile mai vechi sunt marcate atunci când versiunea ghidului sursă diferă de ghidul curent.
+
+Instrucțiuni asociate: [Ghid canonic și mentenanța traducerii](../../HELP_MAINTENANCE.md) · [Asistentul aplicației și permisiuni](../../AGENT_CONTROL.md).
+
+<a id="assistant-control"></a>
+
+## Asistentul și Telegram
+
+Asistentul utilizează presetul selectat și același API de control al aplicației. Permisiunea de a inspecta starea și permisiunea de a efectua operațiuni sunt separate. Inspectați comenzile și rezultatele: textul asistentului nu este o dovadă că o acțiune a fost finalizată.
+
+Telegram este activat numai de către proprietarul local, cu un token de bot existent și un ID numeric de proprietar. Controlul este destinat conversației private a acelui proprietar. Un bot neconfigurat sau inactiv nu trebuie să primească mesaje ale aplicației.
+
+Nu lipiți un token de bot într-un chat obișnuit. Configurarea integrării nu dovedește conectivitatea Telegram și nu creează automat un bot. Capturile de ecran și răspunsurile pot conține date private din spațiul de lucru.
+
+Selectați un preset de asistent și acordați permisiunea de operare în aplicație separat de inspecție. Execuția asistentului Codex și Antigravity necesită permisiunea nativă a proprietarului; acestea nu sunt înlocuite în mod silențios cu o sesiune API sau Claude fără instrumente. Capturile de ecran pot fi afișate în conversația cu asistentul, dar datele de intrare actuale ale modelului nu includ analiza imaginilor. Nu presupuneți că asistentul a inspectat vizual o imagine doar pentru că a afișat-o.
+
+Asistentul poate inspecta rezumate, sarcini, conversații, starea fluxului de lucru, contextul procesului și ferestrele aplicației prin intermediul instrumentelor tipizate. Acesta poate modifica setările obișnuite permise și poate lansa operațiuni autorizate ale aplicației. Nu poate acorda drepturi native, nu poate dezvălui acreditările stocate, nu poate modifica permisiunea rădăcină a spațiului de lucru de la distanță și nu poate aproba o poartă Forge doar pentru că este convenabil.
+
+Instrucțiuni asociate: [Contract de control al aplicației](../../AGENT_CONTROL.md).
+
+<a id="telegram"></a>
+
+## Operați botul privat de Telegram
+
+Creați sau obțineți propriul bot, inițiați conversația privată cu acesta și introduceți tokenul său și ID-ul numeric de utilizator Telegram în setările locale de control. Activați integrarea numai atunci când intenționați ca aplicația să se conecteze. ID-ul de proprietar este un identificator de utilizator, nu un nume de utilizator sau un ID de bot. Sunt acceptate numai mesajele de la acel utilizator din aceeași conversație privată.
+
+Utilizați /start, /menu sau /status pentru o prezentare generală a versiunii care rulează, a numărului de proiecte/sarcini și a stărilor sarcinilor. Butoanele deschid Proiecte, Sarcini, Captură de ecran, Ajutor și Limbă. Listele afișează opt elemente pe pagină, cu navigare Înapoi, Reîmprospătare, Acasă și Anterior/Următor. Butoanele de proiect filtrează lista de sarcini. Un card de sarcină arată progresul salvat al fluxului de lucru, modelul/presetul și întrebările în așteptare, dacă există.
+
+Deschideți Conversațiile unei sarcini pentru a previzualiza conversațiile deschise/recente și conversațiile din fazele fluxului de lucru. Fiecare previzualizare afișează până la șase dintre cele mai recente mesaje utilizator/asistent, scurtate vizibil la câte 200 de caractere fiecare. Raționamentul privat nu este afișat. Citirea istoricului nu pornește un furnizor. Previzualizările sunt doar pentru citire: textul obișnuit și /ask TEXT se adresează în continuare asistentului aplicației, niciodată implicit conversației sarcinii pe care o vizualizați.
+
+Rulare / Continuare recitește fluxul de lucru curent Code sau Work și pornește un flux de lucru salvat eligibil. Pauză solicită punerea pe pauză a acestuia. Niciuna dintre ele nu acceptă cerințe, o specificație, un plan, constatări ale revizuirii sau întrebări; o decizie în așteptare împiedică Rularea. Luați decizii în aplicație sau utilizați o comandă tipizată autorizată explicit, cu poarta și revizia exactă actuale.
+
+Utilizați Limbă sau /language pentru a selecta oricare dintre cele 56 de limbi de interfață după numele său nativ. Aceasta salvează o preferință numai pentru acest bot și proprietar. Utilizare limbă aplicație șterge această preferință. Nu modifică nici limba aplicației, nici permisiunile de acces; mesajele existente nu sunt retrimise automat.
+
+Navigarea actualizează în mod normal același mesaj de meniu publicat. Butoanele au identități opace care expiră după 15 minute și pot fi utilizate o singură dată; modificarea unui card invalidează butoanele sale vechi. Butoanele expirate, consumate, asociate altor mesaje sau provenite dintr-un proces anterior nu pot efectua o acțiune. Un mesaj care este în mod cert needitabil poate fi înlocuit cu un card nou; o eroare de rețea necunoscută nu este reîncercată ca un mesaj nou.
+
+La activare, poller-ul elimină restanțele anterioare și înregistrează acceptarea actualizării înainte de expediere, astfel încât comenzile întrerupte să nu fie reluate automat la repornire. Acest lucru previne reluarea; nu garantează finalizarea. Verificați starea/contextul înainte de a lansa în mod deliberat sarcini noi după o eroare. Nu există notificări automate privind starea sarcinilor.
+
+Comenzile explicite rămân disponibile: /projects, /tasks, /task TASK_ID, /run TASK_ID, /pause TASK_ID, /screenshot și /ask TEXT. /new {JSON} creează o sarcină prin createTask tipizat; /command {JSON} trimite o comandă explicită din catalog. Consultați catalogul activ pentru structura argumentelor. Se aplică aceleași autorizări de backend și permisiuni de dosar ca în aplicație.
+
+Aplicația nu trimite niciodată asistentului valorile stocate ale tokenului de bot. Cu toate acestea, capturile de ecran, rezumatele și textul conversației pot conține informații private despre proiect. Opriți integrarea local dacă botul sau contul proprietarului nu mai prezintă încredere. Rotiți un token compromis la furnizorul botului, apoi actualizați configurația sa criptată locală.
+
+Instrucțiuni asociate: [Bot privat și comenzi](../../AGENT_CONTROL.md).
+
+<a id="native-permissions"></a>
+
+## Permisiune nativă de acces la computer doar pentru proprietar
+
+Accesul nativ la computer începe dezactivat. Numai proprietarul îl poate activa în Setări locale → Control la distanță. Asistentul și comenzile HTTP/MCP/Telegram nu pot activa această opțiune pentru ele însele. Dacă o operațiune este refuzată, asistentul ar trebui să descrie setarea și să lase proprietarul să decidă.
+
+Când este activat explicit, computer.run acceptă un executabil, un tablou de argumente și un director de lucru absolut opțional. Nu utilizează interpolare shell, are o limită de 30 de secunde și limitează ieșirea la 1 MiB. Un director furnizat care lipsește sau este nevalid este refuzat; omiterea directorului de lucru curent utilizează directorul de setări deținut de aplicație, nu HOME. Ieșire anulează comenzile deținute active și așteaptă curățarea proceselor acestora.
+
+Domeniul de citire/operare al aplicației și accesul nativ sunt decizii separate. Un arbore de lucru nu limitează accesul la sistemul de fișiere al unui furnizor nerestricționat. Revocați accesul nativ după finalizarea sarcinii dacă nu mai este necesar și inspectați confirmările comenzilor în loc să acceptați textul asistentului ca dovadă.
+
+Instrucțiuni asociate: [Contract de control doar pentru proprietar](../../../shared/control.ts).
+
+<a id="remote"></a>
+
+## Browser și instanțe la distanță
+
+Proprietarul local activează serverul și alege adresa, portul și domeniul acestuia: citire pentru inspecție sau operare pentru acțiuni. Adresa implicită 127.0.0.1 este disponibilă numai pe acest computer. 0.0.0.0 ascultă pe interfețele de rețea; examinați accesul la rețea înainte de a-l activa.
+
+Un browser deschide aceeași interfață după autentificarea cu token. Nu includeți tokenuri în linkuri publice sau capturi de ecran. Doar HTTP nu criptează traficul; utilizați un canal protejat printr-o rețea care nu prezintă încredere.
+
+Proprietarul configurează alte instanțe prin URL și token. Backend-ul intermediază cererile; acest lucru nu copiază proiectele acestora pe mașina locală. Verificați instanța selectată înainte de fiecare acțiune.
+
+Comenzile și evenimentele tipizate asigură controlul aplicației. Domeniul de citire nu autorizează modificări ale sarcinilor. Controlul nativ al computerului este o opțiune separată a proprietarului local și începe dezactivat.
+
+Aplicația trebuie să rămână în execuție pentru controlul din browser, Telegram și agenți externi. Fiecare instanță are propriul profil privat, stare a sarcinilor, token și port de server. Nu reutilizați un profil în mod concurent între instanțe independente. Evenimentele din browser și răspunsurile la comenzi sunt limitate la instanța selectată; comutarea UI nu mută fișierele și nu copiază autentificarea nativă.
+
+Instrucțiuni asociate: [HTTP și controlul instanțelor](../../AGENT_CONTROL.md).
+
+<a id="external-agents"></a>
+
+## OpenClaw, Hermes și alți agenți externi
+
+Utilizați API-ul autentificat de control al aplicației sau puntea stdio MCP inclusă. Activați serverul local, alegeți citire sau operare și configurați fiecare client cu URL-ul și tokenul acelei instanțe. Este necesar Node.js 22 sau mai recent pentru a rula puntea MCP de sine stătătoare; aplicația Electron nu vă instalează clientul agent. URL-ul din browser nu este un endpoint MCP HTTP transmisibil în flux: furnizați-l ca ZIAFORGE_URL punții stdio.
+
+Puntea expune ziaforge_status, ziaforge_commands, ziaforge_command și ziaforge_screenshot. Începeți cu starea și catalogul live de comenzi, apoi citiți system.context pentru sarcina selectată. Comenzile tipizate respectă aceleași verificări de revizie, poartă, dosar de sarcină și curățare ca UI local.
+
+Catalogul live de comenzi include documentation.guide, ajutorul canonic în limba engleză, cu calea sursă și sourceSha256. Arhitectul intern al aplicației primește aceeași referință prin intermediul instrumentelor sale. Acest lucru le oferă agenților întregul context al produsului fără a depinde de note mai vechi; documentația nu acordă niciodată acces și nu înlocuiește o decizie umană curentă.
+
+Agenții ar trebui să discute cerințele, deciziile tehnice și planificarea pornind de la o idee umană scurtă. Aceștia trebuie să respecte porțile umane explicite, modelele selectate, politica manuală/Auto și revizuirea obligatorie. Nu trebuie să inventeze aprobări, să reia comenzi incerte sub un nou ID sau să publice modificări Git fără intenția proprietarului.
+
+Configurați mai multe servere MCP denumite pentru mai multe instalări. Comutarea instanțelor este o decizie de rutare, nu sincronizare. Exemplele de configurare pentru OpenClaw și Hermes se află în AGENT_CONTROL.md; configurarea specifică clientului și compatibilitatea trebuie verificate pentru versiunea instalată a clientului.
+
+Memoria cache externă requestId deduplică doar un set limitat de cereri în timp ce aplicația rulează. Operațiunile durabile folosesc propriile identități: createRequestId pentru crearea sarcinilor, commandId pentru deciziile fluxului de lucru, clientMessageId pentru mesaje și operationId pentru modificări Git. Păstrați identitatea și conținutul util inițiale după o confirmare necunoscută; citiți starea salvată înainte de a lansa în mod deliberat sarcini noi.
+
+Instrucțiuni asociate: [Instrucțiuni pentru clientul MCP](../../AGENT_CONTROL.md).
+
+<a id="local-cli"></a>
+
+## CLI local și limitele de automatizare
+
+Dispecerul ziaf controlează aceeași aplicație în execuție și același flux de lucru salvat. Din sursă, utilizați npm run ziaf -- list, npm run ziaf -- status --task TASK_ID --json, npm run ziaf -- start --task TASK_ID sau npm run ziaf -- pause --task TASK_ID. O confirmare de pornire reușită nu înseamnă că sarcina a fost finalizată.
+
+--until-success activează în mod deliberat Auto pentru fluxul de lucru salvat, dar întrebările, revizuirea, porțile de acceptare, limitele și punctele de control se aplică în continuare. Ctrl+C închide dispecerul de observare; nu oprește implicit fluxul de lucru al aplicației. Consultați CLI.md pentru codurile de ieșire, endpoint-ul local și gestionarea profilului.
+
+Interfața Automatizări stochează în prezent definiții de afișare și contoare locale de rulare. Nu este un planificator periodic certificat și nu dovedește că o etapă a modelului în fundal a rulat. Pentru execuția efectivă, utilizați controalele fluxului de lucru salvat, ziaf sau API-ul autentificat și inspectați confirmările acestora. Nu confundați panoul demonstrativ cu o planificare nesupravegheată.
+
+Instrucțiuni asociate: [Comenzi ale dispecerului](../../CLI.md).
+
+<a id="updates"></a>
+
+## Versiune și actualizări
+
+Despre arată versiunea exactă care rulează. Actualizările publice necesită un depozit de versiuni GitHub de încredere și un canal stabil sau de previzualizare. Verificarea, descărcarea și instalarea au stări separate; o eroare nu înseamnă că o actualizare a fost instalată.
+
+Instalarea automată este destinată versiunilor semnate pentru macOS. Versiunile de dezvoltare nesemnate nu sunt instalate automat prin acest mecanism. Pentru înlocuirea manuală, închideți complet aplicația curentă și utilizați un artefact verificat.
+
+Verificarea automată rulează imediat după activare, apoi la fiecare șase ore.
+
+Canalul stabil exclude versiunile de previzualizare; previzualizarea permite și versiuni de dezvoltare. O verificare reușită stabilește doar metadatele versiunii disponibile. Descărcarea și instalarea necesită pachetul specific platformei și fluxul de versiuni configurat. Livrarea pachetelor DEB pe Linux este o cale de instalare separată; nu presupuneți că un pachet DEB este actualizat automat prin mecanismul de actualizare pentru macOS.
+
+Instrucțiuni asociate: [Pregătirea versiunii](../../RELEASE_READINESS.md).
+
+<a id="restart"></a>
+
+## Repornire și recuperare
+
+Pe macOS, utilizați Ieșire / ⌘Q pentru o oprire completă. Închiderea ferestrei poate lăsa aplicația în execuție. Închideți complet vechea versiune înainte de a înlocui aplicația.
+
+După lansare, selectați aceeași sarcină. Istoricul și ciornele revin. Reluare restaurează un context nativ/local, dar nu trimite o ciornă, nu reia coada din pauză și nu autorizează repetarea unei operațiuni necunoscute.
+
+Dacă apare Recuperare, nu editați manual fișierele JSON. Inspectați tipul de document afectat, păstrați fișierele originale și selectați o copie de rezervă validată. Restaurarea unei cozi mai vechi marchează elementele acesteia ca fiind incerte.
+
+Când starea livrării este necunoscută, un flux de lucru gestionat poate avea nevoie de permisiune explicită pentru un context nou. Lucrul anterior și încercările eșuate rămân; un refuz vizibil este mai sigur decât un succes fabricat.
+
+Creați o copie de rezervă a fișierelor sarcinii și a profilului aplicației cu toate instanțele aplicației închise. Un dosar copiat nu este o restaurare testată. Dacă recuperarea vă solicită să selectați o copie de rezervă validată, păstrați și fișierele exacte deteriorate. Restaurarea unui flux de lucru sau a unei cozi mai vechi nu autorizează reluarea deducerilor incerte sau a operațiunilor Git.
+
+Instrucțiuni asociate: [Contract de recuperare](../../DATA_RECOVERY.md).
+
+<a id="troubleshooting"></a>
+
+## Depanare
+
+CLI nu a fost găsit: verificați instalarea și versiunea acestuia într-un terminal obișnuit, apoi reporniți ZIAForge. Prezența unui executabil nu înseamnă că sunteți autentificat. Utilizați mecanismul propriu de autentificare al furnizorului.
+
+Model indisponibil sau autorizarea a eșuat: reîmprospătați descoperirea, selectați un ID disponibil și verificați contul și limitele. Nu repetați o cerere incertă înainte de a inspecta istoricul acesteia.
+
+Flux de lucru oprit: deschideți faza curentă, întrebarea, confirmarea de verificare sau jurnalele CLI. Remediați cauza specifică: o întrebare fără răspuns, comanda, permisiunea pentru dosar sau limita de încercări. Continuare nu poate transforma o verificare eșuată într-un succes.
+
+Dosar lipsă sau înlocuit: restaurați accesul la dosarul original sau creați o sarcină nouă. Aplicația nu trebuie să continue din HOME. Dacă observați un alt director de lucru, opriți tura și păstrați diagnosticele.
+
+Pentru un raport, includeți versiunea din Despre, ruta, CLI/modelul, comportamentul așteptat și cel observat, o captură de ecran și un extras de jurnal sigur. Eliminați secretele, conținutul personal și căile care nu pot fi publicate.
+
+Pagină la distanță indisponibilă: verificați dacă proprietarul a activat serverul, verificați adresa și portul de ascultare, apoi autentificați-vă cu tokenul corect al instanței. O eroare 401 indică o problemă de autentificare; o modificare refuzată poate fi cauzată de domeniul de citire sau de un control exclusiv al proprietarului. Modificarea tokenului închide clienții existenți din browser. Nu expuneți portul separat de inspecție DevTools drept control la distanță al aplicației.
+
+Salvarea în editor a fost refuzată: păstrați ciorna, inspectați fișierul curent de pe disc și rezolvați conflictul generat de modificările externe. Nu ocoliți compararea prin rescrierea metadatelor aplicației. Dacă încărcarea completă a fișierelor mari nu este disponibilă, utilizați editarea/căutarea în fereastră acceptată sau un editor extern.
+
+Telegram indisponibil: confirmați local tokenul de bot, ID-ul numeric al proprietarului, conversația privată și starea. Un webhook sau un poller concurent poate bloca interogarea; ZIAForge nu șterge automat un webhook și nu preia controlul asupra unui alt poller. Comenzile respinse sau întrerupte la o limită necunoscută nu sunt reluate automat.
+
+Instrucțiuni asociate: [Testare și diagnosticare](../../TESTING.md).
+
+<a id="diagnostics"></a>
+
+## Raportați probleme și inspectați dovezile
+
+Înregistrați compilarea exactă care rulează din Despre, OS/arhitectura, modul de sarcină, furnizorul/modelul selectat și pașii care reproduc problema. Descrieți rezultatul așteptat și rezultatul observat. Includeți o captură de ecran sigură și confirmarea de verificare sau comanda reținută relevantă, mai degrabă decât un întreg profil privat.
+
+Jurnalele CLI, jurnalele de evenimente, transcrierile modelelor, urmele din browser și capturile de ecran pot expune codul sursă, căi personale sau tokenuri. Inspectați și redactați înainte de partajare. Un instrument de cenzurare a jurnalelor pe principiul celui mai bun efort nu certifică faptul că o captură de ecran sau o arhivă poate fi publicată.
+
+Pentru colaboratori, qa:doctor citește identitatea mediului/compilării; qa:inspect deschide un profil izolat cu simulări de furnizor. O componentă fixture demonstrează calea testată a aplicației fără a contacta un model. Deducerea în timp real, conectivitatea Telegram, desktopul nativ Linux, semnarea și verificările artefactelor împachetate reprezintă dovezi separate. Consultați TESTING.md pentru comenzi reproductibile și curățare.
+
+Instrucțiuni asociate: [Comenzi pentru dovezi](../../TESTING.md).
+
+<a id="privacy"></a>
+
+## Date locale și limite
+
+Proiectele, istoricul, planurile, documentele și diagnosticele pot conține text privat. Nu publicați profiluri, capturi brute, chei sau jurnale complete care conțin cod sursă.
+
+Pe Linux, salvarea acreditărilor pentru API, control, Telegram și instanțe necesită un GNOME Secret Service deblocat sau KWallet; fără un depozit de secrete acceptat, ZIAForge refuză să salveze aceste secrete în loc să utilizeze mecanismul de rezervă basic_text din Electron.
+
+Stocarea locală nu înseamnă că cererile rămân pe computerul dumneavoastră: CLI/API-ul selectat le trimite către furnizorul său. Un dosar de lucru și supravegherea proceselor nu reprezintă o izolare la nivel de OS. Inspectați permisiunile selectate.
+
+Distingeți tipurile de dovezi: fișierele fixture testează aplicația fără un model; modul nativ live utilizează un CLI/cont real; verificările pachetelor certifică un artefact specific. Trecerea unui test nu le garantează pe celelalte.
+
+Domeniul de aplicare al aplicației, un arbore de lucru și un prompt doar pentru citire sunt diferite de aplicarea restricțiilor la nivel de sistem de operare. Politicile de recenzent/asistent Antigravity detectează modificările în dovezile colectate din spațiul de lucru mai degrabă decât să impună accesul doar pentru citire la sistemul de fișiere. Controlul nativ al computerului execută programe autorizate de proprietar în afara limitei obișnuite a instrumentelor aplicației; dezactivați-l atunci când nu mai este necesar.
+
+Instrucțiuni asociate: [Proveniență și publicare](../../RELEASE_READINESS.md).
+
+<a id="project-contributors"></a>
+
+## Înțelegeți și modificați acest proiect open-source
+
+Citiți mai întâi AGENTS.md și CONTRIBUTING.md, apoi PROJECT_MAP.md pentru delimitările actuale ale sursei. Contractele tipizate implementate și documentele actuale privind fluxul de lucru/furnizorii guvernează comportamentul. CONCEPT.md și secțiunile centrate pe terminal din ARCHITECTURE.md păstrează intenția istorică și nu trebuie confundate cu specificațiile versiunii curente.
+
+Sursa în limba engleză a ajutorului este docs/help/en.json. Nu editați manual fișierele generate USER_GUIDE.md sau website/guide.html. Modificați secțiunea canonică, actualizați contractul afectat și rulați node scripts/help/generate.cjs. Secțiunea de Ajutor din aplicație citește aceeași sursă. Revizuiți completările în raport cu implementarea reală, inclusiv limitele, permisiunile și căile neacceptate.
+
+Fiecare dintre cele 56 de configurări regionale de interfață are o stare de ajutor separată în docs/help/locales.json. Ajutorul lipsă sau incomplet revine la limba engleză ca rezervă. Textele complete traduse automat sunt etichetate și asociate cu hash-ul sursei în limba engleză, fără a pretinde o revizuire umană. O traducere revizuită de un om înregistrează în plus recenzentul său. Fiecare traducere trebuie să păstreze ID-urile secțiunilor, acțiunile, identificatorii de fișiere/comenzi și limitele tehnice, să utilizeze direcția corectă de scriere și să fie reîmprospătată atunci când sursa sa în limba engleză se modifică.
+
+Înainte de lansare, rulați node scripts/help/generate.cjs --check pentru a detecta fișierele de ieșire generate învechite, structurile nevalide de configurări regionale sau linkurile locale întrerupte către contracte. Verificările traducerii UI și verificările comportamentului aplicației rămân separate. HELP_MAINTENANCE.md oferă procedura de actualizare pentru colaboratori și AI; documentația nu trebuie să pretindă că un test care nu a rulat a fost trecut.
+
+Instrucțiuni asociate: [Harta curentă a proiectului](../../PROJECT_MAP.md) · [Mentenanța documentației](../../HELP_MAINTENANCE.md) · [Instrucțiuni pentru colaboratori](../../../CONTRIBUTING.md) · [Instrucțiuni pentru agenți](../../../AGENTS.md).

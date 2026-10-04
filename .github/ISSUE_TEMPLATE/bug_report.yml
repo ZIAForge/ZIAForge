@@ -1,0 +1,33 @@
+name: Bug report
+description: Report a reproducible application problem
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: "Use a disposable project. Do not attach credentials, private prompts or unreviewed logs. See SECURITY.md for vulnerabilities."
+  - type: textarea
+    id: versions
+    attributes:
+      label: Application and environment
+      description: App version/build ID, macOS/architecture, selected CLI/API and its version or model.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Include whether this is a fresh task, an existing chat, a workflow or recovery after Quit.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Expected and actual result
+      description: State what was observed in the UI and in files or receipts; preserve unsent drafts.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Reviewed diagnostic evidence
+      description: Optional sanitized logs, screenshots, error text and QA receipt. Identify fixture versus live behavior.

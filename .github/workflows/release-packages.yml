@@ -1,0 +1,124 @@
+name: Stable release packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_plan:
+        description: Compact JSON from the owner-ledger release.cjs prepare command
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: stable-release-${{ github.ref }}
+  cancel-in-progress: false
+
+# This workflow only compiles and checks package integrity. It runs no unit,
+# provider, native PTY or GUI tests, and does not sign, tag or publish a release.
+jobs:
+  package:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-15-intel
+            platform: darwin
+            arch: x64
+          - runner: macos-15
+            platform: darwin
+            arch: arm64
+          - runner: windows-latest
+            platform: win32
+            arch: x64
+          - runner: windows-11-arm
+            platform: win32
+            arch: arm64
+          - runner: ubuntu-24.04
+            platform: linux
+            arch: x64
+          - runner: ubuntu-24.04-arm
+            platform: linux
+            arch: arm64
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 100
+    defaults:
+      run:
+        shell: bash
+    env:
+      CI: 'true'
+      RELEASE_PLAN: ${{ inputs.release_plan }}
+      TARGET: ${{ matrix.platform }}-${{ matrix.arch }}
+    steps:
+      - name: Preserve committed bytes on the disposable runner
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 24.21.0
+          architecture: ${{ matrix.arch }}
+          cache: npm
+      - name: Materialize the reserved release identity for this unique attempt
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs'), path = require('node:path')
+          if (process.env.GITHUB_REF !== 'refs/heads/main') throw Error('Official packages must be dispatched from main')
+          if (`${process.platform}-${process.arch}` !== process.env.TARGET) throw Error('Release job must use the native target OS and Node architecture')
+          const plan = JSON.parse(process.env.RELEASE_PLAN)
+          const file = path.join(process.env.RUNNER_TEMP, 'release-plan.json')
+          fs.writeFileSync(file, JSON.stringify(plan) + '\n', { flag: 'wx', mode: 0o600 })
+          fs.mkdirSync('release', { recursive: true })
+          NODE
+          node scripts/platform/release.cjs materialize \
+            --plan "$RUNNER_TEMP/release-plan.json" --target "$TARGET" \
+            --attempt "$GITHUB_RUN_ID.$GITHUB_RUN_ATTEMPT" --output release/stable-input
+      - name: Linux packaging dependencies
+        if: matrix.platform == 'linux'
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends build-essential python3 pkg-config rpm libopenjp2-tools libfuse2t64
+      - name: Clean installation with the locked native dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Compile and package this native target without runtime tests
+        run: |
+          mkdir -p release/stable
+          node scripts/platform/package.cjs --build-only \
+            --platform '${{ matrix.platform }}' --arch '${{ matrix.arch }}' \
+            --identity release/stable-input/build-identity.json \
+            --source-manifest release/stable-input/source-manifest.json \
+            --output "release/stable/$TARGET-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+      - name: Require the completed package-integrity receipt
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs'), path = require('node:path')
+          const plan = JSON.parse(process.env.RELEASE_PLAN)
+          const directory = path.join('release/stable', `${process.env.TARGET}-${process.env.GITHUB_RUN_ID}-${process.env.GITHUB_RUN_ATTEMPT}`)
+          const result = JSON.parse(fs.readFileSync(path.join(directory, 'result.json')))
+          if (result.status !== 'passed' || result.version !== plan.version || result.releaseId !== plan.releaseId || result.sourceCommit !== plan.source.commit || result.sourceChanged !== false || result.nativeExecution !== 'not-run-build-only') throw Error('Release package did not complete its declared integrity scope')
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${process.env.TARGET}: ${plan.version}, ${plan.source.commit}. Compile/package integrity passed; runtime, GUI and provider checks not run. Unsigned.\n`)
+          NODE
+      - name: Retain complete packages and diagnostic receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: stable-${{ matrix.platform }}-${{ matrix.arch }}-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          compression-level: 0
+          if-no-files-found: warn
+          path: |
+            release/stable/*/*.json
+            release/stable/*/*.log
+            release/stable/*/SHA256SUMS
+            release/stable/*/THIRD_PARTY_NOTICES.txt
+            release/stable/*/artifacts/*.dmg
+            release/stable/*/artifacts/*.zip
+            release/stable/*/artifacts/*.exe
+            release/stable/*/artifacts/*.deb
+            release/stable/*/artifacts/*.rpm
+            release/stable/*/artifacts/*.AppImage
+            release/stable/*/artifacts/*.tar.gz
+            release/stable-input/*.json
+
+# Artifacts are immutable per run/attempt. Download and retain checksums before
+# a separate authorized publication step; never publish private QA logs or paths.

@@ -1,0 +1,519 @@
+{
+  "schemaVersion": 1,
+  "locale": "ceb",
+  "title": "Giya sa tiggamit sa ZIAForge",
+  "description": "Gikan sa tinguha ngadto sa napamatud-ang resulta. Usa ka praktikal nga giya sa Code, Work ug pagkontrolar sa aplikasyon.",
+  "sourcePolicy": "Ang Iningles maoy kanonikal. Ang hinubad sa makina nga tabang gilain pagmarka gikan sa gipang-usisa sa tawo nga mga hubad. Ang mga awtomatikong pagsusi dili mopamatuod sa katinuod sa lumad nga pinulongan.",
+  "sections": [
+    {
+      "id": "start",
+      "title": "Unang mga lakang",
+      "paragraphs": [
+        "Ang ZIAForge nagtipig sa diskusyon, pagplano, pagpatuman ug pagpamatuod diha sa usa ka buluhaton. Pilia ang Code alang sa usa ka proyekto sa Git, o Work alang sa mga dokumento, panukiduki ug uban pang mga resulta sa usa ka ordinaryong folder.",
+        "Magsugod sa usa ka gamay nga buluhaton sa usa ka bulag nga proyekto. Kon mopili ka ug lumad nga CLI, i-install kini ug pag-sign in gamit ang kaugalingon nitong account sa terminal una. Sa laing paagi, ikumpigura ang usa ka koneksyon sa API. Ang usa ka suskripsyon sa CLI ug usa ka bayad nga API maoy magkabulag nga mga paagi sa koneksyon; ang ZIAForge dili mopasign in kanimo o mobalhin ug mga kredito taliwala kanila."
+      ],
+      "steps": [
+        "Ablihi ang Settings ug susiha ang folder sa workspace ug pinulongan. Ang About nagpakita sa eksaktong identidad sa nagdagan nga build.",
+        "Alang sa Code, pagdugang ug repository sa Git sa sidebar. Alang sa Work, pagpili ug lahi nga folder sa paghimo sa buluhaton.",
+        "I-save ang usa ka preset uban ang CLI, modelo, paningkamot sa pangatarungan ug lebel sa pag-access. Mahimo ka usab nga mopili sa Custom direkta nga walay na-save nga preset.",
+        "Paghimo ug buluhaton, pilia ang rota niini, mga tahas ug mano-mano o awtomatikong pag-abante. Ribyuha ang mga gipili sa dili pa mag-Start."
+      ],
+      "note": "Gamita ang artifact ug checksum nga gihatag sa tigdumala. Ang usa ka preview mahimong walay pirma o walay gipatik nga feed sa pag-update. Ang suporta sa desktop ug lumad nga provider kinahanglang mapamatud-an alang sa eksaktong OS, arkitektura ug artifact; ang suporta sa source lamang dili sertipikasyon sa pagpagawas.",
+      "links": [
+        {
+          "label": "Overview sa proyekto",
+          "path": "README.md"
+        },
+        {
+          "label": "Pagkaangay sa provider",
+          "path": "docs/PROVIDER_COMPATIBILITY.md"
+        }
+      ]
+    },
+    {
+      "id": "install-platforms",
+      "title": "I-install ang saktong desktop package",
+      "paragraphs": [
+        "Pagpili ug package alang sa imong operating system ug arkitektura sa CPU: x64 o arm64. Ang pipeline sa build makahimo ug macOS DMG/ZIP, Windows NSIS installer/ZIP, ug Linux DEB/RPM/AppImage/tar.gz/ZIP nga mga format. Ang usa ka namugna nga file o cross-build dili pamatuod nga ang installer niini ug ang lumad nga UI nakapasar sa imong makina; konsultaha ang talaan sa pagpamatuod sa maong release.",
+        "Ang mga build sa macOS nga naggamit sa Electron 44 nagkinahanglan ug macOS 13 o mas bag-o. Gamita ang package nga arm64 sa Apple Silicon ug ang package nga x64 alang sa Intel. Bug-os nga biyai ang mas daan nga app sa dili pa pulihan. Ang mga preview package mahimong dili pinirmahan ug dili notarized; ayaw saypa ang usa ka artifact sa pag-uswag isip usa ka pinirmahan nga publikong release.",
+        "Ang Windows nagkinahanglan ug operating system nga gisuportahan sa giapil nga bersyon sa Electron ug Git nga anaa sa PATH. Pilia ang katugbang nga arkitektura. Ang usa ka wala mapirmahi nga preview walay sertipikasyon sa Authenticode. Ang madaladala nga ZIP kinahanglang magtipig sa kompletong direktoryo sa aplikasyon ug mga runtime file, dili lang ang executable niini.",
+        "Ang Linux nagkinahanglan ug compatible nga graphical desktop, ang mga librarya sa sistema nga gikinahanglan sa Electron, ug Git. Alang sa na-encrypt nga mga kredensyal sa pagkontrolar, paghatag ug nagtrabaho nga Secret Service sama sa gnome-libsecret o KWallet; ang dili luwas nga backend nga basic_text dili dawaton. Ang ebidensya sa headless/container smoke dili mopamatuod sa matag desktop o distribusyon.",
+        "Pag-install ug DEB gamit ang apt install ./file.deb, o pag-install ug RPM pinaagi sa package manager sa imong distribusyon. Ang usa ka AppImage nagkinahanglan ug permiso nga mapatuman ug angay nga suporta sa FUSE; ang --appimage-extract-and-run maoy usa ka alternatibo kon diin kini gisuportahan. I-extract ang mga package sa tar.gz ug ZIP uban ang tanan nilang runtime file. Ipahilain ang datos sa tiggamit ug mga file sa aplikasyon kon mag-ilis ug package.",
+        "Aron magtukod gikan sa source, gamita ang Node 24, Git ug npm ci, lakip ang normal nga Electron installer. Ang mga lumad nga pagtukod pag-usab nagkinahanglan ug mga galamiton sa plataporma: Xcode command-line tools sa macOS; MSVC C++, Windows SDK ug Python sa Windows; compiler, make, Python, pkg-config ug ang gikinahanglang mga galamiton sa pagputos sa Linux. Sunda ang PLATFORM_BUILDS.md alang sa eksaktong mga sugo ug kasamtangang mga limitasyon sa plataporma.",
+        "Ang mga bersyon sa release gireserba sa sentral nga paagi ug ang mga resulta dili mausab. Ang usa ka build sa pagpamatuod sa CI dili usa ka gimantala nga installer. Ang mga archive sa source adunay sulod nga source, lockfile, dokumentasyon ug mga script; ang mga dependency, kredensyal, profile sa tiggamit ug pribadong panukiduki wala giapil. Ayaw gayod ipangagpas ang balidasyon sa lumad nga ARM o Windows gikan sa malampusong build sa x64."
+      ],
+      "links": [
+        {
+          "label": "Mga package sa plataporma, mga gikinahanglan ug mga limitasyon sa pagpamatuod",
+          "path": "docs/PLATFORM_BUILDS.md"
+        },
+        {
+          "label": "Identidad sa build ug mga pagsusi sa release",
+          "path": "docs/RELEASE_READINESS.md"
+        }
+      ]
+    },
+    {
+      "id": "code",
+      "title": "Code: lima ka rota",
+      "paragraphs": [
+        "Ang Auto magtimbang-timbang sa gilapdon: ang usa ka yano nga pangutana mahimong mahuman sa usa ka tubag, samtang ang mas dako nga buluhaton nagkinahanglan ug pagpangandam. Ang Fix a bug mag-imbestigar sa hinungdan ug mag-andam ug pagtul-id. Ang Spec first magsugod sa teknikal nga solusyon; ang Requirements first magsugod sa mga kinahanglanon ug criteria sa pagdawat.",
+        "Ang Multi-model naggamit ug managlahing mga konteksto alang sa eksplorasyon, disenyo, pagpatuman ug pagrepaso. Ang ngalan sa rota wala magkinahanglan ug lain-laing mga provider: ang matag tahas naggamit sa preset o Custom nga kumpigurasyon nga imong gipili.",
+        "Ang usa ka Worktree maglain sa mga kausaban sa Git sa usa ka buluhaton. Ang Branch magtrabaho sa napiling checkout. Susiha ang proyekto, sanga ug modelo sa dili pa magsugod; ang deskripsyon sa buluhaton dili usab ipadala ngadto sa ordinaryong chat.",
+        "Alang sa usa ka ideya nga adunay wala pa masulbad nga mga pagpili sa produkto o teknikal, gamita ang Requirements first ug tukora ang pundasyon diha sa diskusyon. Ang Auto magklasipikar sa hangyo; dili kini usa ka sugo sa pagpatuman dayon sa matag mubo nga pulong. Ang Save draft magpabilin sa hangyo nga dili makontak ang modelo; ang Start magtipig ug maglunsad sa gidumalang dagan sa makausa. Ang usa ngadto sa upat ka kopya sa buluhaton adunay independente nga mga ID sa pagmugna ug mga setting sa tahas."
+      ],
+      "links": [
+        {
+          "label": "Kontrata sa workflow sa Code",
+          "path": "docs/WORKFLOWS.md"
+        },
+        {
+          "label": "Mga profile sa prompt sa Code",
+          "path": "docs/CODE_WORKFLOW_PROMPTS.md"
+        }
+      ]
+    },
+    {
+      "id": "forge",
+      "title": "Diskusyon sa Forge",
+      "paragraphs": [
+        "Ang Start mag-abli sa sentral nga diskusyon. Tubag sa natural nga paagi, pangutana ug mga balos nga pangutana, pagdugang ug mga limitasyon ug hisguti ang mga teknikal nga pagpili. Ang panag-estorya ug mga pangutana magpabilin uban sa buluhaton.",
+        "Ang pagpadala ug teksto dili modawat sa usa ka dokumento o magtugot ug bag-ong plano sa pagpatuman. Ang usa ka pagpatin-aw panahon sa pagpatuman mopahunong una sa gidumalang turno ug mobisita pag-usab sa naapektuhang gilapdon. Ang usa ka tubag sa usa ka pangutana sulod sa usa ka gidawat na nga lakang makapadayon sa maong lakang.",
+        "Aron tinuyo nga bisitahon pag-usab ang pundasyon, pilia ang Requirements, Specification o Planning. Ang usa ka bag-ong bersyon nagkinahanglan ug bag-ong pagdawat sa mga nagsalig nga desisyon. Ang nahuman nga mga lakang ug ang ilang ebidensya magpabilin; ang gipulihan nga wala mahuman nga mga hugna magpabilin sa kaagi.",
+        "Ang gidumalang mga sesyon sa hugna lahi sa libre nga chat. Gamita ang diskusyon sa Forge imbes nga magpadala ug mga mano-manong prompt direkta ngadto sa sesyon nga gipanag-iya sa workflow."
+      ],
+      "links": [
+        {
+          "label": "Kontrata sa diskusyon sa Forge",
+          "path": "docs/WORKFLOWS.md"
+        }
+      ]
+    },
+    {
+      "id": "decisions",
+      "title": "Mga dokumento ug mga desisyon",
+      "paragraphs": [
+        "Ablihi ang usa ka dokumento, susiha ang bersyon niini ug paghimo ug mga pag-edit kon gikinahanglan. Ang pagsumite sa mga pag-edit pinaagi sa diskusyon maghimo ug bag-ong bersyon; ang mga taho ug napamatud-ang mga resulta dili usbon sa paghinumdom balik.",
+        "Sa dili pa modawat sa gisugyot nga plano, usba ang han-ay, mga panudlo, criteria sa pagdawat ug mga sugo sa pagpamatuod. Tugoti ang konkretong mga sugo nga imong nasabtan: modagan kini sa folder sa buluhaton. Ang Multi-model mosugyot ug usa ka lakang sa pagpatuman sa tibuok buluhaton, uban ang mga detalye sa mga dokumento ug panudlo niini.",
+        "Ang Approve maoy usa ka bulag nga tinuyo nga desisyon. Ang Auto dili molaktaw sa mga pangutana o pagdawat sa mga kinahanglanon, mga espesipikasyon ug mga plano. Ang usa ka dokumento nga nausab sa gawas dili makagamit pag-usab sa daan nga pag-uyon.",
+        "Ang mga file sa pagpangandam makita isip mga artifact. Ang ilang bersyon, hugna nga naghimo ug hash magbugkos kanila sa usa ka resulta. Ang mga dokumento sa Code gitipigan sa gawas sa worktree ug dili awtomatikong mosulod sa usa ka commit.",
+        "Susiha ang dokumento ug ang gipakita nga desisyon sa dili pa modawat. Ang pagdawat magbugkos sa kasamtangang ganghaan ID, rebisyon sa plano ug nahibilin nga mga hash sa dokumento. Paghangyo ug mga kausaban kon sayop ang gilapdon o ebidensya. Kon ang usa ka desisyon nahimong karaan na, kargaha pag-usab ang gitipigang kahimtang sa dili pa maghimo ug bag-ong pagpili; ang usa ka nausab nga file dili madawat ubos sa mas sayo nga bersyon."
+      ],
+      "links": [
+        {
+          "label": "Mga ganghaan sa workflow ug mga bersyon sa dokumento",
+          "path": "docs/WORKFLOWS.md"
+        }
+      ]
+    },
+    {
+      "id": "execution",
+      "title": "Pagpatuman ug pagrepaso",
+      "paragraphs": [
+        "Ang To-do nagpakita sa tinuod nga mga lakang, ang kasamtangang pagsulay, pagpamatuod ug mga resulta sa pagrepaso. Ang usa ka ahente nga nag-ingon ug “done” dili mokompleto sa usa ka lakang: ang gikinahanglang ebidensya sa plano kinahanglang anaa.",
+        "Ang mano-manong paagi mohunong taliwala sa mga kuwalipikadong lakang. Ang Auto mopaasdang sa napamatud-ang mga lakang ug motugot ug limitado nga mga pagsulay pag-usab. Ang Stop after kanunay nga maghimo ug checkpoint. Ang Pause mopahunong sa aktibong trabaho sa workflow; ang pagsira sa usa ka panel dili mopahunong niini.",
+        "Ang usa ka independente nga tigrepaso naggamit ug lahi nga konteksto uban ang mga file ug mga resulta sa pagpamatuod. Ang matag gikinahanglang makababag nga kaplag kinahanglang masulbad; ang daghang tigrepaso dili makabotar aron wagtangon ang usa ka makababag nga sayop.",
+        "Sa Multi-model, ang pagtul-id sa mga kaplag nagkinahanglan ug klarong desisyon. Ang pagtul-id dili hilom nga magsugod ug laing pagrepaso: ang Review again mag-abli ug bag-ong siklo. Ang mga komento sa pagrepaso mahimong mohangyo sa koordinetor nga konsiderahon pag-usab nga dili na usbon ang pagpatuman.",
+        "Ang nahuman nga mga lakang dili mahimong hilom nga usbon. Uban sa TDD, ang Red kinahanglang mapakyas gayod alang sa gipaabot nga rason, unya ang Green kinahanglang makapasar. Ang limitado nga mga pagsulay magpugong sa walay kataposang mga pagsulay pag-usab.",
+        "I-save ang independente nga CLI/API nga mga tigrepaso sa Settings → Review teams, unya pilia ang team sa Code o Work. Ang mga tigrepaso magdungan sa pagdagan, sundan sa report architect sa team. Mahimo ka usab magkumpigura ug independente nga mga tigrepaso nga walay gitipigan nga team. Ang report architect makadawat lamang ug dili mailhan nga structured nga mga taho, nga walay mga file sa proyekto o mga galamiton; kini nga paglain sa pagkakaron nagkinahanglan ug Claude Code o API.",
+        "Ang matag lakang sa pagpatuman nagkinahanglan ug mapatuman nga pagsusi, gikinahanglan nga independente nga pagrepaso, o pareho. Ang mga hugna sa pagpangandam hinuon magpabilin sa napamatud-ang mga resulta ug mga resibo sa artifact; kini wala magpakaaron-ingnon nga ang mga pagsulay sa pagpatuman midagan. Ang usa ka sugo magmalampuson lamang kon ang tinuod nga exit status niini ug ang paglimpyo sa gipanag-iyahan nga proseso mapamatud-an. Ang usa ka Red nga pagsusi alang sa TDD kinahanglang mapakyas sa normal nga paagi sa dili pa ang pagpatuman ug Green nga pagpamatuod; ang usa ka nawala nga executable o usa ka timeout dili balido nga Red nga resulta.",
+        "Ang mga default circuit breaker mohunong human sa tulo ka napakyas nga pagsulay sa usa ka lakang o kalim-an ka pagsulay sa kinatibuk-an. Ang pagbalda mokonsumo ug usa ka pagsulay apan dili mismo maisip nga usa ka napakyas nga pagsulay. Ang mga limitasyon ug nahuman nga ebidensya molahutay sa pagsugod pag-usab; ang Retry dili mag-reset niini. Basaha ang nahibilin nga kapakyasan sa dili pa motugot sa laing pagsulay."
+      ],
+      "links": [
+        {
+          "label": "Pagpamatuod ug pagrepaso",
+          "path": "docs/WORKFLOWS.md"
+        }
+      ]
+    },
+    {
+      "id": "review-teams",
+      "title": "Dungan nga mga team sa pagrepaso ug ang report architect",
+      "paragraphs": [
+        "Ablihi ang Settings → Review teams ug pag-save ug team. Pagdugang ug independente nga mga tigrepaso uban ang ilang kaugalingong CLI o API, modelo, paningkamot sa pangatarungan ug espesyalisasyon, unya pagpili ug report architect. Pilia ang team diha sa kumpigurasyon sa pagrepaso sa buluhaton. Ang usa ka preset sa executor mahimo usab nga gamiton sa usa ka tigrepaso, ug ang Custom magpabilin nga magamit; ang independente nga mga tahas aduna gihapon managlahing konteksto.",
+        "Ang mga tigrepaso magdungan sa pagdagan sa samang ebidensya sa buluhaton. Ang matag gikinahanglang taho, sayop ug hukom ipabilin. Ang arkitekto makadawat ug dili mailhan nga may numerong mga taho nga walay mga ngalan sa tigrepaso, mga identidad sa modelo o provider, orihinal nga sulod sa buluhaton, pag-access sa repository o mga galamiton. Nagtandi kini sa mga taho ug nagbalik ug usa ka structured nga hukom; wala kini nagpahigayon ug bag-ong pagrepaso sa tinubdan.",
+        "Ang usa ka makababag nga kaplag o ang pagsalikway sa gikinahanglang tigrepaso dili mahimong tangtangon pinaagi sa mayoriya nga botasyon o kagustohan sa arkitekto. Ang nawala o sayop nga porma sa mga taho magpugong sa pag-uyon. Susiha ang tagsa-tagsa ka mga kaplag ug ang gitipong desisyon sa dili pa modawat o motugot sa mga pagtul-id. Ang usa ka na-save nga team masulbad ug ma-freeze alang sa dagan; ang pag-edit sa preset niini dili mousab sa nahuman nga ebidensya.",
+        "Ang report-only nga arkitekto kasamtangang naggamit sa gisuportahang Claude o API nga mga kumpigurasyon nga walay gamit. Ang Codex ug Antigravity magpabiling magamit isip mga tigrepaso apan gibalibaran alang niining nahilit nga tahas sa arkitekto hangtod nga adunay napamatud-ang kontrata nga walay gamit. Ang usa ka prompt nga nag-ingon nga “no tools” lamang dili igo."
+      ],
+      "note": "Ang pipeline sa disenyo/pagrepaso sa Code Multi-model ug ang gitipigan nga parallel review team maoy magkabulag nga mga kontrol. Hupti ang gipili nga custom review policy; ayaw ipangagpas nga ang usa ka rota makapagana sa matag feature sa pagrepaso.",
+      "links": [
+        {
+          "label": "Natipe nga kumpigurasyon sa team",
+          "path": "shared/review-team.ts"
+        },
+        {
+          "label": "Pang-agregat sa pagrepaso",
+          "path": "electron/workflow/ReviewAggregation.ts"
+        }
+      ]
+    },
+    {
+      "id": "specializations",
+      "title": "Mga espesyalisasyon sa ahente ug polisiya sa prompt",
+      "paragraphs": [
+        "Ang usa ka modelo mao ang makina sa pagpatuman; ang usa ka espesyalisasyon maoy usa ka profile sa panudlo. Pilia ang None alang sa walay dugang nga espesyalisasyon, Standard alang sa default nga giya, Auto alang sa usa ka may kalabutan nga built-in nga giya, o Manual alang sa pinili nga mga giya ug imong kaugalingong limitado nga mga panudlo. Ang mga preset makatipig sa gipili.",
+        "Ang orihinal nga katalogo naglangkob sa kinatibuk-ang coding, arkitektura, kasegurohan, kasaligan, pasundayag, pagsulay ug paggamit sa interface. Ang Auto naggamit sa anaa nga teksto sa buluhaton/lakang aron pagpili ug giya; wala kini hilom nga motawag ug laing modelo o mopamatuod sa kahanas. Ang mga sugyot sa pagplano mahimong susihon ug usbon sa dili pa dawaton ang plano sa pagpatuman.",
+        "Ang mga espesyalisasyon sa pagrepaso makatabang sa pagdumala sa pagtagad apan dili gayod mopuli sa independente nga ebidensya, mga limitasyon sa pag-access o sa structured nga hukom. Isipa ang naandan nga mga panudlo isip bahin sa gilapdon sa buluhaton: ayaw gamita kini aron laktawan ang pagdawat sa dokumento, polisiya sa gamit, pag-authenticate o mga kapakyasan sa tigrepaso."
+      ],
+      "links": [
+        {
+          "label": "Orihinal nga katalogo sa prompt",
+          "path": "shared/specializations.ts"
+        }
+      ]
+    },
+    {
+      "id": "work",
+      "title": "Work: gikan sa pangutana ngadto sa dokumento",
+      "paragraphs": [
+        "Ang Work wala magkinahanglan ug Git. Ang Default maghimo ug bulag nga folder sa buluhaton; ang Custom magpili ug kasamtangang folder pinaagi sa lumad nga picker. Ang Save draft magtipig sa mga setting nga walay inference; ang Start magpadagan sa unang hugna.",
+        "Ang Auto motubag direkta o mosugyot ug angay nga plano uban ang tinuod nga mga To-do. Ang Brainstorm maghimo ug ideas.md sa dili pa ka mopili ug dugang nga mga ideya o ebalwasyon. Ang Research magtipig sa findings.md, mga tinubdan ug mga limitasyon. Ang Write mobalhin gikan sa tinguha ug, kon mapuslanon, outline.md ngadto sa usa ka mahulagwayong dokumento o draft.md; ang mga rebisyon magpabilin sa nangaging mga bersyon.",
+        "Pilia ang mga input sa file pinaagi sa lumad nga picker ug i-reference kini gamit ang @. Kopyahon kini sa app isip dili mausab nga mga input sa buluhaton ug pamatud-an ang ilang identidad sa dili pa ang pagdagan. Ang Default maghimo ug folder sa buluhaton nga gipanag-iyahan sa aplikasyon; ang pag-access sa folder sa Custom maoy usa ka gitipigan nga pagtugot sa tag-iya. Ang usa ka na-save, wala pa masugdan nga draft mahimong mousab sa folder niini.",
+        "Paghimo ug 1–4 nga mga kopya uban ang independente nga mga setting sa executor. Ang mga buluhaton nga naggamit ug nagsapaw nga mga folder dili makasulat sa dungan nga paagi. Kini nga koordinasyon magamit sa mga operasyon sa ZIAForge, dili sa bisan unsang eksternal nga mga programa.",
+        "Ang Deep Brainstorm nag-default sa tulo ka independente nga mga trabahante ug nagsuporta hangtod sa walo. Pilia ang ilang han-ay ug mga kumpigurasyon, lakip ang paggamit pag-usab sa usa ka preset sa magkabulag nga mga konteksto. Ang mga pangutana sa trabahante magpabilin sa ilang mga gigikanan; ang sayop nga porma sa mga taho makadawat ug usa ka pagsulay sa pag-ayo sa format. Ang dili kompleto nga kapakyasan magpabiling makita imbes nga ipresentar isip unanimous nga kalampusan.",
+        "Ang Deep maghiusa sa nahabilin nga mga taho sa trabahante ngadto sa brainstorm_report.md ug kanunayng mangayo ug desisyon sa tiggamit. Ang usa ka gamay nga follow-up mag-usab sa taho pinaagi sa koordinetor; ang usa ka dakong kausaban magsugod ug laing hugna sa na-freeze nga mga trabahante. Ang mga artifact magpabilin sa ilang mga bersyon.",
+        "Ang nasulbad nga mga tahas mo-freeze sa paghimo sa buluhaton o klarong pag-save sa draft. Human sa unang pagtawag, awtomatiko/mano-mano lamang nga pag-abante ang mahimong mausab; paggamit ug bag-ong buluhaton alang sa lain-laing mga setting sa tahas o modelo. Ang pag-edit sa tibuok kalibotan nga preset dili hilom nga mag-usab sa ulahing mga hugna.",
+        "Ang mano-manong paagi mohunong taliwala sa mga kuwalipikadong hugna, lakip ang usa ka dakong outline sa Write. Ang Auto makapadayon pinaagi sa maong outline. Ang mga pangutana, gisugyot nga mapatuman nga mga plano, direksyon sa Brainstorm ug pagrepaso sa taho sa Deep magpabiling klarong mga desisyon bisan sa Auto. Ang usa ka citation lamang dili pamatuod nga nahitabo ang pag-browse, ug ang gitipigan nga binary file lamang dili pamatuod sa pag-render niini."
+      ],
+      "links": [
+        {
+          "label": "Mga paagi ug mga desisyon sa Work",
+          "path": "docs/WORK_WORKFLOWS.md"
+        }
+      ]
+    },
+    {
+      "id": "models",
+      "title": "Mga preset, modelo ug pag-access",
+      "paragraphs": [
+        "Ang usa ka preset magtipig ug CLI/API, modelo, paningkamot sa pangatarungan ug mga permiso. Ang footer sa chat adunay mga bahin alang sa preset, CLI, modelo ug mga opsyon. Ang Custom mogana nga walay preset; ang Create preset magtipig sa kasamtangang gipili.",
+        "Ang katalogo naggikan sa napiling na-install nga CLI o API diin kini gisuportahan. Ang Refresh mag-update sa listahan nga dili usbon ang gipili. Kon dili magamit ang pagdiskobre, pagsulod ug klarong modelo ID; kinahanglang suportahan gihapon kini sa provider. Ang mga lebel sa pangatarungan nagdepende sa modelo ug CLI. Ang default sa provider lahi sa klarong token nga none.",
+        "I-apply lamang ang mga kausaban human sa pag-ila sa backend. Limitado ang pagbalhin panahon sa aktibong turno o dili blangko nga lumbay. Ang mga draft ug makitang kaagi magpabilin, apan ang pag-ilis sa mga provider dili magbalhin sa ilang pribadong internal nga kahimtang.",
+        "Sa Forge, importante ang label sa tahas: ang pagpangandam makagamit ug bulag nga Planner. Ang footer mag-usab sa gipakita nga tahas; ang mga tigrepaso ug mga katabang gipili sa mga setting sa workflow. Ang polisiya alang sa napamatud-an na nga pagpatuman mahimong ma-lock.",
+        "Nagkalahi ang mga permiso taliwala sa mga provider. Ang Read only ug Workspace write magamit diin gisuportahan kini sa adapter. Ang Antigravity naggamit sa lumad nga mga setting sa CLI o klarong gipili nga bug-os nga pag-access. Ang bug-os nga pag-access dili usa ka sandbox.",
+        "Ang espesyalisasyon nagdugang ug giya sa prompt, dili laing modelo o permiso. Ang mga preset ug tahas nagsuporta sa None, Standard, Auto ug Manual. Ang Auto nagpili ug mga profile gikan sa teksto sa lakang nga walay dugang nga tawag sa modelo; ang Manual modawat hangtod sa upat ka mga espesyalidad ug naandan nga mga panudlo. Ang mga gitahas nga gisugyot sa Planner mahimong usbon sa dili pa dawaton ang plano.",
+        "Ang mano-manong gisal-ot nga modelo ID o paningkamot magpabiling imong pagpili, apan mahimong isalikway kini sa provider. Ang pag-edit sa tibuok kalibotan nga preset dili magbag-o sa nagdagan nga chat o gidawat nga plano sa paghinumdom balik. Aron tinuyo nga usbon ang walay gibuhat nga panag-estorya, gamita ang kaugalingon nitong mga kontrol sa kumpigurasyon ug paghulat sa pag-ila. Ang usa ka gipugngan nga opsyon kinahanglang sabton isip limitasyon sa kapabilidad o siklo sa kinabuhi, dili laktawan pinaagi sa pag-edit sa gitipigan nga JSON."
+      ],
+      "links": [
+        {
+          "label": "Mga kapabilidad sa provider",
+          "path": "docs/PROVIDER_COMPATIBILITY.md"
+        }
+      ]
+    },
+    {
+      "id": "chat",
+      "title": "Mga chat, Stop ug ang lumbay",
+      "paragraphs": [
+        "Ang naablihang mga tab, Recent ug mga draft iya sa usa ka buluhaton. Ang pagsira sa usa ka tab magtangtang niini gikan sa Open apan magpabilin niini sa Recent ug dili mopahunong sa proseso sa provider niini o sa gidumalang workflow. Pangitaa ang kaagi, ablihi pag-usab ang usa ka chat o isira ang tanang dugang nga mga tab gikan sa menu sa kaagi.",
+        "Ang Stop mobalda sa kasamtangang turno. Paghulat nga mahuman ang paghunong sa dili pa ang sunod nga Send: ang pag-ila sa pagbalda dili pagkahuman sa proseso. Mahimo nimong i-type ang sunod nga draft samtang naghulat.",
+        "Sa ordinaryong chat, ang Queue magtipig ug ulahing hangyo nga bulag sa kasamtangang draft. Ang Pause queue mopugong sa dugang nga paghatod. Ang Stop ug Quit mopauswag sa paghunong sa lumbay. Human sa pagsugod pag-usab, Resume una, unya klarong Continue queue.",
+        "Ang Uncertain nagpasabot nga wala mahibaloi ang paghatod. Ang maong mensahe dili awtomatikong ipadala pag-usab: susiha ang kaagi, kopyaha ang teksto kon angay ug i-dismiss ang nalumbay nga aytem. Ang pagpadala niini pag-usab maoy usa ka bag-ong tinuyo nga hangyo.",
+        "Ang gidumalang mga chat sa hugna naggamit sa ilang workflow, dili sa ordinaryong lumbay. Ang Follow stage nagpakita sa kasamtangang hugna; ang mano-manong pagpili ug laing tab mopahunong sa pagsunod. Ang mga log sa CLI nagpakita sa mga diagnostiko nga bulag sa tubag.",
+        "Ang mga tubag sa Markdown mo-render ug mga ulohan, listahan, lamesa, link ug fenced code. Ang mga card sa gamit ug mga diagnostiko sa CLI magpabiling bulag sa tubag. Ang gitaho sa modelo nga panghunahuna ug mga sukod sa token makita lamang kon ang provider aktwal nga mopadayag niini; ayaw ipangagpas ang pribadong pangatarungan o paggamit gikan sa animasyon.",
+        "Human sa usa ka dili sigurado nga pagpadala o pag-ila sa lumbay, susiha ang kaagi ug sulayi pag-usab kadto lamang samang gitipigang hangyo kon itanyag. Ang resibo sa lumbay nagpasabot nga gidawat sa storage ang aytem, dili nga nahuman ang inference. Kuhaa ang usa ka dili sigurado nga nalumbay nga aytem isip usa lamang ka klarong pagsalikway; dili kini makabakwi sa prompt nga napadala na."
+      ],
+      "links": [
+        {
+          "label": "Lig-on nga lumbay sa mensahe",
+          "path": "docs/MESSAGE_QUEUE.md"
+        }
+      ]
+    },
+    {
+      "id": "files",
+      "title": "Mga file, Git ug pagkompleto",
+      "paragraphs": [
+        "Ang Files nagpakita sa folder sa buluhaton. Itandi ang mga resulta sa mga kinahanglanon, ablihi ang mga dokumento ug susiha ang mga diff. Ang pagpabilin sa binary file dili pamatuod sa saktong pag-render sa target nga aplikasyon niini.",
+        "Ang Git naghatag ug kahimtang, mga kausaban ug mga operasyon uban sa narekord nga mga resulta. Ang Commit, merge ug push kay mano-mano pinaagi sa default; ang awtomatikong mga operasyon maoy bulag nga mga pagpili alang sa bug-os nga napamatud-ang plano.",
+        "Ayaw usba ang nagtrabaho nga mga file taliwala sa pagpamatuod ug pagmantala: ang pag-uyon gigapos sa eksaktong mga byte. Ang mga panagbangi, napakyas nga mga push ug wala mahibaloi nga mga resulta sa operasyon mobabag sa pag-uswag hangtod sa usa ka klarong desisyon. Ang Auto dili hilom nga motugot sa pagmantala.",
+        "Ang Work walay gihimong mga sanga sa Git ug walay pinalasyon sa Git. Hupti ang gikinahanglang mga dokumento gikan sa napiling folder, lakip ang mga bersyon ug mga tinubdan.",
+        "Ang editor sa file naghatag ug syntax sumala sa extension, pagpangita ug pag-ilis, kaagi sa pag-undo, line wrapping ug mga draft matag tab. Ang mga save nagpreserbar sa gisuportahang UTF-8/UTF-16 nga pag-encode ug nagsalikway sa mga panagbangi sa kausaban sa gawas. Ang ubang mga pag-encode ug binary nga sulod nagkinahanglan ug eksternal nga editor. Ang wala ma-save nga mga draft magpugong sa aplikasyon sa pag-Quit hangtod nga i-save o isalikway kini sa tag-iya.",
+        "Ang tibuok nga syntax gipagana hangtod sa 8 MiB. Ang mas dagkong mga text file mag-abli sa 256 KiB nga mga bintana; ang 8–64 MiB mahimong klarong ikarga sa tibuok nga walay syntax. Labaw sa 64 MiB gamita ang pag-edit sa bintana ug limitado nga pagpangita sa sunod nga kaparehas. Kini usa ka limitado nga large-file mode, dili Sublime Text parity alang sa bisan unsa kadako nga mga dokumento.",
+        "Ang Open folder naggamit sa kasamtangang konteksto sa buluhaton o branch/worktree, imbes nga hilom nga mag-abli lamang sa orihinal nga repository. Ang linya sa file mahimong mopadayag sa ginikanan nga direktoryo sa maong file. Ang mga path gipamatud-an sa backend batok sa narehistro nga mga grant sa buluhaton. Ang mga binary file dili ma-edit isip yano nga teksto; gamita ang ilang target nga viewer ug hupti ang orihinal nga mga byte.",
+        "Ang pagtangtang sa Worktree maoy usa ka bulag nga gibantayan nga lihok. Taposa ang gilakip nga structured nga mga sesyon ug mga terminal sa dili pa kini tangtangon, lakip ang mga sesyon nga walay gibuhat. Susiha ang gitipigan nga resulta sa Git ug ang kahimtang sa pagbawi; ang pagpapas sa usa ka rekord sa buluhaton dili puli sa luwas nga pagpreserbar sa wala ma-commit nga trabaho."
+      ],
+      "links": [
+        {
+          "label": "Natipe nga kontrata sa editor",
+          "path": "shared/editor.ts"
+        },
+        {
+          "label": "Mga polisiya sa Git",
+          "path": "docs/WORKFLOWS.md"
+        }
+      ]
+    },
+    {
+      "id": "api",
+      "title": "Mga koneksyon sa API",
+      "paragraphs": [
+        "Ang Connections modugang ug klarong gipili nga OpenAI-compatible nga endpoint. Pagsulod ug ngalan, base URL, modelo ug yawe kon gikinahanglan. Daghang server ang nanginahanglan ug base URL nga natapos sa /v1; tan-awa ang dokumentasyon sa imong endpoint.",
+        "Gikinahanglan ang HTTPS gawas sa loopback HTTP. Paggamit ug yano nga endpoint nga walay mga kredensyal nga gipasulod sa URL. Ang mga yawe naggamit ug gisuportahang OS nga pag-encrypt ug dili ibalik sa UI. Ang pag-usab sa endpoint nagkinahanglan sa pagsulod pag-usab sa yawe niini. Ang pagbilin nga blangko sa field sa yawe magpabilin sa gitipigan nga yawe; ang Remove the saved key klarong magpapas niini.",
+        "Ang mga tawag sa API dili mogamit ug suskripsyon sa CLI. Ang mga gamit ug modelo lahi sa lumad nga mga sesyon, ug ang malampusong pagdiskobre sa modelo dili pamatuod sa inference. Ang paggamit sa token makita lamang kon ang provider aktwal nga mobalik niini.",
+        "Ibutang ang mga kredensyal sa Connections imbes sa mga teksto sa buluhaton o mga panudlo sa preset. Ang mga tigsusi nga read-only makadawat lamang sa ilang gitugotang mga galamiton sa file sa API; ang report architect walay mga galamiton. Ang dili gisuportahang mga tawag sa gamit isalikway imbes nga hilom nga tumanon. Nagkalahi ang mga server sa mga parametro sa pangatarungan, suporta sa gamit ug mga listahan sa modelo; itandi ang sayop sa kaugalingong kontrata sa imong endpoint."
+      ],
+      "links": [
+        {
+          "label": "Mga koneksyon sa API",
+          "path": "docs/API_CONNECTIONS.md"
+        }
+      ]
+    },
+    {
+      "id": "settings",
+      "title": "Mga setting, mga pinulongan ug luwas nga pag-reset",
+      "paragraphs": [
+        "Ang General settings nagpili sa workspace, pinulongan sa interface ug mga default. Ang Connections nagdumala sa mga endpoint sa API. Ang Presets ug Review teams nagtipig sa mga kumpigurasyon sa tahas. Ang Remote control nagdumala sa lokal nga mga kredensyal, kasangkaran sa server ug mga permiso sa tag-iya; ang Updates nagdumala sa tinubdan/channel sa release. Ang About nagpakita sa eksaktong nagdagan nga build.",
+        "Ang pinulongan sa interface bulag sa pinulongan sa prompt ug sa kahimtang sa pagrepaso sa dokumentasyon. Ang mga ngalan sa produkto, mga ID sa sugo, mga extension sa file, mga ID sa modelo sa tighatag ug mga ngalan nga gihimo sa tiggamit magpabiling mga tigpaila. Ang Tabang nagsunod sa gipiling pinulongan sa interface kon adunay kasamtangang paghubad nga magamit; ang mga paghubad sa makina gimarkahan ug ang Iningles magpabiling kanonikal nga pakisayran.",
+        "Ang Save magpatuman sa gipakita nga kompigurasyon. Ang pag-reset sa database o factory reset makatangtang sa metadata sa aplikasyon; tipigi ang mga file ug usa ka nasulayan nga backup sa dili pa tinuyo nga mogamit sa pag-reset. Kini nga mga operasyon maoy mga aksyon sa lokal nga tag-iya. Ayaw kini gamita isip laktod nga paagi aron pagsusi sa usa ka napakyas nga dagan sa trabaho o naguba nga rekord."
+      ],
+      "links": [
+        {
+          "label": "Mga instruksyon sa lokalisasyon",
+          "path": "docs/LOCALIZATION.md"
+        },
+        {
+          "label": "Pagbawi sa datos",
+          "path": "docs/DATA_RECOVERY.md"
+        }
+      ]
+    },
+    {
+      "id": "help-assistant",
+      "title": "Pangutana sa katabang sa Tabang",
+      "paragraphs": [
+        "Ablihi ang Tabang, pagpili og gitipigan nga konektadong preset diha sa panel sa katabang niini ug pangutana bahin sa ZIAForge. Ang mga tubag naggamit sa kasamtangang kanonikal nga giya sa Iningles ug sa imong gipiling pinulongan sa interface. Ang mga buton sa pakisayran sa seksyon mag-abli sa may kalabotan nga mga hilisgotan sa giya, aron imong matandi ang katin-awan sa pakisayran.",
+        "Kini nga katabang nagtipig og bulag nga pribadong panag-istorya nga hangtod sa 100 ka gitipigang mga entry ug 3 MiB. Pagsulod og pangutana nga hangtod sa 12,000 ka karakter; ang Send mangutana niini, ang Stop mokanselar sa aktibong tubag samtang magpabiling anaa ang imong pangutana, ug ang Clear magtangtang niini nga panag-istorya sa Tabang. Ang imong wala mapadala nga draft ug ang pagpili sa preset magpabilin bisan kon sirad-an o ablihan pag-usab ang Tabang sa samang sesyon sa app, apan ang draft dili matipig sa disk. Ang katabang dili magpadala og mga sugo sa aplikasyon, mag-usab sa dagan sa trabaho o modawat og ganghaan. Ang tambag dili buhi nga pagberipika sa usa ka buluhaton, account o panggawas nga koneksyon.",
+        "Ang mga sesyon sa Tabang sa Claude Code ug API nagpatuman sa gisuportahang polisiya nga walay gamit. Ang lumad nga mga sesyon sa Tabang sa Codex ug Antigravity nagkinahanglan sa anaa nang lumad nga pagtugot sa kompyuter sa lokal nga tag-iya. Kon kini gipugngan, ipasabot sa app ang gikinahanglan imbes nga mopili og laing tighatag. Ang tag-iya lamang ang makapaandar niini sa mga setting sa lokal nga pagkontrol; ang katabang dili makapaandar niini sa iyang kaugalingon.",
+        "Ang Tabang sa Codex naggamit og sandbox nga basa-lamang ug mobalibad sa mga hangyo sa pag-aprobar sa gamit. Ang Antigravity naggamit sa paagi sa plano ug sa lumad nga flag sa sandbox niini. Kini nga lumad nga mga paagi dili unibersal nga garantiya sa pagkakulong sa operating system. Ang hash sa gigikanang giya nagpaila sa pakisayran nga gigamit alang sa tubag; ang namugna nga katin-awan mahimo gihapon nga masayop, busa susiha ang nalambigit nga mga seksyon niini sa dili pa molihok. Ang mas daan nga mga tubag mamarkahan kon ang bersyon sa ilang gigikanang giya lahi sa kasamtangang giya."
+      ],
+      "links": [
+        {
+          "label": "Kanonikal nga giya ug pagmentinar sa paghubad",
+          "path": "docs/HELP_MAINTENANCE.md"
+        },
+        {
+          "label": "Katabang sa aplikasyon ug mga pagtugot",
+          "path": "docs/AGENT_CONTROL.md"
+        }
+      ]
+    },
+    {
+      "id": "assistant-control",
+      "title": "Katabang ug Telegram",
+      "paragraphs": [
+        "Ang katabang naggamit sa gipiling preset ug sa samang pagkontrol sa aplikasyon API. Ang pagtugot sa pagsusi sa kahimtang ug ang pagtugot sa paghimo og mga operasyon magkabulag. Susiha ang mga sugo ug mga resulta: ang gisulat sa katabang dili pamatuod nga nahuman ang usa ka aksyon.",
+        "Ang Telegram gipaandar lamang sa lokal nga tag-iya, gamit ang anaa nang token sa bot ug usa ka numerikal nga tag-iya ID. Ang pagkontrol para lamang sa pribadong chat nianang tag-iya. Ang wala makompigura o dili aktibo nga bot kinahanglang dili makadawat og mga mensahe sa aplikasyon.",
+        "Ayaw idikit ang token sa bot ngadto sa ordinaryong chat. Ang pagkompigura sa integrasyon dili magpamatuod sa koneksyon sa Telegram ug dili awtomatikong maghimo og bot. Ang mga screenshot ug mga tubag mahimong maglakip og pribadong datos sa workspace.",
+        "Pagpili og preset sa katabang ug ihatag ang pagtugot sa operasyon sa aplikasyon nga bulag sa pagsusi. Ang pagpatuman sa katabang sa Codex ug Antigravity nagkinahanglan sa lumad nga pagtugot sa tag-iya; dili kini hilom nga ilisan og sesyon sa API o Claude nga walay gamit. Ang mga screenshot mahimong ipakita sa panag-istorya sa katabang, apan ang kasamtangang input sa modelo wala maglakip og pag-analisar sa hulagway. Ayaw pagdahom nga ang katabang biswal nga misusi sa usa ka hulagway tungod lang kay gipakita kini niini.",
+        "Ang katabang makasusi sa mga katingbanan, mga buluhaton, mga chat, kahimtang sa dagan sa trabaho, konteksto sa proseso ug mga bintana sa aplikasyon pinaagi sa mga gitayp nga gamit. Makapausab kini sa gitugotang ordinaryong mga setting ug makalansad sa awtorisadong mga operasyon sa aplikasyon. Dili kini makahatag og lumad nga mga katungod, magpadayag sa gitipigang mga kredensyal, mag-usab sa paghatag sa gamut nga workspace sa layo o mag-aprobar sa usa ka ganghaan sa Forge tungod lang kay sayon kini."
+      ],
+      "links": [
+        {
+          "label": "Kasabotan sa pagkontrol sa aplikasyon",
+          "path": "docs/AGENT_CONTROL.md"
+        }
+      ]
+    },
+    {
+      "id": "telegram",
+      "title": "Padagana ang imong pribadong Telegram bot",
+      "paragraphs": [
+        "Paghimo o pagkuha sa imong kaugalingong bot, sugdi ang pribadong chat niini, ug isulod ang token niini ug ang imong numerikal nga Telegram user ID sa mga setting sa lokal nga pagkontrol. Ipaandar lamang ang integrasyon kon tuyo nimo nga mokonektar ang app. Ang tag-iya ID maoy usa ka tigpaila sa tiggamit, dili username o bot ID. Ang mga mensahe lamang gikan nianang tiggamita sa samang pribadong chat ang pagadawaton.",
+        "Gamita ang /start, /menu o /status alang sa usa ka kinatibuk-ang pagtan-aw sa nagdagan nga bersyon, mga ihap sa proyekto/buluhaton ug mga kahimtang sa buluhaton. Ang mga buton mag-abli sa Mga Proyekto, Mga Buluhaton, Screenshot, Tabang ug Pinulongan. Ang mga lista nagpakita og walo ka aytem matag panid, nga adunay Back, Refresh, Home ug Nauna/Sunod nga pag-navigate. Ang mga buton sa proyekto magsala sa lista sa buluhaton. Ang usa ka task card nagpakita sa gitipigan nga pag-uswag sa dagan sa trabaho, modelo/preset ug naghulat nga mga pangutana kon anaa.",
+        "Ablihi ang Mga Chat sa usa ka buluhaton aron ma-preview ang bukas/bag-ohay nga mga panag-istorya ug mga chat sa hugna sa dagan sa trabaho. Ang matag preview nagpakita og hangtod sa unom ka pinakabag-ong mga mensahe sa tiggamit/katabang, gipamubo nga makita ngadto sa 200 ka karakter matag usa. Ang pribadong pangatarungan wala gipakita. Ang pagbasa sa kasaysayan dili magsugod og tighatag. Ang mga preview basa-lamang: ang ordinaryong teksto ug /ask TEXT magtumong gihapon sa katabang sa aplikasyon, dili gayod sa hilom ngadto sa chat sa buluhaton nga imong gitan-aw.",
+        "Ang Run / Continue magbasa pag-usab sa kasamtangang dagan sa trabaho sa Code o Work ug magsugod sa usa ka kwalipikado nga gitipigang dagan sa trabaho. Ang Pause mohangyo sa paghunong niini. Walay usa kanila ang modawat og mga kinahanglanon, espesipikasyon, plano, mga nakaplagan sa pagrepaso o mga pangutana; ang usa ka naghulat nga desisyon magpugong sa Run. Paghimo og mga desisyon diha sa aplikasyon, o paggamit og klarong gitugotan nga gitayp nga sugo uban sa eksaktong kasamtangang ganghaan ug rebisyon niini.",
+        "Gamita ang Pinulongan o /language aron pagpili sa bisan unsa sa 56 ka mga pinulongan sa interface pinaagi sa lumad nga ngalan niini. Nagtipig kini og gusto alang niini nga bot ug tag-iya lamang. Ang Paggamit sa pinulongan sa app magtangtang niana nga gusto. Dili kini mag-usab sa pinulongan sa aplikasyon o sa mga pagtugot sa pag-access; ang anaa nang mga mensahe dili awtomatikong ipadala pag-usab.",
+        "Ang pag-navigate kasagarang mag-update sa samang gipatik nga mensahe sa menu. Ang mga buton adunay dili klaro nga mga identidad nga mo-expire human sa 15 ka minuto ug magamit kausa; ang pag-usab sa kard maghimo sa daan nga mga buton niini nga dili na balido. Ang na-expire, nagamit na, wala motakdo nga mensahe ug miaging proseso nga mga buton dili makahimo og aksyon. Ang usa ka hingpit nga dili ma-edit nga mensahe mahimong ilisan og bag-ong kard; ang usa ka wala mailhing sayop sa network dili sulayan pag-usab isip bag-ong mensahe.",
+        "Sa pagpaandar, isalikway sa poller ang mas sayo nga backlog ug irekord ang pagdawat sa update sa dili pa ipadala aron ang nabalda nga mga sugo dili awtomatikong ipatugtog pag-usab sa pagsugod pag-usab. Nagpugong kini sa pagsubli; wala kini naggarantiya sa pagkahuman. Susiha ang kahimtang/konteksto sa dili pa tinuyo nga maghatag og bag-ong trabaho human sa usa ka sayop. Walay awtomatikong mga pahibalo sa kahimtang sa buluhaton.",
+        "Ang dayag nga mga sugo magpabiling anaa: /projects, /tasks, /task TASK_ID, /run TASK_ID, /pause TASK_ID, /screenshot ug /ask TEXT. Ang /new {JSON} maghimo og buluhaton pinaagi sa gitayp nga createTask; ang /command {JSON} magpadala og dayag nga sugo sa katalogo. Basaha ang buhi nga katalogo alang sa mga porma sa argumento. Ang samang pagtugot sa backend ug mga paghatag sa folder magamit sama sa aplikasyon.",
+        "Ang app dili gayod magpadala sa gitipigan nga mga bili sa bot-token ngadto sa katabang. Ang mga screenshot, mga katingbanan ug teksto sa panag-istorya mahimo gihapon nga maglangkob og pribadong impormasyon sa proyekto. Hunonga ang integrasyon sa lokal kon ang bot o account sa tag-iya dili na kasaligan. Ilisi ang na-leak nga token uban sa tighatag sa bot, unya i-update ang lokal nga na-encrypt nga kompigurasyon niini."
+      ],
+      "links": [
+        {
+          "label": "Pribadong bot ug mga sugo",
+          "path": "docs/AGENT_CONTROL.md"
+        }
+      ]
+    },
+    {
+      "id": "native-permissions",
+      "title": "Tag-iya-lamang nga lumad nga pagtugot sa kompyuter",
+      "paragraphs": [
+        "Ang lumad nga access sa kompyuter magsugod nga gipugngan. Ang tag-iya lamang ang makapaandar niini sa lokal nga Mga Setting → Layo nga pagkontrol. Ang katabang ug ang mga sugo sa HTTP/MCP/Telegram dili makapaandar niini nga flag alang sa ilang kaugalingon. Kon ang usa ka operasyon gibalibaran, ang katabang kinahanglang mohulagway sa setting ug tugotan ang tag-iya sa pagdesisyon.",
+        "Kon klarong gipaandar, ang computer.run modawat og ma-execute, array sa argumento ug opsyonal nga hingpit nga working directory. Wala kini naggamit og shell interpolation, adunay limitasyon nga 30 ka segundo ug naglimite sa output ngadto sa 1 MiB. Ang gihatag nga nawala o dili balido nga directory balibaran; ang pagbiya sa cwd naggamit sa directory sa mga setting nga gipanag-iya sa app, dili HOME. Ang Quit mokanselar sa aktibong gipanag-iyahan nga mga sugo ug maghulat sa paglimpyo sa ilang proseso.",
+        "Ang sakop sa pagbasa/pagpadagan sa aplikasyon ug ang lumad nga access maoy magkabulag nga mga desisyon. Ang usa ka worktree dili magpugong sa pag-access sa filesystem sa usa ka walay pugong nga tighatag. Bawia ang lumad nga access human sa buluhaton kon dili na kini gikinahanglan, ug susiha ang mga resibo sa sugo imbes nga dawaton ang gisulat sa katabang isip pamatuod."
+      ],
+      "links": [
+        {
+          "label": "Kontrata sa pagkontrol sa tag-iya lamang",
+          "path": "shared/control.ts"
+        }
+      ]
+    },
+    {
+      "id": "remote",
+      "title": "Browser ug layo nga mga instance",
+      "paragraphs": [
+        "Ang lokal nga tag-iya nagpaandar sa server ug nagpili sa address, port ug sakop niini: basa alang sa pagsusi o pagpadagan alang sa mga aksyon. Ang default nga 127.0.0.1 nga address anaa lamang niini nga kompyuter. Ang 0.0.0.0 maminaw sa mga interface sa network; repasoha ang access sa network sa dili pa kini ipaandar.",
+        "Ang usa ka browser mag-abli sa samang interface human sa pag-login gamit ang token. Ayaw ilakip ang mga token sa publikong mga link o mga screenshot. Ang HTTP lamang dili mag-encrypt sa trapiko; paggamit og gipanalipdan nga agianan ibabaw sa dili kasaligan nga network.",
+        "Ang tag-iya nagkompigura sa ubang mga instance pinaagi sa URL ug token. Ang backend nag-proxy sa mga hangyo; dili kini magkopya sa ilang mga proyekto ngadto sa lokal nga makina. Susiha ang gipiling instance sa dili pa ang matag aksyon.",
+        "Ang mga gitayp nga sugo ug mga hitabo nagdala sa pagkontrol sa aplikasyon. Ang sakop sa pagbasa dili mag-awtorisar sa mga mutasyon sa buluhaton. Ang lumad nga pagkontrol sa kompyuter maoy usa ka bulag nga pagpili sa lokal nga tag-iya ug magsugod nga gipugngan.",
+        "Ang app kinahanglang magpabiling nagdagan alang sa pagkontrol sa browser, Telegram ug panggawas nga ahente. Ang matag instance adunay kaugalingong pribadong profile, kahimtang sa buluhaton, token ug port sa server. Ayaw paggamit pag-usab og usa ka profile nga dungan tali sa independente nga mga instance. Ang mga hitabo sa browser ug mga tubag sa sugo nasakop sa gipiling instance; ang pagbalhin sa UI dili magbalhin sa mga file o magkopya sa lumad nga login."
+      ],
+      "links": [
+        {
+          "label": "HTTP ug pagkontrol sa instance",
+          "path": "docs/AGENT_CONTROL.md"
+        }
+      ]
+    },
+    {
+      "id": "external-agents",
+      "title": "OpenClaw, Hermes ug uban pang panggawas nga mga ahente",
+      "paragraphs": [
+        "Gamita ang napatunayan nga pagkontrol sa aplikasyon API o ang gilakip nga MCP stdio tulay. Ipaandar ang server sa lokal, pagpili og basa o pagpadagan ug ikompigura ang matag kliyente uban nianang instance URL ug token. Ang Node.js 22 o mas bag-o gikinahanglan aron mapadagan ang independente nga MCP tulay; ang Electron nga app dili mag-instalar sa imong kliyente sa ahente. Ang browser URL dili usa ka Ma-stream nga HTTP MCP endpoint: ihatag kini isip ZIAFORGE_URL ngadto sa stdio tulay.",
+        "Ang tulay nagbutyag sa ziaforge_status, ziaforge_commands, ziaforge_command ug ziaforge_screenshot. Pagsugod sa kahimtang ug sa buhi nga katalogo sa sugo, unya basaha ang system.context alang sa gipiling buluhaton. Ang mga gitayp nga sugo nagsunod sa samang rebisyon, ganghaan, folder sa buluhaton ug mga pagsusi sa paglimpyo sama sa lokal nga UI.",
+        "Ang buhi nga katalogo sa sugo naglakip sa documentation.guide, ang kanonikal nga tabang sa Iningles, uban ang gigikanang agianan niini ug sourceSha256. Ang internal nga arkitekto sa aplikasyon makadawat sa samang pakisayran pinaagi sa mga gamit niini. Naghatag kini sa mga ahente sa tibuok konteksto sa produkto nga dili magsalig sa mas daan nga mga nota; ang dokumentasyon dili gayod maghatag og access o mopuli sa kasamtangang tawhanong desisyon.",
+        "Ang mga ahente kinahanglang maghisgot sa mga kinahanglanon, teknikal nga mga desisyon ug pagplano gikan sa usa ka mubo nga tawhanong ideya. Kinahanglan nilang tipigan ang dayag nga tawhanong mga ganghaan, gipiling mga modelo, polisiya sa manwal/Auto ug gikinahanglang pagrepaso. Dili sila angay mag-imbento og pag-uyon, magsubli sa walay kasegurohang mga sugo ubos sa bag-ong ID, o magmantala sa mga kausaban sa Git nga walay tuyo sa tag-iya.",
+        "Ikompigura ang pipila ka ginganlan nga MCP server alang sa daghang mga instalasyon. Ang pagbalhin sa instance maoy usa ka desisyon sa pagruta, dili pag-synchronize. Ang mga pananglitan sa pagkompigura sa OpenClaw ug Hermes anaa sa AGENT_CONTROL.md; ang espesipiko sa kliyente nga setup ug pagkaangay kinahanglang susihon alang sa na-instalar nga bersyon sa kliyente.",
+        "Ang panggawas nga cache sa requestId igo ra nga magtangtang sa duplicate sa usa ka limitado nga hugpong sa mga hangyo samtang nagdagan ang app. Ang lig-on nga mga operasyon naggamit sa ilang kaugalingong mga identidad: createRequestId alang sa paghimo og buluhaton, commandId alang sa mga desisyon sa dagan sa trabaho, clientMessageId alang sa mga mensahe ug operationId alang sa mga mutasyon sa Git. Tipigi ang orihinal nga identidad ug payload human sa wala mailhing pag-ila; basaha ang gitipigang kahimtang sa dili pa tinuyo nga magpagula og bag-ong trabaho."
+      ],
+      "links": [
+        {
+          "label": "Mga instruksyon sa kliyente sa MCP",
+          "path": "docs/AGENT_CONTROL.md"
+        }
+      ]
+    },
+    {
+      "id": "local-cli",
+      "title": "Lokal nga CLI ug mga limitasyon sa awtomasyon",
+      "paragraphs": [
+        "Ang ziaf dispatcher nagkontrol sa samang nagdagan nga app ug gitipigang dagan sa trabaho. Gikan sa tinubdan, gamita ang npm run ziaf -- list, npm run ziaf -- status --task TASK_ID --json, npm run ziaf -- start --task TASK_ID, o npm run ziaf -- pause --task TASK_ID. Ang usa ka malampusong pag-ila sa Pagsugod wala magpasabot nga nahuman na ang buluhaton.",
+        "Ang --until-success tinuyo nga nagpaandar sa Auto alang sa gitipigang dagan sa trabaho, apan ang mga pangutana, pagrepaso, mga ganghaan sa pagdawat, mga limitasyon ug mga checkpoint magamit gihapon. Ang Ctrl+C mogawas sa nag-obserbar nga dispatcher; dili kini hilom nga mopahunong sa dagan sa trabaho sa aplikasyon. Tan-awa ang CLI.md alang sa mga code sa paggawas, lokal nga endpoint ug pagdumala sa profile.",
+        "Ang interface sa Automations kasamtangang nagtipig sa mga depinisyon sa pagpakita ug lokal nga mga ihap sa pagpadagan. Dili kini sertipikadong nagbalikbalik nga scheduler ug wala magpamatuod nga ang usa ka turno sa modelo sa background midagan. Alang sa aktuwal nga pagpatuman gamita ang gitipigang mga kontrol sa dagan sa trabaho, ziaf o ang napatunayan nga API ug susiha ang ilang mga resibo. Ayaw sayopon ang panel sa demonstrasyon isip walay nag-atiman nga pag-iskedyul."
+      ],
+      "links": [
+        {
+          "label": "Mga sugo sa dispatcher",
+          "path": "docs/CLI.md"
+        }
+      ]
+    },
+    {
+      "id": "updates",
+      "title": "Bersyon ug mga update",
+      "paragraphs": [
+        "Ang About nagpakita sa eksaktong nagdagan nga bersyon. Ang publikong mga update nagkinahanglan og kasaligang GitHub repository sa release ug usa ka lig-on o preview nga channel. Ang pagsusi, pag-download ug pag-instalar adunay magkabulag nga mga kahimtang; ang usa ka sayop wala magpasabot nga na-instalar ang update.",
+        "Ang awtomatikong pag-instalar alang sa gipirmahan nga macOS nga mga release. Ang wala mapirmahi nga mga development build dili awtomatikong ma-instalar pinaagi niini nga mekanismo. Alang sa manwal nga pag-ilis, hingpit nga biyai ang kasamtangang app ug paggamit og napamatud-an nga artifact.",
+        "Ang awtomatikong pagsusi modagan dayon kon mapaandar, unya matag unom ka oras.",
+        "Ang Stable wala maglakip sa mga preview release; ang preview nagtugot usab sa mga development release. Ang usa ka malampusong pagsusi nagtino lamang sa magamit nga metadata sa release. Ang pag-download ug pag-instalar nagkinahanglan sa package sa plataporma ug sa gikompigura nga release feed. Ang paghatod sa Linux DEB maoy usa ka bulag nga agianan sa installer; ayaw pagdahom nga ang usa ka DEB awtomatikong ma-upgrade pinaagi sa macOS nga mekanismo sa pag-update."
+      ],
+      "links": [
+        {
+          "label": "Kaandam sa release",
+          "path": "docs/RELEASE_READINESS.md"
+        }
+      ]
+    },
+    {
+      "id": "restart",
+      "title": "Pagsugod pag-usab ug pagbawi",
+      "paragraphs": [
+        "Sa macOS, gamita ang Quit / ⌘Q alang sa tibuok nga pagsira. Ang pagsira sa bintana mahimong magbilin sa app nga nagdagan. Hingpit nga biyai ang daan nga bersyon sa dili pa ilisan ang aplikasyon.",
+        "Human sa paglansad, pilia ang samang buluhaton. Ang kasaysayan ug mga draft mobalik. Ang Resume mopasig-uli sa lumad/lokal nga konteksto apan dili magpadala og draft, magtangtang sa paghunong sa linya o mag-awtorisar sa pagbalikbalik sa wala mailhing operasyon.",
+        "Kon ang Pagbawi makita, ayaw usba ang JSON pinaagi sa kamot. Susiha ang apektadong matang sa dokumento, tipigi ang orihinal nga mga file ug pagpili og napamatud-an nga backup. Ang pagpasig-uli sa mas daan nga linya magmarka sa mga butang niini nga walay kasegurohan.",
+        "Kon wala mahibaloi ang pagpadala, ang gidumala nga dagan sa trabaho mahimong magkinahanglan og klarong pagtugot alang sa bag-ong konteksto. Ang mas sayo nga trabaho ug napakyas nga mga pagsulay magpabilin; ang makita nga pagbalibad mas luwas kaysa hinimo-himo nga kalampusan.",
+        "I-backup ang mga file sa buluhaton ug profile sa app nga sirado ang tanang instance sa app. Ang gikopya nga folder dili usa ka nasulayan nga pagpasig-uli. Kon ang pagbawi mohangyo kanimo sa pagpili og napamatud-an nga backup, hupti usab ang eksaktong nadaot nga mga file. Ang pagpasig-uli sa mas daan nga dagan sa trabaho o linya dili mag-awtorisar sa pagsubli sa walay kasegurohang inference o mga operasyon sa Git."
+      ],
+      "links": [
+        {
+          "label": "Kontrata sa pagbawi",
+          "path": "docs/DATA_RECOVERY.md"
+        }
+      ]
+    },
+    {
+      "id": "troubleshooting",
+      "title": "Pagsulbad sa mga problema",
+      "paragraphs": [
+        "CLI wala makit-i: susiha ang instalasyon ug bersyon niini sa ordinaryong terminal, unya sugdi pag-usab ang ZIAForge. Ang presensya sa usa ka executable wala magpasabot nga naka-sign in ka. Gamita ang kaugalingong mekanismo sa pag-sign in sa tighatag.",
+        "Ang modelo dili magamit o napakyas ang pagtugot: i-refresh ang pagdiskobre, pagpili og magamit nga ID ug susiha ang imong account ug mga limitasyon. Ayaw sublia ang usa ka walay kasegurohang hangyo sa dili pa susihon ang kasaysayan niini.",
+        "Nahunong ang dagan sa trabaho: ablihi ang kasamtangang hugna, pangutana, resibo sa pagberipika o mga log sa CLI. Tubaga ang espesipikong hinungdan: usa ka wala matubag nga pangutana, sugo, pagtugot sa folder o limitasyon sa pagsulay. Ang Continue dili makahimo sa usa ka napakyas nga pagsusi nga magmalampuson.",
+        "Nawala o giilisan ang folder: ipasig-uli ang access sa orihinal nga folder o paghimo og bag-ong buluhaton. Ang app kinahanglang dili magpadayon gikan sa HOME. Kon makakita ka og laing cwd, hunonga ang turno ug tipigi ang mga pagsusi sa problema.",
+        "Alang sa usa ka report, ilakip ang About nga bersyon, rota, CLI/modelo, gilauman ug aktuwal nga pamatasan, usa ka screenshot ug usa ka luwas nga kinutlo sa log. Tangtanga ang mga sekreto, personal nga sulod ug mga agianan nga dili mamahimong imantala.",
+        "Layo nga panid dili magamit: pamatud-i nga gipaandar sa tag-iya ang server, susiha ang naminaw nga address ug port, unya pagpamatuod gamit ang saktong token sa instance. Ang usa ka 401 nagpaila sa pag-authenticate; ang gibalibaran nga mutasyon mahimong sakop sa pagbasa o tag-iya-lamang nga pagkontrol. Ang pag-usab sa token magsira sa anaa nang mga kliyente sa browser. Ayaw ibutyag ang bulag nga DevTools inspection port isip layo nga pagkontrol sa aplikasyon.",
+        "Gibalibaran ang pag-save sa editor: hupti ang draft, susiha ang kasamtangang file sa disk ug sulbara ang panagbangi sa panggawas nga kausaban. Ayaw laktawi ang pagtandi pinaagi sa pagsulat pag-usab sa metadata sa aplikasyon. Kon ang tibuok nga pagkarga sa dako nga file dili magamit, gamita ang gisuportahang pag-edit/pagpangita sa bintana o usa ka panggawas nga editor.",
+        "Telegram dili magamit: kumpirmaha ang token sa bot, numerikal nga tag-iya, pribadong chat ug kahimtang sa lokal. Ang usa ka nakigkompetensya nga webhook o poller makababag sa pag-poll; ang ZIAForge dili awtomatikong magtangtang og webhook o mopuli sa laing poller. Ang mga sugo nga gisalikway o nabalda sa wala mailhing utlanan dili awtomatikong ipatugtog pag-usab."
+      ],
+      "links": [
+        {
+          "label": "Pagsulay ug pagdayagnos",
+          "path": "docs/TESTING.md"
+        }
+      ]
+    },
+    {
+      "id": "diagnostics",
+      "title": "I-report ang mga problema ug susiha ang ebidensya",
+      "paragraphs": [
+        "Irekord ang eksaktong nagdagan nga build gikan sa About, OS/arkitektura, paagi sa buluhaton, gipiling tighatag/modelo ug ang mga lakang nga magsubli sa problema. Ihulagway ang gilaumang resulta ug ang naobserbahang resulta. Ilakip ang usa ka luwas nga screenshot ug ang may kalabotan nga gihuptang sugo o resibo sa pagberipika, imbes ang tibuok pribadong profile.",
+        "Ang mga log sa CLI, mga journal sa hitabo, mga transcript sa modelo, mga trace sa browser ug mga screenshot mahimong magpadayag sa tinubdan, personal nga mga agianan o mga token. Susiha ug tangtanga ang sensitibong impormasyon sa dili pa ipaambit. Ang kinamaayohang paningkamot sa pagtangtang sa sensitibong impormasyon sa log wala magpamatuod nga ang usa ka screenshot o archive mamahimong imantala.",
+        "Alang sa mga mag-aamot, ang qa:doctor magbasa sa identidad sa palibot/build; ang qa:inspect mag-abli og gilain nga profile nga adunay mga stub sa tighatag. Ang usa ka fixture nagpamatuod sa nasulayan nga agianan sa aplikasyon nga dili makontak ang usa ka modelo. Ang tinuod nga live inference, koneksyon sa Telegram, lumad nga Linux desktop, pagpirma ug giputos nga mga pagsusi sa artifact maoy bulag nga ebidensya. Tan-awa ang TESTING.md alang sa masubli nga mga sugo ug paglimpyo."
+      ],
+      "links": [
+        {
+          "label": "Mga sugo sa ebidensya",
+          "path": "docs/TESTING.md"
+        }
+      ]
+    },
+    {
+      "id": "privacy",
+      "title": "Lokal nga datos ug mga utlanan",
+      "paragraphs": [
+        "Ang mga proyekto, kasaysayan, mga plano, mga dokumento ug mga pagsusi sa problema mahimong maglangkob og pribadong teksto. Ayaw imantala ang mga profile, hilaw nga nakuha, mga yawe o kompleto nga mga log uban ang source code.",
+        "Sa Linux, ang pagtipig sa API, pagkontrol, Telegram ug mga kredensyal sa instance nagkinahanglan og naablihan nga GNOME Secret Service o KWallet; kon walay gisuportahang tipiganan sa sekreto, ang ZIAForge mobalibad sa pagtipig niini nga mga sekreto imbes nga mogamit sa basic_text nga fallback sa Electron.",
+        "Ang lokal nga pagtipig wala magpasabot nga ang mga hangyo magpabilin sa imong kompyuter: ang gipiling CLI/API magpadala niini ngadto sa tighatag niini. Ang usa ka working folder ug pagdumala sa proseso dili paglain sa OS. Susiha ang gipiling mga pagtugot.",
+        "Ilha ang mga matang sa ebidensya: ang mga fixture magsulay sa aplikasyon nga walay modelo; ang lumad nga live magbansay sa tinuod nga CLI/account; ang giputos nga mga pagsusi magpamatuod sa usa ka espesipikong artifact. Ang pagpasar sa usa dili maggarantiya sa uban.",
+        "Ang sakop sa aplikasyon, ang usa ka worktree ug ang basa-lamang nga prompt lahi sa pagpatuman sa operating system. Ang mga polisiya sa tigsusi/katabang sa Antigravity makamatikod sa mga kausaban sa nakolektang ebidensya sa workspace imbes nga magpatuman sa basa-lamang nga access sa filesystem. Ang lumad nga pagkontrol sa kompyuter nagpatuman sa mga programa nga gi-awtorisar sa tag-iya gawas sa ordinaryong utlanan sa gamit sa app; i-off kini kon dili na kini gikinahanglan."
+      ],
+      "links": [
+        {
+          "label": "Gigikanan ug pagmantala",
+          "path": "docs/RELEASE_READINESS.md"
+        }
+      ]
+    },
+    {
+      "id": "project-contributors",
+      "title": "Sabta ug usba kini nga open-source nga proyekto",
+      "paragraphs": [
+        "Basaha una ang AGENTS.md ug CONTRIBUTING.md, unya ang PROJECT_MAP.md alang sa kasamtangang mga utlanan sa tinubdan. Ang napatuman nga gitayp nga mga kontrata ug kasamtangang mga dokumento sa dagan sa trabaho/tighatag maoy nagdumala sa pamatasan. Ang CONCEPT.md ug ang terminal-una nga mga bahin sa ARCHITECTURE.md nagpreserbar sa makasaysayanong katuyoan ug kinahanglang dili masaypan isip kasamtangang mga pag-angkon sa release.",
+        "Ang Iningles nga gigikanan sa tabang mao ang docs/help/en.json. Ayaw usba pinaagi sa kamot ang namugna nga USER_GUIDE.md o website/guide.html. Usba ang kanonikal nga seksyon, i-update ang apektadong kontrata ug padagana ang node scripts/help/generate.cjs. Ang Tabang sulod sa app nagbasa sa samang tinubdan. Repasoha ang mga pagdugang uban sa aktuwal nga pagpatuman, lakip ang mga limitasyon, mga pagtugot ug wala gisuportahang mga agianan.",
+        "Ang matag usa sa 56 ka mga interface locale adunay bulag nga kahimtang sa tabang sa docs/help/locales.json. Ang nawala o dili kompleto nga tabang mobalik sa Iningles. Ang kompleto nga mga lawas nga gihubad sa makina gimarkahan ug gihigot sa hash sa gigikanan sa Iningles, nga walay pag-angkon sa tawhanong pagrepaso. Ang usa ka gipangrepaso sa tawo nga paghubad dugang nga nagrekord sa tigsusi niini. Ang matag paghubad kinahanglang magpreserbar sa mga ID sa seksyon, mga aksyon, mga tigpaila sa file/sugo ug teknikal nga mga limitasyon, mogamit sa hustong direksyon, ug i-refresh kon ang gigikanan niini sa Iningles mausab.",
+        "Sa dili pa ipadala, padagana ang node scripts/help/generate.cjs --check aron makamatikod sa karaan nga namugna nga output, dili balido nga mga scaffold sa locale o naguba nga lokal nga mga link sa kontrata. Ang mga pagsusi sa paghubad sa UI ug mga pagsusi sa pamatasan sa aplikasyon magpabiling magkabulag. Ang HELP_MAINTENANCE.md naghatag sa pamaagi sa pag-update sa mag-aamot ug AI; ang dokumentasyon kinahanglang dili moangkon og nakapasar nga pagsulay nga wala mapadagan."
+      ],
+      "links": [
+        {
+          "label": "Kasamtangang mapa sa proyekto",
+          "path": "docs/PROJECT_MAP.md"
+        },
+        {
+          "label": "Pagmentinar sa dokumentasyon",
+          "path": "docs/HELP_MAINTENANCE.md"
+        },
+        {
+          "label": "Mga instruksyon sa mag-aamot",
+          "path": "CONTRIBUTING.md"
+        },
+        {
+          "label": "Mga instruksyon sa ahente",
+          "path": "AGENTS.md"
+        }
+      ]
+    }
+  ]
+}

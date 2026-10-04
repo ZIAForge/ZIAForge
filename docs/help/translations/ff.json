@@ -1,0 +1,519 @@
+{
+  "schemaVersion": 1,
+  "locale": "ff",
+  "title": "Ñemmborde kuutoro ZIAForge",
+  "description": "Gila e anniya haa e njeñtudi khesɗitinaandi. Ñemmborde gollal ngam Code, Work e ndeenka jaaɓnirgal.",
+  "sourcePolicy": "Ɗemngal Engele ngal woni ɗemngal doosgal. Ballal firo masiŋ ina seerti e firooji ƴeewtaaɗi e junngo aadee. Ƴeewndooji jaajɗi kadi kollitaani potal e ɗemngal neeniwal ngal.",
+  "sections": [
+    {
+      "id": "start",
+      "title": "Taƴe gadane",
+      "paragraphs": [
+        "ZIAForge ina jogoo yeewtere, peewnugol, gollal e ƴeewndo e nder golle goote. Suɓo Code ngam eɓɓaande Git, walla Work ngam ɗereeji, wiɗtooji e njeñtudiiji goɗɗi e nder runngere meere.",
+        "Fuɗɗoro golle famɗuɗe e nder eɓɓaande seertiinde. So a suɓiima CLI neeniijo, aaf ɗum kadi seŋo e konte mum e nder terminal tawo. So wonaa ɗuum, teelto ceŋol API. Abonmaa CLI e API yoɓaaɗo ko laabi ceŋorɗe ceertuɗe; ZIAForge seŋataa ma walla nawa ceede hakkunde majji."
+      ],
+      "steps": [
+        "Uddit Teelteel kadi ƴeewto runngere nokku gollal e ɗemngal ngal. Ko fayti e ina holla gollal dogoowal ngal no laaɓti.",
+        "Ngam Code, ɓeydu mooftirde Git e nder damal bannge. Ngam Work, suɓo runngere seertiinde nde tagataa golle ɗee.",
+        "Danndu preset jogiiɗo CLI, model, tiiɗnaare miijo e tolno jaɓal. Aɗa waawi kadi suɓaade Cuɓaaɗo tawa preset danndaaka.",
+        "Tag golle, suɓo laawol mum, darnde e ɓamtaare junngo walla jaajnde. Ƴeewto suɓngooji ɗii ko adii Fuɗɗo."
+      ],
+      "note": "Huutoro geɗel keɓaangel ngel e ƴeewndo limoore nde gardiiɗo oo hokki. Ƴeewndo ko adii ina waawi wonde ko siynaaka walla alaa laawol khesɗitingol bayyinaangol. Ballal biro e jokkondirɗo neeniijo ina foti ƴeewteede ngam OS tigi rigi, mahdi e geɗel keɓaangel; ballal iwdi tan wonaa seedantaagal yaltugol.",
+      "links": [
+        {
+          "label": "Ƴeewndo eɓɓaande",
+          "path": "README.md"
+        },
+        {
+          "label": "Potal jokkondirɓe",
+          "path": "docs/PROVIDER_COMPATIBILITY.md"
+        }
+      ]
+    },
+    {
+      "id": "install-platforms",
+      "title": "Aaf paket biro potɗo oo",
+      "paragraphs": [
+        "Suɓo paket ngam yuɓɓo gollorgo maa e mahdi CPU: x64 walla arm64. Laawol mahngo ina waawi yaltinde nooneeji macOS DMG/ZIP, Windows NSIS installer/ZIP, e Linux DEB/RPM/AppImage/tar.gz/ZIP. Fiilde tagande walla cross-build wonaa seedamfaagu wonde loowirde mum e UI mum neeniijo ina ngolla e ordinateer maa; ƴeew binndanɗe ƴeewndo ngol yaltugol.",
+        "Mahdiiji macOS kuutortooɗi Electron 44 ina ɗaɓɓi macOS 13 walla ko ɓuri ɗum. Huutoro paket arm64 e Apple Silicon e paket x64 ngam Intel. Uddu jaaɓnirgal ɓooyngal ngal no feewi ko adii lomtinde. Paketeeji ƴeewndo ina mbaawi wonde ɗi siynaaka kadi ɗi njeñtinaaka; woto jillu geɗe ɓamtaare e yaltugol yimɓe siynangol.",
+        "Windows ina sokli yuɓɓo gollorgo ngo goomu Electron jaɓi e Git tawaama e PATH. Suɓo mahdi potndi heen ndii. Ƴeewndo ngo siynaaka alaa seedantaagal Authenticode. ZIP waawɗo nawteede ina foti reende runngere jaaɓnirgal ndee timmunde e piille gollorɗe, wonaa tan fiilde gollirteende ndee.",
+        "Linux ina sokli biro natal jaɓtodinɗo, defte yuɓɓo ɗe Electron ɗaɓɓi, e Git. Ngam seedanteeje ndeenka kawtiteeɗe, hoddin Secret Service gollorɗo hono gnome-libsecret walla KWallet; backend basic_text mo reenanoonka jaɓataake. Seedantaagal kuutorɗe headless/container hollitaani kala biro walla dokkal.",
+        "Aaf DEB e apt install ./file.deb, walla aaf RPM rewrude e koroowo paketeeji dokkal maa. AppImage ina sokli yamiroore gollal e ballal FUSE potngal; --appimage-extract-and-run ko feere goɗɗo ɗo jaɓaa. Lollin paketeeji tar.gz e ZIP e kala piille majji gollorɗe. Seertin keɓe kuutoro e piille jaaɓnirgal nde lomtintaa paket.",
+        "Ngam mahde gila e ɗo ɗum ummorii, huutoro Node 24, Git e npm ci, kadi ina heen aafoowo Electron kuutorteeɗo oo. Mahngo neeniingo ina ɗaɓɓi kuutorɗe jaaɓnirde: kuutorɗe yamiroore Xcode e macOS; MSVC C++, Windows SDK e Python e Windows; compiler, make, Python, pkg-config e kuutorɗe paketeeji potɗi e Linux. Rew e PLATFORM_BUILDS.md ngam heɓde jamirooje laaɓɗe e keeri jaaɓnirde jooni ɗee.",
+        "Bayle yaltugol ina ndeenira hakkundeere kadi njeñtudiiji mbaylaata. Mahngo ƴeewndo CI wonaa aafoowo bayyinaaɗo. Mooftirɗe iwdi ina njogii iwdi, fiilde coktirgal, binndanɗe e piille gollal; lulngooji, seedanteeje, profiiliji kuutorɗe e wiɗtooji sirlu naataani heen. Woto miijo wonde goongɗinal neeniwal ARM walla Windows ummorii ko e mahdi x64 moƴƴiri."
+      ],
+      "links": [
+        {
+          "label": "Paketeeji jaaɓnirɗe, sarɗiiji e keeri ƴeewndo",
+          "path": "docs/PLATFORM_BUILDS.md"
+        },
+        {
+          "label": "Gollal mahngo e ƴeewndooji yaltugol",
+          "path": "docs/RELEASE_READINESS.md"
+        }
+      ]
+    },
+    {
+      "id": "code",
+      "title": "Code: laabi joyi",
+      "paragraphs": [
+        "Auto ina ƴeewtoo njaajeendi: naamnal kumpa ina waawi joofirde jaabawol, kono golle ɓurɗe mawnude ina ɗaɓɓi heblagol. Ñawndu ella ina wiɗto sabaabu kadi heblana feere moƴƴitingol. Doosgal adii ina fuɗɗoroo feere karallaagal; Ɗaɓɓanɗe adii ina fuɗɗoroo sarɗiiji e pawi jaɓgol.",
+        "Multi-model ina huutoroo nokkuuji ceertuɗi ngam wiɗto, diidi, gollal e ƴeewndo. Innde laawol ngol ɗaɓɓaani ceŋorɗe ceertuɗe: kala darnde ina huutoroo preset walla teelteel Cuɓaaɗo mo cuɓ-ɗaa.",
+        "Worktree ina seertina waylo-waylooji Git jeyaaɗi e golle. Branch ina gollira e checkout cuɓaaɗo oo. Ƴeewto eɓɓaande ndee, catal ngal e model ngal ko adii nde puɗɗoto-ɗaa; bayyinaango golle ngol neldataake e yeewtere huuɓtodinnde.",
+        "Ngam miijo ngo suɓngooji mum karallaagal walla kuutorɗe laaɓaani, huutoro Ɗaɓɓanɗe adii kadi maha doosɗe ɗee e nder yeewtere. Auto ina sernda ɗaɓɓannde ndee; wonaa yamiroore ngam gollirde kala helmere seeɗa jooni jooni. Danndu draft ina heddina ɗaɓɓannde ndee tawa jokkondiraani e model; Fuɗɗo ina dannda kadi fuɗɗa laawol ndeenka ngol laawol gootol. Kopiiji golle gooto haa nayo ina njogii ⟦ID⟧ taggol e teelteel darnde ceertuɗe."
+      ],
+      "links": [
+        {
+          "label": "Nanondiral doggol gollal Code",
+          "path": "docs/WORKFLOWS.md"
+        },
+        {
+          "label": "Peeje jamirooje Code",
+          "path": "docs/CODE_WORKFLOW_PROMPTS.md"
+        }
+      ]
+    },
+    {
+      "id": "forge",
+      "title": "Yeewtere Forge",
+      "paragraphs": [
+        "Fuɗɗo ina uddita yeewtere hakkundeere ndee. Jaabo no haaniri, laaɓtin naamne, ɓeydu doosɗe kadi yeewtu suɓngooji karallaagal. Yeewtere ndee e naamne ɗee keddoto ko e golle ɗee.",
+        "Neldude binndol hollitaani jaɓgol ɗerewol walla yamiroore feere kesal gollal. Laaɓtinde e nder gollal ina dartina taƴre ardiinde ndee kadi ina ƴeewtoo njaajeendi ndi memaa ndii. Jaabawol naamnal e nder taƴre nde jaɓaa kisa ina waawi jokkude ndeen taƴre.",
+        "Ngam ruttoraade e nder doosɗe no laaɓti, suɓo Ɗaɓɓanɗe, Doosgal walla Peeje. Baylagol kesol ina ɗaɓɓi jaɓgol khesol e pellitte jokkondirɗe. Taƴe timmuɗe e seedanteeje majje ina keddoo; daawalji ɗi ngasaani kadi ɓenninaaɗi keddoto ko e daartol.",
+        "Golle daawal ardiiɗe ina ceerti e yeewtere nde alaa kaɓirgal. Huutoro yeewtere Forge e nokku neldude jamirooje junngo tigi rigi e gollal jeyiingal doggol gollal."
+      ],
+      "links": [
+        {
+          "label": "Nanondiral yeewtere Forge",
+          "path": "docs/WORKFLOWS.md"
+        }
+      ]
+    },
+    {
+      "id": "decisions",
+      "title": "Ɗereeji e pelle",
+      "paragraphs": [
+        "Uddit ɗerewol, ƴeewto bayle mum kadi waylu ɗum so ina haani. Neldugol waylo-waylooji rewrude e yeewtere ina addana bayle kese; jaŋtooji e njeñtudiiji ƴeewtaaɗi mbaylitaake caggal ɗuum.",
+        "Ko adii jaɓde feere nde ɓe mbaɗi, waylu taƴre ndee, jamirooje ɗee, pawi jaɓgol e jamirooje ƴeewndo. Yamir jamirooje laaɓɗe ɗe paam-ɗaa: ɗe ndogata ko e nder runngere golle ndee. Multi-model ina hokka daawal gootal ngam golle ɗee fof, tawa geɗe mum ina ngoni e nder ɗereeji e jamirooje mum.",
+        "Jaɓ ko pellital seertungal gonngal e yiyngo. Auto rewrataa dow naamne walla jaɓgol ɗaɓɓanɗe, paamiral e peeje. Ɗerewol ngol waylaa e yaasi waawaa huutoraade kadi jaɓgol kiiɗngol.",
+        "Piille keblorɗe ina peeña hono geɗe keɓaaɗe. Bayle majje, daawal ngal ɗe tagi e hash majje ina kaɓɓa ɗe e njeñtudi. Ɗereeji Code ina ndeenee e yaasi worktree kadi naatataa e commit no jaajiri.",
+        "Ƴeewto ɗerewol ngol e pellital kollitaangal ngal fof ko adii nde njaɓataa. Jaɓgol ina haɓɓa ID baafal jooni oo, baylagol feere ndee e hashes ɗereeji reenaaɗi ɗii. Ɗaɓɓu waylo-waylooji so tawii njaajeendi walla seedanteeje ngonaa goonga. So tawii pellital wontii kiiɗngal, loowtu kadi ngonka danndaanka ko adii nde mbaɗataa suɓngo keso; fiilde waylaande waawaa jaɓeede e les bayle ɓooyɗe."
+      ],
+      "links": [
+        {
+          "label": "Baafalji doggol gollal e bayle ɗereeji",
+          "path": "docs/WORKFLOWS.md"
+        }
+      ]
+    },
+    {
+      "id": "execution",
+      "title": "Gollal e ƴeewtindo",
+      "paragraphs": [
+        "Ko haani waɗeede ina holla taƴe goonga, njiylawu jooni oo, ƴeewndo e njeñtudi ƴeewtindo. Nelaaɗo wiyaani “gasii” hollitaani wonde taƴre ndee gasii: seedanteeje ɗe feere ndee ɗaɓɓi ina poti tawaade.",
+        "Mbaydi junngo ina dartoo hakkunde taƴe potɗe. Auto ina yahrina yeeso taƴe ƴeewtaaɗe kadi ina addana etaade haa e keeri. Dartin caggal ina taga nokku dartorde sahaa fof. Dartin ina dartina gollal tiiɗngal ngal doggol gollal ngal; uddude rogo dartintaa ngal.",
+        "Ƴeewtoowo keeringal ina huutoroo nokku seertuɗo mo piille e njeñtudi ƴeewndo. Kala ko haani faddaade ina foti safriraade; ƴeewtooɓe heewɓe mbaawaa wootde ngam ittude ella faddoowo.",
+        "E nder Multi-model, moƴƴitinde kumpaaji ɗaɓɓi ko pellital laaɓngal. Moƴƴitingol fuɗɗataa e nder suuɗaare ƴeewndo goɗɗo: Ƴeewto kadi ina uddita laawol kesol. Miijooji ƴeewndo ina mbaawi ɗaɓɓude e gardiiɗo nde ƴeewtindotoo tawa gollal ngal tokkoraaka.",
+        "Taƴe timmuɗe mbaawaa waylireede e nder suuɗaare. E TDD, Red ina foti tigi rigi woofde e sabaabu jippiiɗo oo, caggal ɗuum Green ina foti gollude no moƴƴi. Etaade keeriinde ina haɗa etagol ngol joofataa.",
+        "Danndu ƴeewtooɓe CLI/API heeringol e Teelteel → Kawtal ƴeewtooɓe, caggal ɗuum suɓo kawtal ngal e nder Code walla Work. Ƴeewtooɓe ina ndoggira e sahaa gooto, caggal mum mahoowo jaŋtol kawtal ngal. Aɗa waawi kadi heblude ƴeewtooɓe heeringol tawa kawtal danndaaka. Mahoowo jaŋtol ngol heɓata tan ko jaŋtooji teeltaaɗi ɗi alaa innde, tawa alaa piille eɓɓaande walla kuutorɗe; ndee senngo jooni ina ɗaɓɓi Claude Code walla API.",
+        "Kala taƴre gollal ina ɗaɓɓi ƴeewndo waawngo gollireede, ƴeewndo keeringal potɗo, walla ɗiɗi ɗii fof. Daawalji keblorɗi ɗii noon ina ndeenira njeñtudiiji goongɗinaaɗi e geɗe keɓaaɗe; ɗum en kollitaani wonde ƴeewndooji gollal ndogii. Yamiroore heɓata nafoore tan ko so tawii ngonka yaltugol mum goonga e laɓɓingol golle mum tabitinaama. Ƴeewndo Red ngam TDD ina foti woofde no haaniri ko adii gollal e ƴeewndo Green; fiilde gollirteende nde alaa walla sahaa ɓennuɗo wonaa njeñtudi Red jaɓaandi.",
+        "Kaɓirɗe dartorɗe tagoore ina ndartina caggal etaade laabi tati woofɗi e dow taƴre wootere walla etaade capanɗe joyi e kawgel ngel fof. Taynugol ina ñaama etagol kono wonaa etagol woofngol e hoore mum. Keeri e seedanteeje timmuɗe ina keddoo caggal kurfetee; Eto kadi artirtaa ɗe. Janngu woofre reenaande ndee ko adii nde njamirtaa etagol goɗngol."
+      ],
+      "links": [
+        {
+          "label": "Ƴeewndo e ƴeewtindo",
+          "path": "docs/WORKFLOWS.md"
+        }
+      ]
+    },
+    {
+      "id": "review-teams",
+      "title": "Kawtal ƴeewtooɓe sahaa gooto e mahoowo jaŋtol",
+      "paragraphs": [
+        "Uddit Teelteel → Kawtal ƴeewtooɓe kadi danndu kawtal. Ɓeydu ƴeewtooɓe heeringol e CLI walla API mumen, model, tiiɗnaare miijo e keeriiɗo, caggal ɗuum suɓo mahoowo jaŋtol. Suɓo kawtal ngal e teelteel ƴeewndo golle ɗee. Preset gollal ina waawi kadi huutoreede e ƴeewtoowo, kadi Cuɓaaɗo ina heddii e woodde; darnde heeringol ina jogii haa jooni nokkuuji ceertuɗi.",
+        "Ƴeewtooɓe ina ndoggira e sahaa gooto e dow seedanteeje golle goote ɗee. Kala jaŋtol, juumre e pellital ɗaɓɓangal ina reenee. Mahoowo oo heɓata ko jaŋtooji limoore ɗi ngalaa innde, tawa alaa inɗe ƴeewtooɓe, model walla jokkondirɓe, loowdi golle adannde, naatgol runngere walla kuutorɗe. Ina yerondira jaŋtooji kadi artira pellital teeltaangal gootal; ngal waɗataa ƴeewndo iwdi kesal.",
+        "Kumpal faddoowal walla salaare ƴeewtoowo potɗo waawaa ittireede wooto ɓurɓe heewde walla yiɗde mahoowo oo. Jaŋtooji ɗi ngalaa walla ɗi mboni ina padda jaɓgol. Ƴeewto kumpaaji gooto gooto e pellital kawtaangal ko adii jaɓde walla yamirde moƴƴitingol. Kawtal danndaangal ina laaɓtinee kadi feɗee ngam gollal ngal; waylude preset mum waylataa seedanteeje timmuɗe.",
+        "Mahoowo jaŋtol tan oo jooni ina huutoroo Claude walla API ballitooɗo mo alaa kuutorɗe. Codex e Antigravity ina keddoo e heɓaade hono ƴeewtooɓe kono ina njaɓŋitee ngam ndee darnde mahoowo seertaande haa nanondiral mo alaa kuutorɗe goongɗinaangal wooda. Jamiroore wiyde “alaa kuutorɗe” tan heyaani."
+      ],
+      "note": "Peeje diidi/ƴeewndo Code Multi-model e kawtal ƴeewtooɓe sahaa gooto danndaangal ko kuutorɗe ceertuɗe. Reenu doosgal ƴeewndo cuɓaangal ngal; woto miijo wonde laawol gootol ina uddita kala fannu ƴeewndo.",
+      "links": [
+        {
+          "label": "Teelteel kawtal gollorngal",
+          "path": "shared/review-team.ts"
+        },
+        {
+          "label": "Kawtal ƴeewndo",
+          "path": "electron/workflow/ReviewAggregation.ts"
+        }
+      ]
+    },
+    {
+      "id": "specializations",
+      "title": "Keeriiɗo nelaaɗo e doosgal jamirooje",
+      "paragraphs": [
+        "Model ko mootoor gollal ngal; keeriiɗo ko profiil jamiroore. Suɓo Alaa ngam alaa keeriiɗo ɓeydaaɗo, Huuɓtodinɗo ngam ñemmborde adannde, Auto ngam ñemmborde naatnde heen, walla Junngo ngam ñemmborde cuɓaande e jamirooje maa keeriinde. Presets ina mbaawi reende suɓngo ngoo.",
+        "Doggol adanngol ngol ina heddi koddiingo huuɓtodinngo, mahdi, kisal, hoolaare, golle, ƴeewndo e kuutorgol jaaɓnirgal. Auto ina huutoroo binndol golle/taƴre ngam suɓaade ñemmborde; ngol noddataa e nder suuɗaare model goɗɗo walla seedantaade ganndal. Miijooji peewnugol ina mbaawi ƴeewteede e waylireede ko adii jaɓde feere gollal ndee.",
+        "Keeriiɗo ƴeewndo ina wallita tiitinde hakkille kono lomtotaako seedanteeje heeringol, keeri naatgol walla pellital teeltaangal. Jogo jamirooje keeriiɗe hono no feccere njaajeendi golle ɗee: woto kuutoro ɗum en ngam woppude jaɓgol ɗerewol, doosgal kuutorɗe, gollal seedanteeje walla caɗeele ƴeewtoowo."
+      ],
+      "links": [
+        {
+          "label": "Doggol jamirooje adannde",
+          "path": "shared/specializations.ts"
+        }
+      ]
+    },
+    {
+      "id": "work",
+      "title": "Work: gila e naamnal haa e ɗerewol",
+      "paragraphs": [
+        "Work ɗaɓɓaani Git. Default ina taga runngere golle seertiinde; Cuɓaaɗo ina suɓoo runngere woodnde rewrude e suɓoowo neeniijo. Danndu draft ina reena teelteel tawa miijaaki; Fuɗɗo ina dogna daawal gadanal ngal.",
+        "Auto ina jaaboo tigi rigi walla hokka feere fotnde e Ko haani waɗeede goonga. Brainstorm ina taga ideas.md ko adii nde cuɓoto-ɗaa miijooji goɗɗi walla ƴeewndo. Research ina reena findings.md, iwdiiji e keeri. Write ina ummoo e anniya kadi, so ina nafata, outline.md haa e ɗerewol cifotoongol walla draft.md; baylagol ina reena bayle ɓooyɗe.",
+        "Suɓo piille naatinteeɗe rewrude e suɓoowo neeniijo kadi tuugnor ɗe e @. Jaaɓnirgal ngal ina natta ɗe hono naatnugol golle ngol waylataako kadi ina goongɗina ɗe ko adii doggol. Default ina taga runngere golle nde jaaɓnirgal ngal jeyi; Naatgol runngere Cuɓaaɗo ko jaɓal joomum danndaangal. Draft danndaangal ngal fuɗɗaaka ina waawi waylude runngere mum.",
+        "Tag kopiiji 1–4 jogiiɗi teelteel gollal ceertuɗe. Golle kuutortooɗe runngereeji ɓuuɓondirɗi mbaawaa winndude e sahaa gooto. Ndee toppitagol gollal ko ngam kuutorɗe ZIAForge, wonaa porogaraamuuji yaasi goɗɗi.",
+        "Deep Brainstorm ina fawa e gollotooɓe tato heeringol kadi ina wallita haa e njeetato. Suɓo doosɗe majji e teelteel majji, haa arti noon e huutoraade preset e nder nokkuuji ceertuɗi. Naamne gollotooɓe ina ndeenira ɗo ɗe ummorii; jaŋtooji bonɗi keɓata ko laawol gootol ngam moƴƴinde porme. Woofre feccere heddoto ko e feeñde e nokku hollitireede hono no nafoore kawtal.",
+        "Deep ina kawta jaŋtooji gollotooɓe reenaaɗi ɗii e nder brainstorm_report.md kadi ina ɗaɓɓa sahaa fof pellital kuutoro. Rewtindaare famɗunde ina moƴƴina jaŋtol ngol rewrude e gardiiɗo oo; waylo-waylo mawngo ina fuɗɗa laawol goɗngol e gollotooɓe feɗaaɓe ɓee. Geɗe keɓaaɗe ina ndeenira bayle majje.",
+        "Darnde laaɓtinaande ina feɗee nde golle tagetee walla draft danndetee no laaɓti. Caggal noddaango gadano ngoo, ko ɓamtaare jaajnde/junngo tan waawi waylude; huutoro golle kese ngam darnde walla modeliiji ceertuɗi. Waylude preset huuɓtodinɗo waylataa e nder suuɗaare daawalji garooji.",
+        "Mbaydi junngo ina dartoo hakkunde daawalji potɗi, haa arti noon e Write outline mawɗo. Auto ina waawi jokkude rewrude e ndeen outline. Naamne, peeje gollal ɗe mbaɗaa, njiylawu Brainstorm e ƴeewndo jaŋtol Deep ina keddoo ko pellitte laaɓtuɗe hay e nder Auto. Tuugnorgal tan hollitaani wonde wanngagol waɗii, kadi fiilde binary reenaande tan hollitaani feeñnande mum."
+      ],
+      "links": [
+        {
+          "label": "Mbaydiiji Work e pelle",
+          "path": "docs/WORK_WORKFLOWS.md"
+        }
+      ]
+    },
+    {
+      "id": "models",
+      "title": "Presets, modeliiji e jaɓal",
+      "paragraphs": [
+        "Preset ina dannda CLI/API, model, tiiɗnaare miijo e jamirooje. Koyngal yeewtere ngal ina jogii taƴe preset, CLI, model e suɓngooji. Cuɓaaɗo ina gollira tawa preset alaa; Tag preset ina dannda ko suɓaa jooni koo.",
+        "Doggol ngol ummotoo ko e CLI walla API cuɓaaɗo aafaaɗo ɗo jaɓaa. Hesɗitin ina hesɗitina doggol ngol tawa waylaani ko suɓaa koo. So yiytugol alaa, naatnu ID model laaɓɗo; jokkondirɗo oo ina foti tan jogaade ballal mum. Tolnooji miijo ina tuugnii e model e CLI. Default jokkondirɗo ina seerti e token none laaɓɗo oo.",
+        "Huutoro waylo-waylooji tan caggal jaɓgol backend. Waylude ina haɗaa e nder sahaa golle gollotooɗo walla doggol ngol heewaani. Drafts e daartol jiytotoolngol ina keddoo, kono waylude jokkondirɓe artirtaa ngonka mumen suuɗiika ndernderiika.",
+        "E nder Forge, maande darnde ina jogii nafoore: heblagol ina waawi huutoraade Peewnoowo seertuɗo. Koyngal ina wayla darnde hollitaande ndee; ƴeewtooɓe e wallitooɓe ina cuɓee e teelteel doggol gollal. Doosgal ngam gollal ƴeewtaangal kisa ina waawi sokdeede.",
+        "Jamirooje ina ceerti e hakkunde jokkondirɓe. Tar tan e Winndu e nokku gollal ina ngoodi ɗo adapter oo wallitata ɗum. Antigravity ina huutoroo teelteel neeniijo CLI walla jaɓal timmungal cuɓaangal no laaɓti. Jaɓal timmungal wonaa sandbox.",
+        "Keeriiɗo ina ɓeyda tiitoonde jamiroore, wonaa model goɗɗo walla yamiroore. Presets e darnde ina mballita Alaa, Huuɓtodinɗo, Auto e Junngo. Auto ina suɓoo profiiliji gila e binndol taƴre tawa noddaani model goɗɗo; Junngo ina jaɓa haa e geɗe nay keeriiɗe e jamirooje peewnaaɗe. Toɗɗe ɗe Peewnoowo ɗaɓɓi ina mbaawi waylireede ko adii jaɓde feere ndee.",
+        "ID model walla tiiɗnaare naatnaande e junngo heddoto ko suɓngo maa, kono jokkondirɗo oo ina waawi salaade ɗum. Waylude preset huuɓtodinɗo waylataa e nder suuɗaare yeewtere dogoore walla feere jaɓaande. Ngam waylude yeewtere nde gollataa no laaɓti, huutoro kuutorɗe mum teelteel kadi fad jaɓgol. Suɓngo dartaango ina foti janngeede no kaɓirgal walla keeri ngonka, wonaa woppeede e waylude JSON danndaangal."
+      ],
+      "links": [
+        {
+          "label": "Baawɗe jokkondirɗo oo",
+          "path": "docs/PROVIDER_COMPATIBILITY.md"
+        }
+      ]
+    },
+    {
+      "id": "chat",
+      "title": "Yeewtereeji, Dartin e doggol ngol",
+      "paragraphs": [
+        "Tabbiteeji udditaaɗi, Ko ɓooyaani e drafts jeyi ko golle goote. Uddude tabi ina ittira ɗum e Udditii kono ina reena ɗum e Ko ɓooyaani kadi dartintaa golle sarwoowo mum walla doggol gollal ngal. Yiylo daartol, uddit kadi yeewtere walla uddu tabbiteeji ɓeydaaɗi fof gila e dosol daartol.",
+        "Dartin ina tayna sahaa jooni oo. Fad dartagol ngol gasa ko adii Neldude garoowal ngal: jaɓgol taynugol wonaa gasgol gollal ngal. Aɗa waawi winndude draft garoowo oo e nder ɗuum.",
+        "E nder yeewtere huuɓtodinnde, Doggol ina reena ɗaɓɓannde garoore kadi seerti e draft jooni oo. Dartin doggol ina reena neldal goɗngal. Dartin e Yaltu ina ndartina doggol ngol. Caggal nde kurfetee, Ruttor tawo, caggal ɗuum Jokku doggol no laaɓti.",
+        "Humpitaaka firti ko neldal ngal anndaaka so yettii. Ɓataake bayɗo noon neldataake kadi no jaajiri: ƴeewto daartol ngol, natto binndol so ina haani kadi momtu geɗel ngel e doggol ngol. Neldude ngal kadi ko ɗaɓɓannde kesal laaɓnde.",
+        "Yeewtereeji daawal jeyi ko doggol gollal mum en, wonaa doggol kuuɓtodinngol ngol. Rew daawal ina holla daawal jooni ngal; suɓaade tabi goɗɗo e junngo ina dartina rewtindaade. Bindi CLI ina kolla caɗeele ceertuɗe e jaabawol ngol.",
+        "Jaabawuuli Markdown ina kollita tiitooɗe, doggi, taable, ceŋorɗe e bindi kod. Kaaƴe kuutorgol e caɗeele CLI ina keddoo ceertuɗi e jaabawol ngol. Miijo ngo model holliti e limoore token feeñata tan ko so jokkondirɗo oo hollitii ɗum tigi rigi; woto miijo wonde miijagol suuɗiingol walla kuutorgol ina woodi sabu dillere tan.",
+        "Caggal neldal ngal humpitaaka walla jaɓgol doggol, ƴeewto daartol kadi eto tan ko ɗaɓɓannde reenaande nde e nokku ɗo hokkoraa. Seedantaagal doggol firti ko njiylawu jaɓii ngel, wonaa miijagol ngol gasii. Ittu geɗel doggol ngol humpitaaka tan ko no momtugol laaɓngol; ngol waawaa woppude jaŋtol neldaangal kisa."
+      ],
+      "links": [
+        {
+          "label": "Doggol ɓatakeeji duumiingol",
+          "path": "docs/MESSAGE_QUEUE.md"
+        }
+      ]
+    },
+    {
+      "id": "files",
+      "title": "Piille, Git e timmugol",
+      "paragraphs": [
+        "Piille ina holla runngere golle ndee. Yerondir njeñtudiiji e ɗaɓɓanɗe, uddit ɗereeji kadi ƴeewto diffs. Reende fiilde binary hollitaani wonde ina feeña no moƴƴi e jaaɓnirgal mum gartirgal.",
+        "Git ina rokka ngonka, waylo-waylooji e golle tawa njeñtudiiji mum en mbinndaama. Commit, merge e push ko e junngo ngoniri no jaajiri; golle jaajɗe ko suɓngooji ceertuɗi ngam feere ƴeewtaande no timmiri.",
+        "Woto waylu piille gollorɗe hakkunde ƴeewndo e bayyinaango: jaɓgol ina haɓɓaa e bayte laaɓɗe. Luural, push mo yaaraani yeeso e njeñtudi golle ɗe anndaaka ina padda ɓamtaare haa pellital laaɓngal waɗee. Auto yamirtaa bayyinaango e nder suuɗaare.",
+        "Work tagataa cale Git kadi alaa joofnirde Git. Reenu ɗereeji ɗaɓɓaaɗi ɗii gila e runngere suɓaande ndee, kadi ina heen bayle e ɗo ɗum ummorii.",
+        "Bayloowo fiilde oo ina rokka pinal binndol e ɓeydugol mum, njiylawu e lomtinde, daartol ruttoraade, wootorde diidi e drafts e kala tabi. Danndude ina reena codiingol UTF-8/UTF-16 ballitoongol kadi ina jaɓŋita luural waylo-waylooji yaasi. Codiingooji goɗɗi e geɗe binary ina ɗaɓɓi bayloowo yaasi. Drafts ɗi ndanndaaka ina padda jaaɓnirgal ngal Yaltude haa joomum dannda ɗum walla woppa ɗum.",
+        "Pinal binndol timmungal ina udditee haa 8 MiB. Piille binndol ɓurɗe mawnude ina pudditoo e nder henorde 256 KiB; 8–64 MiB ina waawi loowteede no timmiri tawa alaa pinal binndol. Dow 64 MiB huutoro baylagol henorde e njiylawu keeringal garoowo. Ɗum ko mbaydi piille mawɗe keeriindi, wonaa fotde Sublime Text ngam ɗereeji mawnuɗi no njiɗ-ɗaa.",
+        "Uddit runngere ina huutoroo ngonka golle jooni ɗee walla catal/worktree, wonaa uddude tan e nder suuɗaare runngere adannde ndee. Gorol fiilde ina waawi hollirde runngere neeniire fiilde ndee. Laabi ina ngoongɗinee e backend dow jamirooje golle winnditaaɗe. Piille binary mbaawaa waylireede hono binndol meere; huutoro ƴeewtoowo majje kadi reenu bayte adanɗe ɗee.",
+        "Ittugol worktree ko gollal deenaangal seertungol. Joofnu geɗe teeltaaɗe e terminalji jokkondirɗi ko adii nde ittataa ɗum, haa arti noon e geɗe ɗe ngollataa. Ƴeewto njeñtudi Git danndaandi e ngonka daɗndo; momtude binndol golle lomtotaako reenirde gollal ngal commit-aaka no moƴƴi."
+      ],
+      "links": [
+        {
+          "label": "Nanondiral bayloowo teeltaaɗo",
+          "path": "shared/editor.ts"
+        },
+        {
+          "label": "Doosɗe Git",
+          "path": "docs/WORKFLOWS.md"
+        }
+      ]
+    },
+    {
+      "id": "api",
+      "title": "Ceŋorɗe API",
+      "paragraphs": [
+        "Ceŋorɗe ina ɓeyda nokku jokkondiral jaɓɗo OpenAI cuɓaaɗo no laaɓti. Naatnu innde, URL tuugnorɗo, model e coktirgal so ina haani. Sarwordeeji keewɗi ina ɗaɓɓi URL tuugnorɗo joofiroowo /v1; ƴeew binndanɗe nokku jokkondiral maa.",
+        "HTTPS ina waɗɗii so wonaa loopback HTTP tan. Huutoro nokku jokkondiral laaɓɗo mo alaa seedanteeje naatnaaɗe e nder URL. Coktirɗe ɗee ina kuutoroo cokirgal OS jaɓangal kadi ngartirtaake e UI. Waylude nokku jokkondiral ina ɗaɓɓi naatnude coktirgal mum kadi. Woppude nokku coktirgal ko meere ina reena coktirgal danndaangal; Momtu coktirgal danndaangal ngal ina momta ngal no laaɓti.",
+        "Noddaangooji API kuutortaako abonmaaji CLI. Kuutorɗe e modeliiji ina ceerti e golle neeniije, kadi keɓgol model no moƴƴi hollitaani wonde miijagol ngol gasii. Kuutorgol token feeñata tan ko so tawii jokkondirɗo oo hollitii ɗum tigi rigi.",
+        "Reenu seedanteeje e nder Ceŋorɗe, wonaa e nder konngi golle walla jamirooje preset. Ƴeewtooɓe tarooɓe tan keɓata tan ko kuutorɗe fiilde API ɗe ɓe njamiroo; mahoowo jaŋtol ngol alaa kuutorgol hay gootol. Noddaangooji kuutorgol ɗi njaɓaaka ina njaɓŋitee wonaa waɗeede e nder suuɗaare. Sarwordeeji ina ceerti e pormeeteeruuji miijo, ballal kuutorɗe e doggol modeliiji; yerondir juumre e nanondiral nokku jokkondiral maa tigi rigi."
+      ],
+      "links": [
+        {
+          "label": "Ceŋorɗe API",
+          "path": "docs/API_CONNECTIONS.md"
+        }
+      ]
+    },
+    {
+      "id": "settings",
+      "title": "Teelteel, ɗemɗe e artirgol deenangol",
+      "paragraphs": [
+        "Teelteel kuuɓtodinngol ina suɓoo nokku gollal, ɗemngal jaaɓnirgal e jamirooje adanɗe. Ceŋorɗe ina toppitii nokkuuji API. Presets e Kawtal ƴeewtooɓe ina ndeenira teelteel darnde. Ndeenka woɗɗungo ina toppitii seedanteeje nokkuuje, njaajeendi sarwoowo e jamirooje joomum; Khesɗitingol ina toppitii iwdi/laawol yaltugol. Ko fayti e ina holla gollal dogoowal ngal no laaɓti.",
+        "Ɗemngal jaaɓnirgal seerti e ɗemngal ɗaɓɓireande e ngonka ƴeewndo binndanɗe. Inɗe ngalu, ID yamiroore, jokkondire fiilde, ID model rokkowo e inɗe ɗe kuutortooɗo tagi keddoto ko maantore. Ballal rewata ko e ɗemngal jaaɓnirgal cuɓaangal so tawii firo jooniwal ina woodi; firooji masin ina maantee kadi Engele heddoto ko tuugnorgal laaɓngal.",
+        "Moftu huutorta ko teeltol kolliraangol ngol. Hesɗitingol databaas walla hesɗitingol faktori ina waawi ittude metadata jaaɓnirgal; reen piille e moftol ƴeewndaangol ko adii nde a huutortoo hesɗitin e anniya. Ɗee golle ko golle joom mum nokkuujo. Woto huutoro ɗum no laawol daɓɓol ngam ƴeewtaade ngonka golle kooñiika walla winndannde bonnde."
+      ],
+      "links": [
+        {
+          "label": "Tinndinoore firo nokkuure",
+          "path": "docs/LOCALIZATION.md"
+        },
+        {
+          "label": "Daɗndugol keɓe",
+          "path": "docs/DATA_RECOVERY.md"
+        }
+      ]
+    },
+    {
+      "id": "help-assistant",
+      "title": "Ƴam wallitoowo Ballal",
+      "paragraphs": [
+        "Uddit Ballal, suɓo preset jokkondirɗo moftaama e nder alluwal wallitoowo mum kadi ƴam ko faati e ZIAForge. Jaabawuuli kuutortoo ko ɗowirde Engele laaɓnde wonnde jooni ndee e ɗemngal jaaɓnirgal cuɓ-ɗaa ngal. Butoŋaaji tuugnorgal feccere ina maccita toɓɓe ɗowirde potɗe, ngam aɗa waawa fotndude fannu oo e tuugnorgal ngal.",
+        "Oo wallitoowo ina jogii yeewtere suturo seertunde haa to 100 naatgol moftaangol e 3 MiB. Naatnu naamnal haa to 12,000 harfeere; Neldu ina ƴama ngal, Dartin ina woppa jaabawol gollangol ngol tawa naamnal maa ina heddii, kadi Laɓɓin ina ittude ndee yeewtere Ballal. Binndol maa ngol neldaka e preset cuɓaaɗo oo ina heddoo so a udditii walla a udditii Ballal e nder sahaa gooto jaaɓnirgal, kono binndol ngol moftaaka e mbeɗu. Wallitoowo oo neldataa yamiroore jaaɓnirgal, waylata ngonka golle walla jaɓde damal. Tinndinoore wonaa seedamfaagu goonga golle, konte walla jokkondiral yaasi.",
+        "Jonndeeji Ballal Claude Code e API ina tiiɗtina doosgal ɗaɓɓaangal ngal alaa kuutorɗe. Jonndeeji Ballal tawaaɗi Codex e Antigravity ina ɗaɓɓi jamirol ordinater tawaangal joom mum nokkuujo gonngal. So tawii ina daaƴaa, jaaɓnirgal ngal faamninat ko soklaa ko e nokku suɓaade rokkowo goɗɗo. Ko joom mum tan waawi hurminde ɗum e teeltol ɗowgol nokku; wallitoowo oo waawaa hurminde ɗum e hoore mum.",
+        "Ballal Codex huutortoo ko sankara taro-tan kadi salaama ɗaɓɓireeji jamirol kuutorɗe. Antigravity huutortoo ko noone peewnugol e raaya mum tawaaɗo sankara. Ɗee nooneeji tawaaɗi ngonaa tagoore timmunde ngam sokde yuɓɓo golloowo. Hash ɗowirde ummorde hollirta ko tuugnorgal kuutoraangal ngam jaabawol; fannu baɗaaɗo ina waawi juumde, ko ɗuum waɗi ƴeewto pecce mum jokkondirɗe ko adii nde a golla. Jaabawuuli ɓooyɗi ina maantee so yamre ɗowirde ummorde mum seertii e ɗowirde jooninde ndee."
+      ],
+      "links": [
+        {
+          "label": "Tuugnorgal laaɓngal e toppitagol firo",
+          "path": "docs/HELP_MAINTENANCE.md"
+        },
+        {
+          "label": "Wallitoowo jaaɓnirgal e jamirooje",
+          "path": "docs/AGENT_CONTROL.md"
+        }
+      ]
+    },
+    {
+      "id": "assistant-control",
+      "title": "Wallitoowo e Telegram",
+      "paragraphs": [
+        "Wallitoowo oo huutortoo ko preset cuɓaaɗo oo e API ɗowgol jaaɓnirgal gooto oo. Jamirol ngam ƴeewtaade ngonka e jamirol ngam waɗde golle ko geɗe ceertuɗe. Ƴeewto yamiroore e njeñtudiiji: binndol wallitoowo wonaa seedamfaagu wonde golle baɗaama haa timmi.",
+        "Telegram ko joom mum nokkuujo oo tan hurminta ɗum, tawa ina waɗi bot token gonɗo e ID joom mum limoore. Ɗowgol ngol ko ngam yeewtere suturo oon joom mum tan. Bot mo teeltinaaka walla mo huwataa fotaani heɓde ɓatakiiji jaaɓnirgal.",
+        "Woto ɗakku bot token e nder yeewtere huuɓtidinnde. Teeltinde jokkondiral ngal hollirtaa wonde jokkondiral Telegram ina huwo, kadi sosataa bot e jaajol. Natal nate e jaabawuuli ina mbaawi jogaade keɓe suturo nokku gollorde.",
+        "Suɓo preset wallitoowo kadi rokkude jamirol golle jaaɓnirgal seerti e ƴeewto. Golle wallitoowo Codex e Antigravity ɗaɓɓi jamirol ordinater tawaangal joom mum; ɗe lomtintaa e nder sirlu e jonnde API walla Claude nde alaa kuutorɗe. Nate ekran ina mbaawi hollireede e yeewtere wallitoowo, kono naatgol model jooni ngol alaa ƴeewndo natal. Woto sikku wallitoowo oo ƴeewtii natal ngal e gite tan sabu o hollirii ngal.",
+        "Wallitoowo oo ina waawi ƴeewtaade tonngooɗe, golle, yeewtere, ngonka golle, ngonka kuugal e damal jaaɓnirgal rewrude e kuutorɗe binndaaɗe. Omo waawi waylude teeltol kuuɓtodinngol ngol newnaa kadi o hurmina golle jaaɓnirgal baɗaaɗe jamirol. O waawaa rokkude hakkeeji tawaaɗi, hollirde keɓe sirlu moftaaɗe, waylude jamirol nokku gollorde ɗaɗol e woɗɗude, walla jaɓde damal Forge tan sabu ina weeɓi."
+      ],
+      "links": [
+        {
+          "label": "Nanondiral ɗowgol jaaɓnirgal",
+          "path": "docs/AGENT_CONTROL.md"
+        }
+      ]
+    },
+    {
+      "id": "telegram",
+      "title": "Gollin bot Telegram maa suturo",
+      "paragraphs": [
+        "Sos walla heɓ bot maa, fuɗɗo yeewtere mum suturo, kadi naatnu tokeen mum e Telegram kuutortooɗo limoore maa ID e teeltol ɗowgol nokku. Hurmin jokkondiral ngal so tawii a yiɗii jaaɓnirgal ngal seŋoo tan. Joom mum ID ko maantore kuutortooɗo, wonaa innde kuutortooɗo walla bot ID. Ko ɓatakiiji ummoriiɗi e oon kuutortooɗo e ndeen yeewtere suturo tan njaɓetee.",
+        "Huutoro /start, /menu walla /status ngam yiyde yamre dogoore ndee, limoore eɓɓooje/golle e ngonkaaji golle. Butoŋaaji ina maccita Eɓɓooje, Golle, Natal ekran, Ballal e Ɗemngal. Doggol ina hollira geɗe jeetati e kala hello, tawa ina waɗi njiilaw Caggal, Hesɗitin, Galle e Ko adii/Yeeso. Butoŋaaji eɓɓoore ina ceŋtoo doggol golle ngol. Karta golle ina hollira yaawre ngonka golle mum moftaande, model/preset e naamne keddiiɗe so tawii ina ngoodi.",
+        "Uddit Yeewtere golle ngam ƴeewtaade yeewtere udditiinde/kesunde e yeewtere laabi ngonka golle. Kala ƴeewndo ina hollira haa to ɓatakiiji jeegom cakkitiɗi ɗi kuutortooɗo/wallitoowo, tawa ina ruttinaa e gite haa to 200 harfeere gooto fof. Miijo suturo hollirtaake. Tarde daartol hurminto rokkowo. Ƴeewndaari ko taro-tan: binndol kuuɓtodinngol e /ask TEXT ina nelda haa jooni to wallitoowo jaaɓnirgal, wonaa e nder sirlu to yeewtere golle nde ƴeewtoto-ɗaa ndee.",
+        "Dogin / Jokku ina tarta kadi ngonka golle Code walla Work jooni kadi fuɗɗora ngonka golle moftaaka potka. Dartin ina ɗaɓɓa dartinde ɗum. Hay gooto e majji jaɓataa ɗaɓɓireeji, bayyinaango, peewnugol, njeñtudi ƴeewndo walla naamne; pellital keddiingal ina haɗa Dogin. Waɗ pellite e nder jaaɓnirgal ngal, walla huutoro yamiroore binndaande yamiraande e laaɓal tawa ina waɗi damal jooniwal e kesɗitingol mum laaɓngol.",
+        "Huutoro Ɗemngal walla /language ngam suɓaade hay gooto e ɗee 56 ɗemɗe jaaɓnirgal e innde mayre asliire. Ɗum reenata ko cuɓol ngam oo bot e oo joom mum tan. Huutoro ɗemngal jaaɓnirgal ittata ngoon cuɓol. Waylataa ɗemngal jaaɓnirgal ngal walla jamirooje naatgol; ɓatakiiji gonɗi neldetaake kadi e jaajol.",
+        "Njiilaw ina hesɗitina e noone kuuɓtodinɗo oo ɓatake dosol bayyinaaɗo gooto. Butoŋaaji ina njogii maantore ɗe laaɓaani ɗe njoofata caggal hojomaaji 15 kadi mbaawi huutoreede laawol gootol; waylude karta ina bonna butoŋaaji mum ɓooyɗi. Butoŋaaji ɓooyɗi, huutoraaɗi, luurooji e ɓatake walla ummoriiɗi e golle ɓooyɗe mbaawaa waɗde golle. Ɓatake mo waawaa wayleede e laaɓal ina waawi lomtineede e karta keso; juumre laylaytol nde anndaaka firtaaka no ɓatake keso nii.",
+        "So hurminaama, poller oo woppata ko ko adii fof kadi winnda jaɓgol kesɗitingol ko adii neldude ngam yamiroore taƴaande woto firtu kadi e hurmingol kadi. Ɗum haɗata firteede kadi; seedintaaki timmal. Ƴeewto ngonka/kontekst ko adii nde neldantaa golle kese e njiylawu caggal juumre. Alaa tintinooji jaajol ngonka golle ngoodi.",
+        "Yamiroore laaɓnde ina heddii e heɓaade: /projects, /tasks, /task TASK_ID, /run TASK_ID, /pause TASK_ID, /screenshot e /ask TEXT. /new {JSON} ina sosa golle rewrude e createTask binndaaɗo; /command {JSON} ina nelda yamiroore doggol laaɓnde. Tar doggol gollorgo ngam nooneeji hujjaaji. Jamirol backend gootol e rokkude runngere ina kuutoree no e nder jaaɓnirgal nii.",
+        "Jaaɓnirgal ngal neldataa hay sahaa gooto bot-token moftaaɗo to wallitoowo. Nate ekran, tonngooɗe e binndol yeewtere ina mbaawi jogaade kabaaruuji eɓɓoore suturo. Dartin jokkondiral ngal e nokku hee so tawii bot walla konte joom mum hoolaaka kadi. Waylu tokeen yaltuɗo to rokkowo bot oo, caggal ɗuum hesɗitin teeltol suuɗaangol nokkuure mum."
+      ],
+      "links": [
+        {
+          "label": "Bot suturo e yamiroore",
+          "path": "docs/AGENT_CONTROL.md"
+        }
+      ]
+    },
+    {
+      "id": "native-permissions",
+      "title": "Jamirol ordinater tawaangol wonande joom mum tan",
+      "paragraphs": [
+        "Naatgol ordinater tawaangol fuɗɗortoo ko e daaƴeede. Ko joom mum tan waawi hurminde ɗum e Teeltol nokku → Ɗowgol woɗɗungol. Wallitoowo oo e yamiroore HTTP/MCP/Telegram mbaawaa hurminde ndee raaya e koye mum en. So golle salaama, wallitoowo oo foti siforaade teeltol ngol kadi woppa joom mum suɓoo.",
+        "So hurminaama e laaɓal, computer.run ina jaɓa kurminoowo, doggol hujjaaji e runngere gollorde timmunde suɓaande. Huutortaako interpolation shell, ina jogii keeri leydi 30-leƴƴannde kadi kaɓɓo yaltugol haa to 1 MiB. Runngere nde heɓaaka walla nde moƴƴaani salete; woppude cwd kuutortoo ko runngere teeltol jeyiinde jaaɓnirgal, wonaa HOME. Yaltu ina woppa yamiroore gollotoonde jeyiinde kadi fadde laɓɓingol golle mum en.",
+        "Laawol taro/gollu jaaɓnirgal e naatgol tawaangol ko pellite ceertuɗe. Worktree haɗataa naatgol yuɓɓo fiilde rokkowo mo alaa keerol. Ittu naatgol tawaangol caggal golle so soklaaka kadi, kadi ƴeewto keɓal yamiroore e nokku jaɓde binndol wallitoowo no seedamfaagu nii."
+      ],
+      "links": [
+        {
+          "label": "Nanondiral ɗowgol joom mum tan",
+          "path": "shared/control.ts"
+        }
+      ]
+    },
+    {
+      "id": "remote",
+      "title": "Banngal e ngonkaaji goɗɗi woɗɗuɗi",
+      "paragraphs": [
+        "Joom mum nokkuujo oo hurminta sarworde ndee kadi suɓoo ñiiŋorde mum, porto e laawol: taro ngam ƴeewto walla gollu ngam golle. Ñiiŋorde 127.0.0.1 woowaande ndee heɓotoo ko e oo ordinater tan. 0.0.0.0 ina heɗoo e ceŋorɗe laylaytol; ƴeewto naatgol laylaytol ko adii nde a hurminta ɗum.",
+        "Banngal udditata ko ngal damal gootal caggal naatgol e tokeen. Woto naatnu tokeenji e jokkondire renndo walla nate ekran. HTTP tan suuɗataa keɓe; huutoro laawol deenaangol dow laylaytol ngol hoolaaka.",
+        "Joom mum teeltinta ngonkaaji goɗɗi e URL e tokeen. Backend oo neltata ɗaɓɓireeji; ɗum nattataa eɓɓooje maɓɓe e masiŋ nokku oo. Ƴeewto ngonka cuɓaaka ko adii kala golle.",
+        "Yamiroore binndaande e kewuuji ina ƴetta ɗowgol jaaɓnirgal. Laawol taro rokkataa jamirol waylude golle. Ɗowgol ordinater tawaangol ko suɓngo seertungo joom mum nokkuujo kadi fuɗɗortoo ko e daaƴeede.",
+        "Jaaɓnirgal ngal foti heddoraade ina doga ngam banngal, Telegram e ɗowgol agent yaasi. Kala ngonka ina jogii daartol mum suturo, ngonka golle, tokeen e porto sarworde. Woto huutoro daartol gootol e sahaa gooto hakkunde ngonkaaji jeyaaɗi e koye mum en. Kewuuji banngal e jaabawuuli yamiroore ngoni ko e ngonka cuɓaaka; waylude UI nattataa piille walla natta naatgol tawaangol."
+      ],
+      "links": [
+        {
+          "label": "HTTP e ɗowgol jaaɓnirgal",
+          "path": "docs/AGENT_CONTROL.md"
+        }
+      ]
+    },
+    {
+      "id": "external-agents",
+      "title": "OpenClaw, Hermes e agent-ji ɗii goɗɗi baɗaaɗi yaasi",
+      "paragraphs": [
+        "Huutoro API ɗowgol jaaɓnirgal heɓaango jamirol walla ponto stdio MCP gondanooɗo. Hurmin sarworde ndee e nokku hee, suɓo taro walla gollu kadi teeltin kala kiliyannke e URL oon jaaɓnirgal e tokeen. Node.js 22 walla ko ɓuri ɗum kesum ina soklaa ngam doginde ponto MCP jeyaaɗo e hoore mum; jaaɓnirgal Electron aafataa kiliyannke agent maa. URL banngal wonaa nokku HTTP MCP Streamable: rokku ɗum no ZIAFORGE_URL wonande ponto stdio.",
+        "Ponto oo ina hollira ziaforge_status, ziaforge_commands, ziaforge_command e ziaforge_screenshot. Fuɗɗoro ngonka e doggol yamiroore dogoowo, caggal ɗuum tar system.context wonande golle cuɓaaɗe ɗee. Yamiroore binndaande ina rewata e ƴeewto ngootol ngol waylude, damal, runngere golle e laɓɓingol no UI nokku oo nii.",
+        "Doggol yamiroore dogoowo ina waɗi documentation.guide, ballal Engele laaɓngal, e laawol ɗo ɗum ummorii e sourceSha256. Mahoowo jaaɓnirgal ndernderjo oo heɓata ko oon tuugnorgal gooto rewrude e kuutorɗe mum. Ɗum rokkat agent-ji ɗii kontekst ngalu fof tawa ɗe tuugaaki e binndi ɓooyɗi; binndanɗe rokkataa jamirol hay sinno feere walla lomtaade pellital neɗɗo jooniwal.",
+        "Agent-ji foti yeewtidde e ɗaɓɓireeji, pellite karallaagal e peewnugol gila e miijo neɗɗo daɓɓo. Ɗe poti reende dame neɗɗo laaɓtuɗe, model-ji cuɓaaɗi, doosgal junngo/Auto e ƴeewndo ɗaɓɓiraango. Ɗe potaani tagde jamirol, firde yamiroore nde laaɓaani les ID keso, walla yaltinde bayle Git tawa joom mum yiɗaani.",
+        "Teeltin sarwordeeji keewɗi innditanaaɗi MCP wonande aafde keewɗe. Waylude ngonka wonaa maandude, ko pellital laawol. Yeruwaaji teeltol OpenClaw e Hermes ngoni ko e AGENT_CONTROL.md; teeltol kiliyannke e jaɓondiral foti ƴeewteede ngam yamre kiliyannke aafaaɗo oo.",
+        "Resorde yaajnde requestId ittata ko limoore toɗɗaande ɗaɓɓireeji tan nde jaaɓnirgal ngal dogata. Golle duumotooɗe kuutortoo ko maantore mum en: createRequestId ngam sosde golle, commandId ngam pellite ngonka golle, clientMessageId ngam ɓatakiiji e operationId ngam bayle Git. Reen maantore e keɓe asliije caggal jaɓgol ngol laaɓaani; tar ngonka moftaka ko adii nde a waɗata golle kese e njiylawu."
+      ],
+      "links": [
+        {
+          "label": "Tingol jaɓoowo MCP",
+          "path": "docs/AGENT_CONTROL.md"
+        }
+      ]
+    },
+    {
+      "id": "local-cli",
+      "title": "CLI nokkuujo e keeri kuugal jaajngal",
+      "paragraphs": [
+        "Neltowo ziaf oo ina ɗowa ngal jaaɓnirgal dogoowo e ngonka golle moftaaka. Gila e ɗaɗol, huutoro npm run ziaf -- list, npm run ziaf -- status --task TASK_ID --json, npm run ziaf -- start --task TASK_ID, walla npm run ziaf -- pause --task TASK_ID. Jaɓgol Fuɗɗo moƴƴol firaani wonde golle ɗee njippii.",
+        "--until-success ina hurmina Auto e njiylawu ngam ngonka golle moftaaka, kono naamne, ƴeewndo, dame jaɓgol, keeri e toɓɓe ƴeewndo ina keddoo. Ctrl+C ina yaltina neltowo ƴeewoowo oo; ɗum haɗataa e nder sirlu ngonka golle jaaɓnirgal ngal. Ƴeew CLI.md ngam koodiiji yaltugol, nokku joofnirɗo nokkuure e toppitagol daartol.",
+        "Damal Automations jooni ina mofta firooji kollirgol e limoore doggugol nokku. Wonaa peewnoowo sahaa goongɗinaaɗo kadi seedintaaki wonde yeewtere model caggal ndee dogii. Ngam gollal goongewal huutoro ɗowle ngonka golle moftaaka, ziaf walla API heɓaango jamirol kadi ƴeewto seedamfaaguuji mum en. Woto jiiɓru alluwal kollal e peewnugol gollal tawa alaa tawtoreede."
+      ],
+      "links": [
+        {
+          "label": "Yamiroore neltowo",
+          "path": "docs/CLI.md"
+        }
+      ]
+    },
+    {
+      "id": "updates",
+      "title": "Yamre e kesɗitinooji",
+      "paragraphs": [
+        "About ina hollira yamre gollotoonde laaɓnde. Kesɗitinooji renndo ɗaɓɓi defterdu yaltinande GitHub hoolaandu e laawol kisngol walla njiylawu. Ƴeewto, aawto e aafgol ina jogii ngonkaaji ceertuɗi; juumre firaani wonde kesɗitingol aafaama.",
+        "Aafgol e jaajol ko ngam yaltinooji macOS siynaaɗi. Mahdiiji ɓamtaare ɗi siynaaka aafataake e jaajol rewrude e ngol laawol. Ngam lomtingol e junngo, yaltu timmuɗum e jaaɓnirgal jooniwal ngal kadi huutoro kaɓɓol goongɗinaangol.",
+        "Ƴeewto e jaajol dogata ko ɗoon e ɗoon so hurminaama, caggal ɗuum kala waktuuji jeegom.",
+        "Kisngol ittata ko yaltinooji njiylawu; njiylawu ina newna yaltinooji ɓamtaare kadi. Ƴeewto moƴƴo holliro tan ko metadata yaltugol tawaangol. Aawto e aafgol ina sokli kaɓɓol dingiral e laylaytol yaltugol teeltinaangol. Neldugol Linux DEB ko laawol aafoowo seertungol; woto sikku DEB ina ɓamtee e jaajol rewrude e laawol kesɗitingol macOS."
+      ],
+      "links": [
+        {
+          "label": "Kewgol yaltugol",
+          "path": "docs/RELEASE_READINESS.md"
+        }
+      ]
+    },
+    {
+      "id": "restart",
+      "title": "Hurmin kadi e daɗndugol",
+      "paragraphs": [
+        "E macOS, huutoro Yaltu / ⌘Q ngam uddude timmunde. Uddude damal ina waawi woppude jaaɓnirgal ngal ina doga. Yaltu timmuɗum e yamre ɓooynde ndee ko adii nde a lomtinta jaaɓnirgal ngal.",
+        "Caggal hurmingol, suɓo ndeen golle goote. Daartol e binndi ina ngarta. Jokku ina artira kontekst tawaaɗo/nokkuujo kono neldataa binndol, daaƴitta laylaytol walla rokkude jamirol firde golle ɗe nganndaaka.",
+        "So Daɗndugol feeñii, woto waylu JSON e junngo. Ƴeewto noone ɗerewol golliraangol ngol, reen piille asliije ɗee kadi suɓo moftol goongɗinaangol. Artirde laylaytol ɓooyngol maantata geɗe mum ko ko laaɓaani.",
+        "So neldugol anndaaka, ngonka golle ɗowaaka ina waawi soklude jamirol laaɓngol ngam kontekst keso. Golle ɓooyɗe e tiiɗnaare nde waraani ina keddoo; salagol ngol yiyotoo ɓuri kisal e dañal ngal taƴaaka.",
+        "Moftu piille golle e daartol jaaɓnirgal tawa kala ngonkaaji jaaɓnirgal ko ko uddaa. Runngere nattaande wonaa artirgol ƴeewndaangol. So daɗndugol ɗaɓɓii nde a suɓotoo moftol goongɗinaangol, reen piille bonɗe laaɓtuɗe ɗee kadi. Artirde ngonka golle ɓooyka walla laylaytol rokkataa jamirol firde miijo walla golle Git ɗe laaɓaani."
+      ],
+      "links": [
+        {
+          "label": "Nanondiral daɗndugol",
+          "path": "docs/DATA_RECOVERY.md"
+        }
+      ]
+    },
+    {
+      "id": "troubleshooting",
+      "title": "Ñawndugol caɗeele",
+      "paragraphs": [
+        "CLI heɓaaka: ƴeewto aafgol e yamre mum e nder terminal goonga, caggal ɗuum hurmin kadi ZIAForge. Kurminoowo tawaade firaani wonde a naatii. Huutoro laawol naatgol jeyaaɗo e rokkowo oo.",
+        "Model heɓaaka walla jamirol waraani: hesɗitin njiylawu, suɓo ID gooto tawaaɗo kadi ƴeewto konte e keeri maa. Woto firtu ɗaɓɓireande nde laaɓaani ko adii nde a ƴeewtotoo daartol mayre.",
+        "Ngonka golle dartii: uddit feccere gollanoonde jooni, naamnal, seedamfaagu goongɗingol walla ceŋorɗe CLI. Ñawndu sabu laaɓɗo oo: naamnal ngal jaabaaka, yamiroore, jamirol runngere walla keeri tiiɗnaare. Jokku waawaa waylude ƴeewndo ngo waraani waɗta ɗum dañal.",
+        "Runngere ŋakki walla lomtinaama: artir naatgol to runngere asliire ndee walla sos golle kese. Jaaɓnirgal fotaani jokkude gila e HOME. So a yiyii cwd goɗɗo, dartin yeewtere ndee kadi reen ƴeewndooji.",
+        "Ngam jaŋtol, naatnu yamre About, laawol, CLI/model, jikku jortanooɗo e goongaajo, natal ekran e feccere seŋorde hisnde. Ittu sirluuji, geɗe neɗɗo e laabi ɗi mbaawaa yaltineede.",
+        "Hello woɗɗungo heɓaaka: goongɗin wonde joom mum hurminii sarworde ndee, ƴeewto ñiiŋorde heɗotoonde e porto, caggal ɗuum heɓ jamirol e tokeen ngonka laaɓɗo. 401 hollirta ko jamirol; waylo salango ina waawi wonde laawol taro walla ɗowgol joom mum tan. Waylude tokeen ina udda kiliyannkeeji banngal gonɗi. Woto yaltin porto ƴeewndo DevTools seertungo no ɗowgol jaaɓnirgal woɗɗungol nii.",
+        "Moftugol taƴoowo salii: reen binndol, ƴeewto fiilde gonnde e mbeɗu kadi ñawndu luural waylooji yaasi. Woto ƴeewnoo fotndugol ngol e winndude kadi metadata jaaɓnirgal. So loowgol timmungol fiilde mawnde alaa, huutoro taƴoowo/njiylawu damal ballitaaɗo walla taƴoowo yaasi.",
+        "Telegram heɓaaka: goongɗin bot token, joom mum limoore, yeewtere suturo e ngonka nokku oo. Webhook walla poller kawroowo ina waawi daaƴde polling; ZIAForge ittataa webhook e jaajol walla ƴettude poller goɗɗo. Yamiroore salaande walla taƴaande to keerol ngol anndaaka firtaaka e jaajol."
+      ],
+      "links": [
+        {
+          "label": "Ƴeewndo e ñawndugol",
+          "path": "docs/TESTING.md"
+        }
+      ]
+    },
+    {
+      "id": "diagnostics",
+      "title": "Jaŋto caɗeele kadi ƴeewto seedamfaagu",
+      "paragraphs": [
+        "Winndu mahdi dogoori ndi cuɓ-ɗaa e About, OS/mahdi, noone golle, rokkowo/model cuɓaaɗo e dente baɗɗe caɗeele ɗee kadi. Sifaa njeñtudi jortanoondi e njeñtudi njiyaandi. Naatnu natal ekran kisal e yamiroore walla seedamfaagu goongɗingol jogitaangal, wonaa daartol suturo fof.",
+        "Ceŋorɗe CLI, ɗereeji kewuuji, binndanɗe model, batte banngal e nate ekran ina mbaawi hollirde ɗaɗi, laabi neɗɗo walla tokeenji. Ƴeewto kadi ittude ko sirlu ko adii nde peccataa. Ittoowo sirluuji e ceŋorɗe tiiɗnaaɗo seedintaaki wonde natal ekran walla defterdu ina waawi yaltineede.",
+        "Ngam wallitooɓe, qa:doctor ina fija daartol taariindi/mahdi; qa:inspect ina uddita daartol seertungol tawa ina waɗi stubs rokkowo. Fixture ina seedina laawol jaaɓnirgal ƴeewndaangal tawa jokkondiraaka e model. Miijo ngootaagu, jokkondiral Telegram, biro tawaaɗo Linux, siyno e ƴeewto keɓe kaɓɓaaɗe ko seedamfaaguuji ceertuɗi. Ƴeew TESTING.md ngam yamiroore nde mbaaw-ɗaa firde e laɓɓingol."
+      ],
+      "links": [
+        {
+          "label": "Yamiroore seedamfaagu",
+          "path": "docs/TESTING.md"
+        }
+      ]
+    },
+    {
+      "id": "privacy",
+      "title": "Keɓe nokku e keeri",
+      "paragraphs": [
+        "Eɓɓooje, daartol, peewnugol, binndanɗe e ƴeewndo ina mbaawi jogaade binndol suturo. Woto yaltin daartol, nanngugol ɓoocingol, coktirɗe walla ceŋorɗe timmuɗe e kood asliijo.",
+        "E Linux, moftude API, ɗowgol, Telegram e keɓe ngonka ɗaɓɓi GNOME Secret Service walla KWallet mo udditaa; tawa alaa moftirgal sirlu tawaangal, ZIAForge salaama moftude ɗee sirluuji e nokku huutoraade basic_text mo Electron.",
+        "Moftol nokku firaani wonde ɗaɓɓireeji ina keddoo e ordinater maa: CLI/API cuɓaaɗo oo neldata ɗum ko to rokkowo mum. Runngere gollorde e toppitagol golle ngonaa seertingol OS. Ƴeewto jamirooje cuɓaaɗe.",
+        "Seertin nooneeji seedamfaagu: fixtures ina ƴeewtoo jaaɓnirgal tawa alaa model; tawaangal laaɓngal huutortoo ko CLI/konte goonga; ƴeewtooji kaɓɓaaɗi seedinta ko golle keertiiɗe. Wartaade gooto hollirtaa wonde ɗe keddiiɗe ɗee kadi pawii.",
+        "Laawol jaaɓnirgal, worktree e yamiroore taro-tan ina seerti e tiiɗtingol yuɓɓo golloowo. Doosɗe ƴeewoowo/balloowo Antigravity ƴeewtata ko waylooji e nder seedamfaagu nokku gollorde renndinaaɗo e nokku tiiɗtinde naatgol taro-tan yuɓɓo fiilde. Ɗowgol ordinater tawaangol doginta ko porogaraamuuji ɗi joom mum yamiri yaasi keerol kuutorɗe jaaɓnirgal kuuɓtodinngol; ñif ɗum so soklaaka kadi."
+      ],
+      "links": [
+        {
+          "label": "Iwdi e yaltinande",
+          "path": "docs/RELEASE_READINESS.md"
+        }
+      ]
+    },
+    {
+      "id": "project-contributors",
+      "title": "Faam kadi waylu ndee eɓɓoore udditiinde",
+      "paragraphs": [
+        "Tar AGENTS.md e CONTRIBUTING.md ko adii, caggal ɗuum PROJECT_MAP.md ngam keeri koodi gonɗi jooni. Nanondirɗe binndaaɗe baɗaaɗe e binndanɗe ngonka golle/rokkowo jooni ɗee ɗowata jikkuuji. CONCEPT.md e pecce fuɗɗorde terminal ARCHITECTURE.md reenata ko anniya taariindi kadi fotaani jiiɓreede e haalaaji yaltugol jooni.",
+        "Iwdi ballal Engele ko docs/help/en.json. Woto waylu e junngo USER_GUIDE.md walla website/guide.html baɗaaɗo oo. Waylu feccere laaɓnde ndee, hesɗitin nanondiral fawaangal ngal kadi dogin node scripts/help/generate.cjs. Ballal nder-jaaɓnirgal tarata ko ngoon iwdi gootol. Ƴeewto ɓeydooje e golle goongaaji, haa arti e keeri, jamirooje e laabi ɗi mballitaaka.",
+        "Kala nokkuure e ɗee 56 ɗemɗe jaaɓnirgal ina jogii ngonka ballal seertunga e docs/help/locales.json. Ballal ngal ŋakki walla ngal timmaani ruttotoo ko e Engele. Binndi timmuɗi ɗi masin firi ina maantee kadi kaɓɓee e hash iwdi Engele, tawa alaa haala ƴeewndo neɗɗo. Firo ngo neɗɗo ƴeewtii ina winnda kadi ƴeewoowo mum. Kala firo foti reende ID feccere, golle, maantore fiilde/yamiroore e keeri karallaagal, huutoraade noone njiilaw potɗo, kadi heɗitineede so tawii iwdi Engele mum wayliima.",
+        "Ko adii neldude, dogin node scripts/help/generate.cjs --check ngam yiyde njeñtudi baɗaandi ɓooyndi, scaffolds ɗemngal ɗe moƴƴaani walla jokkondire nanondiral nokku ɗe taƴii. Ƴeewtooji firo UI e ƴeewtooji jikku jaaɓnirgal ina keddoo ko seerti. HELP_MAINTENANCE.md rokkat laawol kesɗitingol wallitoowo e AI; binndanɗe fotaani wiide ƴeewndo yaltii tawa dogaani."
+      ],
+      "links": [
+        {
+          "label": "Kartal eɓɓoore gonngal",
+          "path": "docs/PROJECT_MAP.md"
+        },
+        {
+          "label": "Toppitagol binndanɗe",
+          "path": "docs/HELP_MAINTENANCE.md"
+        },
+        {
+          "label": "Tingol wallitoowo",
+          "path": "CONTRIBUTING.md"
+        },
+        {
+          "label": "Tingol agent",
+          "path": "AGENTS.md"
+        }
+      ]
+    }
+  ]
+}

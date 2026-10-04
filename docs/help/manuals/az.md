@@ -1,0 +1,487 @@
+<!-- Generated from docs/help/en.json; source SHA-256 19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947. Do not edit this output.
+Run node scripts/help/generate.cjs after changing the canonical help.
+Requested locale: az; served locale: az; status: machine-translated. -->
+# ZIAForge istifadəçi təlimatı
+
+Niyyətdən yoxlanılmış nəticəyə qədər. Code, Work və tətbiqin idarə edilməsi üzrə praktiki bələdçi.
+
+İngilis dili əsas dildir. Maşın tərcüməsi edilmiş kömək insan tərəfindən nəzərdən keçirilmiş tərcümələrdən ayrıca etiketlənir. Avtomatlaşdırılmış yoxlamalar ana dili dəqiqliyini təsdiq etmir.
+
+> Bu bələdçi cari ingiliscə mənbədən maşın tərcüməsi edilmişdir. İnsan rəyi hələ də müsbət qarşılanır.
+
+## Bələdçi bölmələri
+
+- [İlk addımlar](#start)
+- [Düzgün masaüstü paketini quraşdırın](#install-platforms)
+- [Code: beş marşrut](#code)
+- [Forge müzakirəsi](#forge)
+- [Sənədlər və qərarlar](#decisions)
+- [İcra və nəzərdən keçirmə](#execution)
+- [Paralel nəzərdən keçirmə komandaları və hesabat memarı](#review-teams)
+- [Agent ixtisaslaşmaları və sorğu siyasəti](#specializations)
+- [Work: sualdan sənədə qədər](#work)
+- [İlkin təyinatlar, modellər və giriş](#models)
+- [Söhbətlər, Dayandır və növbə](#chat)
+- [Fayllar, Git və tamamlama](#files)
+- [API bağlantıları](#api)
+- [Parametrlər, dillər və təhlükəsiz sıfırlama](#settings)
+- [Kömək köməkçisindən soruşun](#help-assistant)
+- [Köməkçi və Telegram](#assistant-control)
+- [Şəxsi Telegram botunuzu idarə edin](#telegram)
+- [Yalnız sahib üçün doğma kompüter icazəsi](#native-permissions)
+- [Brauzer və uzaq instansiyalar](#remote)
+- [OpenClaw, Hermes və digər xarici agentlər](#external-agents)
+- [Yerli CLI və avtomatlaşdırma məhdudiyyətləri](#local-cli)
+- [Versiya və yeniləmələr](#updates)
+- [Yenidən başlatma və bərpa](#restart)
+- [Problemlərin aradan qaldırılması](#troubleshooting)
+- [Problemləri bildirin və sübutları araşdırın](#diagnostics)
+- [Yerli məlumatlar və sərhədlər](#privacy)
+- [Bu açıq mənbəli layihəni anlayın və dəyişdirin](#project-contributors)
+
+<a id="start"></a>
+
+## İlk addımlar
+
+ZIAForge müzakirə, planlaşdırma, icra və yoxlamanı bir tapşırıqda saxlayır. Git layihəsi üçün Code rejimini, adi qovluqdakı sənədlər, araşdırmalar və digər nəticələr üçün isə Work rejimini seçin.
+
+Ayrı bir layihədə kiçik bir tapşırıqla başlayın. Əgər yerli CLI seçirsinizsə, əvvəlcə onu quraşdırın və terminalda öz hesabı ilə daxil olun. Alternativ olaraq, API bağlantısını konfiqurasiya edin. CLI abunəliyi və ödənişli API ayrı-ayrı qoşulma üsullarıdır; ZIAForge sizin yerinizə daxil olmur və onlar arasında kreditləri köçürmür.
+
+1. Parametrləri açın və iş sahəsi qovluğu ilə dili yoxlayın. Haqqında hazırda işləyən quruluşun dəqiq eyniliyini göstərir.
+2. Code üçün yan paneldə Git repozitoriyası əlavə edin. Work üçün isə tapşırığı yaradarkən ayrıca qovluq seçin.
+3. CLI, model, mühakimə səyi və giriş səviyyəsi ilə bir ilkin təyinat yadda saxlayın. Yadda saxlanılmış ilkin təyinat olmadan birbaşa Xüsusi rejimini də seçə bilərsiniz.
+4. Tapşırıq yaradın, onun marşrutunu, rollarını və əl ilə və ya avtomatik irəliləyişini seçin. Başlatmadan əvvəl seçimləri nəzərdən keçirin.
+
+> Tərtibatçı tərəfindən təqdim edilən artefakt və yoxlama cəmindən istifadə edin. İlkin baxış versiyası imzasız ola və ya dərc olunmuş yeniləmə lentinə malik olmaya bilər. Masaüstü və yerli təminatçı dəstəyi dəqiq OS, arxitektura və artefakt üçün yoxlanılmalıdır; təkcə mənbə kodunun dəstəklənməsi buraxılış sertifikatı demək deyil.
+
+Əlaqəli təlimatlar: [Layihənin icmalı](../../../README.md) · [Təminatçı uyğunluğu](../../PROVIDER_COMPATIBILITY.md).
+
+<a id="install-platforms"></a>
+
+## Düzgün masaüstü paketini quraşdırın
+
+Əməliyyat sisteminiz və CPU arxitekturanız üçün paket seçin: x64 və ya arm64. Quraşdırma kəməri macOS DMG/ZIP, Windows NSIS quraşdırıcı/ZIP və Linux DEB/RPM/AppImage/tar.gz/ZIP formatlarını hasil edə bilər. Yaradılmış fayl və ya çarpaz quruluş onun quraşdırıcısının və yerli UI-in kompüterinizdə uğurla keçməsinə sübut deyil; həmin buraxılışın yoxlama qeydlərinə baxın.
+
+Electron 44 istifadə edən macOS quruluşları macOS 13 və ya daha sonrakı versiyanı tələb edir. Apple Silicon-da arm64 paketindən, Intel üçün isə x64 paketindən istifadə edin. Əvəzləmədən əvvəl köhnə tətbiqdən tamamilə çıxın. İlkin baxış paketləri imzasız və notarial təsdiqsiz ola bilər; tərtibat artefaktını imzalanmış ictimai buraxılışla qarışdırmayın.
+
+Windows üçün quraşdırılmış Electron versiyası tərəfindən dəstəklənən və PATH daxilində mövcud olan Git əməliyyat sistemi tələb olunur. Uyğun gələn arxitekturanı seçin. İmzasız ilkin baxış versiyasında Authenticode sertifikatı yoxdur. Daşına bilən ZIP təkcə icra olunan faylını deyil, tam tətbiq qovluğunu və icra zamanı fayllarını saxlamalıdır.
+
+Linux üçün uyğun qrafik masaüstü, Electron tərəfindən tələb olunan sistem kitabxanaları və Git lazımdır. Şifrələnmiş idarəetmə etimadnamələri üçün gnome-libsecret və ya KWallet kimi işlək Secret Service təmin edin; təhlükəsiz olmayan basic_text arxa paneli qəbul edilmir. Qrafiksiz/konteyner sınaq sübutları hər bir masaüstünü və ya distributivi təsdiqləmir.
+
+DEB paketini apt install ./file.deb ilə quraşdırın və ya distributivinizin paket meneceri vasitəsilə RPM quraşdırın. AppImage icra icazəsi və uyğun FUSE dəstəyi tələb edir; dəstəkləndiyi yerlərdə --appimage-extract-and-run bir alternativdir. tar.gz və ZIP paketlərini bütün runtime faylları ilə birlikdə çıxarın. Paketi əvəz edərkən istifadəçi məlumatlarını və tətbiq fayllarını bir-birindən ayrı saxlayın.
+
+Mənbə kodundan qurmaq üçün Node 24, Git və adi Electron quraşdırıcısı daxil olmaqla npm ci istifadə edin. Yerli yenidənqurmalar platforma alətlərini tələb edir: macOS üzərində Xcode əmr sətri alətləri; Windows üzərində MSVC C++, Windows SDK və Python; Linux üzərində isə kompilyator, make, Python, pkg-config və tələb olunan paketləmə alətləri. Dəqiq əmrlər və cari platforma məhdudiyyətləri üçün PLATFORM_BUILDS.md təlimatına əməl edin.
+
+Buraxılış versiyaları mərkəzləşdirilmiş şəkildə rezerv edilir və çıxışlar dəyişməzdir. CI yoxlama quruluşu dərc olunmuş quraşdırıcı deyil. Mənbə arxivləri mənbə kodunu, kilid faylını, sənədləri və skriptləri ehtiva edir; asılılıqlar, etimadnamələr, istifadəçi profilləri və şəxsi araşdırmalar istisna edilir. Uğurlu x64 quruluşundan heç vaxt yerli ARM və ya Windows təsdiqini nəticə çıxarmayın.
+
+Əlaqəli təlimatlar: [Platforma paketləri, ilkin tələblər və yoxlama məhdudiyyətləri](../../PLATFORM_BUILDS.md) · [Quruluş eyniliyi və buraxılış yoxlamaları](../../RELEASE_READINESS.md).
+
+<a id="code"></a>
+
+## Code: beş marşrut
+
+Auto miqyası qiymətləndirir: sadə bir sual cavabla tamamlana bilər, daha böyük bir tapşırıq isə hazırlıq tələb edir. Xətanı düzəlt səbəbi araşdırır və düzəliş hazırlayır. Əvvəlcə spesifikasiya texniki həll ilə başlayır; Əvvəlcə tələblər isə tələblər və qəbul meyarları ilə başlayır.
+
+Çoxmodelli rejim kəşfiyyat, layihələndirmə, tətbiq və nəzərdən keçirmə üçün ayrı-ayrı kontekstlərdən istifadə edir. Marşrutun adı fərqli təminatçıların olmasını tələb etmir: hər bir rol seçdiyiniz ilkin təyinat və ya Xüsusi konfiqurasiyadan istifadə edir.
+
+İş ağacı tapşırığın Git dəyişikliklərini təcrid edir. Budaq seçilmiş çıxarışda işləyir. Başlamazdan əvvəl layihəni, budağı və modeli yoxlayın; tapşırıq təsviri eyni zamanda adi söhbətə göndərilmir.
+
+Həll olunmamış məhsul və ya texniki seçimləri olan ideya üçün Əvvəlcə tələblər rejimindən istifadə edin və bünövrəni müzakirədə qurun. Auto sorğunu təsnif edir; bu, hər bir qısa ifadəni dərhal tətbiq etmək əmri deyil. Qaralamanı saxla modellə əlaqə saxlamadan sorğunu qoruyub saxlayır; Başlat idarə olunan axını saxlayır və bir dəfə işə salır. Birdən dördə qədər tapşırıq nüsxəsi müstəqil yaradılma ID-lərinə və rol parametrlərinə malikdir.
+
+Əlaqəli təlimatlar: [Code iş axını müqaviləsi](../../WORKFLOWS.md) · [Code sorğu profilləri](../../CODE_WORKFLOW_PROMPTS.md).
+
+<a id="forge"></a>
+
+## Forge müzakirəsi
+
+Başlat mərkəzi müzakirəni açır. Təbii şəkildə cavab verin, qarşı suallar verin, məhdudiyyətlər əlavə edin və texniki seçimləri müzakirə edin. Söhbət və suallar tapşırıqda qalır.
+
+Mətn göndərmək sənədi qəbul etmir və ya yeni tətbiq planını səlahiyyətləndirmir. İcra zamanı edilən aydınlaşdırma əvvəlcə idarə olunan növbəni dayandırır və təsirlənmiş miqyasa yenidən baxır. Artıq qəbul edilmiş addım daxilindəki suala verilən cavab həmin addımı davam etdirə bilər.
+
+Bünövrəyə düşünülmüş şəkildə yenidən baxmaq üçün Tələblər, Spesifikasiya və ya Planlaşdırma bölməsini seçin. Yeni versiya asılı qərarların yenidən qəbul edilməsini tələb edir. Tamamlanmış addımlar və onların sübutları qalır; əvəz edilmiş natamam mərhələlər isə tarixçədə saxlanılır.
+
+İdarə olunan mərhələ seansları sərbəst söhbətdən fərqlənir. İş axınına məxsus seansa birbaşa əl ilə sorğular göndərmək əvəzinə Forge müzakirəsindən istifadə edin.
+
+Əlaqəli təlimatlar: [Forge müzakirə müqaviləsi](../../WORKFLOWS.md).
+
+<a id="decisions"></a>
+
+## Sənədlər və qərarlar
+
+Sənədi açın, onun versiyasını yoxlayın və lazım olduqda düzəlişlər edin. Düzəlişləri müzakirə vasitəsilə təqdim etmək yeni versiya yaradır; hesabatlar və yoxlanılmış nəticələr geriyə dönük olaraq yenidən yazılmır.
+
+Təklif olunan planı qəbul etməzdən əvvəl ardıcıllığı, təlimatları, qəbul meyarlarını və yoxlama əmrlərini redaktə edin. Başa düşdüyünüz konkret əmrləri səlahiyyətləndirin: onlar tapşırıq qovluğunda icra olunur. Çoxmodelli rejim sənədlərində və təlimatlarında təfərrüatları olan bir tam tapşırıq tətbiqi addımı təklif edir.
+
+Təsdiq et ayrı, düşünülmüş bir qərardır. Auto sualları və ya tələblərin, spesifikasiyaların və planların qəbulunu yan keçmir. Xaricdən dəyişdirilmiş sənəd köhnə təsdiqi yenidən istifadə edə bilməz.
+
+Hazırlıq faylları artefakt kimi görünür. Onların versiyası, hasil edən mərhələsi və heşi onları nəticəyə bağlayır. Code sənədləri iş ağacından kənarda saxlanılır və avtomatik olaraq commit-ə daxil olmur.
+
+Qəbul etməzdən əvvəl həm sənədi, həm də göstərilən qərarı yoxlayın. Qəbul cari qapı ID-ni, plan təftişini və saxlanılan sənəd heşlərini bağlayır. Miqyas və ya sübutlar yanlış olduqda dəyişiklik tələb edin. Əgər qərar köhnəlibsə, yeni seçim etməzdən əvvəl saxlanılmış vəziyyəti yenidən yükləyin; dəyişdirilmiş fayl əvvəlki versiya altında qəbul edilə bilməz.
+
+Əlaqəli təlimatlar: [İş axını qapıları və sənəd versiyaları](../../WORKFLOWS.md).
+
+<a id="execution"></a>
+
+## İcra və nəzərdən keçirmə
+
+Görüləcək işlər real addımları, cari cəhdi, yoxlama və nəzərdən keçirmə nəticələrini göstərir. Agentin “hazırdır” deməsi addımı tamamlamır: planın tələb etdiyi sübut mövcud olmalıdır.
+
+Əl ilə rejim uyğun addımlar arasında fasilə verir. Auto yoxlanılmış addımları irəlilədir və məhdud sayda təkrar cəhdlərə icazə verir. Sonra dayandır həmişə nəzarət nöqtəsi yaradır. Fasilə iş axınının aktiv işini dayandırır; paneli bağlamaq onu dayandırmır.
+
+Müstəqil rəyçi fayllar və yoxlama nəticələri olan ayrı bir kontekstdən istifadə edir. Tələb olunan hər bir bloklayıcı rəy həll edilməlidir; bir neçə rəyçi səsvermə yolu ilə bloklayıcı xətanı ləğv edə bilməz.
+
+Çoxmodelli rejimdə tapıntıların düzəldilməsi açıq bir qərar tələb edir. Düzəliş səssizcə başqa bir nəzərdən keçirmə başlatmır: Yenidən nəzərdən keçir yeni bir dövrə açır. Rəy şərhləri tətbiqi təkrarlamadan koordinatorun yenidən baxmasını tələb edə bilər.
+
+Tamamlanmış addımlar səssizcə redaktə edilə bilməz. TDD ilə Qırmızı gözlənilən səbəbə görə həqiqətən uğursuz olmalı, sonra Yaşıl uğurla keçməlidir. Məhdud cəhdlər sonsuz təkrarların qarşısını alır.
+
+Müstəqil CLI/API rəyçilərini Parametrlər → Nəzərdən keçirmə komandaları bölməsində yadda saxlayın, sonra komandanı Code və ya Work daxilində seçin. Rəyçilər paralel işləyir, ardınca isə komandanın hesabat memarı gəlir. Siz həmçinin yadda saxlanılmış komanda olmadan da müstəqil rəyçiləri konfiqurasiya edə bilərsiniz. Hesabat memarı layihə faylları və ya alətlər olmadan yalnız anonim strukturlaşdırılmış hesabatlar alır; bu təcrid hazırda Claude Code və ya API tələb edir.
+
+Hər bir tətbiq addımı icra oluna bilən yoxlama, tələb olunan müstəqil rəy və ya hər ikisini tələb edir. Hazırlıq mərhələləri isə bunun əvəzinə təsdiqlənmiş nəticələri və artefakt qəbzlərini saxlayır; bunlar tətbiq testlərinin işlədiyi təəssüratını yaratmır. Əmr yalnız onun faktiki çıxış statusu və ona məxsus proseslərin təmizlənməsi təsdiqləndikdə uğurlu sayılır. TDD üçün Qırmızı yoxlama tətbiqdən və Yaşıl yoxlamadan əvvəl normal şəkildə uğursuz olmalıdır; çatışmayan icra faylı və ya vaxt aşımı etibarlı Qırmızı nəticə deyil.
+
+Defolt qoruyucu açarlar bir addımda üç uğursuz cəhddən və ya cəmi əlli cəhddən sonra dayanır. Kəsilmə bir cəhdi sərf edir, lakin özü uğursuz cəhd sayılmır. Məhdudiyyətlər və tamamlanmış sübutlar yenidən başlatmadan sonra da qalır; Yenidən cəhd et onları sıfırlamır. Başqa bir cəhdi səlahiyyətləndirməzdən əvvəl saxlanılmış uğursuzluq qeydini oxuyun.
+
+Əlaqəli təlimatlar: [Yoxlama və nəzərdən keçirmə](../../WORKFLOWS.md).
+
+<a id="review-teams"></a>
+
+## Paralel nəzərdən keçirmə komandaları və hesabat memarı
+
+Parametrlər → Nəzərdən keçirmə komandaları bölməsini açın və komandanı yadda saxlayın. Öz CLI və ya API, modeli, mühakimə səyi və ixtisasına malik müstəqil rəyçiləri əlavə edin, sonra hesabat memarını seçin. Komandanı tapşırığın nəzərdən keçirmə konfiqurasiyasında seçin. İcraçı ilkin təyinatı rəyçi tərəfindən də istifadə edilə bilər və Xüsusi əlçatan olaraq qalır; müstəqil rollar hələ də ayrı kontekstlərə malikdir.
+
+Rəyçilər eyni tapşırıq sübutları üzərində paralel işləyirlər. Tələb olunan hər bir hesabat, xəta və hökm saxlanılır. Memar rəyçi adları, model və ya təminatçı şəxsiyyəti, ilkin tapşırıq məzmunu, repozitoriyaya giriş və ya alətlər olmadan anonim nömrələnmiş hesabatlar alır. O, hesabatları müqayisə edir və bir strukturlaşdırılmış hökm qaytarır; yeni bir mənbə kodu rəyi keçirmir.
+
+Bloklayıcı aşkar edilmiş fakt və ya tələb olunan rəyçinin imtinası səs çoxluğu və ya memarın üstünlük verməsi ilə ləğv edilə bilməz. Çatışmayan və ya qüsurlu hesabatlar təsdiqin qarşısını alır. Qəbul etməzdən və ya düzəlişləri səlahiyyətləndirməzdən əvvəl fərdi tapıntıları və ümumi qərarı yoxlayın. Saxlanılmış komanda icra üçün müəyyənləşdirilir və dondurulur; onun ilkin təyinatını redaktə etmək tamamlanmış sübutları yenidən yazmır.
+
+Yalnız hesabat üzrə memar hazırda dəstəklənən Claude və ya API alətsiz konfiqurasiyalarından istifadə edir. Codex və Antigravity rəyçi kimi əlçatan olaraq qalır, lakin yoxlanılmış alətsiz müqavilə mövcud olana qədər bu təcrid olunmuş memar rolu üçün rədd edilir. Təkcə “alət yoxdur” deyən sorğu kifayət deyil.
+
+> Code Çoxmodelli layihələndirmə/nəzərdən keçirmə kəməri və saxlanılmış paralel nəzərdən keçirmə komandası ayrı-ayrı idarəetmə elementləridir. Seçilmiş xüsusi rəy siyasətini qoruyun; bir marşrutun hər bir rəy funksiyasını aktivləşdirdiyini güman etməyin.
+
+Əlaqəli təlimatlar: [Tipləşdirilmiş komanda konfiqurasiyası](../../../shared/review-team.ts) · [Rəylərin aqreqasiyası](../../../electron/workflow/ReviewAggregation.ts).
+
+<a id="specializations"></a>
+
+## Agent ixtisaslaşmaları və sorğu siyasəti
+
+Model icra mühərrikidir; ixtisaslaşma isə təlimat profilidir. Əlavə ixtisaslaşmanın olmaması üçün Heç biri, standart bələdçi üçün Standart, müvafiq daxili bələdçi üçün Auto və ya seçilmiş bələdçilər və öz məhdud təlimatlarınız üçün Əl ilə seçin. İlkin təyinatlar seçimi saxlaya bilər.
+
+Orijinal kataloq ümumi kodlaşdırma, arxitektura, təhlükəsizlik, etibarlılıq, məhsuldarlıq, sınaq və interfeys istifadəyə yararlılığını əhatə edir. Auto bələdçi seçmək üçün mövcud tapşırıq/addım mətnindən istifadə edir; o, gizlicə başqa bir modeli çağırmır və ya ekspertiziyanı sertifikatlaşdırmır. Planlaşdırma təklifləri tətbiq planını qəbul etməzdən əvvəl yoxlanıla və dəyişdirilə bilər.
+
+Rəy ixtisaslaşmaları diqqəti yönəltməyə kömək edir, lakin heç vaxt müstəqil sübutları, giriş məhdudiyyətlərini və ya strukturlaşdırılmış hökmü əvəz etmir. Xüsusi təlimatlara tapşırıq miqyasının bir hissəsi kimi yanaşın: sənədin qəbulunu, alət siyasətini, autentifikasiyanı və ya rəyçinin uğursuzluqlarını yan keçmək üçün onlardan istifadə etməyin.
+
+Əlaqəli təlimatlar: [Orijinal sorğu kataloqu](../../../shared/specializations.ts).
+
+<a id="work"></a>
+
+## Work: sualdan sənədə qədər
+
+Work üçün Git tələb olunmur. Standart ayrıca tapşırıq qovluğu yaradır; Xüsusi yerli seçici vasitəsilə mövcud qovluğu seçir. Qaralamanı saxla parametrləri nəticə çıxarma olmadan saxlayır; Başlat birinci mərhələni icra edir.
+
+Auto birbaşa cavab verir və ya real Görüləcək işlər ilə uyğun bir plan təklif edir. Beyin fırtınası daha çox ideya və ya qiymətləndirmə seçməzdən əvvəl ideas.md yaradır. Tədqiqat findings.md-ni, mənbələri və məhdudiyyətləri saxlayır. Yaz niyyətdən və faydalı olduqda outline.md-dən təsviri sənədə və ya draft.md-ə keçir; təftişlər əvvəlki versiyaları saxlayır.
+
+Fayl daxiletmələrini yerli seçici vasitəsilə seçin və onlara @ ilə istinad edin. Tətbiq onları dəyişməz tapşırıq daxiletmələri kimi kopyalayır və icradan əvvəl onların eyniliyini təsdiqləyir. Standart rejim tətbiqə məxsus tapşırıq qovluğu yaradır; Xüsusi qovluq girişi isə yadda saxlanılmış sahib icazəsidir. Saxlanılmış, lakin başladılmamış qaralama öz qovluğunu dəyişə bilər.
+
+Müstəqil icraçı parametrləri ilə 1–4 nüsxələrini yaradın. Kəsişən qovluqlardan istifadə edən tapşırıqlar eyni vaxtda yaza bilməz. Bu koordinasiya ixtiyari xarici proqramlara deyil, ZIAForge əməliyyatlarına tətbiq edilir.
+
+Dərin beyin fırtınası standart olaraq üç müstəqil işçiyə malikdir və səkkizə qədər dəstəkləyir. Ayrı-ayrı kontekstlərdə ilkin təyinatın yenidən istifadəsi də daxil olmaqla, onların ardıcıllığını və konfiqurasiyalarını seçin. İşçi sualları öz mənşəyini saxlayır; yanlış formatlanmış hesabatlar bir format düzəltmə cəhdi alır. Qismən uğursuzluq yekdil uğur kimi təqdim edilmək əvəzinə görünən olaraq qalır.
+
+Dərin rejim saxlanılan işçi hesabatlarını brainstorm_report.md faylında birləşdirir və həmişə istifadəçi qərarını soruşur. Kiçik bir izləmə addımı hesabatı koordinator vasitəsilə yenidən nəzərdən keçirir; böyük bir dəyişiklik dondurulmuş işçilərin başqa bir mərhələsini başladır. Artefaktlar öz versiyalarını saxlayır.
+
+Müəyyən edilmiş rollar tapşırığın yaradılması və ya qaralamanı açıq şəkildə yadda saxlama zamanı dondurulur. İlk çağırışdan sonra yalnız avtomatik/əl ilə irəliləyiş dəyişdirilə bilər; fərqli rol və ya model parametrləri üçün yeni tapşırıqdan istifadə edin. Qlobal ilkin təyinatın redaktə edilməsi sonrakı mərhələləri səssizcə dəyişdirmir.
+
+Əl ilə rejim uyğun mərhələlər arasında, o cümlədən əsaslı Yazı planı zamanı fasilə verir. Auto bu plan vasitəsilə davam edə bilər. Suallar, təklif olunan icra edilə bilən planlar, Beyin fırtınasının istiqaməti və Dərin hesabatın nəzərdən keçirilməsi hətta Auto rejimində belə açıq qərarlar olaraq qalır. Təkcə sitatın olması veb-baxışın baş verdiyini sübut etmir və saxlanılan ikili faylın təkliyi onun düzgün vizuallaşdırıldığını sübut etmir.
+
+Əlaqəli təlimatlar: [Work rejimləri və qərarları](../../WORK_WORKFLOWS.md).
+
+<a id="models"></a>
+
+## İlkin təyinatlar, modellər və giriş
+
+İlkin təyinat CLI/API, model, mühakimə səyi və icazələri yadda saxlayır. Söhbətin aşağı hissəsində ilkin təyinat, CLI, model və seçimlər bölmələri var. Xüsusi ilkin təyinat olmadan işləyir; İlkin təyinat yarat cari seçimi saxlayır.
+
+Kataloq dəstəkləndiyi yerlərdə seçilmiş quraşdırılmış CLI və ya API-dən gəlir. Yenilə seçimi dəyişmədən siyahını yeniləyir. Əgər aşkarlanma əlçatan deyilsə, açıq bir model ID daxil edin; təminatçı hələ də onu dəstəkləməlidir. Mühakimə səviyyələri modeldən və CLI-dən asılıdır. Təminatçının susmaya görə parametri açıq none tokenindən fərqlənir.
+
+Dəyişiklikləri yalnız arxa tərəfin təsdiqindən sonra tətbiq edin. Aktiv növbə və ya boş olmayan növbə zamanı keçid məhdudlaşdırılır. Qaralamalar və görünən tarixçə qalır, lakin təminatçıların dəyişdirilməsi onların şəxsi daxili vəziyyətini köçürmür.
+
+Forge rejimində rol etiketi vacibdir: hazırlıq ayrı bir Planlaşdırıcıdan istifadə edə bilər. Aşağı hissə göstərilən rolu dəyişir; rəyçilər və köməkçilər iş axını parametrlərində seçilir. Artıq yoxlanılmış tətbiq üçün siyasət kilidlənə bilər.
+
+İcazələr təminatçılar arasında fərqlənir. Adapter onları dəstəklədiyi yerlərdə Yalnız oxumaq üçün və İş sahəsinə yazmaq əlçatandır. Antigravity yerli CLI parametrlərindən və ya açıq şəkildə seçilmiş tam girişdən istifadə edir. Tam giriş sandbox deyil.
+
+İxtisaslaşma başqa bir model və ya icazə deyil, sorğu rəhbərliyi əlavə edir. İlkin təyinatlar və rollar Heç biri, Standart, Auto və Əl ilə rejimlərini dəstəkləyir. Auto əlavə model çağırışı olmadan addım mətnindən profilləri seçir; Əl ilə rejimi dördə qədər ixtisas və fərdi təlimatları qəbul edir. Planlaşdırıcı tərəfindən təklif olunan təyinatlar plan qəbul edilməzdən əvvəl redaktə edilə bilər.
+
+Əl ilə daxil edilmiş model ID və ya səy sizin seçiminiz olaraq qalır, lakin təminatçı onu rədd edə bilər. Qlobal ilkin təyinatı redaktə etmək işləyən söhbəti və ya qəbul edilmiş planı geriyə dönük şəkildə dəyişdirmir. Boş dayanan söhbəti düşünülmüş şəkildə dəyişmək üçün onun öz konfiqurasiya idarəedicilərindən istifadə edin və təsdiqi gözləyin. Qeyri-aktiv edilmiş seçim imkan və ya həyat dövrü məhdudiyyəti kimi qəbul edilməlidir, saxlanılmış JSON redaktə edilərək yan keçilməməlidir.
+
+Əlaqəli təlimatlar: [Təminatçı imkanları](../../PROVIDER_COMPATIBILITY.md).
+
+<a id="chat"></a>
+
+## Söhbətlər, Dayandır və növbə
+
+Açıq tablar, Sonuncular və qaralamalar bir tapşırığa aiddir. Tabı bağlamaq onu Açıq bölməsindən çıxarır, lakin Sonuncular bölməsində saxlayır və onun təminatçı prosesini və ya idarə olunan iş axınını dayandırmır. Tarixçə menyusundan tarixçəni axtarın, söhbəti yenidən açın və ya bütün əlavə tabları bağlayın.
+
+Dayandır cari növbəni kəsir. Növbəti Göndər əməliyyatından əvvəl dayandırmanın bitməsini gözləyin: kəsilmə təsdiqi prosesin başa çatması demək deyil. Bu arada növbəti qaralamanı yaza bilərsiniz.
+
+Adi söhbətdə Növbə sonrakı sorğunu cari qaralamadan ayrıca saxlayır. Növbəni dayandır sonrakı çatdırılmanı saxlayır. Dayandır və Çıx növbəni fasiləyə qoyur. Yenidən başlatdıqdan sonra əvvəlcə Bərpa et, sonra isə açıq şəkildə Növbəni davam etdir seçin.
+
+Qeyri-müəyyən çatdırılmanın məlum olmadığını bildirir. Belə bir mesaj avtomatik olaraq yenidən göndərilmir: tarixçəni yoxlayın, uyğundursa mətni kopyalayın və növbəyə qoyulmuş elementi rədd edin. Onu yenidən göndərmək yeni düşünülmüş bir sorğudur.
+
+İdarə olunan mərhələ söhbətləri adi növbədən deyil, öz iş axınından istifadə edir. Mərhələni izlə cari mərhələni göstərir; başqa bir tabı əl ilə seçmək izləməni dayandırır. CLI qeydləri diaqnostikanı cavabdan ayrı göstərir.
+
+Markdown cavabları başlıqları, siyahıları, cədvəlləri, keçidləri və çərçivəyə alınmış kodları vizuallaşdırır. Alət kartları və CLI diaqnostikası cavabdan ayrı qalır. Model tərəfindən bildirilən düşünmə və token göstəriciləri yalnız təminatçı onları faktiki olaraq təqdim etdikdə görünür; animasiyadan şəxsi mühakimə və ya istifadə nəticəsi çıxarmayın.
+
+Qeyri-müəyyən göndərmə və ya növbə təsdiqindən sonra tarixçəni yoxlayın və yalnız təklif edildiyi yerdə saxlanılan eyni sorğunu yenidən cəhd edin. Növbə qəbzi yaddaşın elementi qəbul etdiyini bildirir, nəticə çıxarmanın başa çatdığını deyil. Qeyri-müəyyən növbəyə qoyulmuş elementi yalnız açıq bir rəddetmə kimi silin; bu, artıq çatdırılmış sorğunu geri çəkə bilməz.
+
+Əlaqəli təlimatlar: [Davamlı mesaj növbəsi](../../MESSAGE_QUEUE.md).
+
+<a id="files"></a>
+
+## Fayllar, Git və tamamlama
+
+Fayllar tapşırıq qovluğunu göstərir. Nəticələri tələblərlə müqayisə edin, sənədləri açın və fərqləri nəzərdən keçirin. İkili faylın saxlanması onun hədəf tətbiqdə düzgün göstərilməsini sübut etmir.
+
+Git qeydə alınmış nəticələrlə statusu, dəyişiklikləri və əməliyyatları təmin edir. Commit, merge və push standart olaraq əl ilə aparılır; avtomatik əməliyyatlar tam yoxlanılmış plan üçün ayrı-ayrı seçimlərdir.
+
+Yoxlama və dərc etmə arasında işçi faylları dəyişdirməyin: təsdiq dəqiq baytlara bağlıdır. Konfliktlər, uğursuz push əməliyyatları və naməlum əməliyyat nəticələri açıq qərar verilənə qədər irəliləyişi bloklayır. Auto dərc etməni səssizcə səlahiyyətləndirmir.
+
+Work heç bir Git budağı yaratmır və heç bir Git yekunlaşdırmasına malik deyil. Tələb olunan sənədləri, o cümlədən versiyaları və mənbələri seçilmiş qovluqdan saxlayın.
+
+Fayl redaktoru uzantıya görə sintaksis, axtarış və əvəzetmə, geri alma tarixçəsi, sətir bükülməsi və hər tab üçün qaralamalar təqdim edir. Yadda saxlama əməliyyatları dəstəklənən UTF-8/UTF-16 kodlaşdırmasını qoruyur və xarici dəyişiklik konfliktlərini rədd edir. Digər kodlaşdırmalar və ikili məzmun xarici redaktor tələb edir. Yadda saxlanılmamış qaralamalar sahibi onları yadda saxlayana və ya ləğv edənə qədər tətbiqdən Çıxışın qarşısını alır.
+
+Tam sintaksis 8 MiB-ə qədər aktivdir. Daha böyük mətn faylları 256 KiB pəncərələrində açılır; 8–64 MiB sintaksis olmadan tam şəkildə açıq yüklənə bilər. 64 MiB-dən yuxarı fayllar üçün pəncərə redaktəsindən və məhdud növbəti uyğunluq axtarışından istifadə edin. Bu, ixtiyari dərəcədə böyük sənədlər üçün Sublime Text bərabərliyi deyil, məhdud böyük fayl rejimidir.
+
+Qovluğu aç təkcə ilkin repozitoriyanı səssizcə açmaq əvəzinə, cari tapşırıq və ya budaq/iş ağacı kontekstindən istifadə edir. Fayl sətri həmin faylın əsas qovluğunu göstərə bilər. Yollar arxa tərəf tərəfindən qeydiyyatdan keçmiş tapşırıq icazələrinə qarşı təsdiqlənir. İkili fayllar adi mətn kimi redaktə edilə bilməz; onların hədəf görüntüləyicisindən istifadə edin və ilkin baytları qoruyun.
+
+İş ağacının silinməsi ayrıca qorunan bir əməliyyatdır. Onu silməzdən əvvəl qoşulmuş strukturlaşdırılmış seansları və terminalları, o cümlədən boş dayanan seansları dayandırın. Saxlanılmış Git nəticəsini və bərpa vəziyyətini yoxlayın; tapşırıq qeydini silmək qeyd olunmamış işi təhlükəsiz şəkildə qorumağın əvəzi deyil.
+
+Əlaqəli təlimatlar: [Tipləşdirilmiş redaktor müqaviləsi](../../../shared/editor.ts) · [Git siyasətləri](../../WORKFLOWS.md).
+
+<a id="api"></a>
+
+## API bağlantıları
+
+Bağlantılar açıq şəkildə seçilmiş OpenAI ilə uyğun son nöqtəni əlavə edir. Ad, əsas URL, model və lazım olduqda açar daxil edin. Bir çox serverlər /v1 ilə bitən əsas URL tələb edir; son nöqtənizin sənədlərinə baxın.
+
+Geri döngü HTTP istisna olmaqla, HTTPS tələb olunur. URL daxilində etimadnamələr yerləşdirilməmiş sadə son nöqtədən istifadə edin. Açarlar dəstəklənən OS şifrələməsindən istifadə edir və UI-ə qaytarılmır. Son nöqtəni dəyişdirmək onun açarını yenidən daxil etməyi tələb edir. Açar sahəsini boş qoymaq saxlanılmış açarı qoruyur; Saxlanılan açarı sil onu açıq şəkildə təmizləyir.
+
+API çağırışları CLI abunəliyindən istifadə etmir. Alətlər və modellər yerli seanslardan fərqlənir və modelin uğurlu aşkarlanması nəticə çıxarmanı sübut etmir. Token istifadəsi yalnız təminatçı onu faktiki olaraq qaytardıqda görünür.
+
+Etimadnamələri tapşırıq mətni və ya ilkin təyinat təlimatlarında deyil, Bağlantılarda saxlayın. Yalnız oxumaq hüququ olan rəyçilər yalnız icazə verilən API fayl alətlərini alırlar; hesabat memarının heç bir aləti yoxdur. Dəstəklənməyən alət çağırışları səssizcə icra edilmək əvəzinə rədd edilir. Serverlər mühakimə parametrləri, alət dəstəyi və model siyahılarında fərqlənir; xətanı son nöqtənizin öz müqaviləsi ilə müqayisə edin.
+
+Əlaqəli təlimatlar: [API bağlantıları](../../API_CONNECTIONS.md).
+
+<a id="settings"></a>
+
+## Parametrlər, dillər və təhlükəsiz sıfırlama
+
+Ümumi parametrlər iş sahəsini, interfeys dilini və susmaya görə təyinatları seçir. Bağlantılar API son nöqtələrini idarə edir. İlkin təyinatlar və Nəzərdən keçirmə komandaları rol konfiqurasiyalarını saxlayır. Uzaqdan idarəetmə yerli etimadnamələri, server miqyasını və sahib icazələrini idarə edir; Yeniləmələr buraxılış mənbəyini/kanalını idarə edir. Haqqında hazırda işləyən dəqiq quruluşu göstərir.
+
+İnterfeys dili sorğu dilindən və sənədlərin nəzərdən keçirilməsi vəziyyətindən ayrıdır. Məhsul adları, əmr identifikatorları, fayl uzantıları, təminatçı model identifikatorları və istifadəçi tərəfindən yaradılan adlar identifikator olaraq qalır. Kömək cari tərcümə mövcud olduqda seçilmiş interfeys dilinə uyğunlaşır; maşın tərcümələri etiketlənir və ingilis dili kanonik istinad olaraq qalır.
+
+Yadda saxla göstərilən konfiqurasiyanı tətbiq edir. Verilənlər bazasının sıfırlanması və ya zavod parametrlərinə sıfırlama tətbiq metaməlumatlarını silə bilər; sıfırlamadan qəsdən istifadə etməzdən əvvəl faylları və sınaqdan keçirilmiş ehtiyat nüsxəni qoruyun. Bu əməliyyatlar yerli sahibin hərəkətləridir. Uğursuz iş axınını və ya zədələnmiş qeydi araşdırmaq üçün onlardan qısa yol kimi istifadə etməyin.
+
+Əlaqəli təlimatlar: [Lokallaşdırma təlimatları](../../LOCALIZATION.md) · [Məlumatların bərpası](../../DATA_RECOVERY.md).
+
+<a id="help-assistant"></a>
+
+## Kömək köməkçisindən soruşun
+
+Kömək bölməsini açın, köməkçi panelində saxlanılan qoşulmuş ilkin təyinatı seçin və ZIAForge haqqında soruşun. Cavablar cari kanonik ingiliscə bələdçidən və seçdiyiniz interfeys dilindən istifadə edir. Bölmə-istinad düymələri müvafiq bələdçi mövzularını açır, beləliklə izahatı istinadla müqayisə edə bilərsiniz.
+
+Bu köməkçi 100-dək saxlanılan qeyd və 3 MiB həcmində ayrıca şəxsi söhbət saxlayır. 12,000 simvola qədər sual daxil edin; Göndər onu soruşur, Dayandır sualınızı əlçatan saxlamaqla aktiv cavabı ləğv edir və Təmizlə bu Kömək söhbətini silir. Göndərilməmiş qaralamanız və ilkin təyinat seçiminiz eyni tətbiq sessiyasında Kömək bölməsini bağlayıb yenidən açdıqda saxlanılır, lakin qaralama diskə yazılmır. Köməkçi tətbiq əmrləri göndərmir, iş axınını dəyişmir və ya keçidi qəbul etmir. Məsləhət tapşırığın, hesabın və ya xarici bağlantının canlı yoxlanılması demək deyil.
+
+Claude Code və API Kömək sessiyaları dəstəklənən alətsiz siyasəti tətbiq edir. Doğma Codex və Antigravity Kömək sessiyaları mövcud yerli sahibin doğma kompüter icazəsini tələb edir. Əgər o qeyri-aktivdirsə, tətbiq fərqli təminatçı seçmək əvəzinə ilkin şərti izah edir. Yalnız sahib onu yerli idarəetmə parametrlərində aktivləşdirə bilər; köməkçi bunu özü aktivləşdirə bilməz.
+
+Codex Kömək yalnız oxunabilən qum qutusundan istifadə edir və alət təsdiq sorğularını rədd edir. Antigravity plan rejimindən və onun doğma qum qutusu bayrağından istifadə edir. Bu doğma rejimlər əməliyyat sistemi təcridinin universal zəmanəti deyil. Mənbə bələdçisi heşi cavab üçün istifadə olunan istinadı müəyyən edir; yaradılan izahat yenə də yanlış ola bilər, ona görə də hərəkətə keçməzdən əvvəl onun əlaqəli bölmələrini yoxlayın. Köhnə cavablar onların mənbə bələdçisi versiyası cari bələdçidən fərqli olduqda işarələnir.
+
+Əlaqəli təlimatlar: [Kanonik təlimat və tərcümə baxımı](../../HELP_MAINTENANCE.md) · [Tətbiq köməkçisi və icazələr](../../AGENT_CONTROL.md).
+
+<a id="assistant-control"></a>
+
+## Köməkçi və Telegram
+
+Köməkçi seçilmiş ilkin təyinatdan və eyni tətbiq idarəetməsi API-dən istifadə edir. Vəziyyəti yoxlamaq icazəsi ilə əməliyyatları icra etmək icazəsi ayrıdır. Əmrləri və nəticələri yoxlayın: köməkçinin mətni hərəkətin tamamlandığına dair sübut deyil.
+
+Telegram yalnız yerli sahib tərəfindən, mövcud bot tokeni və rəqəmsal sahib ID ilə aktivləşdirilir. İdarəetmə həmin sahibin şəxsi söhbəti üçündür. Quraşdırılmamış və ya qeyri-aktiv bot tətbiq ismarıclarını almamalıdır.
+
+Bot tokenini adi söhbətə yapışdırmayın. İnteqrasiyanı quraşdırmaq Telegram bağlantısını sübut etmir və avtomatik olaraq bot yaratmır. Ekran görüntüləri və cavablar məxfi iş sahəsi məlumatlarını ehtiva edə bilər.
+
+Köməkçi ilkin təyinatını seçin və tətbiq əməliyyatı icazəsini yoxlamadan ayrı olaraq verin. Codex və Antigravity köməkçisinin icrası sahibin yerli icazəsini tələb edir; onlar alətsiz API və ya Claude sessiyası ilə səssizcə əvəz edilmir. Ekran görüntüləri köməkçi söhbətində göstərilə bilər, lakin cari model girişi təsvirin təhlilini ehtiva etmir. Köməkçinin təsviri sırf göstərdiyi üçün onu vizual olaraq araşdırdığını güman etməyin.
+
+Köməkçi tipləşdirilmiş alətlər vasitəsilə xülasələri, tapşırıqları, söhbətləri, iş axını vəziyyətini, proses kontekstini və tətbiq pəncərələrini yoxlaya bilər. O, icazə verilən adi parametrləri dəyişə və səlahiyyətli tətbiq əməliyyatlarını başlada bilər. O, yerli hüquqlar verə, saxlanılan etimadnamələri aşkara çıxara, kök iş sahəsi icazəsini uzaqdan dəyişə və ya sadəcə rahat olduğu üçün Forge keçidini təsdiqləyə bilməz.
+
+Əlaqəli təlimatlar: [Tətbiq idarəetmə müqaviləsi](../../AGENT_CONTROL.md).
+
+<a id="telegram"></a>
+
+## Şəxsi Telegram botunuzu idarə edin
+
+Öz botunuzu yaradın və ya əldə edin, onun şəxsi söhbətini başladın və yerli idarəetmə parametrlərində onun tokenini və rəqəmsal Telegram istifadəçi ID daxil edin. İnteqrasiyanı yalnız tətbiqin qoşulmasını istədiyiniz zaman aktivləşdirin. Sahib ID istifadəçi identifikatorudur, istifadəçi adı və ya bot ID deyil. Yalnız həmin şəxsi söhbətdəki həmin istifadəçidən gələn ismarıclar qəbul edilir.
+
+İşləyən versiyanın, layihə/tapşırıq saylarının və tapşırıq vəziyyətlərinin icmalı üçün /start, /menu və ya /status istifadə edin. Düymələr Layihələr, Tapşırıqlar, Ekran görüntüsü, Kömək və Dil bölmələrini açır. Siyahılar Geri, Yenilə, Əsas səhifə və Əvvəlki/Növbəti naviqasiyası ilə hər səhifədə səkkiz element göstərir. Layihə düymələri tapşırıq siyahısını süzgəcdən keçirir. Tapşırıq kartı mövcud olduqda saxlanılan iş axını tərəqqisini, model/ilkin təyinatı və gözləyən sualları göstərir.
+
+Açıq/son söhbətlərə və iş axını mərhələsi söhbətlərinə önbaxış üçün tapşırığın Söhbətlər bölməsini açın. Hər bir önbaxış hər biri görünən şəkildə 200 simvola qədər qısaldılmış altıya qədər ən son istifadəçi/köməkçi ismarıcını göstərir. Şəxsi mühakimə göstərilmir. Tarixçəni oxumaq təminatçını başlatmır. Önbaxışlar yalnız oxunur: adi mətn və /ask TEXT hələ də tətbiq köməkçisinə müraciət edir, heç vaxt baxdığınız tapşırıq söhbətinə üstüörtülü şəkildə aid olmur.
+
+İşlət / Davam et cari Code və ya Work iş axınını yenidən oxuyur və uyğun saxlanılan iş axınını başladır. Fasilə onun dayandırılmasını tələb edir. Heç biri tələbləri, spesifikasiyanı, planı, rəy nəticələrini və ya sualları qəbul etmir; gözləyən qərar İşlət əməliyyatının qarşısını alır. Qərarları tətbiqdə qəbul edin və ya dəqiq cari keçidi və reviziyası ilə açıq şəkildə səlahiyyət verilmiş tipləşdirilmiş əmrdən istifadə edin.
+
+56 interfeys dillərindən hər hansı birini öz doğma adı ilə seçmək üçün Dil və ya /language istifadə edin. Bu, yalnız bu bot və sahib üçün üstünlük parametrini saxlayır. Tətbiq dilindən istifadə et bu üstünlük parametrini təmizləyir. Bu, nə tətbiqin dilini, nə də giriş icazələrini dəyişir; mövcud ismarıclar avtomatik olaraq yenidən göndərilmir.
+
+Naviqasiya adətən eyni dərc olunmuş menyu ismarıcını yeniləyir. Düymələr 15 dəqiqədən sonra vaxtı bitən və bir dəfə istifadə edilə bilən qeyri-şəffaf identifikatorlara malikdir; kartın dəyişdirilməsi onun köhnə düymələrini etibarsız edir. Vaxtı bitmiş, istifadə edilmiş, uyğun gəlməyən ismarıc və əvvəlki proses düymələri heç bir hərəkət icra edə bilməz. Qəti şəkildə redaktə edilə bilməyən ismarıc yeni kartla əvəz edilə bilər; naməlum şəbəkə xətası yeni ismarıc kimi yenidən cəhd edilmir.
+
+Aktivləşdirmə zamanı sorğulayıcı əvvəlki qalıqları atır və göndərmədən əvvəl yeniləmənin qəbulunu qeyd edir, beləliklə kəsilmiş əmrlər yenidən başladıqda avtomatik olaraq təkrar oxunmur. Bu, təkrar oxunmanın qarşısını alır; tamamlanmaya zəmanət vermir. Xətadan sonra qəsdən yeni iş verməzdən əvvəl statusu/konteksti yoxlayın. Avtomatik tapşırıq vəziyyəti bildirişləri yoxdur.
+
+Açıq əmrlər əlçatan olaraq qalır: /projects, /tasks, /task TASK_ID, /run TASK_ID, /pause TASK_ID, /screenshot və /ask TEXT. /new {JSON} tipləşdirilmiş createTask vasitəsilə tapşırıq yaradır; /command {JSON} açıq kataloq əmri göndərir. Arqument formaları üçün canlı kataloqu oxuyun. Tətbiqdəki kimi eyni backend avtorizasiyası və qovluq icazələri tətbiq olunur.
+
+Tətbiq saxlanılan bot tokeni dəyərlərini heç vaxt köməkçiyə göndərmir. Bununla belə, ekran görüntüləri, xülasələr və söhbət mətni məxfi layihə məlumatlarını ehtiva edə bilər. Əgər bota və ya sahib hesabına artıq etibar edilmirsə, inteqrasiyanı yerli olaraq dayandırın. Sızdırılmış tokeni bot təminatçısı ilə dəyişdirin, sonra onun yerli şifrələnmiş konfiqurasiyasını yeniləyin.
+
+Əlaqəli təlimatlar: [Şəxsi bot və əmrlər](../../AGENT_CONTROL.md).
+
+<a id="native-permissions"></a>
+
+## Yalnız sahib üçün doğma kompüter icazəsi
+
+Doğma kompüterə giriş ilkin olaraq qeyri-aktivdir. Yalnız sahib onu yerli Parametrlər → Uzaqdan idarəetmə bölməsində aktivləşdirə bilər. Köməkçi və HTTP/MCP/Telegram əmrləri bu bayrağı özləri üçün aktivləşdirə bilməz. Əgər əməliyyat rədd edilərsə, köməkçi parametri təsvir etməli və qərarı sahibin öhdəsinə buraxmalıdır.
+
+Açıq şəkildə aktivləşdirildikdə, computer.run icra olunan faylı, arqument massivini və istəyə bağlı mütləq iş qovluğunu qəbul edir. O, heç bir qabıq interpolyasiyasından istifadə etmir, 30 saniyəlik məhdudiyyətə malikdir və çıxışı 1 MiB ilə məhdudlaşdırır. Təqdim olunan çatışmayan və ya etibarsız qovluq rədd edilir; cwd parametrinin buraxılması HOME əvəzinə tətbiqə məxsus parametrlər qovluğundan istifadə edir. Çıxış aktiv sahib əmrlərini ləğv edir və onların proseslərinin təmizlənməsini gözləyir.
+
+Tətbiqin oxuma/idarəetmə əhatə dairəsi və doğma giriş ayrı-ayrı qərarlardır. İş ağacı məhdudiyyətsiz təminatçının fayl sistemi girişini məhdudlaşdırmır. Tapşırıqdan sonra artıq tələb olunmursa, doğma girişi ləğv edin və köməkçi nəsrini sübut kimi qəbul etmək əvəzinə əmr qəbzlərini yoxlayın.
+
+Əlaqəli təlimatlar: [Yalnız sahib üçün idarəetmə müqaviləsi](../../../shared/control.ts).
+
+<a id="remote"></a>
+
+## Brauzer və uzaq instansiyalar
+
+Yerli sahib serveri aktivləşdirir və onun ünvanını, portunu və əhatə dairəsini seçir: yoxlama üçün oxuma və ya hərəkətlər üçün idarəetmə. Standart 127.0.0.1 ünvanı yalnız bu kompüterdə mövcuddur. 0.0.0.0 şəbəkə interfeyslərini dinləyir; aktivləşdirməzdən əvvəl şəbəkə girişini nəzərdən keçirin.
+
+Brauzer tokenlə girişdən sonra eyni interfeysi açır. Tokenləri açıq bağlantılara və ya ekran görüntülərinə daxil etməyin. Təkcə HTTP trafiki şifrələmir; etibarsız şəbəkə üzərindən qorunan kanaldan istifadə edin.
+
+Sahib digər instansiyaları URL və token ilə konfiqurasiya edir. Backend sorğuları proksiləşdirir; bu, onların layihələrini yerli maşına kopyalamır. Hər hərəkətdən əvvəl seçilmiş instansiyanı yoxlayın.
+
+Tipləşdirilmiş əmrlər və hadisələr tətbiq idarəetməsini daşıyır. Oxuma əhatə dairəsi tapşırıq mutasiyalarına səlahiyyət vermir. Doğma kompüter idarəetməsi ayrıca yerli sahib seçimidir və ilkin olaraq qeyri-aktivdir.
+
+Brauzer, Telegram və xarici agent idarəetməsi üçün tətbiq işlək vəziyyətdə qalmalıdır. Hər bir instansiyanın öz şəxsi profili, tapşırıq vəziyyəti, tokeni və server portu var. Müstəqil instansiyalar arasında eyni vaxtda bir profili təkrar istifadə etməyin. Brauzer hadisələri və əmr cavabları seçilmiş instansiya ilə məhdudlaşır; UI dəyişdirilməsi faylların yerini dəyişmir və ya yerli girişi kopyalamır.
+
+Əlaqəli təlimatlar: [HTTP və instansiya idarəetməsi](../../AGENT_CONTROL.md).
+
+<a id="external-agents"></a>
+
+## OpenClaw, Hermes və digər xarici agentlər
+
+Autentifikasiya edilmiş tətbiq idarəetməsi API və ya paketlənmiş MCP stdio körpüsündən istifadə edin. Serveri yerli olaraq aktivləşdirin, oxuma və ya idarəetmə rejimini seçin və hər bir müştərini həmin instansiya URL və tokeni ilə konfiqurasiya edin. Müstəqil MCP körpüsünü işlətmək üçün Node.js 22 və ya daha yenisi lazımdır; Electron tətbiqi agent müştərinizi quraşdırmır. Brauzer URL axın edilə bilən HTTP MCP son nöqtəsi deyil: onu stdio körpüsünə ZIAFORGE_URL kimi təqdim edin.
+
+Körpü ziaforge_status, ziaforge_commands, ziaforge_command və ziaforge_screenshot təqdim edir. Vəziyyət və canlı əmr kataloqu ilə başlayın, sonra seçilmiş tapşırıq üçün system.context oxuyun. Tipləşdirilmiş əmrlər yerli UI ilə eyni reviziya, keçid, tapşırıq qovluğu və təmizləmə yoxlamalarına riayət edir.
+
+Canlı əmr kataloquna documentation.guide, mənbə yolu və sourceSha256 ilə birlikdə kanonik ingiliscə kömək daxildir. Daxili tətbiq memarı öz alətləri vasitəsilə eyni istinadı alır. Bu, agentlərə köhnə qeydlərə güvənmədən bütün məhsul kontekstini verir; sənədlər heç vaxt giriş hüququ vermir və ya cari insan qərarını əvəz etmir.
+
+Agentlər qısa bir insan ideyasından tələbləri, texniki qərarları və planlaşdırmanı müzakirə etməlidirlər. Onlar açıq insan qapılarını, seçilmiş modelləri, əl ilə/Auto siyasətini və tələb olunan rəyi qorumalıdırlar. Onlar təsdiq uydurmamalı, qeyri-müəyyən əmrləri yeni ID altında təkrar oxutmamalı və ya sahibinin niyyəti olmadan Git dəyişikliklərini dərc etməməlidirlər.
+
+Bir neçə quraşdırma üçün bir neçə adlandırılmış MCP serveri konfiqurasiya edin. İnstansiya dəyişdirilməsi marşrutlaşdırma qərarıdır, sinxronizasiya deyil. OpenClaw və Hermes konfiqurasiya nümunələri AGENT_CONTROL.md daxilindədir; quraşdırılmış müştəri versiyası üçün müştəriyə xas quraşdırma və uyğunluq yoxlanılmalıdır.
+
+Xarici requestId keş yalnız tətbiq işləyərkən məhdud sayda sorğuların təkrarlanmasını aradan qaldırır. Davamlı əməliyyatlar öz şəxsi identifikasiyalarından istifadə edir: tapşırıq yaradılması üçün createRequestId, iş axını qərarları üçün commandId, ismarıclar üçün clientMessageId və Git mutasiyaları üçün operationId. Naməlum təsdiqdən sonra ilkin identifikasiyanı və faydalı yükü qoruyun; qəsdən yeni iş verməzdən əvvəl saxlanılan vəziyyəti oxuyun.
+
+Əlaqəli təlimatlar: [MCP müştəri təlimatları](../../AGENT_CONTROL.md).
+
+<a id="local-cli"></a>
+
+## Yerli CLI və avtomatlaşdırma məhdudiyyətləri
+
+ziaf dispetçeri eyni işləyən tətbiqi və saxlanılan iş axınını idarə edir. Mənbədən npm run ziaf -- list, npm run ziaf -- status --task TASK_ID --json, npm run ziaf -- start --task TASK_ID və ya npm run ziaf -- pause --task TASK_ID istifadə edin. Uğurlu Başlama təsdiqi tapşırığın tamamlandığı mənasına gəlmir.
+
+--until-success saxlanılan iş axını üçün şüurlu şəkildə Auto aktivləşdirir, lakin suallar, rəy, qəbul keçidləri, məhdudiyyətlər və nəzarət nöqtələri hələ də tətbiq olunur. Ctrl+C müşahidə edən dispetçerdən çıxır; bu, tətbiq iş axınını üstüörtülü şəkildə dayandırmır. Çıxış kodları, yerli son nöqtə və profil ilə işləmə üçün CLI.md bölməsinə baxın.
+
+Avtomatlaşdırmalar interfeysi hazırda ekran təriflərini və yerli icra sayğaclarını saxlayır. Bu, sertifikatlaşdırılmış təkrarlanan planlaşdırıcı deyil və arxa fon model növbəsinin işlədiyini sübut etmir. Faktiki icra üçün saxlanılan iş axını idarəedicilərindən, ziaf-dan və ya autentifikasiya edilmiş API-dən istifadə edin və onların qəbzlərini yoxlayın. Nümayiş panelini nəzarətsiz planlaşdırma ilə qarışdırmayın.
+
+Əlaqəli təlimatlar: [Dispetçer əmrləri](../../CLI.md).
+
+<a id="updates"></a>
+
+## Versiya və yeniləmələr
+
+Haqqında dəqiq işləyən versiyanı göstərir. İctimai yeniləmələr etibarlı GitHub buraxılış repozitoriyasını və stabil və ya ilkin baxış kanalını tələb edir. Yoxlama, yükləmə və quraşdırma ayrı-ayrı vəziyyətlərə malikdir; xəta yeniləmənin quraşdırıldığı mənasına gəlmir.
+
+Avtomatik quraşdırma imzalanmış macOS buraxılışları üçündür. İmzasız inkişaf qurulmaları bu mexanizm vasitəsilə avtomatik quraşdırılmır. Əl ilə əvəzləmə üçün cari tətbiqi tamamilə bağlayın və təsdiqlənmiş artefaktdan istifadə edin.
+
+Avtomatik yoxlama aktivləşdirildikdə dərhal, sonra isə hər altı saatdan bir işləyir.
+
+Stabil ilkin baxış buraxılışlarını istisna edir; ilkin baxış inkişaf buraxılışlarına da icazə verir. Uğurlu yoxlama yalnız mövcud buraxılış metaməlumatlarını müəyyənləşdirir. Yükləmə və quraşdırma platforma paketinə və konfiqurasiya edilmiş buraxılış lentinə ehtiyac duyur. Linux DEB çatdırılması ayrıca quraşdırıcı yoludur; DEB-nin avtomatik olaraq macOS yeniləmə mexanizmi ilə təkmilləşdirildiyini güman etməyin.
+
+Əlaqəli təlimatlar: [Buraxılış hazırlığı](../../RELEASE_READINESS.md).
+
+<a id="restart"></a>
+
+## Yenidən başlatma və bərpa
+
+macOS üzərində tam söndürmə üçün Çıxış / ⌘Q istifadə edin. Pəncərənin bağlanması tətbiqi işlək vəziyyətdə saxlaya bilər. Tətbiqi əvəz etməzdən əvvəl köhnə versiyanı tamamilə bağlayın.
+
+Başladıqdan sonra eyni tapşırığı seçin. Tarixçə və qaralamalar geri qayıdır. Davam etdirmə doğma/yerli konteksti bərpa edir, lakin qaralamanı göndərmir, növbənin fasiləsini ləğv etmir və ya naməlum əməliyyatın təkrarlanmasına icazə vermir.
+
+Əgər Bərpa görünürsə, JSON faylını əl ilə redaktə etməyin. Təsirlənən sənəd növünü yoxlayın, orijinal faylları qoruyun və təsdiqlənmiş ehtiyat nüsxəni seçin. Köhnə növbənin bərpası onun elementlərini qeyri-müəyyən kimi qeyd edir.
+
+Çatdırılma naməlum olduqda, idarə olunan iş axını təzə kontekst üçün açıq icazə tələb edə bilər. Əvvəlki işlər və uğursuz cəhdlər qalır; görünən imtina uydurma uğurdan daha təhlükəsizdir.
+
+Bütün tətbiq instansiyaları bağlı vəziyyətdə tapşırıq fayllarını və tətbiq profilini ehtiyat nüsxələyin. Kopyalanmış qovluq sınaqdan keçirilmiş bərpa demək deyil. Bərpa sizdən təsdiqlənmiş ehtiyat nüsxəni seçməyi tələb edirsə, dəqiq zədələnmiş faylları da saxlayın. Köhnə iş axınını və ya növbəni bərpa etmək qeyri-müəyyən nəticəçıxarma və ya Git əməliyyatlarını təkrar oxutmağa icazə vermir.
+
+Əlaqəli təlimatlar: [Bərpa müqaviləsi](../../DATA_RECOVERY.md).
+
+<a id="troubleshooting"></a>
+
+## Problemlərin aradan qaldırılması
+
+CLI tapılmadı: adi terminalda onun quraşdırılmasını və versiyasını yoxlayın, sonra ZIAForge yenidən başladın. İcra olunan faylın mövcud olması daxil olduğunuz demək deyil. Təminatçının öz daxilolma mexanizmindən istifadə edin.
+
+Model əlçatan deyil və ya avtorizasiya uğursuz oldu: aşkarlamanı yeniləyin, mövcud ID seçin və hesabınızı və limitlərinizi yoxlayın. Tarixçəsini yoxlamadan qeyri-müəyyən sorğunu təkrarlamayın.
+
+İş axını dayandı: cari mərhələni, sualı, yoxlama qəbzini və ya CLI qeydlərini açın. Konkret səbəbi aradan qaldırın: cavabsız sual, əmr, qovluq icazəsi və ya cəhd limiti. Davam et uğursuz yoxlamanı uğura çevirə bilməz.
+
+Qovluq çatışmır və ya əvəz edilib: ilkin qovluğa girişi bərpa edin və ya yeni tapşırıq yaradın. Tətbiq HOME-dən davam etməməlidir. Başqa bir cwd müşahidə etsəniz, növbəni dayandırın və diaqnostikanı qoruyun.
+
+Hesabat üçün Haqqında versiyasını, marşrutu, CLI/modeli, gözlənilən və faktiki davranışı, ekran görüntüsünü və təhlükəsiz jurnal çıxarışını daxil edin. Dərc edilə bilməyən sirləri, şəxsi məzmunu və yolları silin.
+
+Uzaq səhifə əlçatan deyil: sahibin serveri aktivləşdirdiyini yoxlayın, dinləmə ünvanını və portunu yoxlayın, sonra düzgün instansiya tokeni ilə autentifikasiyadan keçin. 401 autentifikasiyanı göstərir; rədd edilmiş mutasiya oxuma əhatə dairəsi və ya yalnız sahib üçün idarəetmə ola bilər. Tokenin dəyişdirilməsi mövcud brauzer müştərilərini bağlayır. Ayrı DevTools yoxlama portunu uzaqdan tətbiq idarəetməsi kimi üzə çıxarmayın.
+
+Redaktorun yadda saxlaması rədd edildi: qaralamanı saxlayın, diskdəki cari faylı yoxlayın və xarici dəyişiklik münaqişəsini həll edin. Tətbiq metaməlumatlarını yenidən yazaraq müqayisədən yan keçməyin. Böyük faylın tam yüklənməsi əlçatan deyilsə, dəstəklənən pəncərə redaktəsindən/axtarışından və ya xarici redaktordan istifadə edin.
+
+Telegram əlçatan deyil: bot tokenini, rəqəmsal sahibi, şəxsi söhbəti və vəziyyəti yerli olaraq təsdiqləyin. Rəqabət aparan veb-huk və ya sorğulayıcı sorğulamanı bloklaya bilər; ZIAForge avtomatik olaraq veb-huku silmir və ya başqa bir sorğulayıcını ələ keçirmir. Naməlum sərhəddə rədd edilmiş və ya kəsilmiş əmrlər avtomatik olaraq təkrar oxunmur.
+
+Əlaqəli təlimatlar: [Sınaq və diaqnostika](../../TESTING.md).
+
+<a id="diagnostics"></a>
+
+## Problemləri bildirin və sübutları araşdırın
+
+Haqqında bölməsindən dəqiq işləyən qurulmanı, OS/arxitekturanı, tapşırıq rejimini, seçilmiş təminatçı/modeli və problemi təkrarlayan addımları qeyd edin. Gözlənilən nəticəni və müşahidə olunan nəticəni təsvir edin. Bütün şəxsi profil əvəzinə təhlükəsiz ekran görüntüsünü və müvafiq saxlanılan əmri və ya yoxlama qəbzini daxil edin.
+
+CLI qeydləri, hadisə jurnalları, model transkriptləri, brauzer izləri və ekran görüntüləri mənbə kodunu, şəxsi yolları və ya tokenləri üzə çıxara bilər. Paylaşmazdan əvvəl yoxlayın və redaktə edin. Ən yaxşı səylə işləyən jurnal redaktoru ekran görüntüsünün və ya arxivin dərc edilə bilən olduğunu təsdiqləmir.
+
+Töhfəçilər üçün qa:doctor mühit/quruluş eyniliyini oxuyur; qa:inspect təminatçı stubları ilə təcrid olunmuş profili açır. Fikstur modellə əlaqə saxlamadan sınaqdan keçirilmiş tətbiq yolunu sübut edir. Canlı nəticəçıxarma, Telegram bağlantısı, yerli Linux masaüstü, imzalama və paketlənmiş artefakt yoxlamaları ayrı sübutlardır. Təkrarlana bilən əmrlər və təmizləmə üçün TESTING.md bölməsinə baxın.
+
+Əlaqəli təlimatlar: [Sübut əmrləri](../../TESTING.md).
+
+<a id="privacy"></a>
+
+## Yerli məlumatlar və sərhədlər
+
+Layihələr, tarixçə, planlar, sənədlər və diaqnostika məxfi mətn ehtiva edə bilər. Profilləri, xammal çəkilişləri, açarları və ya tam jurnalları mənbə kodu ilə birlikdə dərc etməyin.
+
+Linux üzərində API, idarəetmə, Telegram və instansiya etimadnamələrini saxlamaq kiliddən çıxarılmış GNOME Məxfi Xidmət və ya KWallet tələb edir; dəstəklənən gizli anbar olmadan, ZIAForge Electron-nın basic_text ehtiyat variantından istifadə etmək əvəzinə bu sirləri saxlamaqdan imtina edir.
+
+Yerli yaddaş sorğuların kompüterinizdə qalması demək deyil: seçilmiş CLI/API onları öz təminatçısına göndərir. İş qovluğu və proses nəzarəti OS təcridi deyil. Seçilmiş icazələri yoxlayın.
+
+Sübut növlərini fərqləndirin: fiksturlar tətbiqi modelsiz sınaqdan keçirir; yerli canlı real CLI/hesabı işlədir; paketlənmiş yoxlamalar müəyyən bir artefaktı təsdiqləyir. Birindən keçmək digərlərinə zəmanət vermir.
+
+Tətbiq əhatə dairəsi, iş ağacı və yalnız oxunabilən sorğu əməliyyat sistemi məcburiyyətindən fərqlidir. Antigravity rəyçi/köməkçi siyasətləri fayl sisteminə yalnız oxunabilən girişi tətbiq etməkdənsə, toplanmış iş sahəsi sübutlarındakı dəyişiklikləri aşkar edir. Doğma kompüter idarəetməsi sahib tərəfindən icazə verilmiş proqramları adi tətbiq-alət sərhədindən kənarda icra edir; artıq lazım olmadıqda onu söndürün.
+
+Əlaqəli təlimatlar: [Mənbə və dərcetmə](../../RELEASE_READINESS.md).
+
+<a id="project-contributors"></a>
+
+## Bu açıq mənbəli layihəni anlayın və dəyişdirin
+
+Əvvəlcə AGENTS.md və CONTRIBUTING.md, sonra cari mənbə sərhədləri üçün PROJECT_MAP.md oxuyun. Tətbiq edilmiş tipləşdirilmiş müqavilələr və cari iş axını/təminatçı sənədləri davranışı tənzimləyir. CONCEPT.md və ARCHITECTURE.md-ün terminal yönümlü hissələri tarixi niyyəti qoruyur və cari buraxılış iddiaları ilə qarışdırılmamalıdır.
+
+İngiliscə kömək mənbəyi docs/help/en.json-dir. Yaradılmış USER_GUIDE.md və ya website/guide.html fayllarını əl ilə redaktə etməyin. Kanonik bölməni dəyişdirin, təsirlənən müqaviləni yeniləyin və node scripts/help/generate.cjs işə salın. Tətbiqdaxili Kömək eyni mənbəni oxuyur. Əlavələri faktiki icra ilə, o cümlədən məhdudiyyətlər, icazələr və dəstəklənməyən yollarla nəzərdən keçirin.
+
+56 interfeys lokallarının hər birinin docs/help/locales.json daxilində ayrıca kömək vəziyyəti var. Çatışmayan və ya natamam kömək ingilis dilinə qayıdır. Tam maşın tərcüməsi olunmuş mətnlər etiketlənir və insan rəyi iddiası olmadan ingiliscə mənbə heşinə bağlanır. İnsan tərəfindən nəzərdən keçirilmiş tərcümə əlavə olaraq öz rəyçisini qeyd edir. Hər bir tərcümə bölmə identifikatorlarını, əməliyyatları, fayl/əmr identifikatorlarını və texniki məhdudiyyətləri qorumalı, düzgün istiqamətdən istifadə etməli və ingiliscə mənbəyi dəyişdikdə yenilənməlidir.
+
+Buraxılışdan əvvəl köhnəlmiş yaradılmış çıxışı, etibarsız lokal strukturlarını və ya qırılmış yerli müqavilə bağlantılarını aşkar etmək üçün node scripts/help/generate.cjs --check işə salın. UI tərcümə yoxlamaları və tətbiq davranışı yoxlamaları ayrı qalır. HELP_MAINTENANCE.md töhfəçi və AI yeniləmə prosedurunu təqdim edir; sənədlər işlədilməmiş sınağın keçdiyini iddia etməməlidir.
+
+Əlaqəli təlimatlar: [Cari layihə xəritəsi](../../PROJECT_MAP.md) · [Sənədlərin saxlanması və yenilənməsi](../../HELP_MAINTENANCE.md) · [Töhfəçi təlimatları](../../../CONTRIBUTING.md) · [Agent təlimatları](../../../AGENTS.md).

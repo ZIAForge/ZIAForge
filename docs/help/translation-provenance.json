@@ -1,0 +1,2966 @@
+{
+  "schemaVersion": 1,
+  "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+  "uiCanonicalSha256": "1b3d92f8ddd9b98ac7fbbcf9a261d865081d59807da2c73b8ff45ffe03a54d84",
+  "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+  "automatedChecks": [
+    "complete field/section/order coverage",
+    "protected technical tokens/placeholders/numbers",
+    "nonempty text and no copied long English fields",
+    "source hash unchanged"
+  ],
+  "limitations": "Automated and limited AI checks are not native-language human review or full linguistic certification. Private provider transcripts are not published.",
+  "locales": [
+    {
+      "locale": "am",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "5cca671e1586cf26a7cfac991ffb486d6625ef554252c67968699700b48d0f73",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 52.73,
+          "usage": {
+            "input_tokens": 25928,
+            "output_tokens": 11148,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 37076
+          },
+          "inputCanonicalSha256": "2fab1c281e0f0c989aae121230ee90b400d110cde8dd854627fc15522c5cfd11",
+          "inputFileSha256": "026852586c600045a6a0706fe9fbf3829864fc586cd485901d008b339d62ddca",
+          "promptFileSha256": "cb755465c64c8b48bd46445bfb773bb93517eb84945889bd7f252dc2d20ab6e1",
+          "responseFileSha256": "eab2d02e3b28ba98102befebbb9f0d18ecb4f34e7420333034d03bf38400bf22"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 43.41,
+          "usage": {
+            "input_tokens": 27072,
+            "output_tokens": 11810,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 38882
+          },
+          "inputCanonicalSha256": "d222f57ebfea3d95d9235a49199896bfadda3a4a65d224085a6e320175bc0341",
+          "inputFileSha256": "6e0721afb9c3d5832644b68df6d3edbd9be1ef459ec3c619bbeeaed13008533b",
+          "promptFileSha256": "eb2df90a439b3e8161a8ca11e4b1adb786856b7a759003cd07a45a74f682a0c1",
+          "responseFileSha256": "3951f96c108520b74360057a0af400cb4f48cd00f940dac9a9ccbb0f7e9e8bf8"
+        }
+      ]
+    },
+    {
+      "locale": "ar",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "e65e272d9103c996a2c2b6612b6f73e0c094c740078d87b3f047e9dc8ca7a82c",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "partial",
+          "accepted": 100,
+          "durationSeconds": 31.85,
+          "usage": {
+            "input_tokens": 25919,
+            "output_tokens": 9061,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 34980
+          },
+          "inputCanonicalSha256": "2fab1c281e0f0c989aae121230ee90b400d110cde8dd854627fc15522c5cfd11",
+          "inputFileSha256": "026852586c600045a6a0706fe9fbf3829864fc586cd485901d008b339d62ddca",
+          "promptFileSha256": "f9de87e0b9b1c5b9a6ad6dabe0d460c8149735c2c04c13d42afe542437bd3089",
+          "responseFileSha256": "659b7c67e569f4b23e6ec71a55742ffc62e86cd75d0c1a13398e0437318a13a0"
+        },
+        {
+          "part": 1,
+          "attempt": 2,
+          "status": "partial",
+          "accepted": 0,
+          "durationSeconds": 10.68,
+          "usage": {
+            "input_tokens": 18650,
+            "output_tokens": 1618,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 20268
+          },
+          "inputCanonicalSha256": "a3bf9bd680ec892940797536da12ec610f1544c7d85a644de59b2f3a6e90228b",
+          "inputFileSha256": "81a95035b9c4ed063128eb914685e6542c22032e63f7db35e8718a6e650f6eff",
+          "promptFileSha256": "d3ed5827aea9bf623e3d6cd800a3a2b5e6e1db1ccc412fc3ea303f735f1a3205",
+          "responseFileSha256": "cc35e26168a5c83e16a85a4eeb70d98e74c193ecc567a10a0d8944ba790cfe2b"
+        },
+        {
+          "part": 1,
+          "attempt": 3,
+          "status": "passed",
+          "accepted": 1,
+          "durationSeconds": 9.3,
+          "usage": {
+            "input_tokens": 17290,
+            "output_tokens": 260,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 17550
+          },
+          "inputCanonicalSha256": "44ba2b8988c0b06d60a8d94d9a75c9e7f35bfa7150b5087d46929b657dafe8e1",
+          "inputFileSha256": "6f2fa16538836b500ceace18472eb9eea10b889916ab0435d74e40387265ddb3",
+          "promptFileSha256": "c353d937cbeb3d696455ce6263412a4d70d2e3c40ebb1a927b3294bdd016f032",
+          "responseFileSha256": "70f149b155e1e9a1387e64f48a908387456d49c64194aa705aecf77180ae74bd"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "partial",
+          "accepted": 115,
+          "durationSeconds": 30.82,
+          "usage": {
+            "input_tokens": 26926,
+            "output_tokens": 9197,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 36123
+          },
+          "inputCanonicalSha256": "dea6b815236766cb51069302cbbee0674c538c215f5bd07d4d7446731192406e",
+          "inputFileSha256": "da18a14eb8fd1fb4ab9cbb6e679b4d231f99a5791c8c841cfd8d86455eb4b124",
+          "promptFileSha256": "96f91b1c19431ead5f5b583e7f69272c26db4d8f7ca7aaf1e6c5929130eb5bde",
+          "responseFileSha256": "a893e32f252c95074dc6ed1ee50b608e6969032e38c6722b7147f306f29f0c5c"
+        },
+        {
+          "part": 2,
+          "attempt": 2,
+          "status": "partial",
+          "accepted": 3,
+          "durationSeconds": 12.26,
+          "usage": {
+            "input_tokens": 19436,
+            "output_tokens": 2517,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 21953
+          },
+          "inputCanonicalSha256": "9e76514b361d1206537a0f02f8cd8e1916e28b794cf9f7d4f4e65d79036f007d",
+          "inputFileSha256": "a22b4913ee82930d0d9852022d08b159543ba91caae9d19ac17cd49ed30c1891",
+          "promptFileSha256": "6c8781f85eb6ad934d14f9d8b9628aebc318c7b65b4ab43f899a8f06233d1774",
+          "responseFileSha256": "f0e4663ea293bb30e5f846f6ea25da1715693cd3ea4ab1035dcc7a4cc03a1f8d"
+        },
+        {
+          "part": 2,
+          "attempt": 3,
+          "status": "passed",
+          "accepted": 2,
+          "durationSeconds": 45.19,
+          "usage": {
+            "input_tokens": 17207,
+            "output_tokens": 2732,
+            "thinking_tokens": 2574,
+            "cache_read_tokens": 0,
+            "total_tokens": 19939
+          },
+          "inputCanonicalSha256": "33cf678cf792f76c9d829a24396f14ed8658f2d9fb022908bc302adcccf7e7a2",
+          "inputFileSha256": "b741f6a61b4ba348b54cd6a3be9990f59ad614905b3c0b5398bbc9bec5488f8a",
+          "promptFileSha256": "380d873777ba98d3068b51f7007b5045aeabf673eecbd9d61522d148a63e6ae5",
+          "responseFileSha256": "68b5e0d69082d6c484202ff604730a1f13dcbc5cd523a25699973420f4d5b46f"
+        },
+        {
+          "part": 3,
+          "attempt": 1,
+          "status": "failed",
+          "accepted": null,
+          "durationSeconds": 18.63,
+          "usage": null,
+          "inputCanonicalSha256": "33cf678cf792f76c9d829a24396f14ed8658f2d9fb022908bc302adcccf7e7a2",
+          "inputFileSha256": "b741f6a61b4ba348b54cd6a3be9990f59ad614905b3c0b5398bbc9bec5488f8a",
+          "promptFileSha256": "380d873777ba98d3068b51f7007b5045aeabf673eecbd9d61522d148a63e6ae5",
+          "responseFileSha256": "12ef6c2865d147d2b9c17e7e33fbe9b3f750241a48f63e8104cb6b49b06550f1"
+        }
+      ]
+    },
+    {
+      "locale": "az",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "d4ea90fcb9615d27af53c2fd59108c6ca7f97ed6b96789842a65afa792e787ea",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 94.52,
+          "usage": {
+            "input_tokens": 25922,
+            "output_tokens": 36296,
+            "thinking_tokens": 24736,
+            "cache_read_tokens": 0,
+            "total_tokens": 62218
+          },
+          "inputCanonicalSha256": "2fab1c281e0f0c989aae121230ee90b400d110cde8dd854627fc15522c5cfd11",
+          "inputFileSha256": "026852586c600045a6a0706fe9fbf3829864fc586cd485901d008b339d62ddca",
+          "promptFileSha256": "8122c2650c9e61c8e9bfdb84112068def9e478fea7516838cbb6d76786340115",
+          "responseFileSha256": "020fd15b996244998f121b84901ab14484936b0ea71094c8d012b538b1fc1732"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 38.21,
+          "usage": {
+            "input_tokens": 27067,
+            "output_tokens": 11974,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 39041
+          },
+          "inputCanonicalSha256": "d222f57ebfea3d95d9235a49199896bfadda3a4a65d224085a6e320175bc0341",
+          "inputFileSha256": "6e0721afb9c3d5832644b68df6d3edbd9be1ef459ec3c619bbeeaed13008533b",
+          "promptFileSha256": "bb7bff6c294438fce180ef4c609c3bcdf06f02ff66539b79439c91fb891092a5",
+          "responseFileSha256": "7d82fab5b37f4340d8dfb41f56f9e3a540ffae3051fffa0d81cc8970f162e8aa"
+        }
+      ]
+    },
+    {
+      "locale": "bho",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "80ddb07126b28fa670d3a31c12f4a83b7b3a48b0a2a73f00ace643a732fef59d",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 70.42,
+          "usage": {
+            "input_tokens": 25932,
+            "output_tokens": 27171,
+            "thinking_tokens": 18640,
+            "cache_read_tokens": 0,
+            "total_tokens": 53103
+          },
+          "inputCanonicalSha256": "2fab1c281e0f0c989aae121230ee90b400d110cde8dd854627fc15522c5cfd11",
+          "inputFileSha256": "026852586c600045a6a0706fe9fbf3829864fc586cd485901d008b339d62ddca",
+          "promptFileSha256": "5202c990f58a449dcddc4475e597d049a0a7a7b89a8ea15d1e280cff76afccc5",
+          "responseFileSha256": "5163bb6a975ce8ab02b342ccf9c0be0d828e8ec7052425fa3148bd1582b00254"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 36.85,
+          "usage": {
+            "input_tokens": 27073,
+            "output_tokens": 9149,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 36222
+          },
+          "inputCanonicalSha256": "d222f57ebfea3d95d9235a49199896bfadda3a4a65d224085a6e320175bc0341",
+          "inputFileSha256": "6e0721afb9c3d5832644b68df6d3edbd9be1ef459ec3c619bbeeaed13008533b",
+          "promptFileSha256": "6085892a6c4347850166240a269e8ed26c825280b5e8a65833eec399dea3676c",
+          "responseFileSha256": "769ecf99ff93f0981d73565e5ca1d74b98ed0b4cacd70ed594864e91486d3557"
+        }
+      ]
+    },
+    {
+      "locale": "bn",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "74dca31f992597a7f3440a2e4db87a32e43cd94a1a5546e88ced2839187b4682",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 62.05,
+          "usage": {
+            "input_tokens": 25923,
+            "output_tokens": 26985,
+            "thinking_tokens": 19181,
+            "cache_read_tokens": 0,
+            "total_tokens": 52908
+          },
+          "inputCanonicalSha256": "2fab1c281e0f0c989aae121230ee90b400d110cde8dd854627fc15522c5cfd11",
+          "inputFileSha256": "026852586c600045a6a0706fe9fbf3829864fc586cd485901d008b339d62ddca",
+          "promptFileSha256": "a725ff3590932e6b32c63c98609d0b16beddc5b3461d62da2025f1baf49ca728",
+          "responseFileSha256": "da5a749f0542446febb532dd8123842e5728a6c40797275d1fa606bdf06f420e"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 34.84,
+          "usage": {
+            "input_tokens": 27072,
+            "output_tokens": 8496,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 35568
+          },
+          "inputCanonicalSha256": "d222f57ebfea3d95d9235a49199896bfadda3a4a65d224085a6e320175bc0341",
+          "inputFileSha256": "6e0721afb9c3d5832644b68df6d3edbd9be1ef459ec3c619bbeeaed13008533b",
+          "promptFileSha256": "1a32dfe07807292c367981f48125d3bb7351fb8d61c664f7425014e4dc26f5a0",
+          "responseFileSha256": "7b1d0a83f366413b57b9a47c750dd22f33aaf436346da90f6ab8b4e178d70bdc"
+        }
+      ]
+    },
+    {
+      "locale": "ceb",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "63ebcd647a4366bfec28daaf82815c6c71a98af9f3108122ae1b7c8c68311078",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 44.9,
+          "usage": {
+            "input_tokens": 25929,
+            "output_tokens": 10419,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 36348
+          },
+          "inputCanonicalSha256": "2fab1c281e0f0c989aae121230ee90b400d110cde8dd854627fc15522c5cfd11",
+          "inputFileSha256": "026852586c600045a6a0706fe9fbf3829864fc586cd485901d008b339d62ddca",
+          "promptFileSha256": "261f67fef4308b3f07d211307267ae2344bef70acdbc2aa77f77d191007bbc40",
+          "responseFileSha256": "7dad72c457d58f0689b3acebce2454ff41d854a380bcdc762ce670f5bf2752f3"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 41.65,
+          "usage": {
+            "input_tokens": 14833,
+            "output_tokens": 11144,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 12240,
+            "total_tokens": 25977
+          },
+          "inputCanonicalSha256": "d222f57ebfea3d95d9235a49199896bfadda3a4a65d224085a6e320175bc0341",
+          "inputFileSha256": "6e0721afb9c3d5832644b68df6d3edbd9be1ef459ec3c619bbeeaed13008533b",
+          "promptFileSha256": "b7b568b506ca0c078fff5ba5f0ab81ccecb74bb844bcaf0591f83ba68eb02dbc",
+          "responseFileSha256": "96f130ce2ccbfdea5a22eba103660a78e6da419585e348062fad732bf2855564"
+        }
+      ]
+    },
+    {
+      "locale": "de",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "149f7fb15392260bae4069a91239a7360c3bd66ea8ab2a3983a2225d225f1a12",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "partial",
+          "accepted": 112,
+          "durationSeconds": 32.82,
+          "usage": {
+            "input_tokens": 25921,
+            "output_tokens": 8463,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 34384
+          },
+          "inputCanonicalSha256": "2fab1c281e0f0c989aae121230ee90b400d110cde8dd854627fc15522c5cfd11",
+          "inputFileSha256": "026852586c600045a6a0706fe9fbf3829864fc586cd485901d008b339d62ddca",
+          "promptFileSha256": "f68148b2f238f7c5adda02ec5916608104e51c49f0f2fd1a30adc3a8d2d16985",
+          "responseFileSha256": "5943df2b3bea1e8deb731403a4780c685520576c74aca6b8f7dcac5e94389c58"
+        },
+        {
+          "part": 1,
+          "attempt": 2,
+          "status": "passed",
+          "accepted": 1,
+          "durationSeconds": 7.28,
+          "usage": {
+            "input_tokens": 17151,
+            "output_tokens": 132,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 17283
+          },
+          "inputCanonicalSha256": "d4c974ce1c3d86993cf13d51aa77fe1527737d48cf485a32354240c56fb6e4c0",
+          "inputFileSha256": "32b7882bafd64f8c4f2d6841b03abe15da1938ce786bba3325a2ecb58d1b6670",
+          "promptFileSha256": "f412a55b27d1444e5add91a4439ebb4982e6931cc86d8d77afa6c05a2a0a5bec",
+          "responseFileSha256": "7f7092cabd5f93afbcf9b9e30b6b853df13aa8682f9216131087975e77e5f820"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 135,
+          "durationSeconds": 27.49,
+          "usage": {
+            "input_tokens": 26925,
+            "output_tokens": 8737,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 35662
+          },
+          "inputCanonicalSha256": "dea6b815236766cb51069302cbbee0674c538c215f5bd07d4d7446731192406e",
+          "inputFileSha256": "da18a14eb8fd1fb4ab9cbb6e679b4d231f99a5791c8c841cfd8d86455eb4b124",
+          "promptFileSha256": "7607b7ec6b73f2de3c17e7d3e40fa4ddc1b1974a64806185163a6b058034f6b4",
+          "responseFileSha256": "c3892d2db696489f90e93bbefdfb58e2e26578c3711399a4b327579de80059e3"
+        },
+        {
+          "part": 2,
+          "attempt": 2,
+          "status": "passed",
+          "accepted": 1,
+          "durationSeconds": 12.91,
+          "usage": {
+            "input_tokens": 17237,
+            "output_tokens": 2354,
+            "thinking_tokens": 2187,
+            "cache_read_tokens": 0,
+            "total_tokens": 19591
+          },
+          "inputCanonicalSha256": "7f91649fa358d9632b677067ca823eee99a674e4d66d0cd43894c8923fd3060a",
+          "inputFileSha256": "8695b6a2d692d44fa1217a0139c2a61da5797b5ec41f4a90b26a661f6d79b294",
+          "promptFileSha256": "196c76dc7d1af75459f620960db1df25c8ab9ffa7ba04e7c6f0dc943e8263bff",
+          "responseFileSha256": "7ed30ade9a552ddbb26eeb1a420b0ac08acb8fe443cb19ac2dc475adef0c245c"
+        },
+        {
+          "part": 3,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 2,
+          "durationSeconds": 9.45,
+          "usage": {
+            "input_tokens": 17202,
+            "output_tokens": 1460,
+            "thinking_tokens": 1310,
+            "cache_read_tokens": 0,
+            "total_tokens": 18662
+          },
+          "inputCanonicalSha256": "33cf678cf792f76c9d829a24396f14ed8658f2d9fb022908bc302adcccf7e7a2",
+          "inputFileSha256": "b741f6a61b4ba348b54cd6a3be9990f59ad614905b3c0b5398bbc9bec5488f8a",
+          "promptFileSha256": "222da7f917cc1e0fb52cfed1253f7b83f9f4fa7d70569ab19f648e4d71f62dc7",
+          "responseFileSha256": "91f7c6b6cab1347652b569c92644a297ac6b7105c7c93e4d053a88a1648aca4a"
+        }
+      ]
+    },
+    {
+      "locale": "es",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "c970afadcfd9bdea9d5a89a2f74168a4ad6e2c04f3bc4c4573c6b8b720356a85",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 33.73,
+          "usage": {
+            "input_tokens": 25926,
+            "output_tokens": 7810,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 33736
+          },
+          "inputCanonicalSha256": "2fab1c281e0f0c989aae121230ee90b400d110cde8dd854627fc15522c5cfd11",
+          "inputFileSha256": "026852586c600045a6a0706fe9fbf3829864fc586cd485901d008b339d62ddca",
+          "promptFileSha256": "a184bd76719015269ee9dc7cbb048642258276b6de034e7bc1fe2f298f3b0786",
+          "responseFileSha256": "f51c5e15f6927766ae9bce366a5e6703dcf95d782a3d4cb3cd7814ea390afd63"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 29.72,
+          "usage": {
+            "input_tokens": 27068,
+            "output_tokens": 8712,
+            "thinking_tokens": 413,
+            "cache_read_tokens": 0,
+            "total_tokens": 35780
+          },
+          "inputCanonicalSha256": "d222f57ebfea3d95d9235a49199896bfadda3a4a65d224085a6e320175bc0341",
+          "inputFileSha256": "6e0721afb9c3d5832644b68df6d3edbd9be1ef459ec3c619bbeeaed13008533b",
+          "promptFileSha256": "abacffddff54de370d52d1c81ad379f9212c3d1158e24f71117faf25166f8916",
+          "responseFileSha256": "c2bb341cfa72f52fd587fb582be687a1655db314f06a5519e60ca9994d635b8e"
+        },
+        {
+          "part": 2,
+          "attempt": 2,
+          "status": "passed",
+          "accepted": 1,
+          "durationSeconds": 7.17,
+          "usage": {
+            "input_tokens": 17245,
+            "output_tokens": 166,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 17411
+          },
+          "inputCanonicalSha256": "7f91649fa358d9632b677067ca823eee99a674e4d66d0cd43894c8923fd3060a",
+          "inputFileSha256": "8695b6a2d692d44fa1217a0139c2a61da5797b5ec41f4a90b26a661f6d79b294",
+          "promptFileSha256": "8f0918db5eb069e08c83290a24bc271ba048de4184da6090326f31266df881fd",
+          "responseFileSha256": "f13b44c6ed31f25fba13001230444f5aa96b5180981483570a5e73ae19408923"
+        }
+      ]
+    },
+    {
+      "locale": "fa",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "0aaae79e9bc8735a0ca209bf9f07cdcdcc6b7ec4f5ae3927df81a99e5fd6190c",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 37.24,
+          "usage": {
+            "input_tokens": 25929,
+            "output_tokens": 9090,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 35019
+          },
+          "inputCanonicalSha256": "2fab1c281e0f0c989aae121230ee90b400d110cde8dd854627fc15522c5cfd11",
+          "inputFileSha256": "026852586c600045a6a0706fe9fbf3829864fc586cd485901d008b339d62ddca",
+          "promptFileSha256": "41008938d3df54ac415ebafe7923678d160bdf0fbba1da3979c52fbd9e8de121",
+          "responseFileSha256": "badd1716e779ab55276f3a1997acfda478fe732ed1fefb0ec8cf0fb3cffd1d96"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "failed",
+          "accepted": null,
+          "durationSeconds": 14.74,
+          "usage": null,
+          "inputCanonicalSha256": "d222f57ebfea3d95d9235a49199896bfadda3a4a65d224085a6e320175bc0341",
+          "inputFileSha256": "6e0721afb9c3d5832644b68df6d3edbd9be1ef459ec3c619bbeeaed13008533b",
+          "promptFileSha256": "c06cc3c1911db51df5fb91293ab1b29cfabda2c97ae25e16f8153d5105f76e38",
+          "responseFileSha256": "3f70d2d932ae561ef1b785c6ff4eb37a0a17a46b38bd10c0261e5712f66f815f"
+        },
+        {
+          "part": 2,
+          "attempt": 2,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 39.05,
+          "usage": {
+            "input_tokens": 27684,
+            "output_tokens": 11627,
+            "thinking_tokens": 1376,
+            "cache_read_tokens": 0,
+            "total_tokens": 39311
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "66bb7839af07b85ededc64e0be4bfb50ead591c36ca00e2aa083eb268ec06d0c",
+          "responseFileSha256": "47b8d4925565ba3014ec579a823cc370e7e1a52060fb8d1a550c24719a1d250c"
+        }
+      ]
+    },
+    {
+      "locale": "ff",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "991ed154eaebc9286cdb74017fb90593e4cbe7d17926019591867276687d53da",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "failed",
+          "accepted": null,
+          "durationSeconds": 33.85,
+          "usage": null,
+          "inputCanonicalSha256": "2fab1c281e0f0c989aae121230ee90b400d110cde8dd854627fc15522c5cfd11",
+          "inputFileSha256": "026852586c600045a6a0706fe9fbf3829864fc586cd485901d008b339d62ddca",
+          "promptFileSha256": "629abce62741c7dd25741e893bfba73c3488fd76377330307c678a329cbb7b36",
+          "responseFileSha256": "baaeb1e5d6b62a3b7244d5d7f9d15c4eb686201f8546dffa0be613017a9c0ba5"
+        },
+        {
+          "part": 1,
+          "attempt": 2,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 78.21,
+          "usage": {
+            "input_tokens": 40335,
+            "output_tokens": 23906,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 24503,
+            "total_tokens": 64241
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "a1044945d13d86aa83b60144a12af3b397c970c864456db3ea8fa7e30219ea6e",
+          "responseFileSha256": "fc54c9d0fb6a5b7a6b539e97a09c06470202a52c3eee191be6fdfc1070747e5f"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 82.51,
+          "usage": {
+            "input_tokens": 42757,
+            "output_tokens": 25281,
+            "thinking_tokens": 2148,
+            "cache_read_tokens": 24505,
+            "total_tokens": 68038
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "3ace50b0602b13708e2c12f35bf33a03b87fdd75f72ef84ef4aa79524470df3b",
+          "responseFileSha256": "e63fbbade827b03d46a4fa3cbea8212c9c6d673fdc60d157acb4b85c11395478"
+        }
+      ]
+    },
+    {
+      "locale": "fr",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "8a3aaa1467d2026632e1ac1cdd5ef99107a067a2c20fc3e688cb08754884035f",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 63.69,
+          "usage": {
+            "input_tokens": 26378,
+            "output_tokens": 29395,
+            "thinking_tokens": 20264,
+            "cache_read_tokens": 0,
+            "total_tokens": 55773
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "40bf87f92580d43f09e6ae0f8b0d472fecf788b5a75cf16feb20e26f0160a033",
+          "responseFileSha256": "361d3d0abd24893e85da6654fa93c0b95a5a8be52a4eebee3b147850963c3713"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 34.65,
+          "usage": {
+            "input_tokens": 27690,
+            "output_tokens": 9702,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 37392
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "e846a5b4cd9b5ea22ac351a36288759fe84b8967ae66c944cd6f9dcc395774b9",
+          "responseFileSha256": "799fcac2b93f54ffb0979623701ed467ab5ff18b53b3ddbe9f5275362c7bcd24"
+        }
+      ]
+    },
+    {
+      "locale": "gu",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "6c81558d480724b720d631f42ad1cc52dcc95b8720f7b0612e93b1b564c7add6",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 78.68,
+          "usage": {
+            "input_tokens": 22298,
+            "output_tokens": 32996,
+            "thinking_tokens": 22058,
+            "cache_read_tokens": 4079,
+            "total_tokens": 55294
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "c79b2d13191a32887ffa12d2db2de285a6b78cf0d51902c810479eb55271eadc",
+          "responseFileSha256": "1e5d57f8810a7b926e6f4d42e7382829755d621909dddcdb355a6c018dbd10e7"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 66.6,
+          "usage": {
+            "input_tokens": 67896,
+            "output_tokens": 24432,
+            "thinking_tokens": 580,
+            "cache_read_tokens": 0,
+            "total_tokens": 92328
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "bc79222d995fb3373bef10eda98eda61f63c09957bcb699cb1c82311f0e3af13",
+          "responseFileSha256": "933479f914b20e0ff9f7d11c3af280e7081f74ab2f66bc0da61722d2e865d110"
+        }
+      ]
+    },
+    {
+      "locale": "ha",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "a7015de3103630e711afb89fc24c171562acfa8e12c8b47a949d079a43c58610",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 79.25,
+          "usage": {
+            "input_tokens": 26376,
+            "output_tokens": 33767,
+            "thinking_tokens": 22826,
+            "cache_read_tokens": 0,
+            "total_tokens": 60143
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "494afb544a5da6c300b729ff1bf81a87571d552ce708e0cdae232d115fb71c8b",
+          "responseFileSha256": "6314920f3c197c4be0f47da37dcb507de41b42d0a75821d27ae20c2d2507dfc6"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 45.73,
+          "usage": {
+            "input_tokens": 27686,
+            "output_tokens": 11589,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 39275
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "a92a49799b13ef8734c3821ee70924bcde82000266adf524cf5400d45c54266b",
+          "responseFileSha256": "e33b83b38fd4b175883acf3146fa774559cc970596f8ee70b9addc92cc8e6f33"
+        }
+      ]
+    },
+    {
+      "locale": "hi",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "243dfc658f2d0074a0c10f817d03a1e5f7ef9cafda1f771155869d3c88191802",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 34.11,
+          "usage": {
+            "input_tokens": 26372,
+            "output_tokens": 8698,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 35070
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "5b1964b01ec75c2c77b5c00a9762054a12b609f0b750ad69ff1a6f4ee695d346",
+          "responseFileSha256": "5e30a424c4d47753b7c1b2695f7f858767fa32f21b91d1457305fe563ed7fd4f"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 30.92,
+          "usage": {
+            "input_tokens": 27685,
+            "output_tokens": 9207,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 36892
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "584d705d8575e2fba7bed1da3bd7182825939d6be394240058d580c33971b0ea",
+          "responseFileSha256": "8d6a9337b719fb1323d8a1d06edda43f36d48527bc8b95556a1d12319f7ce34b"
+        }
+      ]
+    },
+    {
+      "locale": "id",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "8895b611649f3d7be00944445fe6b2e2923b09612671863bc6365fafca2ffac7",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 30.78,
+          "usage": {
+            "input_tokens": 26372,
+            "output_tokens": 7944,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 34316
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "acf6b3c520a7fcd925a97347ba27b2888832cec470c2b43a495315e3364889a8",
+          "responseFileSha256": "31760a53dfdd089f6e8272579b201e4bc2da3f23842ee0acd8e94650169d5d06"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "partial",
+          "accepted": 135,
+          "durationSeconds": 25.33,
+          "usage": {
+            "input_tokens": 27692,
+            "output_tokens": 8480,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 36172
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "7e878fdc84cb1b0ab02bb62813aa882078700b11e29260c8be7233fb6ea1ad63",
+          "responseFileSha256": "1884fe32986618466a0af5078bf43495cdcea4e05afec33949f338569ed5c0f1"
+        },
+        {
+          "part": 2,
+          "attempt": 2,
+          "status": "passed",
+          "accepted": 2,
+          "durationSeconds": 13.58,
+          "usage": {
+            "input_tokens": 17331,
+            "output_tokens": 2185,
+            "thinking_tokens": 1925,
+            "cache_read_tokens": 0,
+            "total_tokens": 19516
+          },
+          "inputCanonicalSha256": "e8c27cd11c6fe1782c43a32c996dd3b6e2599495ad4555844c50c5921f1cba21",
+          "inputFileSha256": "d6451ff82296a1bd6cd7fd0c61423e402657fd92fd4ec7b2869a9a8ff4ad8c2c",
+          "promptFileSha256": "de15abbfe9d1378019bdc9dbc661f13fe746ff26f90234edfdeb9c74fce97379",
+          "responseFileSha256": "c39d0348414b439d7ad670d4dcd3da2e4815cba596de650ee1236bb4b103ff95"
+        }
+      ]
+    },
+    {
+      "locale": "ig",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "bd7dde0405ae48dd4b343a5e381accdcb936c5865a8b55cb9df4b07e6af7c789",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 49.38,
+          "usage": {
+            "input_tokens": 26374,
+            "output_tokens": 12269,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 38643
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "136f8e72f9b15059597fe4f4a99e708163c4dd61ceea29a026a042bc64c6dc68",
+          "responseFileSha256": "d8a1002f6a9bc8aa5be55482f6e261835a2422bf6dd02a634ce3f79125694ebe"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 84.39,
+          "usage": {
+            "input_tokens": 43732,
+            "output_tokens": 25563,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 24507,
+            "total_tokens": 69295
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "fc0ba1f46f973e94b71a75676af8b78c66a3d5c4043a62e0541d31eb6b14ca61",
+          "responseFileSha256": "4a54de94037a9dbcde80098c2d558fba529ed80bebc675abbf8b963b98d132f4"
+        }
+      ]
+    },
+    {
+      "locale": "it",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "b3488ee70b5c85aa6fae4179c2c74ac4a5dc25ec0a55cbf1a4a7e866c0e9c144",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 30.36,
+          "usage": {
+            "input_tokens": 26378,
+            "output_tokens": 8810,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 35188
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "a9fb5addb376c57a7ff29cf38c83a42b84d76beacb2ccd6c9cc1919ad2db2192",
+          "responseFileSha256": "69e18d7cd5bb8ed064d3677bc8775f13bdb2bf68b5260c559e7c4b29ee502fe3"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 74.21,
+          "usage": {
+            "input_tokens": 27691,
+            "output_tokens": 33735,
+            "thinking_tokens": 24144,
+            "cache_read_tokens": 0,
+            "total_tokens": 61426
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "14d7ab29832c1ffb8a2b490d90d6fc215e1514180d7178dd2f38c10b24c1332b",
+          "responseFileSha256": "45464fa001f514b700cdc8a25ae3f9f14058637eb2347597ac49cf040641bd4e"
+        }
+      ]
+    },
+    {
+      "locale": "ja-JP",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "da3753da6fd58853b7c7d3d0d73fb5fce1a5fb4756ecab6f79d2653ba24d6a0c",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "partial",
+          "accepted": 105,
+          "durationSeconds": 32.12,
+          "usage": {
+            "input_tokens": 26377,
+            "output_tokens": 8448,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 34825
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "9b1f5eef180004783c121e673bd4e55e773c6df7cfe0c0bcfac9de42f029bec6",
+          "responseFileSha256": "890dba939f3ca480c82c03eec87bb5a9bb6c0b84f30d089a79067e78cfdbaf76"
+        },
+        {
+          "part": 1,
+          "attempt": 2,
+          "status": "partial",
+          "accepted": 6,
+          "durationSeconds": 21.98,
+          "usage": {
+            "input_tokens": 18095,
+            "output_tokens": 5474,
+            "thinking_tokens": 4570,
+            "cache_read_tokens": 0,
+            "total_tokens": 23569
+          },
+          "inputCanonicalSha256": "14dbfbefeef9100bf70850b9acb0b8a3b9ab74f2b960a3c086d315ea311ad6e2",
+          "inputFileSha256": "ef9084cd6b7e455350225f0242179b09e4c241c6df16697d9d289273c3bfbf1e",
+          "promptFileSha256": "40f75825835fd3d757e8a3277dfa3dac9a23901e6666eaadce1afaa1dc8f9a8d",
+          "responseFileSha256": "f2475aca2e18a166f9f433371bedba149340998168f5089d5fa945c221cd86c3"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "partial",
+          "accepted": 136,
+          "durationSeconds": 37.11,
+          "usage": {
+            "input_tokens": 27691,
+            "output_tokens": 10908,
+            "thinking_tokens": 1825,
+            "cache_read_tokens": 0,
+            "total_tokens": 38599
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "942eeb7c70a61a72e3ce233654c126140fe329066c2aa16bcc09821ab4a84ff4",
+          "responseFileSha256": "4f34f7dcee085b5f513badc808e34ef1ac3758758528853a08e060cbaddf6eed"
+        },
+        {
+          "part": 2,
+          "attempt": 2,
+          "status": "partial",
+          "accepted": 0,
+          "durationSeconds": 10.84,
+          "usage": {
+            "input_tokens": 17139,
+            "output_tokens": 41,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 17180
+          },
+          "inputCanonicalSha256": "ba4abfa6554b874843a0505ec157bb408e254cd9847df043b53181cb705e2532",
+          "inputFileSha256": "9a0ae4b7ec85a5ec592e262ad240a9bffb124802e0dfac3a616f73594c85ac4b",
+          "promptFileSha256": "a94374d1e45ef7ab45a8375ce5302e720f0c05b44e2b4acca9e57dc8810a0e6e",
+          "responseFileSha256": "5f9bc8907fc1fa64169252fea26ca23a7f60fa56475cd526e4adb57348820cad"
+        }
+      ]
+    },
+    {
+      "locale": "jv",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "0089b18b6f6366c47aafbb635c88d73fc9c042629a4ec4faae07b6276488fce4",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 44.77,
+          "usage": {
+            "input_tokens": 26376,
+            "output_tokens": 11866,
+            "thinking_tokens": 2320,
+            "cache_read_tokens": 0,
+            "total_tokens": 38242
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "1a186fa2220b4f7e66a6360544e44c27dfe174fa1da6d1e9c4bfe807130fefd5",
+          "responseFileSha256": "0fc8d9a15306965296fc729b164735fcb3de955a37bb9e89745d1f73636d4d60"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "partial",
+          "accepted": 135,
+          "durationSeconds": 34.56,
+          "usage": {
+            "input_tokens": 27696,
+            "output_tokens": 10044,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 37740
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "539051e661558fc7c87d6876f1667541486132a114fb6718d6021ade580e1358",
+          "responseFileSha256": "5deea48a00bd5fa8fc2879c13147975a6a714e0c62be544537e40a1550259099"
+        },
+        {
+          "part": 2,
+          "attempt": 2,
+          "status": "passed",
+          "accepted": 2,
+          "durationSeconds": 10.85,
+          "usage": {
+            "input_tokens": 17344,
+            "output_tokens": 309,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 17653
+          },
+          "inputCanonicalSha256": "e8c27cd11c6fe1782c43a32c996dd3b6e2599495ad4555844c50c5921f1cba21",
+          "inputFileSha256": "d6451ff82296a1bd6cd7fd0c61423e402657fd92fd4ec7b2869a9a8ff4ad8c2c",
+          "promptFileSha256": "eabac44899819d5febb4cb3cd9ebdabd67f2e74117a9886d27fd1564ba81a513",
+          "responseFileSha256": "77934d8231ce416c6acd44979067ef2896abdfcdf0d004be7b706ba95aa5efd4"
+        }
+      ]
+    },
+    {
+      "locale": "kk",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "25cadc4805ec16997166787d5c313f1250a6d8dce8b384cc2119405fed140631",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 41.0,
+          "usage": {
+            "input_tokens": 26379,
+            "output_tokens": 12731,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 39110
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "7e128ad265ada00aff7e9d5d8c4460544825c865cbdf8cfe1aef2e65da0634f8",
+          "responseFileSha256": "e22393f84c66cd99b4ed081f610cb72be238f2df58777187c2d44f7d374683c2"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 41.69,
+          "usage": {
+            "input_tokens": 27696,
+            "output_tokens": 13688,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 41384
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "1e27c23a5c7322f6c0d1fcdd2e6e7c09b09a06d4ffaf31da1051a7f26b625a04",
+          "responseFileSha256": "4d648f5c8d0ef2660c5bb4be1c18bf66262cd18a4e97030e6d289f0a9572fa03"
+        }
+      ]
+    },
+    {
+      "locale": "km",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "b710e293d5154e30069bcfe9209e2fe3794504117b5775a30ef828989b9e3916",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 86.04,
+          "usage": {
+            "input_tokens": 26377,
+            "output_tokens": 36031,
+            "thinking_tokens": 23678,
+            "cache_read_tokens": 0,
+            "total_tokens": 62408
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "94b731f7e97c3e01232e535c3b44052df10020864841e7a0d9611d12f0e9ead8",
+          "responseFileSha256": "be9775ce8b9715cc041cfad1cc33b699f1d964f92b2bd9a8b1077037e6836635"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 41.91,
+          "usage": {
+            "input_tokens": 29270,
+            "output_tokens": 13274,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 42544
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "64bc68f48fd842b405e3832678af1c212f3f3743e0871e6222561bbb14d12f0a",
+          "responseFileSha256": "f35db6aa862bae385bc9ff4a0002c02f4e870121920463260ae75624d198364e"
+        }
+      ]
+    },
+    {
+      "locale": "kn",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "3403b5eecd877981040b731f6a71f6515ec2f012ddb18136386aed9a8806a501",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 38.41,
+          "usage": {
+            "input_tokens": 26378,
+            "output_tokens": 11647,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 38025
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "beff160643d342a58d5ba82ac7b2b079f60feb8f22632ed0cca72824c8c3f1de",
+          "responseFileSha256": "8377d0e691a1583ac53a8009c19837f5f196adfd9bca97616c099bc8725d900b"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 82.1,
+          "usage": {
+            "input_tokens": 27679,
+            "output_tokens": 36028,
+            "thinking_tokens": 23371,
+            "cache_read_tokens": 0,
+            "total_tokens": 63707
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "f2b9bfd66bc1abaa0bf4bcf6598d17d70bc3fd6ba3efed0956fcd50bdf311137",
+          "responseFileSha256": "1892349b19acb0f8ed0400de8f4095a708a040ef00e508a79a8a47101dd4b18b"
+        }
+      ]
+    },
+    {
+      "locale": "ko",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "6081b2eb5531a9f95a52e8e968f6adc088be8c0b3d91129eff8c67d9c69bb547",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 32.11,
+          "usage": {
+            "input_tokens": 26378,
+            "output_tokens": 8758,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 35136
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "d506d5286239fc484e6858de791eb4d142ffaabc3908eb7ea6b14c7fbd6b2523",
+          "responseFileSha256": "591312a336ed5d94a25ccc93e76e298b4c5e04455296ec93cb78a1fe5f7e66bb"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 35.03,
+          "usage": {
+            "input_tokens": 27686,
+            "output_tokens": 10752,
+            "thinking_tokens": 1059,
+            "cache_read_tokens": 0,
+            "total_tokens": 38438
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "41c3272a99721440fd4363b9bf3a759c4d617fcef956142b9939a0430edc787f",
+          "responseFileSha256": "e69d7c93815ea266cd76095b9e5339206ae1eea403f6c9dc448a55685b747a90"
+        }
+      ]
+    },
+    {
+      "locale": "ku",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "ac8d561377dc2b8a6fab959df948ee705c5d1be6799fda06eebf9e3784324bb7",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 72.71,
+          "usage": {
+            "input_tokens": 64616,
+            "output_tokens": 23442,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 88058
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "aee487f9f3c8e66122a27a4254c510de4c56ca1fa72eea50332ffed2d6ae0fbd",
+          "responseFileSha256": "b83f1580775c07fdbbf8294e729d3cfdc33445fc28e4607d70c86d03f97caace"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 52.3,
+          "usage": {
+            "input_tokens": 27694,
+            "output_tokens": 12667,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 40361
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "5314ecddf8a36e734aad4ec823a8757dbbd249c794e8c019933b4bd834393ecd",
+          "responseFileSha256": "f6df9d2104586fff2de4cea404440e3c163bd7a819473bebf86456147887a06f"
+        }
+      ]
+    },
+    {
+      "locale": "mai",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "06026d06aad9ff5312634b9854b53b3371c6ea646c9d378695bc6ebcbb0babf2",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 43.81,
+          "usage": {
+            "input_tokens": 26382,
+            "output_tokens": 12293,
+            "thinking_tokens": 2343,
+            "cache_read_tokens": 0,
+            "total_tokens": 38675
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "6b55a60e3be27adb4988b8a0926b1144dde25c5e21b3b0059e0fee737dc052ba",
+          "responseFileSha256": "450f3ee955fadb1f4a91358eb35549575b28a9665010f69ef9ff317a2c44645c"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 40.2,
+          "usage": {
+            "input_tokens": 27694,
+            "output_tokens": 11723,
+            "thinking_tokens": 1141,
+            "cache_read_tokens": 0,
+            "total_tokens": 39417
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "fdab5bd07cb9981ba2b34bee8c124a0d12c022181a15fbcf1934b08112d8b675",
+          "responseFileSha256": "afbfc32fc437994517ab14312988ca20d652a74f5d6fb0b41cd05c1a4c5fd49f"
+        }
+      ]
+    },
+    {
+      "locale": "mg",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "d9c0b04d520f24ea26eb905981c6f2126881af785b7f72b2d3c211ac12cba25b",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 54.4,
+          "usage": {
+            "input_tokens": 26376,
+            "output_tokens": 12389,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 38765
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "88e837d9d6ed91b79519b84132170d067705d5c43f7d72012874bb5396b81318",
+          "responseFileSha256": "641e72897d8ae7692049946735b6cd2d773407fc8baedfdda98f57ecb3b2d9d0"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 57.65,
+          "usage": {
+            "input_tokens": 27687,
+            "output_tokens": 15243,
+            "thinking_tokens": 1394,
+            "cache_read_tokens": 0,
+            "total_tokens": 42930
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "a77ea7b8b8f7ddaeae57e3b3294103b516be8dc974f9ca8b1fc546fbb1cce2db",
+          "responseFileSha256": "7929e5ac41464324106c9543627a25b9388795b001abea8fd6f87952a1dcfbbc"
+        }
+      ]
+    },
+    {
+      "locale": "ml",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "4883049218050ee92a1e1935a46c2da73a18cbc367eeb24621a760dc28fc8d9b",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 51.02,
+          "usage": {
+            "input_tokens": 26371,
+            "output_tokens": 11158,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 37529
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "02f953fe0e4ba9683c86af386c55b42b339d3dac4794d2897380751df5ba8901",
+          "responseFileSha256": "06e79dc325e9edb458920028983b39e266a95b9a44b1946aa066c79a517d251f"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 48.63,
+          "usage": {
+            "input_tokens": 27692,
+            "output_tokens": 12192,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 39884
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "d692c0f67bc29b74efe7f0b7ee485dfb1b7a539be647e719c823827a2d381848",
+          "responseFileSha256": "c1c0501b84db9668097d409b82a3d65d73e9a903868fe36a2c8fadecb356689b"
+        }
+      ]
+    },
+    {
+      "locale": "mr",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "6e77ba22d184360b1d1a93d46624d9eaa71aeb6dc9a11c64a2f0a61501fd25cf",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 50.77,
+          "usage": {
+            "input_tokens": 26375,
+            "output_tokens": 9777,
+            "thinking_tokens": 825,
+            "cache_read_tokens": 0,
+            "total_tokens": 36152
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "ea43beb90d8fe827d1f094068b255b4c0b81bbdc11e7a43b15a8694a2c3a269c",
+          "responseFileSha256": "6ede63362b4cea0e16f67b8c9033b882b11bb934b7998fd442f917496d4519c6"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 43.54,
+          "usage": {
+            "input_tokens": 27690,
+            "output_tokens": 9684,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 37374
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "32d2f9178534378feb9d092f6c8fe454fd3c96be3ebebde02973368bd0739f4a",
+          "responseFileSha256": "945686372704321279acdff4546c9c8008ca3edc6815032485e7046327ff1a57"
+        }
+      ]
+    },
+    {
+      "locale": "my",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "97b5af09b5aeda34a0910093d1a5abed41fb089cffc9ae191b5039d294509b2f",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 55.63,
+          "usage": {
+            "input_tokens": 26369,
+            "output_tokens": 14783,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 41152
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "4039a1f176fd0a81415043a0417aee6a8ef8c19222a6bf4e0e2a6707e22bdef7",
+          "responseFileSha256": "987cadae9812d4d6900058f93c2e5b7cf1c4db329e78a4ac3fef11ec85039d29"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 73.31,
+          "usage": {
+            "input_tokens": 27688,
+            "output_tokens": 14406,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 42094
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "dd4d94ba39d6b4c96407d1818330adb8ac6b00bd3a4abe000c3025dd1741993c",
+          "responseFileSha256": "9d2d32cb524bd2d24152d5cb49202d0daf6785f8b44cba80817f7073c6af95ed"
+        }
+      ]
+    },
+    {
+      "locale": "ne",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "4fc715fcce967b45bf12cf2558fbd407d7afdc3a9420aa12eaea6c7f5cd9d7fd",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 80.91,
+          "usage": {
+            "input_tokens": 37866,
+            "output_tokens": 19006,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 24498,
+            "total_tokens": 56872
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "3b66231411ad346eaf866dc2cfb404fecc377c2c77f6df97190bf90f7d2b7ad5",
+          "responseFileSha256": "9f2f33bf5419cfc699d4a9d82e99dfbc485b910e4c6bf03fb9d35724cf493aed"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 38.32,
+          "usage": {
+            "input_tokens": 27686,
+            "output_tokens": 10171,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 37857
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "1675bf4ff8f98285bbc10593adea77bfaba97b36e59f90cd64ed87d01a55a06d",
+          "responseFileSha256": "f6cf1ca668047c7bb4162bedca126d1a27f4eae8e7620fb4cd0d1a2304245833"
+        }
+      ]
+    },
+    {
+      "locale": "nl",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "09c73be8f500d88da7ac031359cdd9b0452ee92034792eddf7f1fd169a3ede64",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 78.55,
+          "usage": {
+            "input_tokens": 26378,
+            "output_tokens": 29846,
+            "thinking_tokens": 20649,
+            "cache_read_tokens": 0,
+            "total_tokens": 56224
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "c251c8c9f328706ce6cb22a861e0092c0ee8528d85e752818f4b0c678739ea6d",
+          "responseFileSha256": "545a6a2bbca8f97d1f9965698d49c786b8d7e5ac44dc55f78679e575df659c11"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "partial",
+          "accepted": 135,
+          "durationSeconds": 35.61,
+          "usage": {
+            "input_tokens": 27688,
+            "output_tokens": 9710,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 37398
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "454c08d4b56fd69966d7d7e1f4c3e078e28fb665069ea161f4c5798f56fb153a",
+          "responseFileSha256": "ed30cb8ab4e261bd69b791638b9d0ca9ef57ece5b141e8c649c4429cff3df3e2"
+        },
+        {
+          "part": 2,
+          "attempt": 2,
+          "status": "passed",
+          "accepted": 2,
+          "durationSeconds": 7.78,
+          "usage": {
+            "input_tokens": 17340,
+            "output_tokens": 288,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 17628
+          },
+          "inputCanonicalSha256": "e8c27cd11c6fe1782c43a32c996dd3b6e2599495ad4555844c50c5921f1cba21",
+          "inputFileSha256": "d6451ff82296a1bd6cd7fd0c61423e402657fd92fd4ec7b2869a9a8ff4ad8c2c",
+          "promptFileSha256": "b88aa475a423ce27472dce3975e10839fc74dc988875582a38475023449611a5",
+          "responseFileSha256": "4469d3fda881cc41c49ab4b19faa6d5a8f625d77f619b49091b294dac510e7aa"
+        }
+      ]
+    },
+    {
+      "locale": "om",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "d82d1c7efc8b9905ac7c1416f6c99ff6c47ae85521f2b23e8a745af072a9826e",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 99.86,
+          "usage": {
+            "input_tokens": 26375,
+            "output_tokens": 35203,
+            "thinking_tokens": 23142,
+            "cache_read_tokens": 0,
+            "total_tokens": 61578
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "22637ecf0111d0d3b5145a4164f1e816434fde219244f60462e10e333c287e62",
+          "responseFileSha256": "1915cf8354e1fb06197f97334739461c6af870337e270c396f2f2bc170610fa2"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 54.15,
+          "usage": {
+            "input_tokens": 27689,
+            "output_tokens": 12989,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 40678
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "c9152469ccd16286013092a81dbd2522bb0fe9cf510c289a13ea67ae0e06d57a",
+          "responseFileSha256": "88d4b5e9a4222cc7bc4a4e11dde55c3ed03d8404040ec0830a99bc4542a3860c"
+        }
+      ]
+    },
+    {
+      "locale": "or",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "63342c716bd8f74e174cd6a62ba27a57291e7ab0c80622e26bf8495fd7e476bc",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 44.67,
+          "usage": {
+            "input_tokens": 26371,
+            "output_tokens": 18686,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 45057
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "cfc2f3b196e7bf513504d777c9d40d099cba0fdcdd9e5ca9d7c70a6781f28971",
+          "responseFileSha256": "5f2540131431928a5917ade21aee6cdaa8c090af01dd450f97479c95c1d65f87"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 113.02,
+          "usage": {
+            "input_tokens": 27689,
+            "output_tokens": 52763,
+            "thinking_tokens": 32749,
+            "cache_read_tokens": 0,
+            "total_tokens": 80452
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "fafaeb6c0fca89d68c2aa12fd447bff99b53638d1087aafd06bd732ca00e9b16",
+          "responseFileSha256": "5c8ff7b7ff7ce0d4af80785b45e4ca9a3968efc5c3d29fdde4c9b214af3af557"
+        }
+      ]
+    },
+    {
+      "locale": "pa",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "8b5d4a46217a8504b188ea54a60bdc9810a03d7576089b24c0d76d56525ab1dc",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 40.23,
+          "usage": {
+            "input_tokens": 26381,
+            "output_tokens": 14923,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 41304
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "c2ccdcbbbfe833596bcf39a67ed52d0a04942f46e05c8a462cd3e39ce34c2a2f",
+          "responseFileSha256": "0965135cf5fbcdeab72ae9bb3769213bcf4889faf6530d488a0e899507c12795"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 44.71,
+          "usage": {
+            "input_tokens": 27695,
+            "output_tokens": 15468,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 43163
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "3078f98bac21dc75fba906dfae66fa0f35d4f4b7afe65d76ae788f175abfc2d5",
+          "responseFileSha256": "828a0f0cf035dec7ddf9d441b98f9f9f6f6a8a37b8a643c6f247ce686b4877d0"
+        }
+      ]
+    },
+    {
+      "locale": "pl",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "612b0d73a7eaaa9b45882a1559c804d2897dcbdd6a298c9bf9604814e57ba03e",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "partial",
+          "accepted": 112,
+          "durationSeconds": 31.89,
+          "usage": {
+            "input_tokens": 26378,
+            "output_tokens": 9823,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 36201
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "a2ff09ea3002acbd3f4cb48e84b435e05cc43c98190b3acbf44ceab84523495e",
+          "responseFileSha256": "b525bf1d27a23d284efaf89cfc947b4530daaea9887e289c3879baf7387e41c8"
+        },
+        {
+          "part": 1,
+          "attempt": 2,
+          "status": "passed",
+          "accepted": 1,
+          "durationSeconds": 6.5,
+          "usage": {
+            "input_tokens": 17181,
+            "output_tokens": 104,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 17285
+          },
+          "inputCanonicalSha256": "09983aa455dfc6b031da05885924fc9c4524144c50347054a540acbad225de74",
+          "inputFileSha256": "f0d10f1a0ec7b82daf51acdf547ab8558d0b79b44ef99ea870a6886e989c03f1",
+          "promptFileSha256": "a3c6d419c87eaeb5cad2bdbc2510ec988c8a21ed4b8fd3f7e24222dcd6299cec",
+          "responseFileSha256": "28f68f3f695ed8d242e726330e6a7727b72d1d9ab44d451bfca2bab152916c14"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 31.38,
+          "usage": {
+            "input_tokens": 27692,
+            "output_tokens": 11354,
+            "thinking_tokens": 705,
+            "cache_read_tokens": 0,
+            "total_tokens": 39046
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "3317005248b50cd4fc253816cbb6083678051e1b4e0c04d3f985615cb4446c65",
+          "responseFileSha256": "9c6b357895d7c82f52f17482874b2d80c46a7940ebfb3d296c1febfaaabba351"
+        }
+      ]
+    },
+    {
+      "locale": "pnb",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "d705e0fd68b0f7a29100f164ebd85fba4cceed2209f218cedc796c6f00db6976",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 38.97,
+          "usage": {
+            "input_tokens": 26386,
+            "output_tokens": 10611,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 36997
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "75de155b89d33f35501372b1879ec1fa5249f8db5a8e6f1413a71a8106effaff",
+          "responseFileSha256": "5377ec0231eeba2cb532d520a995a56bba1b8233846b4f314aabd8c3a7c62533"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 38.43,
+          "usage": {
+            "input_tokens": 27687,
+            "output_tokens": 10946,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 38633
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "667fb1de587f61439616fc7d3e3cded3ad13c4a1161486019e9f15021d1e44cf",
+          "responseFileSha256": "adb883a8d1f955bae34deef38c62b5c6997e17da9be75c6384d314622f4dc361"
+        }
+      ]
+    },
+    {
+      "locale": "ps",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "23e9beec0fc8e20d905465674043069383be9173857a934273d90b3ffb459b43",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 42.27,
+          "usage": {
+            "input_tokens": 22293,
+            "output_tokens": 12089,
+            "thinking_tokens": 1205,
+            "cache_read_tokens": 4079,
+            "total_tokens": 34382
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "645878d8ad9382f39ff8a9a2e266008a9a1922ce36a85f69dc547fd0e23f0209",
+          "responseFileSha256": "153fa701afeff01c5dcadd7600d19ea2ef84745858206cb8eaa6110ced843396"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 36.97,
+          "usage": {
+            "input_tokens": 27691,
+            "output_tokens": 11501,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 39192
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "4e255b05db5f6da39652e26f031c93171b55aae7ce3f3a44f12205ed12256fe9",
+          "responseFileSha256": "31de7d50713c68ed46ad3103f2224f72093277deb62da37618308401c6327cd0"
+        }
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "cdab92bcb44656c56972b68ef4e0397bdde4045a5b51e3457c9704fdf06b76b7",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 25.17,
+          "usage": {
+            "input_tokens": 26383,
+            "output_tokens": 8228,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 34611
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "32b0af107bbdee537c4e0c552915cb300cc5e03f084502534e4dfa4741d310c0",
+          "responseFileSha256": "25a5a969777e93b540b043a148ff58e6f509eb0f97143f51f6878d5cbcf9c524"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "partial",
+          "accepted": 135,
+          "durationSeconds": 30.06,
+          "usage": {
+            "input_tokens": 27693,
+            "output_tokens": 8903,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 36596
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "921fb8f071b7ab468b51bbe804d8b7927269e02465f748f3eddcd6bc83f8b852",
+          "responseFileSha256": "e432b7bd9663b5c1caf50469223fb8e4c3e25eaad9239f056b4415b2f8349693"
+        },
+        {
+          "part": 2,
+          "attempt": 2,
+          "status": "passed",
+          "accepted": 2,
+          "durationSeconds": 6.09,
+          "usage": {
+            "input_tokens": 17345,
+            "output_tokens": 262,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 17607
+          },
+          "inputCanonicalSha256": "e8c27cd11c6fe1782c43a32c996dd3b6e2599495ad4555844c50c5921f1cba21",
+          "inputFileSha256": "d6451ff82296a1bd6cd7fd0c61423e402657fd92fd4ec7b2869a9a8ff4ad8c2c",
+          "promptFileSha256": "c4b63023bb0521c837831ff4ac4ddf601ae125ce979b840fe0f007b019c6b738",
+          "responseFileSha256": "6a312eae5d783e393d511625f9427a5427544116c79d2b97ddf76fb67468cd42"
+        }
+      ]
+    },
+    {
+      "locale": "ro",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "5008d787e2aa11ea0cc35c1f7afd35b9c08d2451231ed7413ec63dd259fb91da",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 29.17,
+          "usage": {
+            "input_tokens": 26376,
+            "output_tokens": 9586,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 35962
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "51b20f7f68dbeba2bfe890f537ab48d9c37e1107d4e8390d4ed7c17a3aa2fef1",
+          "responseFileSha256": "37e3cd495ecc151e61669c55f3ff2c281a28958d317c126ba6c969b59c72e5f7"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 70.46,
+          "usage": {
+            "input_tokens": 27690,
+            "output_tokens": 32381,
+            "thinking_tokens": 22082,
+            "cache_read_tokens": 0,
+            "total_tokens": 60071
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "ed67f67493587c1bf9303068754dbfceb2b66576fb8693ef96adb9d1b7a0efd1",
+          "responseFileSha256": "80da4ab866723e0bb1ba0e06c598265fde278f2c28d5aba76500c4224623a5b3"
+        }
+      ]
+    },
+    {
+      "locale": "ru",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "9175d25a08e7f5b2d0692b08e2a9d1693257de18e894d1eaf19898fe3a577d15",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "failed",
+          "accepted": null,
+          "durationSeconds": 94.01,
+          "usage": null,
+          "inputCanonicalSha256": "2fab1c281e0f0c989aae121230ee90b400d110cde8dd854627fc15522c5cfd11",
+          "inputFileSha256": "026852586c600045a6a0706fe9fbf3829864fc586cd485901d008b339d62ddca",
+          "promptFileSha256": "2d5e87cd02ca2cbe11394571209d655cfd99430fc853a9f57303882afb65e181",
+          "responseFileSha256": "e68059f2be3f4996b21738bdb71be0c297d3bda90c05859e340411ab73fddd89"
+        },
+        {
+          "part": 1,
+          "attempt": 2,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 29.36,
+          "usage": {
+            "input_tokens": 25926,
+            "output_tokens": 8419,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 34345
+          },
+          "inputCanonicalSha256": "2fab1c281e0f0c989aae121230ee90b400d110cde8dd854627fc15522c5cfd11",
+          "inputFileSha256": "026852586c600045a6a0706fe9fbf3829864fc586cd485901d008b339d62ddca",
+          "promptFileSha256": "2d5e87cd02ca2cbe11394571209d655cfd99430fc853a9f57303882afb65e181",
+          "responseFileSha256": "6803e164535394e97432d612f14dc999368dfb3cae10006b0e960b9d1e5b50cc"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "failed",
+          "accepted": null,
+          "durationSeconds": 58.05,
+          "usage": null,
+          "inputCanonicalSha256": "dea6b815236766cb51069302cbbee0674c538c215f5bd07d4d7446731192406e",
+          "inputFileSha256": "da18a14eb8fd1fb4ab9cbb6e679b4d231f99a5791c8c841cfd8d86455eb4b124",
+          "promptFileSha256": "09ded5dba0af13c96e48a44f71c6b083918b93566a0a0f6ee67a210819426b8a",
+          "responseFileSha256": "98fa2313fd2c3a53592aaac287bdd510cf76f0822c4a3441774be822a7c78dd8"
+        },
+        {
+          "part": 2,
+          "attempt": 2,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 60.13,
+          "usage": {
+            "input_tokens": 27068,
+            "output_tokens": 8870,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 35938
+          },
+          "inputCanonicalSha256": "d222f57ebfea3d95d9235a49199896bfadda3a4a65d224085a6e320175bc0341",
+          "inputFileSha256": "6e0721afb9c3d5832644b68df6d3edbd9be1ef459ec3c619bbeeaed13008533b",
+          "promptFileSha256": "963d8da4313507186a5187016cc3e802642e8e7946d09b8c27484fbbce7b9103",
+          "responseFileSha256": "1535f2c1b5c1911a990d733d35e7a3ad62450be4e102497e8d367bb939d2650a"
+        },
+        {
+          "part": 2,
+          "attempt": 3,
+          "status": "passed",
+          "accepted": 1,
+          "durationSeconds": 10.7,
+          "usage": {
+            "input_tokens": 17241,
+            "output_tokens": 1649,
+            "thinking_tokens": 1479,
+            "cache_read_tokens": 0,
+            "total_tokens": 18890
+          },
+          "inputCanonicalSha256": "7f91649fa358d9632b677067ca823eee99a674e4d66d0cd43894c8923fd3060a",
+          "inputFileSha256": "8695b6a2d692d44fa1217a0139c2a61da5797b5ec41f4a90b26a661f6d79b294",
+          "promptFileSha256": "80cd7ee377cb24c9d0c906331afe9c41a077ac083b03df0f34ffc77d343b988e",
+          "responseFileSha256": "e9452369f7f94769b6059f1559e25c54e7672db3c361e1fe3ed3b103bbc2c839"
+        }
+      ]
+    },
+    {
+      "locale": "sd",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "55166a7e6917d6acb61c598dd2bb027be9836e0406a5b977511dffa8fb66cd47",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 41.14,
+          "usage": {
+            "input_tokens": 26370,
+            "output_tokens": 11897,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 38267
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "7986430b163668e96c80d62b8499b002920af2155ae68dc808f4fbd1c63f636f",
+          "responseFileSha256": "87aa3bcf7df37be29bbe12dfed4394f8af9133351d30b7f8eb85c7199da4c6e4"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 44.25,
+          "usage": {
+            "input_tokens": 27689,
+            "output_tokens": 12862,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 40551
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "0a641f1cd9e151a0863b42ecca42674e10eb93491ec72bd0aba1eb2ed190cb13",
+          "responseFileSha256": "2bb040bf9ef2645adaf2c275eb328e92026330d03c9eda070d0c0f9b56e15488"
+        }
+      ]
+    },
+    {
+      "locale": "so",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "7dc739619aa7c589ef810a34704069621ec13b323ea62183d189fc4167cbadf3",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 51.84,
+          "usage": {
+            "input_tokens": 26372,
+            "output_tokens": 12218,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 38590
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "78aaa38f8f3ee7883190e539eb4b80b3f152ff2ee513d74e144726dd47dd893d",
+          "responseFileSha256": "49e4b5d355e2074dce0e5cc5f97f9f40f0dd7d318edf50aa644d7bce0b433771"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 100.75,
+          "usage": {
+            "input_tokens": 27685,
+            "output_tokens": 40069,
+            "thinking_tokens": 27032,
+            "cache_read_tokens": 0,
+            "total_tokens": 67754
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "3c1df6fcee430fb5871f0ba8295b9db4480ecbc403f2fc1c4be011eb004a4925",
+          "responseFileSha256": "51a7402ecfbaf9d4a696409b7ba661d9c98b8be29d256b266f203f3d6ae4fae5"
+        }
+      ]
+    },
+    {
+      "locale": "su",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "667793444b7fa9717513680d7163b57d23fa4774a546015138db03349dcf5f28",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 37.46,
+          "usage": {
+            "input_tokens": 22298,
+            "output_tokens": 10076,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 4079,
+            "total_tokens": 32374
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "7e10e6b594c1b4c78a545e2723cc4dd8d6b6f572b9f8e4523271e303ce76bb1d",
+          "responseFileSha256": "0ba395e95758d7bbb8299c08a14e9b4538ac54ed08407d19fa464d4dfbad2e7a"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 38.13,
+          "usage": {
+            "input_tokens": 27697,
+            "output_tokens": 10819,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 38516
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "6ec7a185535e8b85ce91f04d6031400f0c5b12c6818e48414026e9980d8e904a",
+          "responseFileSha256": "e0f48612be3b4cb04826a30840a432b7ad3ba7a0715077fda04b78b77a6cb62a"
+        }
+      ]
+    },
+    {
+      "locale": "ta",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "63f3fcac8163c177285d40b0de82629465e9b5cc9a885c9f9638eb937a521bf4",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 35.59,
+          "usage": {
+            "input_tokens": 26371,
+            "output_tokens": 9904,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 36275
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "52c1c8a7690bf58126dd71d4ba76363e9e8d2678e1b0fd397ae04b2b6b461638",
+          "responseFileSha256": "51a05880b0fa141400e8a174807f006b91b51e79598277a6c518e6f959cdafaf"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 37.59,
+          "usage": {
+            "input_tokens": 27677,
+            "output_tokens": 10205,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 37882
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "5a058ff26f55abf37a458d477d2777b74669bf60a0935c200188004a799d4f35",
+          "responseFileSha256": "d7e77a06187df098310ad5f8ee95274c920e8a6d34b1598e87aa951df893b76a"
+        }
+      ]
+    },
+    {
+      "locale": "te",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "99566abd9d4e086fd24095209fcb051126cf364b4dc1bbb010244def10fc4c52",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 34.6,
+          "usage": {
+            "input_tokens": 26374,
+            "output_tokens": 11485,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 37859
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "956f5d38b3d45dc97101911c140d6c924fd1495031ce6b9257b547f4c367e5bf",
+          "responseFileSha256": "dc1c0898895dd47e7e00fd8852c978837874fceae6e8396a379ff5d4a97bb951"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 37.26,
+          "usage": {
+            "input_tokens": 27689,
+            "output_tokens": 12091,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 39780
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "fc8f5ee2bb5aae99f7ea3cadae372d58c80cda595ddada3e8310fd228226d5dc",
+          "responseFileSha256": "20f13c7dc2d403acefef46d462a397c797311450b00435f26df122264b64c109"
+        }
+      ]
+    },
+    {
+      "locale": "th",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "6384ad78a124b9ce9af78fcd5694fd1798d79080841e7d7a356b95dc5db5a3a2",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 38.48,
+          "usage": {
+            "input_tokens": 26370,
+            "output_tokens": 11295,
+            "thinking_tokens": 1355,
+            "cache_read_tokens": 0,
+            "total_tokens": 37665
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "8939e2cd6f1aa0732de6579c94146cf15984635cc1c011c5188a6b1dd2e4ccb2",
+          "responseFileSha256": "fd49f2623d5a7831202d0b7f6f76a1b795a9d4590fef1e97655d2c2a62396e52"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 36.77,
+          "usage": {
+            "input_tokens": 27681,
+            "output_tokens": 10213,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 37894
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "e156ef78d8b80e388c373b023fab7e5620c0ae1f00a2c3bb30e47665f91d120e",
+          "responseFileSha256": "8a11f71be6f430e5663e8d68727c7a4d4d02870028c42b5cb4cb3337dc6bdf9c"
+        }
+      ]
+    },
+    {
+      "locale": "tl",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "e399d96256ec1d7a26d7340f279bbf03bb70297d450ed167329ba04ee1a4261b",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 33.34,
+          "usage": {
+            "input_tokens": 26369,
+            "output_tokens": 10926,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 37295
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "b1164744fc3731e1785f0c7f586fda61ff65d78147032302f5ca98a0dfca821e",
+          "responseFileSha256": "5b1ad02541919ef8cf77e221c6720f260554db0988dd942b8da64de10196dce4"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 35.73,
+          "usage": {
+            "input_tokens": 27689,
+            "output_tokens": 11212,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 38901
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "dfba8af4458ca42e65f33ecf1600f1e64a136a88b84f42cfdff17e8ddaa1ea16",
+          "responseFileSha256": "2454f334da46e8aeb839470b0c45f65b86c9cb917f80b930fe77c431c8f8acf9"
+        }
+      ]
+    },
+    {
+      "locale": "tr",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "01137da0f1af24b59f3c1dc789c6fbf3a1533ebda77b91a22f0413ca2598761b",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 36.61,
+          "usage": {
+            "input_tokens": 26372,
+            "output_tokens": 10675,
+            "thinking_tokens": 1537,
+            "cache_read_tokens": 0,
+            "total_tokens": 37047
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "ba010f81d71f2a75b657e0b6839d0664491dbbfc8ecb79b423bc4ec11373e129",
+          "responseFileSha256": "2be669f0bd73b817ae4c47d8ab39036473a9fdefddb063e01ebe4181d85e6cbe"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 33.79,
+          "usage": {
+            "input_tokens": 27688,
+            "output_tokens": 9793,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 37481
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "5c631829c95bf4b9e8c9be9e117e7d0bd2a99fdf77428c3a10c798f32a9a5c5b",
+          "responseFileSha256": "8b204d032e57aca53328417aff4549cdb9af100d366a8dfc1807cc3a2ef49759"
+        }
+      ]
+    },
+    {
+      "locale": "uk",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "e2ae4455fb6acd44cdf6bd1dec4e6ba1bbe89ee3d6fba831f61bfb582dda5b66",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 37.12,
+          "usage": {
+            "input_tokens": 26374,
+            "output_tokens": 9995,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 36369
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "0ad4743f58a3a79747ea53d549106159ad026c6d0ef644fd51ed1adfc98e366a",
+          "responseFileSha256": "1695b08d1f79f679a8ae4c5e68c9ef9f514aa669d3a937f7a236581933924220"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 33.12,
+          "usage": {
+            "input_tokens": 27688,
+            "output_tokens": 11008,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 38696
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "1b402a4dd4a6012b930fd68eba0c1c37d4af730b238d3d839cd6c7e0680577bf",
+          "responseFileSha256": "fe95843e50bcded6b36e85ebaff693104f07ba446b2262c57f66a4b00a8dbf78"
+        }
+      ]
+    },
+    {
+      "locale": "ur",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "0d98ddbd80a039c5016f559067c66db8e383a6710863fd7a0e4a121d1ac3829a",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 32.9,
+          "usage": {
+            "input_tokens": 26373,
+            "output_tokens": 9324,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 35697
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "462d53f13d001c43ec1f24702d15f58bccd5773be25405b384a6b20ac7e355ed",
+          "responseFileSha256": "073a3b100870e10bf1ad64b9f50a701439e74dca2ed840659273500b492ed817"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 30.76,
+          "usage": {
+            "input_tokens": 27690,
+            "output_tokens": 9952,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 37642
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "4849db89bb0b6fa50c1fb8f2aae553f401de0e1813871a23a1b6fcc4c3040587",
+          "responseFileSha256": "6deea4d00645afebe35a4f7e2bad91b2dc5dd5b8c85d798c2451b99bf8d44c7b"
+        }
+      ]
+    },
+    {
+      "locale": "uz",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "5a2e4390ed594a81307d1f715653831d1f1d7d2f8bcdf2991cd4556aed857e80",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 35.2,
+          "usage": {
+            "input_tokens": 26381,
+            "output_tokens": 11822,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 38203
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "3a31f94c06992e6c5bff98473b6fe4fef534941d02732eb098e4c618e8688c17",
+          "responseFileSha256": "f1e330acb55eda40d34f3ab18662f41aa80a5654b9d070e8bb6f1018f1652c22"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 35.07,
+          "usage": {
+            "input_tokens": 27685,
+            "output_tokens": 12377,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 40062
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "812654cd5c1ba17558c01fe9183624079f8113c6dcf91d22b59be08a740899eb",
+          "responseFileSha256": "0eb0afcbdcebaf54775a577fed82a35f43a966b9cd8f87d90f68fc541c106746"
+        }
+      ]
+    },
+    {
+      "locale": "vi",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "9866b0d7629da3abb0947612eb0ac651bdb0bef247203ddcf72ca58281b2395b",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 28.95,
+          "usage": {
+            "input_tokens": 26378,
+            "output_tokens": 9488,
+            "thinking_tokens": 495,
+            "cache_read_tokens": 0,
+            "total_tokens": 35866
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "95ba09b36fe5ea473cdba3500434d15b8866fe3a9e0a711a53f39b1c282e3c95",
+          "responseFileSha256": "f4ae50a4522b3cadd6781f08e2c8aaa329e15aed0b2d3310ca749dcaee29d85e"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "partial",
+          "accepted": 136,
+          "durationSeconds": 32.21,
+          "usage": {
+            "input_tokens": 27688,
+            "output_tokens": 10056,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 37744
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "73fc596476fa1941e5a8612314d15633a6909b46966956b0acbbbc019aff01dd",
+          "responseFileSha256": "52a464f6f3f236e78e3817d4762fce220f8d3f3a21e79e07e18067871a41406a"
+        },
+        {
+          "part": 2,
+          "attempt": 2,
+          "status": "passed",
+          "accepted": 1,
+          "durationSeconds": 9.33,
+          "usage": {
+            "input_tokens": 17254,
+            "output_tokens": 1730,
+            "thinking_tokens": 1552,
+            "cache_read_tokens": 0,
+            "total_tokens": 18984
+          },
+          "inputCanonicalSha256": "5e4c2a0a9cd841a2797af4998a3c6dd3ae5ac948bf033db4b64363a50a11ed6a",
+          "inputFileSha256": "a9b552ab810182cbd446ff8cbafb8241a8606846fd25cead1b7ad444c3193d06",
+          "promptFileSha256": "26a8f8cfca0de10a1dd04b31fdbe93428855820e1d0623973f28a3b50f5f3be6",
+          "responseFileSha256": "819165d3932152f0f4ec774a9b48661970366970adbc2df969d6d0cb8b852e8b"
+        }
+      ]
+    },
+    {
+      "locale": "yo",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "3b8b2405ed9d209c1f6611c54e93db8ea505bde80b5371446960f55f20445a17",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 106.93,
+          "usage": {
+            "input_tokens": 26374,
+            "output_tokens": 42621,
+            "thinking_tokens": 25384,
+            "cache_read_tokens": 0,
+            "total_tokens": 68995
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "9f76f7d66a1f472885b8237240544d1992ee68aca80a271edfc124ecfcc64b93",
+          "responseFileSha256": "8bf78447d00dc5dfa9c4226a518eac0a3acc0dce722e8a70e050b64cbbfbbb51"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 64.78,
+          "usage": {
+            "input_tokens": 27683,
+            "output_tokens": 17742,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 45425
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "d300b2823a6d06df9cf0205c4f926f43648e099f9d5fb2719171e4de3ce79a7f",
+          "responseFileSha256": "a26e17be5ef0f6a3891897f077d5072d712c399fd62fdf0b82ddac76e09c9997"
+        }
+      ]
+    },
+    {
+      "locale": "zh-CN",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "cc5b6133cc3d2a2d4f5f0a946f6d2e9266182df7127b9a91ff372bc2fc849b0e",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 26.99,
+          "usage": {
+            "input_tokens": 26381,
+            "output_tokens": 7253,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 33634
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "709cab896e8c5443cc7607096c1c414a68402c6e6ab39d747a81000ebeb0e86e",
+          "responseFileSha256": "9665ebc37442cd1cce5d8244fe8f48568fc95c5e30c835eedb66b1a2c281c5a7"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 64.87,
+          "usage": {
+            "input_tokens": 27688,
+            "output_tokens": 28440,
+            "thinking_tokens": 20582,
+            "cache_read_tokens": 0,
+            "total_tokens": 56128
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "2d47cba9c130dce8b4f260e463ce4f78c688468e5969b50f8e70cd7ee5a0844c",
+          "responseFileSha256": "5f99fac9ec791b09be8d2ae598b328c117ba5e2cd7d7281975882a51ce6a93af"
+        }
+      ]
+    },
+    {
+      "locale": "zh-TW",
+      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "contentSha256": "7eb805eae2fd699ecbfcbe7648979ee5126461cb8fcb6e869837731fe396c59c",
+      "fieldCount": 250,
+      "newUIKeys": 39,
+      "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
+      "nativeHumanReview": false,
+      "attempts": [
+        {
+          "part": 1,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 113,
+          "durationSeconds": 35.67,
+          "usage": {
+            "input_tokens": 26381,
+            "output_tokens": 8030,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 34411
+          },
+          "inputCanonicalSha256": "09a2caf40aed4a2979f02111c50b14a83a0d869665b4956cc6e849bdb478f0e0",
+          "inputFileSha256": "c11e53cbc7c5a9f6896fb5651c01453a586e5384549b3249220619e84076fe94",
+          "promptFileSha256": "697ac17b4950b87e4e21a11d40cdf851b3fc62943f00fb1553d17b28ed01be1e",
+          "responseFileSha256": "4bddc7019567e76f8d9208789c2863e3eff4d96bf9ac3efd5295878d8f5ef5be"
+        },
+        {
+          "part": 2,
+          "attempt": 1,
+          "status": "passed",
+          "accepted": 137,
+          "durationSeconds": 33.03,
+          "usage": {
+            "input_tokens": 27693,
+            "output_tokens": 8663,
+            "thinking_tokens": 0,
+            "cache_read_tokens": 0,
+            "total_tokens": 36356
+          },
+          "inputCanonicalSha256": "978933740f3a4c5b21a1ab54c39c8a8dd2c0c6d7b9780dfa397a6862a33f5172",
+          "inputFileSha256": "c7c666d5d7c8d800708a4225be490b7971d25cb74cd1c4e164f38e6e1b70abb6",
+          "promptFileSha256": "26dd445beaa38cd4dec93f02690404dc79ea84b36d098aab26eb224c56cfe9e6",
+          "responseFileSha256": "ec33d4192528d452254043999215b44c3a01ae3872f6a6658a736401c1c62461"
+        }
+      ]
+    }
+  ]
+}
