@@ -1,5 +1,11 @@
 # Release engineering and provenance
 
+## 1.0.2 maintenance release
+
+Version **1.0.2** updates official project-site links to [ziaforge.studio](https://ziaforge.studio) and includes the refreshed multilingual documentation presentation. The canonical product guide remains on the separate documentation site; GitHub remains the source and package destination. Workflow behavior, model settings and review decisions retain the 1.0.1 contract. See [1.0.2 notes](releases/1.0.2.md).
+
+The release receives fresh versioned packages from one frozen source commit through the existing compile/package-only route. No repeated native-provider, unit, E2E, PTY or GUI testing is claimed. Packages remain unsigned and use manual installation. The original 1.0.1 release policy below is retained for historical context and the shared engineering rules.
+
 ## 1.0.1 release policy
 
 Version **1.0.1** is the first public stable release line. Stable describes the selected product/update channel; it does not imply a code-signing certificate, notarization or a newly completed native desktop test. macOS, Windows and Linux receive separate x64 and ARM64 packages, all compiled from the same clean `main` commit. No development package is relabelled as a release.

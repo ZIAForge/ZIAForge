@@ -1,7 +1,7 @@
 {
   "name": "ziaforge",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "engines": {
     "node": ">=22.12.0"
   },
@@ -93,7 +93,7 @@
   },
   "description": "Forge, don’t vibe. Plan-driven AI development and work with your own CLI subscriptions or API providers.",
   "author": "ZIAForge contributors",
-  "homepage": "https://github.com/ZIAForge/ZIAForge",
+  "homepage": "https://ziaforge.studio/",
   "repository": {
     "type": "git",
     "url": "https://github.com/ZIAForge/ZIAForge.git"

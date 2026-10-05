@@ -33,9 +33,9 @@ Start with the [English user guide](USER_GUIDE.md), generated from [the canonica
 
 The editor, review-team configuration and specialization catalog also have source contracts in [shared/editor.ts](../shared/editor.ts), [shared/review-team.ts](../shared/review-team.ts) and [shared/specializations.ts](../shared/specializations.ts). General help explains their user-facing behavior; the typed definitions govern arguments.
 
-## Documentation website
+## Website and documentation
 
-The [public documentation site](https://ziaforge.github.io/ZIAForge/) provides the generated product guide in all 56 languages. [Website delivery](WEBSITE.md) explains presentation, source boundaries, checks and documentation-only publication. See [local reading and portable documentation build](../website/README.md) for commands. The new Studio landing and original films are local preparation for a separate future hosting step.
+The official project landing is [ziaforge.studio](https://ziaforge.studio); source code, issues and release downloads remain on [GitHub](https://github.com/ZIAForge/ZIAForge). The separate [public documentation site](https://ziaforge.github.io/ZIAForge/) provides the generated product guide in all 56 languages. [Website delivery](WEBSITE.md) explains presentation, source boundaries and the independent publication scopes. See [local reading and portable documentation build](../website/README.md) for commands.
 
 ## Historical material
 

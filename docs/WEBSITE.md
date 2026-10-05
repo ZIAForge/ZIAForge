@@ -2,7 +2,9 @@
 
 The public documentation site is separate from the desktop renderer and its release versions. It renders the same canonical product guide as in-app Help and provides all 56 configured language guides. Presentation changes do not allocate an application package version or certify native model/platform execution.
 
-See [documentation website setup](../website/README.md) for local reading, maintenance checks and the portable documentation build. The project owner is also preparing a new Studio landing and local infographic films for future independent hosting at `ziaforge.studio`; those local deliverables are excluded from documentation publication until their own hosting step.
+The official project landing is [https://ziaforge.studio](https://ziaforge.studio), deployed from a separate Studio PHP workspace. The multilingual product guide has its separate [GitHub Pages destination](https://ziaforge.github.io/ZIAForge/). Source code, issue reports and downloadable application releases remain in [the GitHub repository](https://github.com/ZIAForge/ZIAForge).
+
+See [documentation website setup](../website/README.md) for local reading, maintenance checks and the portable documentation build. The Studio landing and infographic films have an independent hosting scope; they are excluded from the documentation-only publication route. Updating a link does not deploy a website or change DNS.
 
 ## Source boundaries
 
@@ -23,4 +25,4 @@ Desktop fixtures, native model inference, package checks and website checks are 
 
 `.github/workflows/website.yml` runs only when dispatched and stages documentation with `--docs-only`. The root and `website/index.html` are generated guide entry points. Its website allowlist contains the 56 guide pages, guide presentation, language-compatible fonts and inherited icon; new landing HTML/scripts/dictionaries and video assets are excluded.
 
-The portable documentation directory retains public source needed by guide links. Private research, profiles, authentication and dependencies are excluded. The existing GitHub Pages destination remains separate from the future custom domain. Do not add a CNAME, change DNS or upload films as part of documentation maintenance.
+The portable documentation directory retains public source needed by guide links. Private research, profiles, authentication and dependencies are excluded. The GitHub Pages documentation destination remains separate from the official project landing domain. Do not add a CNAME, change DNS or upload films as part of documentation maintenance.

@@ -2,7 +2,7 @@
 
 The public GitHub Pages site serves the generated product guide in all 56 application languages. English is canonical; the other guides carry their current machine-translation notice and source hash. The site keeps the product's inherited icon and loading-screen identity.
 
-The new Studio landing and original video tutorials are being prepared locally for the owner's future independent hosting. They are separate from this documentation publication. In that local workspace, see `LOCAL_STUDIO_README.md` for the complete landing, films and portable host build.
+The official project landing is [ziaforge.studio](https://ziaforge.studio), deployed from a separate Studio PHP workspace. This directory contains the source's lightweight project page and generated guides; it is not the deployed Studio application. Source code, issue reports and downloadable packages remain on [GitHub](https://github.com/ZIAForge/ZIAForge).
 
 ## Read locally
 
@@ -36,6 +36,6 @@ node scripts/website/build.cjs --docs-only
 
 A fresh portable output is written to `out/documentation/`. The builder refuses a nonempty output and writes a file/hash manifest. The root page is the English guide, with a language selector for every served guide. Public source required by contract links is retained; dependencies, private research, runtime profiles and credentials are excluded.
 
-The manually dispatched `Documentation website` workflow validates the guide and publishes this documentation-only output to GitHub Pages. Its allowlist excludes the local Studio landing, new films, caption sources and landing dictionaries. It does not configure `ziaforge.studio`, change DNS, create a `CNAME` or upload to video platforms.
+The manually dispatched `Documentation website` workflow validates the guide and publishes this documentation-only output to GitHub Pages. Its allowlist excludes the independently deployed Studio landing, films, caption sources and landing dictionaries. It does not deploy the separate Studio PHP application, change DNS, create a `CNAME` or upload to video platforms.
 
 See [website delivery](../docs/WEBSITE.md) for source boundaries and publication scope.

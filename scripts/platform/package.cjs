@@ -129,7 +129,7 @@ async function main(argv) {
     for (const file of ['build-identity.json', 'dependency-inventory.json', 'THIRD_PARTY_NOTICES.txt']) extraResources.push({ from: path.join(directory, file), to: file })
     extraResources.push({ from: path.join(project, 'node_modules/electron/dist/LICENSE'), to: 'ELECTRON_LICENSE.txt' }, { from: path.join(project, 'node_modules/electron/dist/LICENSES.chromium.html'), to: 'LICENSES.chromium.html' })
     const artifactVersion = stable ? manifest.version : manifest.buildId
-    const config = { extends: path.join(project, 'electron-builder.json5'), directories: { output: artifacts }, extraMetadata: { version: manifest.version, homepage: 'https://github.com/ZIAForge/ZIAForge', desktopName: 'ziaforge.desktop' },
+    const config = { extends: path.join(project, 'electron-builder.json5'), directories: { output: artifacts }, extraMetadata: { version: manifest.version, homepage: 'https://ziaforge.studio/', desktopName: 'ziaforge.desktop' },
       buildVersion: manifest.version, asarUnpack: ['node_modules/node-pty/**/*'], npmRebuild: native, extraResources, forceCodeSigning: false,
       artifactName: `ZIAForge-${artifactVersion}-${target.platform}-${target.arch}.` + '${ext}',
       mac: { identity: null, notarize: false, hardenedRuntime: false, target: target.formats, artifactName: `ZIAForge-${artifactVersion}-macOS-${target.arch}.` + '${ext}',

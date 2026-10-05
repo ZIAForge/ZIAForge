@@ -664,6 +664,18 @@ export const Sidebar: React.FC<{ onOpenHelp?: () => void; helpActive?: boolean }
                 {t('about_desc')}
               </p>
 
+              <a
+                href="https://ziaforge.studio/"
+                onClick={(e) => {
+                  e.preventDefault()
+                  window.ziafAPI.openExternal('https://ziaforge.studio/').catch(err => console.error('Failed to open project website:', err))
+                }}
+                className="flex items-center justify-center gap-2 px-5 py-2.5 w-full rounded-xl text-xs font-bold text-white bg-gradient-to-r from-zinc-900 to-zinc-800 hover:from-zinc-800 hover:to-zinc-700 border border-zinc-700 hover:border-[#ff6b00]/30 shadow-md transition-all select-none cursor-pointer"
+              >
+                <Globe className="h-4 w-4 text-[#ff6b00]" aria-hidden="true" />
+                <span>{t('browser_preview_open')} · <bdi>ziaforge.studio</bdi></span>
+              </a>
+
               {/* Github Repository button */}
               <a 
                 href="https://github.com/ziaforge/ziaforge" 

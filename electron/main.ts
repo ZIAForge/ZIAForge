@@ -1065,7 +1065,8 @@ function updateAboutPanel(lang: string) {
     applicationVersion: JSON.parse(fs.readFileSync(path.join(APP_ROOT, 'package.json'), 'utf8')).version,
     version: JSON.parse(fs.readFileSync(path.join(APP_ROOT, 'package.json'), 'utf8')).version,
     copyright: 'Copyright © 2026 ZIAForge',
-    credits: `FORGE. DON'T VIBE.\n${translate(lang, 'native.aboutCredits')}\nGitHub: https://github.com/ziaforge/ziaforge`,
+    credits: `FORGE. DON'T VIBE.\n${translate(lang, 'native.aboutCredits')}\nhttps://ziaforge.studio/\nGitHub: https://github.com/ziaforge/ziaforge`,
+    website: 'https://ziaforge.studio/',
     iconPath: path.join(VITE_PUBLIC, 'app-logo.jpeg')
   })
 }
@@ -2717,6 +2718,12 @@ function createMenu() {
       label: getLabel('menu_help', 'Help'),
       role: 'help' as const,
       submenu: [
+        {
+          label: `${getLabel('browser_preview_open', 'Open in browser')} · ziaforge.studio`,
+          click: () => {
+            openExternalUrl('https://ziaforge.studio/').catch(err => console.error('Failed to open project website:', err))
+          }
+        },
         {
           label: getLabel('menu_github', 'GitHub Repository'),
           click: () => {
