@@ -36,16 +36,16 @@ The locked node-pty package includes N-API binaries for macOS and Windows x64/ar
 
 ## Stable release: one version, six native targets
 
-`.github/workflows/release-packages.yml` is the official compile/package-only route. It runs on native macOS Intel and Apple Silicon, Windows x64 and ARM64, and Ubuntu x64 and ARM64 runners. Every target compiles the same clean source commit and embeds the same release version, such as `1.0.1`. It uses no Wine, QEMU, account credentials or live provider requests. Hosted runner availability and repository billing still apply.
+`.github/workflows/release-packages.yml` is the official compile/package-only route. It runs on native macOS Intel and Apple Silicon, Windows x64 and ARM64, and Ubuntu x64 and ARM64 runners. Every target compiles the same clean source commit and embeds the same release version, such as `1.0.3`. It uses no Wine, QEMU, account credentials or live provider requests. Hosted runner availability and repository billing still apply.
 
 First commit the intended version in both `package.json` and `package-lock.json`, together with all release sources, on `main`. On the owner's machine, with the existing retained release ledger available, allocate the version exactly once:
 
 ```sh
-node scripts/platform/release.cjs prepare --version 1.0.1 \
+node scripts/platform/release.cjs prepare --version 1.0.3 \
   --output /absolute/new-release-preparation-directory
 ```
 
-This atomically reserves `release/macos/.versions/1.0.1`. Existing development reservations remain untouched. A failed preparation still consumes a reservation if allocation already occurred; inspect and retain its metadata rather than deleting it. The resulting compact `release-plan.json` binds that one version to the exact source commit, portable digest, release UUID and six targets. It contains no owner-machine filename, home directory or private branch. Preserve the separate local reservation receipt; do not publish it.
+This atomically reserves `release/macos/.versions/1.0.3`. Existing development reservations remain untouched. A failed preparation still consumes a reservation if allocation already occurred; inspect and retain its metadata rather than deleting it. The resulting compact `release-plan.json` binds that one version to the exact source commit, portable digest, release UUID and six targets. It contains no owner-machine filename, home directory or private branch. Preserve the separate local reservation receipt; do not publish it.
 
 Dispatch **Stable release packages** from the exact `main` commit, supplying the plan as the `release_plan` input. With authenticated GitHub CLI, passing JSON through standard input avoids shell interpolation of its contents:
 
@@ -59,7 +59,7 @@ Each job verifies the dispatch commit and committed bytes, runs `npm ci`, rebuil
 
 The release workflow deliberately runs **no unit tests, native PTY execution, GUI, installer, upgrade or provider checks**. Receipts declare `verificationScope: compile-and-package-integrity-only`, `nativeExecution: not-run-build-only` and GUI unverified. A passing package job must not be described as a new platform runtime certification. The separate verification workflow below remains available when such checks are requested.
 
-Artifacts named `stable-<platform>-<arch>-<run>-<attempt>` contain the complete distributable archives, notices, checksums and diagnostic receipts. The DMG/ZIP preserves a complete Mac `.app`; the unarchived staging bundle is not uploaded a second time. Artifact names inside each retained attempt use `ZIAForge-1.0.1-<OS>-<arch>.<format>`. GitHub artifacts expire: download and retain all six target results and checksums before publication.
+Artifacts named `stable-<platform>-<arch>-<run>-<attempt>` contain the complete distributable archives, notices, checksums and diagnostic receipts. The DMG/ZIP preserves a complete Mac `.app`; the unarchived staging bundle is not uploaded a second time. Artifact names inside each retained attempt use `ZIAForge-1.0.3-<OS>-<arch>.<format>`. GitHub artifacts expire: download and retain all six target results and checksums before publication.
 
 Retrying a failed job against the same frozen source creates a new build identity from its GitHub run/attempt while keeping the reserved public version. If an **unpublished candidate** needs a source correction, commit that correction at the same package/lock version and append a revision on the owner's machine:
 

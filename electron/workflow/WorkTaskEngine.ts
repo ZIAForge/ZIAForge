@@ -5,6 +5,7 @@ import type { WorkArtifactReceipt, WorkExecutionStep, WorkFlowDefinition, WorkFl
 import type { WorkflowAgentRequest, WorkflowEngineOptions } from './WorkflowEngine'
 import { RecoveryStore } from '../runtime/RecoveryStore'
 import { ensurePrivateDirectory } from '../runtime/privateStorage'
+import { syncDirectory } from '../runtime/syncDirectory'
 import { workflowId } from './WorkflowValidation'
 import { validateWorkCommand, validateWorkDefinition, validateWorkSnapshot } from './WorkTaskValidation'
 import { parseWorkResult } from './WorkTaskProtocol'
@@ -60,15 +61,13 @@ export class WorkFlowEngine {
       return latest
     }
     if (!reserve) return highest()
-    const parent = fs.openSync(path.dirname(directory), fs.constants.O_RDONLY | fs.constants.O_DIRECTORY | fs.constants.O_NOFOLLOW)
-    try { fs.fsyncSync(parent) } finally { fs.closeSync(parent) }
+    syncDirectory(path.dirname(directory))
     for (let attempt = 0; attempt < 8; attempt++) {
       const generation = highest() + 1
       if (generation > 999999999999) throw new Error('Work recovery identity limit reached')
       try { fs.mkdirSync(path.join(directory, String(generation).padStart(12, '0')), { mode: 0o700 }) }
       catch (error) { if ((error as NodeJS.ErrnoException).code === 'EEXIST') continue; throw error }
-      const descriptor = fs.openSync(directory, fs.constants.O_RDONLY | fs.constants.O_DIRECTORY | fs.constants.O_NOFOLLOW)
-      try { fs.fsyncSync(descriptor) } finally { fs.closeSync(descriptor) }
+      syncDirectory(directory)
       return generation
     }
     throw new Error('Concurrent Work recovery changed its ownership; inspect again')

@@ -3,6 +3,7 @@ import path from 'node:path'
 import { createHash, randomUUID } from 'node:crypto'
 import { assertPrivateFile, ensurePrivateDirectory } from './privateStorage'
 import { withRecoveryWriteLock } from './RecoveryWriteLock'
+import { syncDirectory } from './syncDirectory'
 
 export interface RecoveryBackup { id: string; bytes: number; savedAt: number }
 export interface RecoveryInspection {
@@ -66,8 +67,7 @@ export class RecoveryStore<T> {
     return value
   }
   private syncDirectory(directory: string): void {
-    const fd = fs.openSync(directory, fs.constants.O_RDONLY | fs.constants.O_DIRECTORY | fs.constants.O_NOFOLLOW)
-    try { fs.fsyncSync(fd) } finally { fs.closeSync(fd) }
+    syncDirectory(directory)
   }
   private publish(file: string, bytes: Buffer, replace: boolean): void {
     assertPrivateFile(file)

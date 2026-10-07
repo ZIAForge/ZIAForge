@@ -5,6 +5,7 @@ import type { WorkArtifactReceipt, WorkPhaseResult } from '../../shared/work-flo
 import { workflowId } from './WorkflowValidation'
 import { workOutputPath } from './WorkTaskValidation'
 import { isWithin } from '../runtime/ProjectAccess'
+import { syncDirectory } from '../runtime/syncDirectory'
 
 const digest = (value: Buffer | string) => createHash('sha256').update(value).digest('hex')
 export class WorkArtifactStore {
@@ -52,8 +53,7 @@ export class WorkArtifactStore {
       try { fs.writeFileSync(fd, content); fs.fsyncSync(fd) } finally { fs.closeSync(fd) }
       if (existing) { if (!this.bytes(target).equals(existing)) throw new Error('Work output changed before publication'); fs.renameSync(temporary, target) }
       else fs.linkSync(temporary, target)
-      const directory = fs.openSync(cwd, fs.constants.O_RDONLY | fs.constants.O_DIRECTORY | fs.constants.O_NOFOLLOW)
-      try { fs.fsyncSync(directory) } finally { fs.closeSync(directory) }
+      syncDirectory(cwd)
     } finally { fs.rmSync(temporary, { force: true }) }
   }
   async write(request: { taskId: string; stageId: string; invocationId: string; result: WorkPhaseResult; previous: WorkArtifactReceipt[]; publish?: boolean }, signal: AbortSignal): Promise<WorkArtifactReceipt[]> {
@@ -77,8 +77,7 @@ export class WorkArtifactStore {
         try { fs.writeFileSync(fd, item.content); fs.fsyncSync(fd) } finally { fs.closeSync(fd) }
       } catch (error) { if ((error as NodeJS.ErrnoException).code !== 'EEXIST') throw error; if (!this.bytes(filename).equals(item.content)) throw new Error('Work artifact replay differs from the retained output') }
       for (const parent of [path.dirname(filename), directory]) {
-        const fd = fs.openSync(parent, fs.constants.O_RDONLY | fs.constants.O_DIRECTORY | fs.constants.O_NOFOLLOW)
-        try { fs.fsyncSync(fd) } finally { fs.closeSync(fd) }
+        syncDirectory(parent)
       }
       const id = `artifact-${digest(`${request.taskId}:${request.stageId}:${request.invocationId}:${item.name}`).slice(0, 32)}`
       const prior = request.previous.find(receipt => receipt.id === id)

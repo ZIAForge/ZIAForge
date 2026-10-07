@@ -3,7 +3,7 @@ import { UI_LANGUAGES } from '../languages'
 import { ControlSettings } from '../features/workspace/ControlSettings'
 import { UpdatesPanel } from '../features/workspace/UpdatesPanel'
 import { ReviewTeamsSettings } from '../features/workspace/ReviewTeamsSettings'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useStore, type Preset } from '../store'
 import { useTranslation } from '../i18n'
 import { resolveDefaultPreset } from '../features/workspace/modelSelection'
@@ -45,6 +45,9 @@ export const Settings: React.FC = () => {
   const [globalWorkspacePath, setGlobalWorkspacePath] = useState(settings?.globalWorkspacePath || '')
 
   const [jsonError, setJsonError] = useState<string | null>(null)
+  const [saveError, setSaveError] = useState<string | null>(null)
+  const [isSaving, setIsSaving] = useState(false)
+  const saveInProgress = useRef(false)
 
   useEffect(() => {
     setDefaultCodingPreset(current => resolveDefaultPreset(presets, current))
@@ -121,7 +124,8 @@ export const Settings: React.FC = () => {
     debugLogging !== (settings?.debugLogging ?? false) ||
     globalWorkspacePath !== (settings?.globalWorkspacePath || '')
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    if (saveInProgress.current) return
     if (activeSubTab === 'integrations') {
       try {
         JSON.parse(mcpJson)
@@ -131,24 +135,34 @@ export const Settings: React.FC = () => {
         return
       }
     }
-    saveSettings({
-      theme,
-      language,
-      uiLanguage,
-      defaultIDE,
-      autoArchive,
-      soundAlerts,
-      soundType,
-      desktopNotifications,
-      launchAtLogin,
-      preventSleep,
-      defaultCodingPreset,
-      defaultReviewPreset, defaultHelperPreset,
-      useMockData,
-      preferNativeClaude,
-      debugLogging,
-      globalWorkspacePath
-    })
+    saveInProgress.current = true
+    setIsSaving(true)
+    setSaveError(null)
+    try {
+      await saveSettings({
+        theme,
+        language,
+        uiLanguage,
+        defaultIDE,
+        autoArchive,
+        soundAlerts,
+        soundType,
+        desktopNotifications,
+        launchAtLogin,
+        preventSleep,
+        defaultCodingPreset,
+        defaultReviewPreset, defaultHelperPreset,
+        useMockData,
+        preferNativeClaude,
+        debugLogging,
+        globalWorkspacePath
+      })
+    } catch (error: unknown) {
+      setSaveError(error instanceof Error ? error.message : String(error))
+    } finally {
+      saveInProgress.current = false
+      setIsSaving(false)
+    }
   }
 
 
@@ -200,13 +214,14 @@ export const Settings: React.FC = () => {
         <div className="flex items-center justify-between border-b border-[#1e2024] pb-4 mb-6 no-drag-region">
           <h2 className="text-xl font-bold text-white">{['control', 'updates', 'review-teams'].includes(activeSubTab) ? subTabs.find(tab => tab.id === activeSubTab)?.name : t(`${activeSubTab}_settings`)}</h2>
           <div className="flex items-center gap-3">
-            {isDirty && (
+            {(isDirty || isSaving) && (
               <button
                 onClick={handleSave}
-                className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-bold text-white bg-[#ff6b00] hover:bg-[#ff7c1a] shadow-lg transition-all animate-fade-in"
+                disabled={isSaving}
+                className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-bold text-white bg-[#ff6b00] hover:bg-[#ff7c1a] shadow-lg transition-all animate-fade-in disabled:opacity-50 disabled:cursor-wait"
               >
                 <Save className="h-3.5 w-3.5" />
-                <span>{t('save_changes')}</span>
+                <span>{t(isSaving ? 'saving' : 'save_changes')}</span>
               </button>
             )}
             {activeSubTab === 'presets' && !editingPreset && (
@@ -220,6 +235,12 @@ export const Settings: React.FC = () => {
             )}
           </div>
         </div>
+
+        {saveError && (
+          <div role="alert" className="mb-4 rounded-lg border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-xs text-rose-300">
+            {uiText("Error: {value1}", { value1: saveError })}
+          </div>
+        )}
 
         {/* Viewport */}
         <div className="flex-1 overflow-y-auto space-y-6 pb-12 pr-4">

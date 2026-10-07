@@ -4,6 +4,7 @@ import path from 'node:path'
 import { createHash, randomUUID } from 'node:crypto'
 import type { FileHandle } from 'node:fs/promises'
 import { isWithin } from '../runtime/ProjectAccess'
+import { syncDirectoryAsync } from '../runtime/syncDirectory'
 import { EDITOR_DEFAULT_BYTES, EDITOR_FULL_BYTES, EDITOR_WINDOW_BYTES, type EditorDocument, type EditorDraft, type EditorEncoding, type EditorOpenRequest, type EditorReadRequest, type EditorSaveRequest, type EditorSaveResult, type EditorScope, type EditorSearchRequest, type EditorSearchResult } from '../../shared/editor'
 
 interface Session { scope: EditorScope; root: string; rootIdentity: string; filename: string; relativePath: string; version: string; encoding: EditorEncoding; bom: boolean; document?: EditorDocument }
@@ -189,7 +190,7 @@ export class EditorService {
         if ((await fs.stat(backup)).ino !== before.ino) throw new Error('File identity changed before replacement')
         await fs.rename(temp, session.filename)
         replaced = true
-        const parent = await fs.open(path.dirname(session.filename), 'r'); try { await parent.sync() } finally { await parent.close() }
+        await syncDirectoryAsync(path.dirname(session.filename))
         const updated = await this.read({ id: request.id, offset: request.start, full: document.mode === 'full' })
         updated.backupPath = path.basename(backup)
         await this.storeDraft({ id: request.id, discard: true })

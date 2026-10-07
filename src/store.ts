@@ -1058,12 +1058,16 @@ export const useStore = create<AppState>((set, get) => {
 
     saveSettings: async (settings) => {
       await window.ziafAPI.saveSettings(settings)
-      const repositories = await window.ziafAPI.getRepositories()
-      set({ 
-        settings, 
-        repositories,
-        activeRepoId: repositories.find(r => r.id === get().activeRepoId) ? get().activeRepoId : (repositories[0]?.id || null)
-      })
+      set({ settings })
+      try {
+        const repositories = await window.ziafAPI.getRepositories()
+        set({
+          repositories,
+          activeRepoId: repositories.find(r => r.id === get().activeRepoId) ? get().activeRepoId : (repositories[0]?.id || null)
+        })
+      } catch (error) {
+        console.error('Failed to refresh repositories after saving settings', error)
+      }
     },
 
     appendLog: (line, taskId?: string) => {

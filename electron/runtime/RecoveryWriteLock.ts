@@ -4,6 +4,7 @@ import os from 'node:os'
 import { randomUUID } from 'node:crypto'
 import { execFileSync } from 'node:child_process'
 import { assertPrivateFile, ensurePrivateDirectory } from './privateStorage'
+import { syncDirectory } from './syncDirectory'
 
 interface Owner {
   generation: number
@@ -28,8 +29,7 @@ function birth(pid: number): string | undefined {
   } catch { return undefined }
 }
 function sync(directory: string): void {
-  const fd = fs.openSync(directory, fs.constants.O_RDONLY | fs.constants.O_DIRECTORY | fs.constants.O_NOFOLLOW)
-  try { fs.fsyncSync(fd) } finally { fs.closeSync(fd) }
+  syncDirectory(directory)
 }
 function publish(file: string, owner: Owner, replace: boolean): void {
   assertPrivateFile(file)

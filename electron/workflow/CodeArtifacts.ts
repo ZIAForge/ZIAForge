@@ -3,6 +3,7 @@ import path from 'node:path'
 import { createHash } from 'node:crypto'
 import type { CodeArtifactDraft, CodeArtifactReceipt } from '../../shared/code-flow'
 import { validateArtifactDrafts } from './CodeFlowProtocol'
+import { syncDirectory } from '../runtime/syncDirectory'
 
 const identity = (value: string) => {
   if (typeof value !== 'string' || !/^[A-Za-z0-9_-]{1,160}$/.test(value)) throw new Error('Invalid artifact identity')
@@ -21,8 +22,7 @@ export interface WriteCodeArtifacts {
 export class CodeArtifactStore {
   constructor(private readonly taskRoot: (taskId: string) => string) {}
   private syncDirectory(directory: string): void {
-    const fd = fs.openSync(directory, fs.constants.O_RDONLY | fs.constants.O_DIRECTORY | fs.constants.O_NOFOLLOW)
-    try { fs.fsyncSync(fd) } finally { fs.closeSync(fd) }
+    syncDirectory(directory)
   }
   private directory(taskId: string, stepId: string, attemptId: string, create: boolean): string {
     identity(taskId); identity(stepId); identity(attemptId)

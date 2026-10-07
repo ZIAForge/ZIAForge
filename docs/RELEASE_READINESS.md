@@ -1,5 +1,11 @@
 # Release engineering and provenance
 
+## 1.0.3 Windows settings persistence patch
+
+Version **1.0.3** corrects a Windows directory-flush failure that could reject settings saves, including interface-language changes. Regular-file writes and flushes remain required, while the shared storage helper uses directory flushes only where supported. Settings catches save failures and displays the error instead of leaving an unhandled rejected save. See [1.0.3 notes](releases/1.0.3.md).
+
+Verification is being finalized. Focused storage/editor and Settings regressions are recorded separately from the planned native Windows filesystem probes. Native probe outcomes and fresh six-target compile/package receipts must be entered in the release notes before publication. Application launches, GUI, provider inference and a complete regression suite are outside this patch's planned verification scope; no such success is claimed. Allocate 1.0.3 only after the fixes and evidence are integrated into a clean committed source. Prior published versions and their ledger records remain unchanged.
+
 ## 1.0.2 maintenance release
 
 Version **1.0.2** updates official project-site links to [ziaforge.studio](https://ziaforge.studio) and includes the refreshed multilingual documentation presentation. The canonical product guide remains on the separate documentation site; GitHub remains the source and package destination. Workflow behavior, model settings and review decisions retain the 1.0.1 contract. See [1.0.2 notes](releases/1.0.2.md).
@@ -30,7 +36,7 @@ The most recent dependency audit, performed on 2026-10-03, reported 17 high affe
 
 The packages are unsigned. macOS builds are not Developer ID signed or notarized; Windows installers do not have Authenticode signatures. Checksums verify that a download matches the published bytes, not that an independent authority has endorsed it. Install only assets obtained from the official repository and use the documented operating-system installation flow. Never disable a system security boundary globally to install the application.
 
-The application can check GitHub stable/preview releases. Automatic installation requires compatible signed packages and published updater metadata; 1.0.1 uses manual installation. The existing installation/profile must be retained when checking or when a download fails. Native subscription authentication and live model availability belong to each user’s provider account and are not certified by a packaging result.
+The application can check GitHub stable/preview releases. Automatic installation requires compatible signed packages and published updater metadata; the current unsigned release uses manual installation. The existing installation/profile must be retained when checking or when a download fails. Native subscription authentication and live model availability belong to each user’s provider account and are not certified by a packaging result.
 
 ## Maintainer sequence
 

@@ -1,6 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { randomUUID } from 'node:crypto'
+import { syncDirectoryAsync } from './syncDirectory'
 
 /** Private, application-owned storage. Never follow a symlink supplied in its path. */
 export function ensurePrivateDirectory(directory: string): void {
@@ -44,8 +45,7 @@ export async function writePrivateMetadata(file: string, data: unknown): Promise
     // Hard-link publication is atomic and refuses an existing destination, unlike rename.
     // A crash can leave a private temporary file, but never a partial session.json.
     await fs.promises.link(temporary, file)
-    const directory = await fs.promises.open(path.dirname(file), fs.constants.O_RDONLY | fs.constants.O_DIRECTORY | fs.constants.O_NOFOLLOW)
-    try { await directory.sync() } finally { await directory.close() }
+    await syncDirectoryAsync(path.dirname(file))
   } finally {
     if (created) await fs.promises.unlink(temporary).catch(error => {
       if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error
@@ -68,7 +68,6 @@ export async function replacePrivateMetadata(file: string, data: unknown): Promi
     try { await handle.writeFile(JSON.stringify(data), 'utf8'); await handle.sync() } finally { await handle.close() }
     assertPrivateFile(file)
     await fs.promises.rename(temporary, file)
-    const directory = await fs.promises.open(path.dirname(file), fs.constants.O_RDONLY | fs.constants.O_DIRECTORY | fs.constants.O_NOFOLLOW)
-    try { await directory.sync() } finally { await directory.close() }
+    await syncDirectoryAsync(path.dirname(file))
   } finally { await fs.promises.rm(temporary, { force: true }) }
 }

@@ -1,0 +1,53 @@
+name: Native Windows settings storage regression
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: windows-settings-save-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  native-storage:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: windows-2025
+            arch: x64
+          - runner: windows-11-arm
+            arch: arm64
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Preserve exact committed source bytes
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 24.21.0
+          architecture: ${{ matrix.arch }}
+          cache: npm
+      - name: Install source-test dependencies with lifecycle scripts disabled
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Prove old failure and patched settings persistence through native Node filesystem APIs
+        run: node scripts/qa/windows-settings-save.cjs --baseline 9504aba4c4ce8311fc2d894bef050c870368b040 --output test-results/windows-settings-save/result.json
+      - name: Retain bounded source-storage receipt only
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: windows-settings-save-${{ matrix.arch }}-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 14
+          path: test-results/windows-settings-save/result.json
+
+# Native Windows Node storage evidence only. No GUI, Electron runtime, providers,
+# full suites, packaging, release upload, credentials or write-capable token.

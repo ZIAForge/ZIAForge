@@ -123,6 +123,12 @@ Direct `npx playwright test` uses `test-results/e2e/` and may replace that direc
 
 Workflow unit tests cover Red proof, durable restart/cancel/limits, stale revisions, storage boundaries and source changes during verification. VerificationRunner tests use real disposable child processes, including output limits, timeout, cancellation and an ordinary orphan that ignores SIGTERM. Model discovery and version preflight are included in production Quit ownership. Test cleanup records any emergency signals separately; production cleanup is certified only when no fallback was required.
 
+## Windows settings persistence regression
+
+The manual **Native Windows settings storage regression** workflow runs `scripts/qa/windows-settings-save.cjs` on native Windows x64 and Windows 11 ARM64 with Node 24.21.0. It requires the Git history containing the pinned 1.0.2 baseline. It reproduces the baseline directory-open/flush failure without changing the original settings, then checks patched saves, repeated reads, dead-owner recovery and another cold process using the same disposable profile. It also checks exclusive metadata creation, replacement, regular-file flushes, bounded backups and temporary-file cleanup.
+
+This is native Windows **source-storage** evidence. The UI component regression separately checks rejected saves, draft retention, retry, pending submissions and acknowledged language changes. Neither result certifies a packaged Electron GUI, a provider or a full desktop restart. The workflow only retains its bounded JSON receipt and does not build, upload or publish a release.
+
 ## Application diagnostic log policy
 
 The application diagnostic writer limits the current file to 512 KiB, retains at most three archives, caps each entry at 8 KiB and creates log files with mode `0600`. Known credential patterns are redacted; prompt bodies are omitted at the logging call sites. This is best-effort redaction, not a guarantee that arbitrary secrets can be detected. Keep diagnostic logging disabled unless needed and review any evidence before sharing it.
