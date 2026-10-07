@@ -4,7 +4,7 @@
 
 Version **1.0.3** corrects a Windows directory-flush failure that could reject settings saves, including interface-language changes. Regular-file writes and flushes remain required, while the shared storage helper uses directory flushes only where supported. Settings catches save failures and displays the error instead of leaving an unhandled rejected save. See [1.0.3 notes](releases/1.0.3.md).
 
-Verification is being finalized. Focused storage/editor and Settings regressions are recorded separately from the planned native Windows filesystem probes. Native probe outcomes and fresh six-target compile/package receipts must be entered in the release notes before publication. Application launches, GUI, provider inference and a complete regression suite are outside this patch's planned verification scope; no such success is claimed. Allocate 1.0.3 only after the fixes and evidence are integrated into a clean committed source. Prior published versions and their ledger records remain unchanged.
+Focused storage/editor and Settings regressions, TypeScript and changed-file lint passed. Native Node filesystem probes passed on Windows x64 and Windows 11 ARM64, including the original failure and cold-process persistence; see the release notes for the exact scope. Fresh six-target compile/package receipts identify the frozen release source and published asset hashes separately. Application launches, GUI, provider inference and a complete regression suite are outside this patch's verification scope; no such success is claimed. Allocate 1.0.3 only from a clean committed source. Prior published versions and their ledger records remain unchanged.
 
 ## 1.0.2 maintenance release
 
