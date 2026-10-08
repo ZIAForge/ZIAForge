@@ -2,7 +2,7 @@
 
 Start with the [English user guide](USER_GUIDE.md), generated from [the canonical help source](help/en.json). It includes the complete product tour, task-oriented instructions, recovery, permissions, limitations and links to technical contracts. In-app Help and the [offline website guide](../website/guide.html) use the same source. [Help translation coverage](help/LOCALES.md) is separate from interface localization.
 
-Current patch: [1.0.7 release notes](releases/1.0.7.md), with verification status and distribution limits.
+Current patch: [1.0.8 release notes](releases/1.0.8.md), with verification status and distribution limits.
 
 ## Contribute or work as an AI agent
 
@@ -21,7 +21,7 @@ Current patch: [1.0.7 release notes](releases/1.0.7.md), with verification statu
 | Native provider sessions, effort and workspace | [PROVIDER_COMPATIBILITY.md](PROVIDER_COMPATIBILITY.md) |
 | Codex conversation startup, model changes and resume | [CODEX_CHAT.md](CODEX_CHAT.md) |
 | Explicit API endpoints and secrets | [API_CONNECTIONS.md](API_CONNECTIONS.md) |
-| Grok Connector v1, native questions, permissions and images | [GROK_CONNECTOR.md](GROK_CONNECTOR.md) |
+| Grok Connector v1, native questions, permissions, images and video | [GROK_CONNECTOR.md](GROK_CONNECTOR.md) |
 | Code reference profile import | [CODE_WORKFLOW_PROMPTS.md](CODE_WORKFLOW_PROMPTS.md) |
 | Saved chat input and unknown delivery | [MESSAGE_QUEUE.md](MESSAGE_QUEUE.md) |
 | Corruption and chosen backups | [DATA_RECOVERY.md](DATA_RECOVERY.md) |

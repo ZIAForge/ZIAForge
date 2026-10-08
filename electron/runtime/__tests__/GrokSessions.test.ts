@@ -12,8 +12,19 @@ import { SessionRegistry } from '../SessionRegistry'
 import { ProcessSupervisor } from '../ProcessSupervisor'
 import type { TrustedAgentSessionConfig } from '../SessionManager'
 import { validateSessionCommand } from '../AgentSessionValidation'
+import { AgentMediaStore } from '../AgentMediaStore'
 
 const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aXv8AAAAASUVORK5CYII=', 'base64')
+const currentPng = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aXioAAAAASUVORK5CYII=', 'base64')
+function headerVideo() {
+  const box = (kind: string, ...parts: Buffer[]) => { const body = Buffer.concat(parts), header = Buffer.alloc(8); header.writeUInt32BE(body.length + 8); header.write(kind, 4); return Buffer.concat([header, body]) }
+  const mvhd = Buffer.alloc(100); mvhd.writeUInt32BE(1000, 12); mvhd.writeUInt32BE(6040, 16)
+  const mdhd = Buffer.alloc(24); mdhd.writeUInt32BE(1000, 12); mdhd.writeUInt32BE(6040, 16)
+  const tkhd = Buffer.alloc(84); tkhd.writeUInt32BE(736 * 65536, 76); tkhd.writeUInt32BE(400 * 65536, 80)
+  const hdlr = Buffer.alloc(24); hdlr.write('vide', 8)
+  // Header-only custody fixture; the separate packaged fixture proves decoder playback.
+  return Buffer.concat([box('ftyp', Buffer.from('isom\0\0\0\0isom', 'binary')), box('moov', box('mvhd', mvhd), box('trak', box('tkhd', tkhd), box('mdia', box('mdhd', mdhd), box('hdlr', hdlr)))), box('mdat', Buffer.from([1, 2, 3]))])
+}
 const interaction: GrokInteraction = { kind: 'question', interactionId: `question_${'a'.repeat(32)}`, responseId: `resp_${'b'.repeat(32)}`, state: 'pending', expiresAt: Date.now() + 600000, request: { sessionId: 'native', toolCallId: 'native-question', mode: 'default', questions: [{ question: 'Which option?', options: [{ label: 'One', description: '' }], multiSelect: false }] } }
 function approval(suffix = 'c'): Extract<GrokInteraction, { kind: 'approval' }> {
   return { kind: 'approval', interactionId: `approval_${suffix.repeat(32)}`, responseId: interaction.responseId, state: 'pending', expiresAt: Date.now() + 120000, request: { sessionId: 'native', toolCall: { toolCallId: 'image-edit', kind: 'other', title: 'imagine-edit' }, options: [
@@ -185,6 +196,91 @@ describe('Grok session ownership, private image inputs and durable native answer
     const restored = (await service.sessions.attach(config))!
     expect(await service.sessions.listImages(restored)).toEqual([])
     expect(await service.sessions.readMedia({ sessionId: restored.sessionId, runId: restored.runId, mediaId: media.id })).toEqual({ bytes: new Uint8Array(png), mime: 'image/png' })
+  })
+  it('hands off prior committed raster history while excluding the current user text and attachments', async () => {
+    const session = await service.sessions.create(config), priorPath = path.join(root, 'prior.png'); fs.writeFileSync(priorPath, png)
+    const prior = await service.sessions.stageImages(session, [priorPath])
+    await service.sessions.send({ ...session, clientMessageId: 'prior-input', text: 'Earlier request', imageIds: [prior[0].id] })
+    providers[0].emit({ type: 'message.started', messageId: 'prior-answer', role: 'assistant', turnId: 'turn-one' })
+    providers[0].emit({ type: 'message.delta', messageId: 'prior-answer', deltaType: 'text', content: 'Earlier answer', turnId: 'turn-one' })
+    providers[0].emit({ type: 'message.completed', messageId: 'prior-answer', finishReason: 'stop', turnId: 'turn-one' })
+    providers[0].emit({ type: 'agent.status.changed', scope: 'turn', status: 'completed', turnId: 'turn-one' })
+    await service.sessions.snapshot(session)
+    await service.sessions.discardImages({ ...session, imageIds: [prior[0].id] })
+    const currentPath = path.join(root, 'current.png'); fs.writeFileSync(currentPath, currentPng)
+    const current = await service.sessions.stageImages(session, [currentPath])
+    providers[0].sendPrompt.mockImplementation(async request => {
+      providers[0].emit({ type: 'agent.status.changed', scope: 'turn', status: 'running', turnId: 'turn-two' })
+      const context = await providers[0].options.apiHistoryContext!()
+      expect(context.text).toContain('Earlier request'); expect(context.text).toContain('Earlier answer')
+      expect(context.text).not.toContain('CURRENT USER REQUEST'); expect(context.text.length).toBeLessThanOrEqual(24000)
+      expect(context.images).toEqual([{ mime: 'image/png', dataUrl: `data:image/png;base64,${png.toString('base64')}` }])
+      expect(JSON.stringify(context)).not.toContain(currentPng.toString('base64'))
+      expect(request.inputImages).toEqual([{ id: current[0].id, mime: 'image/png', dataUrl: `data:image/png;base64,${currentPng.toString('base64')}` }])
+      return { turnId: 'turn-two' }
+    })
+    expect((await service.sessions.send({ ...session, clientMessageId: 'current-input', text: 'CURRENT USER REQUEST', imageIds: [current[0].id] })).outcome).toBe('accepted')
+  })
+  it('hands off confirmed native question answers after restart without transferring permissions or unconfirmed decisions', async () => {
+    const session = await service.sessions.create(config)
+    await service.sessions.send({ ...session, clientMessageId: 'question-history', text: 'Choose the video style' })
+    const question: Extract<GrokInteraction, { kind: 'question' }> = { ...interaction, request: { ...interaction.request, questions: [{ question: 'Which  style — exactly?', options: [{ label: 'Soft light', description: 'Keep detail' }], multiSelect: false }] } }
+    const answer = { kind: 'question' as const, outcome: 'accepted' as const, answers: { 'Which  style — exactly?': ['Other'] }, annotations: { 'Which  style — exactly?': { notes: 'Preserve Unicode: тёплый свет; no motion blur.' } } }
+    providers[0].emit({ type: 'interaction.requested', interaction: question, turnId: 'turn-one' })
+    await service.sessions.resolveInteraction({ ...session, turnId: 'turn-one', interactionId: question.interactionId, answer })
+    for (const [index, state] of (['pending', 'submitting', 'failed', 'expired'] as const).entries()) {
+      const unconfirmed = { ...question, interactionId: `question_${String(index + 1).repeat(32)}`, request: { ...question.request, questions: [{ question: `UNCONFIRMED_${state}`, options: [{ label: 'One', description: '' }], multiSelect: false }] } }
+      providers[0].emit({ type: 'interaction.requested', interaction: unconfirmed, turnId: 'turn-one' })
+      if (state !== 'pending') providers[0].emit({ type: 'interaction.state.changed', interactionId: unconfirmed.interactionId, state, answer: { kind: 'question', outcome: 'accepted', answers: { [`UNCONFIRMED_${state}`]: ['One'] } }, turnId: 'turn-one' })
+    }
+    const permission = approval()
+    providers[0].emit({ type: 'interaction.requested', interaction: permission, turnId: 'turn-one' })
+    await service.sessions.resolveInteraction({ ...session, turnId: 'turn-one', interactionId: permission.interactionId, answer: { kind: 'approval', optionId: 'one-off' } })
+    providers[0].emit({ type: 'agent.status.changed', scope: 'turn', status: 'completed', turnId: 'turn-one' })
+    await service.sessions.snapshot(session); await service.sessions.shutdown(); service = create()
+    const restored = (await service.sessions.attach(config))!, resumed = await service.sessions.resume(restored, config)
+    providers[1].sendPrompt.mockImplementation(async () => {
+      providers[1].emit({ type: 'agent.status.changed', scope: 'turn', status: 'running', turnId: 'turn-two' })
+      const context = await providers[1].options.apiHistoryContext!()
+      const rows = JSON.parse(context.text.split('\n')[1]) as Array<{ questionAnswers?: unknown[] }>
+      expect(rows.flatMap(row => row.questionAnswers ?? [])).toEqual([{ mode: question.request.mode, questions: question.request.questions, answer }])
+      expect(context.text).not.toContain('UNCONFIRMED_')
+      expect(context.text).not.toContain('one-off'); expect(context.text).not.toContain('allow_once')
+      expect(context.text).not.toContain('CURRENT REQUEST')
+      expect(providers[1].resolveInteraction).not.toHaveBeenCalled()
+      return { turnId: 'turn-two' }
+    })
+    expect((await service.sessions.send({ ...resumed, clientMessageId: 'new-native-context', text: 'CURRENT REQUEST' })).outcome).toBe('accepted')
+    expect(providers[1].sendPrompt).toHaveBeenCalledTimes(1)
+  })
+  it('retains owned video/raster media after restart and skips unavailable or video history inputs', async () => {
+    const session = await service.sessions.create(config)
+    await service.sessions.send({ ...session, clientMessageId: 'prior-media', text: 'Earlier media request' })
+    const signal = new AbortController().signal, video = headerVideo()
+    const imageRef = await providers[0].options.apiStoreMedia!('image-item', png.toString('base64'), signal)
+    const videoRef = await providers[0].options.apiStoreVideo!(video, signal)
+    providers[0].emit({ type: 'message.started', messageId: 'media-answer', role: 'assistant', turnId: 'turn-one' })
+    providers[0].emit({ type: 'tool.started', toolCallId: 'image-tool', toolName: 'imagine', input: {}, turnId: 'turn-one' })
+    providers[0].emit({ type: 'tool.completed', toolCallId: 'image-tool', media: [imageRef], outcome: 'completed', turnId: 'turn-one' })
+    providers[0].emit({ type: 'tool.started', toolCallId: 'video-tool', toolName: 'image_to_video', input: {}, turnId: 'turn-one' })
+    providers[0].emit({ type: 'tool.completed', toolCallId: 'video-tool', media: [videoRef], outcome: 'completed', turnId: 'turn-one' })
+    providers[0].emit({ type: 'message.completed', messageId: 'media-answer', finishReason: 'stop', turnId: 'turn-one' })
+    providers[0].emit({ type: 'agent.status.changed', scope: 'turn', status: 'completed', turnId: 'turn-one' })
+    await service.sessions.snapshot(session); await service.sessions.shutdown(); service = create()
+    const restored = (await service.sessions.attach(config))!, resumed = await service.sessions.resume(restored, config)
+    const owner = { sessionId: resumed.sessionId, runId: resumed.runId }
+    expect(await service.sessions.readMedia({ ...owner, mediaId: videoRef.id })).toEqual({ bytes: new Uint8Array(video), mime: 'video/mp4' })
+    expect(await service.sessions.readMedia({ ...owner, mediaId: imageRef.id })).toEqual({ bytes: new Uint8Array(png), mime: 'image/png' })
+    const context = await providers[1].options.apiHistoryContext!()
+    expect(context.images).toEqual([{ mime: 'image/png', dataUrl: `data:image/png;base64,${png.toString('base64')}` }])
+    expect(JSON.stringify(context)).not.toContain(video.toString('base64'))
+    const foreign = await new AgentMediaStore(path.join(root, 'storage', 'api-conversations', 'media')).storeVideo({ taskId: 'task-one', runId: 'foreign-run' }, video)
+    await expect(service.sessions.readMedia({ ...owner, mediaId: foreign.id })).rejects.toThrow('unavailable')
+    fs.rmSync(path.join(root, 'storage', 'api-conversations', 'media', `${imageRef.id}.bin`))
+    const missing = await providers[1].options.apiHistoryContext!()
+    expect(missing.images).toBeUndefined(); expect(missing.text).toContain('historical images are unavailable')
+    await expect(providers[0].options.apiStoreVideo!(video, signal)).rejects.toThrow('no longer active')
+    await expect(providers[0].options.apiHistoryContext!()).rejects.toThrow('owner changed')
   })
   it('expires replayed questions without native submission and validates bounded IPC IDs', async () => {
     const session = await service.sessions.create(config)

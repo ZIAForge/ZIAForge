@@ -1,5 +1,9 @@
 # Release engineering and provenance
 
+## 1.0.8 Grok video
+
+Version **1.0.8** adds capability-gated native Grok video tools, authenticated MP4 retrieval into the private media store, an inline player and Save video. Existing native conversations migrate only at a new user turn, with bounded owned history and image context. See [1.0.8 notes](releases/1.0.8.md) for feature limits and verification scope. One frozen source commit supplies all six build-only platform targets; earlier releases and ledger entries remain immutable. New video UI messages cover all 56 catalogs, while the changed API Help section has an explicit English fallback in non-English guides.
+
 ## 1.0.6 Grok Connector integration
 
 Version **1.0.6** adds the explicit Grok Connector v1 Responses profile: advertised model/context settings, capability and usage inspection, native question and permission cards, cancellation, and private input-image attachments. Provider tools remain distinct from approved local workspace operations; connections and active turns retain their own identity. See [1.0.6 notes](releases/1.0.6.md) and the [Grok contract](GROK_CONNECTOR.md).

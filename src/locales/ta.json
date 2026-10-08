@@ -1382,5 +1382,13 @@
   "grok_auto_approve_permissions": "Automatically approve one-time provider permissions",
   "grok_auto_approve_permissions_hint": "For new or reconfigured chats using this connection. Selects only a one-time permission offered by Grok. Questions and local file or command approvals still need your answer; read-only chats keep manual provider permissions.",
   "provider_interaction_auto_approved": "Approved automatically: one-time provider permission",
-  "grok_auto_approve_enabled": "One-time Grok permissions: automatic"
+  "grok_auto_approve_enabled": "One-time Grok permissions: automatic",
+  "video_generated": "உருவாக்கப்பட்ட காணொளி",
+  "video_unavailable": "காணொளி கிடைக்கவில்லை",
+  "video_load_error": "காணொளியை ஏற்ற முடியவில்லை: {error}",
+  "video_save": "காணொளியைச் சேமி",
+  "video_save_error": "காணொளியைச் சேமிக்க முடியவில்லை: {error}",
+  "video_save_cancelled": "காணொளியைச் சேமிப்பது ரத்துசெய்யப்பட்டது",
+  "video_saved": "காணொளி சேமிக்கப்பட்டது",
+  "video_invalid": "செல்லாத காணொளித் தரவு"
 }

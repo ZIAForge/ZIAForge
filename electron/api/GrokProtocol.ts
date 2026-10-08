@@ -1,3 +1,4 @@
+import { MAX_VIDEO_BYTES } from '../../shared/agent-media'
 import type { GrokApprovalRequest, GrokInteraction, GrokQuestionRequest } from '../../shared/grok-interactions'
 
 export interface GrokImageArtifact {
@@ -7,9 +8,11 @@ export interface GrokImageArtifact {
   bytes: number
   sha256: string
 }
+export interface GrokVideoArtifact { id: string; kind: 'video'; mime: 'video/mp4'; bytes: number; sha256: string }
+export type GrokArtifact = GrokImageArtifact | GrokVideoArtifact
 export type GrokEvent =
   | { type: 'grok.tool'; responseId: string; sequence: number; tool: { id: string; name: string; status: string; input?: unknown; output?: unknown } }
-  | { type: 'grok.artifact'; responseId: string; sequence: number; artifact: GrokImageArtifact }
+  | { type: 'grok.artifact'; responseId: string; sequence: number; artifact: GrokArtifact }
   | { type: 'grok.approval' | 'grok.question'; responseId: string; sequence: number; interaction: GrokInteraction }
   | { type: 'grok.status'; responseId: string; sequence: number; status: string }
 
@@ -87,12 +90,21 @@ export function grokImageArtifact(value: unknown): GrokImageArtifact {
   return { id, kind: 'image', mime: value.mime_type as GrokImageArtifact['mime'], bytes: value.bytes as number, sha256: identifier(value.sha256, /^[a-f0-9]{64}$/) }
 }
 
+/** Both streaming observations and final/polled Responses use this same file contract. */
+export function grokArtifact(value: unknown): GrokArtifact {
+  if (object(value) && value.kind === 'image') return grokImageArtifact(value)
+  if (!object(value) || value.object !== 'file' || value.kind !== 'video' || value.mime_type !== 'video/mp4' || !Number.isSafeInteger(value.bytes) || (value.bytes as number) <= 0 || (value.bytes as number) > MAX_VIDEO_BYTES) invalid()
+  const id = identifier(value.id, /^file_[a-f0-9]{32}$/)
+  if (value.api_url !== `/v1/files/${id}/content` || value.owner_url !== undefined && value.owner_url !== `/api/artifacts/${id}/content`) invalid()
+  return { id, kind: 'video', mime: 'video/mp4', bytes: value.bytes as number, sha256: identifier(value.sha256, /^[a-f0-9]{64}$/) }
+}
+
 /** Only the explicitly selected Grok profile calls this parser. */
 export function parseGrokEvent(value: Record<string, unknown>, expectedResponseId: string, now = Date.now()): GrokEvent {
   if (value.version !== 1 || !GROK_RESPONSE_ID.test(expectedResponseId) || value.response_id !== expectedResponseId || !Number.isSafeInteger(value.sequence_number) || (value.sequence_number as number) < 0) invalid()
   const common = { responseId: expectedResponseId, sequence: value.sequence_number as number }
   if (value.type === 'grok.artifact.error') throw new Error('Grok generated media failed native artifact verification')
-  if (value.type === 'grok.artifact') return { type: 'grok.artifact', ...common, artifact: grokImageArtifact(value.artifact) }
+  if (value.type === 'grok.artifact') return { type: 'grok.artifact', ...common, artifact: grokArtifact(value.artifact) }
   if (value.type === 'grok.status') return { type: 'grok.status', ...common, status: string(value.status, 100) }
   if (value.type === 'grok.tool') {
     if (!object(value.tool)) invalid()

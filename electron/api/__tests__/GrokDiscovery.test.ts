@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { grokInspection, grokModelMetadata } from '../GrokDiscovery'
+import { grokInspection, grokModelMetadata, grokVideoTools } from '../GrokDiscovery'
 import { validGrokConnectionOptions } from '../../../shared/api-provider'
 import { queueContext } from '../../runtime/QueueStore'
 
@@ -17,6 +17,14 @@ describe('Grok capability discovery', () => {
     expect(result).toMatchObject({ version: 1, imageInput: true, imageGeneration: true, imageEdit: true, videoAvailable: false, interactiveQuestions: true, contextWindows: [256000, 500000], usage: { tier: 'fixture', creditUsagePercent: null, periodEnd: '2026-10-14' } })
     expect(JSON.stringify(result)).not.toMatch(/private-owner|hidden|rawSecret/)
     expect(grokInspection({ ...cap, media: { images: { available: true }, video: { available: true, enabled: true } } }, null, models, false)).toMatchObject({ imageGeneration: false, videoAvailable: false })
+  })
+  it('enables only named video tools with all three deployment availability flags', () => {
+    const available = { ...cap, nativeTools: [...cap.nativeTools, { name: 'image_to_video' }, { name: 'reference_to_video' }], media: { ...cap.media, video: { available: true, enabled: true, verified: true } } }
+    expect(grokVideoTools(available)).toEqual(['image_to_video', 'reference_to_video'])
+    expect(grokInspection(available, null, models, false).videoAvailable).toBe(true)
+    for (const key of ['available', 'enabled', 'verified']) expect(grokVideoTools({ ...available, media: { video: { ...available.media.video, [key]: false } } })).toEqual([])
+    expect(grokVideoTools({ ...available, nativeTools: [{ name: 'image_to_video' }] })).toEqual(['image_to_video'])
+    expect(grokInspection({ ...available, nativeTools: [{ name: 'web_search' }] }, null, models, false).videoAvailable).toBe(false)
   })
   it('refuses incompatible extensions and invalid tool catalogs', () => {
     expect(() => grokInspection({ ...cap, version: 2 }, null, models, false)).toThrow('Unsupported')

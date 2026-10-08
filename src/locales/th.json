@@ -1382,5 +1382,13 @@
   "grok_auto_approve_permissions": "Automatically approve one-time provider permissions",
   "grok_auto_approve_permissions_hint": "For new or reconfigured chats using this connection. Selects only a one-time permission offered by Grok. Questions and local file or command approvals still need your answer; read-only chats keep manual provider permissions.",
   "provider_interaction_auto_approved": "Approved automatically: one-time provider permission",
-  "grok_auto_approve_enabled": "One-time Grok permissions: automatic"
+  "grok_auto_approve_enabled": "One-time Grok permissions: automatic",
+  "video_generated": "วิดีโอที่สร้างขึ้น",
+  "video_unavailable": "วิดีโอไม่พร้อมใช้งาน",
+  "video_load_error": "ไม่สามารถโหลดวิดีโอได้: {error}",
+  "video_save": "บันทึกวิดีโอ",
+  "video_save_error": "ไม่สามารถบันทึกวิดีโอได้: {error}",
+  "video_save_cancelled": "ยกเลิกการบันทึกวิดีโอแล้ว",
+  "video_saved": "บันทึกวิดีโอแล้ว",
+  "video_invalid": "ข้อมูลวิดีโอไม่ถูกต้อง"
 }

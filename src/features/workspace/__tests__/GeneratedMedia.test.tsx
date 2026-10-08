@@ -47,6 +47,57 @@ afterEach(() => {
 })
 
 describe('owned generated raster media', () => {
+  it('renders owned MP4 with native controls, saves it through IPC and never opens the image zoom dialog', async () => {
+    const bytes = new Uint8Array([0, 0, 0, 24, 102, 116, 121, 112, 105, 115, 111, 109, 0, 0, 0, 0, 105, 115, 111, 109, 109, 112, 52, 50])
+    const videoRef: AgentMediaRef = { ...media, mime: 'video/mp4', bytes: bytes.length, durationMs: 6000 }
+    const api = fixture()
+    api.read.mockResolvedValue({ bytes, mime: 'video/mp4' })
+    const view = render(<GeneratedMedia media={videoRef} owner={owner} />)
+    const player = await screen.findByTestId(`generated-video-${media.id}`) as HTMLVideoElement
+    expect(player.controls).toBe(true)
+    expect(player.autoplay).toBe(false)
+    expect(player.preload).toBe('metadata')
+    expect(player.src).toBe('blob:owned-image-1')
+    fireEvent.click(player)
+    expect(screen.queryByRole('dialog')).toBeNull()
+    expect(screen.queryByTestId(`generated-media-open-${media.id}`)).toBeNull()
+    expect(screen.getByRole('button', { name: 'Save video' })).toBe(saveButton())
+    await act(async () => fireEvent.click(saveButton()))
+    expect(api.save).toHaveBeenCalledExactlyOnceWith({ ...owner, mediaId: media.id })
+    expect(screen.getByRole('status').textContent).toBe('Video saved')
+    expect(safeMediaBlob(videoRef, { bytes, mime: 'video/mp4' }).type).toBe('video/mp4')
+    const leadingBox = new Uint8Array([0, 0, 0, 8, 102, 114, 101, 101, ...bytes])
+    expect(safeMediaBlob({ ...videoRef, bytes: leadingBox.length }, { bytes: leadingBox, mime: 'video/mp4' }).size).toBe(leadingBox.length)
+    expect(() => safeMediaBlob(videoRef, { bytes: new Uint8Array(bytes.length), mime: 'video/mp4' })).toThrow('Invalid video data')
+    expect(() => safeMediaBlob(videoRef, { bytes, mime: 'image/png' })).toThrow('Invalid video data')
+    view.unmount()
+    expect(revokeURL).toHaveBeenCalledExactlyOnceWith(player.src)
+  })
+
+  it('retains a playing video offscreen and releases its Blob when it pauses offscreen', async () => {
+    const bytes = new Uint8Array([0, 0, 0, 24, 102, 116, 121, 112, 105, 115, 111, 109, 0, 0, 0, 0, 105, 115, 111, 109, 109, 112, 52, 50])
+    const api = fixture()
+    api.read.mockResolvedValue({ bytes, mime: 'video/mp4' })
+    let observe!: IntersectionObserverCallback
+    vi.stubGlobal('IntersectionObserver', class {
+      constructor(callback: IntersectionObserverCallback) { observe = callback }
+      observe() {}
+      disconnect() {}
+    })
+    render(<GeneratedMedia media={{ ...media, mime: 'video/mp4', bytes: bytes.length }} owner={owner} />)
+    const target = screen.getByTestId(`generated-media-${media.id}`)
+    const intersect = (isIntersecting: boolean) => observe([{ target, isIntersecting } as unknown as IntersectionObserverEntry], {} as IntersectionObserver)
+    act(() => intersect(true))
+    const player = await screen.findByTestId(`generated-video-${media.id}`)
+    fireEvent.play(player)
+    act(() => intersect(false))
+    expect(revokeURL).not.toHaveBeenCalled()
+    expect(api.read).toHaveBeenCalledTimes(1)
+    fireEvent.pause(player)
+    expect(revokeURL).toHaveBeenCalledExactlyOnceWith('blob:owned-image-1')
+    expect(screen.queryByTestId(`generated-video-${media.id}`)).toBeNull()
+  })
+
   it('copies the exact typed-array view and refuses unsafe MIME, mismatched size, bad signatures and over-budget refs', async () => {
     const buffer = new Uint8Array([0, ...png, 0])
     const blob = safeMediaBlob(media, { bytes: buffer.subarray(1, 9), mime: 'image/png' })

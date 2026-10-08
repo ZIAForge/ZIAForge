@@ -95,7 +95,7 @@ export class RemoteServer {
     if(rel==='index.html'){
       let html=await fs.promises.readFile(file,'utf8')
       html=html.replace(/<meta[^>]+http-equiv="Content-Security-Policy"[^>]*>/i,'').replace('<head>',`<head><script src="/remote-bridge.js"></script>`)
-      res.writeHead(200,{'Content-Type':'text/html','Cache-Control':'no-store','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; font-src 'self'; frame-src 'self' https: http:; frame-ancestors 'none'"});res.end(html);return
+      res.writeHead(200,{'Content-Type':'text/html','Cache-Control':'no-store','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self'; font-src 'self'; frame-src 'self' https: http:; frame-ancestors 'none'"});res.end(html);return
     }
     res.writeHead(200,{'Content-Type':mime[path.extname(file)]||'application/octet-stream','Cache-Control':'no-cache'});fs.createReadStream(file).pipe(res)
   }

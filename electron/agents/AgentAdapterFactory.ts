@@ -1,6 +1,6 @@
 import { ResponsesAdapter } from './ResponsesAdapter'
 import { AgentMediaStore } from '../runtime/AgentMediaStore'
-import type { AgentMediaRef } from '../../shared/agent-media'
+import type { AgentMediaRef, AgentImageRef } from '../../shared/agent-media'
 import path from 'node:path'
 import { ChildProcess, SpawnOptions } from 'node:child_process'
 import { AgentEvent, ApprovalDecision } from '../../shared/agent-events'
@@ -95,6 +95,8 @@ export interface CreateAdapterOptions {
   apiResumeSessionId?: string
   apiReadOnly?: boolean
   apiStoreMedia?: (itemId: string, encoded: string, signal: AbortSignal) => Promise<AgentMediaRef>
+  apiStoreVideo?: (bytes: Buffer, signal: AbortSignal) => Promise<AgentMediaRef>
+  apiHistoryContext?: () => Promise<{ text: string; images?: Array<{ mime: AgentImageRef['mime']; dataUrl: string }> }>
   toolPolicy?: 'none'
   spawnProcess?: (command: string, args: string[], options: SpawnOptions) => ChildProcess
 
@@ -310,7 +312,7 @@ export class AgentAdapterFactory {
       if (!options.apiConnection || !options.apiHistoryDirectory) throw new Error('A resolved API connection and private history directory are required')
       if (options.apiConnection.transport === 'responses') {
         const mediaStore = new AgentMediaStore(path.join(options.apiHistoryDirectory, 'media'))
-        return new ResponsesAdapter({ taskId: options.taskId, runId, worktreePath: options.worktreePath, connection: options.apiConnection, historyDirectory: options.apiHistoryDirectory, resumeSessionId: options.apiResumeSessionId, readOnly: options.apiReadOnly, toolPolicy: options.toolPolicy, model: options.model, reasoningEffort: options.reasoningEffort, onEvent: options.onEvent, onRawLog: options.onRawLog, storeMedia: options.apiStoreMedia ?? ((_itemId, encoded, signal) => mediaStore.storeBase64({ taskId: options.taskId, runId }, encoded, signal)) })
+        return new ResponsesAdapter({ taskId: options.taskId, runId, worktreePath: options.worktreePath, connection: options.apiConnection, historyDirectory: options.apiHistoryDirectory, resumeSessionId: options.apiResumeSessionId, readOnly: options.apiReadOnly, toolPolicy: options.toolPolicy, model: options.model, reasoningEffort: options.reasoningEffort, onEvent: options.onEvent, onRawLog: options.onRawLog, storeMedia: options.apiStoreMedia ?? ((_itemId, encoded, signal) => mediaStore.storeBase64({ taskId: options.taskId, runId }, encoded, signal)), storeVideo: options.apiStoreVideo ?? ((bytes, signal) => mediaStore.storeVideo({ taskId: options.taskId, runId }, bytes, signal)), historyContext: options.apiHistoryContext })
       }
       return new ApiAdapter({ taskId: options.taskId, runId, worktreePath: options.worktreePath, connection: options.apiConnection, historyDirectory: options.apiHistoryDirectory, resumeSessionId: options.apiResumeSessionId, readOnly: options.apiReadOnly, toolPolicy: options.toolPolicy, model: options.model, reasoningEffort: options.reasoningEffort, onEvent: options.onEvent, onRawLog: options.onRawLog })
     }

@@ -1382,5 +1382,13 @@
   "grok_auto_approve_permissions": "Automatically approve one-time provider permissions",
   "grok_auto_approve_permissions_hint": "For new or reconfigured chats using this connection. Selects only a one-time permission offered by Grok. Questions and local file or command approvals still need your answer; read-only chats keep manual provider permissions.",
   "provider_interaction_auto_approved": "Approved automatically: one-time provider permission",
-  "grok_auto_approve_enabled": "One-time Grok permissions: automatic"
+  "grok_auto_approve_enabled": "One-time Grok permissions: automatic",
+  "video_generated": "Bidiyon da aka ƙirƙira",
+  "video_unavailable": "Babu bidiyon",
+  "video_load_error": "An kasa loda bidiyon: {error}",
+  "video_save": "Ajiye bidiyon",
+  "video_save_error": "An kasa ajiye bidiyon: {error}",
+  "video_save_cancelled": "An soke ajiyar bidiyon",
+  "video_saved": "An ajiye bidiyon",
+  "video_invalid": "Bayanan bidiyon ba su inganta ba"
 }

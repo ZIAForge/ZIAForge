@@ -1382,5 +1382,13 @@
   "grok_auto_approve_permissions": "Automatically approve one-time provider permissions",
   "grok_auto_approve_permissions_hint": "For new or reconfigured chats using this connection. Selects only a one-time permission offered by Grok. Questions and local file or command approvals still need your answer; read-only chats keep manual provider permissions.",
   "provider_interaction_auto_approved": "Approved automatically: one-time provider permission",
-  "grok_auto_approve_enabled": "One-time Grok permissions: automatic"
+  "grok_auto_approve_enabled": "One-time Grok permissions: automatic",
+  "video_generated": "Yaratilgan video",
+  "video_unavailable": "Video mavjud emas",
+  "video_load_error": "Videoni yuklab bo‘lmadi: {error}",
+  "video_save": "Videoni saqlash",
+  "video_save_error": "Videoni saqlab bo‘lmadi: {error}",
+  "video_save_cancelled": "Videoni saqlash bekor qilindi",
+  "video_saved": "Video saqlandi",
+  "video_invalid": "Video ma’lumotlari yaroqsiz"
 }

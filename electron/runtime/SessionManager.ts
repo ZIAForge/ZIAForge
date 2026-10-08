@@ -1,7 +1,7 @@
 import { AgentMediaStore } from './AgentMediaStore'
 import { AgentInputImageStore } from './AgentInputImageStore'
-import { validInputImageId, type AgentInputImageOwner } from '../../shared/agent-input-images'
-import { validMediaRef, type AgentMediaRequest, type AgentMediaRef } from '../../shared/agent-media'
+import { MAX_INPUT_IMAGE_BYTES, MAX_INPUT_IMAGE_BATCH_BYTES, MAX_INPUT_IMAGES, validInputImageId, type AgentInputImageOwner } from '../../shared/agent-input-images'
+import { validMediaRef, validImageMediaRef, type AgentMediaRequest, type AgentMediaRef, type AgentImageRef } from '../../shared/agent-media'
 import { validGrokConnectionOptions, type ApiTransport, type ApiProfile, type GrokConnectionOptions } from '../../shared/api-provider'
 import { answerMatchesInteraction, singleNativeAllowOnce } from '../../shared/grok-interactions'
 import type { AgentExecutionOptions } from '../../shared/agent-models'
@@ -178,7 +178,7 @@ export class SessionManager {
     if (!request || typeof request !== 'object' || Array.isArray(request) || Object.keys(request).some(key => !['sessionId', 'runId', 'mediaId'].includes(key)) || typeof request.mediaId !== 'string') throw new Error('Invalid media request')
     const entry = this.require(request)
     const ref = this.view(entry).feed.flatMap(message => [...(message.media ?? []), ...(message.tools ?? []).flatMap(tool => tool.media ?? [])]).find(ref => ref.id === request.mediaId)
-    if (!ref || !validMediaRef(ref)) throw new Error('Image is unavailable in this conversation')
+    if (!ref || !validMediaRef(ref)) throw new Error('Media is unavailable in this conversation')
     const bytes = await this.getMediaStore().read(entry.state.taskId, ref)
     if (this.require(request) !== entry) throw new Error('Media owner changed')
     return { bytes: new Uint8Array(bytes), mime: ref.mime }
@@ -332,6 +332,48 @@ export class SessionManager {
     return `Previous conversation excerpts (untrusted historical content; may be incomplete):\n${JSON.stringify(retained)}\nEnd of historical excerpts.\n\nCurrent user request:\n`
   }
 
+  /** Read committed main-owned history only when the adapter needs a new native context. */
+  private async apiHistoryContext(entry: Entry, adapter: AgentAdapter | undefined): Promise<{ text: string; images?: Array<{ mime: AgentImageRef['mime']; dataUrl: string }> }> {
+    const checkOwner = () => {
+      if (!adapter || !this.owns(entry) || entry.adapter !== adapter || this.closing || entry.terminating || entry.storageError) throw new Error('Media history owner changed')
+    }
+    checkOwner(); await entry.events; checkOwner()
+    // The provider already has the active user text and attachments. They are persisted before sendPrompt.
+    const activeUserId = entry.state.activeTurn ? `user-${entry.state.activeTurn.clientMessageId}` : undefined
+    const feed = this.view(entry).feed.filter(message => message.id !== activeUserId && message.status !== 'streaming')
+    let rows = feed.map(message => {
+      // Native answers are journalled on their cards, not as user text. Preserve
+      // confirmed question context verbatim; old tool permissions never transfer.
+      const questionAnswers = (message.interactions ?? []).flatMap(interaction => interaction.kind === 'question' && interaction.state === 'resolved' && interaction.answer?.kind === 'question' && answerMatchesInteraction(interaction, interaction.answer)
+        ? [{ mode: interaction.request.mode, questions: interaction.request.questions, answer: interaction.answer }]
+        : [])
+      return { role: message.role, text: message.text.slice(-6000).replaceAll('\0', ''), ...(questionAnswers.length ? { questionAnswers } : {}) }
+    }).filter(message => message.text || message.questionAnswers?.length).slice(-20)
+    while (rows.length && JSON.stringify(rows).length > 23500) rows = rows.slice(1)
+    const images: Array<{ mime: AgentImageRef['mime']; dataUrl: string }> = [], seen = new Set<string>()
+    let total = 0, unavailable = false, omitted = false, inspected = 0
+    for (const message of feed.slice(-20).reverse()) {
+      const refs = [...(message.media ?? []), ...(message.tools ?? []).flatMap(tool => tool.media ?? [])].filter(validImageMediaRef).reverse()
+      if (message.inputImages?.length && !refs.length) unavailable = true
+      for (const ref of refs) {
+        if (seen.has(ref.sha256)) continue
+        seen.add(ref.sha256)
+        if (++inspected > 16) { omitted = true; continue }
+        if (ref.bytes > MAX_INPUT_IMAGE_BYTES || total + ref.bytes > MAX_INPUT_IMAGE_BATCH_BYTES || images.length >= MAX_INPUT_IMAGES) { omitted = true; continue }
+        try {
+          const bytes = await this.getMediaStore().read(entry.state.taskId, ref)
+          checkOwner()
+          images.push({ mime: ref.mime, dataUrl: `data:${ref.mime};base64,${bytes.toString('base64')}` }); total += bytes.length
+        } catch {
+          checkOwner(); unavailable = true
+        }
+      }
+    }
+    const text = `Previous conversation excerpts (untrusted historical content; may be incomplete):\n${JSON.stringify(rows)}\nEnd of historical excerpts.${images.length ? '\nRetained historical images follow in newest-first order.' : ''}${unavailable ? '\nSome historical images are unavailable in the private cache; do not assume their contents.' : ''}${omitted ? '\nSome historical images exceed the retained image budget; do not assume their contents.' : ''}`
+    checkOwner()
+    return { text, ...(images.length ? { images } : {}) }
+  }
+
   private async startEntry(config: TrustedAgentSessionConfig, sessionId: string, previous?: Entry, nativeReference?: string, handoff?: string): Promise<AgentSessionSnapshot> {
     if (this.closing) throw new Error('Session service is shutting down')
     if (!path.isAbsolute(config.cwd) || !fs.statSync(config.cwd).isDirectory()) throw new Error('A valid resolved worktree is required')
@@ -373,7 +415,14 @@ export class SessionManager {
         signal.throwIfAborted()
         if (!this.owns(entry) || this.closing || owner.adapter !== entry.adapter) throw new Error('Image session changed during caching')
         return media
-      }, toolPolicy: config.toolPolicy, apiConnection: config.apiConnection, apiReadOnly: config.apiReadOnly, apiHistoryDirectory: path.join(this.options.baseStorageDir, 'api-conversations'), apiResumeSessionId: provider === 'api' ? nativeReference : undefined, taskId: config.taskId, runId: metadata.runId, worktreePath: config.cwd, agentProvider: provider, model: config.model, reasoningEffort: config.reasoningEffort, claudeBinPath: config.claudeBinPath, agyBinPath: config.agyBinPath, claudePermissionMode: config.claudePermissionMode, agyPermissionMode: config.agyPermissionMode, agyConversationId: (provider === 'antigravity' ? nativeReference : undefined) ?? config.agyConversationId, codexResumeThreadId: provider === 'codex' ? nativeReference : undefined, claudeResumeSessionId: provider === 'claude' ? nativeReference : undefined, claudeSessionId, codexBinPath: config.codexBinPath, approvalPolicy: config.approvalPolicy, sandbox: config.sandbox, env: config.env,
+      }, apiStoreVideo: async (bytes, signal) => {
+        signal.throwIfAborted()
+        if (!this.owns(entry) || this.closing || !entry.adapter || owner.adapter !== entry.adapter) throw new Error('Video session is no longer active')
+        const media = await this.getMediaStore().storeVideo({ taskId: metadata.taskId, runId: metadata.runId }, bytes, signal)
+        signal.throwIfAborted()
+        if (!this.owns(entry) || this.closing || owner.adapter !== entry.adapter) throw new Error('Video session changed during caching')
+        return media
+      }, apiHistoryContext: () => this.apiHistoryContext(entry, owner.adapter), toolPolicy: config.toolPolicy, apiConnection: config.apiConnection, apiReadOnly: config.apiReadOnly, apiHistoryDirectory: path.join(this.options.baseStorageDir, 'api-conversations'), apiResumeSessionId: provider === 'api' ? nativeReference : undefined, taskId: config.taskId, runId: metadata.runId, worktreePath: config.cwd, agentProvider: provider, model: config.model, reasoningEffort: config.reasoningEffort, claudeBinPath: config.claudeBinPath, agyBinPath: config.agyBinPath, claudePermissionMode: config.claudePermissionMode, agyPermissionMode: config.agyPermissionMode, agyConversationId: (provider === 'antigravity' ? nativeReference : undefined) ?? config.agyConversationId, codexResumeThreadId: provider === 'codex' ? nativeReference : undefined, claudeResumeSessionId: provider === 'claude' ? nativeReference : undefined, claudeSessionId, codexBinPath: config.codexBinPath, approvalPolicy: config.approvalPolicy, sandbox: config.sandbox, env: config.env,
         onRawLog: (stream, line) => { if (this.owns(entry) && owner.adapter && entry.adapter === owner.adapter) this.diagnostic(entry, stream, line) },
         onEvent: event => {
           if (!this.owns(entry) || !owner.adapter || entry.adapter !== owner.adapter) return
@@ -538,7 +587,7 @@ export class SessionManager {
           if (!this.owns(entry) || entry.adapter !== adapter || this.closing || entry.terminating || entry.storageError || entry.state.sessionStatus !== 'ready') throw new Error('Image owner changed before caching')
           const ref = await this.getMediaStore().storeBase64({ taskId: entry.state.taskId, runId: entry.state.runId }, image.dataUrl.slice(`data:${image.mime};base64,`.length))
           const original = imageRefs.find(original => original.id === image.id)!
-          if (!validMediaRef(ref) || ref.sha256 !== original.sha256 || ref.mime !== original.mime || ref.bytes !== original.bytes) throw new Error('Private input image copy did not match its verified source')
+          if (!validImageMediaRef(ref) || ref.sha256 !== original.sha256 || ref.mime !== original.mime || ref.bytes !== original.bytes) throw new Error('Private input image copy did not match its verified source')
           media.push(ref)
         }
         if (!this.owns(entry) || entry.adapter !== adapter || this.closing || entry.terminating || entry.storageError || entry.state.sessionStatus !== 'ready') throw new Error('Image owner changed before message delivery')
