@@ -721,6 +721,10 @@ export class SessionManager {
 
   private makeEntry(metadata: Metadata, messageQueue = new QueueStore(this.options.baseStorageDir, metadata)): Entry {
     const state: AgentSessionSnapshot = { taskId: metadata.taskId, chatId: metadata.chatId, sessionId: metadata.sessionId, runId: metadata.runId, presetName: metadata.presetName, reasoningEffort: metadata.launch?.reasoningEffort, permissions: metadata.launch ? effectivePermissionLabel(metadata.launch) : undefined, model: metadata.model, apiConnectionId: metadata.apiConnectionId, provider: metadata.provider ?? 'codex', sessionStatus: 'starting', cursor: 0, capabilities: { attachments: false, interactiveApprovals: metadata.provider !== 'antigravity', interruptTurn: metadata.provider !== 'antigravity' }, feed: [], pendingApprovals: [] }
+    if (metadata.provider === 'api') {
+      state.apiTransport = metadata.launch?.apiTransport ?? 'chat-completions'
+      state.apiProfile = metadata.launch?.apiProfile ?? 'openai-compatible'
+    }
     const entry: Entry = { state, metadata, previousFeed: [], journal: this.options.getJournal(metadata.taskId, metadata.runId), projector: createFeedProjector(), approvals: new ApprovalRegistry(), events: Promise.resolve(), eventIds: new Set(), completedTurns: new Set(), usageRequests: new Set(), deliveries: new Map(), queue: [], messageQueue, inputIds: new Set(), dispatching: false }
     entry.approvals.onStateChanged(record => {
       // Provider completion/expiry is canonical; registry contributes submission/rollback only.

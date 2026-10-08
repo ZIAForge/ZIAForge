@@ -65,6 +65,19 @@ const applySettings = () => fireEvent.click(screen.getByTestId('agent-chat-apply
 const savedHistory: AgentSessionSnapshot['feed'] = [{ id: 'earlier-answer', role: 'assistant', text: 'Earlier answer', status: 'completed', revision: 1, thinking: '', tools: [], approvals: [], timestamp: 1 }]
 
 describe('StructuredChat', () => {
+  it('shows the protocol pinned to the run and updates only after an acknowledged session change', async () => {
+    const state = fixture({ provider: 'api', presetName: '', apiConnectionId: 'saved-api', apiTransport: 'chat-completions', apiProfile: 'openai-compatible' })
+    render(<StructuredChat {...state.props} />)
+    await ready()
+    expect(screen.getByTestId('agent-chat-api-transport').textContent).toContain('Chat Completions')
+    state.api.reconfigure.mockResolvedValue({ ...state.base, provider: 'api', runId: 'responses-run', presetName: '', apiConnectionId: 'saved-api', apiTransport: 'responses', apiProfile: 'codex-connector' })
+    fireEvent.click(screen.getByTestId('composer-provider-button'))
+    await act(async () => applySettings())
+    expect(state.api.reconfigure).toHaveBeenCalledTimes(1)
+    expect(screen.getByTestId('agent-chat-api-transport').textContent).toContain('Responses')
+    expect(screen.getByTestId('agent-chat-api-transport').textContent).toContain('Codex connector')
+  })
+
   beforeEach(() => {
     const stored = new Map<string, string>()
     vi.stubGlobal('localStorage', {

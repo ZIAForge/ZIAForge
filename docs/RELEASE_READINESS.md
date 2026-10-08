@@ -1,5 +1,11 @@
 # Release engineering and provenance
 
+## 1.0.5 Responses and image inspection
+
+Version **1.0.5** adds explicitly configured Responses connections, private generated-image cards with Save and a zoomable viewer, approved local command calls on supported hosts, and clearer connection migration. Existing connections retain Chat Completions until explicitly saved and applied to a chat. See [1.0.5 notes](releases/1.0.5.md) and [API contracts](API_CONNECTIONS.md).
+
+The release uses one frozen source commit for all six native build targets. Targeted API/media/session checks and the packaged Mac image-viewer flow are tracked separately from build-only Windows/Linux/Apple Silicon receipts. A build does not certify provider access or native runtime behavior on another OS. No repeated full regression suite or replacement image generation is implied. The consumed 1.0.4 development identity remains immutable; public artifacts use the separate stable 1.0.5 reservation.
+
 ## 1.0.3 Windows settings persistence patch
 
 Version **1.0.3** corrects a Windows directory-flush failure that could reject settings saves, including interface-language changes. Regular-file writes and flushes remain required, while the shared storage helper uses directory flushes only where supported. Settings catches save failures and displays the error instead of leaving an unhandled rejected save. See [1.0.3 notes](releases/1.0.3.md).

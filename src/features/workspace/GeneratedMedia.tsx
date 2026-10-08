@@ -4,6 +4,7 @@ import { validMediaRef, type AgentMediaRef, type AgentMediaRequest } from '../..
 import { useTranslation } from '../../i18n'
 import { uiText } from '../../uiText'
 import { safeMediaBlob } from './generatedMediaData'
+import { ImageViewer } from './ImageViewer'
 
 export type AgentMediaOwner = Pick<AgentMediaRequest, 'sessionId' | 'runId'>
 interface GeneratedMediaProps { media: AgentMediaRef; owner?: AgentMediaOwner }
@@ -27,8 +28,11 @@ export function GeneratedMedia({ media, owner }: GeneratedMediaProps) {
   const [retry, setRetry] = useState(0)
   const [preview, setPreview] = useState<Preview>({ key: identity })
   const [saveState, setSaveState] = useState<SaveState>({ key: identity })
+  const [viewer, setViewer] = useState<{ key: string; url: string } | null>(null)
   const current = preview.key === identity ? preview : { key: identity }
   const save = saveState.key === identity ? saveState : { key: identity }
+  const viewerOpen = viewer?.key === identity && viewer.url === current.url
+  const shouldLoad = visible || viewerOpen
 
   useEffect(() => {
     mounted.current = true
@@ -37,6 +41,7 @@ export function GeneratedMedia({ media, owner }: GeneratedMediaProps) {
 
   useEffect(() => {
     setSaveState({ key: identity })
+    setViewer(null)
     return () => { if (saving.current?.key === identity) saving.current = null }
   }, [identity])
 
@@ -58,7 +63,7 @@ export function GeneratedMedia({ media, owner }: GeneratedMediaProps) {
       setPreview({ key: identity, error: uiText('Image unavailable') })
       return
     }
-    if (!visible) return
+    if (!shouldLoad) return
     const request: AgentMediaRequest = { sessionId: owner.sessionId, runId: owner.runId, mediaId: media.id }
     void (async () => {
       try {
@@ -82,7 +87,7 @@ export function GeneratedMedia({ media, owner }: GeneratedMediaProps) {
   // The identity contains every primitive owner/ref field; new snapshot objects
   // for the same image must not reload bytes or revoke a visible preview.
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [identity, valid, api, visible, retry])
+  }, [identity, valid, api, shouldLoad, retry])
 
   const saveImage = async () => {
     if (!owner || !api?.save || !current.url || saving.current?.key === identity) return
@@ -101,12 +106,13 @@ export function GeneratedMedia({ media, owner }: GeneratedMediaProps) {
     if (currentKey.current !== identity || retainedURL.current?.key !== identity || retainedURL.current.url !== url) return
     URL.revokeObjectURL(url)
     retainedURL.current = null
+    setViewer(null)
     setPreview({ key: identity, error: uiText('Invalid generated image data') })
   }
 
   return <figure ref={container} data-testid={`generated-media-${media.id}`} className="max-w-xl space-y-2 rounded-lg border border-[#2b2e33] bg-[#111317] p-2">
     <div className="relative flex max-h-[32rem] w-full items-center justify-center overflow-hidden rounded bg-[#090a0c]" style={{ aspectRatio: valid ? `${media.width} / ${media.height}` : '4 / 3' }}>
-      {current.url ? <img key={current.url} data-testid={`generated-image-${media.id}`} src={current.url} alt={uiText('Generated image')} width={media.width} height={media.height} loading="lazy" decoding="async" onError={() => imageFailed(current.url!)} className="h-full w-full object-contain" />
+      {current.url ? <button type="button" data-testid={`generated-media-open-${media.id}`} aria-label={t('image_viewer_open')} onClick={() => setViewer({ key: identity, url: current.url! })} className="flex h-full w-full cursor-zoom-in items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-orange-500"><img key={current.url} data-testid={`generated-image-${media.id}`} src={current.url} alt={uiText('Generated image')} width={media.width} height={media.height} loading="lazy" decoding="async" onError={() => imageFailed(current.url!)} className="h-full w-full object-contain" /></button>
         : <span className="p-4 text-xs text-zinc-500">{current.error ? uiText('Image unavailable') : uiText('Loading…')}</span>}
     </div>
     <figcaption className="flex flex-wrap items-center justify-between gap-2 text-xs text-zinc-400">
@@ -116,5 +122,6 @@ export function GeneratedMedia({ media, owner }: GeneratedMediaProps) {
     {current.error && <div className="text-xs text-rose-300"><p role="alert" className="break-words">{current.error}</p>{valid && owner && api?.read && <button type="button" data-testid={`generated-media-retry-${media.id}`} onClick={() => setRetry(value => value + 1)} className="mt-1 underline">{t('retry')}</button>}</div>}
     {save.error && <p role="alert" className="break-words text-xs text-rose-300">{save.error}</p>}
     {save.outcome && <p role="status" className="text-xs text-zinc-400">{save.outcome === 'cancelled' ? uiText('Image save cancelled') : uiText('Image saved')}</p>}
+    {viewerOpen && current.url && <ImageViewer key={`${identity}:${current.url}`} url={current.url} width={media.width} height={media.height} onClose={() => setViewer(null)} onError={() => imageFailed(current.url!)} />}
   </figure>
 }

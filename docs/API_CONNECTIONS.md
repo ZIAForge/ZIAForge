@@ -6,6 +6,10 @@ API connections use a saved endpoint and key separately from native CLI authenti
 
 Use a base URL including `/v1` where required. HTTPS is required except for loopback HTTP. Userinfo, query strings, fragments and redirects are refused. Main encrypts keys with supported OS credential storage; renderer metadata contains only `hasApiKey`. A blank edit preserves a key, an explicit empty key removes it, and changing the endpoint requires re-entry or clearing.
 
+For a saved Chat Completions connection, **Set up Responses** opens an unsaved draft for the same connection. Review its transport and profile, then **Save connection**. The endpoint is not inferred from its hostname; commands remain off unless explicitly enabled. Leaving the key blank keeps its encrypted value when the endpoint is unchanged.
+
+Existing chats keep their pinned protocol after saving. Their header reports that effective protocol from the backend snapshot, separately from the current connection settings. Open the chat's CLI / API selector and **Apply** the same connection to deliberately reload its saved configuration. This keeps the chat identity and history and starts a new run; it does not replay interrupted requests or turn old Markdown image links into image cards. Resume still enforces the old pinned policy and refuses a changed endpoint/transport until explicit reconfiguration.
+
 Responses uses top-level `instructions`, `previous_response_id` and `function_call_output` with the original `call_id`. Output item IDs are separate from execution IDs. Only completed live function calls enter local execution; replayed history does not dispatch tools. Raw reasoning is neither rendered nor persisted. Changing transport creates an explicit history handoff rather than interpreting Chat history as Responses state. Saved launch/queue policies pin the selected Responses endpoint and profile.
 
 ## Caller tools and owner approval
@@ -22,7 +26,7 @@ The explicit Codex connector profile consumes the documented, unversioned `codex
 
 Standard `image_generation_call.result` is decoded into a private cache and replaced with metadata-only journal references. PNG/JPEG/WebP headers, encoded/decoded size, dimensions and digest are checked. Limits: 32 MiB/32 million pixels per image, 128 MiB private cache. Unknown MIME, SVG, arbitrary URLs and automatic Markdown image downloads are rejected. A protected file read uses only a validated file ID under the pinned saved base URL with Bearer in main and no redirects. It never performs a replacement generation.
 
-Images appear independently of collapsed tool output. Loading and Save verify current session ownership plus ancestor history, and recheck cache integrity. Save uses the native owner-selected destination; renderer does not supply a path. Binary bytes/base64 are absent from history, event journals, snapshots and normal diagnostic logs. Reopen/retry/Save use cached bytes and no inference. Cache quota failures preserve history; export needed images before clearing private cached media.
+Images appear independently of collapsed tool output. Clicking a preview opens a modal viewer with bounded zoom, fit, actual size and pan. The viewer reuses its authenticated Blob URL, keeps it alive while open, and closes when the media owner changes. It never downloads model-supplied links or requests inference. Loading and Save verify current session ownership plus ancestor history, and recheck cache integrity. Save uses the native owner-selected destination; renderer does not supply a path. Binary bytes/base64 are absent from history, event journals, snapshots and normal diagnostic logs. Reopen/retry/Save use cached bytes and no inference. Cache quota failures preserve history; export needed images before clearing private cached media.
 
 ## Evidence
 

@@ -26,6 +26,7 @@ describe('API vertical session integration', () => {
     const config: TrustedAgentSessionConfig = { taskId: 'task', chatId: 'chat-main', presetName: '', cwd: root, provider: 'api', model: 'media-model', apiConnectionId: 'media-api', apiReadOnly: true, apiConnection: { id: 'media-api', name: 'Media fixture', model: 'media-model', enabled: true, hasApiKey: false, transport: 'responses', baseUrl: `http://127.0.0.1:${(server.address() as { port: number }).port}/v1` } }
     const create = () => { const service = new RunService({ sessionRegistry: new SessionRegistry(), processSupervisor: new ProcessSupervisor(), baseStorageDir: path.join(root, 'state') }); services.push(service); return service }
     const first = create(), original = await first.sessions.create(config)
+    expect(original).toMatchObject({ apiTransport: 'responses', apiProfile: 'openai-compatible' })
     await first.sessions.send({ ...original, text: 'Return an image', clientMessageId: 'image-input' })
     await vi.waitFor(async () => expect((await first.sessions.snapshot(original)).lastTurn?.status).toBe('completed'))
     const completed = await first.sessions.snapshot(original)
@@ -40,7 +41,7 @@ describe('API vertical session integration', () => {
     expect(journal).not.toContain(png.toString('base64'))
     await first.sessions.shutdown()
     const second = create(), attached = await second.sessions.attach(config)
-    expect(attached?.sessionStatus).toBe('disconnected')
+    expect(attached).toMatchObject({ sessionStatus: 'disconnected', apiTransport: 'responses', apiProfile: 'openai-compatible' })
     expect(Buffer.from((await second.sessions.readMedia(request)).bytes)).toEqual(png)
     expect(requests).toBe(1)
     const resumed = await second.sessions.resume(attached!, config)
@@ -63,6 +64,7 @@ describe('API vertical session integration', () => {
     const config: TrustedAgentSessionConfig = { taskId: 'task', chatId: 'chat-main', presetName: '', cwd: root, provider: 'api', model: 'actual-model', apiConnectionId: 'connection', apiReadOnly: true, apiConnection: { id: 'connection', name: 'Private fixture', baseUrl: `http://127.0.0.1:${(server.address() as { port: number }).port}/v1`, enabled: true, hasApiKey: true, apiKey: 'fixture-key-never-persist', model: 'stored-default' } }
     const create = () => { const registry = new SessionRegistry(); const service = new RunService({ sessionRegistry: registry, processSupervisor: new ProcessSupervisor(), baseStorageDir: path.join(root, 'state') }); services.push(service); return { service, registry } }
     const first = create(), original = await first.service.sessions.create(config)
+    expect(original).toMatchObject({ apiTransport: 'chat-completions', apiProfile: 'openai-compatible' })
     expect(first.registry.getAgentSession(original.sessionId)?.pid).toBeUndefined()
     expect(original.capabilities).toMatchObject({ interruptTurn: true, interactiveApprovals: false })
     const send = async (service: RunService, session: AgentSessionSnapshot, text: string, clientMessageId: string) => { await service.sessions.send({ ...session, text, clientMessageId }); await vi.waitFor(async () => expect((await service.sessions.snapshot(session)).lastTurn?.status).toBe('completed')); return service.sessions.snapshot(session) }

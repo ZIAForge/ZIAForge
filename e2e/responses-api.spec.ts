@@ -27,7 +27,7 @@ const { startResponsesFixture } = createRequire(import.meta.url)('./fixtures/res
 
 test.use({ providerFixture: 'codex' })
 
-test('persists Responses caller identity, approved local command, private image and owned cancellation across Quit and Resume', async ({ app }, testInfo) => {
+test('migrates a saved API connection and preserves Responses tools, image zoom and cancellation across Quit and Resume', async ({ app }, testInfo) => {
   test.setTimeout(120_000)
   const api = await startResponsesFixture()
   const profile = testInfo.outputPath('profile')
@@ -45,7 +45,7 @@ test('persists Responses caller identity, approved local command, private image 
   const readOwned = async (media: AgentMediaRef) => {
     const current = (await snapshot())!
     return app.window.evaluate(async request => {
-      const value = await window.ziafAPI.agentMedia.read(request)
+      const value = await window.ziafAPI.agentMedia!.read(request)
       const bytes = new Uint8Array(value.bytes)
       const digest = await crypto.subtle.digest('SHA-256', bytes.buffer)
       return { bytes: bytes.length, mime: value.mime, sha256: [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, '0')).join('') }
@@ -63,15 +63,14 @@ test('persists Responses caller identity, approved local command, private image 
     await app.window.getByTestId('api-connection-name').fill('Local Responses fixture')
     await app.window.getByTestId('api-connection-url').fill(api.baseUrl)
     await app.window.getByTestId('api-connection-model').fill('responses-fixture-model')
-    await app.window.getByTestId('api-connection-transport').selectOption('responses')
-    await app.window.getByTestId('api-connection-profile').selectOption('codex-connector')
-    await app.window.getByTestId('api-connection-commands').check()
+    // Start with the legacy transport. Saving a connection must not switch an
+    // existing chat; explicit Apply later reloads the saved policy.
+    await expect(app.window.getByTestId('api-connection-transport')).toHaveValue('chat-completions')
     await app.window.getByTestId('api-connection-save').click()
     await expect(app.window.locator('strong').filter({ hasText: 'Local Responses fixture' })).toBeVisible()
-    const connections = await app.window.evaluate(() => window.ziafAPI.apiConnections.list())
+    let connections = await app.window.evaluate(() => window.ziafAPI.apiConnections.list())
     expect(connections).toHaveLength(1)
-    expect(connections[0]).toMatchObject({ transport: 'responses', profile: 'codex-connector', allowCommands: true, hasApiKey: false })
-    await app.window.screenshot({ path: testInfo.outputPath('01-responses-saved-connection.png'), fullPage: true })
+    expect(connections[0]).toMatchObject({ transport: 'chat-completions', profile: 'openai-compatible', allowCommands: false, hasApiKey: false })
 
     await open(); await send('fixture-hello')
     await expect.poll(async () => (await snapshot())?.lastTurn?.status).toBe('completed')
@@ -84,6 +83,36 @@ test('persists Responses caller identity, approved local command, private image 
     await expect.poll(async () => (await snapshot())?.provider).toBe('api')
     await expect.poll(async () => (await snapshot())?.sessionStatus).toBe('ready')
     expect((await snapshot())?.permissions).toBe('Read & Write')
+    expect(api.requests).toHaveLength(0)
+
+    const legacy = (await snapshot())!
+    expect(legacy.apiTransport).toBe('chat-completions')
+    await expect(app.window.getByTestId('agent-chat-api-transport')).toContainText('Chat Completions')
+    await app.window.getByRole('button', { name: 'Connections', exact: true }).first().click()
+    await app.window.getByTestId(`api-connection-responses-${connections[0].id}`).click()
+    await expect(app.window.getByTestId('api-connection-transport')).toHaveValue('responses')
+    await expect(app.window.getByTestId('api-connection-commands')).not.toBeChecked()
+    expect((await app.window.evaluate(() => window.ziafAPI.apiConnections.list()))[0].transport).toBe('chat-completions')
+    await app.window.getByTestId('api-connection-profile').selectOption('codex-connector')
+    await app.window.getByTestId('api-connection-commands').check()
+    await app.window.getByTestId('api-connection-save').click()
+    await expect(app.window.getByTestId('api-connection-saved')).toBeVisible()
+    connections = await app.window.evaluate(() => window.ziafAPI.apiConnections.list())
+    expect(connections[0]).toMatchObject({ transport: 'responses', profile: 'codex-connector', allowCommands: true, hasApiKey: false })
+    await app.window.screenshot({ path: testInfo.outputPath('01-responses-saved-connection.png'), fullPage: true })
+    await open()
+    expect((await snapshot())!.apiTransport).toBe('chat-completions')
+    expect((await snapshot())!.runId).toBe(legacy.runId)
+    await app.window.getByTestId('composer-provider-button').click()
+    await expect(app.window.getByTestId('agent-chat-api-connection-protocol')).toContainText('Responses')
+    // Same selected connection/model, no artificial change needed to Apply.
+    await app.window.getByTestId('agent-chat-apply').click()
+    await expect.poll(async () => (await snapshot())?.apiTransport).toBe('responses')
+    await expect(app.window.getByTestId('agent-chat-api-transport')).toContainText('Responses')
+    const migrated = (await snapshot())!
+    expect(migrated.sessionId).toBe(legacy.sessionId)
+    expect(migrated.runId).not.toBe(legacy.runId)
+    expect(migrated.feed).toEqual(legacy.feed)
     expect(api.requests).toHaveLength(0)
 
     await send('fixture-responses-media')
@@ -124,13 +153,42 @@ test('persists Responses caller identity, approved local command, private image 
     const media = refs[0]
     expect(media).toMatchObject({ mime: 'image/png', bytes: api.media.bytes, sha256: api.media.sha256, sourceRunId: finished.runId })
     await assertRaster(media)
+    const previewURL = await app.window.getByTestId(`generated-image-${media.id}`).getAttribute('src')
+    await app.window.getByTestId(`generated-media-open-${media.id}`).click()
+    await expect(app.window.getByTestId('image-viewer')).toBeVisible()
+    await expect(app.window.getByTestId('image-viewer-image')).toHaveAttribute('src', previewURL!)
+    await app.window.getByTestId('image-viewer-actual-size').click()
+    await expect(app.window.getByTestId('image-viewer-scale')).toHaveText('100%')
+    await app.window.getByTestId('image-viewer-zoom-in').click()
+    await expect(app.window.getByTestId('image-viewer-scale')).toHaveText('125%')
+    await app.window.getByTestId('image-viewer-zoom-out').click()
+    await expect(app.window.getByTestId('image-viewer-scale')).toHaveText('100%')
+    await app.window.getByTestId('image-viewer-zoom-in').click()
+    await app.window.getByTestId('image-viewer-zoom-in').click()
+    const viewport = app.window.getByTestId('image-viewer-viewport')
+    const beforePan = await viewport.evaluate(node => ({ left: node.scrollLeft, top: node.scrollTop }))
+    if (beforePan.left > 50 && beforePan.top > 50) {
+      const box = (await viewport.boundingBox())!
+      await app.window.mouse.move(box.x + box.width / 2, box.y + box.height / 2)
+      await app.window.mouse.down()
+      await app.window.mouse.move(box.x + box.width / 2 + 40, box.y + box.height / 2 + 40, { steps: 4 })
+      await app.window.mouse.up()
+      expect(await viewport.evaluate(node => node.scrollLeft)).toBeLessThan(beforePan.left)
+      expect(await viewport.evaluate(node => node.scrollTop)).toBeLessThan(beforePan.top)
+    }
+    await app.window.getByTestId('image-viewer-fit').click()
+    await app.window.screenshot({ path: testInfo.outputPath('03-image-viewer-fit.png'), fullPage: true })
+    await app.window.keyboard.press('Escape')
+    await expect(app.window.getByTestId('image-viewer')).toHaveCount(0)
+    await expect(app.window.getByTestId(`generated-media-open-${media.id}`)).toBeFocused()
+    expect(api.requests).toHaveLength(3)
     const tools = app.window.getByTestId(`tools-block-${mediaMessage.id}`)
     await tools.getByRole('button', { name: /^Tools \(/i }).first().click()
     await expect(app.window.getByTestId('tool-item-provider-ig_fixture_image')).toHaveCount(0)
     await assertRaster(media)
     expect(await readOwned(media)).toEqual({ mime: 'image/png', bytes: api.media.bytes, sha256: api.media.sha256 })
     const denied = await app.window.evaluate(async request => {
-      try { await window.ziafAPI.agentMedia.read(request); return false } catch { return true }
+      try { await window.ziafAPI.agentMedia!.read(request); return false } catch { return true }
     }, { sessionId: finished.sessionId, runId: 'run-foreign', mediaId: media.id })
     expect(denied, 'A foreign run cannot read the cached image').toBe(true)
     const cacheFile = path.join(sessionRoot, 'api-conversations/media', `${media.id}.bin`)
@@ -146,7 +204,7 @@ test('persists Responses caller identity, approved local command, private image 
     await app.electronApp.evaluate(({ dialog }) => {
       const state = globalThis as unknown as { responsesSaveDialog?: { original: typeof dialog.showSaveDialog; calls: number } }
       state.responsesSaveDialog = { original: dialog.showSaveDialog, calls: 0 }
-      dialog.showSaveDialog = (async () => { state.responsesSaveDialog!.calls++; return { canceled: true, filePath: undefined } }) as typeof dialog.showSaveDialog
+      dialog.showSaveDialog = (async () => { state.responsesSaveDialog!.calls++; return { canceled: true, filePath: '' } }) as typeof dialog.showSaveDialog
     })
     try {
       await app.window.getByTestId(`generated-media-save-${media.id}`).click()
