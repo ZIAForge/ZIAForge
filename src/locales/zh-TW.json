@@ -1290,5 +1290,22 @@
   "help.aiStopped": "回答已停止。您的問題仍保留在輸入框中。",
   "help.aiFailed": "說明助理無法完成此回答。請檢查所選的 AI 連線並重試。",
   "help.aiNativeRequired": "此原生 CLI 需要擁有者的電腦存取權限。請在「設定」→「控制」中於本地啟用它，或選取 Claude Code 或 API 預設組態以進行無工具的說明工作階段。",
-  "help.aiPresetChanged": "此預設組態在啟動期間已變更。請重新選取並重試。"
+  "help.aiPresetChanged": "此預設組態在啟動期間已變更。請重新選取並重試。",
+  "api_responses_text_0": "Generated image",
+  "api_responses_text_1": "Save image",
+  "api_responses_text_2": "Image unavailable",
+  "api_responses_text_3": "Invalid generated image data",
+  "api_responses_text_4": "Could not load image: {error}",
+  "api_responses_text_5": "Could not save image: {error}",
+  "api_responses_text_6": "Image saved",
+  "api_responses_text_7": "Image save cancelled",
+  "api_responses_text_8": "Provider tool",
+  "api_responses_text_9": "API transport",
+  "api_responses_text_10": "API profile",
+  "api_responses_text_11": "Chat Completions",
+  "api_responses_text_12": "Responses",
+  "api_responses_text_13": "OpenAI-compatible",
+  "api_responses_text_14": "Codex connector",
+  "api_responses_text_15": "Allow local commands",
+  "api_responses_text_16": "Commands run locally after your approval. This is not an operating-system sandbox."
 }

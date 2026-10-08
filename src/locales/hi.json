@@ -1290,5 +1290,22 @@
   "help.aiStopped": "उत्तर रोक दिया गया। आपका प्रश्न अभी भी उपलब्ध है।",
   "help.aiFailed": "सहायता सहायक इस उत्तर को पूरा नहीं कर सका। चयनित AI कनेक्शन की जाँच करें और पुनः प्रयास करें।",
   "help.aiNativeRequired": "इस मूल CLI को स्वामी की कंप्यूटर-पहुंच अनुमति की आवश्यकता है। इसे Settings → Control में स्थानीय रूप से सक्षम करें, या उपकरण-रहित सहायता सत्र के लिए Claude Code या किसी API प्रीसेट का चयन करें।",
-  "help.aiPresetChanged": "यह प्रीसेट स्टार्टअप के दौरान बदल गया। इसे पुनः चुनें और पुनः प्रयास करें।"
+  "help.aiPresetChanged": "यह प्रीसेट स्टार्टअप के दौरान बदल गया। इसे पुनः चुनें और पुनः प्रयास करें।",
+  "api_responses_text_0": "Generated image",
+  "api_responses_text_1": "Save image",
+  "api_responses_text_2": "Image unavailable",
+  "api_responses_text_3": "Invalid generated image data",
+  "api_responses_text_4": "Could not load image: {error}",
+  "api_responses_text_5": "Could not save image: {error}",
+  "api_responses_text_6": "Image saved",
+  "api_responses_text_7": "Image save cancelled",
+  "api_responses_text_8": "Provider tool",
+  "api_responses_text_9": "API transport",
+  "api_responses_text_10": "API profile",
+  "api_responses_text_11": "Chat Completions",
+  "api_responses_text_12": "Responses",
+  "api_responses_text_13": "OpenAI-compatible",
+  "api_responses_text_14": "Codex connector",
+  "api_responses_text_15": "Allow local commands",
+  "api_responses_text_16": "Commands run locally after your approval. This is not an operating-system sandbox."
 }

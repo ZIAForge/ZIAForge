@@ -1,3 +1,6 @@
+import { AgentMediaStore } from './AgentMediaStore'
+import { validMediaRef, type AgentMediaRequest } from '../../shared/agent-media'
+import type { ApiTransport, ApiProfile } from '../../shared/api-provider'
 import type { AgentExecutionOptions } from '../../shared/agent-models'
 import { effectivePermissionLabel, isPermissionLabel, validateReasoningEffort } from './AgentExecutionPolicy'
 import fs from 'node:fs'
@@ -26,6 +29,10 @@ export interface TrustedAgentSessionConfig extends AgentChatIdentity, AgentExecu
   apiConnectionId?: string
   apiConnection?: CreateAdapterOptions['apiConnection']
   apiReadOnly?: boolean
+  apiTransport?: ApiTransport
+  apiProfile?: ApiProfile
+  apiBaseUrl?: string
+  apiAllowCommands?: boolean
   toolPolicy?: 'none'
   codexBinPath?: string
   claudeBinPath?: string
@@ -45,7 +52,7 @@ export interface SessionManagerOptions {
   getJournal(taskId: string, runId: string): EventJournal
   createAdapter?: (options: CreateAdapterOptions) => AgentAdapter
 }
-export type PersistedAgentLaunch = Pick<TrustedAgentSessionConfig, 'presetName' | 'model' | 'reasoningEffort' | 'permissions' | 'approvalPolicy' | 'sandbox' | 'claudePermissionMode' | 'agyPermissionMode' | 'apiConnectionId' | 'apiReadOnly' | 'toolPolicy'> & { provider: AgentSessionProvider }
+export type PersistedAgentLaunch = Pick<TrustedAgentSessionConfig, 'presetName' | 'model' | 'reasoningEffort' | 'permissions' | 'approvalPolicy' | 'sandbox' | 'claudePermissionMode' | 'agyPermissionMode' | 'apiConnectionId' | 'apiReadOnly' | 'toolPolicy' | 'apiTransport' | 'apiProfile' | 'apiBaseUrl' | 'apiAllowCommands'> & { provider: AgentSessionProvider }
 interface Metadata extends AgentChatIdentity, AgentSessionRef {
   version: 1
   provider?: AgentSessionProvider
@@ -114,7 +121,25 @@ export class SessionManager {
   private readonly transitions = new Map<string, { signature: string; promise: Promise<AgentSessionSnapshot> }>()
   private closing = false
   private startedSession = false
+  private mediaStore?: AgentMediaStore
   constructor(private readonly options: SessionManagerOptions) {}
+
+  // A legacy/CLI coordinator need not allocate API media storage. Keep the
+  // strict private-path validation at the first actual image operation.
+  private getMediaStore(): AgentMediaStore {
+    return this.mediaStore ??= new AgentMediaStore(path.join(this.options.baseStorageDir, 'api-conversations', 'media'))
+  }
+
+  /** Main-only, logical ownership checked against the visible current/ancestor feed. */
+  async readMedia(request: AgentMediaRequest) {
+    if (!request || typeof request !== 'object' || Array.isArray(request) || Object.keys(request).some(key => !['sessionId', 'runId', 'mediaId'].includes(key)) || typeof request.mediaId !== 'string') throw new Error('Invalid media request')
+    const entry = this.require(request)
+    const ref = this.view(entry).feed.flatMap(message => message.tools ?? []).flatMap(tool => tool.media ?? []).find(ref => ref.id === request.mediaId)
+    if (!ref || !validMediaRef(ref)) throw new Error('Image is unavailable in this conversation')
+    const bytes = await this.getMediaStore().read(entry.state.taskId, ref)
+    if (this.require(request) !== entry) throw new Error('Media owner changed')
+    return { bytes: new Uint8Array(bytes), mime: ref.mime }
+  }
 
   onEvent(callback: (update: AgentSessionUpdate) => void): () => void {
     this.listeners.add(callback)
@@ -203,7 +228,7 @@ export class SessionManager {
   }
 
   private change(ref: AgentSessionRef, config: TrustedAgentSessionConfig, requestId: string | undefined, resume: boolean): Promise<AgentSessionSnapshot> {
-    const signature = JSON.stringify([ref.sessionId, ref.runId, config.taskId, config.chatId, config.provider, config.presetName, config.model, { reasoningEffort: config.reasoningEffort }, config.permissions, config.approvalPolicy, config.sandbox, config.claudePermissionMode, config.agyPermissionMode, config.apiConnectionId, config.apiReadOnly, config.toolPolicy, resume])
+    const signature = JSON.stringify([ref.sessionId, ref.runId, config.taskId, config.chatId, config.provider, config.presetName, config.model, { reasoningEffort: config.reasoningEffort }, config.permissions, config.approvalPolicy, config.sandbox, config.claudePermissionMode, config.agyPermissionMode, config.apiConnectionId, config.apiReadOnly, config.apiTransport, config.apiProfile, config.apiBaseUrl, config.apiAllowCommands, config.toolPolicy, resume])
     const operationKey = `${ref.sessionId}:${resume ? 'resume' : 'reconfigure'}:${requestId ?? ref.runId}`
     const previous = this.transitions.get(operationKey)
     if (previous) return previous.signature === signature ? previous.promise : Promise.reject(new Error('Switch request identity was already used with another selection'))
@@ -233,7 +258,7 @@ export class SessionManager {
       if (this.closing || !this.owns(entry)) throw new Error('Session service is shutting down or ownership changed')
       this.assertTaskAvailable(entry.state.taskId)
       this.options.registry.setAgentSessionPid(entry.state.sessionId, entry.state.runId, undefined)
-      const sameProvider = entry.state.provider === (config.provider ?? 'codex') && (entry.state.provider !== 'api' || entry.metadata.apiConnectionId === config.apiConnectionId)
+      const sameProvider = entry.state.provider === (config.provider ?? 'codex') && (entry.state.provider !== 'api' || entry.metadata.apiConnectionId === config.apiConnectionId && entry.state.model === config.model && (entry.metadata.launch?.apiReadOnly ?? false) === (config.apiReadOnly ?? false) && (entry.metadata.launch?.apiTransport ?? 'chat-completions') === (config.apiTransport ?? config.apiConnection?.transport ?? 'chat-completions') && (entry.metadata.launch?.apiProfile ?? 'openai-compatible') === (config.apiProfile ?? config.apiConnection?.profile ?? 'openai-compatible') && (entry.metadata.launch?.apiAllowCommands ?? false) === (config.apiAllowCommands ?? config.apiConnection?.allowCommands ?? false) && (!entry.metadata.launch?.apiBaseUrl || entry.metadata.launch.apiBaseUrl === config.apiConnection?.baseUrl))
       // Empty Codex/Claude sessions may not have a provider-side rollout yet.
       // Only a never-sent native conversation may safely start fresh.
       const hasNativeInput = entry.metadata.nativeHistoryInherited || entry.projector.messages().some(message => message.role === 'user')
@@ -267,10 +292,14 @@ export class SessionManager {
     if (!path.isAbsolute(config.cwd) || !fs.statSync(config.cwd).isDirectory()) throw new Error('A valid resolved worktree is required')
     const provider = config.provider ?? 'codex'
     if (provider === 'api' && (!config.apiConnectionId || config.apiConnection?.id !== config.apiConnectionId || !config.apiConnection.enabled)) throw new Error('A matching enabled API connection is required')
+    if (provider === 'api') {
+      config = { ...config, apiTransport: config.apiTransport ?? config.apiConnection!.transport ?? 'chat-completions', apiProfile: config.apiProfile ?? config.apiConnection!.profile ?? 'openai-compatible', apiBaseUrl: config.apiBaseUrl ?? config.apiConnection!.baseUrl, apiAllowCommands: config.apiAllowCommands ?? config.apiConnection!.allowCommands ?? false }
+      if (config.apiTransport !== (config.apiConnection!.transport ?? 'chat-completions') || config.apiProfile !== (config.apiConnection!.profile ?? 'openai-compatible') || config.apiBaseUrl !== config.apiConnection!.baseUrl || config.apiAllowCommands !== (config.apiConnection!.allowCommands ?? false)) throw new Error('Saved API transport or endpoint changed. Reconfigure explicitly before continuing.')
+    }
     validateReasoningEffort(provider, config.reasoningEffort)
     if (config.toolPolicy !== undefined && (config.toolPolicy !== 'none' || !['claude', 'api'].includes(provider))) throw new Error('This provider cannot enforce the requested tool-free policy')
     if (config.permissions !== undefined && !isPermissionLabel(config.permissions)) throw new Error('Invalid session access selection')
-    const launch: PersistedAgentLaunch = { reasoningEffort: config.reasoningEffort, permissions: config.permissions, provider, presetName: config.presetName, model: config.model, approvalPolicy: config.approvalPolicy, sandbox: config.sandbox, claudePermissionMode: config.claudePermissionMode, agyPermissionMode: config.agyPermissionMode, apiConnectionId: config.apiConnectionId, apiReadOnly: config.apiReadOnly, toolPolicy: config.toolPolicy }
+    const launch: PersistedAgentLaunch = { reasoningEffort: config.reasoningEffort, permissions: config.permissions, provider, presetName: config.presetName, model: config.model, approvalPolicy: config.approvalPolicy, sandbox: config.sandbox, claudePermissionMode: config.claudePermissionMode, agyPermissionMode: config.agyPermissionMode, apiConnectionId: config.apiConnectionId, apiReadOnly: config.apiReadOnly, apiTransport: config.apiTransport, apiProfile: config.apiProfile, apiBaseUrl: config.apiBaseUrl, apiAllowCommands: config.apiAllowCommands, toolPolicy: config.toolPolicy }
     const metadata: Metadata = { version: 1, provider, apiConnectionId: config.apiConnectionId, taskId: config.taskId, chatId: config.chatId, sessionId, runId: `run-${randomUUID()}`, presetName: config.presetName, model: config.model, createdAt: Math.max(Date.now(), (previous?.metadata.createdAt ?? 0) + 1), launch, previousRunId: previous?.state.runId, handoff, nativeHistoryInherited: nativeReference !== undefined }
     const entry = this.makeEntry(metadata, previous?.messageQueue)
     if (previous) for (const id of previous.inputIds) entry.inputIds.add(id)
@@ -288,7 +317,14 @@ export class SessionManager {
       const factory = this.options.createAdapter ?? AgentAdapterFactory.createAdapter.bind(AgentAdapterFactory)
       const owner: { adapter?: AgentAdapter } = {}
       const claudeSessionId = provider === 'claude' && !nativeReference ? randomUUID() : undefined
-      const adapter = factory({ toolPolicy: config.toolPolicy, apiConnection: config.apiConnection, apiReadOnly: config.apiReadOnly, apiHistoryDirectory: path.join(this.options.baseStorageDir, 'api-conversations'), apiResumeSessionId: provider === 'api' ? nativeReference : undefined, taskId: config.taskId, runId: metadata.runId, worktreePath: config.cwd, agentProvider: provider, model: config.model, reasoningEffort: config.reasoningEffort, claudeBinPath: config.claudeBinPath, agyBinPath: config.agyBinPath, claudePermissionMode: config.claudePermissionMode, agyPermissionMode: config.agyPermissionMode, agyConversationId: (provider === 'antigravity' ? nativeReference : undefined) ?? config.agyConversationId, codexResumeThreadId: provider === 'codex' ? nativeReference : undefined, claudeResumeSessionId: provider === 'claude' ? nativeReference : undefined, claudeSessionId, codexBinPath: config.codexBinPath, approvalPolicy: config.approvalPolicy, sandbox: config.sandbox, env: config.env,
+      const adapter = factory({ apiStoreMedia: async (_itemId, encoded, signal) => {
+        signal.throwIfAborted()
+        if (!this.owns(entry) || this.closing || !entry.adapter || owner.adapter !== entry.adapter) throw new Error('Image session is no longer active')
+        const media = await this.getMediaStore().storeBase64({ taskId: metadata.taskId, runId: metadata.runId }, encoded, signal)
+        signal.throwIfAborted()
+        if (!this.owns(entry) || this.closing || owner.adapter !== entry.adapter) throw new Error('Image session changed during caching')
+        return media
+      }, toolPolicy: config.toolPolicy, apiConnection: config.apiConnection, apiReadOnly: config.apiReadOnly, apiHistoryDirectory: path.join(this.options.baseStorageDir, 'api-conversations'), apiResumeSessionId: provider === 'api' ? nativeReference : undefined, taskId: config.taskId, runId: metadata.runId, worktreePath: config.cwd, agentProvider: provider, model: config.model, reasoningEffort: config.reasoningEffort, claudeBinPath: config.claudeBinPath, agyBinPath: config.agyBinPath, claudePermissionMode: config.claudePermissionMode, agyPermissionMode: config.agyPermissionMode, agyConversationId: (provider === 'antigravity' ? nativeReference : undefined) ?? config.agyConversationId, codexResumeThreadId: provider === 'codex' ? nativeReference : undefined, claudeResumeSessionId: provider === 'claude' ? nativeReference : undefined, claudeSessionId, codexBinPath: config.codexBinPath, approvalPolicy: config.approvalPolicy, sandbox: config.sandbox, env: config.env,
         onRawLog: (stream, line) => { if (this.owns(entry) && owner.adapter && entry.adapter === owner.adapter) this.diagnostic(entry, stream, line) },
         onEvent: event => {
           if (!this.owns(entry) || !owner.adapter || entry.adapter !== owner.adapter) return
@@ -736,13 +772,14 @@ export class SessionManager {
     if (value.launch !== undefined) {
       const launch = value.launch
       if (!launch || typeof launch !== 'object' || Array.isArray(launch) || launch.provider !== (value.provider ?? 'codex') || launch.presetName !== value.presetName || launch.model !== value.model) invalid()
+      if (launch.apiTransport !== undefined && !['chat-completions', 'responses'].includes(launch.apiTransport) || launch.apiProfile !== undefined && !['openai-compatible', 'codex-connector'].includes(launch.apiProfile) || launch.apiAllowCommands !== undefined && typeof launch.apiAllowCommands !== 'boolean' || launch.apiBaseUrl !== undefined && (typeof launch.apiBaseUrl !== 'string' || launch.apiBaseUrl.length > 2000)) invalid()
       if (launch.apiConnectionId !== value.apiConnectionId || (launch.apiReadOnly !== undefined && typeof launch.apiReadOnly !== 'boolean')) invalid()
       try { validateReasoningEffort(launch.provider, launch.reasoningEffort) } catch { invalid() }
       if (launch.toolPolicy === 'none' && !['claude', 'api'].includes(launch.provider)) invalid()
       if (launch.permissions !== undefined && !isPermissionLabel(launch.permissions)) invalid()
       const allowed: Record<string, readonly string[]> = { toolPolicy: ['none'], approvalPolicy: ['on-request', 'never', 'untrusted'], sandbox: ['read-only', 'workspace-write', 'danger-full-access'], claudePermissionMode: ['default', 'acceptEdits', 'plan', 'bypassPermissions', 'dontAsk'], agyPermissionMode: ['cli-settings', 'dangerously-skip'] }
       for (const [key, choices] of Object.entries(allowed)) if ((launch as unknown as Record<string, unknown>)[key] !== undefined && !choices.includes((launch as unknown as Record<string, string>)[key])) invalid()
-      if (Object.keys(launch).some(key => !['provider', 'presetName', 'model', 'reasoningEffort', 'permissions', 'apiConnectionId', 'apiReadOnly', ...Object.keys(allowed)].includes(key))) invalid()
+      if (Object.keys(launch).some(key => !['provider', 'presetName', 'model', 'reasoningEffort', 'permissions', 'apiConnectionId', 'apiReadOnly', 'apiTransport', 'apiProfile', 'apiBaseUrl', 'apiAllowCommands', ...Object.keys(allowed)].includes(key))) invalid()
     }
     return value
   }

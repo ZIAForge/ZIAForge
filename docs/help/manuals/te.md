@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: te; served locale: te; status: machine-translated. -->
 # ZIAForge వినియోగదారు మార్గదర్శి
@@ -23,7 +23,7 @@ Requested locale: te; served locale: te; status: machine-translated. -->
 - [ప్రీసెట్‌లు, మోడల్స్ మరియు యాక్సెస్](#models)
 - [చాట్‌లు, ఆపు మరియు క్యూ](#chat)
 - [ఫైళ్లు, Git మరియు పూర్తి కావడం](#files)
-- [API కనెక్షన్‌లు](#api)
+- [API connections](#api)
 - [సెట్టింగ్‌లు, భాషలు మరియు సురక్షిత రీసెట్](#settings)
 - [సహాయ అసిస్టెంట్‌ను అడగండి](#help-assistant)
 - [అసిస్టెంట్ మరియు Telegram](#assistant-control)
@@ -256,17 +256,25 @@ Work ఎటువంటి Git శాఖలను (బ్రాంచ్‌ల�
 
 <a id="api"></a>
 
-## API కనెక్షన్‌లు
+## API connections
 
-కనెక్షన్‌లు స్పష్టంగా ఎంచుకున్న OpenAI-అనుకూల ముగింపు బిందువును (ఎండ్‌పాయింట్) జోడిస్తుంది. పేరు, బేస్ URL, మోడల్ మరియు అవసరమైతే కీని నమోదు చేయండి. చాలా సర్వర్‌లకు /v1 తో ముగిసే బేస్ URL అవసరం; మీ ముగింపు బిందువు డాక్యుమెంటేషన్‌ను సంప్రదించండి.
+> పూర్తి గైడ్ ఇంకా మీ ఇంటర్‌ఫేస్ భాషలోకి అనువదించబడలేదు. ఇంగ్లీష్ రిఫరెన్స్ చూపబడుతోంది.
 
-లూప్‌బ్యాక్ HTTP మినహా HTTPS అవసరం. URL లో పొందుపరిచిన క్రెడెన్షియల్స్ లేని సాధారణ ముగింపు బిందువును ఉపయోగించండి. కీలు మద్దతు ఉన్న OS ఎన్‌క్రిప్షన్‌ను ఉపయోగిస్తాయి మరియు అవి UI కి తిరిగి ఇవ్వబడవు. ముగింపు బిందువును మార్చడానికి దాని కీని మళ్లీ నమోదు చేయడం అవసరం. కీ ఫీల్డ్‌ను ఖాళీగా ఉంచడం ద్వారా సేవ్ చేసిన కీ అలాగే ఉంటుంది; సేవ్ చేసిన కీని తీసివేయి దాన్ని స్పష్టంగా తొలగిస్తుంది.
+Connections adds an explicitly selected OpenAI-compatible endpoint. Enter a name, base URL, model and a key if needed. Select Chat Completions for existing integrations or Responses for function rounds, provider tool progress and generated images. Existing connections retain Chat Completions until you change them explicitly.
 
-API కాల్‌లు CLI చందాను ఉపయోగించవు. స్థానిక సెషన్‌ల నుండి టూల్స్ మరియు మోడల్స్ భిన్నంగా ఉంటాయి మరియు విజయవంతమైన మోడల్ ఆవిష్కరణ అనుమితిని (ఇన్ఫరెన్స్) రుజువు చేయదు. ప్రొవైడర్ వాస్తవంగా తిరిగి ఇచ్చినప్పుడు మాత్రమే టోకెన్ వినియోగం కనిపిస్తుంది.
+HTTPS is required except for loopback HTTP. Use a plain endpoint without credentials, queries or fragments. Redirects are refused. Keys use supported OS encryption and are never returned to the UI. Changing the endpoint requires re-entering or clearing its key. Leaving the key field blank preserves a saved key.
 
-టాస్క్ వివరణ లేదా ప్రీసెట్ సూచనలలో కాకుండా క్రెడెన్షియల్స్‌ను కనెక్షన్‌లలో ఉంచండి. రీడ్-ఓన్లీ సమీక్షకులు వారికి అనుమతించబడిన API ఫైల్ టూల్స్‌ను మాత్రమే స్వీకరిస్తారు; రిపోర్ట్ ఆర్కిటెక్ట్‌కు ఎటువంటి టూల్స్ ఉండవు. మద్దతు లేని టూల్ కాల్‌లు నిశ్శబ్దంగా అమలు చేయబడటానికి బదులుగా తిరస్కరించబడతాయి. రీజనింగ్ పారామితులు, టూల్ మద్దతు మరియు మోడల్ జాబితాలలో సర్వర్‌లు మారుతూ ఉంటాయి; లోపాన్ని మీ ముగింపు బిందువు యొక్క స్వంత నిబంధనలతో పోల్చండి.
+Workspace file tools execute in the backend-resolved local task folder, with relative paths and checks against traversal and links. Every file write needs explicit approval and an unchanged expected revision. Read-only sessions expose only read tools. In Responses, Allow local commands separately enables approved executable/argument calls on macOS and Linux. Command supervision is unavailable on Windows; the adapter does not advertise that tool there. Commands always require owner approval and are not an operating-system sandbox.
 
-సంబంధిత సూచనలు: [API కనెక్షన్‌లు](../../API_CONNECTIONS.md).
+The Codex connector profile identifies that gateway’s Responses tool-progress extension. Native provider tools execute on the server, separately from caller tools on your computer. Local read-only permissions do not constrain the server. A connector cannot be selected for a report-only architect that requires all tools disabled: unsupported isolation fails rather than silently allowing native tools. Select an endpoint that can enforce the required policy.
+
+Generated PNG, JPEG and WebP results appear as separate image cards, with Save image, outside collapsed tool output. Images are validated and kept in private application storage; model-supplied URLs and Markdown images are not fetched automatically. Opening saved history, retrying an image read and saving a cached image do not request a new generation. Results are bounded to 32 MiB and 32 million pixels per image, with a 128 MiB private cache. Preserve needed images before manually clearing the private cache if it becomes full.
+
+Responses conversations retain the acknowledged response identity and exact function call IDs. Interrupted inputs are not automatically resent. An uncertain local edit or command is not rerun after restart; preserve the history and explicitly create a new context after inspection. Changes to a saved transport or endpoint require explicit reconfiguration. Provider status, cancellation and expiry failures are reported without hiding them behind a CLI fallback.
+
+API connections use their configured endpoint and authentication, separately from native CLI subscriptions. Some gateways use subscriptions internally; ZIAForge does not copy native authentication into an API. Models, tool policies, reasoning parameters and billing depend on the endpoint. Discovery alone does not prove inference. Keep keys in Connections, never in task prose or screenshots.
+
+సంబంధిత సూచనలు: [API connections](../../API_CONNECTIONS.md).
 
 <a id="settings"></a>
 

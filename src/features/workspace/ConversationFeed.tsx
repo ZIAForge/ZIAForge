@@ -24,6 +24,7 @@ import type { FeedItem } from '../../store'
 import { MemoApprovalCard } from './ApprovalCard'
 import { MarkdownMessage } from '../../components/MarkdownMessage'
 import { WorkflowMessageText } from './WorkflowMessageText'
+import { GeneratedMedia, type AgentMediaOwner } from './GeneratedMedia'
 
 export interface ConversationFeedProps {
   messages?: ReconstructedMessage[]
@@ -37,6 +38,7 @@ export interface ConversationFeedProps {
   autoScroll?: boolean
   workflowTitle?: string
   workflowKind?: 'work'
+  mediaOwner?: AgentMediaOwner
 }
 
 export type FeedRow =
@@ -206,6 +208,7 @@ export const ConversationFeed: React.FC<ConversationFeedProps> = ({
   autoScroll = true,
   workflowTitle,
   workflowKind,
+  mediaOwner,
 }) => {
   const { t } = useTranslation()
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -255,6 +258,7 @@ export const ConversationFeed: React.FC<ConversationFeedProps> = ({
               message={row.message}
               workflowTitle={workflowTitle}
               workflowKind={workflowKind}
+              mediaOwner={mediaOwner}
               onResolveApproval={onResolveApproval}
               onStopTool={onStopTool}
             />
@@ -279,6 +283,7 @@ interface MessageBubbleProps {
   message: ReconstructedMessage
   onResolveApproval?: (approvalId: string, decision: 'allow' | 'deny') => void | Promise<void>
   onStopTool?: (callId: string, command?: string) => void
+  mediaOwner?: AgentMediaOwner
 }
 
 const MessageBubble: React.FC<MessageBubbleProps> = ({
@@ -287,6 +292,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
   workflowKind,
   onResolveApproval,
   onStopTool,
+  mediaOwner,
 }) => {
   const { t, language } = useTranslation()
   const [isThinkingExpanded, setIsThinkingExpanded] = useState<boolean>(false)
@@ -409,6 +415,11 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
           </div>
         )}
 
+        {/* Media remains visible independently of Tools and generic Output. */}
+        {message.tools?.some(tool => tool.media?.length) && <div className="space-y-3" data-testid={`media-block-${message.id}`}>
+          {(message.tools ?? []).flatMap(tool => (tool.media ?? []).map(media => <GeneratedMedia key={`${tool.callId}:${media.id}`} media={media} owner={mediaOwner} />))}
+        </div>}
+
         {/* 3. Approvals / Permission requests (if present) */}
         {message.approvals && message.approvals.length > 0 && (
           <div
@@ -452,7 +463,9 @@ const MemoMessageBubble = React.memo(MessageBubble, (previous, next) => {
     previous.onResolveApproval !== next.onResolveApproval ||
     previous.onStopTool !== next.onStopTool ||
     previous.workflowTitle !== next.workflowTitle ||
-    previous.workflowKind !== next.workflowKind
+    previous.workflowKind !== next.workflowKind ||
+    previous.mediaOwner?.sessionId !== next.mediaOwner?.sessionId ||
+    previous.mediaOwner?.runId !== next.mediaOwner?.runId
   ) {
     return false
   }
@@ -499,6 +512,7 @@ const ToolItemCard: React.FC<ToolItemCardProps> = ({ tool, onStopTool }) => {
           <span className="font-semibold text-zinc-300 text-[11px] truncate">
             {tool.toolName}
           </span>
+          {tool.executor === 'provider' && <span data-testid={`tool-provider-${tool.callId}`} className="shrink-0 rounded border border-sky-500/20 bg-sky-500/10 px-1.5 py-0.5 text-[9px] text-sky-300">{uiText('Provider tool')}</span>}
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
@@ -512,7 +526,7 @@ const ToolItemCard: React.FC<ToolItemCardProps> = ({ tool, onStopTool }) => {
                 {t('running') || 'Выполняется'}
               </span>
 
-              {onStopTool && (
+              {onStopTool && tool.executor !== 'provider' && (
                 <button
                   type="button"
                   onClick={() =>

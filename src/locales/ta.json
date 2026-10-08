@@ -1290,5 +1290,22 @@
   "help.aiStopped": "பதில் நிறுத்தப்பட்டது. உங்கள் கேள்வி இன்னும் கிடைக்கும்.",
   "help.aiFailed": "உதவி உதவியாளரால் இந்தப் பதிலை நிறைவு செய்ய முடியவில்லை. தேர்ந்தெடுக்கப்பட்ட AI இணைப்பைச் சரிபார்த்து மீண்டும் முயற்சிக்கவும்.",
   "help.aiNativeRequired": "இந்த இயல்பான CLI-க்கு உரிமையாளரின் கணினி அணுகல் அனுமதி தேவை. Settings → Control-இல் அதை உள்ளூரில் இயக்கவும், அல்லது கருவிகளற்ற உதவி அமர்வுக்கு Claude Code அல்லது ஒரு API முந்தையமைப்பைத் தேர்ந்தெடுக்கவும்.",
-  "help.aiPresetChanged": "தொடக்கத்தின் போது இந்த முந்தையமைப்பு மாறியது. அதை மீண்டும் தேர்ந்தெடுத்து மீண்டும் முயற்சிக்கவும்."
+  "help.aiPresetChanged": "தொடக்கத்தின் போது இந்த முந்தையமைப்பு மாறியது. அதை மீண்டும் தேர்ந்தெடுத்து மீண்டும் முயற்சிக்கவும்.",
+  "api_responses_text_0": "Generated image",
+  "api_responses_text_1": "Save image",
+  "api_responses_text_2": "Image unavailable",
+  "api_responses_text_3": "Invalid generated image data",
+  "api_responses_text_4": "Could not load image: {error}",
+  "api_responses_text_5": "Could not save image: {error}",
+  "api_responses_text_6": "Image saved",
+  "api_responses_text_7": "Image save cancelled",
+  "api_responses_text_8": "Provider tool",
+  "api_responses_text_9": "API transport",
+  "api_responses_text_10": "API profile",
+  "api_responses_text_11": "Chat Completions",
+  "api_responses_text_12": "Responses",
+  "api_responses_text_13": "OpenAI-compatible",
+  "api_responses_text_14": "Codex connector",
+  "api_responses_text_15": "Allow local commands",
+  "api_responses_text_16": "Commands run locally after your approval. This is not an operating-system sandbox."
 }

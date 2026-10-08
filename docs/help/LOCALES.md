@@ -1,66 +1,66 @@
-<!-- Generated from docs/help/en.json; source SHA-256 19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help. -->
 # Help translation coverage
 
-Interface translations and help translations have separate provenance. All 56 configured interface locales have a help entry. Machine-translated bodies are served only for the current English source hash and carry an explicit notice; they are not human-reviewed translations. Missing/draft bodies display the English reference.
+Interface translations and help translations have separate provenance. All 56 configured interface locales have a help entry. Machine-translated bodies are served only for the current English source hash and carry an explicit notice; they are not human-reviewed translations. Missing/draft bodies display the English reference. Individually changed sections may also carry an explicit English fallback while unchanged translations retain their original provenance.
 
-| Locale | Help status | Served guide | Offline manual |
-| --- | --- | --- | --- |
-| am | machine-translated | am | [am](manuals/am.md) |
-| ar | machine-translated | ar | [ar](manuals/ar.md) |
-| az | machine-translated | az | [az](manuals/az.md) |
-| bho | machine-translated | bho | [bho](manuals/bho.md) |
-| bn | machine-translated | bn | [bn](manuals/bn.md) |
-| ceb | machine-translated | ceb | [ceb](manuals/ceb.md) |
-| de | machine-translated | de | [de](manuals/de.md) |
-| en | source | en | [en](../USER_GUIDE.md) |
-| es | machine-translated | es | [es](manuals/es.md) |
-| fa | machine-translated | fa | [fa](manuals/fa.md) |
-| ff | machine-translated | ff | [ff](manuals/ff.md) |
-| fr | machine-translated | fr | [fr](manuals/fr.md) |
-| gu | machine-translated | gu | [gu](manuals/gu.md) |
-| ha | machine-translated | ha | [ha](manuals/ha.md) |
-| hi | machine-translated | hi | [hi](manuals/hi.md) |
-| id | machine-translated | id | [id](manuals/id.md) |
-| ig | machine-translated | ig | [ig](manuals/ig.md) |
-| it | machine-translated | it | [it](manuals/it.md) |
-| ja-JP | machine-translated | ja-JP | [ja-JP](manuals/ja-JP.md) |
-| jv | machine-translated | jv | [jv](manuals/jv.md) |
-| kk | machine-translated | kk | [kk](manuals/kk.md) |
-| km | machine-translated | km | [km](manuals/km.md) |
-| kn | machine-translated | kn | [kn](manuals/kn.md) |
-| ko | machine-translated | ko | [ko](manuals/ko.md) |
-| ku | machine-translated | ku | [ku](manuals/ku.md) |
-| mai | machine-translated | mai | [mai](manuals/mai.md) |
-| mg | machine-translated | mg | [mg](manuals/mg.md) |
-| ml | machine-translated | ml | [ml](manuals/ml.md) |
-| mr | machine-translated | mr | [mr](manuals/mr.md) |
-| my | machine-translated | my | [my](manuals/my.md) |
-| ne | machine-translated | ne | [ne](manuals/ne.md) |
-| nl | machine-translated | nl | [nl](manuals/nl.md) |
-| om | machine-translated | om | [om](manuals/om.md) |
-| or | machine-translated | or | [or](manuals/or.md) |
-| pa | machine-translated | pa | [pa](manuals/pa.md) |
-| pl | machine-translated | pl | [pl](manuals/pl.md) |
-| pnb | machine-translated | pnb | [pnb](manuals/pnb.md) |
-| ps | machine-translated | ps | [ps](manuals/ps.md) |
-| pt-BR | machine-translated | pt-BR | [pt-BR](manuals/pt-BR.md) |
-| ro | machine-translated | ro | [ro](manuals/ro.md) |
-| ru | machine-translated | ru | [ru](manuals/ru.md) |
-| sd | machine-translated | sd | [sd](manuals/sd.md) |
-| so | machine-translated | so | [so](manuals/so.md) |
-| su | machine-translated | su | [su](manuals/su.md) |
-| ta | machine-translated | ta | [ta](manuals/ta.md) |
-| te | machine-translated | te | [te](manuals/te.md) |
-| th | machine-translated | th | [th](manuals/th.md) |
-| tl | machine-translated | tl | [tl](manuals/tl.md) |
-| tr | machine-translated | tr | [tr](manuals/tr.md) |
-| uk | machine-translated | uk | [uk](manuals/uk.md) |
-| ur | machine-translated | ur | [ur](manuals/ur.md) |
-| uz | machine-translated | uz | [uz](manuals/uz.md) |
-| vi | machine-translated | vi | [vi](manuals/vi.md) |
-| yo | machine-translated | yo | [yo](manuals/yo.md) |
-| zh-CN | machine-translated | zh-CN | [zh-CN](manuals/zh-CN.md) |
-| zh-TW | machine-translated | zh-TW | [zh-TW](manuals/zh-TW.md) |
+| Locale | Help status | Served guide | English fallback sections | Offline manual |
+| --- | --- | --- | --- | --- |
+| am | machine-translated | am | api | [am](manuals/am.md) |
+| ar | machine-translated | ar | api | [ar](manuals/ar.md) |
+| az | machine-translated | az | api | [az](manuals/az.md) |
+| bho | machine-translated | bho | api | [bho](manuals/bho.md) |
+| bn | machine-translated | bn | api | [bn](manuals/bn.md) |
+| ceb | machine-translated | ceb | api | [ceb](manuals/ceb.md) |
+| de | machine-translated | de | api | [de](manuals/de.md) |
+| en | source | en | — | [en](../USER_GUIDE.md) |
+| es | machine-translated | es | api | [es](manuals/es.md) |
+| fa | machine-translated | fa | api | [fa](manuals/fa.md) |
+| ff | machine-translated | ff | api | [ff](manuals/ff.md) |
+| fr | machine-translated | fr | api | [fr](manuals/fr.md) |
+| gu | machine-translated | gu | api | [gu](manuals/gu.md) |
+| ha | machine-translated | ha | api | [ha](manuals/ha.md) |
+| hi | machine-translated | hi | api | [hi](manuals/hi.md) |
+| id | machine-translated | id | api | [id](manuals/id.md) |
+| ig | machine-translated | ig | api | [ig](manuals/ig.md) |
+| it | machine-translated | it | api | [it](manuals/it.md) |
+| ja-JP | machine-translated | ja-JP | api | [ja-JP](manuals/ja-JP.md) |
+| jv | machine-translated | jv | api | [jv](manuals/jv.md) |
+| kk | machine-translated | kk | api | [kk](manuals/kk.md) |
+| km | machine-translated | km | api | [km](manuals/km.md) |
+| kn | machine-translated | kn | api | [kn](manuals/kn.md) |
+| ko | machine-translated | ko | api | [ko](manuals/ko.md) |
+| ku | machine-translated | ku | api | [ku](manuals/ku.md) |
+| mai | machine-translated | mai | api | [mai](manuals/mai.md) |
+| mg | machine-translated | mg | api | [mg](manuals/mg.md) |
+| ml | machine-translated | ml | api | [ml](manuals/ml.md) |
+| mr | machine-translated | mr | api | [mr](manuals/mr.md) |
+| my | machine-translated | my | api | [my](manuals/my.md) |
+| ne | machine-translated | ne | api | [ne](manuals/ne.md) |
+| nl | machine-translated | nl | api | [nl](manuals/nl.md) |
+| om | machine-translated | om | api | [om](manuals/om.md) |
+| or | machine-translated | or | api | [or](manuals/or.md) |
+| pa | machine-translated | pa | api | [pa](manuals/pa.md) |
+| pl | machine-translated | pl | api | [pl](manuals/pl.md) |
+| pnb | machine-translated | pnb | api | [pnb](manuals/pnb.md) |
+| ps | machine-translated | ps | api | [ps](manuals/ps.md) |
+| pt-BR | machine-translated | pt-BR | api | [pt-BR](manuals/pt-BR.md) |
+| ro | machine-translated | ro | api | [ro](manuals/ro.md) |
+| ru | machine-translated | ru | api | [ru](manuals/ru.md) |
+| sd | machine-translated | sd | api | [sd](manuals/sd.md) |
+| so | machine-translated | so | api | [so](manuals/so.md) |
+| su | machine-translated | su | api | [su](manuals/su.md) |
+| ta | machine-translated | ta | api | [ta](manuals/ta.md) |
+| te | machine-translated | te | api | [te](manuals/te.md) |
+| th | machine-translated | th | api | [th](manuals/th.md) |
+| tl | machine-translated | tl | api | [tl](manuals/tl.md) |
+| tr | machine-translated | tr | api | [tr](manuals/tr.md) |
+| uk | machine-translated | uk | api | [uk](manuals/uk.md) |
+| ur | machine-translated | ur | api | [ur](manuals/ur.md) |
+| uz | machine-translated | uz | api | [uz](manuals/uz.md) |
+| vi | machine-translated | vi | api | [vi](manuals/vi.md) |
+| yo | machine-translated | yo | api | [yo](manuals/yo.md) |
+| zh-CN | machine-translated | zh-CN | api | [zh-CN](manuals/zh-CN.md) |
+| zh-TW | machine-translated | zh-TW | api | [zh-TW](manuals/zh-TW.md) |
 
 See [maintenance instructions](../HELP_MAINTENANCE.md) before claiming a translation is reviewed.

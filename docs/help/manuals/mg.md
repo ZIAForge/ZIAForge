@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: mg; served locale: mg; status: machine-translated. -->
 # Torolalan'ny mpampiasa ZIAForge
@@ -23,7 +23,7 @@ Ny teny anglisy no fototra manan-kery. Ny fanampiana nadika tamin'ny milina dia 
 - [Tolotra mialoha, maodely ary fidirana](#models)
 - [Resaka, Mijanona ary ny filaharana](#chat)
 - [Rakitra, Git ary fahavitana](#files)
-- [Fifandraisana API](#api)
+- [API connections](#api)
 - [Fikirana, fiteny ary famerenana amin'ny laoniny azo antoka](#settings)
 - [Manontania ny mpanampy amin'ny Fanampiana](#help-assistant)
 - [Mpanampy sy Telegram](#assistant-control)
@@ -256,17 +256,25 @@ Torolalana mifandraika: [Fifanarahana fanitsiana voafaritra karazana](../../../s
 
 <a id="api"></a>
 
-## Fifandraisana API
+## API connections
 
-Ny Fifandraisana dia manampy teboka fidirana mifanaraka amin'ny OpenAI nofidina mazava tsara. Mampidira anarana, URL fototra, maodely ary lakile raha ilaina. Mpizara maro no mitaky URL fototra mifarana amin'ny /v1; jereo ny tahirin-kevitry ny teboka fidiranao.
+> Mbola tsy voadika amin'ny tenin'ny interface-nao ny torolalana feno. Mampiseho ny loharano amin'ny teny Anglisy.
 
-Ilaina ny HTTPS afa-tsy amin'ny HTTP loopback. Mampiasà teboka fidirana tsotra tsy misy mari-pamantarana fanamarinana mifototra ao anatin'ny URL. Mampiasa fanafenana OS tohanana ny lakile ary tsy averina any amin'ny UI. Ny fanovana ny teboka fidirana dia mitaky fampidirana indray ny lakileny. Ny famelana ny sahan'ny lakile ho foana dia mitazona lakile voatahiry; ny Esory ny lakile voatahiry dia mamafa izany mazava tsara.
+Connections adds an explicitly selected OpenAI-compatible endpoint. Enter a name, base URL, model and a key if needed. Select Chat Completions for existing integrations or Responses for function rounds, provider tool progress and generated images. Existing connections retain Chat Completions until you change them explicitly.
 
-Ny antso API dia tsy mampiasa famandrihana CLI. Tsy mitovy amin'ny fotoam-piasana natoraly ny fitaovana sy ny maodely, ary ny fahitana maodely nahomby dia tsy porofon'ny faminavinana. Ny fampiasana token dia tsy miseho raha tsy rehefa tena mamerina izany ny mpamatsy.
+HTTPS is required except for loopback HTTP. Use a plain endpoint without credentials, queries or fragments. Redirects are refused. Keys use supported OS encryption and are never returned to the UI. Changing the endpoint requires re-entering or clearing its key. Leaving the key field blank preserves a saved key.
 
-Tazomy ao amin'ny Fifandraisana ny mari-pamantarana fa aza atao anaty lahatsoratry ny asa na torolalan'ny tolotra mialoha. Ny mpamerina mamaky fotsiny dia tsy mahazo afa-tsy ny fitaovana rakitra API navela ho azy ireo; tsy manana fitaovana ny mpamolavola tatitra. Nolavina ny antso fitaovana tsy tohanana fa tsy tanterahina mangina. Miovaova arakaraka ny mpizara ny masontsivana fisainana, ny fanohanan'ny fitaovana ary ny lisitry ny maodely; ampitahao amin'ny fifanarahana manokan'ny teboka fidiranao ny hadisoana.
+Workspace file tools execute in the backend-resolved local task folder, with relative paths and checks against traversal and links. Every file write needs explicit approval and an unchanged expected revision. Read-only sessions expose only read tools. In Responses, Allow local commands separately enables approved executable/argument calls on macOS and Linux. Command supervision is unavailable on Windows; the adapter does not advertise that tool there. Commands always require owner approval and are not an operating-system sandbox.
 
-Torolalana mifandraika: [Fifandraisana API](../../API_CONNECTIONS.md).
+The Codex connector profile identifies that gateway’s Responses tool-progress extension. Native provider tools execute on the server, separately from caller tools on your computer. Local read-only permissions do not constrain the server. A connector cannot be selected for a report-only architect that requires all tools disabled: unsupported isolation fails rather than silently allowing native tools. Select an endpoint that can enforce the required policy.
+
+Generated PNG, JPEG and WebP results appear as separate image cards, with Save image, outside collapsed tool output. Images are validated and kept in private application storage; model-supplied URLs and Markdown images are not fetched automatically. Opening saved history, retrying an image read and saving a cached image do not request a new generation. Results are bounded to 32 MiB and 32 million pixels per image, with a 128 MiB private cache. Preserve needed images before manually clearing the private cache if it becomes full.
+
+Responses conversations retain the acknowledged response identity and exact function call IDs. Interrupted inputs are not automatically resent. An uncertain local edit or command is not rerun after restart; preserve the history and explicitly create a new context after inspection. Changes to a saved transport or endpoint require explicit reconfiguration. Provider status, cancellation and expiry failures are reported without hiding them behind a CLI fallback.
+
+API connections use their configured endpoint and authentication, separately from native CLI subscriptions. Some gateways use subscriptions internally; ZIAForge does not copy native authentication into an API. Models, tool policies, reasoning parameters and billing depend on the endpoint. Discovery alone does not prove inference. Keep keys in Connections, never in task prose or screenshots.
+
+Torolalana mifandraika: [API connections](../../API_CONNECTIONS.md).
 
 <a id="settings"></a>
 

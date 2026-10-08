@@ -1290,5 +1290,22 @@
   "help.aiStopped": "Gipahunong ang tubag. Ang imong pangutana anaa pa gihapon.",
   "help.aiFailed": "Ang katabang sa Tabang wala makahuman niini nga tubag. Susiha ang gipiling koneksyon sa AI ug sulayi pag-usab.",
   "help.aiNativeRequired": "Kini nga lumad nga CLI nagkinahanglan sa pagtugot sa pag-access sa kompyuter sa tag-iya. Ipaandar kini sa lokal sa Mga Setting → Pagkontrol, o pagpili og Claude Code o usa ka API preset alang sa sesyon sa Tabang nga walay gamit.",
-  "help.aiPresetChanged": "Kini nga preset nausab samtang nagsugod. Pilia kini pag-usab ug sulayi pag-usab."
+  "help.aiPresetChanged": "Kini nga preset nausab samtang nagsugod. Pilia kini pag-usab ug sulayi pag-usab.",
+  "api_responses_text_0": "Generated image",
+  "api_responses_text_1": "Save image",
+  "api_responses_text_2": "Image unavailable",
+  "api_responses_text_3": "Invalid generated image data",
+  "api_responses_text_4": "Could not load image: {error}",
+  "api_responses_text_5": "Could not save image: {error}",
+  "api_responses_text_6": "Image saved",
+  "api_responses_text_7": "Image save cancelled",
+  "api_responses_text_8": "Provider tool",
+  "api_responses_text_9": "API transport",
+  "api_responses_text_10": "API profile",
+  "api_responses_text_11": "Chat Completions",
+  "api_responses_text_12": "Responses",
+  "api_responses_text_13": "OpenAI-compatible",
+  "api_responses_text_14": "Codex connector",
+  "api_responses_text_15": "Allow local commands",
+  "api_responses_text_16": "Commands run locally after your approval. This is not an operating-system sandbox."
 }

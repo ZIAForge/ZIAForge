@@ -25,6 +25,8 @@ interface HelpLocaleEntry {
   reviewer: string | null
   translatedSourceSha256?: string | null
   translationMethod?: string | null
+  englishFallbackSections?: string[]
+  retainedTranslationSourceSha256?: string
 }
 // Machine translations and human-reviewed translations remain distinct claims.
 // The build's consistency command validates their complete schema and contract links.
@@ -37,6 +39,7 @@ export function resolveHelp(language: string) {
   const translated = translations[path]
   const reviewed = entry?.status === 'reviewed' && entry.reviewedSourceSha256 === helpSourceSha256 && !!entry.reviewer && translated?.locale === language
   const machineTranslated = entry?.status === 'machine-translated' && entry.translatedSourceSha256 === helpSourceSha256 && !!entry.translationMethod && translated?.locale === language
-  const guide: HelpGuide = reviewed || machineTranslated ? translated : englishGuide
-  return { guide, locale: guide.locale, direction: rtlLocales.has(guide.locale) ? 'rtl' as const : 'ltr' as const, isFallback: language !== 'en' && !reviewed && !machineTranslated, isMachineTranslated: machineTranslated, status: entry?.status ?? 'not-translated' }
+  const englishFallbackSections = machineTranslated ? entry.englishFallbackSections ?? [] : []
+  const guide: HelpGuide = reviewed || machineTranslated ? { ...translated, sections: translated.sections.map(section => englishFallbackSections.includes(section.id) ? englishGuide.sections.find(original => original.id === section.id) ?? section : section) } : englishGuide
+  return { guide, locale: guide.locale, direction: rtlLocales.has(guide.locale) ? 'rtl' as const : 'ltr' as const, isFallback: language !== 'en' && !reviewed && !machineTranslated, isMachineTranslated: machineTranslated, status: entry?.status ?? 'not-translated', englishFallbackSections }
 }

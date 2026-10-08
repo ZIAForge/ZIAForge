@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: zh-TW; served locale: zh-TW; status: machine-translated. -->
 # ZIAForge 使用者指南
@@ -23,7 +23,7 @@ Requested locale: zh-TW; served locale: zh-TW; status: machine-translated. -->
 - [預設集、模型與存取權限](#models)
 - [聊天、「停止」與佇列](#chat)
 - [檔案、Git 與完成](#files)
-- [API 連線](#api)
+- [API connections](#api)
 - [設定、語言與安全重設](#settings)
 - [向說明助理提問](#help-assistant)
 - [助理與 Telegram](#assistant-control)
@@ -256,17 +256,25 @@ Work 不會建立任何 Git 分支，也沒有 Git 定稿作業。請從選取�
 
 <a id="api"></a>
 
-## API 連線
+## API connections
 
-「連線」可新增明確選取的 OpenAI 相容端點。請輸入名稱、基本 URL、模型以及金鑰（若需要）。許多伺服器要求基本 URL 以 /v1 結尾；請參閱您的端點說明文件。
+> 完整指南尚未翻譯成您的介面語言。目前顯示英文參考內容。
 
-除 loopback HTTP 外，皆強制要求 HTTPS。請使用未在 URL 中嵌入憑證的純端點。金鑰使用受支援的 OS 加密技術，且不會回傳給 UI。變更端點需要重新輸入其金鑰。將金鑰欄位留白會保留已儲存的金鑰；「移除儲存的金鑰」則會明確予以清除。
+Connections adds an explicitly selected OpenAI-compatible endpoint. Enter a name, base URL, model and a key if needed. Select Chat Completions for existing integrations or Responses for function rounds, provider tool progress and generated images. Existing connections retain Chat Completions until you change them explicitly.
 
-API 呼叫不會使用 CLI 訂閱。工具與模型與原生工作階段不同，且成功發現模型並不證明具備推論能力。只有在提供者實際回傳 Token 使用量時才會顯示該數據。
+HTTPS is required except for loopback HTTP. Use a plain endpoint without credentials, queries or fragments. Redirects are refused. Keys use supported OS encryption and are never returned to the UI. Changing the endpoint requires re-entering or clearing its key. Leaving the key field blank preserves a saved key.
 
-請將憑證保存在「連線」中，而非任務敘述或預設集指示中。唯讀審查者僅會收到其獲准的 API 檔案工具；報告架構師則沒有任何工具。不受支援的工具呼叫會被拒絕，而不會靜默執行。各伺服器的推論參數、工具支援與模型清單各有不同；請將錯誤與您端點自身的約定進行比對。
+Workspace file tools execute in the backend-resolved local task folder, with relative paths and checks against traversal and links. Every file write needs explicit approval and an unchanged expected revision. Read-only sessions expose only read tools. In Responses, Allow local commands separately enables approved executable/argument calls on macOS and Linux. Command supervision is unavailable on Windows; the adapter does not advertise that tool there. Commands always require owner approval and are not an operating-system sandbox.
 
-相關指示: [API 連線](../../API_CONNECTIONS.md).
+The Codex connector profile identifies that gateway’s Responses tool-progress extension. Native provider tools execute on the server, separately from caller tools on your computer. Local read-only permissions do not constrain the server. A connector cannot be selected for a report-only architect that requires all tools disabled: unsupported isolation fails rather than silently allowing native tools. Select an endpoint that can enforce the required policy.
+
+Generated PNG, JPEG and WebP results appear as separate image cards, with Save image, outside collapsed tool output. Images are validated and kept in private application storage; model-supplied URLs and Markdown images are not fetched automatically. Opening saved history, retrying an image read and saving a cached image do not request a new generation. Results are bounded to 32 MiB and 32 million pixels per image, with a 128 MiB private cache. Preserve needed images before manually clearing the private cache if it becomes full.
+
+Responses conversations retain the acknowledged response identity and exact function call IDs. Interrupted inputs are not automatically resent. An uncertain local edit or command is not rerun after restart; preserve the history and explicitly create a new context after inspection. Changes to a saved transport or endpoint require explicit reconfiguration. Provider status, cancellation and expiry failures are reported without hiding them behind a CLI fallback.
+
+API connections use their configured endpoint and authentication, separately from native CLI subscriptions. Some gateways use subscriptions internally; ZIAForge does not copy native authentication into an API. Models, tool policies, reasoning parameters and billing depend on the endpoint. Discovery alone does not prove inference. Keep keys in Connections, never in task prose or screenshots.
+
+相關指示: [API connections](../../API_CONNECTIONS.md).
 
 <a id="settings"></a>
 

@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: ta; served locale: ta; status: machine-translated. -->
 # ZIAForge பயனர் வழிகாட்டி
@@ -23,7 +23,7 @@ Requested locale: ta; served locale: ta; status: machine-translated. -->
 - [முன்னமைவுகள், மாதிரிகள் மற்றும் அணுகல்](#models)
 - [அரட்டைகள், நிறுத்து மற்றும் வரிசை](#chat)
 - [கோப்புகள், Git மற்றும் நிறைவு](#files)
-- [API இணைப்புகள்](#api)
+- [API connections](#api)
 - [அமைப்புகள், மொழிகள் மற்றும் பாதுகாப்பான மீட்டமைப்பு](#settings)
 - [உதவி உதவியாளரிடம் கேளுங்கள்](#help-assistant)
 - [உதவியாளரும் Telegram-மும்](#assistant-control)
@@ -256,17 +256,25 @@ Worktree அகற்றுதல் என்பது ஒரு தனி ப�
 
 <a id="api"></a>
 
-## API இணைப்புகள்
+## API connections
 
-இணைப்புகள் (Connections) வெளிப்படையாகத் தேர்ந்தெடுக்கப்பட்ட OpenAI-இணக்கமான இறுதிப்புள்ளியைச் (endpoint) சேர்க்கிறது. பெயர், அடிப்படை URL, மாதிரி மற்றும் தேவைப்பட்டால் ஒரு விசையை உள்ளிடவும். பல சேவையகங்களுக்கு /v1 இல் முடியும் அடிப்படை URL தேவைப்படுகிறது; உங்கள் இறுதிப்புள்ளி ஆவணங்களைப் பார்க்கவும்.
+> முழுமையான வழிகாட்டி உங்கள் இடைமுக மொழியில் இன்னும் மொழிபெயர்க்கப்படவில்லை. ஆங்கிலக் குறிப்பு காட்டப்படுகிறது.
 
-லூப்ேக் (loopback) HTTP தவிர மற்றவற்றுக்கு HTTPS தேவை. URL இல் நற்சான்றிதழ்கள் பதிக்கப்படாத ஒரு எளிய இறுதிப்புள்ளியைப் பயன்படுத்தவும். விசைகள் ஆதரிக்கப்படும் OS குறியாக்கத்தைப் பயன்படுத்துகின்றன மற்றும் UI க்குத் திருப்பி அனுப்பப்படுவதில்லை. இறுதிப்புள்ளியை மாற்றுவதற்கு அதன் விசையை மீண்டும் உள்ளிட வேண்டும். விசை புலத்தை காலியாக விட்டுவிடுவது சேமிக்கப்பட்ட விசையைப் பாதுகாக்கிறது; சேமித்த விசையை அகற்று (Remove the saved key) என்பது அதை வெளிப்படையாக நீக்குகிறது.
+Connections adds an explicitly selected OpenAI-compatible endpoint. Enter a name, base URL, model and a key if needed. Select Chat Completions for existing integrations or Responses for function rounds, provider tool progress and generated images. Existing connections retain Chat Completions until you change them explicitly.
 
-API அழைப்புகள் ஒரு CLI சந்தாவைப் பயன்படுத்துவதில்லை. கருவிகளும் மாதிரிகளும் நேட்டிவ் அமர்வுகளிலிருந்து வேறுபடுகின்றன, மேலும் வெற்றிகரமான மாதிரி கண்டுபிடிப்பு அனுமானத்தை (inference) நிரூபிக்காது. வழங்குநர் உண்மையில் திருப்பி அனுப்பும்போது மட்டுமே டோக்கன் பயன்பாடு தோன்றும்.
+HTTPS is required except for loopback HTTP. Use a plain endpoint without credentials, queries or fragments. Redirects are refused. Keys use supported OS encryption and are never returned to the UI. Changing the endpoint requires re-entering or clearing its key. Leaving the key field blank preserves a saved key.
 
-நற்சான்றிதழ்களை பணி உரை அல்லது முன்னமைக்கப்பட்ட வழிமுறைகளில் வைப்பதற்குப் பதிலாக இணைப்புகளில் வைக்கவும். படிக்க மட்டும் (Read-only) மதிப்பாய்வாளர்கள் தங்களுக்கு அனுமதிக்கப்பட்ட API கோப்புக் கருவிகளை மட்டுமே பெறுகிறார்கள்; அறிக்கை கட்டமைப்பாளருக்கு (report architect) கருவிகள் எதுவும் இல்லை. ஆதரிக்கப்படாத கருவி அழைப்புகள் அமைதியாக இயக்கப்படாமல் நிராகரிக்கப்படுகின்றன. பகுத்தறியும் அளவுருக்கள், கருவி ஆதரவு மற்றும் மாதிரி பட்டியல்களில் சேவையகங்கள் மாறுபடுகின்றன; உங்கள் இறுதிப்புள்ளியின் சொந்த ஒப்பந்தத்துடன் பிழையை ஒப்பிடவும்.
+Workspace file tools execute in the backend-resolved local task folder, with relative paths and checks against traversal and links. Every file write needs explicit approval and an unchanged expected revision. Read-only sessions expose only read tools. In Responses, Allow local commands separately enables approved executable/argument calls on macOS and Linux. Command supervision is unavailable on Windows; the adapter does not advertise that tool there. Commands always require owner approval and are not an operating-system sandbox.
 
-தொடர்புடைய வழிமுறைகள்: [API இணைப்புகள்](../../API_CONNECTIONS.md).
+The Codex connector profile identifies that gateway’s Responses tool-progress extension. Native provider tools execute on the server, separately from caller tools on your computer. Local read-only permissions do not constrain the server. A connector cannot be selected for a report-only architect that requires all tools disabled: unsupported isolation fails rather than silently allowing native tools. Select an endpoint that can enforce the required policy.
+
+Generated PNG, JPEG and WebP results appear as separate image cards, with Save image, outside collapsed tool output. Images are validated and kept in private application storage; model-supplied URLs and Markdown images are not fetched automatically. Opening saved history, retrying an image read and saving a cached image do not request a new generation. Results are bounded to 32 MiB and 32 million pixels per image, with a 128 MiB private cache. Preserve needed images before manually clearing the private cache if it becomes full.
+
+Responses conversations retain the acknowledged response identity and exact function call IDs. Interrupted inputs are not automatically resent. An uncertain local edit or command is not rerun after restart; preserve the history and explicitly create a new context after inspection. Changes to a saved transport or endpoint require explicit reconfiguration. Provider status, cancellation and expiry failures are reported without hiding them behind a CLI fallback.
+
+API connections use their configured endpoint and authentication, separately from native CLI subscriptions. Some gateways use subscriptions internally; ZIAForge does not copy native authentication into an API. Models, tool policies, reasoning parameters and billing depend on the endpoint. Discovery alone does not prove inference. Keep keys in Connections, never in task prose or screenshots.
+
+தொடர்புடைய வழிமுறைகள்: [API connections](../../API_CONNECTIONS.md).
 
 <a id="settings"></a>
 

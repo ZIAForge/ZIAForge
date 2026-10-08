@@ -84,6 +84,8 @@ export interface LegacyZiafAPI extends EditorAPI {
   updates: import('./control').UpdatesAPI
   recovery: import('./recovery').RecoveryAPI
   apiConnections: import('./api-provider').ApiConnectionsAPI
+  /** Local renderer only; binary media is not exposed through remote control commands. */
+  agentMedia?: import('./agent-media').AgentMediaAPI
   git: import('./git').GitAPI
   workflows: import('./workflow').WorkflowAPI
   workFlows: WorkFlowAPI

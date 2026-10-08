@@ -1290,5 +1290,22 @@
   "help.aiStopped": "Odpowiedź zatrzymana. Twoje pytanie jest nadal dostępne.",
   "help.aiFailed": "Asystent Pomocy nie mógł ukończyć tej odpowiedzi. Sprawdź połączenie z wybranym profilem AI i spróbuj ponownie.",
   "help.aiNativeRequired": "To natywne CLI wymaga uprawnienia właściciela do obsługi komputera. Włącz je lokalnie w menu Ustawienia → Sterowanie lub wybierz profil Claude Code bądź API dla sesji Pomocy bez narzędzi.",
-  "help.aiPresetChanged": "Ten profil zmienił się podczas uruchamiania. Wybierz go ponownie i ponów próbę."
+  "help.aiPresetChanged": "Ten profil zmienił się podczas uruchamiania. Wybierz go ponownie i ponów próbę.",
+  "api_responses_text_0": "Generated image",
+  "api_responses_text_1": "Save image",
+  "api_responses_text_2": "Image unavailable",
+  "api_responses_text_3": "Invalid generated image data",
+  "api_responses_text_4": "Could not load image: {error}",
+  "api_responses_text_5": "Could not save image: {error}",
+  "api_responses_text_6": "Image saved",
+  "api_responses_text_7": "Image save cancelled",
+  "api_responses_text_8": "Provider tool",
+  "api_responses_text_9": "API transport",
+  "api_responses_text_10": "API profile",
+  "api_responses_text_11": "Chat Completions",
+  "api_responses_text_12": "Responses",
+  "api_responses_text_13": "OpenAI-compatible",
+  "api_responses_text_14": "Codex connector",
+  "api_responses_text_15": "Allow local commands",
+  "api_responses_text_16": "Commands run locally after your approval. This is not an operating-system sandbox."
 }

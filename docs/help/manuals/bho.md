@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: bho; served locale: bho; status: machine-translated. -->
 # ZIAForge प्रयोगकर्ता गाइड
@@ -23,7 +23,7 @@ Requested locale: bho; served locale: bho; status: machine-translated. -->
 - [प्रीसेट, मॉडल आ एक्सेस](#models)
 - [चैट, Stop आ कतार](#chat)
 - [फाइल, Git आ समापन](#files)
-- [API कनेक्शन](#api)
+- [API connections](#api)
 - [सेटिंग्स, भाषा आ सुरक्षित रीसेट](#settings)
 - [Help सहायक से पूछीं](#help-assistant)
 - [सहायक आ Telegram](#assistant-control)
@@ -256,17 +256,25 @@ Worktree हटावल एगो अलग संरक्षित कार�
 
 <a id="api"></a>
 
-## API कनेक्शन
+## API connections
 
-Connections स्पष्ट रूप से चुनल गइल OpenAI-अनुकूल एंडपॉइंट जोड़ेला। एगो नाम, बेस URL, मॉडल आ जरूरत पड़ला पर एगो की दर्ज करीं। कई गो सर्वर खातिर /v1 में समाप्त होखे वाला बेस URL के जरूरत होला; अपना एंडपॉइंट दस्तावेज़ से सलाह लीं।
+> पूरा गाइड अभी राउर इंटरफेस के भाषा में अनुवादित नइखे। अंग्रेजी संदर्भ देखावल जा रहल बा।
 
-लूपबैक HTTP के छोड़ के HTTPS के जरूरत होला। URL में बिना क्रेडेंशियल एम्बेड कइले एगो सादा एंडपॉइंट के इस्तेमाल करीं। कुंजियाँ समर्थित OS एन्क्रिप्शन के इस्तेमाल करेलीं आ UI में वापस ना भेजल जालीं। एंडपॉइंट बदलला पर ओकर कुंजी दोबारा दर्ज करे के जरूरत होला। कुंजी फ़ील्ड के खाली छोड़ला से सहेजल कुंजी सुरक्षित रहेला; Remove the saved key स्पष्ट रूप से एकरा के साफ कर देवेला।
+Connections adds an explicitly selected OpenAI-compatible endpoint. Enter a name, base URL, model and a key if needed. Select Chat Completions for existing integrations or Responses for function rounds, provider tool progress and generated images. Existing connections retain Chat Completions until you change them explicitly.
 
-API कॉल्स CLI सदस्यता के इस्तेमाल ना करेला। टूल्स आ मॉडल नेटिव सत्र से अलग होला, आ सफल मॉडल खोज इन्फेरेंस साबित ना करेला। टोकन उपयोग तबे लउकेला जब प्रोवाइडर वास्तव में एकरा के लौटावेला।
+HTTPS is required except for loopback HTTP. Use a plain endpoint without credentials, queries or fragments. Redirects are refused. Keys use supported OS encryption and are never returned to the UI. Changing the endpoint requires re-entering or clearing its key. Leaving the key field blank preserves a saved key.
 
-क्रेडेंशियल के काम के विवरण भा प्रीसेट निर्देश के बजाय Connections में राखीं। केवल-पढ़े खातिर समीक्षकन के खाली उनकर अनुमत API फाइल टूल्स मिलेला; रिपोर्ट आर्किटेक्ट के कवनो टूल्स ना मिलेला। असमर्थित टूल कॉल चुपचाप चलावे के बजाय खारिज कर दिहल जाला। सर्वर रीजनिंग पैरामीटर, टूल समर्थन आ मॉडल लिस्टिंग में भिन्न हो सकेला; कवनो त्रुटि के अपना एंडपॉइंट के अनुबंध से तुलना करीं।
+Workspace file tools execute in the backend-resolved local task folder, with relative paths and checks against traversal and links. Every file write needs explicit approval and an unchanged expected revision. Read-only sessions expose only read tools. In Responses, Allow local commands separately enables approved executable/argument calls on macOS and Linux. Command supervision is unavailable on Windows; the adapter does not advertise that tool there. Commands always require owner approval and are not an operating-system sandbox.
 
-संबंधित निर्देश: [API कनेक्शन](../../API_CONNECTIONS.md).
+The Codex connector profile identifies that gateway’s Responses tool-progress extension. Native provider tools execute on the server, separately from caller tools on your computer. Local read-only permissions do not constrain the server. A connector cannot be selected for a report-only architect that requires all tools disabled: unsupported isolation fails rather than silently allowing native tools. Select an endpoint that can enforce the required policy.
+
+Generated PNG, JPEG and WebP results appear as separate image cards, with Save image, outside collapsed tool output. Images are validated and kept in private application storage; model-supplied URLs and Markdown images are not fetched automatically. Opening saved history, retrying an image read and saving a cached image do not request a new generation. Results are bounded to 32 MiB and 32 million pixels per image, with a 128 MiB private cache. Preserve needed images before manually clearing the private cache if it becomes full.
+
+Responses conversations retain the acknowledged response identity and exact function call IDs. Interrupted inputs are not automatically resent. An uncertain local edit or command is not rerun after restart; preserve the history and explicitly create a new context after inspection. Changes to a saved transport or endpoint require explicit reconfiguration. Provider status, cancellation and expiry failures are reported without hiding them behind a CLI fallback.
+
+API connections use their configured endpoint and authentication, separately from native CLI subscriptions. Some gateways use subscriptions internally; ZIAForge does not copy native authentication into an API. Models, tool policies, reasoning parameters and billing depend on the endpoint. Discovery alone does not prove inference. Keep keys in Connections, never in task prose or screenshots.
+
+संबंधित निर्देश: [API connections](../../API_CONNECTIONS.md).
 
 <a id="settings"></a>
 

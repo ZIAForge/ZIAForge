@@ -246,16 +246,19 @@
     },
     {
       "id": "api",
-      "title": "Połączenia API",
+      "title": "API connections",
       "paragraphs": [
-        "Sekcja Połączenia dodaje jawnie wybrany punkt końcowy zgodny z OpenAI. Wprowadź nazwę, bazowy URL, model oraz w razie potrzeby klucz. Wiele serwerów wymaga bazowego URL kończącego się na /v1; sprawdź dokumentację swojego punktu końcowego.",
-        "Wymagany jest protokół HTTPS, z wyjątkiem adresu pętli zwrotnej HTTP. Używaj zwykłego punktu końcowego bez danych uwierzytelniających osadzonych w URL. Klucze korzystają z obsługiwanego szyfrowania OS i nie są zwracane do UI. Zmiana punktu końcowego wymaga ponownego wprowadzenia klucza. Pozostawienie pola klucza pustego zachowuje zapisany klucz; opcja Usuń zapisany klucz jawnie go czyści.",
-        "Wywołania API nie korzystają z subskrypcji CLI. Narzędzia i modele różnią się od sesji natywnych, a pomyślne wykrycie modelu nie dowodzi działania wnioskowania. Zużycie tokenów jest widoczne tylko wtedy, gdy dostawca faktycznie je zwraca.",
-        "Przechowuj dane uwierzytelniające w Połączeniach, a nie w treści zadania czy instrukcjach szablonu. Recenzenci z dostępem tylko do odczytu otrzymują wyłącznie dozwolone narzędzia plikowe API; architekt raportu nie posiada żadnych narzędzi. Nieobsługiwane wywołania narzędzi są odrzucane, a nie wykonywane po cichu. Serwery różnią się pod względem parametrów rozumowania, obsługi narzędzi i list modeli; porównaj błąd z kontraktem własnego punktu końcowego."
+        "Connections adds an explicitly selected OpenAI-compatible endpoint. Enter a name, base URL, model and a key if needed. Select Chat Completions for existing integrations or Responses for function rounds, provider tool progress and generated images. Existing connections retain Chat Completions until you change them explicitly.",
+        "HTTPS is required except for loopback HTTP. Use a plain endpoint without credentials, queries or fragments. Redirects are refused. Keys use supported OS encryption and are never returned to the UI. Changing the endpoint requires re-entering or clearing its key. Leaving the key field blank preserves a saved key.",
+        "Workspace file tools execute in the backend-resolved local task folder, with relative paths and checks against traversal and links. Every file write needs explicit approval and an unchanged expected revision. Read-only sessions expose only read tools. In Responses, Allow local commands separately enables approved executable/argument calls on macOS and Linux. Command supervision is unavailable on Windows; the adapter does not advertise that tool there. Commands always require owner approval and are not an operating-system sandbox.",
+        "The Codex connector profile identifies that gateway’s Responses tool-progress extension. Native provider tools execute on the server, separately from caller tools on your computer. Local read-only permissions do not constrain the server. A connector cannot be selected for a report-only architect that requires all tools disabled: unsupported isolation fails rather than silently allowing native tools. Select an endpoint that can enforce the required policy.",
+        "Generated PNG, JPEG and WebP results appear as separate image cards, with Save image, outside collapsed tool output. Images are validated and kept in private application storage; model-supplied URLs and Markdown images are not fetched automatically. Opening saved history, retrying an image read and saving a cached image do not request a new generation. Results are bounded to 32 MiB and 32 million pixels per image, with a 128 MiB private cache. Preserve needed images before manually clearing the private cache if it becomes full.",
+        "Responses conversations retain the acknowledged response identity and exact function call IDs. Interrupted inputs are not automatically resent. An uncertain local edit or command is not rerun after restart; preserve the history and explicitly create a new context after inspection. Changes to a saved transport or endpoint require explicit reconfiguration. Provider status, cancellation and expiry failures are reported without hiding them behind a CLI fallback.",
+        "API connections use their configured endpoint and authentication, separately from native CLI subscriptions. Some gateways use subscriptions internally; ZIAForge does not copy native authentication into an API. Models, tool policies, reasoning parameters and billing depend on the endpoint. Discovery alone does not prove inference. Keep keys in Connections, never in task prose or screenshots."
       ],
       "links": [
         {
-          "label": "Połączenia API",
+          "label": "API connections",
           "path": "docs/API_CONNECTIONS.md"
         }
       ]

@@ -1290,5 +1290,22 @@
   "help.aiStopped": "Jawaabtii waa la joojiyay. Su'aashaadu weli way diyaar tahay.",
   "help.aiFailed": "Kaaliyaha Caawintu ma dhammaystiri karin jawaabtan. Hubi xiriirka AI ee la doortay oo isku day mar kale.",
   "help.aiNativeRequired": "CLI-kan asalka ahi waxa uu u baahan yahay oggolaanshaha kombuyuutar-gelitaanka ee milkiilaha. Ka kici heer maxalli ah gudaha Habaynta → Maamulka, ama dooro Claude Code ama qaabeyn hore oo API ah si aad u hesho fadhi Caawimo oo aan qalab lahayn.",
-  "help.aiPresetChanged": "Qaabeyntan hore way isbeddeshay xilligii furitaanka. Dooro mar kale oo dib u tijaabi."
+  "help.aiPresetChanged": "Qaabeyntan hore way isbeddeshay xilligii furitaanka. Dooro mar kale oo dib u tijaabi.",
+  "api_responses_text_0": "Generated image",
+  "api_responses_text_1": "Save image",
+  "api_responses_text_2": "Image unavailable",
+  "api_responses_text_3": "Invalid generated image data",
+  "api_responses_text_4": "Could not load image: {error}",
+  "api_responses_text_5": "Could not save image: {error}",
+  "api_responses_text_6": "Image saved",
+  "api_responses_text_7": "Image save cancelled",
+  "api_responses_text_8": "Provider tool",
+  "api_responses_text_9": "API transport",
+  "api_responses_text_10": "API profile",
+  "api_responses_text_11": "Chat Completions",
+  "api_responses_text_12": "Responses",
+  "api_responses_text_13": "OpenAI-compatible",
+  "api_responses_text_14": "Codex connector",
+  "api_responses_text_15": "Allow local commands",
+  "api_responses_text_16": "Commands run locally after your approval. This is not an operating-system sandbox."
 }

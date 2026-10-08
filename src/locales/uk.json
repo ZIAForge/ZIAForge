@@ -1290,5 +1290,22 @@
   "help.aiStopped": "Відповідь зупинено. Ваше запитання збережено.",
   "help.aiFailed": "Асистент довідки не зміг сформувати відповідь. Перевірте з'єднання з вибраним AI і спробуйте знову.",
   "help.aiNativeRequired": "Цей нативний CLI потребує дозволу власника на доступ до комп'ютера. Увімкніть його локально в меню «Налаштування» → «Керування» або виберіть Claude Code чи пресет API для сеансу довідки без інструментів.",
-  "help.aiPresetChanged": "Цей пресет змінився під час запуску. Виберіть його знову та повторіть спробу."
+  "help.aiPresetChanged": "Цей пресет змінився під час запуску. Виберіть його знову та повторіть спробу.",
+  "api_responses_text_0": "Generated image",
+  "api_responses_text_1": "Save image",
+  "api_responses_text_2": "Image unavailable",
+  "api_responses_text_3": "Invalid generated image data",
+  "api_responses_text_4": "Could not load image: {error}",
+  "api_responses_text_5": "Could not save image: {error}",
+  "api_responses_text_6": "Image saved",
+  "api_responses_text_7": "Image save cancelled",
+  "api_responses_text_8": "Provider tool",
+  "api_responses_text_9": "API transport",
+  "api_responses_text_10": "API profile",
+  "api_responses_text_11": "Chat Completions",
+  "api_responses_text_12": "Responses",
+  "api_responses_text_13": "OpenAI-compatible",
+  "api_responses_text_14": "Codex connector",
+  "api_responses_text_15": "Allow local commands",
+  "api_responses_text_16": "Commands run locally after your approval. This is not an operating-system sandbox."
 }

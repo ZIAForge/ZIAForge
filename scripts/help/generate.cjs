@@ -65,6 +65,10 @@ for (const locale of uiLocales) {
     if (entry.contentFile !== `translations/${locale}.json`) throw new Error(`Help translation path must match its locale: ${locale}`)
     const translation = read(`docs/help/${entry.contentFile}`)
     validateGuide(translation, locale, source)
+    const fallbackSections = entry.englishFallbackSections ?? []
+    if (!Array.isArray(fallbackSections) || new Set(fallbackSections).size !== fallbackSections.length || fallbackSections.some(id => typeof id !== 'string' || !source.sections.some(section => section.id === id))) throw new Error(`Invalid English fallback sections: ${locale}`)
+    if (fallbackSections.length && (entry.status !== 'machine-translated' || !/^[a-f0-9]{64}$/.test(entry.retainedTranslationSourceSha256 ?? ''))) throw new Error(`Mixed help needs retained translation provenance: ${locale}`)
+    for (const id of fallbackSections) if (JSON.stringify(translation.sections.find(section => section.id === id)) !== JSON.stringify(source.sections.find(section => section.id === id))) throw new Error(`English fallback must match canonical section: ${locale}.${id}`)
     if (entry.status === 'reviewed') {
       if (entry.reviewedSourceSha256 !== sourceSha256) throw new Error(`Help translation needs review for changed English source: ${locale}`)
       text(entry.reviewer, `${locale}.reviewer`)
@@ -99,6 +103,7 @@ for (const locale of uiLocales) {
   const language = guide.locale
   const machine = registry.locales[locale].status === 'machine-translated'
   const fallback = locale !== language
+  const englishSections = new Set(registry.locales[locale].englishFallbackSections ?? [])
   const disclosure = machine ? label(locale, 'help.machineTranslationNotice', 'Machine-translated help. English is canonical; native-language human review is not claimed.') : fallback ? label(locale, 'help.fallbackNotice', 'This help language is unavailable. Showing the English reference.') : ''
   const mdFile = markdownPath(locale), htmlFile = htmlPath(locale)
   const related = label(language, 'help.contractsLabel', 'Related instructions')
@@ -106,13 +111,13 @@ for (const locale of uiLocales) {
   let markdown = `<!-- ${banner}\nRequested locale: ${locale}; served locale: ${language}; status: ${registry.locales[locale].status}. -->\n# ${guide.title}\n\n${guide.description}\n\n${guide.sourcePolicy}\n\n${disclosure ? `> ${disclosure}\n\n` : ''}## ${toc}\n\n`
   markdown += guide.sections.map(section => `- [${section.title}](#${section.id})`).join('\n') + '\n\n'
   for (const section of guide.sections) {
-    markdown += `<a id="${section.id}"></a>\n\n## ${section.title}\n\n${section.paragraphs.join('\n\n')}\n\n`
+    markdown += `<a id="${section.id}"></a>\n\n## ${section.title}\n\n${englishSections.has(section.id) ? `> ${label(locale, 'help.fallbackNotice', 'This help language is unavailable. Showing the English reference.')}\n\n` : ''}${section.paragraphs.join('\n\n')}\n\n`
     if (section.steps) markdown += section.steps.map((step, index) => `${index + 1}. ${step}`).join('\n') + '\n\n'
     if (section.note) markdown += `> ${section.note}\n\n`
     if (section.links.length) markdown += `${related}: ${section.links.map(link => `[${link.label}](${relative(mdFile, link.path)})`).join(' · ')}.\n\n`
   }
   outputs.set(mdFile, markdown.trimEnd() + '\n')
-  const htmlSection = section => `<section id="${section.id}"><h2>${escapeHtml(section.title)}</h2>${section.paragraphs.map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join('')}${section.steps ? `<ol>${section.steps.map(step => `<li>${escapeHtml(step)}</li>`).join('')}</ol>` : ''}${section.note ? `<aside>${escapeHtml(section.note)}</aside>` : ''}<p class="guide-contracts">${escapeHtml(related)}: ${section.links.map(link => `<a href="${relative(htmlFile, link.path)}">${escapeHtml(link.label)}</a>`).join(' · ')}.</p></section>`
+  const htmlSection = section => `<section id="${section.id}"${englishSections.has(section.id) ? ' lang="en" dir="ltr"' : ''}><h2>${escapeHtml(section.title)}</h2>${englishSections.has(section.id) ? `<aside lang="${locale}" dir="${rtlLocales.has(locale) ? 'rtl' : 'ltr'}">${escapeHtml(label(locale, 'help.fallbackNotice', 'This help language is unavailable. Showing the English reference.'))}</aside>` : ''}${section.paragraphs.map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join('')}${section.steps ? `<ol>${section.steps.map(step => `<li>${escapeHtml(step)}</li>`).join('')}</ol>` : ''}${section.note ? `<aside>${escapeHtml(section.note)}</aside>` : ''}<p class="guide-contracts">${escapeHtml(related)}: ${section.links.map(link => `<a href="${relative(htmlFile, link.path)}">${escapeHtml(link.label)}</a>`).join(' · ')}.</p></section>`
   const languageOptions = [...servedGuides.keys()].sort((a, b) => nativeName(a).localeCompare(nativeName(b))).map(other => `<option value="${relative(htmlFile, htmlPath(other))}" lang="${other}" dir="${rtlLocales.has(other) ? 'rtl' : 'ltr'}"${other === language ? ' selected' : ''}>${escapeHtml(nativeName(other))}</option>`).join('')
   const languageLinks = [...servedGuides.keys()].sort().map(other => `<a href="${relative(htmlFile, htmlPath(other))}" hreflang="${other}" lang="${other}" dir="${rtlLocales.has(other) ? 'rtl' : 'ltr'}">${escapeHtml(nativeName(other))}</a>`).join(' · ')
   const searchLabel = label(language, 'search', 'Search')
@@ -122,8 +127,8 @@ for (const locale of uiLocales) {
 
 }
 outputs.set('src/components/helpSource.generated.ts', `// ${banner.replaceAll('\n', '\n// ')}\nexport const helpSourceSha256 = '${sourceSha256}'\n`)
-let localesMarkdown = `<!-- ${banner} -->\n# Help translation coverage\n\nInterface translations and help translations have separate provenance. All ${uiLocales.length} configured interface locales have a help entry. Machine-translated bodies are served only for the current English source hash and carry an explicit notice; they are not human-reviewed translations. Missing/draft bodies display the English reference.\n\n| Locale | Help status | Served guide | Offline manual |\n| --- | --- | --- | --- |\n`
-localesMarkdown += uiLocales.map(locale => `| ${locale} | ${registry.locales[locale].status} | ${servedGuides.has(locale) ? locale : 'English'} | [${locale}](${relative('docs/help/LOCALES.md', markdownPath(locale))}) |`).join('\n') + '\n\nSee [maintenance instructions](../HELP_MAINTENANCE.md) before claiming a translation is reviewed.\n'
+let localesMarkdown = `<!-- ${banner} -->\n# Help translation coverage\n\nInterface translations and help translations have separate provenance. All ${uiLocales.length} configured interface locales have a help entry. Machine-translated bodies are served only for the current English source hash and carry an explicit notice; they are not human-reviewed translations. Missing/draft bodies display the English reference. Individually changed sections may also carry an explicit English fallback while unchanged translations retain their original provenance.\n\n| Locale | Help status | Served guide | English fallback sections | Offline manual |\n| --- | --- | --- | --- | --- |\n`
+localesMarkdown += uiLocales.map(locale => `| ${locale} | ${registry.locales[locale].status} | ${servedGuides.has(locale) ? locale : 'English'} | ${(registry.locales[locale].englishFallbackSections ?? []).join(', ') || '—'} | [${locale}](${relative('docs/help/LOCALES.md', markdownPath(locale))}) |`).join('\n') + '\n\nSee [maintenance instructions](../HELP_MAINTENANCE.md) before claiming a translation is reviewed.\n'
 outputs.set('docs/help/LOCALES.md', localesMarkdown)
 let stale = false
 for (const [file, content] of outputs) {

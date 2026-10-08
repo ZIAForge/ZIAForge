@@ -22,6 +22,7 @@ const api: LegacyZiafAPI = {
       return () => ipcRenderer.off('recovery:changed', listener)
     },
   },
+  agentMedia: { read: request => ipcRenderer.invoke('agent-media:read', request), save: request => ipcRenderer.invoke('agent-media:save', request) },
   apiConnections: { list: () => ipcRenderer.invoke('api-connections:list'), save: request => ipcRenderer.invoke('api-connections:save', request), remove: request => ipcRenderer.invoke('api-connections:remove', request) },
   git: {
     prepare: request => ipcRenderer.invoke('git:prepare', request),

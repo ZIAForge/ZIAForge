@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: ceb; served locale: ceb; status: machine-translated. -->
 # Giya sa tiggamit sa ZIAForge
@@ -23,7 +23,7 @@ Ang Iningles maoy kanonikal. Ang hinubad sa makina nga tabang gilain pagmarka gi
 - [Mga preset, modelo ug pag-access](#models)
 - [Mga chat, Stop ug ang lumbay](#chat)
 - [Mga file, Git ug pagkompleto](#files)
-- [Mga koneksyon sa API](#api)
+- [API connections](#api)
 - [Mga setting, mga pinulongan ug luwas nga pag-reset](#settings)
 - [Pangutana sa katabang sa Tabang](#help-assistant)
 - [Katabang ug Telegram](#assistant-control)
@@ -256,17 +256,25 @@ May kalabotan nga mga panudlo: [Natipe nga kontrata sa editor](../../../shared/e
 
 <a id="api"></a>
 
-## Mga koneksyon sa API
+## API connections
 
-Ang Connections modugang ug klarong gipili nga OpenAI-compatible nga endpoint. Pagsulod ug ngalan, base URL, modelo ug yawe kon gikinahanglan. Daghang server ang nanginahanglan ug base URL nga natapos sa /v1; tan-awa ang dokumentasyon sa imong endpoint.
+> Ang tibuok nga giya wala pa mahubad sa imong pinulongan sa interface. Gipakita ang reperensiya sa Iningles.
 
-Gikinahanglan ang HTTPS gawas sa loopback HTTP. Paggamit ug yano nga endpoint nga walay mga kredensyal nga gipasulod sa URL. Ang mga yawe naggamit ug gisuportahang OS nga pag-encrypt ug dili ibalik sa UI. Ang pag-usab sa endpoint nagkinahanglan sa pagsulod pag-usab sa yawe niini. Ang pagbilin nga blangko sa field sa yawe magpabilin sa gitipigan nga yawe; ang Remove the saved key klarong magpapas niini.
+Connections adds an explicitly selected OpenAI-compatible endpoint. Enter a name, base URL, model and a key if needed. Select Chat Completions for existing integrations or Responses for function rounds, provider tool progress and generated images. Existing connections retain Chat Completions until you change them explicitly.
 
-Ang mga tawag sa API dili mogamit ug suskripsyon sa CLI. Ang mga gamit ug modelo lahi sa lumad nga mga sesyon, ug ang malampusong pagdiskobre sa modelo dili pamatuod sa inference. Ang paggamit sa token makita lamang kon ang provider aktwal nga mobalik niini.
+HTTPS is required except for loopback HTTP. Use a plain endpoint without credentials, queries or fragments. Redirects are refused. Keys use supported OS encryption and are never returned to the UI. Changing the endpoint requires re-entering or clearing its key. Leaving the key field blank preserves a saved key.
 
-Ibutang ang mga kredensyal sa Connections imbes sa mga teksto sa buluhaton o mga panudlo sa preset. Ang mga tigsusi nga read-only makadawat lamang sa ilang gitugotang mga galamiton sa file sa API; ang report architect walay mga galamiton. Ang dili gisuportahang mga tawag sa gamit isalikway imbes nga hilom nga tumanon. Nagkalahi ang mga server sa mga parametro sa pangatarungan, suporta sa gamit ug mga listahan sa modelo; itandi ang sayop sa kaugalingong kontrata sa imong endpoint.
+Workspace file tools execute in the backend-resolved local task folder, with relative paths and checks against traversal and links. Every file write needs explicit approval and an unchanged expected revision. Read-only sessions expose only read tools. In Responses, Allow local commands separately enables approved executable/argument calls on macOS and Linux. Command supervision is unavailable on Windows; the adapter does not advertise that tool there. Commands always require owner approval and are not an operating-system sandbox.
 
-May kalabotan nga mga panudlo: [Mga koneksyon sa API](../../API_CONNECTIONS.md).
+The Codex connector profile identifies that gateway’s Responses tool-progress extension. Native provider tools execute on the server, separately from caller tools on your computer. Local read-only permissions do not constrain the server. A connector cannot be selected for a report-only architect that requires all tools disabled: unsupported isolation fails rather than silently allowing native tools. Select an endpoint that can enforce the required policy.
+
+Generated PNG, JPEG and WebP results appear as separate image cards, with Save image, outside collapsed tool output. Images are validated and kept in private application storage; model-supplied URLs and Markdown images are not fetched automatically. Opening saved history, retrying an image read and saving a cached image do not request a new generation. Results are bounded to 32 MiB and 32 million pixels per image, with a 128 MiB private cache. Preserve needed images before manually clearing the private cache if it becomes full.
+
+Responses conversations retain the acknowledged response identity and exact function call IDs. Interrupted inputs are not automatically resent. An uncertain local edit or command is not rerun after restart; preserve the history and explicitly create a new context after inspection. Changes to a saved transport or endpoint require explicit reconfiguration. Provider status, cancellation and expiry failures are reported without hiding them behind a CLI fallback.
+
+API connections use their configured endpoint and authentication, separately from native CLI subscriptions. Some gateways use subscriptions internally; ZIAForge does not copy native authentication into an API. Models, tool policies, reasoning parameters and billing depend on the endpoint. Discovery alone does not prove inference. Keep keys in Connections, never in task prose or screenshots.
+
+May kalabotan nga mga panudlo: [API connections](../../API_CONNECTIONS.md).
 
 <a id="settings"></a>
 

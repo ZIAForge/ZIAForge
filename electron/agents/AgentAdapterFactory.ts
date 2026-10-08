@@ -1,3 +1,7 @@
+import { ResponsesAdapter } from './ResponsesAdapter'
+import { AgentMediaStore } from '../runtime/AgentMediaStore'
+import type { AgentMediaRef } from '../../shared/agent-media'
+import path from 'node:path'
 import { ChildProcess, SpawnOptions } from 'node:child_process'
 import { AgentEvent, ApprovalDecision } from '../../shared/agent-events'
 import {
@@ -88,6 +92,7 @@ export interface CreateAdapterOptions {
   apiHistoryDirectory?: string
   apiResumeSessionId?: string
   apiReadOnly?: boolean
+  apiStoreMedia?: (itemId: string, encoded: string, signal: AbortSignal) => Promise<AgentMediaRef>
   toolPolicy?: 'none'
   spawnProcess?: (command: string, args: string[], options: SpawnOptions) => ChildProcess
 
@@ -301,6 +306,10 @@ export class AgentAdapterFactory {
 
     if (provider === 'api') {
       if (!options.apiConnection || !options.apiHistoryDirectory) throw new Error('A resolved API connection and private history directory are required')
+      if (options.apiConnection.transport === 'responses') {
+        const mediaStore = new AgentMediaStore(path.join(options.apiHistoryDirectory, 'media'))
+        return new ResponsesAdapter({ taskId: options.taskId, runId, worktreePath: options.worktreePath, connection: options.apiConnection, historyDirectory: options.apiHistoryDirectory, resumeSessionId: options.apiResumeSessionId, readOnly: options.apiReadOnly, toolPolicy: options.toolPolicy, model: options.model, reasoningEffort: options.reasoningEffort, onEvent: options.onEvent, onRawLog: options.onRawLog, storeMedia: options.apiStoreMedia ?? ((_itemId, encoded, signal) => mediaStore.storeBase64({ taskId: options.taskId, runId }, encoded, signal)) })
+      }
       return new ApiAdapter({ taskId: options.taskId, runId, worktreePath: options.worktreePath, connection: options.apiConnection, historyDirectory: options.apiHistoryDirectory, resumeSessionId: options.apiResumeSessionId, readOnly: options.apiReadOnly, toolPolicy: options.toolPolicy, model: options.model, reasoningEffort: options.reasoningEffort, onEvent: options.onEvent, onRawLog: options.onRawLog })
     }
 

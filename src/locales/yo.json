@@ -1290,5 +1290,22 @@
   "help.aiStopped": "Ìdáhùn ti dúró. Ìbéèrè rẹ ṣì wà fún lílò.",
   "help.aiFailed": "Olùrànlọ́wọ́ Ìrànlọ́wọ́ kò lè parí ìdáhùn yìí. Ṣàyẹ̀wò ìsopọ̀ AI tí a yàn kí o sì tún gbìyànjú.",
   "help.aiNativeRequired": "CLI abínibí yìí nílò ìyọ̀nda ìwọlé-kọ̀mpútà ti olówó. Mú un ṣiṣẹ́ ní agbègbè rẹ nínú Ètò → Ìdarí, tàbí yan Claude Code tàbí ètò tẹ́lẹ̀ API kan fún ìgbìmọ̀ Ìrànlọ́wọ́ tí kò lo irinṣẹ́.",
-  "help.aiPresetChanged": "Ètò tẹ́lẹ̀ yìí yípadà nígbà ìbẹ̀rẹ̀. Tún un yàn kí o sì tún gbìyànjú."
+  "help.aiPresetChanged": "Ètò tẹ́lẹ̀ yìí yípadà nígbà ìbẹ̀rẹ̀. Tún un yàn kí o sì tún gbìyànjú.",
+  "api_responses_text_0": "Generated image",
+  "api_responses_text_1": "Save image",
+  "api_responses_text_2": "Image unavailable",
+  "api_responses_text_3": "Invalid generated image data",
+  "api_responses_text_4": "Could not load image: {error}",
+  "api_responses_text_5": "Could not save image: {error}",
+  "api_responses_text_6": "Image saved",
+  "api_responses_text_7": "Image save cancelled",
+  "api_responses_text_8": "Provider tool",
+  "api_responses_text_9": "API transport",
+  "api_responses_text_10": "API profile",
+  "api_responses_text_11": "Chat Completions",
+  "api_responses_text_12": "Responses",
+  "api_responses_text_13": "OpenAI-compatible",
+  "api_responses_text_14": "Codex connector",
+  "api_responses_text_15": "Allow local commands",
+  "api_responses_text_16": "Commands run locally after your approval. This is not an operating-system sandbox."
 }

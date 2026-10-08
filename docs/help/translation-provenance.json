@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+  "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
   "uiCanonicalSha256": "1b3d92f8ddd9b98ac7fbbcf9a261d865081d59807da2c73b8ff45ffe03a54d84",
   "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
   "automatedChecks": [
@@ -13,8 +13,8 @@
   "locales": [
     {
       "locale": "am",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "5cca671e1586cf26a7cfac991ffb486d6625ef554252c67968699700b48d0f73",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "0203de25c9ecd5613b3470b53b98511d24c40d2a2ae814837c6f825021e63e53",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -56,12 +56,16 @@
           "promptFileSha256": "eb2df90a439b3e8161a8ca11e4b1adb786856b7a759003cd07a45a74f682a0c1",
           "responseFileSha256": "3951f96c108520b74360057a0af400cb4f48cd00f940dac9a9ccbb0f7e9e8bf8"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "ar",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "e65e272d9103c996a2c2b6612b6f73e0c094c740078d87b3f047e9dc8ca7a82c",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "7aee646a7974110ff779115617f7783e8857b3a16d07e2d81da4b1d1860dee54",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -187,12 +191,16 @@
           "promptFileSha256": "380d873777ba98d3068b51f7007b5045aeabf673eecbd9d61522d148a63e6ae5",
           "responseFileSha256": "12ef6c2865d147d2b9c17e7e33fbe9b3f750241a48f63e8104cb6b49b06550f1"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "az",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "d4ea90fcb9615d27af53c2fd59108c6ca7f97ed6b96789842a65afa792e787ea",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "a5a4c79a8d037041a4548e4976cfc411a38204b8493d1d542d3cbc7bb6b00965",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -234,12 +242,16 @@
           "promptFileSha256": "bb7bff6c294438fce180ef4c609c3bcdf06f02ff66539b79439c91fb891092a5",
           "responseFileSha256": "7d82fab5b37f4340d8dfb41f56f9e3a540ffae3051fffa0d81cc8970f162e8aa"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "bho",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "80ddb07126b28fa670d3a31c12f4a83b7b3a48b0a2a73f00ace643a732fef59d",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "b524fb883f84b564f2767c2d6a3da8ef258b9bf48d1ea887312cd4a8d9734125",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -281,12 +293,16 @@
           "promptFileSha256": "6085892a6c4347850166240a269e8ed26c825280b5e8a65833eec399dea3676c",
           "responseFileSha256": "769ecf99ff93f0981d73565e5ca1d74b98ed0b4cacd70ed594864e91486d3557"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "bn",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "74dca31f992597a7f3440a2e4db87a32e43cd94a1a5546e88ced2839187b4682",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "b0d7933997df755af8ae904383257c014c073a05a6474747489462b5e785c562",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -328,12 +344,16 @@
           "promptFileSha256": "1a32dfe07807292c367981f48125d3bb7351fb8d61c664f7425014e4dc26f5a0",
           "responseFileSha256": "7b1d0a83f366413b57b9a47c750dd22f33aaf436346da90f6ab8b4e178d70bdc"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "ceb",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "63ebcd647a4366bfec28daaf82815c6c71a98af9f3108122ae1b7c8c68311078",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "fb81e0c0ccea8b6f16be50aeecaa4f877e8fab141f282d347d2e3c8331153477",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -375,12 +395,16 @@
           "promptFileSha256": "b7b568b506ca0c078fff5ba5f0ab81ccecb74bb844bcaf0591f83ba68eb02dbc",
           "responseFileSha256": "96f130ce2ccbfdea5a22eba103660a78e6da419585e348062fad732bf2855564"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "de",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "149f7fb15392260bae4069a91239a7360c3bd66ea8ab2a3983a2225d225f1a12",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "b91296505e461f1247ee8bbf1ee0ba41e68696d5525258015bb3fde979375536",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -476,12 +500,16 @@
           "promptFileSha256": "222da7f917cc1e0fb52cfed1253f7b83f9f4fa7d70569ab19f648e4d71f62dc7",
           "responseFileSha256": "91f7c6b6cab1347652b569c92644a297ac6b7105c7c93e4d053a88a1648aca4a"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "es",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "c970afadcfd9bdea9d5a89a2f74168a4ad6e2c04f3bc4c4573c6b8b720356a85",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "a0d332ad8144f9d6788dfb60367fa646029a4c7da9bac41c264f03965b9ed507",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -541,12 +569,16 @@
           "promptFileSha256": "8f0918db5eb069e08c83290a24bc271ba048de4184da6090326f31266df881fd",
           "responseFileSha256": "f13b44c6ed31f25fba13001230444f5aa96b5180981483570a5e73ae19408923"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "fa",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "0aaae79e9bc8735a0ca209bf9f07cdcdcc6b7ec4f5ae3927df81a99e5fd6190c",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "dc2f7802ec703ec3a365e8a13491ed7e890ec6c6d77e5ebf2c58ef908ed4cbc7",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -600,12 +632,16 @@
           "promptFileSha256": "66bb7839af07b85ededc64e0be4bfb50ead591c36ca00e2aa083eb268ec06d0c",
           "responseFileSha256": "47b8d4925565ba3014ec579a823cc370e7e1a52060fb8d1a550c24719a1d250c"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "ff",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "991ed154eaebc9286cdb74017fb90593e4cbe7d17926019591867276687d53da",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "bdb8d72ae58f14d0b3e786b61a3391e5caf7e3509ec2295a6c88c9160e528300",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -659,12 +695,16 @@
           "promptFileSha256": "3ace50b0602b13708e2c12f35bf33a03b87fdd75f72ef84ef4aa79524470df3b",
           "responseFileSha256": "e63fbbade827b03d46a4fa3cbea8212c9c6d673fdc60d157acb4b85c11395478"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "fr",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "8a3aaa1467d2026632e1ac1cdd5ef99107a067a2c20fc3e688cb08754884035f",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "cf262ac509ef1f29747de1002e30813f6b968d20689d3080886452ccd1a2e1f5",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -706,12 +746,16 @@
           "promptFileSha256": "e846a5b4cd9b5ea22ac351a36288759fe84b8967ae66c944cd6f9dcc395774b9",
           "responseFileSha256": "799fcac2b93f54ffb0979623701ed467ab5ff18b53b3ddbe9f5275362c7bcd24"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "gu",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "6c81558d480724b720d631f42ad1cc52dcc95b8720f7b0612e93b1b564c7add6",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "c1913b7e32e8e2deeee96d975a88242aca866e71a2465acdaa4b790f5469d381",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -753,12 +797,16 @@
           "promptFileSha256": "bc79222d995fb3373bef10eda98eda61f63c09957bcb699cb1c82311f0e3af13",
           "responseFileSha256": "933479f914b20e0ff9f7d11c3af280e7081f74ab2f66bc0da61722d2e865d110"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "ha",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "a7015de3103630e711afb89fc24c171562acfa8e12c8b47a949d079a43c58610",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "120244e92ddeb9e2574c128ee7f6db395fd3c318c2b81c6e3b4cc2f305a06c92",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -800,12 +848,16 @@
           "promptFileSha256": "a92a49799b13ef8734c3821ee70924bcde82000266adf524cf5400d45c54266b",
           "responseFileSha256": "e33b83b38fd4b175883acf3146fa774559cc970596f8ee70b9addc92cc8e6f33"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "hi",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "243dfc658f2d0074a0c10f817d03a1e5f7ef9cafda1f771155869d3c88191802",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "f009a1f16785a81babfd1829417d64681b18d425ab58a81474d9e1f21f75477e",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -847,12 +899,16 @@
           "promptFileSha256": "584d705d8575e2fba7bed1da3bd7182825939d6be394240058d580c33971b0ea",
           "responseFileSha256": "8d6a9337b719fb1323d8a1d06edda43f36d48527bc8b95556a1d12319f7ce34b"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "id",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "8895b611649f3d7be00944445fe6b2e2923b09612671863bc6365fafca2ffac7",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "833cff6e44ac212784aa232224a59128b26fa50eb947bca4efde9e1b54228618",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -912,12 +968,16 @@
           "promptFileSha256": "de15abbfe9d1378019bdc9dbc661f13fe746ff26f90234edfdeb9c74fce97379",
           "responseFileSha256": "c39d0348414b439d7ad670d4dcd3da2e4815cba596de650ee1236bb4b103ff95"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "ig",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "bd7dde0405ae48dd4b343a5e381accdcb936c5865a8b55cb9df4b07e6af7c789",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "af5ae1ec7124bfa9f2a01554ec350de15eb185d50d33139393894c3ae0ededf7",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -959,12 +1019,16 @@
           "promptFileSha256": "fc0ba1f46f973e94b71a75676af8b78c66a3d5c4043a62e0541d31eb6b14ca61",
           "responseFileSha256": "4a54de94037a9dbcde80098c2d558fba529ed80bebc675abbf8b963b98d132f4"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "it",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "b3488ee70b5c85aa6fae4179c2c74ac4a5dc25ec0a55cbf1a4a7e866c0e9c144",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "cd0e7c3b69c10762f776647f58100c3b0b77d615d1f23ea8fcd16fd712b89539",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1006,12 +1070,16 @@
           "promptFileSha256": "14d7ab29832c1ffb8a2b490d90d6fc215e1514180d7178dd2f38c10b24c1332b",
           "responseFileSha256": "45464fa001f514b700cdc8a25ae3f9f14058637eb2347597ac49cf040641bd4e"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "ja-JP",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "da3753da6fd58853b7c7d3d0d73fb5fce1a5fb4756ecab6f79d2653ba24d6a0c",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "6ff5b5972dc3651353bce3e21096f4bfccbb9ceb6f98ba81bf1f9c204660f8da",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1089,12 +1157,16 @@
           "promptFileSha256": "a94374d1e45ef7ab45a8375ce5302e720f0c05b44e2b4acca9e57dc8810a0e6e",
           "responseFileSha256": "5f9bc8907fc1fa64169252fea26ca23a7f60fa56475cd526e4adb57348820cad"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "jv",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "0089b18b6f6366c47aafbb635c88d73fc9c042629a4ec4faae07b6276488fce4",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "dd4275c0df031d174bb4b995d52c1fda3a24e7591e924941e56cca46c6c12bb2",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1154,12 +1226,16 @@
           "promptFileSha256": "eabac44899819d5febb4cb3cd9ebdabd67f2e74117a9886d27fd1564ba81a513",
           "responseFileSha256": "77934d8231ce416c6acd44979067ef2896abdfcdf0d004be7b706ba95aa5efd4"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "kk",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "25cadc4805ec16997166787d5c313f1250a6d8dce8b384cc2119405fed140631",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "0f51bb4c39c512cf05debd6cb6a73cf3532813636b1ee972841d0964c6fe9e90",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1201,12 +1277,16 @@
           "promptFileSha256": "1e27c23a5c7322f6c0d1fcdd2e6e7c09b09a06d4ffaf31da1051a7f26b625a04",
           "responseFileSha256": "4d648f5c8d0ef2660c5bb4be1c18bf66262cd18a4e97030e6d289f0a9572fa03"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "km",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "b710e293d5154e30069bcfe9209e2fe3794504117b5775a30ef828989b9e3916",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "280bda04199a85e2ef8cd37c2e61e417361a9c59f86751e93be1fdfb5945770a",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1248,12 +1328,16 @@
           "promptFileSha256": "64bc68f48fd842b405e3832678af1c212f3f3743e0871e6222561bbb14d12f0a",
           "responseFileSha256": "f35db6aa862bae385bc9ff4a0002c02f4e870121920463260ae75624d198364e"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "kn",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "3403b5eecd877981040b731f6a71f6515ec2f012ddb18136386aed9a8806a501",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "96db440d03736bd82b2a7c8a7e60ee196c98a6b632567fa24a05d0fde0b19698",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1295,12 +1379,16 @@
           "promptFileSha256": "f2b9bfd66bc1abaa0bf4bcf6598d17d70bc3fd6ba3efed0956fcd50bdf311137",
           "responseFileSha256": "1892349b19acb0f8ed0400de8f4095a708a040ef00e508a79a8a47101dd4b18b"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "ko",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "6081b2eb5531a9f95a52e8e968f6adc088be8c0b3d91129eff8c67d9c69bb547",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "f9c6dfda3fa046d45e1b8bda9f017dc90c28710469014bd9a367b35cb81a109f",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1342,12 +1430,16 @@
           "promptFileSha256": "41c3272a99721440fd4363b9bf3a759c4d617fcef956142b9939a0430edc787f",
           "responseFileSha256": "e69d7c93815ea266cd76095b9e5339206ae1eea403f6c9dc448a55685b747a90"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "ku",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "ac8d561377dc2b8a6fab959df948ee705c5d1be6799fda06eebf9e3784324bb7",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "423f449632a14e186663513247bf57784fa49d45f03cb7dffe3c85ca5fa7fd43",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1389,12 +1481,16 @@
           "promptFileSha256": "5314ecddf8a36e734aad4ec823a8757dbbd249c794e8c019933b4bd834393ecd",
           "responseFileSha256": "f6df9d2104586fff2de4cea404440e3c163bd7a819473bebf86456147887a06f"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "mai",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "06026d06aad9ff5312634b9854b53b3371c6ea646c9d378695bc6ebcbb0babf2",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "89c6c7637a370cad858be64d80ad85c11454b2852cf455d5f5e3db8408983c60",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1436,12 +1532,16 @@
           "promptFileSha256": "fdab5bd07cb9981ba2b34bee8c124a0d12c022181a15fbcf1934b08112d8b675",
           "responseFileSha256": "afbfc32fc437994517ab14312988ca20d652a74f5d6fb0b41cd05c1a4c5fd49f"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "mg",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "d9c0b04d520f24ea26eb905981c6f2126881af785b7f72b2d3c211ac12cba25b",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "2767c3083c245198a1f67a3df4751f59a570dc773da41d3f0ba4bed99a9563c9",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1483,12 +1583,16 @@
           "promptFileSha256": "a77ea7b8b8f7ddaeae57e3b3294103b516be8dc974f9ca8b1fc546fbb1cce2db",
           "responseFileSha256": "7929e5ac41464324106c9543627a25b9388795b001abea8fd6f87952a1dcfbbc"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "ml",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "4883049218050ee92a1e1935a46c2da73a18cbc367eeb24621a760dc28fc8d9b",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "2cddb733f48e808f1e3030bdabfe55ed886ef24e135b4f32c9897283d3d0ffc0",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1530,12 +1634,16 @@
           "promptFileSha256": "d692c0f67bc29b74efe7f0b7ee485dfb1b7a539be647e719c823827a2d381848",
           "responseFileSha256": "c1c0501b84db9668097d409b82a3d65d73e9a903868fe36a2c8fadecb356689b"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "mr",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "6e77ba22d184360b1d1a93d46624d9eaa71aeb6dc9a11c64a2f0a61501fd25cf",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "36a59ab5c55d38e73ea8c4cfd55dc936163262bacffce6d60f1e69d4899ca02a",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1577,12 +1685,16 @@
           "promptFileSha256": "32d2f9178534378feb9d092f6c8fe454fd3c96be3ebebde02973368bd0739f4a",
           "responseFileSha256": "945686372704321279acdff4546c9c8008ca3edc6815032485e7046327ff1a57"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "my",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "97b5af09b5aeda34a0910093d1a5abed41fb089cffc9ae191b5039d294509b2f",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "4958f858b4c49f0e78667c48aefd45ea8d70a06c9c14371be880cba244fab12f",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1624,12 +1736,16 @@
           "promptFileSha256": "dd4d94ba39d6b4c96407d1818330adb8ac6b00bd3a4abe000c3025dd1741993c",
           "responseFileSha256": "9d2d32cb524bd2d24152d5cb49202d0daf6785f8b44cba80817f7073c6af95ed"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "ne",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "4fc715fcce967b45bf12cf2558fbd407d7afdc3a9420aa12eaea6c7f5cd9d7fd",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "0dd5c3628e72e3ae16f51c1e8241b811433608b86f46816f8020344f301e501c",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1671,12 +1787,16 @@
           "promptFileSha256": "1675bf4ff8f98285bbc10593adea77bfaba97b36e59f90cd64ed87d01a55a06d",
           "responseFileSha256": "f6cf1ca668047c7bb4162bedca126d1a27f4eae8e7620fb4cd0d1a2304245833"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "nl",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "09c73be8f500d88da7ac031359cdd9b0452ee92034792eddf7f1fd169a3ede64",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "28ec7d2d2b988548f0e788147a999d7acbfc0759dd1ac1ebcff999cd1a52ba91",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1736,12 +1856,16 @@
           "promptFileSha256": "b88aa475a423ce27472dce3975e10839fc74dc988875582a38475023449611a5",
           "responseFileSha256": "4469d3fda881cc41c49ab4b19faa6d5a8f625d77f619b49091b294dac510e7aa"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "om",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "d82d1c7efc8b9905ac7c1416f6c99ff6c47ae85521f2b23e8a745af072a9826e",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "a07b3808f416b7cad69f9aceec133809bece4eaa90d2e03a40de8e97166f4053",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1783,12 +1907,16 @@
           "promptFileSha256": "c9152469ccd16286013092a81dbd2522bb0fe9cf510c289a13ea67ae0e06d57a",
           "responseFileSha256": "88d4b5e9a4222cc7bc4a4e11dde55c3ed03d8404040ec0830a99bc4542a3860c"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "or",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "63342c716bd8f74e174cd6a62ba27a57291e7ab0c80622e26bf8495fd7e476bc",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "6ba89702f9d30f23577406f548574f13a571b5860f853a22429de3072e14a04a",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1830,12 +1958,16 @@
           "promptFileSha256": "fafaeb6c0fca89d68c2aa12fd447bff99b53638d1087aafd06bd732ca00e9b16",
           "responseFileSha256": "5c8ff7b7ff7ce0d4af80785b45e4ca9a3968efc5c3d29fdde4c9b214af3af557"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "pa",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "8b5d4a46217a8504b188ea54a60bdc9810a03d7576089b24c0d76d56525ab1dc",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "cdc9e15cec83f95049224e14dd2c0d81f7fef041ef06c4c54c4884c43f604dc6",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1877,12 +2009,16 @@
           "promptFileSha256": "3078f98bac21dc75fba906dfae66fa0f35d4f4b7afe65d76ae788f175abfc2d5",
           "responseFileSha256": "828a0f0cf035dec7ddf9d441b98f9f9f6f6a8a37b8a643c6f247ce686b4877d0"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "pl",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "612b0d73a7eaaa9b45882a1559c804d2897dcbdd6a298c9bf9604814e57ba03e",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "402356f340b440666b2ceca0da5ed04008e89f7351c98e406da83530b492f4c1",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1942,12 +2078,16 @@
           "promptFileSha256": "3317005248b50cd4fc253816cbb6083678051e1b4e0c04d3f985615cb4446c65",
           "responseFileSha256": "9c6b357895d7c82f52f17482874b2d80c46a7940ebfb3d296c1febfaaabba351"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "pnb",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "d705e0fd68b0f7a29100f164ebd85fba4cceed2209f218cedc796c6f00db6976",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "42186b8bf4522f1d9a6cfd878434b7542b06208ee9f5bdd7110f56968e5a4ed6",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1989,12 +2129,16 @@
           "promptFileSha256": "667fb1de587f61439616fc7d3e3cded3ad13c4a1161486019e9f15021d1e44cf",
           "responseFileSha256": "adb883a8d1f955bae34deef38c62b5c6997e17da9be75c6384d314622f4dc361"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "ps",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "23e9beec0fc8e20d905465674043069383be9173857a934273d90b3ffb459b43",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "a20d13c5c553c45261c88d8a8091588e9feebeba46706a0f7726a9d701c36a9d",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2036,12 +2180,16 @@
           "promptFileSha256": "4e255b05db5f6da39652e26f031c93171b55aae7ce3f3a44f12205ed12256fe9",
           "responseFileSha256": "31de7d50713c68ed46ad3103f2224f72093277deb62da37618308401c6327cd0"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "pt-BR",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "cdab92bcb44656c56972b68ef4e0397bdde4045a5b51e3457c9704fdf06b76b7",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "c87187d2e0fb311c08f1160156306b4a8dcdaa3eb7ad9a28311104e0accf1d2d",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2101,12 +2249,16 @@
           "promptFileSha256": "c4b63023bb0521c837831ff4ac4ddf601ae125ce979b840fe0f007b019c6b738",
           "responseFileSha256": "6a312eae5d783e393d511625f9427a5427544116c79d2b97ddf76fb67468cd42"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "ro",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "5008d787e2aa11ea0cc35c1f7afd35b9c08d2451231ed7413ec63dd259fb91da",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "74d0cdf1ea8a7c1e75723bbdb44758eae7b621f7f865096f974e47c334534111",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2148,12 +2300,16 @@
           "promptFileSha256": "ed67f67493587c1bf9303068754dbfceb2b66576fb8693ef96adb9d1b7a0efd1",
           "responseFileSha256": "80da4ab866723e0bb1ba0e06c598265fde278f2c28d5aba76500c4224623a5b3"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "ru",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "9175d25a08e7f5b2d0692b08e2a9d1693257de18e894d1eaf19898fe3a577d15",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "dc19cae8ddaffd3434949d1e9bb14c5819b0b0be617d03a85950ab431141bbf2",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2237,12 +2393,16 @@
           "promptFileSha256": "80cd7ee377cb24c9d0c906331afe9c41a077ac083b03df0f34ffc77d343b988e",
           "responseFileSha256": "e9452369f7f94769b6059f1559e25c54e7672db3c361e1fe3ed3b103bbc2c839"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "sd",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "55166a7e6917d6acb61c598dd2bb027be9836e0406a5b977511dffa8fb66cd47",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "8bb6e2cf1f91f881c90a7037a25cdc84b44478155db089044332dc63d92686e3",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2284,12 +2444,16 @@
           "promptFileSha256": "0a641f1cd9e151a0863b42ecca42674e10eb93491ec72bd0aba1eb2ed190cb13",
           "responseFileSha256": "2bb040bf9ef2645adaf2c275eb328e92026330d03c9eda070d0c0f9b56e15488"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "so",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "7dc739619aa7c589ef810a34704069621ec13b323ea62183d189fc4167cbadf3",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "34bb408ec5f6c8b495492018cbb731ca0e906b9d26ed9e0e63c779834928a261",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2331,12 +2495,16 @@
           "promptFileSha256": "3c1df6fcee430fb5871f0ba8295b9db4480ecbc403f2fc1c4be011eb004a4925",
           "responseFileSha256": "51a7402ecfbaf9d4a696409b7ba661d9c98b8be29d256b266f203f3d6ae4fae5"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "su",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "667793444b7fa9717513680d7163b57d23fa4774a546015138db03349dcf5f28",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "7f7041e7f2616f0e050572e5896fe529795d5c2e58e2507325ddcaf5815c0e98",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2378,12 +2546,16 @@
           "promptFileSha256": "6ec7a185535e8b85ce91f04d6031400f0c5b12c6818e48414026e9980d8e904a",
           "responseFileSha256": "e0f48612be3b4cb04826a30840a432b7ad3ba7a0715077fda04b78b77a6cb62a"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "ta",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "63f3fcac8163c177285d40b0de82629465e9b5cc9a885c9f9638eb937a521bf4",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "4acb65627b943550b0147010e86ac791b94eae9578e0cccd7b5cd95dda439665",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2425,12 +2597,16 @@
           "promptFileSha256": "5a058ff26f55abf37a458d477d2777b74669bf60a0935c200188004a799d4f35",
           "responseFileSha256": "d7e77a06187df098310ad5f8ee95274c920e8a6d34b1598e87aa951df893b76a"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "te",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "99566abd9d4e086fd24095209fcb051126cf364b4dc1bbb010244def10fc4c52",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "f4867007749c9e9450de41cef020c15a3425e563051f58d34dba3e6c4d9045fb",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2472,12 +2648,16 @@
           "promptFileSha256": "fc8f5ee2bb5aae99f7ea3cadae372d58c80cda595ddada3e8310fd228226d5dc",
           "responseFileSha256": "20f13c7dc2d403acefef46d462a397c797311450b00435f26df122264b64c109"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "th",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "6384ad78a124b9ce9af78fcd5694fd1798d79080841e7d7a356b95dc5db5a3a2",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "6c0d736b6932b58ed65874eb68af7110e0ec4e330046d60341618813e7b34f01",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2519,12 +2699,16 @@
           "promptFileSha256": "e156ef78d8b80e388c373b023fab7e5620c0ae1f00a2c3bb30e47665f91d120e",
           "responseFileSha256": "8a11f71be6f430e5663e8d68727c7a4d4d02870028c42b5cb4cb3337dc6bdf9c"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "tl",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "e399d96256ec1d7a26d7340f279bbf03bb70297d450ed167329ba04ee1a4261b",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "97f0bbe7a5846d0ab2c1b5e22f4baf8e5ffed39d39cecafba2c16ddb10239892",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2566,12 +2750,16 @@
           "promptFileSha256": "dfba8af4458ca42e65f33ecf1600f1e64a136a88b84f42cfdff17e8ddaa1ea16",
           "responseFileSha256": "2454f334da46e8aeb839470b0c45f65b86c9cb917f80b930fe77c431c8f8acf9"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "tr",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "01137da0f1af24b59f3c1dc789c6fbf3a1533ebda77b91a22f0413ca2598761b",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "44ccd1c43208873186004e21dbef08cc0622eb784e5c723227552c3c5782981b",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2613,12 +2801,16 @@
           "promptFileSha256": "5c631829c95bf4b9e8c9be9e117e7d0bd2a99fdf77428c3a10c798f32a9a5c5b",
           "responseFileSha256": "8b204d032e57aca53328417aff4549cdb9af100d366a8dfc1807cc3a2ef49759"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "uk",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "e2ae4455fb6acd44cdf6bd1dec4e6ba1bbe89ee3d6fba831f61bfb582dda5b66",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "0f5b180883c87058912d90beff9b975e273027538ef4b795613a4f3c53c04f6e",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2660,12 +2852,16 @@
           "promptFileSha256": "1b402a4dd4a6012b930fd68eba0c1c37d4af730b238d3d839cd6c7e0680577bf",
           "responseFileSha256": "fe95843e50bcded6b36e85ebaff693104f07ba446b2262c57f66a4b00a8dbf78"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "ur",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "0d98ddbd80a039c5016f559067c66db8e383a6710863fd7a0e4a121d1ac3829a",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "9fa96873f01e9c1fce0e0dc65a93b5eaeb031a617f2b08c2f0dec1fbc6381f43",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2707,12 +2903,16 @@
           "promptFileSha256": "4849db89bb0b6fa50c1fb8f2aae553f401de0e1813871a23a1b6fcc4c3040587",
           "responseFileSha256": "6deea4d00645afebe35a4f7e2bad91b2dc5dd5b8c85d798c2451b99bf8d44c7b"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "uz",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "5a2e4390ed594a81307d1f715653831d1f1d7d2f8bcdf2991cd4556aed857e80",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "01e0b7ab127789bd0dec36f26061a38f4bd870d6a28e2291b1af98eaa3af8b5b",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2754,12 +2954,16 @@
           "promptFileSha256": "812654cd5c1ba17558c01fe9183624079f8113c6dcf91d22b59be08a740899eb",
           "responseFileSha256": "0eb0afcbdcebaf54775a577fed82a35f43a966b9cd8f87d90f68fc541c106746"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "vi",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "9866b0d7629da3abb0947612eb0ac651bdb0bef247203ddcf72ca58281b2395b",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "c47b9f5147002fda5498c1d268fe8e707a6d2a0167ece85899b8448756dddb91",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2819,12 +3023,16 @@
           "promptFileSha256": "26a8f8cfca0de10a1dd04b31fdbe93428855820e1d0623973f28a3b50f5f3be6",
           "responseFileSha256": "819165d3932152f0f4ec774a9b48661970366970adbc2df969d6d0cb8b852e8b"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "yo",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "3b8b2405ed9d209c1f6611c54e93db8ea505bde80b5371446960f55f20445a17",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "25dfe028f6546038c7edf3bde355274d417f95d34c0458b304ec6b550fdcbb97",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2866,12 +3074,16 @@
           "promptFileSha256": "d300b2823a6d06df9cf0205c4f926f43648e099f9d5fb2719171e4de3ce79a7f",
           "responseFileSha256": "a26e17be5ef0f6a3891897f077d5072d712c399fd62fdf0b82ddac76e09c9997"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "zh-CN",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "cc5b6133cc3d2a2d4f5f0a946f6d2e9266182df7127b9a91ff372bc2fc849b0e",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "d6e7ff2b581117b08c7c150cf8402a8c5c57aeeca153a7d7117515a253e96201",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2913,12 +3125,16 @@
           "promptFileSha256": "2d47cba9c130dce8b4f260e463ce4f78c688468e5969b50f8e70cd7ee5a0844c",
           "responseFileSha256": "5f99fac9ec791b09be8d2ae598b328c117ba5e2cd7d7281975882a51ce6a93af"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     },
     {
       "locale": "zh-TW",
-      "sourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
-      "contentSha256": "7eb805eae2fd699ecbfcbe7648979ee5126461cb8fcb6e869837731fe396c59c",
+      "sourceSha256": "fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e",
+      "contentSha256": "8ec8c59296c532191df3eefebcd1bb544162c90bbb80ce1923baae5c3e239ea7",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2960,7 +3176,103 @@
           "promptFileSha256": "26dd445beaa38cd4dec93f02690404dc79ea84b36d098aab26eb224c56cfe9e6",
           "responseFileSha256": "ec33d4192528d452254043999215b44c3a01ae3872f6a6658a736401c1c62461"
         }
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "englishFallbackSections": [
+        "api"
       ]
     }
-  ]
+  ],
+  "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+  "sourceRefresh": {
+    "changedSections": [
+      "api"
+    ],
+    "method": "Unchanged English sections compared against previous committed canonical source; previous machine translations retained. Changed API section explicitly served in canonical English. No new translation or human review claimed."
+  },
+  "interfaceRefresh": {
+    "keys": [
+      "api_responses_text_0",
+      "api_responses_text_1",
+      "api_responses_text_2",
+      "api_responses_text_3",
+      "api_responses_text_4",
+      "api_responses_text_5",
+      "api_responses_text_6",
+      "api_responses_text_7",
+      "api_responses_text_8",
+      "api_responses_text_9",
+      "api_responses_text_10",
+      "api_responses_text_11",
+      "api_responses_text_12",
+      "api_responses_text_13",
+      "api_responses_text_14",
+      "api_responses_text_15",
+      "api_responses_text_16"
+    ],
+    "sourceLocales": [
+      "en"
+    ],
+    "machineTranslatedLocales": [
+      "ru"
+    ],
+    "englishFallbackLocales": [
+      "am",
+      "ar",
+      "az",
+      "bho",
+      "bn",
+      "ceb",
+      "de",
+      "es",
+      "fa",
+      "ff",
+      "fr",
+      "gu",
+      "ha",
+      "hi",
+      "id",
+      "ig",
+      "it",
+      "ja-JP",
+      "jv",
+      "kk",
+      "km",
+      "kn",
+      "ko",
+      "ku",
+      "mai",
+      "mg",
+      "ml",
+      "mr",
+      "my",
+      "ne",
+      "nl",
+      "om",
+      "or",
+      "pa",
+      "pl",
+      "pnb",
+      "ps",
+      "pt-BR",
+      "ro",
+      "sd",
+      "so",
+      "su",
+      "ta",
+      "te",
+      "th",
+      "tl",
+      "tr",
+      "uk",
+      "ur",
+      "uz",
+      "vi",
+      "yo",
+      "zh-CN",
+      "zh-TW"
+    ],
+    "nativeHumanReview": false,
+    "method": "Current change adds English API controls and Russian machine translations. Other existing UI translations are retained; the new controls use explicit English text until localized."
+  }
 }

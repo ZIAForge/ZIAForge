@@ -1,3 +1,3 @@
-// Generated from docs/help/en.json; source SHA-256 19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947. Do not edit this output.
+// Generated from docs/help/en.json; source SHA-256 fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e. Do not edit this output.
 // Run node scripts/help/generate.cjs after changing the canonical help.
-export const helpSourceSha256 = '19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947'
+export const helpSourceSha256 = 'fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e'

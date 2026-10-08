@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: ar; served locale: ar; status: machine-translated. -->
 # دليل مستخدم ZIAForge
@@ -23,7 +23,7 @@ Requested locale: ar; served locale: ar; status: machine-translated. -->
 - [الإعدادات المسبقة، والطرز، والوصول](#models)
 - [المحادثات، والإيقاف، وقائمة الانتظار](#chat)
 - [الملفات، وGit، والاكتمال](#files)
-- [اتصالات API](#api)
+- [API connections](#api)
 - [الإعدادات، واللغات، وإعادة الضبط الآمنة](#settings)
 - [اسأل مساعد المساعدة](#help-assistant)
 - [المساعد وTelegram](#assistant-control)
@@ -256,17 +256,25 @@ Requested locale: ar; served locale: ar; status: machine-translated. -->
 
 <a id="api"></a>
 
-## اتصالات API
+## API connections
 
-تضيف «الاتصالات» نقطة نهاية متوافقة مع OpenAI محددة صراحةً. أدخل اسمًا، وURL أساسيًا، وطرازًا، ومفتاحًا إذا لزم الأمر. تتطلب العديد من الخوادم URL أساسيًا ينتهي بـ /v1؛ راجع وثائق نقطة النهاية الخاصة بك.
+> الدليل الكامل غير مترجم بعد إلى لغة واجهتك. يتم عرض المرجع باللغة الإنجليزية.
 
-يلزم HTTPS باستثناء HTTP للاسترجاع الداخلي. استخدم نقطة نهاية عادية دون بيانات اعتماد مضمنة في URL. تستخدم المفاتيح تشفير OS المدعوم ولا يتم إرجاعها إلى UI. يتطلب تغيير نقطة النهاية إعادة إدخال مفتاحها. يؤدي ترك حقل المفتاح فارغًا إلى الاحتفاظ بمفتاح محفوظ؛ يؤدي «إزالة المفتاح المحفوظ» إلى مسحه صراحةً.
+Connections adds an explicitly selected OpenAI-compatible endpoint. Enter a name, base URL, model and a key if needed. Select Chat Completions for existing integrations or Responses for function rounds, provider tool progress and generated images. Existing connections retain Chat Completions until you change them explicitly.
 
-لا تستخدم استدعاءات API اشتراك CLI. تختلف الأدوات والطرز عن الجلسات الأصلية، ولا يثبت اكتشاف الطراز الناجح إتمام الاستدلال. تظهر بيانات استخدام الرموز فقط عندما يعيدها الموفر فعليًا.
+HTTPS is required except for loopback HTTP. Use a plain endpoint without credentials, queries or fragments. Redirects are refused. Keys use supported OS encryption and are never returned to the UI. Changing the endpoint requires re-entering or clearing its key. Leaving the key field blank preserves a saved key.
 
-احتفظ ببيانات الاعتماد في «الاتصالات» بدلاً من نصوص المهمة أو تعليمات الإعداد المسبق. يتلقى المراجعون للقراءة فقط أدوات ملفات API المصرح بها لهم فقط؛ ولا يملك مهندس التقارير أي أدوات. يتم رفض استدعاءات الأدوات غير المدعومة بدلاً من تنفيذها بصمت. تختلف الخوادم في معلمات التفكير المنطقي، ودعم الأدوات، وقوائم الطرز؛ قارن أي خطأ بالعقد الخاص بنقطة النهاية لديك.
+Workspace file tools execute in the backend-resolved local task folder, with relative paths and checks against traversal and links. Every file write needs explicit approval and an unchanged expected revision. Read-only sessions expose only read tools. In Responses, Allow local commands separately enables approved executable/argument calls on macOS and Linux. Command supervision is unavailable on Windows; the adapter does not advertise that tool there. Commands always require owner approval and are not an operating-system sandbox.
 
-التعليمات ذات الصلة: [اتصالات API](../../API_CONNECTIONS.md).
+The Codex connector profile identifies that gateway’s Responses tool-progress extension. Native provider tools execute on the server, separately from caller tools on your computer. Local read-only permissions do not constrain the server. A connector cannot be selected for a report-only architect that requires all tools disabled: unsupported isolation fails rather than silently allowing native tools. Select an endpoint that can enforce the required policy.
+
+Generated PNG, JPEG and WebP results appear as separate image cards, with Save image, outside collapsed tool output. Images are validated and kept in private application storage; model-supplied URLs and Markdown images are not fetched automatically. Opening saved history, retrying an image read and saving a cached image do not request a new generation. Results are bounded to 32 MiB and 32 million pixels per image, with a 128 MiB private cache. Preserve needed images before manually clearing the private cache if it becomes full.
+
+Responses conversations retain the acknowledged response identity and exact function call IDs. Interrupted inputs are not automatically resent. An uncertain local edit or command is not rerun after restart; preserve the history and explicitly create a new context after inspection. Changes to a saved transport or endpoint require explicit reconfiguration. Provider status, cancellation and expiry failures are reported without hiding them behind a CLI fallback.
+
+API connections use their configured endpoint and authentication, separately from native CLI subscriptions. Some gateways use subscriptions internally; ZIAForge does not copy native authentication into an API. Models, tool policies, reasoning parameters and billing depend on the endpoint. Discovery alone does not prove inference. Keep keys in Connections, never in task prose or screenshots.
+
+التعليمات ذات الصلة: [API connections](../../API_CONNECTIONS.md).
 
 <a id="settings"></a>
 

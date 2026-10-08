@@ -1290,5 +1290,22 @@
   "help.aiStopped": "답변이 중지되었습니다. 질문 내용은 그대로 유지됩니다.",
   "help.aiFailed": "도움말 어시스턴트가 이 답변을 완료하지 못했습니다. 선택한 AI 연결을 확인하고 다시 시도하십시오.",
   "help.aiNativeRequired": "이 네이티브 CLI는 소유자의 컴퓨터 접근 권한이 필요합니다. 설정 → 제어에서 로컬로 활성화하거나, 도구가 필요 없는 도움말 세션을 위해 Claude Code 또는 API 프리셋을 선택하십시오.",
-  "help.aiPresetChanged": "시작하는 동안 이 프리셋이 변경되었습니다. 다시 선택하고 재시도하십시오."
+  "help.aiPresetChanged": "시작하는 동안 이 프리셋이 변경되었습니다. 다시 선택하고 재시도하십시오.",
+  "api_responses_text_0": "Generated image",
+  "api_responses_text_1": "Save image",
+  "api_responses_text_2": "Image unavailable",
+  "api_responses_text_3": "Invalid generated image data",
+  "api_responses_text_4": "Could not load image: {error}",
+  "api_responses_text_5": "Could not save image: {error}",
+  "api_responses_text_6": "Image saved",
+  "api_responses_text_7": "Image save cancelled",
+  "api_responses_text_8": "Provider tool",
+  "api_responses_text_9": "API transport",
+  "api_responses_text_10": "API profile",
+  "api_responses_text_11": "Chat Completions",
+  "api_responses_text_12": "Responses",
+  "api_responses_text_13": "OpenAI-compatible",
+  "api_responses_text_14": "Codex connector",
+  "api_responses_text_15": "Allow local commands",
+  "api_responses_text_16": "Commands run locally after your approval. This is not an operating-system sandbox."
 }

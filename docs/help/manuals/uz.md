@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: uz; served locale: uz; status: machine-translated. -->
 # ZIAForge foydalanuvchi qoʻllanmasi
@@ -23,7 +23,7 @@ Ingliz tili asosiy hisoblanadi. Mashina orqali tarjima qilingan yordam matnlari 
 - [Oldindan oʻrnatishlar, modellar va kirish huquqi](#models)
 - [Chatlar, Stop va navbat](#chat)
 - [Fayllar, Git va yakunlash](#files)
-- [API ulanishlari](#api)
+- [API connections](#api)
 - [Sozlamalar, tillar va xavfsiz tiklash](#settings)
 - [Yordamchi assistentdan so‘rang](#help-assistant)
 - [Yordamchi va Telegram](#assistant-control)
@@ -256,17 +256,25 @@ Tegishli ko‘rsatmalar: [Tipga ega tahrirlovchi shartnomasi](../../../shared/ed
 
 <a id="api"></a>
 
-## API ulanishlari
+## API connections
 
-Ulanishlar boʻlimi aniq tanlangan OpenAI-mos yakuniy nuqtani qoʻshadi. Nom, asosiy URL, model va kerak boʻlsa kalitni kiriting. Koʻpgina serverlar /v1 bilan tugaydigan asosiy URL ni talab qiladi; yakuniy nuqta hujjatlariga qarang.
+> To‘liq qo‘llanma hali interfeys tilingizga tarjima qilinmagan. Ingliz tilidagi asl nusxa ko‘rsatilmoqda.
 
-Teskari aloqa HTTP dan tashqari holatlarda HTTPS talab qilinadi. URL ichiga hisob maʼlumotlari kiritilmagan oddiy yakuniy nuqtadan foydalaning. Kalitlar qoʻllab-quvvatlanadigan OS shifrlashidan foydalanadi va UI ga qaytarilmaydi. Yakuniy nuqtani oʻzgartirish uning kalitini qayta kiritishni talab qiladi. Kalit maydonini boʻsh qoldirish saqlangan kalitni saqlab qoladi; Saqlangan kalitni olib tashlash uni ochiqchasiga tozalaydi.
+Connections adds an explicitly selected OpenAI-compatible endpoint. Enter a name, base URL, model and a key if needed. Select Chat Completions for existing integrations or Responses for function rounds, provider tool progress and generated images. Existing connections retain Chat Completions until you change them explicitly.
 
-API chaqiruvlari CLI obunasidan foydalanmaydi. Asboblar va modellar mahalliy seanslardan farq qiladi, va modelning muvaffaqiyatli aniqlanishi xulosa chiqarishni isbotlamaydi. Tokenlardan foydalanish faqat provayder uni haqiqatan ham qaytargandagina koʻrsatiladi.
+HTTPS is required except for loopback HTTP. Use a plain endpoint without credentials, queries or fragments. Redirects are refused. Keys use supported OS encryption and are never returned to the UI. Changing the endpoint requires re-entering or clearing its key. Leaving the key field blank preserves a saved key.
 
-Hisob maʼlumotlarini topshiriq matni yoki oldindan oʻrnatilgan koʻrsatmalarda emas, balki Ulanishlar boʻlimida saqlang. Faqat oʻqish uchun moʻljallangan taqrizchilar faqat oʻzlariga ruxsat berilgan API fayl asboblarini oladilar; hisobot meʼmorida hech qanday asbob boʻlmaydi. Qoʻllab-quvvatlanmaydigan asbob chaqiruvlari bildirmasdan bajarilmasdan, rad etiladi. Serverlar mulohaza yuritish parametrlari, asboblarni qoʻllab-quvvatlash va modellar roʻyxati boʻyicha farqlanadi; xatoni yakuniy nuqtangizning shaxsiy shartnomasi bilan solishtiring.
+Workspace file tools execute in the backend-resolved local task folder, with relative paths and checks against traversal and links. Every file write needs explicit approval and an unchanged expected revision. Read-only sessions expose only read tools. In Responses, Allow local commands separately enables approved executable/argument calls on macOS and Linux. Command supervision is unavailable on Windows; the adapter does not advertise that tool there. Commands always require owner approval and are not an operating-system sandbox.
 
-Tegishli ko‘rsatmalar: [API ulanishlari](../../API_CONNECTIONS.md).
+The Codex connector profile identifies that gateway’s Responses tool-progress extension. Native provider tools execute on the server, separately from caller tools on your computer. Local read-only permissions do not constrain the server. A connector cannot be selected for a report-only architect that requires all tools disabled: unsupported isolation fails rather than silently allowing native tools. Select an endpoint that can enforce the required policy.
+
+Generated PNG, JPEG and WebP results appear as separate image cards, with Save image, outside collapsed tool output. Images are validated and kept in private application storage; model-supplied URLs and Markdown images are not fetched automatically. Opening saved history, retrying an image read and saving a cached image do not request a new generation. Results are bounded to 32 MiB and 32 million pixels per image, with a 128 MiB private cache. Preserve needed images before manually clearing the private cache if it becomes full.
+
+Responses conversations retain the acknowledged response identity and exact function call IDs. Interrupted inputs are not automatically resent. An uncertain local edit or command is not rerun after restart; preserve the history and explicitly create a new context after inspection. Changes to a saved transport or endpoint require explicit reconfiguration. Provider status, cancellation and expiry failures are reported without hiding them behind a CLI fallback.
+
+API connections use their configured endpoint and authentication, separately from native CLI subscriptions. Some gateways use subscriptions internally; ZIAForge does not copy native authentication into an API. Models, tool policies, reasoning parameters and billing depend on the endpoint. Discovery alone does not prove inference. Keep keys in Connections, never in task prose or screenshots.
+
+Tegishli ko‘rsatmalar: [API connections](../../API_CONNECTIONS.md).
 
 <a id="settings"></a>
 

@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: ne; served locale: ne; status: machine-translated. -->
 # ZIAForge प्रयोगकर्ता मार्गदर्शन
@@ -23,7 +23,7 @@ Requested locale: ne; served locale: ne; status: machine-translated. -->
 - [प्रिसेटहरू, मोडेलहरू र पहुँच](#models)
 - [कुराकानीहरू, रोक्नुहोस् र लाम](#chat)
 - [फाइलहरू, Git र पूर्णता](#files)
-- [API जडानहरू](#api)
+- [API connections](#api)
 - [सेटिङहरू, भाषाहरू र सुरक्षित रिसेट](#settings)
 - [Help सहायकलाई सोध्नुहोस्](#help-assistant)
 - [सहायक र Telegram](#assistant-control)
@@ -256,17 +256,25 @@ Work ले कुनै Git शाखाहरू सिर्जना गर�
 
 <a id="api"></a>
 
-## API जडानहरू
+## API connections
 
-जडानहरूले स्पष्ट रूपमा चयन गरिएको OpenAI-मिल्दो अन्तिम बिन्दु थप्छ। एउटा नाम, आधार URL, मोडेल र आवश्यक परेमा कुञ्जी प्रविष्ट गर्नुहोस्। धेरै सर्भरहरूलाई /v1 मा समाप्त हुने आधार URL चाहिन्छ; आफ्नो अन्तिम बिन्दुको कागजात हेर्नुहोस्।
+> पूर्ण निर्देशिका अझै तपाईँको इन्टरफेसको भाषामा अनुवाद गरिएको छैन। अंग्रेजी सन्दर्भ देखाइँदैछ।
 
-लुपब्याक HTTP बाहेक HTTPS अनिवार्य छ। URL मा प्रमाणपत्रहरू सम्मिलित नगरीकन सामान्य अन्तिम बिन्दु प्रयोग गर्नुहोस्। कुञ्जीहरूले समर्थित OS इन्क्रिप्सन प्रयोग गर्छन् र UI मा फिर्ता पठाइँदैन। अन्तिम बिन्दु परिवर्तन गर्दा यसको कुञ्जी पुन: प्रविष्ट गर्न आवश्यक हुन्छ। कुञ्जी क्षेत्र खाली छोड्दा सुरक्षित गरिएको कुञ्जी यथावत रहन्छ; सुरक्षित गरिएको कुञ्जी हटाउनुहोस् ले यसलाई स्पष्ट रूपमा खाली गर्दछ।
+Connections adds an explicitly selected OpenAI-compatible endpoint. Enter a name, base URL, model and a key if needed. Select Chat Completions for existing integrations or Responses for function rounds, provider tool progress and generated images. Existing connections retain Chat Completions until you change them explicitly.
 
-API कलहरूले CLI सदस्यता प्रयोग गर्दैनन्। उपकरण र मोडेलहरू नेटिभ सत्रहरू भन्दा फरक हुन्छन्, र सफल मोडेल खोजीले निष्कर्ष प्रमाणित गर्दैन। प्रदायकले वास्तवमा फिर्ता पठाउँदा मात्र टोकन उपयोग देखिन्छ।
+HTTPS is required except for loopback HTTP. Use a plain endpoint without credentials, queries or fragments. Redirects are refused. Keys use supported OS encryption and are never returned to the UI. Changing the endpoint requires re-entering or clearing its key. Leaving the key field blank preserves a saved key.
 
-प्रमाणपत्रहरू कार्य विवरण वा प्रिसेट निर्देशनहरूमा राख्नुको सट्टा जडानहरू मा राख्नुहोस्। पढ्न-मात्र पाउने समीक्षकहरूले केवल आफ्ना अनुमतिप्राप्त API फाइल उपकरणहरू प्राप्त गर्छन्; प्रतिवेदन वास्तुकारसँग कुनै उपकरण हुँदैन। असमर्थित उपकरण कलहरू मौन रूपमा कार्यान्वयन हुनुको सट्टा अस्वीकृत हुन्छन्। सर्भरहरू तर्क मापदण्ड, उपकरण समर्थन र मोडेल सूचीहरूमा फरक हुन्छन्; कुनै त्रुटिलाई आफ्नो अन्तिम बिन्दुको आफ्नै सम्झौतासँग तुलना गर्नुहोस्।
+Workspace file tools execute in the backend-resolved local task folder, with relative paths and checks against traversal and links. Every file write needs explicit approval and an unchanged expected revision. Read-only sessions expose only read tools. In Responses, Allow local commands separately enables approved executable/argument calls on macOS and Linux. Command supervision is unavailable on Windows; the adapter does not advertise that tool there. Commands always require owner approval and are not an operating-system sandbox.
 
-सम्बन्धित निर्देशनहरू: [API जडानहरू](../../API_CONNECTIONS.md).
+The Codex connector profile identifies that gateway’s Responses tool-progress extension. Native provider tools execute on the server, separately from caller tools on your computer. Local read-only permissions do not constrain the server. A connector cannot be selected for a report-only architect that requires all tools disabled: unsupported isolation fails rather than silently allowing native tools. Select an endpoint that can enforce the required policy.
+
+Generated PNG, JPEG and WebP results appear as separate image cards, with Save image, outside collapsed tool output. Images are validated and kept in private application storage; model-supplied URLs and Markdown images are not fetched automatically. Opening saved history, retrying an image read and saving a cached image do not request a new generation. Results are bounded to 32 MiB and 32 million pixels per image, with a 128 MiB private cache. Preserve needed images before manually clearing the private cache if it becomes full.
+
+Responses conversations retain the acknowledged response identity and exact function call IDs. Interrupted inputs are not automatically resent. An uncertain local edit or command is not rerun after restart; preserve the history and explicitly create a new context after inspection. Changes to a saved transport or endpoint require explicit reconfiguration. Provider status, cancellation and expiry failures are reported without hiding them behind a CLI fallback.
+
+API connections use their configured endpoint and authentication, separately from native CLI subscriptions. Some gateways use subscriptions internally; ZIAForge does not copy native authentication into an API. Models, tool policies, reasoning parameters and billing depend on the endpoint. Discovery alone does not prove inference. Keep keys in Connections, never in task prose or screenshots.
+
+सम्बन्धित निर्देशनहरू: [API connections](../../API_CONNECTIONS.md).
 
 <a id="settings"></a>
 

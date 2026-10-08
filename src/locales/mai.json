@@ -1290,5 +1290,22 @@
   "help.aiStopped": "उत्तर रोकि देल गेल। अहाँक प्रश्न एखनहुँ उपलब्ध अछि।",
   "help.aiFailed": "Help सहायक ई उत्तर पूरा नहि क सकल। चयनित AI कनेक्शनक जांच करू आ फेर प्रयास करू।",
   "help.aiNativeRequired": "एहि मूल CLI कें स्वामीक कंप्यूटर-पहुँच अनुमतिक आवश्यकता अछि। Settings → Control मे एकरा स्थानीय रूप सँ सक्षम करू, वा टूल-मुक्त Help सत्र लेल Claude Code वा कोनो API प्रीसेट चुनू।",
-  "help.aiPresetChanged": "स्टार्टअप काल ई प्रीसेट बदलि गेल। एकरा फेर सँ चुनू आ पुनः प्रयास करू।"
+  "help.aiPresetChanged": "स्टार्टअप काल ई प्रीसेट बदलि गेल। एकरा फेर सँ चुनू आ पुनः प्रयास करू।",
+  "api_responses_text_0": "Generated image",
+  "api_responses_text_1": "Save image",
+  "api_responses_text_2": "Image unavailable",
+  "api_responses_text_3": "Invalid generated image data",
+  "api_responses_text_4": "Could not load image: {error}",
+  "api_responses_text_5": "Could not save image: {error}",
+  "api_responses_text_6": "Image saved",
+  "api_responses_text_7": "Image save cancelled",
+  "api_responses_text_8": "Provider tool",
+  "api_responses_text_9": "API transport",
+  "api_responses_text_10": "API profile",
+  "api_responses_text_11": "Chat Completions",
+  "api_responses_text_12": "Responses",
+  "api_responses_text_13": "OpenAI-compatible",
+  "api_responses_text_14": "Codex connector",
+  "api_responses_text_15": "Allow local commands",
+  "api_responses_text_16": "Commands run locally after your approval. This is not an operating-system sandbox."
 }

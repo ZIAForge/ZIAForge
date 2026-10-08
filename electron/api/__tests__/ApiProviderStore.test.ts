@@ -38,6 +38,21 @@ describe('private API connections', () => {
     expect((await store.list())[0].hasApiKey).toBe(false)
     await store.remove({ id: saved.id }); expect(await store.list()).toEqual([])
   })
+  it('keeps legacy transport and encrypted custody while explicit Responses settings survive restart', async () => {
+    const { store, directory, secrets } = fixture()
+    const legacy = await store.save({ name: 'Legacy', model: 'm', baseUrl: 'https://fixture.invalid/v1', enabled: true, apiKey: 'transport-fixture-secret' })
+    expect(legacy).not.toHaveProperty('transport')
+    const request = { id: legacy.id, name: legacy.name, model: legacy.model, baseUrl: legacy.baseUrl, enabled: true }
+    await expect(store.save({ ...request, profile: 'codex-connector' })).rejects.toThrow('Responses')
+    await expect(store.save({ ...request, allowCommands: true })).rejects.toThrow('Responses')
+    await store.save({ ...request, transport: 'responses', profile: 'codex-connector', allowCommands: true })
+    const reopened = new ApiProviderStore({ directory, secrets }); stores.push(reopened)
+    expect((await reopened.list())[0]).toMatchObject({ transport: 'responses', profile: 'codex-connector', allowCommands: true, hasApiKey: true })
+    expect((await reopened.resolve(legacy.id)).apiKey).toBe('transport-fixture-secret')
+    expect(JSON.stringify(await reopened.list())).not.toContain('transport-fixture-secret')
+    await reopened.save({ id: legacy.id, name: legacy.name, model: legacy.model, baseUrl: legacy.baseUrl, enabled: true, transport: 'chat-completions', profile: 'openai-compatible', allowCommands: false })
+    expect(await reopened.resolve(legacy.id)).toMatchObject({ transport: 'chat-completions', allowCommands: false, apiKey: 'transport-fixture-secret' })
+  })
   it('fails closed when OS encryption is unavailable and rejects embedded credentials and unsafe schemes', async () => {
     const { store, secrets, directory } = fixture()
     vi.spyOn(secrets, 'isEncryptionAvailable').mockReturnValue(false)

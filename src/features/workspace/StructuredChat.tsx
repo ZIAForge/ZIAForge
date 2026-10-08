@@ -455,6 +455,7 @@ function StructuredChatSession({ taskId, chatId, presetName, provider = 'codex',
       <ConversationFeed
         className="min-h-0"
         messages={snapshot?.feed || []}
+        mediaOwner={snapshot ? { sessionId: snapshot.sessionId, runId: snapshot.runId } : undefined}
         workflowTitle={managedByPlan ? workflowTitle : undefined}
         workflowKind={managedByPlan ? workflowKind : undefined}
         onResolveApproval={snapshot?.capabilities.interactiveApprovals ? resolveApproval : undefined}

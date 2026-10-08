@@ -143,7 +143,9 @@ ZIAForge uses **structured provider interfaces** rather than scraping an interac
 | Codex | Native App Server stdio | Your installed CLI's login |
 | Claude Code | Persistent stream-json | Your installed CLI's login |
 | Antigravity | Supported headless stream-json | Your installed CLI's login |
-| API | OpenAI-compatible streaming Chat Completions | Your explicitly configured endpoint and optional API key |
+| API | Explicit streaming Chat Completions or Responses | Your explicitly configured endpoint and optional API key |
+
+Responses connections support caller workspace tools, separately approved local commands on macOS/Linux, provider progress cards and private generated-image previews. Server tools operate remotely; they never dispatch local commands. Windows local API commands are not yet available. Existing API connections keep Chat Completions until explicitly changed.
 
 Native subscription access and API billing are separate choices. Model availability and limits belong to the selected provider and account. An unsupported CLI version fails visibly before prompt delivery; ZIAForge does not silently switch transport or provider.
 
@@ -207,7 +209,7 @@ The interface offers **56 languages**, including right-to-left layouts. Telegram
 
 Open **Help** for searchable product instructions, or ask the separate **Help assistant** using a saved connected AI preset. It answers from the current canonical guide and links its sections. It has no application command executor or live project context; the application architect is a separate feature.
 
-English is the canonical help source. The other 55 guides are currently **machine-translated and labelled as such**, with source hashes and a separate human-review status. Offline Markdown manuals and HTML guides are generated from the same package. Contributions from native speakers are welcome.
+English is the canonical help source. The other 55 guides are currently **machine-translated and labelled as such**, with source hashes and a separate human-review status. Newly changed sections may explicitly show the English reference while unchanged translations retain their provenance. Offline Markdown manuals and HTML guides are generated from the same package. Contributions from native speakers are welcome.
 
 [English guide](docs/USER_GUIDE.md) · [Language coverage and manuals](docs/help/LOCALES.md) · [Help maintenance](docs/HELP_MAINTENANCE.md) · [Localization](docs/LOCALIZATION.md)
 

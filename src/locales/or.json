@@ -1290,5 +1290,22 @@
   "help.aiStopped": "ଉତ୍ତର ବନ୍ଦ ହୋଇଛି। ଆପଣଙ୍କ ପ୍ରଶ୍ନ ଏବେ ମଧ୍ୟ ଉପଲବ୍ଧ ଅଛି।",
   "help.aiFailed": "ସହାୟତା ସହକାରୀ ଏହି ଉତ୍ତର ସମ୍ପୂର୍ଣ୍ଣ କରିପାରିଲେ ନାହିଁ। ମନୋନୀତ AI ସଂଯୋଗ ଯାଞ୍ଚ କରନ୍ତୁ ଏବଂ ପୁନର୍ବାର ଚେଷ୍ଟା କରନ୍ତୁ।",
   "help.aiNativeRequired": "ଏହି ନେଟିଭ୍ CLI ପାଇଁ ମାଲିକଙ୍କ କମ୍ପ୍ୟୁଟର-ପ୍ରବେଶ ଅନୁମତି ଆବଶ୍ୟକ। Settings → Control ରେ ସ୍ଥାନୀୟ ଭାବରେ ଏହାକୁ ସକ୍ଷମ କରନ୍ତୁ, କିମ୍ବା ଏକ ଟୁଲ୍-ମୁକ୍ତ ସହାୟତା ଅଧିବେଶନ ପାଇଁ Claude Code କିମ୍ବା ଏକ API ପ୍ରିସେଟ୍ ଚୟନ କରନ୍ତୁ।",
-  "help.aiPresetChanged": "ଷ୍ଟାର୍ଟଅପ୍ ସମୟରେ ଏହି ପ୍ରିସେଟ୍ ପରିବର୍ତ୍ତିତ ହୋଇଛି। ଏହାକୁ ପୁଣି ବାଛନ୍ତୁ ଏବଂ ପୁନଃ ପ୍ରୟାସ କରନ୍ତୁ।"
+  "help.aiPresetChanged": "ଷ୍ଟାର୍ଟଅପ୍ ସମୟରେ ଏହି ପ୍ରିସେଟ୍ ପରିବର୍ତ୍ତିତ ହୋଇଛି। ଏହାକୁ ପୁଣି ବାଛନ୍ତୁ ଏବଂ ପୁନଃ ପ୍ରୟାସ କରନ୍ତୁ।",
+  "api_responses_text_0": "Generated image",
+  "api_responses_text_1": "Save image",
+  "api_responses_text_2": "Image unavailable",
+  "api_responses_text_3": "Invalid generated image data",
+  "api_responses_text_4": "Could not load image: {error}",
+  "api_responses_text_5": "Could not save image: {error}",
+  "api_responses_text_6": "Image saved",
+  "api_responses_text_7": "Image save cancelled",
+  "api_responses_text_8": "Provider tool",
+  "api_responses_text_9": "API transport",
+  "api_responses_text_10": "API profile",
+  "api_responses_text_11": "Chat Completions",
+  "api_responses_text_12": "Responses",
+  "api_responses_text_13": "OpenAI-compatible",
+  "api_responses_text_14": "Codex connector",
+  "api_responses_text_15": "Allow local commands",
+  "api_responses_text_16": "Commands run locally after your approval. This is not an operating-system sandbox."
 }

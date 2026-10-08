@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 fed1d177bb98f1742eb79a0a8420de451327fc7bc9760b20bcaed4489b5fec8e. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: jv; served locale: jv; status: machine-translated. -->
 # Pandhuan pangguna ZIAForge
@@ -23,7 +23,7 @@ Basa Inggris minangka babon resmi (kanonik). Pitulung asil jarwan mesin diwenehi
 - [Prasetel, model lan akses](#models)
 - [Obrolan, Stop lan antrean](#chat)
 - [Berkas, Git lan pungkasan](#files)
-- [Sambungan API](#api)
+- [API connections](#api)
 - [Setelan, basa lan reset aman](#settings)
 - [Takon marang asisten Pitulung](#help-assistant)
 - [Asisten lan Telegram](#assistant-control)
@@ -256,17 +256,25 @@ Pituduh gegandhengan: [Kontrak editor terketik](../../../shared/editor.ts) · [K
 
 <a id="api"></a>
 
-## Sambungan API
+## API connections
 
-Sambungan nambahake endpoint sing cocog karo OpenAI sing dipilih kanthi cetha. Lebokake jeneng, URL dhasar, model, lan kunci yen dibutuhake. Akeh server mbutuhake URL dhasar sing dipungkasi /v1; priksa dokumentasi endpoint sampeyan.
+> Pandhuan lengkap durung diterjemahake menyang basa tampilan sampeyan. Nampilake rujukan basa Inggris.
 
-HTTPS diwajibake kajaba kanggo loopback HTTP. Gunakake endpoint biasa tanpa kredensial sing katempel ing URL. Kunci nggunakake enkripsi OS sing didhukung lan ora dibalekake menyang UI. Ngowahi endpoint mbutuhake nglebokake maneh kuncine. Ninggalake kolom kunci kosong bakal njaga kunci sing wis disimpen; Mbusak kunci sing disimpen bakal mbusak kanthi cetha.
+Connections adds an explicitly selected OpenAI-compatible endpoint. Enter a name, base URL, model and a key if needed. Select Chat Completions for existing integrations or Responses for function rounds, provider tool progress and generated images. Existing connections retain Chat Completions until you change them explicitly.
 
-Panggilan API ora nggunakake langganan CLI. Piranti lan model beda karo sesi asli, lan panemuan model sing sukses ora mbuktekake proses inferensi mlaku. Panggunan token mung katon yen panyedhiya pancen ngirimake.
+HTTPS is required except for loopback HTTP. Use a plain endpoint without credentials, queries or fragments. Redirects are refused. Keys use supported OS encryption and are never returned to the UI. Changing the endpoint requires re-entering or clearing its key. Leaving the key field blank preserves a saved key.
 
-Simpen kredensial ing Sambungan, dudu ing teks tugas utawa pandhuan prasetel. Penelaah mung-waca mung nampa piranti berkas API sing diidini; arsitek laporan ora duwe piranti. Panggilan piranti sing ora didhukung bakal ditolak, ora dileksanakake meneng-menengan. Saben server beda-beda ing paramèter nalar, panyengkuyung piranti, lan dhaptar model; tandhingake kaluputan karo kontrak endpoint sampeyan dhewe.
+Workspace file tools execute in the backend-resolved local task folder, with relative paths and checks against traversal and links. Every file write needs explicit approval and an unchanged expected revision. Read-only sessions expose only read tools. In Responses, Allow local commands separately enables approved executable/argument calls on macOS and Linux. Command supervision is unavailable on Windows; the adapter does not advertise that tool there. Commands always require owner approval and are not an operating-system sandbox.
 
-Pituduh gegandhengan: [Sambungan API](../../API_CONNECTIONS.md).
+The Codex connector profile identifies that gateway’s Responses tool-progress extension. Native provider tools execute on the server, separately from caller tools on your computer. Local read-only permissions do not constrain the server. A connector cannot be selected for a report-only architect that requires all tools disabled: unsupported isolation fails rather than silently allowing native tools. Select an endpoint that can enforce the required policy.
+
+Generated PNG, JPEG and WebP results appear as separate image cards, with Save image, outside collapsed tool output. Images are validated and kept in private application storage; model-supplied URLs and Markdown images are not fetched automatically. Opening saved history, retrying an image read and saving a cached image do not request a new generation. Results are bounded to 32 MiB and 32 million pixels per image, with a 128 MiB private cache. Preserve needed images before manually clearing the private cache if it becomes full.
+
+Responses conversations retain the acknowledged response identity and exact function call IDs. Interrupted inputs are not automatically resent. An uncertain local edit or command is not rerun after restart; preserve the history and explicitly create a new context after inspection. Changes to a saved transport or endpoint require explicit reconfiguration. Provider status, cancellation and expiry failures are reported without hiding them behind a CLI fallback.
+
+API connections use their configured endpoint and authentication, separately from native CLI subscriptions. Some gateways use subscriptions internally; ZIAForge does not copy native authentication into an API. Models, tool policies, reasoning parameters and billing depend on the endpoint. Discovery alone does not prove inference. Keep keys in Connections, never in task prose or screenshots.
+
+Pituduh gegandhengan: [API connections](../../API_CONNECTIONS.md).
 
 <a id="settings"></a>
 
