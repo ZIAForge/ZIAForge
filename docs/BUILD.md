@@ -17,4 +17,4 @@ The manual **Stable release packages** GitHub Actions workflow compiles/packages
 
 [macOS builds](MACOS_BUILD.md) explains the development allocator and Mac checks. [Linux](LINUX.md) describes the earlier Ubuntu desktop verification. [Testing](TESTING.md) is the separate contributor regression contract.
 
-Keep version reservations and source provenance when removing generated outputs. Stable releases, development previews and CI verification packages have different identities. Current public packages are unsigned; manual installation is the supported update path.
+Keep version reservations and source provenance when removing generated outputs. Stable releases, development previews and CI verification packages have different identities. Current public packages are unsigned. Supported installed layouts use the verified [application updater](UPDATES.md); unsupported layouts retain the manual installation path.

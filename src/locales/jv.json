@@ -1390,5 +1390,17 @@
   "video_save_error": "Ora bisa nyimpen video: {error}",
   "video_save_cancelled": "Panyimpenan video dibatalake",
   "video_saved": "Video wis disimpen",
-  "video_invalid": "Data video ora valid"
+  "video_invalid": "Data video ora valid",
+  "updates.check": "Priksa pamutakhiran",
+  "updates.update": "Mutakhirake saiki",
+  "updates.installedVersion": "Versi sing dipasang",
+  "updates.availableVersion": "Versi sing kasedhiya",
+  "updates.localOnly": "Atur pamutakhiran ing aplikasi desktop ing komputer iki.",
+  "updates.manualInstall": "Pamasangan otomatis ora kasedhiya ing kene. Undhuh paket utawa bukak kaca rilis kanggo masang kanthi manual.",
+  "updates.installNotice": "Rampungake pakaryan sing isih lumaku sadurunge mutakhirake. ZIAForge bakal ditutup lan bisa mbukak pemasang sistem.",
+  "updates.release": "Deleng rilis",
+  "updates.settings": "Setelan pamutakhiran",
+  "updates.autoInstallNotice": "Pamasangan tansah mbutuhake tumindak sampeyan.",
+  "updates.preparing": "Nyiyapake pamutakhiran…",
+  "updates.installing": "Masang pamutakhiran…"
 }

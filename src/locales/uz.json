@@ -1390,5 +1390,17 @@
   "video_save_error": "Videoni saqlab bo‘lmadi: {error}",
   "video_save_cancelled": "Videoni saqlash bekor qilindi",
   "video_saved": "Video saqlandi",
-  "video_invalid": "Video ma’lumotlari yaroqsiz"
+  "video_invalid": "Video ma’lumotlari yaroqsiz",
+  "updates.check": "Yangilanishlarni tekshirish",
+  "updates.update": "Hozir yangilash",
+  "updates.installedVersion": "O‘rnatilgan versiya",
+  "updates.availableVersion": "Mavjud versiya",
+  "updates.localOnly": "Yangilanishlarni ushbu kompyuterdagi ish stoli ilovasida boshqaring.",
+  "updates.manualInstall": "Bu yerda avtomatik o‘rnatish mavjud emas. Qo‘lda o‘rnatish uchun paketni yuklab oling yoki reliz sahifasini oching.",
+  "updates.installNotice": "Yangilashdan oldin joriy ishni tugating. ZIAForge yopiladi va tizim o‘rnatuvchisini ochishi mumkin.",
+  "updates.release": "Relizni ko‘rish",
+  "updates.settings": "Yangilash sozlamalari",
+  "updates.autoInstallNotice": "O‘rnatish har doim sizning harakatingizni talab qiladi.",
+  "updates.preparing": "Yangilanish tayyorlanmoqda…",
+  "updates.installing": "Yangilanish o‘rnatilmoqda…"
 }

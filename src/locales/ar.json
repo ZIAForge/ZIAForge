@@ -1390,5 +1390,17 @@
   "video_save_error": "تعذّر حفظ الفيديو: {error}",
   "video_save_cancelled": "تم إلغاء حفظ الفيديو",
   "video_saved": "تم حفظ الفيديو",
-  "video_invalid": "بيانات الفيديو غير صالحة"
+  "video_invalid": "بيانات الفيديو غير صالحة",
+  "updates.check": "التحقق من التحديثات",
+  "updates.update": "التحديث الآن",
+  "updates.installedVersion": "الإصدار المثبّت",
+  "updates.availableVersion": "الإصدار المتاح",
+  "updates.localOnly": "أدِر التحديثات من تطبيق سطح المكتب على هذا الكمبيوتر.",
+  "updates.manualInstall": "التثبيت التلقائي غير متاح هنا. نزّل الحزمة أو افتح صفحة الإصدار للتثبيت يدويًا.",
+  "updates.installNotice": "أنهِ العمل الجاري قبل التحديث. سيُغلق ZIAForge وقد يفتح برنامج تثبيت النظام.",
+  "updates.release": "عرض الإصدار",
+  "updates.settings": "إعدادات التحديث",
+  "updates.autoInstallNotice": "يتطلب التثبيت دائمًا إجراءً منك.",
+  "updates.preparing": "جارٍ تحضير التحديث…",
+  "updates.installing": "جارٍ تثبيت التحديث…"
 }

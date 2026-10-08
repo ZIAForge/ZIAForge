@@ -1390,5 +1390,17 @@
   "video_save_error": "भिडियो सुरक्षित गर्न सकिएन: {error}",
   "video_save_cancelled": "भिडियो सुरक्षित गर्ने कार्य रद्द गरियो",
   "video_saved": "भिडियो सुरक्षित गरियो",
-  "video_invalid": "भिडियोको डेटा अमान्य छ"
+  "video_invalid": "भिडियोको डेटा अमान्य छ",
+  "updates.check": "अद्यावधिक जाँच्नुहोस्",
+  "updates.update": "अहिले अद्यावधिक गर्नुहोस्",
+  "updates.installedVersion": "स्थापित संस्करण",
+  "updates.availableVersion": "उपलब्ध संस्करण",
+  "updates.localOnly": "यस कम्प्युटरको डेस्कटप एपमा अद्यावधिक व्यवस्थापन गर्नुहोस्।",
+  "updates.manualInstall": "यहाँ स्वचालित स्थापना उपलब्ध छैन। प्याकेज डाउनलोड गर्नुहोस् वा आफैँ स्थापना गर्न रिलिज पृष्ठ खोल्नुहोस्।",
+  "updates.installNotice": "अद्यावधिक गर्नुअघि चलिरहेको काम सक्नुहोस्। ZIAForge बन्द हुनेछ र प्रणालीको स्थापनाकर्ता खुल्न सक्छ।",
+  "updates.release": "रिलिज हेर्नुहोस्",
+  "updates.settings": "अद्यावधिक सेटिङ",
+  "updates.autoInstallNotice": "स्थापनाका लागि सधैँ तपाईंको कार्य आवश्यक हुन्छ।",
+  "updates.preparing": "अद्यावधिक तयार हुँदैछ…",
+  "updates.installing": "अद्यावधिक स्थापना हुँदैछ…"
 }

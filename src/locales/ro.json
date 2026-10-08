@@ -1390,5 +1390,17 @@
   "video_save_error": "Videoclipul nu a putut fi salvat: {error}",
   "video_save_cancelled": "Salvarea videoclipului a fost anulată",
   "video_saved": "Videoclip salvat",
-  "video_invalid": "Date video nevalide"
+  "video_invalid": "Date video nevalide",
+  "updates.check": "Caută actualizări",
+  "updates.update": "Actualizează acum",
+  "updates.installedVersion": "Versiune instalată",
+  "updates.availableVersion": "Versiune disponibilă",
+  "updates.localOnly": "Gestionează actualizările în aplicația desktop de pe acest computer.",
+  "updates.manualInstall": "Instalarea automată nu este disponibilă aici. Descarcă pachetul sau deschide pagina versiunii pentru instalare manuală.",
+  "updates.installNotice": "Încheie lucrul în curs înainte de actualizare. ZIAForge se va închide și poate deschide programul de instalare al sistemului.",
+  "updates.release": "Vezi versiunea",
+  "updates.settings": "Setări de actualizare",
+  "updates.autoInstallNotice": "Instalarea necesită întotdeauna o acțiune din partea ta.",
+  "updates.preparing": "Se pregătește actualizarea…",
+  "updates.installing": "Se instalează actualizarea…"
 }

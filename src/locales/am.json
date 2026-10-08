@@ -1390,5 +1390,17 @@
   "video_save_error": "ቪዲዮውን ማስቀመጥ አልተቻለም፦ {error}",
   "video_save_cancelled": "ቪዲዮውን ማስቀመጥ ተሰርዟል",
   "video_saved": "ቪዲዮው ተቀምጧል",
-  "video_invalid": "ልክ ያልሆነ የቪዲዮ ውሂብ"
+  "video_invalid": "ልክ ያልሆነ የቪዲዮ ውሂብ",
+  "updates.check": "ዝማኔዎችን ፈትሽ",
+  "updates.update": "አሁን አዘምን",
+  "updates.installedVersion": "የተጫነ ስሪት",
+  "updates.availableVersion": "የሚገኝ ስሪት",
+  "updates.localOnly": "ዝማኔዎችን በዚህ ኮምፒውተር የዴስክቶፕ መተግበሪያ ውስጥ ያስተዳድሩ።",
+  "updates.manualInstall": "እዚህ ራስ-ሰር ጭነት አይገኝም። በእጅ ለመጫን ጥቅሉን ያውርዱ ወይም የልቀት ገጹን ይክፈቱ።",
+  "updates.installNotice": "ከማዘመንዎ በፊት የሚሠሩትን ሥራ ያጠናቅቁ። ZIAForge ይዘጋል፤ የስርዓቱን መጫኛም ሊከፍት ይችላል።",
+  "updates.release": "ልቀቱን ተመልከት",
+  "updates.settings": "የዝማኔ ቅንብሮች",
+  "updates.autoInstallNotice": "ጭነት ሁልጊዜ የእርስዎን እርምጃ ይፈልጋል።",
+  "updates.preparing": "ዝማኔ በመዘጋጀት ላይ…",
+  "updates.installing": "ዝማኔ በመጫን ላይ…"
 }

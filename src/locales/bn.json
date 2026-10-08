@@ -1390,5 +1390,17 @@
   "video_save_error": "ভিডিও সংরক্ষণ করা যায়নি: {error}",
   "video_save_cancelled": "ভিডিও সংরক্ষণ বাতিল করা হয়েছে",
   "video_saved": "ভিডিও সংরক্ষিত হয়েছে",
-  "video_invalid": "ভিডিওর ডেটা অবৈধ"
+  "video_invalid": "ভিডিওর ডেটা অবৈধ",
+  "updates.check": "আপডেট দেখুন",
+  "updates.update": "এখনই আপডেট করুন",
+  "updates.installedVersion": "ইনস্টল করা সংস্করণ",
+  "updates.availableVersion": "উপলব্ধ সংস্করণ",
+  "updates.localOnly": "এই কম্পিউটারের ডেস্কটপ অ্যাপে আপডেট পরিচালনা করুন।",
+  "updates.manualInstall": "এখানে স্বয়ংক্রিয় ইনস্টলেশন উপলব্ধ নয়। প্যাকেজ ডাউনলোড করুন বা নিজে ইনস্টল করতে রিলিজ পৃষ্ঠা খুলুন।",
+  "updates.installNotice": "আপডেটের আগে চলমান কাজ শেষ করুন। ZIAForge বন্ধ হবে এবং সিস্টেম ইনস্টলার খুলতে পারে।",
+  "updates.release": "রিলিজ দেখুন",
+  "updates.settings": "আপডেট সেটিংস",
+  "updates.autoInstallNotice": "ইনস্টলেশনের জন্য সবসময় আপনার পদক্ষেপ প্রয়োজন।",
+  "updates.preparing": "আপডেট প্রস্তুত হচ্ছে…",
+  "updates.installing": "আপডেট ইনস্টল হচ্ছে…"
 }

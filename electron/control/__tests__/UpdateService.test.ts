@@ -2,129 +2,114 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { releaseFixture } from './updateFixture'
 
-// Offline release-policy tests only. These mocks do not certify macOS signing,
-// published updater metadata, network availability, download integrity or install.
 const native = vi.hoisted(() => ({
-  app: { isPackaged: false, getVersion: vi.fn(() => '1.0.0') },
-  updater: { autoDownload: false, autoInstallOnAppQuit: false, allowPrerelease: false, allowDowngrade: false,
-    on: vi.fn(), setFeedURL: vi.fn(), checkForUpdates: vi.fn(async () => undefined), downloadUpdate: vi.fn(async () => undefined), quitAndInstall: vi.fn() },
-  codesign: vi.fn(() => ({ status: 0, stderr: 'Signature=adhoc' })),
+  app: { isPackaged: false, getVersion: vi.fn(() => '99.0.0') },
+  target: { kind: 'manual', extension: 'dmg', canInstall: false, messageCode: 'updates.notPackaged' } as { kind: string; extension: string; canInstall: boolean; messageCode?: string },
+  prepare: vi.fn(), arm: vi.fn(async () => 123), discard: vi.fn(),
 }))
 vi.mock('electron', () => ({ app: native.app }))
-vi.mock('electron-updater', () => ({ autoUpdater: native.updater }))
-vi.mock('node:child_process', async importOriginal => ({ ...await importOriginal<typeof import('node:child_process')>(), spawnSync: native.codesign }))
+vi.mock('../UpdateInstaller', () => ({ detectUpdateTarget: () => native.target, prepareUpdate: native.prepare, armPreparedUpdate: native.arm, discardPreparedUpdate: native.discard }))
 import { UpdateService } from '../UpdateService'
 
-let directory: string, resourceDescriptor: PropertyDescriptor | undefined, platformDescriptor: PropertyDescriptor | undefined
+let directory: string
 const fetchMock = vi.fn<typeof fetch>()
-const releases = (items: Array<{ tag_name: string; prerelease?: boolean; draft?: boolean }>) => new Response(JSON.stringify(items.map(item => ({ prerelease: false, draft: false, ...item }))), { status: 200, headers: { 'Content-Type': 'application/json' } })
+const extension = process.platform === 'darwin' ? 'dmg' : process.platform === 'win32' ? 'exe' : 'AppImage'
 beforeEach(() => {
-  vi.clearAllMocks(); fetchMock.mockReset(); native.app.isPackaged = false
+  vi.clearAllMocks(); fetchMock.mockReset()
   directory = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'ziaf-update-policy-')))
-  resourceDescriptor = Object.getOwnPropertyDescriptor(process, 'resourcesPath')
-  platformDescriptor = Object.getOwnPropertyDescriptor(process, 'platform')
-  Object.defineProperty(process, 'platform', { value: 'darwin', configurable: true })
-  Object.defineProperty(process, 'resourcesPath', { value: directory, configurable: true })
+  native.target = { kind: 'manual', extension, canInstall: false, messageCode: 'updates.notPackaged' }
+  native.prepare.mockResolvedValue({ directory, source: 'owned stage' })
   vi.stubGlobal('fetch', fetchMock)
 })
-afterEach(() => {
-  vi.useRealTimers()
-  vi.unstubAllGlobals()
-  if (platformDescriptor) Object.defineProperty(process, 'platform', platformDescriptor)
-  if (resourceDescriptor) Object.defineProperty(process, 'resourcesPath', resourceDescriptor)
-  else Reflect.deleteProperty(process, 'resourcesPath')
-  fs.rmSync(directory, { recursive: true, force: true })
-})
+afterEach(() => { vi.useRealTimers(); vi.unstubAllGlobals(); fs.rmSync(directory, { recursive: true, force: true }) })
+function mockRelease() {
+  const fixture = releaseFixture(undefined, process.platform, process.arch, native.target.extension)
+  fetchMock.mockImplementation(async url => {
+    const value = String(url)
+    if (value.includes('/repos/')) return new Response(JSON.stringify(fixture.catalog))
+    if (value.endsWith('release-manifest.json')) return new Response(fixture.manifest)
+    if (value.endsWith(fixture.candidate.asset.name)) return new Response(new Uint8Array(fixture.bytes))
+    throw new Error('Unexpected fixture request')
+  })
+  return fixture
+}
+const service = (requestQuit?: () => void) => new UpdateService(directory, { currentVersion: '1.0.8', requestQuit })
 
-describe('offline update release policy', () => {
-  it('orders semantic versions and keeps preview tags out of stable even if the GitHub flag is inconsistent', async () => {
-    const catalog = [ { tag_name: 'v1.9.0' }, { tag_name: 'v1.10.0' }, { tag_name: 'v2.0.0-beta.2', prerelease: false }, { tag_name: 'v2.0.0-beta.10', prerelease: true }, { tag_name: 'v8.0.0', draft: true }, { tag_name: 'not-semver' } ]
-    const service = new UpdateService(directory)
-    service.configure({ repository: 'fixture/releases', channel: 'stable', automatic: false })
-    fetchMock.mockResolvedValueOnce(releases(catalog))
-    expect(await service.check()).toMatchObject({ state: 'available', version: '1.10.0', currentChannel: 'stable' })
-    service.configure({ repository: 'fixture/releases', channel: 'preview', automatic: false })
-    fetchMock.mockResolvedValueOnce(releases(catalog))
-    expect(await service.check()).toMatchObject({ state: 'available', version: '2.0.0-beta.10', currentChannel: 'preview' })
+describe('verified local-owner release updates', () => {
+  it('uses the official repository and product version without enabling background downloads', async () => {
+    const updater = service(); mockRelease()
+    expect(updater.status()).toMatchObject({ repository: 'ZIAForge/ZIAForge', currentVersion: '1.0.8', currentChannel: 'stable', automatic: false })
+    updater.start(); expect(fetchMock).not.toHaveBeenCalled()
+    expect(await updater.check()).toMatchObject({ state: 'available', version: '1.0.9', canInstall: false, messageCode: 'updates.notPackaged' })
     expect(fetchMock).toHaveBeenCalledTimes(2)
-    expect(native.updater.checkForUpdates).not.toHaveBeenCalled()
+    await updater.close()
   })
-
-  it('does not auto-download or install development or unsigned packages even when automatic is enabled', async () => {
-    const service = new UpdateService(directory)
-    fetchMock.mockImplementation(async () => releases([{ tag_name: 'v1.1.0' }]))
-    service.configure({ repository: 'fixture/releases', channel: 'stable', automatic: true })
-    fs.writeFileSync(path.join(directory, 'app-update.yml'), 'provider: github\n')
-    expect(await service.check()).toMatchObject({ state: 'available', version: '1.1.0' })
-    await expect(service.download()).rejects.toThrow(/signed/)
-    expect(native.codesign).not.toHaveBeenCalled()
-    native.app.isPackaged = true
-    expect(await service.check()).toMatchObject({ state: 'available', version: '1.1.0' })
-    await expect(service.download()).rejects.toThrow(/signed/)
-    expect(native.codesign).toHaveBeenCalled()
-    expect(native.updater.setFeedURL).not.toHaveBeenCalled()
-    expect(native.updater.checkForUpdates).not.toHaveBeenCalled()
-    expect(native.updater.downloadUpdate).not.toHaveBeenCalled()
-    expect(native.updater.autoInstallOnAppQuit).toBe(false)
-    expect(() => service.install()).toThrow(/No verified update/)
-    await service.close()
-  })
-
-  it('requires an explicit repository and available verified update before download or install', async () => {
-    const service = new UpdateService(directory)
-    await expect(service.check()).rejects.toThrow(/repository/)
-    await expect(service.download()).rejects.toThrow(/available update/)
-    expect(() => service.install()).toThrow(/verified update/)
-    expect(fetchMock).not.toHaveBeenCalled()
-    expect(native.updater.quitAndInstall).not.toHaveBeenCalled()
-  })
-
-  it('coalesces a pending check, reports network failure honestly and allows a later explicit retry', async () => {
-    const service = new UpdateService(directory)
-    service.configure({ repository: 'fixture/releases', channel: 'stable', automatic: false })
-    let reject!: (error: Error) => void
-    fetchMock.mockImplementationOnce(() => new Promise<Response>((_resolve, fail) => { reject = fail }))
-    const first = service.check(), second = service.check()
-    expect(first).toBe(second); expect(fetchMock).toHaveBeenCalledTimes(1)
-    expect(service.status().state).toBe('checking')
-    reject(new Error('Offline fixture network failure'))
-    expect(await first).toMatchObject({ state: 'error', message: expect.stringContaining('network failure') })
-    expect(native.updater.downloadUpdate).not.toHaveBeenCalled()
-    fetchMock.mockResolvedValueOnce(releases([{ tag_name: 'v0.9.0' }, { tag_name: 'v1.0.0' }]))
-    expect(await service.check()).toMatchObject({ state: 'current', version: '1.0.0' })
+  it('never downloads equal or older releases and reports network failures with a retry', async () => {
+    const updater = service()
+    fetchMock.mockRejectedValueOnce(new Error('Offline fixture'))
+    expect(await updater.check()).toMatchObject({ state: 'error', message: 'Offline fixture' })
+    const old = releaseFixture(undefined, process.platform, process.arch, extension, '1.0.8')
+    fetchMock.mockResolvedValueOnce(new Response(JSON.stringify(old.catalog)))
+    expect(await updater.check()).toMatchObject({ state: 'current', version: '1.0.8' })
     expect(fetchMock).toHaveBeenCalledTimes(2)
+    await expect(updater.download()).rejects.toThrow(/available update/)
   })
-
-  it('automatically checks immediately and every six hours, fences configuration and cancels pending work on close', async () => {
+  it('coalesces check and download, verifies bytes, and leaves development installation untouched', async () => {
+    const updater = service(), fixture = mockRelease()
+    const check = updater.check(); expect(updater.check()).toBe(check); await check
+    const download = updater.download(); expect(updater.download()).toBe(download)
+    expect(await download).toMatchObject({ state: 'downloaded', progress: 100 })
+    expect(fetchMock).toHaveBeenCalledTimes(3)
+    const files = fs.readdirSync(path.join(directory, 'update-cache'))
+    expect(files).toEqual([`${fixture.candidate.asset.sha256}-${fixture.candidate.asset.name}`])
+    await expect(updater.install()).rejects.toThrow(/published package installer/)
+    expect(native.prepare).not.toHaveBeenCalled(); expect(native.arm).not.toHaveBeenCalled()
+  })
+  it('rejects altered downloads without installing, and allows an explicit correct retry', async () => {
+    const updater = service(); const fixture = mockRelease(); await updater.check()
+    fetchMock.mockResolvedValueOnce(new Response(Buffer.alloc(fixture.bytes.length, 1)))
+    await expect(updater.download()).rejects.toThrow(/checksum/)
+    expect(updater.status()).toMatchObject({ state: 'available', messageCode: 'updates.downloadFailed' })
+    expect(fs.readdirSync(path.join(directory, 'update-cache'))).toEqual([])
+    expect(await updater.download()).toMatchObject({ state: 'downloaded' })
+    expect(native.arm).not.toHaveBeenCalled()
+  })
+  it('disarms prepared installation if dirty-editor normal Quit is rejected', async () => {
+    native.target = { kind: 'mac-zip', extension: 'zip', canInstall: true }
+    const updater = service(() => { throw new Error('Save your files first') }); mockRelease()
+    await updater.check(); await updater.download()
+    await expect(updater.install()).rejects.toThrow(/Save your files/)
+    expect(updater.status().state).toBe('downloaded')
+    expect(native.discard).toHaveBeenCalledTimes(1)
+    await updater.finalizeInstallAfterQuitCleanup(); expect(native.arm).not.toHaveBeenCalled()
+  })
+  it('waits for explicit normal-Quit cleanup and never resumes installation from a later process', async () => {
+    native.target = { kind: 'mac-zip', extension: 'zip', canInstall: true }
+    const quit = vi.fn(), updater = service(quit); mockRelease()
+    await updater.check(); await updater.download(); await updater.install()
+    expect(quit).toHaveBeenCalledTimes(1); expect(native.arm).not.toHaveBeenCalled()
+    await updater.close(); await updater.finalizeInstallAfterQuitCleanup(); await updater.finalizeInstallAfterQuitCleanup()
+    expect(native.arm).toHaveBeenCalledTimes(1)
+    const restarted = service(quit); restarted.start(); await restarted.finalizeInstallAfterQuitCleanup()
+    expect(native.arm).toHaveBeenCalledTimes(1); expect(quit).toHaveBeenCalledTimes(1)
+  })
+  it('background checking can download but never requests installation or restart', async () => {
     vi.useFakeTimers({ toFake: ['setInterval', 'clearInterval'] })
-    const service = new UpdateService(directory)
-    let resolveFirst!: (response: Response) => void
-    fetchMock.mockImplementationOnce(() => new Promise<Response>(resolve => { resolveFirst = resolve }))
-    try {
-      service.configure({ repository: 'fixture/releases', channel: 'stable', automatic: true })
-      expect(fetchMock).toHaveBeenCalledTimes(1)
-      expect(service.status().state).toBe('checking')
-      expect(() => service.configure({ repository: 'fixture/other', channel: 'preview', automatic: true })).toThrow(/pending update/)
-      resolveFirst(releases([{ tag_name: 'v1.0.0' }]))
-      expect(await service.check()).toMatchObject({ state: 'current', currentChannel: 'stable' })
-      let secondSignal: AbortSignal | undefined
-      fetchMock.mockImplementationOnce((_url, options) => new Promise<Response>((_resolve, reject) => {
-        secondSignal = options?.signal as AbortSignal
-        secondSignal.addEventListener('abort', () => reject(secondSignal!.reason), { once: true })
-      }))
-      await vi.advanceTimersByTimeAsync(6 * 60 * 60 * 1000 - 1)
-      expect(fetchMock).toHaveBeenCalledTimes(1)
-      await vi.advanceTimersByTimeAsync(1)
-      expect(fetchMock).toHaveBeenCalledTimes(2)
-      expect(secondSignal?.aborted).toBe(false)
-      expect(() => service.configure({ repository: 'fixture/other', channel: 'preview', automatic: false })).toThrow(/pending update/)
-      await service.close()
-      expect(secondSignal?.aborted).toBe(true)
-      expect(service.status().state).toBe('error')
-      await vi.advanceTimersByTimeAsync(24 * 60 * 60 * 1000)
-      expect(fetchMock).toHaveBeenCalledTimes(2)
-      expect(native.updater.downloadUpdate).not.toHaveBeenCalled()
-    } finally { await service.close() }
+    const quit = vi.fn(), updater = service(quit); mockRelease()
+    updater.configure({ repository: 'ZIAForge/ZIAForge', channel: 'stable', automatic: true })
+    await updater.check()
+    expect(updater.status().state).toBe('downloaded')
+    expect(quit).not.toHaveBeenCalled(); expect(native.prepare).not.toHaveBeenCalled()
+    await updater.close()
+  })
+  it('cancels a pending network request on Quit and fences configuration while checking', async () => {
+    const updater = service(); let signal: AbortSignal | undefined
+    fetchMock.mockImplementation((_url, options) => new Promise<Response>((_resolve, reject) => { signal = options?.signal as AbortSignal; signal.addEventListener('abort', () => reject(signal!.reason), { once: true }) }))
+    const check = updater.check()
+    expect(() => updater.configure({ repository: 'ZIAForge/ZIAForge', channel: 'preview', automatic: false })).toThrow(/pending update/)
+    await updater.close(); await check
+    expect(signal?.aborted).toBe(true); expect(native.arm).not.toHaveBeenCalled()
   })
 })

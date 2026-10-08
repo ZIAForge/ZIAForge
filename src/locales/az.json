@@ -1390,5 +1390,17 @@
   "video_save_error": "Videonu saxlamaq mümkün olmadı: {error}",
   "video_save_cancelled": "Videonun saxlanması ləğv edildi",
   "video_saved": "Video saxlanıldı",
-  "video_invalid": "Yanlış video məlumatları"
+  "video_invalid": "Yanlış video məlumatları",
+  "updates.check": "Yeniləmələri yoxla",
+  "updates.update": "İndi yenilə",
+  "updates.installedVersion": "Quraşdırılmış versiya",
+  "updates.availableVersion": "Mövcud versiya",
+  "updates.localOnly": "Yeniləmələri bu kompüterdəki masaüstü tətbiqində idarə edin.",
+  "updates.manualInstall": "Burada avtomatik quraşdırma mümkün deyil. Əl ilə quraşdırmaq üçün paketi endirin və ya buraxılış səhifəsini açın.",
+  "updates.installNotice": "Yeniləmədən əvvəl cari işi tamamlayın. ZIAForge bağlanacaq və sistem quraşdırıcısını aça bilər.",
+  "updates.release": "Buraxılışa bax",
+  "updates.settings": "Yeniləmə parametrləri",
+  "updates.autoInstallNotice": "Quraşdırma həmişə sizin əməliyyatınızı tələb edir.",
+  "updates.preparing": "Yeniləmə hazırlanır…",
+  "updates.installing": "Yeniləmə quraşdırılır…"
 }

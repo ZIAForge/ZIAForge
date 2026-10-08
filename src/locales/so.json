@@ -1390,5 +1390,17 @@
   "video_save_error": "Lama kaydin karin fiidiyowga: {error}",
   "video_save_cancelled": "Kaydinta fiidiyowga waa la joojiyay",
   "video_saved": "Fiidiyowga waa la kaydiyay",
-  "video_invalid": "Xogta fiidiyowga waa khaldan tahay"
+  "video_invalid": "Xogta fiidiyowga waa khaldan tahay",
+  "updates.check": "Hubi cusboonaysiinta",
+  "updates.update": "Hadda cusboonaysii",
+  "updates.installedVersion": "Nooca rakiban",
+  "updates.availableVersion": "Nooca la heli karo",
+  "updates.localOnly": "Cusboonaysiinta ku maamul abka desktop-ka ee kombiyuutarkan.",
+  "updates.manualInstall": "Rakibid toos ah halkan lagama heli karo. Soo dejiso xirmada ama fur bogga sii-daynta si aad gacanta ugu rakibto.",
+  "updates.installNotice": "Dhammee shaqada socota ka hor cusboonaysiinta. ZIAForge wuu xirmayaa waxaana dhici karta inuu furo rakibaha nidaamka.",
+  "updates.release": "Eeg sii-daynta",
+  "updates.settings": "Dejinta cusboonaysiinta",
+  "updates.autoInstallNotice": "Rakibiddu mar walba waxay u baahan tahay tallaabadaada.",
+  "updates.preparing": "Cusboonaysiinta waa la diyaarinayaa…",
+  "updates.installing": "Cusboonaysiinta waa la rakibayaa…"
 }

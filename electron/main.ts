@@ -2587,6 +2587,7 @@ let isQuitting = false
 
 let quitCleanup: Promise<void> | undefined
 let quitCleanupFinished = false
+let quitCleanupSucceeded = true
 app.on('before-quit', event => {
   // Keep services alive so the owner can still save after a cancelled Quit.
   if (!isQuitting && editorHasDirtyFiles && win && !win.isDestroyed()) {
@@ -2607,25 +2608,36 @@ app.on('before-quit', event => {
       ['provider discovery', shutdownProviderLaunches()], ['model discovery', shutdownModelDiscovery()],
       ['Git', gitService?.shutdown()], ['workflow', workflowHost?.shutdown()], ['Work workflow', workFlowHost?.shutdown()],
     ] as const
-    await Promise.all(closingServices.map(async ([name, pending]) => { try { await pending } catch (error) { logToFile(`${name} shutdown failed: ${errorMessage(error)}`) } }))
-    await agentRunService?.sessions.shutdown().catch(error => logToFile(`Agent shutdown failed: ${errorMessage(error)}`))
+    await Promise.all(closingServices.map(async ([name, pending]) => { try { await pending } catch (error) { quitCleanupSucceeded = false; logToFile(`${name} shutdown failed: ${errorMessage(error)}`) } }))
+    await agentRunService?.sessions.shutdown().catch(error => { quitCleanupSucceeded = false; logToFile(`Agent shutdown failed: ${errorMessage(error)}`) })
     for (const watcher of watchers.values()) watcher.close()
     watchers.clear()
     if (streamInterval) clearInterval(streamInterval)
     const owned = new Map(pendingProjectPtys)
     for (const [sessionId, process] of ptySessions) {
       const cwd = ptySessionCwds.get(sessionId)
-      if (!cwd) { logToFile(`PTY working directory ownership missing for PID ${process.pid}`); continue }
+      if (!cwd) { quitCleanupSucceeded = false; logToFile(`PTY working directory ownership missing for PID ${process.pid}`); continue }
       const generation = ptySessionGenerations.get(sessionId) ?? 0
       owned.set(`${sessionId}:${generation}`, { sessionId, process, cwd, generation })
     }
     const results = await Promise.allSettled([...owned.values()].map(entry => retirePty(entry.sessionId, entry.process, entry.cwd, entry.generation, { timeoutMs: 500, force: false })))
-    for (const result of results) if (result.status === 'rejected') logToFile(`PTY shutdown failed: ${errorMessage(result.reason)}`)
+    for (const result of results) if (result.status === 'rejected') { quitCleanupSucceeded = false; logToFile(`PTY shutdown failed: ${errorMessage(result.reason)}`) }
     ptySessions.clear()
     pendingProjectPtys.clear()
   })().catch(error => {
+    quitCleanupSucceeded = false
     logToFile(`Quit cleanup failed: ${errorMessage(error)}`)
-  }).finally(() => {
+  }).finally(async () => {
+    // An installer may be armed only after services and owned processes stop.
+    // The detached helper still waits for this Electron process to exit.
+    if (quitCleanupSucceeded) {
+      try { await updateService?.finalizeInstallAfterQuitCleanup() }
+      catch (error) { logToFile(`Update installation was not started: ${errorMessage(error)}`) }
+    } else if (updateService?.status().state === 'installing') {
+      try { updateService.cancelPendingInstall() }
+      catch (error) { logToFile(`Update stage cleanup failed: ${errorMessage(error)}`) }
+      logToFile('Update installation was not started because application cleanup failed. Current installation is retained.')
+    }
     quitCleanupFinished = true
     app.quit()
   })
@@ -2928,7 +2940,16 @@ function getControlService():ControlService{
     makeBot(config,service){return new TelegramBot({directory:settingsDir,token:config.telegramToken!,owner:config.telegramOwner,getLanguage:()=>loadSettings().uiLanguage || 'en',execute:r=>service.execute(r),assistant:text=>service.assistant.send({text}),screenshot:async()=>await controlSystem('system.screenshot',[]) as {dataUrl:string}})},
   })
 }
-function getUpdateService(){return updateService??=new UpdateService(settingsDir)}
+function assertCanInstallUpdate() {
+  if (isQuitting) throw new Error('Application is closing')
+  if (editorHasDirtyFiles) throw new Error('Save or discard unsaved file edits before installing the update.')
+}
+function getUpdateService() {
+  return updateService ??= new UpdateService(settingsDir, {
+    currentVersion: JSON.parse(fs.readFileSync(path.join(APP_ROOT, 'package.json'), 'utf8')).version,
+    requestQuit() { assertCanInstallUpdate(); app.quit() },
+  })
+}
 function getHelpAssistant():HelpAssistantEngine {
   const policyFor = (name:string) => {
     if (!name) throw new Error('help.aiSelectPreset')
@@ -2968,7 +2989,7 @@ handleIpc('updates:status',()=>getUpdateService().status())
 handleIpc('updates:configure',(_,config)=>getUpdateService().configure(config))
 handleIpc('updates:check',()=>getUpdateService().check())
 handleIpc('updates:download',()=>getUpdateService().download())
-handleIpc('updates:install',()=>getUpdateService().install())
+handleIpc('updates:install',()=>{assertCanInstallUpdate();return getUpdateService().install()})
 
 // Splash only on very first launch
 app.whenReady().then(async () => {

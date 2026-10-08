@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: ta; served locale: ta; status: machine-translated. -->
 # ZIAForge பயனர் வழிகாட்டி
@@ -32,7 +32,7 @@ Requested locale: ta; served locale: ta; status: machine-translated. -->
 - [உலாவி மற்றும் தொலைநிலை நிகழ்வுகள்](#remote)
 - [OpenClaw, Hermes மற்றும் பிற வெளிப்புற முகவர்கள்](#external-agents)
 - [உள்ளூர் CLI மற்றும் தானியங்கு வரம்புகள்](#local-cli)
-- [பதிப்பும் புதுப்பிப்புகளும்](#updates)
+- [Version and updates](#updates)
 - [மறுதொடக்கமும் மீட்டெடுப்பும்](#restart)
 - [சிக்கல் தீர்க்கும் வழிமுறைகள்](#troubleshooting)
 - [சிக்கல்களைப் புகாரளித்து ஆதாரங்களை ஆய்வு செய்யுங்கள்](#diagnostics)
@@ -418,17 +418,21 @@ ziaf டிஸ்பாட்சர் அதே இயங்கும் செ
 
 <a id="updates"></a>
 
-## பதிப்பும் புதுப்பிப்புகளும்
+## Version and updates
 
-About இயங்கும் சரியான பதிப்பைக் காட்டுகிறது. பொதுப் புதுப்பிப்புகளுக்கு நம்பகமான GitHub வெளியீட்டுக் களஞ்சியமும் நிலையான அல்லது மாதிரிக்காட்சி அலைவரிசையும் தேவை. சரிபார்த்தல், பதிவிறக்குதல் மற்றும் நிறுவுதல் ஆகியவை தனித்தனி நிலைகளைக் கொண்டுள்ளன; ஒரு பிழை என்றால் புதுப்பிப்பு நிறுவப்பட்டுவிட்டது என்று அர்த்தமல்ல.
+> முழுமையான வழிகாட்டி உங்கள் இடைமுக மொழியில் இன்னும் மொழிபெயர்க்கப்படவில்லை. ஆங்கிலக் குறிப்பு காட்டப்படுகிறது.
 
-தானியங்கு நிறுவல் என்பது கையொப்பமிடப்பட்ட macOS வெளியீடுகளுக்கானது. கையொப்பமிடப்படாத மேம்பாட்டு உருவாக்கங்கள் இந்த பொறிமுறையின் மூலம் தானாகவே நிறுவப்படாது. கைமுறையாக மாற்றுவதற்கு, தற்போதைய பயன்பாட்டிலிருந்து முழுமையாக வெளியேறி சரிபார்க்கப்பட்ட கலைப்பொருளைப் பயன்படுத்தவும்.
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-தானியங்கு சரிபார்ப்பு இயக்கப்பட்டவுடன் உடனடியாகவும், பின்னர் ஒவ்வொரு ஆறு மணி நேரத்திற்கும் ஒரு முறையும் இயங்கும்.
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Stable மாதிரிக்காட்சி வெளியீடுகளை விலக்குகிறது; preview மேம்பாட்டு வெளியீடுகளையும் அனுமதிக்கிறது. ஒரு வெற்றிகரமான சரிபார்ப்பு கிடைக்கக்கூடிய வெளியீட்டு மெட்டாடேட்டாவை மட்டுமே நிறுவுகிறது. பதிவிறக்கம் மற்றும் நிறுவலுக்கு இயங்குதள தொகுப்பும் உள்ளமைக்கப்பட்ட வெளியீட்டு ஊட்டியும் தேவை. Linux DEB வழங்கல் என்பது ஒரு தனி நிறுவி பாதையாகும்; DEB ஆனது macOS புதுப்பிப்பு பொறிமுறையால் தானாகவே மேம்படுத்தப்படும் என்று கருத வேண்டாம்.
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-தொடர்புடைய வழிமுறைகள்: [வெளியீட்டுத் தயார்நிலை](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+தொடர்புடைய வழிமுறைகள்: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

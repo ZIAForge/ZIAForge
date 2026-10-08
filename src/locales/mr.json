@@ -1390,5 +1390,17 @@
   "video_save_error": "व्हिडिओ जतन करता आला नाही: {error}",
   "video_save_cancelled": "व्हिडिओ जतन करणे रद्द केले",
   "video_saved": "व्हिडिओ जतन केला",
-  "video_invalid": "व्हिडिओचा डेटा अवैध आहे"
+  "video_invalid": "व्हिडिओचा डेटा अवैध आहे",
+  "updates.check": "अपडेट तपासा",
+  "updates.update": "आता अपडेट करा",
+  "updates.installedVersion": "इंस्टॉल केलेली आवृत्ती",
+  "updates.availableVersion": "उपलब्ध आवृत्ती",
+  "updates.localOnly": "या संगणकावरील डेस्कटॉप अॅपमध्ये अपडेट व्यवस्थापित करा.",
+  "updates.manualInstall": "येथे स्वयंचलित इंस्टॉलेशन उपलब्ध नाही. पॅकेज डाउनलोड करा किंवा स्वतः इंस्टॉल करण्यासाठी प्रकाशन पृष्ठ उघडा.",
+  "updates.installNotice": "अपडेट करण्यापूर्वी सुरू असलेले काम पूर्ण करा. ZIAForge बंद होईल आणि सिस्टम इंस्टॉलर उघडू शकतो.",
+  "updates.release": "प्रकाशन पहा",
+  "updates.settings": "अपडेट सेटिंग्ज",
+  "updates.autoInstallNotice": "इंस्टॉलेशनसाठी नेहमी तुमची कृती आवश्यक असते.",
+  "updates.preparing": "अपडेट तयार होत आहे…",
+  "updates.installing": "अपडेट इंस्टॉल होत आहे…"
 }

@@ -1390,5 +1390,17 @@
   "video_save_error": "動画を保存できませんでした: {error}",
   "video_save_cancelled": "動画の保存をキャンセルしました",
   "video_saved": "動画を保存しました",
-  "video_invalid": "動画データが無効です"
+  "video_invalid": "動画データが無効です",
+  "updates.check": "更新を確認",
+  "updates.update": "今すぐ更新",
+  "updates.installedVersion": "インストール済みのバージョン",
+  "updates.availableVersion": "利用可能なバージョン",
+  "updates.localOnly": "このコンピューターのデスクトップアプリで更新を管理してください。",
+  "updates.manualInstall": "ここでは自動インストールを利用できません。パッケージをダウンロードするか、リリースページを開いて手動でインストールしてください。",
+  "updates.installNotice": "更新前に作業を完了してください。ZIAForge が終了し、システムのインストーラーが開く場合があります。",
+  "updates.release": "リリースを表示",
+  "updates.settings": "更新設定",
+  "updates.autoInstallNotice": "インストールには必ずユーザーの操作が必要です。",
+  "updates.preparing": "更新を準備中…",
+  "updates.installing": "更新をインストール中…"
 }

@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: ko; served locale: ko; status: machine-translated. -->
 # ZIAForge 사용자 가이드
@@ -32,7 +32,7 @@ Requested locale: ko; served locale: ko; status: machine-translated. -->
 - [브라우저 및 원격 인스턴스](#remote)
 - [OpenClaw, Hermes 및 기타 외부 에이전트](#external-agents)
 - [로컬 CLI 및 자동화 한계](#local-cli)
-- [버전 및 업데이트](#updates)
+- [Version and updates](#updates)
 - [다시 시작 및 복구](#restart)
 - [문제 해결](#troubleshooting)
 - [문제 보고 및 증거 검사](#diagnostics)
@@ -418,17 +418,21 @@ ziaf 디스패처는 동일한 실행 중인 앱과 저장된 워크플로를 �
 
 <a id="updates"></a>
 
-## 버전 및 업데이트
+## Version and updates
 
-정보 창에 정확한 실행 버전이 표시됩니다. 공개 업데이트에는 신뢰할 수 있는 GitHub 릴리스 저장소와 안정 또는 미리보기 채널이 필요합니다. 확인, 다운로드 및 설치는 별도의 상태를 가집니다. 오류가 발생했다고 해서 업데이트가 설치된 것은 아닙니다.
+> 전체 가이드가 아직 인터페이스 언어로 번역되지 않았습니다. 영어 참조본을 표시합니다.
 
-자동 설치는 서명된 macOS 릴리스 전용입니다. 서명되지 않은 개발 빌드는 이 메커니즘을 통해 자동으로 설치되지 않습니다. 수동으로 교체하려면 현재 앱을 완전히 종료하고 검증된 아티팩트를 사용하십시오.
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-자동 확인은 활성화 시 즉시 실행되며, 이후 6시간마다 실행됩니다.
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-안정 채널은 미리보기 릴리스를 제외하며, 미리보기 채널은 개발 릴리스도 허용합니다. 확인 성공은 사용 가능한 릴리스 메타데이터만 설정할 뿐입니다. 다운로드 및 설치에는 플랫폼 패키지와 구성된 릴리스 피드가 필요합니다. Linux DEB 배포는 별도의 설치 경로입니다. DEB가 macOS 업데이트 메커니즘에 의해 자동으로 업그레이드된다고 가정하지 마십시오.
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-관련 지침: [릴리스 준비 상태](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+관련 지침: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

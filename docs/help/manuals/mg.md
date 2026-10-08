@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: mg; served locale: mg; status: machine-translated. -->
 # Torolalan'ny mpampiasa ZIAForge
@@ -32,7 +32,7 @@ Ny teny anglisy no fototra manan-kery. Ny fanampiana nadika tamin'ny milina dia 
 - [Mpitety tranonkala sy toe-javatra lavidavitra](#remote)
 - [OpenClaw, Hermes ary ireo mpanampy ivelany hafa](#external-agents)
 - [FETRAN'NY CLI EO AN-TOERANA SY NY FAMPIASANA HO AZY](#local-cli)
-- [Dikan-teny sy fanavaozana](#updates)
+- [Version and updates](#updates)
 - [Famerenana mampandeha sy famerenana amin'ny laoniny](#restart)
 - [Famahana olana](#troubleshooting)
 - [Manao tatitra momba ny olana sy mandinika porofo](#diagnostics)
@@ -418,17 +418,21 @@ Torolalana mifandraika: [Baikon'ny mpandefa asa](../../CLI.md).
 
 <a id="updates"></a>
 
-## Dikan-teny sy fanavaozana
+## Version and updates
 
-Mampiseho ny tena dikan-drafitra mandeha ny Mombamomba ny rindranasa. Mitaky tahiry famoahana GitHub azo itokisana sy fantsona maharitra na santatra ny fanavaozana ho an'ny besinimaro. Misaraka ny toetry ny fizahana, ny fampidinana ary ny fametrahana; ny fahadisoana dia tsy midika akory hoe voapetraka ny fanavaozana.
+> Mbola tsy voadika amin'ny tenin'ny interface-nao ny torolalana feno. Mampiseho ny loharano amin'ny teny Anglisy.
 
-Ho an'ny dikan-drafitra macOS misy sonia ny fametrahana ho azy. Tsy apetraka ho azy amin'ny alalan'ity fomba ity ireo dikan-drafitra fampandrosoana tsy misy sonia. Ho an'ny fanoloana amin'ny tanana, akatony tanteraka ny rindranasa ankehitriny ary mampiasà tahiry voamarina.
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-Mandeha avy hatrany ny fizahana ho azy rehefa velomina, avy eo isaky ny adiny enina.
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Manilika ireo dikan-tsantatra ny maharitra; mamela ireo dikan-drafitra fampandrosoana koa ny santatra. Ny fizahana nahomby dia tsy mametraka afa-tsy ny metadata momba ny dikan-drafitra azo ampiasaina. Mila ny fonosana ho an'ny rafitra sy ny loharanom-pamoahana voalamina ny fampidinana sy ny fametrahana. Zotra fametrahana misaraka ny fandefasana Linux DEB; aza mihevitra fa havaozin'ny fomba fanavaozana macOS ho azy ny DEB.
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-Torolalana mifandraika: [Fahavononan'ny dikan-drafitra havoaka](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+Torolalana mifandraika: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

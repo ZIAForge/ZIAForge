@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: or; served locale: or; status: machine-translated. -->
 # ZIAForge ବ୍ୟବହାରକାରୀ ମାର୍ଗଦର୍ଶିକା
@@ -32,7 +32,7 @@ Requested locale: or; served locale: or; status: machine-translated. -->
 - [ବ୍ରାଉଜର୍ ଏବଂ ରିମୋଟ୍ ଇନଷ୍ଟାନ୍ସଗୁଡ଼ିକ](#remote)
 - [OpenClaw, Hermes ଏବଂ ଅନ୍ୟାନ୍ୟ ବାହ୍ୟ ଏଜେଣ୍ଟ](#external-agents)
 - [ସ୍ଥାନୀୟ CLI ଏବଂ ସ୍ୱୟଂଚାଳନ ସୀମା](#local-cli)
-- [ସଂସ୍କରଣ ଏବଂ ଅପଡେଟ୍](#updates)
+- [Version and updates](#updates)
 - [ପୁନରାରମ୍ଭ ଏବଂ ପୁନରୁଦ୍ଧାର](#restart)
 - [ସମସ୍ୟା ନିବାରଣ](#troubleshooting)
 - [ସମସ୍ୟା ରିପୋର୍ଟ କରନ୍ତୁ ଏବଂ ପ୍ରମାଣ ଯାଞ୍ଚ କରନ୍ତୁ](#diagnostics)
@@ -418,17 +418,21 @@ Automations ଇଣ୍ଟରଫେସ୍ ବର୍ତ୍ତମାନ ପ୍ରଦ
 
 <a id="updates"></a>
 
-## ସଂସ୍କରଣ ଏବଂ ଅପଡେଟ୍
+## Version and updates
 
-About ସଠିକ୍ ଚାଲୁଥିବା ସଂସ୍କରଣ ଦେଖାଏ। ସର୍ବସାଧାରଣ ଅପଡେଟ୍ ପାଇଁ ଏକ ବିଶ୍ୱସ୍ତ GitHub ରିଲିଜ୍ ରିପୋଜିଟୋରୀ ଏବଂ ଏକ ସ୍ଥିର କିମ୍ବା ପ୍ରିଭ୍ୟୁ ଚ୍ୟାନେଲ୍ ଆବଶ୍ୟକ। ଯାଞ୍ଚ କରିବା, ଡାଉନଲୋଡ୍ କରିବା ଏବଂ ସଂସ୍ଥାପନର ପୃଥକ ଅବସ୍ଥା ରହିଛି; ଏକ ତ୍ରୁଟିର ଅର୍ଥ କୌଣସି ଅପଡେଟ୍ ସଂସ୍ଥାପିତ ହୋଇଛି ବୋଲି ନୁହେଁ।
+> ସମ୍ପୂର୍ଣ୍ଣ ଗାଇଡ୍ ଏପର୍ଯ୍ୟନ୍ତ ଆପଣଙ୍କ ଇଣ୍ଟରଫେସ୍ ଭାଷାରେ ଅନୁବାଦ ହୋଇନାହିଁ। ଇଂରାଜୀ ରେଫରେନ୍ସ ପ୍ରଦର୍ଶନ କରାଯାଉଛି।
 
-ସ୍ୱୟଂଚାଳିତ ସଂସ୍ଥାପନ ସ୍ୱାକ୍ଷରିତ macOS ରିଲିଜ୍ ପାଇଁ ଉଦ୍ଦିଷ୍ଟ। ଏହି ପ୍ରଣାଳୀ ମାଧ୍ୟମରେ ଅଣ-ସ୍ୱାକ୍ଷରିତ ବିକାଶ ବିଲ୍ଡଗୁଡ଼ିକ ସ୍ୱୟଂଚାଳିତ ଭାବରେ ସଂସ୍ଥାପିତ ହୁଏ ନାହିଁ। ମାନୁଆଲ୍ ପ୍ରତିସ୍ଥାପନ ପାଇଁ, ବର୍ତ୍ତମାନର ଆପ୍ ସମ୍ପୂର୍ଣ୍ଣ ବନ୍ଦ କରନ୍ତୁ ଏବଂ ଏକ ଯାଞ୍ଚ ହୋଇଥିବା ଆର୍ଟିଫାକ୍ଟ ବ୍ୟବହାର କରନ୍ତୁ।
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-ସ୍ୱୟଂଚାଳିତ ଯାଞ୍ଚ ସକ୍ଷମ ହେବା ପରେ ତୁରନ୍ତ ଚାଲେ, ତା'ପରେ ପ୍ରତି ଛଅ ଘଣ୍ଟାରେ ଥରେ ଚାଲେ।
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Stable ପ୍ରିଭ୍ୟୁ ରିଲିଜ୍ କୁ ବାଦ୍ ଦିଏ; preview ବିକାଶ ରିଲିଜ୍ କୁ ମଧ୍ୟ ଅନୁମତି ଦିଏ। ଏକ ସଫଳ ଯାଞ୍ଚ କେବଳ ଉପଲବ୍ଧ ରିଲିଜ୍ ମେଟାଡାଟା ପ୍ରତିଷ୍ଠା କରେ। ଡାଉନଲୋଡ୍ ଏବଂ ସଂସ୍ଥାପନ ପାଇଁ ପ୍ଲାଟଫର୍ମ ପ୍ୟାକେଜ୍ ଏବଂ କନଫିଗର୍ ହୋଇଥିବା ରିଲିଜ୍ ଫିଡ୍ ଆବଶ୍ୟକ। Linux DEB ବିତରଣ ଏକ ପୃଥକ ଇନଷ୍ଟଲର୍ ପଥ; DEB ସ୍ୱୟଂଚାଳିତ ଭାବରେ macOS ଅପଡେଟ୍ ପ୍ରଣାଳୀ ଦ୍ୱାରା ଅପଗ୍ରେଡ୍ ହୋଇଛି ବୋଲି ଧରି ନିଅନ୍ତୁ ନାହିଁ।
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-ସମ୍ପର୍କିତ ନିର୍ଦ୍ଦେଶାବଳୀ: [ରିଲିଜ୍ ପ୍ରସ୍ତୁତି](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+ସମ୍ପର୍କିତ ନିର୍ଦ୍ଦେଶାବଳୀ: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: pnb; served locale: pnb; status: machine-translated. -->
 # ZIAForge ورتن والے دی رہنمائی
@@ -32,7 +32,7 @@ Requested locale: pnb; served locale: pnb; status: machine-translated. -->
 - [براؤزر تے ریموٹ انسٹانسز](#remote)
 - [OpenClaw، Hermes تے دوجے بیرونی ایجنٹس](#external-agents)
 - [مقامی CLI تے آٹومیشن دیاں حداں](#local-cli)
-- [ورژن تے اپ ڈیٹس](#updates)
+- [Version and updates](#updates)
 - [دوبارہ شروع کرنا تے بحالی](#restart)
 - [مسائل دا حل](#troubleshooting)
 - [مسئلیاں دی اطلاع دیو تے ثبوتاں دی جانچ کرو](#diagnostics)
@@ -418,17 +418,21 @@ Automations انٹرفیس فی الحال ڈسپلے تعریفاں تے مقا
 
 <a id="updates"></a>
 
-## ورژن تے اپ ڈیٹس
+## Version and updates
 
-About چلن والا اصل ورژن وکھاندا ہے۔ عوامی اپ ڈیٹس لئی اک قابل اعتماد GitHub ریلیز ریپوزٹری تے مستحکم یا پیش نظارہ چینل درکار ہے۔ جانچن، ڈاؤن لوڈ کرن تے انسٹال کرن دیاں وکھو وکھ حالتاں ہوندیاں ہن؛ اک خرابی دا ایہ مطلب نہیں کہ اپ ڈیٹ انسٹال ہو گئی ہے۔
+> مکمل رہنمائی اجے تہاڈی انٹرفیس بولی وچ ترجمہ نہیں کیتی گئی۔ انگریزی حوالہ وکھایا جا رہیا اے۔
 
-خودکار تنصیب دستخط شدہ macOS ریلیز لئی ہے۔ غیر دستخط شدہ ڈیولپمنٹ بلڈز اس طریقہ کار راہیں خود بخود انسٹال نہیں ہوندے۔ دستی متبادل واسطے، موجودہ ایپ نوں مکمل طور تے بند کرو تے اک تصدیق شدہ آرٹفیکٹ ورتو۔
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-فعال ہون تے خودکار جانچ فورا چلدی ہے، فیر ہر چھ گھنٹے بعد۔
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-مستحکم پیش نظارہ ریلیز نوں خارج کردا ہے؛ پیش نظارہ ڈیولپمنٹ ریلیز دی وی اجازت دیندا ہے۔ اک کامیاب جانچ صرف دستیاب ریلیز میٹا ڈیٹا قائم کردی ہے۔ ڈاؤن لوڈ تے انسٹالیشن واسطے پلیٹ فارم پیکیج تے تشکیل شدہ ریلیز فیڈ دی لوڑ ہوندی ہے۔ Linux DEB ترسیل اک وکھرا انسٹالر رستہ ہے؛ ایہ مت سمجھو کہ اک DEB macOS اپ ڈیٹ دے طریقہ کار راہیں خود بخود اپ گریڈ ہو جاندا ہے۔
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-متعلقہ ہدایتاں: [ریلیز دی تیاری](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+متعلقہ ہدایتاں: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

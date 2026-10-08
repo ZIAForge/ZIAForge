@@ -2,7 +2,7 @@
 
 Start with the [English user guide](USER_GUIDE.md), generated from [the canonical help source](help/en.json). It includes the complete product tour, task-oriented instructions, recovery, permissions, limitations and links to technical contracts. In-app Help and the [offline website guide](../website/guide.html) use the same source. [Help translation coverage](help/LOCALES.md) is separate from interface localization.
 
-Current patch: [1.0.8 release notes](releases/1.0.8.md), with verification status and distribution limits.
+Current patch: [1.0.9 release notes](releases/1.0.9.md), with verification status and distribution limits.
 
 ## Contribute or work as an AI agent
 
@@ -32,6 +32,7 @@ Current patch: [1.0.8 release notes](releases/1.0.8.md), with verification statu
 | Mac/Windows/Linux x64/arm64 packages, clean source archives and native CI | [PLATFORM_BUILDS.md](PLATFORM_BUILDS.md) |
 | Build entry points and platform-specific packaging | [BUILD.md](BUILD.md) |
 | Debian package and two Ubuntu desktop instances | [LINUX.md](LINUX.md) |
+| GitHub checks, verified downloads and application updates | [UPDATES.md](UPDATES.md) |
 | Stable/preview release requirements and provenance | [RELEASE_READINESS.md](RELEASE_READINESS.md), [ASSET_PROVENANCE.md](ASSET_PROVENANCE.md) |
 
 The editor, review-team configuration and specialization catalog also have source contracts in [shared/editor.ts](../shared/editor.ts), [shared/review-team.ts](../shared/review-team.ts) and [shared/specializations.ts](../shared/specializations.ts). General help explains their user-facing behavior; the typed definitions govern arguments.

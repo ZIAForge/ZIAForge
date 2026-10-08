@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: tr; served locale: tr; status: machine-translated. -->
 # ZIAForge kullanım kılavuzu
@@ -32,7 +32,7 @@ Niyetten doğrulanmış bir sonuca. Code, Work ve uygulama denetimine dair prati
 - [Tarayıcı ve uzak örnekler](#remote)
 - [OpenClaw, Hermes ve diğer harici ajanlar](#external-agents)
 - [Yerel CLI ve otomasyon sınırları](#local-cli)
-- [Sürüm ve güncellemeler](#updates)
+- [Version and updates](#updates)
 - [Yeniden başlatma ve kurtarma](#restart)
 - [Sorun Giderme](#troubleshooting)
 - [Sorunları bildirme ve kanıtları inceleme](#diagnostics)
@@ -418,17 +418,21 @@ Otomasyonlar arayüzü şu anda görüntüleme tanımlarını ve yerel çalışt
 
 <a id="updates"></a>
 
-## Sürüm ve güncellemeler
+## Version and updates
 
-Hakkında bölümü çalışan tam sürümü gösterir. Genel güncellemeler güvenilir bir GitHub sürüm deposu ile kararlı veya önizleme kanalı gerektirir. Kontrol etme, indirme ve yükleme ayrı durumlara sahiptir; bir hata, bir güncellemenin yüklendiği anlamına gelmez.
+> Kılavuzun tamamı henüz arayüz dilinize çevrilmedi. İngilizce referans gösteriliyor.
 
-Otomatik yükleme, imzalanmış macOS sürümleri içindir. İmzalanmamış geliştirme derlemeleri bu mekanizma aracılığıyla otomatik olarak yüklenmez. Manuel değiştirme için mevcut uygulamadan tamamen çıkın ve doğrulanmış bir yapıt kullanın.
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-Otomatik kontrol etkinleştirildiğinde hemen, ardından her altı saatte bir çalışır.
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Kararlı kanal önizleme sürümlerini hariç tutar; önizleme kanalı geliştirme sürümlerine de izin verir. Başarılı bir kontrol yalnızca mevcut sürüm meta verilerini doğrular. İndirme ve yükleme, platform paketine ve yapılandırılmış sürüm akışına ihtiyaç duyar. Linux DEB teslimatı ayrı bir yükleyici yoludur; bir DEB paketinin macOS güncelleme mekanizması tarafından otomatik olarak yükseltildiğini varsaymayın.
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-İlgili yönergeler: [Sürüm hazır olma durumu](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+İlgili yönergeler: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

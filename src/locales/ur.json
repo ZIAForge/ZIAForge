@@ -1390,5 +1390,17 @@
   "video_save_error": "ویڈیو محفوظ نہیں ہو سکی: {error}",
   "video_save_cancelled": "ویڈیو محفوظ کرنا منسوخ کر دیا گیا",
   "video_saved": "ویڈیو محفوظ ہو گئی",
-  "video_invalid": "ویڈیو کا ڈیٹا درست نہیں"
+  "video_invalid": "ویڈیو کا ڈیٹا درست نہیں",
+  "updates.check": "اپ ڈیٹس چیک کریں",
+  "updates.update": "ابھی اپ ڈیٹ کریں",
+  "updates.installedVersion": "انسٹال شدہ ورژن",
+  "updates.availableVersion": "دستیاب ورژن",
+  "updates.localOnly": "اس کمپیوٹر کی ڈیسک ٹاپ ایپ میں اپ ڈیٹس کا انتظام کریں۔",
+  "updates.manualInstall": "یہاں خودکار انسٹالیشن دستیاب نہیں۔ پیکیج ڈاؤن لوڈ کریں یا خود انسٹال کرنے کے لیے ریلیز کا صفحہ کھولیں۔",
+  "updates.installNotice": "اپ ڈیٹ سے پہلے جاری کام مکمل کریں۔ ZIAForge بند ہو جائے گا اور سسٹم انسٹالر کھل سکتا ہے۔",
+  "updates.release": "ریلیز دیکھیں",
+  "updates.settings": "اپ ڈیٹ کی ترتیبات",
+  "updates.autoInstallNotice": "انسٹالیشن کے لیے ہمیشہ آپ کی کارروائی ضروری ہے۔",
+  "updates.preparing": "اپ ڈیٹ تیار ہو رہی ہے…",
+  "updates.installing": "اپ ڈیٹ انسٹال ہو رہی ہے…"
 }

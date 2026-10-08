@@ -1390,5 +1390,17 @@
   "video_save_error": "ਵੀਡੀਓ ਸੰਭਾਲੀ ਨਹੀਂ ਜਾ ਸਕੀ: {error}",
   "video_save_cancelled": "ਵੀਡੀਓ ਸੰਭਾਲਣਾ ਰੱਦ ਕੀਤਾ ਗਿਆ",
   "video_saved": "ਵੀਡੀਓ ਸੰਭਾਲੀ ਗਈ",
-  "video_invalid": "ਵੀਡੀਓ ਦਾ ਡਾਟਾ ਅਵੈਧ ਹੈ"
+  "video_invalid": "ਵੀਡੀਓ ਦਾ ਡਾਟਾ ਅਵੈਧ ਹੈ",
+  "updates.check": "ਅੱਪਡੇਟਾਂ ਦੀ ਜਾਂਚ ਕਰੋ",
+  "updates.update": "ਹੁਣੇ ਅੱਪਡੇਟ ਕਰੋ",
+  "updates.installedVersion": "ਇੰਸਟਾਲ ਕੀਤਾ ਸੰਸਕਰਣ",
+  "updates.availableVersion": "ਉਪਲਬਧ ਸੰਸਕਰਣ",
+  "updates.localOnly": "ਇਸ ਕੰਪਿਊਟਰ ਦੀ ਡੈਸਕਟਾਪ ਐਪ ਵਿੱਚ ਅੱਪਡੇਟਾਂ ਦਾ ਪ੍ਰਬੰਧ ਕਰੋ।",
+  "updates.manualInstall": "ਇੱਥੇ ਆਟੋਮੈਟਿਕ ਇੰਸਟਾਲੇਸ਼ਨ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਪੈਕੇਜ ਡਾਊਨਲੋਡ ਕਰੋ ਜਾਂ ਖੁਦ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਰਿਲੀਜ਼ ਪੰਨਾ ਖੋਲ੍ਹੋ।",
+  "updates.installNotice": "ਅੱਪਡੇਟ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਚੱਲ ਰਿਹਾ ਕੰਮ ਪੂਰਾ ਕਰੋ। ZIAForge ਬੰਦ ਹੋਵੇਗਾ ਅਤੇ ਸਿਸਟਮ ਇੰਸਟਾਲਰ ਖੁੱਲ੍ਹ ਸਕਦਾ ਹੈ।",
+  "updates.release": "ਰਿਲੀਜ਼ ਵੇਖੋ",
+  "updates.settings": "ਅੱਪਡੇਟ ਸੈਟਿੰਗਾਂ",
+  "updates.autoInstallNotice": "ਇੰਸਟਾਲੇਸ਼ਨ ਲਈ ਹਮੇਸ਼ਾ ਤੁਹਾਡੀ ਕਾਰਵਾਈ ਲੋੜੀਂਦੀ ਹੈ।",
+  "updates.preparing": "ਅੱਪਡੇਟ ਤਿਆਰ ਹੋ ਰਿਹਾ ਹੈ…",
+  "updates.installing": "ਅੱਪਡੇਟ ਇੰਸਟਾਲ ਹੋ ਰਿਹਾ ਹੈ…"
 }

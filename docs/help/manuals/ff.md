@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: ff; served locale: ff; status: machine-translated. -->
 # Ñemmborde kuutoro ZIAForge
@@ -32,7 +32,7 @@ Gila e anniya haa e njeñtudi khesɗitinaandi. Ñemmborde gollal ngam Code, Work
 - [Banngal e ngonkaaji goɗɗi woɗɗuɗi](#remote)
 - [OpenClaw, Hermes e agent-ji ɗii goɗɗi baɗaaɗi yaasi](#external-agents)
 - [CLI nokkuujo e keeri kuugal jaajngal](#local-cli)
-- [Yamre e kesɗitinooji](#updates)
+- [Version and updates](#updates)
 - [Hurmin kadi e daɗndugol](#restart)
 - [Ñawndugol caɗeele](#troubleshooting)
 - [Jaŋto caɗeele kadi ƴeewto seedamfaagu](#diagnostics)
@@ -418,17 +418,21 @@ Tinndinooje jokkondirɗe: [Yamiroore neltowo](../../CLI.md).
 
 <a id="updates"></a>
 
-## Yamre e kesɗitinooji
+## Version and updates
 
-About ina hollira yamre gollotoonde laaɓnde. Kesɗitinooji renndo ɗaɓɓi defterdu yaltinande GitHub hoolaandu e laawol kisngol walla njiylawu. Ƴeewto, aawto e aafgol ina jogii ngonkaaji ceertuɗi; juumre firaani wonde kesɗitingol aafaama.
+> Koolol timmungol ngol firaaka tawo e ɗemngal jaɓɓorgal maa. Koolol Engele ngol ina holliree no tuugnorgal ni.
 
-Aafgol e jaajol ko ngam yaltinooji macOS siynaaɗi. Mahdiiji ɓamtaare ɗi siynaaka aafataake e jaajol rewrude e ngol laawol. Ngam lomtingol e junngo, yaltu timmuɗum e jaaɓnirgal jooniwal ngal kadi huutoro kaɓɓol goongɗinaangol.
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-Ƴeewto e jaajol dogata ko ɗoon e ɗoon so hurminaama, caggal ɗuum kala waktuuji jeegom.
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Kisngol ittata ko yaltinooji njiylawu; njiylawu ina newna yaltinooji ɓamtaare kadi. Ƴeewto moƴƴo holliro tan ko metadata yaltugol tawaangol. Aawto e aafgol ina sokli kaɓɓol dingiral e laylaytol yaltugol teeltinaangol. Neldugol Linux DEB ko laawol aafoowo seertungol; woto sikku DEB ina ɓamtee e jaajol rewrude e laawol kesɗitingol macOS.
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-Tinndinooje jokkondirɗe: [Kewgol yaltugol](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+Tinndinooje jokkondirɗe: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

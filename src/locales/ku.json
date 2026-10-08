@@ -1390,5 +1390,17 @@
   "video_save_error": "Vîdyo nehat tomarkirin: {error}",
   "video_save_cancelled": "Tomarkirina vîdyoyê hate betalkirin",
   "video_saved": "Vîdyo hate tomarkirin",
-  "video_invalid": "Daneyên vîdyoyê ne derbasdar in"
+  "video_invalid": "Daneyên vîdyoyê ne derbasdar in",
+  "updates.check": "Nûkirinan kontrol bike",
+  "updates.update": "Niha nû bike",
+  "updates.installedVersion": "Guhertoya sazkirî",
+  "updates.availableVersion": "Guhertoya berdest",
+  "updates.localOnly": "Nûkirinan di sepana sermaseyê ya vê komputerê de birêve bibe.",
+  "updates.manualInstall": "Sazkirina xweber li vir ne berdest e. Ji bo sazkirina bi destan pakêtê daxîne an rûpela weşanê veke.",
+  "updates.installNotice": "Berî nûkirinê karê heyî biqedîne. ZIAForge dê were girtin û dibe ku sazkerê pergalê veke.",
+  "updates.release": "Weşanê bibîne",
+  "updates.settings": "Mîhengên nûkirinê",
+  "updates.autoInstallNotice": "Sazkirin her tim çalakiya te hewce dike.",
+  "updates.preparing": "Nûkirin tê amadekirin…",
+  "updates.installing": "Nûkirin tê sazkirin…"
 }

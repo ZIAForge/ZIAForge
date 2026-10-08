@@ -1390,5 +1390,17 @@
   "video_save_error": "વિડિયો સાચવી શકાયો નહીં: {error}",
   "video_save_cancelled": "વિડિયો સાચવવાનું રદ થયું",
   "video_saved": "વિડિયો સાચવ્યો",
-  "video_invalid": "વિડિયોનો ડેટા અમાન્ય છે"
+  "video_invalid": "વિડિયોનો ડેટા અમાન્ય છે",
+  "updates.check": "અપડેટ તપાસો",
+  "updates.update": "હમણાં અપડેટ કરો",
+  "updates.installedVersion": "ઇન્સ્ટોલ કરેલું સંસ્કરણ",
+  "updates.availableVersion": "ઉપલબ્ધ સંસ્કરણ",
+  "updates.localOnly": "આ કમ્પ્યુટરની ડેસ્કટોપ ઍપમાં અપડેટ સંચાલિત કરો.",
+  "updates.manualInstall": "અહીં આપમેળે ઇન્સ્ટોલ કરવું ઉપલબ્ધ નથી. પૅકેજ ડાઉનલોડ કરો અથવા જાતે ઇન્સ્ટોલ કરવા માટે રિલીઝ પેજ ખોલો.",
+  "updates.installNotice": "અપડેટ કરતાં પહેલાં ચાલુ કામ પૂરું કરો. ZIAForge બંધ થશે અને સિસ્ટમ ઇન્સ્ટોલર ખુલી શકે છે.",
+  "updates.release": "રિલીઝ જુઓ",
+  "updates.settings": "અપડેટ સેટિંગ્સ",
+  "updates.autoInstallNotice": "ઇન્સ્ટોલ કરવા માટે હંમેશાં તમારી કાર્યવાહી જરૂરી છે.",
+  "updates.preparing": "અપડેટ તૈયાર થઈ રહ્યું છે…",
+  "updates.installing": "અપડેટ ઇન્સ્ટોલ થઈ રહ્યું છે…"
 }

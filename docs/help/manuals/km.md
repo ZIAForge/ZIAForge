@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: km; served locale: km; status: machine-translated. -->
 # សៀវភៅណែនាំអ្នកប្រើប្រាស់ ZIAForge
@@ -32,7 +32,7 @@ Requested locale: km; served locale: km; status: machine-translated. -->
 - [កម្មវិធីរុករក និងធាតុពីចម្ងាយ](#remote)
 - [OpenClaw, Hermes និងភ្នាក់ងារខាងក្រៅផ្សេងទៀត](#external-agents)
 - [CLI មូលដ្ឋាន និងដែនកំណត់ស្វ័យប្រវត្តិកម្ម](#local-cli)
-- [កំណែ និងការធ្វើបច្ចុប្បន្នភាព](#updates)
+- [Version and updates](#updates)
 - [ការចាប់ផ្តើមឡើងវិញ និងការសង្គ្រោះ](#restart)
 - [ការដោះស្រាយបញ្ហា](#troubleshooting)
 - [រាយការណ៍បញ្ហា និងពិនិត្យមើលភស្តុតាង](#diagnostics)
@@ -418,17 +418,21 @@ Run / Continue អានឡើងវិញនូវលំហូរការង�
 
 <a id="updates"></a>
 
-## កំណែ និងការធ្វើបច្ចុប្បន្នភាព
+## Version and updates
 
-About បង្ហាញកំណែពិតប្រាកដដែលកំពុងដំណើរការ។ ការធ្វើបច្ចុប្បន្នភាពជាសាធារណៈទាមទារឃ្លាំងចេញផ្សាយ GitHub ដែលគួរឱ្យទុកចិត្ត និងប៉ុស្តិ៍ដែលមានស្ថេរភាព (stable) ឬមើលជាមុន (preview)។ ការត្រួតពិនិត្យ ការទាញយក និងការដំឡើង មានស្ថានភាពដាច់ដោយឡែកពីគ្នា; កំហុសមិនមានន័យថាការធ្វើបច្ចុប្បន្នភាពត្រូវបានដំឡើងនោះទេ។
+> មគ្គុទ្ទេសក៍ពេញលេញមិនទាន់ត្រូវបានបកប្រែជាភាសាចំណុចប្រទាក់របស់អ្នកនៅឡើយទេ។ កំពុងបង្ហាញឯកសារយោងជាភាសាអង់គ្លេស។
 
-ការដំឡើងដោយស្វ័យប្រវត្តិគឺសម្រាប់ការចេញផ្សាយ macOS ដែលបានចុះហត្ថលេខា។ ការសាងសង់សម្រាប់ការអភិវឌ្ឍដែលមិនបានចុះហត្ថលេខា នឹងមិនត្រូវបានដំឡើងដោយស្វ័យប្រវត្តិតាមរយៈយន្តការនេះទេ។ សម្រាប់ការជំនួសដោយដៃ សូមចាកចេញពីកម្មវិធីបច្ចុប្បន្នទាំងស្រុង ហើយប្រើប្រាស់វត្ថុបុរាណដែលបានផ្ទៀងផ្ទាត់។
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-ការត្រួតពិនិត្យដោយស្វ័យប្រវត្តិនឹងដំណើរការភ្លាមៗនៅពេលបើកដំណើរការ បន្ទាប់មកដំណើរការរៀងរាល់ប្រាំមួយម៉ោងម្តង។
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Stable មិនរាប់បញ្ចូលការចេញផ្សាយមើលជាមុនទេ; preview អនុញ្ញាតឱ្យមានការចេញផ្សាយសម្រាប់ការអភិវឌ្ឍផងដែរ។ ការត្រួតពិនិត្យជោគជ័យគ្រាន់តែបង្កើតទិន្នន័យមេតានៃការចេញផ្សាយដែលមានប៉ុណ្ណោះ។ ការទាញយក និងការដំឡើងត្រូវការកញ្ចប់វេទិកា និងប្រភពព័ត៌មានចេញផ្សាយដែលបានកំណត់រចនាសម្ព័ន្ធ។ ការចែកចាយ Linux DEB គឺជាផ្លូវកម្មវិធីដំឡើងដាច់ដោយឡែក; កុំសន្មតថា DEB ត្រូវបានធ្វើឱ្យប្រសើរឡើងដោយស្វ័យប្រវត្តិតាមរយៈយន្តការធ្វើបច្ចុប្បន្នភាព macOS ឡើយ។
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-ការណែនាំពាក់ព័ន្ធ: [ការត្រៀមខ្លួនរួចរាល់សម្រាប់ការចេញផ្សាយ](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+ការណែនាំពាក់ព័ន្ធ: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

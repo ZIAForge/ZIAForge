@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: ml; served locale: ml; status: machine-translated. -->
 # ZIAForge ഉപയോക്തൃ ഗൈഡ്
@@ -32,7 +32,7 @@ Requested locale: ml; served locale: ml; status: machine-translated. -->
 - [ബ്രൗസറും വിദൂര ഇൻസ്റ്റൻസുകളും](#remote)
 - [OpenClaw, Hermes, മറ്റ് ബാഹ്യ ഏജന്റുകൾ](#external-agents)
 - [ലോക്കൽ CLI-യും ഓട്ടോമേഷൻ പരിധികളും](#local-cli)
-- [പതിപ്പും അപ്‌ഡേറ്റുകളും](#updates)
+- [Version and updates](#updates)
 - [പുനരാരംഭിക്കലും വീണ്ടെടുക്കലും](#restart)
 - [പ്രശ്നപരിഹാരം](#troubleshooting)
 - [പ്രശ്നങ്ങൾ റിപ്പോർട്ട് ചെയ്യുക, തെളിവുകൾ പരിശോധിക്കുക](#diagnostics)
@@ -418,17 +418,21 @@ ziaf ഡിസ്പാച്ചർ ഒരേ പ്രവർത്തിക്�
 
 <a id="updates"></a>
 
-## പതിപ്പും അപ്‌ഡേറ്റുകളും
+## Version and updates
 
-About പ്രവർത്തിക്കുന്ന കൃത്യമായ പതിപ്പ് കാണിക്കുന്നു. പൊതു അപ്‌ഡേറ്റുകൾക്ക് വിശ്വസനീയമായ ഒരു GitHub റിലീസ് ശേഖരണവും സ്ഥിരതയുള്ളതോ പ്രിവ്യൂവോ ആയ ചാനലും ആവശ്യമാണ്. പരിശോധിക്കൽ, ഡൗൺലോഡ് ചെയ്യൽ, ഇൻസ്റ്റാളേഷൻ എന്നിവയ്ക്ക് പ്രത്യേക അവസ്ഥകളുണ്ട്; ഒരു പിശക് എന്നാൽ ഒരു അപ്‌ഡേറ്റ് ഇൻസ്റ്റാൾ ചെയ്തു എന്ന് അർത്ഥമാക്കുന്നില്ല.
+> പൂർണ്ണ ഗൈഡ് ഇതുവരെ നിങ്ങളുടെ ഇന്റർഫേസ് ഭാഷയിലേക്ക് വിവർത്തനം ചെയ്തിട്ടില്ല. ഇംഗ്ലീഷ് റഫറൻസ് കാണിക്കുന്നു.
 
-സൈൻ ചെയ്ത macOS റിലീസുകൾക്കാണ് ഓട്ടോമാറ്റിക് ഇൻസ്റ്റാളേഷൻ. ഒപ്പിടാത്ത വികസന ബിൽഡുകൾ ഈ സംവിധാനത്തിലൂടെ സ്വയമേവ ഇൻസ്റ്റാൾ ചെയ്യപ്പെടില്ല. മാനുവൽ മാറ്റിസ്ഥാപിക്കലിനായി, നിലവിലെ ആപ്പിൽ നിന്ന് പൂർണ്ണമായും പുറത്തുകടന്ന് പരിശോധിച്ചുറപ്പിച്ച ആർട്ടിഫാക്റ്റ് ഉപയോഗിക്കുക.
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-പ്രവർത്തനക്ഷമമാക്കുമ്പോൾ ഓട്ടോമാറ്റിക് പരിശോധന ഉടനടി നടക്കുന്നു, തുടർന്ന് ഓരോ ആറ് മണിക്കൂറിലും പ്രവർത്തിക്കുന്നു.
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Stable പ്രിവ്യൂ റിലീസുകളെ ഒഴിവാക്കുന്നു; preview വികസന റിലീസുകളെയും അനുവദിക്കുന്നു. ഒരു വിജയകരമായ പരിശോധന ലഭ്യമായ റിലീസ് മെറ്റാഡാറ്റ മാത്രമേ സ്ഥാപിക്കുന്നുള്ളൂ. ഡൗൺലോഡിനും ഇൻസ്റ്റാളേഷനും പ്ലാറ്റ്‌ഫോം പാക്കേജും കോൺഫിഗർ ചെയ്ത റിലീസ് ഫീഡും ആവശ്യമാണ്. Linux DEB ഡെലിവറി ഒരു പ്രത്യേക ഇൻസ്റ്റാളർ പാതയാണ്; ഒരു DEB macOS അപ്‌ഡേറ്റ് സംവിധാനത്തിലൂടെ സ്വയമേവ അപ്‌ഗ്രേഡ് ചെയ്യപ്പെടുമെന്ന് കരുതരുത്.
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-ബന്ധപ്പെട്ട നിർദ്ദേശങ്ങൾ: [റിലീസ് സന്നദ്ധത](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+ബന്ധപ്പെട്ട നിർദ്ദേശങ്ങൾ: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

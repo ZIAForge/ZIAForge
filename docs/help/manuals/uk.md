@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: uk; served locale: uk; status: machine-translated. -->
 # Посібник користувача ZIAForge
@@ -32,7 +32,7 @@ Requested locale: uk; served locale: uk; status: machine-translated. -->
 - [Браузер і віддалені екземпляри](#remote)
 - [OpenClaw, Hermes та інші зовнішні агенти](#external-agents)
 - [Локальний CLI та обмеження автоматизації](#local-cli)
-- [Версія та оновлення](#updates)
+- [Version and updates](#updates)
 - [Перезапуск і відновлення](#restart)
 - [Усунення несправностей](#troubleshooting)
 - [Повідомлення про проблеми та перевірка даних](#diagnostics)
@@ -418,17 +418,21 @@ Telegram вмикається лише локальним власником, з
 
 <a id="updates"></a>
 
-## Версія та оновлення
+## Version and updates
 
-Розділ «Про програму» показує точну версію, що наразі запущена. Загальнодоступні оновлення вимагають надійного репозиторію релізів GitHub і вибору стабільного або попереднього каналу. Перевірка, завантаження та встановлення мають окремі статуси; виникнення помилки не означає, що оновлення було встановлено.
+> Повний посібник ще не перекладено мовою вашого інтерфейсу. Відображається англійський еталон.
 
-Автоматичне встановлення призначене для підписаних релізів для macOS. Непідписані збірки для розробки не встановлюються автоматично цим механізмом. Для заміни вручну повністю закрийте поточний застосунок і скористайтеся перевіреним артефактом.
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-Автоматична перевірка виконується одразу після ввімкнення, а потім кожні шість годин.
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Стабільний канал виключає попередні версії; канал preview також дозволяє версії для розробки. Успішна перевірка лише підтверджує наявність метаданих релізу. Для завантаження та встановлення потрібен пакет для відповідної платформи та налаштований канал релізів. Доставка пакетів DEB для Linux здійснюється через окремий інсталятор; не вважайте, що DEB автоматично оновлюється за допомогою механізму оновлення macOS.
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-Пов'язані інструкції: [Готовність релізу](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+Пов'язані інструкції: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

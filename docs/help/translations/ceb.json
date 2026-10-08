@@ -419,16 +419,21 @@
     },
     {
       "id": "updates",
-      "title": "Bersyon ug mga update",
+      "title": "Version and updates",
       "paragraphs": [
-        "Ang About nagpakita sa eksaktong nagdagan nga bersyon. Ang publikong mga update nagkinahanglan og kasaligang GitHub repository sa release ug usa ka lig-on o preview nga channel. Ang pagsusi, pag-download ug pag-instalar adunay magkabulag nga mga kahimtang; ang usa ka sayop wala magpasabot nga na-instalar ang update.",
-        "Ang awtomatikong pag-instalar alang sa gipirmahan nga macOS nga mga release. Ang wala mapirmahi nga mga development build dili awtomatikong ma-instalar pinaagi niini nga mekanismo. Alang sa manwal nga pag-ilis, hingpit nga biyai ang kasamtangang app ug paggamit og napamatud-an nga artifact.",
-        "Ang awtomatikong pagsusi modagan dayon kon mapaandar, unya matag unom ka oras.",
-        "Ang Stable wala maglakip sa mga preview release; ang preview nagtugot usab sa mga development release. Ang usa ka malampusong pagsusi nagtino lamang sa magamit nga metadata sa release. Ang pag-download ug pag-instalar nagkinahanglan sa package sa plataporma ug sa gikompigura nga release feed. Ang paghatod sa Linux DEB maoy usa ka bulag nga agianan sa installer; ayaw pagdahom nga ang usa ka DEB awtomatikong ma-upgrade pinaagi sa macOS nga mekanismo sa pag-update."
+        "Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.",
+        "When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.",
+        "Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.",
+        "Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.",
+        "Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only."
       ],
       "links": [
         {
-          "label": "Kaandam sa release",
+          "label": "Application update behavior and installation limits",
+          "path": "docs/UPDATES.md"
+        },
+        {
+          "label": "Release readiness",
           "path": "docs/RELEASE_READINESS.md"
         }
       ]

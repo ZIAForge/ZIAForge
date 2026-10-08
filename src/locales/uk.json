@@ -1390,5 +1390,17 @@
   "video_save_error": "Не вдалося зберегти відео: {error}",
   "video_save_cancelled": "Збереження відео скасовано",
   "video_saved": "Відео збережено",
-  "video_invalid": "Некоректні дані відео"
+  "video_invalid": "Некоректні дані відео",
+  "updates.check": "Перевірити оновлення",
+  "updates.update": "Оновити зараз",
+  "updates.installedVersion": "Установлена версія",
+  "updates.availableVersion": "Доступна версія",
+  "updates.localOnly": "Керуйте оновленнями в настільному застосунку на цьому комп’ютері.",
+  "updates.manualInstall": "Автоматичне встановлення тут недоступне. Завантажте пакет або відкрийте сторінку випуску для встановлення вручну.",
+  "updates.installNotice": "Завершіть поточну роботу перед оновленням. ZIAForge закриється та за потреби відкриє системний інсталятор.",
+  "updates.release": "Відкрити випуск",
+  "updates.settings": "Налаштування оновлень",
+  "updates.autoInstallNotice": "Встановлення завжди потребує вашої дії.",
+  "updates.preparing": "Підготовка оновлення…",
+  "updates.installing": "Встановлення оновлення…"
 }

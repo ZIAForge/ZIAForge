@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: yo; served locale: yo; status: machine-translated. -->
 # Ìwé amọ̀nà aṣeamúlò ZIAForge
@@ -32,7 +32,7 @@ Láti èròǹgbà dé àbájáde tí a fìdí rẹ̀ múlẹ̀. Ìwé amọ̀nà
 - [Aṣàwákiri àti àwọn ẹ̀rọ jíjìnnà](#remote)
 - [OpenClaw, Hermes àti àwọn aṣojú òde mìíràn](#external-agents)
 - [CLI agbègbè àti àwọn ààlà ìmúdàṣe](#local-cli)
-- [Ẹ̀yà àti àwọn ìsọdọtun](#updates)
+- [Version and updates](#updates)
 - [Tún bẹ̀rẹ̀ àti ìmúbọ̀sípo](#restart)
 - [Ìwádìí àti ìyanjú ìṣòro](#troubleshooting)
 - [Ròyìn àwọn ìṣòro kí o sì ṣàyẹ̀wò ẹ̀rí](#diagnostics)
@@ -418,17 +418,21 @@ Ojú-ọ̀nà Àwọn Ìmúdàṣe (Automations) ń tọ́jú àwọn ìtumọ̀
 
 <a id="updates"></a>
 
-## Ẹ̀yà àti àwọn ìsọdọtun
+## Version and updates
 
-Nípa (About) ń fi ẹ̀yà gangan tí ń ṣiṣẹ́ hàn. Àwọn ìsọdọtun fún gbogbo ènìyàn nílò ibi-ìkójọ ìtújáde GitHub tí a gbẹ́kẹ̀lé àti ojú-ọ̀nà iduroṣinṣin (stable) tàbí àkọ́kọ́wò (preview). Ṣíṣàyẹ̀wò, gbígba sílẹ̀ àti fífisípò ní àwọn ipò ọ̀tọ̀ọ̀tọ̀; àṣìṣe kò túmọ̀ sí pé ìsọdọtun ti fi sípò.
+> A kò tíì tú gbogbo ìtọ́sọ́nà náà sí èdè ojú-ìbòjú rẹ. Àtẹ̀jáde ìtọ́kasí ti èdè Gẹ̀ẹ́sì ni a ń fi hàn.
 
-Fífisípò aládàáṣiṣẹ́ wà fún àwọn ìtújáde macOS tí a fọwọ́ sí. Àwọn ìkọ́kọ́ ìdàgbàsókè tí a kò fọwọ́ sí kì í fi sípò fúnra wọn nípasẹ̀ ọ̀nà yìí. Fún rírọ́pò pẹ̀lú ọwọ́, pa àgbékalẹ̀ ètò lọ́wọ́lọ́wọ́ pátápátá kí o sì lo ohun-èlò tí a fìdí rẹ̀ múlẹ̀.
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-Àyẹ̀wò aládàáṣiṣẹ́ ń ṣiṣẹ́ lẹ́sẹ̀kẹsẹ̀ nígbà tí a bá mú un ṣiṣẹ́, lẹ́yìn náà ní gbogbo wákàtí mẹ́fà.
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Iduroṣinṣin (Stable) ń yọ àwọn ìtújáde àkọ́kọ́wò kúrò; àkọ́kọ́wò (preview) ń gba àwọn ìtújáde ìdàgbàsókè pẹ̀lú láàyè. Àyẹ̀wò tí ó kẹ́sẹjárí ń fi ìmọ̀ dátà ìtújáde tí ó wà múlẹ̀ nìkan. Gbígba sílẹ̀ àti fífisípò nílò àpò-iṣẹ́ pẹpẹ náà àti àkójọ ìtújáde tí a ṣètò. Ìpèsè Linux DEB jẹ́ ipa-ọ̀nà olùfisípò ọ̀tọ̀; má ṣe rò pé a ń gbé DEB ga fúnra rẹ̀ nípasẹ̀ ọ̀nà ìsọdọtun macOS.
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-Àwọn ìtọ́ni tó jẹmọ́: [Ìmúrasílẹ̀ ìtújáde](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+Àwọn ìtọ́ni tó jẹmọ́: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

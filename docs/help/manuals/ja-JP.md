@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: ja-JP; served locale: ja-JP; status: machine-translated. -->
 # ZIAForge ユーザーガイド
@@ -32,7 +32,7 @@ Requested locale: ja-JP; served locale: ja-JP; status: machine-translated. -->
 - [ブラウザとリモートインスタンス](#remote)
 - [OpenClaw、Hermesおよびその他の外部エージェント](#external-agents)
 - [ローカルCLIと自動化の制限事項](#local-cli)
-- [バージョンとアップデート](#updates)
+- [Version and updates](#updates)
 - [再起動とリカバリ](#restart)
 - [トラブルシューティング](#troubleshooting)
 - [問題の報告とエビデンスの検査](#diagnostics)
@@ -418,17 +418,21 @@ ziafディスパッチャーは、同じ実行中のアプリと保存された�
 
 <a id="updates"></a>
 
-## バージョンとアップデート
+## Version and updates
 
-「バージョン情報」には、実行中の正確なバージョンが表示されます。パブリックアップデートには、信頼できるGitHubリリースポジトリと、安定版（stable）またはプレビュー（preview）チャンネルが必要です。確認、ダウンロード、インストールの状態は分かれています。エラーが発生しても、アップデートがインストールされたことを意味するわけではありません。
+> ガイドの全文はまだ選択されたインターフェース言語に翻訳されていません。英語の参照用ガイドを表示しています。
 
-自動インストールは署名済みのmacOSリリース向けです。未署名の開発ビルドは、この仕組みを通じて自動的にインストールされることはありません。手動で置き換える場合は、現在のアプリを完全に終了し、検証済みのアーティファクトを使用してください。
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-自動確認は、有効化されると即座に実行され、その後は6時間ごとに実行されます。
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-安定版にはプレビューリリースが含まれず、プレビューでは開発リリースも許可されます。確認が成功しても、利用可能なリリースのメタデータが確認されたにすぎません。ダウンロードとインストールには、プラットフォームパッケージと設定済みのリリースフィードが必要です。Linux DEBの配信は独立したインストーラーパスです。DEBがmacOSのアップデート機能によって自動的にアップグレードされると思い込まないでください。
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-関連する指示: [リリースの準備状況](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+関連する指示: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

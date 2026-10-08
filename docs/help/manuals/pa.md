@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: pa; served locale: pa; status: machine-translated. -->
 # ZIAForge ਉਪਭੋਗਤਾ ਗਾਈਡ
@@ -32,7 +32,7 @@ Requested locale: pa; served locale: pa; status: machine-translated. -->
 - [ਬ੍ਰਾਊਜ਼ਰ ਅਤੇ ਰਿਮੋਟ ਇੰਸਟੈਂਸ](#remote)
 - [OpenClaw, Hermes ਅਤੇ ਹੋਰ ਬਾਹਰੀ ਏਜੰਟ](#external-agents)
 - [ਸਥਾਨਕ CLI ਅਤੇ ਆਟੋਮੇਸ਼ਨ ਸੀਮਾਵਾਂ](#local-cli)
-- [ਸੰਸਕਰਣ ਅਤੇ ਅੱਪਡੇਟ](#updates)
+- [Version and updates](#updates)
 - [ਮੁੜ ਚਾਲੂ ਅਤੇ ਰਿਕਵਰੀ](#restart)
 - [ਸਮੱਸਿਆ ਨਿਪਟਾਰਾ](#troubleshooting)
 - [ਸਮੱਸਿਆਵਾਂ ਦੀ ਰਿਪੋਰਟ ਕਰੋ ਅਤੇ ਸਬੂਤਾਂ ਦੀ ਜਾਂਚ ਕਰੋ](#diagnostics)
@@ -418,17 +418,21 @@ ziaf ਡਿਸਪੈਚਰ ਉਸੇ ਚੱਲ ਰਹੀ ਐਪ ਅਤੇ ਸੁ
 
 <a id="updates"></a>
 
-## ਸੰਸਕਰਣ ਅਤੇ ਅੱਪਡੇਟ
+## Version and updates
 
-About ਸਹੀ ਚੱਲ ਰਿਹਾ ਸੰਸਕਰਣ ਦਿਖਾਉਂਦਾ ਹੈ। ਜਨਤਕ ਅੱਪਡੇਟਾਂ ਲਈ ਇੱਕ ਭਰੋਸੇਯੋਗ GitHub ਰੀਲੀਜ਼ ਰਿਪੋਜ਼ਟਰੀ ਅਤੇ ਇੱਕ ਸਥਿਰ ਜਾਂ ਪੂਰਵਦਰਸ਼ਨ ਚੈਨਲ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ। ਜਾਂਚ, ਡਾਊਨਲੋਡ ਕਰਨ ਅਤੇ ਇੰਸਟਾਲੇਸ਼ਨ ਦੀਆਂ ਵੱਖਰੀਆਂ ਸਥਿਤੀਆਂ ਹਨ; ਇੱਕ ਗਲਤੀ ਦਾ ਮਤਲਬ ਇਹ ਨਹੀਂ ਹੈ ਕਿ ਕੋਈ ਅੱਪਡੇਟ ਸਥਾਪਤ ਹੋ ਗਿਆ ਹੈ।
+> ਪੂਰੀ ਗਾਈਡ ਅਜੇ ਤੁਹਾਡੀ ਇੰਟਰਫੇਸ ਭਾਸ਼ਾ ਵਿੱਚ ਅਨੁਵਾਦ ਨਹੀਂ ਕੀਤੀ ਗਈ ਹੈ। ਅੰਗਰੇਜ਼ੀ ਹਵਾਲਾ ਦਿਖਾਇਆ ਜਾ ਰਿਹਾ ਹੈ।
 
-ਆਟੋਮੈਟਿਕ ਇੰਸਟਾਲੇਸ਼ਨ ਦਸਤਖਤ ਕੀਤੇ macOS ਰੀਲੀਜ਼ਾਂ ਲਈ ਹੈ। ਅਣ-ਦਸਤਖਤ ਕੀਤੇ ਵਿਕਾਸ ਬਿਲਡ ਇਸ ਵਿਧੀ ਰਾਹੀਂ ਆਪਣੇ ਆਪ ਸਥਾਪਤ ਨਹੀਂ ਹੁੰਦੇ ਹਨ। ਦਸਤੀ ਬਦਲਣ ਲਈ, ਮੌਜੂਦਾ ਐਪ ਨੂੰ ਪੂਰੀ ਤਰ੍ਹਾਂ ਬੰਦ ਕਰੋ ਅਤੇ ਇੱਕ ਪ੍ਰਮਾਣਿਤ ਆਰਟੀਫੈਕਟ ਦੀ ਵਰਤੋਂ ਕਰੋ।
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-ਸਮਰੱਥ ਹੋਣ 'ਤੇ ਆਟੋਮੈਟਿਕ ਜਾਂਚ ਤੁਰੰਤ ਚੱਲਦੀ ਹੈ, ਫਿਰ ਹਰ ਛੇ ਘੰਟਿਆਂ ਬਾਅਦ।
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-ਸਥਿਰ ਪੂਰਵਦਰਸ਼ਨ ਰੀਲੀਜ਼ਾਂ ਨੂੰ ਬਾਹਰ ਰੱਖਦਾ ਹੈ; ਪੂਰਵਦਰਸ਼ਨ ਵਿਕਾਸ ਰੀਲੀਜ਼ਾਂ ਦੀ ਵੀ ਆਗਿਆ ਦਿੰਦਾ ਹੈ। ਇੱਕ ਸਫਲ ਜਾਂਚ ਸਿਰਫ਼ ਉਪਲਬਧ ਰੀਲੀਜ਼ ਮੈਟਾਡੇਟਾ ਸਥਾਪਤ ਕਰਦੀ ਹੈ। ਡਾਊਨਲੋਡ ਅਤੇ ਇੰਸਟਾਲੇਸ਼ਨ ਲਈ ਪਲੇਟਫਾਰਮ ਪੈਕੇਜ ਅਤੇ ਕੌਂਫਿਗਰ ਕੀਤੀ ਰੀਲੀਜ਼ ਫੀਡ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ। Linux DEB ਡਿਲੀਵਰੀ ਇੱਕ ਵੱਖਰਾ ਇੰਸਟਾਲਰ ਮਾਰਗ ਹੈ; ਇਹ ਨਾ ਮੰਨੋ ਕਿ ਇੱਕ DEB macOS ਅੱਪਡੇਟ ਵਿਧੀ ਦੁਆਰਾ ਆਪਣੇ ਆਪ ਅੱਪਗ੍ਰੇਡ ਹੋ ਜਾਂਦਾ ਹੈ।
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-ਸੰਬੰਧਿਤ ਹਦਾਇਤਾਂ: [ਰੀਲੀਜ਼ ਦੀ ਤਿਆਰੀ](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+ਸੰਬੰਧਿਤ ਹਦਾਇਤਾਂ: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

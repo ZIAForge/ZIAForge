@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: ps; served locale: ps; status: machine-translated. -->
 # د ZIAForge کارن لارښود
@@ -32,7 +32,7 @@ Requested locale: ps; served locale: ps; status: machine-translated. -->
 - [براوزر او لرې پرتو بېلګې](#remote)
 - [OpenClaw، Hermes او نور بهرني اجنټان](#external-agents)
 - [ځايي CLI او د اتومات کولو حدود](#local-cli)
-- [نسخه او تازه معلومات](#updates)
+- [Version and updates](#updates)
 - [بیا پیل او بیا رغونه](#restart)
 - [د ستونزو حل کول](#troubleshooting)
 - [د ستونزو راپور ورکول او د شواهدو معاینه کول](#diagnostics)
@@ -418,17 +418,21 @@ Telegram یوازې د ځايي مالک له خوا، د شته بوټ ټوکن
 
 <a id="updates"></a>
 
-## نسخه او تازه معلومات
+## Version and updates
 
-د About برخه کره روانه نسخه ښیي. عامه تازه معلومات د باور وړ GitHub د خپریدو ذخیره او یو مستحکم یا مخکتنې چینل ته اړتیا لري. کتنه، ډاونلوډ کول او انسټال کول جلا حالتونه لري؛ تېروتنه پدې معنی نه ده چې تازه معلومات انسټال شوي دي.
+> بشپړ لارښود لا تر اوسه ستاسو د انټرفیس ژبې ته نه دی ژباړل شوی. د انګلیسي ماخذ ښودل کېږي.
 
-اتوماتیک انسټالیشن د لاسلیک شوي macOS ریلیزونو لپاره دی. نه لاسلیک شوي پرمختیایي جوړښتونه د دې میکانیزم له لارې په اتوماتيک ډول نه انسټال کیږي. د لاسي بدلولو لپاره، اوسنی ایپ په بشپړه توګه وتړئ او یو تایید شوی هنري اثر وکاروئ.
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-اتوماتیک کتنه سمدلاسه چلیږي کله چې فعاله شي، بیا په هر شپږو ساعتونو کې.
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-ثابت (Stable) د مخکتنې ریلیزونه نه پکې شاملوي؛ مخکتنه (Preview) د پراختیا ریلیزونو ته هم اجازه ورکوي. یو بریالی چک یوازې د موجود ریلیز میټاډاټا رامینځته کوي. ډاونلوډ او انسټالیشن د پلیټ فارم کڅوړې او تنظیم شوي ریلیز فیډ ته اړتیا لري. د Linux DEB تحویلي د انسټالر یوه جلا لاره ده؛ داسې فرض مه کوئ چې یو DEB په اوتومات ډول د macOS د تازه کولو میکانیزم لخوا لوړیږي.
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-اړوند لارښوونې: [د خپرېدو چمتووالی](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+اړوند لارښوونې: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

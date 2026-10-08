@@ -1390,5 +1390,17 @@
   "video_save_error": "Tsy afaka nitahiry ny horonan-tsary: {error}",
   "video_save_cancelled": "Nofoanana ny fitahirizana horonan-tsary",
   "video_saved": "Voatahiry ny horonan-tsary",
-  "video_invalid": "Tsy manan-kery ny angon-drakitra horonan-tsary"
+  "video_invalid": "Tsy manan-kery ny angon-drakitra horonan-tsary",
+  "updates.check": "Hamarino ny fanavaozana",
+  "updates.update": "Havaozy izao",
+  "updates.installedVersion": "Kinova napetraka",
+  "updates.availableVersion": "Kinova misy",
+  "updates.localOnly": "Tantano ao amin’ny rindranasa desktop amin’ity solosaina ity ny fanavaozana.",
+  "updates.manualInstall": "Tsy misy fametrahana mandeha ho azy eto. Sintomy ny fonosana na sokafy ny pejin’ny famoahana mba hametrahana azy tanana.",
+  "updates.installNotice": "Vitao ny asa mandeha alohan’ny hanavaozana. Hikatona ny ZIAForge ary mety hanokatra ny mpametraka an’ny rafitra.",
+  "updates.release": "Jereo ny famoahana",
+  "updates.settings": "Fikirakirana fanavaozana",
+  "updates.autoInstallNotice": "Mitaky hetsika avy aminao foana ny fametrahana.",
+  "updates.preparing": "Manomana fanavaozana…",
+  "updates.installing": "Mametraka fanavaozana…"
 }

@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: az; served locale: az; status: machine-translated. -->
 # ZIAForge istifadəçi təlimatı
@@ -32,7 +32,7 @@ Niyyətdən yoxlanılmış nəticəyə qədər. Code, Work və tətbiqin idarə 
 - [Brauzer və uzaq instansiyalar](#remote)
 - [OpenClaw, Hermes və digər xarici agentlər](#external-agents)
 - [Yerli CLI və avtomatlaşdırma məhdudiyyətləri](#local-cli)
-- [Versiya və yeniləmələr](#updates)
+- [Version and updates](#updates)
 - [Yenidən başlatma və bərpa](#restart)
 - [Problemlərin aradan qaldırılması](#troubleshooting)
 - [Problemləri bildirin və sübutları araşdırın](#diagnostics)
@@ -418,17 +418,21 @@ Avtomatlaşdırmalar interfeysi hazırda ekran təriflərini və yerli icra say�
 
 <a id="updates"></a>
 
-## Versiya və yeniləmələr
+## Version and updates
 
-Haqqında dəqiq işləyən versiyanı göstərir. İctimai yeniləmələr etibarlı GitHub buraxılış repozitoriyasını və stabil və ya ilkin baxış kanalını tələb edir. Yoxlama, yükləmə və quraşdırma ayrı-ayrı vəziyyətlərə malikdir; xəta yeniləmənin quraşdırıldığı mənasına gəlmir.
+> Bələdçi hələ tam olaraq sizin interfeys dilinizə tərcümə edilməyib. İngiliscə nüsxə göstərilir.
 
-Avtomatik quraşdırma imzalanmış macOS buraxılışları üçündür. İmzasız inkişaf qurulmaları bu mexanizm vasitəsilə avtomatik quraşdırılmır. Əl ilə əvəzləmə üçün cari tətbiqi tamamilə bağlayın və təsdiqlənmiş artefaktdan istifadə edin.
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-Avtomatik yoxlama aktivləşdirildikdə dərhal, sonra isə hər altı saatdan bir işləyir.
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Stabil ilkin baxış buraxılışlarını istisna edir; ilkin baxış inkişaf buraxılışlarına da icazə verir. Uğurlu yoxlama yalnız mövcud buraxılış metaməlumatlarını müəyyənləşdirir. Yükləmə və quraşdırma platforma paketinə və konfiqurasiya edilmiş buraxılış lentinə ehtiyac duyur. Linux DEB çatdırılması ayrıca quraşdırıcı yoludur; DEB-nin avtomatik olaraq macOS yeniləmə mexanizmi ilə təkmilləşdirildiyini güman etməyin.
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-Əlaqəli təlimatlar: [Buraxılış hazırlığı](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+Əlaqəli təlimatlar: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

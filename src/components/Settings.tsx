@@ -251,6 +251,10 @@ export const Settings: React.FC = () => {
           {activeSubTab === 'review-teams' && <ReviewTeamsSettings />}
           {activeSubTab === 'general' && (
             <div className="space-y-6 animate-fade-in">
+              <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-zinc-800 bg-[#15171a] p-5">
+                <span className="text-sm text-zinc-400">{t('version')} <span dir="ltr">{appVersion?.fullVersion || '—'}</span></span>
+                <button type="button" className="zf-control inline-flex items-center gap-2 border border-zinc-700 px-4 py-2 text-sm hover:bg-zinc-800" onClick={() => setActiveSubTab('updates')}><RotateCcw size={16} />{t('updates.check')}</button>
+              </div>
               
               <div className="bg-[#15171a] border border-[#1e2024] rounded-xl p-5 space-y-4">
                 <h3 className="text-xs font-bold text-white uppercase tracking-wider border-b border-[#1e2024] pb-2">{t('appearance')}</h3>

@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: ceb; served locale: ceb; status: machine-translated. -->
 # Giya sa tiggamit sa ZIAForge
@@ -32,7 +32,7 @@ Ang Iningles maoy kanonikal. Ang hinubad sa makina nga tabang gilain pagmarka gi
 - [Browser ug layo nga mga instance](#remote)
 - [OpenClaw, Hermes ug uban pang panggawas nga mga ahente](#external-agents)
 - [Lokal nga CLI ug mga limitasyon sa awtomasyon](#local-cli)
-- [Bersyon ug mga update](#updates)
+- [Version and updates](#updates)
 - [Pagsugod pag-usab ug pagbawi](#restart)
 - [Pagsulbad sa mga problema](#troubleshooting)
 - [I-report ang mga problema ug susiha ang ebidensya](#diagnostics)
@@ -418,17 +418,21 @@ May kalabotan nga mga panudlo: [Mga sugo sa dispatcher](../../CLI.md).
 
 <a id="updates"></a>
 
-## Bersyon ug mga update
+## Version and updates
 
-Ang About nagpakita sa eksaktong nagdagan nga bersyon. Ang publikong mga update nagkinahanglan og kasaligang GitHub repository sa release ug usa ka lig-on o preview nga channel. Ang pagsusi, pag-download ug pag-instalar adunay magkabulag nga mga kahimtang; ang usa ka sayop wala magpasabot nga na-instalar ang update.
+> Ang tibuok nga giya wala pa mahubad sa imong pinulongan sa interface. Gipakita ang reperensiya sa Iningles.
 
-Ang awtomatikong pag-instalar alang sa gipirmahan nga macOS nga mga release. Ang wala mapirmahi nga mga development build dili awtomatikong ma-instalar pinaagi niini nga mekanismo. Alang sa manwal nga pag-ilis, hingpit nga biyai ang kasamtangang app ug paggamit og napamatud-an nga artifact.
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-Ang awtomatikong pagsusi modagan dayon kon mapaandar, unya matag unom ka oras.
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Ang Stable wala maglakip sa mga preview release; ang preview nagtugot usab sa mga development release. Ang usa ka malampusong pagsusi nagtino lamang sa magamit nga metadata sa release. Ang pag-download ug pag-instalar nagkinahanglan sa package sa plataporma ug sa gikompigura nga release feed. Ang paghatod sa Linux DEB maoy usa ka bulag nga agianan sa installer; ayaw pagdahom nga ang usa ka DEB awtomatikong ma-upgrade pinaagi sa macOS nga mekanismo sa pag-update.
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-May kalabotan nga mga panudlo: [Kaandam sa release](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+May kalabotan nga mga panudlo: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

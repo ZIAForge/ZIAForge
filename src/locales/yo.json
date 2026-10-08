@@ -1390,5 +1390,17 @@
   "video_save_error": "Kò ṣeé fi fídíò pamọ́: {error}",
   "video_save_cancelled": "A ti fagilé fífi fídíò pamọ́",
   "video_saved": "A ti fi fídíò pamọ́",
-  "video_invalid": "Dátà fídíò kò tọ́"
+  "video_invalid": "Dátà fídíò kò tọ́",
+  "updates.check": "Ṣàyẹ̀wò àwọn ìmúdójúìwọ̀n",
+  "updates.update": "Mú dójú ìwọ̀n báyìí",
+  "updates.installedVersion": "Ẹ̀dà tí a fi sílò",
+  "updates.availableVersion": "Ẹ̀dà tí ó wà",
+  "updates.localOnly": "Ṣàkóso àwọn ìmúdójúìwọ̀n nínú ohun èlò orí kọ̀ǹpútà yìí.",
+  "updates.manualInstall": "Fífi sílò láìfọwọ́sí kò sí níbí. Ṣe ìgbàsílẹ̀ àkójọpọ̀ náà tàbí ṣí ojú ìtẹ̀jáde láti fi sílò fúnra rẹ.",
+  "updates.installNotice": "Parí iṣẹ́ tí ń lọ kí o tó mú dójú ìwọ̀n. ZIAForge yóò ti pa, ó sì lè ṣí ohun èlò fífi sílò ti ẹ̀rọ.",
+  "updates.release": "Wo ìtẹ̀jáde",
+  "updates.settings": "Ètò ìmúdójúìwọ̀n",
+  "updates.autoInstallNotice": "Fífi sílò máa ń nílò ìgbésẹ̀ rẹ ní gbogbo ìgbà.",
+  "updates.preparing": "Ń pèsè ìmúdójúìwọ̀n…",
+  "updates.installing": "Ń fi ìmúdójúìwọ̀n sílò…"
 }

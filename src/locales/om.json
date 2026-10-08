@@ -1390,5 +1390,17 @@
   "video_save_error": "Viidiyoo olkaa'uu hin dandeenye: {error}",
   "video_save_cancelled": "Olkaa'uun viidiyoo haqame",
   "video_saved": "Viidiyoon olkaa'ame",
-  "video_invalid": "Deetaa viidiyoo sirrii hin taane"
+  "video_invalid": "Deetaa viidiyoo sirrii hin taane",
+  "updates.check": "Haaromsota sakatta’i",
+  "updates.update": "Amma haaromsi",
+  "updates.installedVersion": "Gosa fe’ame",
+  "updates.availableVersion": "Gosa jiru",
+  "updates.localOnly": "Haaromsota appii deeskitooppii kompiitara kanaa keessatti bulchi.",
+  "updates.manualInstall": "Asitti ofumaan fe’uun hin danda’amu. Harkaan fe’uuf paakeejii buusi yookaan fuula gadhiifamaa bani.",
+  "updates.installNotice": "Haaromsuu dura hojii adeemsarra jiru xumuri. ZIAForge ni cufama; fe’aa sirnaas banuu danda’a.",
+  "updates.release": "Gadhiifama ilaali",
+  "updates.settings": "Qindaa’inoota haaromsaa",
+  "updates.autoInstallNotice": "Fe’uun yeroo hunda tarkaanfii kee barbaada.",
+  "updates.preparing": "Haaromsi qophaa’aa jira…",
+  "updates.installing": "Haaromsi fe’amaa jira…"
 }

@@ -1390,5 +1390,17 @@
   "video_save_error": "Teu tiasa nyimpen video: {error}",
   "video_save_cancelled": "Nyimpen video dibatalkeun",
   "video_saved": "Video parantos disimpen",
-  "video_invalid": "Data video teu valid"
+  "video_invalid": "Data video teu valid",
+  "updates.check": "Pariksa apdet",
+  "updates.update": "Apdet ayeuna",
+  "updates.installedVersion": "Vérsi dipasang",
+  "updates.availableVersion": "Vérsi sayaga",
+  "updates.localOnly": "Atur apdet dina aplikasi desktop dina komputer ieu.",
+  "updates.manualInstall": "Pamasangan otomatis teu sayaga di dieu. Unduh pakét atawa buka kaca rilis pikeun masang sacara manual.",
+  "updates.installNotice": "Béréskeun pagawéan anu keur lumangsung saméméh ngapdet. ZIAForge bakal ditutup sarta bisa muka pamasang sistem.",
+  "updates.release": "Tingali rilis",
+  "updates.settings": "Setélan apdet",
+  "updates.autoInstallNotice": "Pamasangan salawasna merlukeun tindakan anjeun.",
+  "updates.preparing": "Nyiapkeun apdet…",
+  "updates.installing": "Masang apdet…"
 }

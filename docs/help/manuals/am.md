@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: am; served locale: am; status: machine-translated. -->
 # የZIAForge የተጠቃሚ መመሪያ
@@ -32,7 +32,7 @@ Requested locale: am; served locale: am; status: machine-translated. -->
 - [አሳሽ እና የርቀት ምሳሌዎች](#remote)
 - [OpenClaw፣ Hermes እና ሌሎች ውጫዊ ወኪሎች](#external-agents)
 - [የአካባቢ CLI እና የአውቶሜሽን ገደቦች](#local-cli)
-- [ስሪት እና ዝመናዎች](#updates)
+- [Version and updates](#updates)
 - [ዳግም ማስጀመር እና መልሶ ማግኛ](#restart)
 - [ችግር መፍታት](#troubleshooting)
 - [ችግሮችን ሪፖርት ያድርጉ እና ማስረጃዎችን ይመርምሩ](#diagnostics)
@@ -418,17 +418,21 @@ Telegram የሚነቃው በአካባቢው ባለቤት ብቻ ሲሆን፣ ይ
 
 <a id="updates"></a>
 
-## ስሪት እና ዝመናዎች
+## Version and updates
 
-ስለ ትክክለኛውን የሚሰራ ስሪት ያሳያል። ይፋዊ ዝመናዎች የታመነ የGitHub ልቀት ማከማቻ እና የተረጋጋ ወይም የቅድመ-ዕይታ ጣቢያ ያስፈልጋቸዋል። መፈተሽ፣ ማውረድ እና መጫን የተለያዩ ሁኔታዎች አሏቸው፤ ስህተት መፈጠሩ ዝመና ተጭኗል ማለት አይደለም።
+> ሙሉው መመሪያ እስካሁን ወደ እርስዎ የበይነገጽ ቋንቋ አልተተረጎመም። የእንግሊዝኛ ማመሳከሪያው እየታየ ነው።
 
-አውቶማቲክ ጭነት ለተፈረመባቸው የmacOS ልቀቶች ነው። ያልተፈረሙ የልማት ግንባታዎች በዚህ ዘዴ በራስ-ሰር አይጫኑም። በእጅ ለመተካት የአሁኑን መተግበሪያ ሙሉ በሙሉ ይዝጉ እና የተረጋገጠ ቅርስ ይጠቀሙ።
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-አውቶማቲክ ፍተሻ ሲነቃ ወዲያውኑ ይሰራል፣ ከዚያም በየስድስት ሰዓቱ ይሰራል።
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-የተረጋጋ የቅድመ-ዕይታ ልቀቶችን አያካትትም፤ ቅድመ-ዕይታ የልማት ልቀቶችንም ይፈቅዳል። የተሳካ ፍተሻ የሚገኘውን የልቀት ሜታዳታ ብቻ ያረጋግጣል። ማውረድ እና መጫን የመድረክ ጥቅል እና የተዋቀረ የልቀት ምግብ ያስፈልጋቸዋል። የLinux DEB አቅርቦት የተለየ የመጫኛ መንገድ ነው፤ DEB በmacOS የማዘመኛ ዘዴ በራስ-ሰር ይሻሻላል ብለው አያስቡ።
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-ተዛማጅ መመሪያዎች: [የልቀት ዝግጁነት](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+ተዛማጅ መመሪያዎች: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

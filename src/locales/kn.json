@@ -1390,5 +1390,17 @@
   "video_save_error": "ವೀಡಿಯೊ ಉಳಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ: {error}",
   "video_save_cancelled": "ವೀಡಿಯೊ ಉಳಿಸುವುದನ್ನು ರದ್ದುಪಡಿಸಲಾಗಿದೆ",
   "video_saved": "ವೀಡಿಯೊ ಉಳಿಸಲಾಗಿದೆ",
-  "video_invalid": "ಅಮಾನ್ಯ ವೀಡಿಯೊ ಡೇಟಾ"
+  "video_invalid": "ಅಮಾನ್ಯ ವೀಡಿಯೊ ಡೇಟಾ",
+  "updates.check": "ನವೀಕರಣಗಳನ್ನು ಪರಿಶೀಲಿಸಿ",
+  "updates.update": "ಈಗ ನವೀಕರಿಸಿ",
+  "updates.installedVersion": "ಸ್ಥಾಪಿಸಲಾದ ಆವೃತ್ತಿ",
+  "updates.availableVersion": "ಲಭ್ಯವಿರುವ ಆವೃತ್ತಿ",
+  "updates.localOnly": "ಈ ಕಂಪ್ಯೂಟರ್‌ನ ಡೆಸ್ಕ್‌ಟಾಪ್ ಅಪ್ಲಿಕೇಶನ್‌ನಲ್ಲಿ ನವೀಕರಣಗಳನ್ನು ನಿರ್ವಹಿಸಿ.",
+  "updates.manualInstall": "ಇಲ್ಲಿ ಸ್ವಯಂಚಾಲಿತ ಸ್ಥಾಪನೆ ಲಭ್ಯವಿಲ್ಲ. ಪ್ಯಾಕೇಜ್ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ ಅಥವಾ ಕೈಯಾರೆ ಸ್ಥಾಪಿಸಲು ಬಿಡುಗಡೆ ಪುಟ ತೆರೆಯಿರಿ.",
+  "updates.installNotice": "ನವೀಕರಿಸುವ ಮೊದಲು ನಡೆಯುತ್ತಿರುವ ಕೆಲಸ ಮುಗಿಸಿ. ZIAForge ಮುಚ್ಚುತ್ತದೆ ಮತ್ತು ಸಿಸ್ಟಂ ಸ್ಥಾಪಕ ತೆರೆಯಬಹುದು.",
+  "updates.release": "ಬಿಡುಗಡೆ ವೀಕ್ಷಿಸಿ",
+  "updates.settings": "ನವೀಕರಣ ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
+  "updates.autoInstallNotice": "ಸ್ಥಾಪನೆಗೆ ಯಾವಾಗಲೂ ನಿಮ್ಮ ಕ್ರಿಯೆ ಅಗತ್ಯ.",
+  "updates.preparing": "ನವೀಕರಣ ಸಿದ್ಧವಾಗುತ್ತಿದೆ…",
+  "updates.installing": "ನವೀಕರಣ ಸ್ಥಾಪನೆಯಾಗುತ್ತಿದೆ…"
 }

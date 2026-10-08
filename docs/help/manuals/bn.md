@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: bn; served locale: bn; status: machine-translated. -->
 # ZIAForge ব্যবহারকারী নির্দেশিকা
@@ -32,7 +32,7 @@ Requested locale: bn; served locale: bn; status: machine-translated. -->
 - [ব্রাউজার এবং রিমোট ইন্সট্যান্সসমূহ](#remote)
 - [OpenClaw, Hermes এবং অন্যান্য বাহ্যিক এজেন্ট](#external-agents)
 - [স্থানীয় CLI এবং অটোমেশন সীমাসমূহ](#local-cli)
-- [সংস্করণ এবং আপডেটসমূহ](#updates)
+- [Version and updates](#updates)
 - [পুনরারম্ভ এবং পুনরুদ্ধার](#restart)
 - [সমস্যা সমাধান](#troubleshooting)
 - [সমস্যা প্রতিবেদন করুন এবং প্রমাণ পরীক্ষা করুন](#diagnostics)
@@ -418,17 +418,21 @@ Automations ইন্টারফেস বর্তমানে প্রদর
 
 <a id="updates"></a>
 
-## সংস্করণ এবং আপডেটসমূহ
+## Version and updates
 
-About-এ চলমান সঠিক সংস্করণ দেখানো হয়। সর্বজনীন আপডেটের জন্য একটি বিশ্বস্ত GitHub রিলিজ সংগ্রহস্থল এবং একটি স্থিতিশীল বা পূর্বরূপ চ্যানেল প্রয়োজন। পরীক্ষা করা, ডাউনলোড করা এবং ইনস্টল করার পৃথক অবস্থা রয়েছে; একটি ত্রুটি মানে এই নয় যে একটি আপডেট ইনস্টল হয়েছে।
+> সম্পূর্ণ নির্দেশিকাটি এখনও আপনার ইন্টারফেসের ভাষায় অনুবাদ করা হয়নি। ইংরেজি রেফারেন্স দেখানো হচ্ছে।
 
-স্বয়ংক্রিয় ইনস্টলেশন স্বাক্ষরিত macOS রিলিজের জন্য। স্বাক্ষরবিহীন ডেভেলপমেন্ট বিল্ড এই প্রক্রিয়ার মাধ্যমে স্বয়ংক্রিয়ভাবে ইনস্টল হয় না। ম্যানুয়াল প্রতিস্থাপনের জন্য, বর্তমান অ্যাপটি সম্পূর্ণভাবে বন্ধ করুন এবং একটি যাচাইকৃত আর্টিফ্যাক্ট ব্যবহার করুন।
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-স্বয়ংক্রিয় পরীক্ষা সক্ষম হলে সাথে সাথে চলে, তারপর প্রতি ছয় ঘণ্টায় চলে।
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Stable প্রাকদর্শন রিলিজগুলোকে বাদ দেয়; preview ডেভেলপমেন্ট রিলিজের অনুমতিও দেয়। একটি সফল পরীক্ষা কেবল উপলব্ধ রিলিজ মেটাডেটা প্রতিষ্ঠা করে। ডাউনলোড এবং ইনস্টলেশনের জন্য প্ল্যাটফর্ম প্যাকেজ এবং কনফিগার করা রিলিজ ফিড প্রয়োজন। Linux DEB ডেলিভারি একটি পৃথক ইনস্টলার পাথ; ধরে নেবেন না যে একটি DEB স্বয়ংক্রিয়ভাবে macOS আপডেট প্রক্রিয়া দ্বারা আপগ্রেড হবে।
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-সম্পর্কিত নির্দেশাবলী: [রিলিজ প্রস্তুতি](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+সম্পর্কিত নির্দেশাবলী: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

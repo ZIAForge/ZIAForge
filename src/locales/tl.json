@@ -1390,5 +1390,17 @@
   "video_save_error": "Hindi ma-save ang video: {error}",
   "video_save_cancelled": "Kinansela ang pag-save ng video",
   "video_saved": "Na-save ang video",
-  "video_invalid": "Hindi wastong data ng video"
+  "video_invalid": "Hindi wastong data ng video",
+  "updates.check": "Tingnan kung may update",
+  "updates.update": "I-update ngayon",
+  "updates.installedVersion": "Naka-install na bersyon",
+  "updates.availableVersion": "Available na bersyon",
+  "updates.localOnly": "Pamahalaan ang mga update sa desktop app sa computer na ito.",
+  "updates.manualInstall": "Hindi available dito ang awtomatikong pag-install. I-download ang package o buksan ang pahina ng release para manu-manong mag-install.",
+  "updates.installNotice": "Tapusin ang kasalukuyang gawain bago mag-update. Magsasara ang ZIAForge at maaaring buksan ang installer ng system.",
+  "updates.release": "Tingnan ang release",
+  "updates.settings": "Mga setting ng update",
+  "updates.autoInstallNotice": "Palaging kailangan ang iyong aksyon para mag-install.",
+  "updates.preparing": "Inihahanda ang update…",
+  "updates.installing": "Ini-install ang update…"
 }

@@ -1390,5 +1390,17 @@
   "video_save_error": "वीडियो सहेजा नहीं जा सका: {error}",
   "video_save_cancelled": "वीडियो सहेजना रद्द किया गया",
   "video_saved": "वीडियो सहेजा गया",
-  "video_invalid": "वीडियो का डेटा अमान्य है"
+  "video_invalid": "वीडियो का डेटा अमान्य है",
+  "updates.check": "अपडेट जाँचें",
+  "updates.update": "अभी अपडेट करें",
+  "updates.installedVersion": "इंस्टॉल किया गया संस्करण",
+  "updates.availableVersion": "उपलब्ध संस्करण",
+  "updates.localOnly": "इस कंप्यूटर के डेस्कटॉप ऐप में अपडेट प्रबंधित करें।",
+  "updates.manualInstall": "यहाँ अपने-आप इंस्टॉल करना उपलब्ध नहीं है। पैकेज डाउनलोड करें या मैन्युअल इंस्टॉलेशन के लिए रिलीज़ पेज खोलें।",
+  "updates.installNotice": "अपडेट करने से पहले चल रहा काम पूरा करें। ZIAForge बंद होगा और सिस्टम इंस्टॉलर खुल सकता है।",
+  "updates.release": "रिलीज़ देखें",
+  "updates.settings": "अपडेट सेटिंग",
+  "updates.autoInstallNotice": "इंस्टॉलेशन के लिए हमेशा आपकी कार्रवाई ज़रूरी है।",
+  "updates.preparing": "अपडेट तैयार हो रहा है…",
+  "updates.installing": "अपडेट इंस्टॉल हो रहा है…"
 }

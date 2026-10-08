@@ -1390,5 +1390,17 @@
   "video_save_error": "Video kon niet worden opgeslagen: {error}",
   "video_save_cancelled": "Video opslaan geannuleerd",
   "video_saved": "Video opgeslagen",
-  "video_invalid": "Ongeldige videogegevens"
+  "video_invalid": "Ongeldige videogegevens",
+  "updates.check": "Controleren op updates",
+  "updates.update": "Nu bijwerken",
+  "updates.installedVersion": "Geïnstalleerde versie",
+  "updates.availableVersion": "Beschikbare versie",
+  "updates.localOnly": "Beheer updates in de desktop-app op deze computer.",
+  "updates.manualInstall": "Automatische installatie is hier niet beschikbaar. Download het pakket of open de releasepagina voor handmatige installatie.",
+  "updates.installNotice": "Rond lopend werk af voordat u bijwerkt. ZIAForge wordt gesloten en opent mogelijk het installatieprogramma van het systeem.",
+  "updates.release": "Release bekijken",
+  "updates.settings": "Update-instellingen",
+  "updates.autoInstallNotice": "Installatie vereist altijd een handeling van u.",
+  "updates.preparing": "Update voorbereiden…",
+  "updates.installing": "Update installeren…"
 }

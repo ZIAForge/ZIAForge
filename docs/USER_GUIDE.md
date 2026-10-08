@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: en; served locale: en; status: source. -->
 # ZIAForge user guide
@@ -416,15 +416,17 @@ Related instructions: [Dispatcher commands](CLI.md).
 
 ## Version and updates
 
-About shows the exact running version. Public updates require a trusted GitHub release repository and a stable or preview channel. Checking, downloading and installation have separate states; an error does not mean an update installed.
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-Automatic installation is for signed macOS releases. Unsigned development builds are not automatically installed through this mechanism. For manual replacement, fully quit the current app and use a verified artifact.
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Automatic checking runs immediately when enabled, then every six hours.
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-Stable excludes preview releases; preview allows development releases as well. A successful check only establishes the available release metadata. Download and installation need the platform package and configured release feed. Linux DEB delivery is a separate installer path; do not assume a DEB is automatically upgraded by the macOS update mechanism.
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
 
-Related instructions: [Release readiness](RELEASE_READINESS.md).
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+Related instructions: [Application update behavior and installation limits](UPDATES.md) · [Release readiness](RELEASE_READINESS.md).
 
 <a id="restart"></a>
 
