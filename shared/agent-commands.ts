@@ -45,6 +45,8 @@ export interface ResolveInteractionRequest {
   turnId: string
   interactionId: string
   answer: import('./grok-interactions').GrokInteractionAnswer
+  /** Main-owned provenance, never accepted from renderer IPC. */
+  resolvedBy?: 'auto' | 'user'
 }
 
 export interface RunVerificationRequest {

@@ -101,6 +101,7 @@ export interface InteractionStateChangedEvent extends BaseAgentEvent {
   interactionId: string
   state: import('./grok-interactions').GrokInteractionState
   answer?: import('./grok-interactions').GrokInteractionAnswer
+  resolvedBy?: 'auto' | 'user'
   error?: string
 }
 

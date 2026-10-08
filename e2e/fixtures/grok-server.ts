@@ -2,13 +2,13 @@ import http, { type ServerResponse } from 'node:http'
 import { createHash } from 'node:crypto'
 
 /** Deterministic loopback transport only; no native CLI, credentials or upstream requests. */
-export async function startGrokFixture() {
+export async function startGrokFixture(options: { ambiguousFirstApproval?: boolean; duplicateAllowApproval?: boolean } = {}) {
   const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aXioAAAAASUVORK5CYII=', 'base64')
   const sha256 = createHash('sha256').update(png).digest('hex')
   const ids = { first: `resp_${'1'.repeat(32)}`, stopped: `resp_${'2'.repeat(32)}`, question: `question_${'a'.repeat(32)}`, reject: `approval_${'b'.repeat(32)}`, allow: `approval_${'c'.repeat(32)}`, cancelledQuestion: `question_${'d'.repeat(32)}` }
   const records: Array<{ method: string; path: string; body?: Record<string, unknown> }> = []
   const errors: string[] = [], open = new Set<ServerResponse>(), sequences = new WeakMap<ServerResponse, number>()
-  let primary: ServerResponse | undefined, waiting: ServerResponse | undefined, generations = 0
+  let primary: ServerResponse | undefined, waiting: ServerResponse | undefined, generations = 0, duplicateApprovalEvents = 0
   let stage: 'new' | 'question' | 'reject' | 'allow' | 'complete' = 'new'
   const envelope = { version: 1, artifacts: [] }
   const write = (response: ServerResponse, event: Record<string, unknown>) => {
@@ -18,7 +18,7 @@ export async function startGrokFixture() {
   }
   const json = (response: ServerResponse, body: unknown, status = 200) => { response.writeHead(status, { 'Content-Type': 'application/json' }); response.end(JSON.stringify(body)) }
   const question = (responseId: string, id: string) => ({ type: 'grok.question', version: 1, response_id: responseId, question: { id, request: { sessionId: 'native-fixture', toolCallId: 'native-question', mode: 'default', expiresAt: new Date(Date.now() + 120_000).toISOString(), questions: [{ question: 'Which exact platforms?', multiSelect: true, options: [{ label: 'Linux', description: 'Desktop A' }, { label: 'Windows', description: 'Desktop B' }] }, { question: '  What should change?  ', multiSelect: false, options: [{ label: 'Keep the default', description: 'A native option' }] }] } } })
-  const approval = (id: string) => ({ type: 'grok.approval', version: 1, response_id: ids.first, approval: { id, expires_in: 120, request: { sessionId: 'native-fixture', toolCall: { toolCallId: id, title: id === ids.reject ? 'Optional image operation to reject' : 'Requested image operation', rawInput: { operation: 'image_gen', fixture: true } }, options: [{ optionId: 'native_reject_once', name: 'Reject this operation once', kind: 'reject_once' }, { optionId: 'native_allow_once', name: 'Allow this operation once', kind: 'allow_once' }] } } })
+  const approval = (id: string) => ({ type: 'grok.approval', version: 1, response_id: ids.first, approval: { id, expires_in: 120, request: { sessionId: 'native-fixture', toolCall: { toolCallId: id, title: id === ids.reject ? 'Optional image operation to reject' : 'Requested image operation', kind: 'other', rawInput: { variant: id === ids.reject ? 'ImageEdit' : 'ImageGen', operation: 'image_gen', fixture: true } }, options: [{ optionId: 'native_reject_once', name: 'Reject this operation once', kind: 'reject_once' }, { optionId: 'native_allow_once', name: 'Allow this operation once', kind: 'allow_once' }, ...(id === ids.reject && options.ambiguousFirstApproval ? [{ optionId: 'native_allow_alternative', name: 'Another one-time permission', kind: 'allow_once' }] : [])] } } })
   const finishImage = () => {
     const artifactId = `file_${'e'.repeat(32)}`
     const artifact = { id: artifactId, object: 'file', kind: 'image', mime_type: 'image/png', bytes: png.length, sha256, api_url: `/v1/files/${artifactId}/content`, owner_url: `/api/artifacts/${artifactId}/content` }
@@ -42,7 +42,7 @@ export async function startGrokFixture() {
         generations += 1
         if (generations > 2) throw new Error('Unexpected extra generation or automatic replay')
         const grok = body?.grok as Record<string, unknown> | undefined
-        if (body?.model !== 'grok-fixture' || grok?.permissionMode !== 'default' || grok.maxTurns !== 9 || grok.contextWindow !== 32000 || typeof grok.clientWorkspace !== 'string') throw new Error('Wrong explicit profile/model/workspace/options')
+        if (body?.model !== 'grok-fixture' || grok?.permissionMode !== 'default' || grok.maxTurns !== 9 || grok.contextWindow !== 32000 || typeof grok.clientWorkspace !== 'string' || 'autoApproveNativePermissions' in grok) throw new Error('Wrong explicit profile/model/workspace/options')
         response.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache' }); open.add(response); response.on('close', () => open.delete(response))
         if (generations === 1) {
           const inputs = body?.input as Array<{ role?: string; content?: Array<{ type?: string; image_url?: string }> }>
@@ -60,10 +60,13 @@ export async function startGrokFixture() {
       }
       if (method === 'POST' && url === `/v1/grok/approvals/${ids.reject}`) {
         if (stage !== 'reject' || body?.optionId !== 'native_reject_once') throw new Error('Expected one explicit reject')
-        stage = 'allow'; json(response, { id: ids.reject, answered: true }); write(primary!, approval(ids.allow)); return
+        stage = 'allow'; json(response, { id: ids.reject, answered: true })
+        const offered = approval(ids.allow); write(primary!, offered)
+        if (options.duplicateAllowApproval) { write(primary!, offered); duplicateApprovalEvents++ }
+        return
       }
       if (method === 'POST' && url === `/v1/grok/approvals/${ids.allow}`) {
-        if (stage !== 'allow' || body?.optionId !== 'native_allow_once') throw new Error('Expected one explicit allow')
+        if (stage !== 'allow' || body?.optionId !== 'native_allow_once') throw new Error('Expected one exact offered allow_once')
         json(response, { id: ids.allow, answered: true }); finishImage(); return
       }
       if (method === 'POST' && url === `/v1/responses/${ids.stopped}/cancel`) {
@@ -74,7 +77,7 @@ export async function startGrokFixture() {
   })
   await new Promise<void>((resolve, reject) => { server.once('error', reject); server.listen(0, '127.0.0.1', resolve) })
   const address = server.address(); if (!address || typeof address === 'string') throw new Error('Loopback fixture did not bind')
-  return { baseUrl: `http://127.0.0.1:${address.port}/v1`, png, sha256, ids, records, errors, generationCount: () => generations,
+  return { baseUrl: `http://127.0.0.1:${address.port}/v1`, png, sha256, ids, records, errors, generationCount: () => generations, duplicateApprovalCount: () => duplicateApprovalEvents,
     close: async () => { for (const response of open) response.destroy(); server.closeAllConnections(); await new Promise<void>((resolve, reject) => server.close(error => error ? reject(error) : resolve())) },
   }
 }

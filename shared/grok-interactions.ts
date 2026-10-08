@@ -39,6 +39,7 @@ interface GrokInteractionBase {
   state: GrokInteractionState
   expiresAt: number
   answer?: GrokInteractionAnswer
+  resolvedBy?: 'auto' | 'user'
   error?: string
 }
 export type GrokInteraction = GrokInteractionBase & (
@@ -90,4 +91,11 @@ export function answerMatchesInteraction(interaction: GrokInteraction, answer: G
     if (labels.includes('Other') && !annotation?.notes?.trim()) return false
   }
   return true
+}
+
+/** The native option kind, never its display label, is the authority for one-time consent. */
+export function singleNativeAllowOnce(interaction: GrokInteraction): GrokApprovalOption | undefined {
+  if (interaction.kind !== 'approval') return undefined
+  const options = interaction.request.options.filter(option => option.kind === 'allow_once')
+  return options.length === 1 ? options[0] : undefined
 }
