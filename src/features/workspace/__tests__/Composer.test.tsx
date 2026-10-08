@@ -521,4 +521,19 @@ describe('Composer Component', () => {
     )
     expect((MemoComposer as unknown as { type: unknown }).type).toBe(Composer)
   })
+  it('uses the native attachment picker and the latest owner callback without resurrecting removed chips', async () => {
+    let finish!: (images: ComposerAttachment[]) => void
+    const onPickAttachments = vi.fn(() => new Promise<ComposerAttachment[]>(resolve => { finish = resolve }))
+    const oldChange = vi.fn(), newChange = vi.fn()
+    const { rerender } = render(<Composer attachments={[{ id: 'old', name: 'old.png' }]} onAttachmentsChange={oldChange} onPickAttachments={onPickAttachments} />)
+    expect((screen.getByTestId('composer-file-input') as HTMLInputElement).disabled).toBe(true)
+    fireEvent.click(screen.getByTestId('composer-attach-button'))
+    expect(onPickAttachments).toHaveBeenCalledTimes(1)
+    expect(screen.getByTestId('composer-attach-button').hasAttribute('disabled')).toBe(true)
+    rerender(<Composer attachments={[]} onAttachmentsChange={newChange} onPickAttachments={onPickAttachments} />)
+    await act(async () => { finish([{ id: 'new', name: 'new.png' }]) })
+    expect(oldChange).not.toHaveBeenCalled()
+    expect(newChange).toHaveBeenCalledWith([{ id: 'new', name: 'new.png' }])
+  })
+
 })

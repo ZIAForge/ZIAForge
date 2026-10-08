@@ -29,6 +29,8 @@ export interface SendPromptRequest {
   runId?: string
   text: string
   attachments?: string[]
+  /** Main-resolved private image bytes. Never accepts renderer paths or URLs. */
+  inputImages?: ReadonlyArray<{ id: string; mime: import('./agent-input-images').AgentInputImageRef['mime']; dataUrl: string }>
 }
 
 export interface ResolveApprovalRequest {
@@ -36,6 +38,13 @@ export interface ResolveApprovalRequest {
   runId?: string
   approvalId: string
   decision: ApprovalDecision | string
+}
+export interface ResolveInteractionRequest {
+  taskId: string
+  runId?: string
+  turnId: string
+  interactionId: string
+  answer: import('./grok-interactions').GrokInteractionAnswer
 }
 
 export interface RunVerificationRequest {

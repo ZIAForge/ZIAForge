@@ -9,6 +9,7 @@ import {
   AgentRunStatus,
   SendPromptRequest,
   ResolveApprovalRequest,
+  ResolveInteractionRequest,
 } from '../../shared/agent-commands'
 import { CodexAdapter, CodexAdapterOptions } from './CodexAdapter'
 import { AntigravityAdapter, AntigravityAdapterOptions } from './AntigravityAdapter'
@@ -29,6 +30,7 @@ export interface AgentAdapter {
     decision?: ApprovalDecision | string,
     note?: string
   ): Promise<void>
+  resolveInteraction?(request: ResolveInteractionRequest): Promise<void>
   stop(force?: boolean): Promise<void>
   getStatus(): AgentRunStatus
   getPid(): number | undefined

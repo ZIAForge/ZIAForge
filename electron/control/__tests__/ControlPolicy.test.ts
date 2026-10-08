@@ -6,9 +6,9 @@ const config = (): ControlConfig => ({ enabled: false, host: '127.0.0.1', port: 
 
 describe('application command authority', () => {
   it('allows observations, rejects mutations for read access and never exposes owner grants as commands', () => {
-    for (const method of ['getTasks', 'workflows.get', 'editorRead', 'system.context']) expect(() => assertCommandScope(method, 'read')).not.toThrow()
-    for (const method of ['createTask', 'editorCreate', 'editorSave', 'workflows.respond', 'computer.run']) expect(() => assertCommandScope(method, 'read')).toThrow()
-    for (const method of ['control.configure', 'control.rotateToken', 'updates.install', 'spawnPty', 'constructor', 'toString', '__proto__']) {
+    for (const method of ['getTasks', 'workflows.get', 'editorRead', 'system.context', 'apiConnections.inspect']) expect(() => assertCommandScope(method, 'read')).not.toThrow()
+    for (const method of ['createTask', 'editorCreate', 'editorSave', 'workflows.respond', 'computer.run', 'agentSessions.resolveInteraction']) expect(() => assertCommandScope(method, 'read')).toThrow()
+    for (const method of ['control.configure', 'control.rotateToken', 'updates.install', 'spawnPty', 'constructor', 'toString', '__proto__', 'agentSessions.pickImages', 'agentSessions.listImages', 'agentSessions.discardImages']) {
       expect(() => assertCommandScope(method, 'operate'), method).toThrow()
     }
     expect(() => assertCommandScope('editorSave', 'operate')).not.toThrow()

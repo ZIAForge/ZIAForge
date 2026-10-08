@@ -11,7 +11,7 @@ export function isReasoningEffort(value: unknown): value is ReasoningEffort {
 /** A catalog returned by the selected installed client; never a hard-coded model fallback. */
 export interface AgentModelCatalog {
   agent: string
-  models: Array<{ id: string; label: string; supportedReasoningEfforts?: ReasoningEffort[]; defaultReasoningEffort?: ReasoningEffort }>
+  models: Array<{ id: string; label: string; supportedReasoningEfforts?: ReasoningEffort[]; defaultReasoningEffort?: ReasoningEffort; contextWindows?: number[]; defaultContextWindow?: number }>
   /** CLI flag values, used only when the CLI exposes no per-model metadata. */
   reasoningEfforts?: ReasoningEffort[]
   /** The native/API contract accepts an explicit token for manually entered models. */

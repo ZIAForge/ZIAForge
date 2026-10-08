@@ -23,7 +23,7 @@ const api: LegacyZiafAPI = {
     },
   },
   agentMedia: { read: request => ipcRenderer.invoke('agent-media:read', request), save: request => ipcRenderer.invoke('agent-media:save', request) },
-  apiConnections: { list: () => ipcRenderer.invoke('api-connections:list'), save: request => ipcRenderer.invoke('api-connections:save', request), remove: request => ipcRenderer.invoke('api-connections:remove', request) },
+  apiConnections: { list: () => ipcRenderer.invoke('api-connections:list'), save: request => ipcRenderer.invoke('api-connections:save', request), remove: request => ipcRenderer.invoke('api-connections:remove', request), inspect: request => ipcRenderer.invoke('api-connections:inspect', request) },
   git: {
     prepare: request => ipcRenderer.invoke('git:prepare', request),
     status: request => ipcRenderer.invoke('git:status', request),
@@ -75,6 +75,10 @@ const api: LegacyZiafAPI = {
     interrupt: request => ipcRenderer.invoke('agent-session:interrupt', request),
     terminate: request => ipcRenderer.invoke('agent-session:terminate', request),
     resolveApproval: request => ipcRenderer.invoke('agent-session:resolve-approval', request),
+    resolveInteraction: request => ipcRenderer.invoke('agent-session:resolve-interaction', request),
+    pickImages: request => ipcRenderer.invoke('agent-session:pick-images', request),
+    listImages: request => ipcRenderer.invoke('agent-session:list-images', request),
+    discardImages: request => ipcRenderer.invoke('agent-session:discard-images', request),
     onEvent: callback => {
       const listener = (_event: IpcRendererEvent, update: AgentSessionUpdate) => callback(update)
       ipcRenderer.on('agent-session:update', listener)

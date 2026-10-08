@@ -4,6 +4,7 @@ import readline from 'node:readline'
 import { createFeedProjector } from '../../shared/agent-feed'
 import { assertPrivateFile, ensurePrivateDirectory } from './privateStorage'
 import { validMediaRef } from '../../shared/agent-media'
+import { MAX_INPUT_IMAGES, MAX_INPUT_IMAGE_BATCH_BYTES, validInputImageRef } from '../../shared/agent-input-images'
 import {
   AgentEvent,
   ReconstructedToolItem,
@@ -213,6 +214,10 @@ export class EventJournal {
 /** New binary results are metadata only; old non-media journals stay compatible. */
 function validMediaEvent(event: AgentEvent): boolean {
   if (event.type === 'tool.started' && event.executor !== undefined && !['caller', 'provider'].includes(event.executor)) return false
-  if (event.type !== 'tool.completed' || event.media === undefined) return true
+  if (event.type === 'message.started' && event.inputImages !== undefined) {
+    if (event.role !== 'user' || !Array.isArray(event.inputImages) || event.inputImages.length > MAX_INPUT_IMAGES || !event.inputImages.every(validInputImageRef) || new Set(event.inputImages.map(ref => ref.id)).size !== event.inputImages.length || event.inputImages.reduce((bytes, ref) => bytes + ref.bytes, 0) > MAX_INPUT_IMAGE_BATCH_BYTES || Buffer.byteLength(JSON.stringify(event)) > 16 * 1024) return false
+  }
+  if ((event.type !== 'tool.completed' && event.type !== 'message.started') || event.media === undefined) return true
+  if (event.type === 'message.started' && event.role !== 'user') return false
   return Array.isArray(event.media) && event.media.length <= 4 && event.media.every(ref => validMediaRef(ref) && ref.sourceRunId === event.runId) && Buffer.byteLength(JSON.stringify(event)) <= 16 * 1024
 }

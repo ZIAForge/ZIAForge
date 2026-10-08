@@ -22,6 +22,8 @@ import type {
 } from '../../../shared/agent-events'
 import type { FeedItem } from '../../store'
 import { MemoApprovalCard } from './ApprovalCard'
+import { ProviderInteractionCard } from './ProviderInteractionCard'
+import type { GrokInteractionAnswer } from '../../../shared/grok-interactions'
 import { MarkdownMessage } from '../../components/MarkdownMessage'
 import { WorkflowMessageText } from './WorkflowMessageText'
 import { GeneratedMedia, type AgentMediaOwner } from './GeneratedMedia'
@@ -31,6 +33,8 @@ export interface ConversationFeedProps {
   feedItems?: FeedItem[]
   answeredPromptIds?: Record<string, string>
   onResolveApproval?: (approvalId: string, decision: 'allow' | 'deny') => void | Promise<void>
+  onResolveInteraction?: (interactionId: string, answer: GrokInteractionAnswer) => Promise<void>
+  actionableInteractionIds?: readonly string[]
   onStopTool?: (callId: string, command?: string) => void
   onReviewWithModel?: (model: string, diff?: string) => void
   onPromptAction?: (actionId: string, promptId: string) => void
@@ -201,6 +205,8 @@ export const ConversationFeed: React.FC<ConversationFeedProps> = ({
   feedItems,
   answeredPromptIds,
   onResolveApproval,
+  onResolveInteraction,
+  actionableInteractionIds,
   onStopTool,
   onReviewWithModel,
   onPromptAction,
@@ -260,6 +266,8 @@ export const ConversationFeed: React.FC<ConversationFeedProps> = ({
               workflowKind={workflowKind}
               mediaOwner={mediaOwner}
               onResolveApproval={onResolveApproval}
+              onResolveInteraction={onResolveInteraction}
+              actionableInteractionIds={actionableInteractionIds}
               onStopTool={onStopTool}
             />
           ) : (
@@ -282,6 +290,8 @@ interface MessageBubbleProps {
   workflowKind?: 'work'
   message: ReconstructedMessage
   onResolveApproval?: (approvalId: string, decision: 'allow' | 'deny') => void | Promise<void>
+  onResolveInteraction?: (interactionId: string, answer: GrokInteractionAnswer) => Promise<void>
+  actionableInteractionIds?: readonly string[]
   onStopTool?: (callId: string, command?: string) => void
   mediaOwner?: AgentMediaOwner
 }
@@ -291,6 +301,8 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
   workflowTitle,
   workflowKind,
   onResolveApproval,
+  onResolveInteraction,
+  actionableInteractionIds,
   onStopTool,
   mediaOwner,
 }) => {
@@ -314,6 +326,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
           <div className="rounded-xl bg-[#ff6b00]/10 border border-[#ff6b00]/25 p-3 text-zinc-200 leading-relaxed text-xs shadow-sm text-left whitespace-pre-wrap select-text break-words">
             {workflowTitle ? <WorkflowMessageText message={message} title={workflowTitle} kind={workflowKind} /> : message.text}
           </div>
+          {message.media?.length ? <div className="space-y-3 text-left" data-testid={`media-block-${message.id}`}>{message.media.map(media => <GeneratedMedia key={media.id} media={media} owner={mediaOwner} label={t('grok_input_image')} />)}</div> : null}
           {message.status === 'error' && (
             <div className="text-xs text-red-400" data-testid={`message-send-error-${message.id}`}>
               {t('agent_send_failed')}
@@ -436,6 +449,14 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
           </div>
         )}
 
+        {message.interactions?.length ? <div className="space-y-3" data-testid={`provider-interactions-${message.id}`}>
+          {message.interactions.map(interaction => <ProviderInteractionCard
+            key={`${mediaOwner?.sessionId ?? ''}:${mediaOwner?.runId ?? ''}:${interaction.responseId}:${interaction.interactionId}`}
+            interaction={interaction}
+            onResolve={actionableInteractionIds?.includes(interaction.interactionId) ? onResolveInteraction : undefined}
+          />)}
+        </div> : null}
+
         {/* 4. Main message text */}
         {message.text && message.text.trim().length > 0 && (
           <div
@@ -461,6 +482,8 @@ const MemoMessageBubble = React.memo(MessageBubble, (previous, next) => {
     a.text !== b.text ||
     a.thinking !== b.thinking ||
     previous.onResolveApproval !== next.onResolveApproval ||
+    previous.onResolveInteraction !== next.onResolveInteraction ||
+    previous.actionableInteractionIds !== next.actionableInteractionIds ||
     previous.onStopTool !== next.onStopTool ||
     previous.workflowTitle !== next.workflowTitle ||
     previous.workflowKind !== next.workflowKind ||
@@ -474,7 +497,7 @@ const MemoMessageBubble = React.memo(MessageBubble, (previous, next) => {
     return a.revision === b.revision
   }
 
-  return a.tools === b.tools && a.approvals === b.approvals
+  return a.tools === b.tools && a.approvals === b.approvals && a.interactions === b.interactions && a.media === b.media
 })
 
 interface ToolItemCardProps {

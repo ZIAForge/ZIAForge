@@ -80,4 +80,32 @@ describe('private API connections', () => {
     await expect(store.list()).rejects.toThrow('Unsafe')
     expect(fs.readFileSync(outside, 'utf8')).toBe('{}')
   })
+  it('pins Grok settings across restart and inspects authenticated bounded metadata without exposing account details', async () => {
+    let hold = false, pending = 0
+    const server = http.createServer((request, response) => {
+      expect(request.headers.authorization).toBe('Bearer grok-fixture-secret')
+      if (hold) { pending++; return }
+      const body = request.url === '/v1/models' ? { data: [{ id: 'grok-test', reasoning_efforts: ['low', 'high'], default_reasoning_effort: 'high', context_windows: [256000], context_window: 256000 }] }
+        : request.url === '/v1/grok/capabilities' ? { version: 1, cliVersion: 'fixture', nativeTools: [{ name: 'web_search' }], imageInput: true, media: { images: { available: true, verified: true, edit: true } }, interactiveQuestions: { available: true } }
+        : { rate_limits: { tier: 'fixture-tier', creditUsagePercent: null, accountId: 'private-account', currentPeriod: { end: '2030-01-01T00:00:00Z' } } }
+      response.end(JSON.stringify(body))
+    })
+    servers.push(server); await new Promise<void>(resolve => server.listen(0, '127.0.0.1', resolve))
+    const address = server.address() as { port: number }, { store, directory, secrets } = fixture()
+    const saved = await store.save({ name: 'Grok test', baseUrl: `http://127.0.0.1:${address.port}/v1`, enabled: true, model: 'grok-test', apiKey: 'grok-fixture-secret', transport: 'responses', profile: 'grok-connector-v1', grok: { contextWindow: 256000, maxTurns: 12 } })
+    const reopened = new ApiProviderStore({ directory, secrets }); stores.push(reopened)
+    expect((await reopened.list())[0]).toMatchObject({ profile: 'grok-connector-v1', grok: { contextWindow: 256000, maxTurns: 12 } })
+    expect(await reopened.catalog(saved.id)).toMatchObject({ manualReasoningEffort: false, models: [{ id: 'grok-test', supportedReasoningEfforts: ['low', 'high'], contextWindows: [256000] }] })
+    const inspection = await reopened.inspect({ id: saved.id })
+    expect(inspection).toMatchObject({ imageInput: true, imageGeneration: true, interactiveQuestions: true, usage: { creditUsagePercent: null, tier: 'fixture-tier' }, contextWindows: [256000] })
+    expect(JSON.stringify(inspection)).not.toContain('private-account')
+    expect(JSON.stringify(inspection)).not.toContain('grok-fixture-secret')
+    hold = true
+    const stopped = reopened.inspect({ id: saved.id }).catch(error => error)
+    await vi.waitFor(() => expect(pending).toBe(3))
+    await reopened.shutdown()
+    expect(await stopped).toBeInstanceOf(Error)
+    await expect(reopened.inspect({ id: saved.id })).rejects.toThrow('shutting down')
+  })
+
 })
