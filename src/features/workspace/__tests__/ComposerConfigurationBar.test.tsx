@@ -25,6 +25,17 @@ function Bar({ onApply = async () => {}, busy = false }: { onApply?: (config: Ch
   return <><ComposerConfigurationBar current={value} presets={presets} busy={busy} applying={false} onApply={async next => { await onApply(next); setValue(next) }} /><button>Outside</button></>
 }
 describe('Composer configuration', () => {
+  it('opens Grok connection approval settings from chat options without changing the chat', async () => {
+    vi.mocked(window.ziafAPI.apiConnections.list).mockResolvedValue([{ id: 'connection', name: 'Grok', baseUrl: 'http://localhost/v1', enabled: true, hasApiKey: false, model: 'grok-fixture', transport: 'responses', profile: 'grok-connector-v1' }])
+    const apply = vi.fn()
+    render(<ComposerConfigurationBar current={{ ...current, provider: 'api', apiConnectionId: 'connection' }} presets={[]} busy={false} applying={false} onApply={apply} />)
+    fireEvent.click(screen.getByTestId('composer-options-button'))
+    await waitFor(() => expect(screen.getByTestId('agent-chat-grok-connection-settings')).toBeTruthy())
+    fireEvent.click(screen.getByTestId('agent-chat-grok-connection-settings'))
+    expect(useStore.getState().activeTab).toBe('connections')
+    expect(apply).not.toHaveBeenCalled()
+  })
+
   it('keeps a model/options proposal across segments, uses only advertised efforts and applies once', async () => {
     const apply = vi.fn().mockResolvedValue(undefined); render(<Bar onApply={apply} />)
     fireEvent.click(screen.getByTestId('composer-model-button'))

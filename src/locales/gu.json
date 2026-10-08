@@ -1378,5 +1378,9 @@
   "grok_images_refresh": "Refresh attachments",
   "grok_images_discard": "Discard image draft",
   "grok_images_discard_hint": "Delivery is not confirmed. Discarding removes the staged images and their retry identity, keeps your text, and does not undo a request the provider may already have accepted.",
-  "grok_input_image": "Attached image"
+  "grok_input_image": "Attached image",
+  "grok_auto_approve_permissions": "Automatically approve one-time provider permissions",
+  "grok_auto_approve_permissions_hint": "For new or reconfigured chats using this connection. Selects only a one-time permission offered by Grok. Questions and local file or command approvals still need your answer; read-only chats keep manual provider permissions.",
+  "provider_interaction_auto_approved": "Approved automatically: one-time provider permission",
+  "grok_auto_approve_enabled": "One-time Grok permissions: automatic"
 }

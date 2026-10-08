@@ -45,20 +45,25 @@ describe('explicit API connection transport', () => {
     expect(screen.getByText('Not enabled for this account')).not.toBeNull()
     const choices = screen.getByTestId('api-grok-context-window') as HTMLSelectElement
     expect(Array.from(choices.options, option => option.value)).toEqual(['', '32000'])
+    const autoApprove = screen.getByTestId('api-grok-auto-approve-permissions') as HTMLInputElement
+    expect(autoApprove.checked).toBe(false)
+    fireEvent.click(autoApprove)
     fireEvent.change(choices, { target: { value: '32000' } })
     await submit()
-    expect(api.save.mock.calls[0][0]).toMatchObject({ profile: 'grok-connector-v1', grok: { contextWindow: 32000, maxTurns: 12 } })
+    expect(api.save.mock.calls[0][0]).toMatchObject({ profile: 'grok-connector-v1', grok: { contextWindow: 32000, maxTurns: 12, autoApproveNativePermissions: true } })
     expect(api.save.mock.calls[0][0]).not.toHaveProperty('apiKey')
   })
 
   it.each(['openai-compatible', 'chat-completions'])('clears Grok-only settings when explicitly selecting %s', async selection => {
-    const connection: ApiConnection = { ...legacy, transport: 'responses', profile: 'grok-connector-v1', grok: { contextWindow: 32000, maxTurns: 7 } }
+    const connection: ApiConnection = { ...legacy, transport: 'responses', profile: 'grok-connector-v1', grok: { contextWindow: 32000, maxTurns: 7, autoApproveNativePermissions: true } }
     const api = fixture([connection])
     render(<ApiConnectionsPanel />)
     await waitFor(() => expect(screen.getByTestId(`api-connection-${legacy.id}`)).not.toBeNull())
     fireEvent.click(within(screen.getByTestId(`api-connection-${legacy.id}`)).getByRole('button', { name: 'Edit' }))
+    expect((screen.getByTestId('api-grok-auto-approve-permissions') as HTMLInputElement).checked).toBe(true)
     fireEvent.change(selection === 'chat-completions' ? transport() : profile(), { target: { value: selection } })
     expect(screen.queryByTestId('api-grok-context-window')).toBeNull()
+    expect(screen.queryByTestId('api-grok-auto-approve-permissions')).toBeNull()
     await submit()
     expect(api.save.mock.calls[0][0].grok).toBeUndefined()
     expect(api.save.mock.calls[0][0]).not.toHaveProperty('apiKey')

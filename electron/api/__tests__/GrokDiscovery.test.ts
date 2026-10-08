@@ -24,14 +24,17 @@ describe('Grok capability discovery', () => {
     expect(() => grokInspection(cap, null, { data: {} }, false)).toThrow('Invalid')
   })
   it('validates configuration bounds and rejects unknown native escalation fields', () => {
-    expect(validGrokConnectionOptions({ contextWindow: 500000, maxTurns: 100 })).toBe(true)
-    for (const value of [{ maxTurns: 0 }, { maxTurns: 101 }, { contextWindow: 0 }, { contextWindow: 1.5 }, { permissionMode: 'yolo' }, { allowedTools: ['run_terminal_command'] }, []]) expect(validGrokConnectionOptions(value)).toBe(false)
+    expect(validGrokConnectionOptions({ contextWindow: 500000, maxTurns: 100, autoApproveNativePermissions: true })).toBe(true)
+    expect(validGrokConnectionOptions({ autoApproveNativePermissions: false })).toBe(true)
+    for (const value of [{ autoApproveNativePermissions: 'true' }, { autoApproveNativePermissions: null }, { autoApproveNativePermissions: 1 }, { maxTurns: 0 }, { maxTurns: 101 }, { contextWindow: 0 }, { contextWindow: 1.5 }, { permissionMode: 'yolo' }, { allowedTools: ['run_terminal_command'] }, []]) expect(validGrokConnectionOptions(value)).toBe(false)
   })
   it('binds a saved queue to Grok settings without changing legacy queue identity', () => {
     const legacy = { provider: 'api', presetName: '', apiTransport: 'responses', apiProfile: 'codex-connector' }
     expect(queueContext({ ...legacy, apiGrokConfig: { maxTurns: 7 } })).toBe(queueContext(legacy))
     const grok = { ...legacy, apiProfile: 'grok-connector-v1' }
     expect(queueContext({ ...grok, apiGrokConfig: {} })).toBe(queueContext(grok))
+    expect(queueContext({ ...grok, apiGrokConfig: { autoApproveNativePermissions: false } })).toBe(queueContext(grok))
+    expect(queueContext({ ...grok, apiGrokConfig: { autoApproveNativePermissions: true } })).not.toBe(queueContext(grok))
     expect(queueContext({ ...grok, apiGrokConfig: { contextWindow: 256000 } })).not.toBe(queueContext({ ...grok, apiGrokConfig: { contextWindow: 500000 } }))
     expect(queueContext({ ...grok, apiGrokConfig: { maxTurns: 7, contextWindow: 500000 } })).toBe(queueContext({ ...grok, apiGrokConfig: { contextWindow: 500000, maxTurns: 7 } }))
   })

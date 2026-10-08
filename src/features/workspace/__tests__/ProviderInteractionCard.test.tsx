@@ -15,6 +15,14 @@ beforeEach(() => useStore.setState({ settings: { uiLanguage: 'en' } as Settings 
 afterEach(() => { cleanup(); vi.useRealTimers(); vi.restoreAllMocks() })
 
 describe('provider-native interactions', () => {
+  it('shows the retained automatic decision without submitting it again', () => {
+    const resolve = vi.fn(), value = approval()
+    render(<ProviderInteractionCard interaction={{ ...value, state: 'resolved', resolvedBy: 'auto', answer: { kind: 'approval', optionId: 'native-allow-once' } }} onResolve={resolve} />)
+    expect(screen.getByTestId('provider-interaction-auto-approved').textContent).toBe('Approved automatically: one-time provider permission')
+    expect((screen.getByRole('button', { name: 'Allow for this request only' }) as HTMLButtonElement).disabled).toBe(true)
+    expect(resolve).not.toHaveBeenCalled()
+  })
+
   it('sends the offered native option ID once and ignores an old rejection after terminal replay', async () => {
     const pending = deferred(), resolve = vi.fn(() => pending.promise), value = approval()
     const view = render(<ProviderInteractionCard interaction={value} onResolve={resolve} />)

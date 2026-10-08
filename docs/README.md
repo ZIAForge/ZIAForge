@@ -2,7 +2,7 @@
 
 Start with the [English user guide](USER_GUIDE.md), generated from [the canonical help source](help/en.json). It includes the complete product tour, task-oriented instructions, recovery, permissions, limitations and links to technical contracts. In-app Help and the [offline website guide](../website/guide.html) use the same source. [Help translation coverage](help/LOCALES.md) is separate from interface localization.
 
-Current patch: [1.0.6 release notes](releases/1.0.6.md), with verification status and distribution limits.
+Current patch: [1.0.7 release notes](releases/1.0.7.md), with verification status and distribution limits.
 
 ## Contribute or work as an AI agent
 

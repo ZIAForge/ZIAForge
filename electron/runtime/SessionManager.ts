@@ -3,7 +3,7 @@ import { AgentInputImageStore } from './AgentInputImageStore'
 import { validInputImageId, type AgentInputImageOwner } from '../../shared/agent-input-images'
 import { validMediaRef, type AgentMediaRequest, type AgentMediaRef } from '../../shared/agent-media'
 import { validGrokConnectionOptions, type ApiTransport, type ApiProfile, type GrokConnectionOptions } from '../../shared/api-provider'
-import { answerMatchesInteraction } from '../../shared/grok-interactions'
+import { answerMatchesInteraction, singleNativeAllowOnce } from '../../shared/grok-interactions'
 import type { AgentExecutionOptions } from '../../shared/agent-models'
 import { effectivePermissionLabel, isPermissionLabel, validateReasoningEffort } from './AgentExecutionPolicy'
 import fs from 'node:fs'
@@ -98,6 +98,9 @@ interface Entry {
   inputIds: Set<string>
   dispatching: boolean
   interactionSubmissions?: Set<string>
+  autoInteractionAttempts?: Set<string>
+  autoApprovalStoppedTurns?: Set<string>
+  interactionInterrupt?: string
   notification?: ReturnType<typeof setTimeout>
   storageError?: Error
   terminal?: boolean
@@ -114,7 +117,7 @@ export class SessionMetadataRecoveryError extends Error {
 }
 const safeId = /^[A-Za-z0-9_-]{1,160}$/
 const asError = (error: unknown): Error => error instanceof Error ? error : new Error(String(error))
-const grokConfigIdentity = (value?: GrokConnectionOptions): string => JSON.stringify([value?.contextWindow ?? null, value?.maxTurns ?? null])
+const grokConfigIdentity = (value?: GrokConnectionOptions): string => JSON.stringify([value?.contextWindow ?? null, value?.maxTurns ?? null, ...(value?.autoApproveNativePermissions === true ? [{ autoApproveNativePermissions: true }] : [])])
 
 /** Interactive coordinator, owned by RunService. Provider callbacks only enter through its ordered journal pump. */
 export class SessionManager {
@@ -586,14 +589,19 @@ export class SessionManager {
     const adapter = entry.adapter!
     if (!adapter.interruptTurn) throw new Error('Turn interruption is unavailable')
     this.pauseMessages(entry)
-    if (entry.state.activeTurn?.status === 'interrupting') return
-    await this.enqueue(entry, this.status(entry, 'stopping', 'turn', request.turnId))
+    if (entry.state.activeTurn?.status === 'interrupting' || entry.interactionInterrupt === request.turnId) return
+    // Stop fences a pending answer synchronously, before either journal write can finish.
+    entry.interactionInterrupt = request.turnId
+    ;(entry.autoApprovalStoppedTurns ??= new Set()).add(request.turnId)
     try {
+      await this.enqueue(entry, this.status(entry, 'stopping', 'turn', request.turnId))
       await adapter.interruptTurn(request.turnId)
       await entry.events
     } catch (error) {
       if (this.owns(entry) && entry.state.activeTurn?.turnId === request.turnId) await this.enqueue(entry, this.status(entry, entry.approvals.getActiveByTask(entry.state.taskId).length ? 'waiting_for_approval' : 'running', 'turn', request.turnId))
       throw error
+    } finally {
+      if (entry.interactionInterrupt === request.turnId) entry.interactionInterrupt = undefined
     }
   }
 
@@ -673,20 +681,46 @@ export class SessionManager {
     await entry.events
   }
   async resolveInteraction(request: AgentInteractionRequest): Promise<void> {
-    const answer: AgentInteractionRequest['answer'] = JSON.parse(JSON.stringify(request.answer))
+    return this.submitInteraction(request, 'user')
+  }
+
+  private nativeDecisionOwner(request: AgentInteractionRequest, resolvedBy: 'auto' | 'user'): Entry {
     const entry = this.requireTurn(request)
+    if (entry.changing || entry.interactionInterrupt === request.turnId || entry.state.activeTurn?.status === 'interrupting') throw new Error('Native interaction is stopping or changing context')
+    if (resolvedBy === 'auto' && (entry.autoApprovalStoppedTurns?.has(request.turnId) || entry.state.provider !== 'api' || entry.metadata.launch?.apiProfile !== 'grok-connector-v1' || entry.metadata.launch.apiGrokConfig?.autoApproveNativePermissions !== true || entry.metadata.launch.apiReadOnly || entry.metadata.launch.toolPolicy === 'none')) throw new Error('Automatic native approval is not enabled for this turn')
+    return entry
+  }
+
+  private async submitInteraction(request: AgentInteractionRequest, resolvedBy: 'auto' | 'user'): Promise<void> {
+    const answer: AgentInteractionRequest['answer'] = JSON.parse(JSON.stringify(request.answer))
+    const entry = this.nativeDecisionOwner(request, resolvedBy)
     await entry.events
-    if (this.requireTurn(request) !== entry || !entry.adapter?.resolveInteraction) throw new Error('Native interactions are unavailable for this session')
+    const adapter = entry.adapter
+    if (this.nativeDecisionOwner(request, resolvedBy) !== entry || !adapter?.resolveInteraction) throw new Error('Native interactions are unavailable for this session')
     const interaction = this.view(entry).pendingInteractions?.find(item => item.interactionId === request.interactionId && item.turnId === request.turnId)
     if (!interaction || interaction.state !== 'pending' || interaction.expiresAt <= Date.now() || !answerMatchesInteraction(interaction, answer)) throw new Error('Unknown, expired or invalid native interaction')
+    if (resolvedBy === 'auto' && (answer.kind !== 'approval' || singleNativeAllowOnce(interaction)?.optionId !== answer.optionId)) throw new Error('No unique one-time native permission was offered')
     const submissions = entry.interactionSubmissions ??= new Set<string>()
     if (submissions.has(request.interactionId)) throw new Error('This interaction answer has already been submitted')
     submissions.add(request.interactionId)
-    await this.enqueue(entry, { eventId: randomUUID(), taskId: entry.state.taskId, runId: request.runId, turnId: request.turnId, timestamp: Date.now(), type: 'interaction.state.changed', interactionId: request.interactionId, state: 'submitting', answer })
-    // Journal acknowledgement and ownership are required before native side effects.
-    if (this.requireTurn(request) !== entry) throw new Error('Native interaction owner changed')
-    try { await entry.adapter.resolveInteraction({ taskId: entry.state.taskId, runId: request.runId, turnId: request.turnId, interactionId: request.interactionId, answer }) }
+    await this.enqueue(entry, { eventId: randomUUID(), taskId: entry.state.taskId, runId: request.runId, turnId: request.turnId, timestamp: Date.now(), type: 'interaction.state.changed', interactionId: request.interactionId, state: 'submitting', answer, resolvedBy })
+    // No asynchronous gap between the final ownership/Stop fence and invoking POST.
+    if (this.nativeDecisionOwner(request, resolvedBy) !== entry || entry.adapter !== adapter || interaction.expiresAt <= Date.now()) throw new Error('Native interaction owner changed or expired')
+    try { await adapter.resolveInteraction({ taskId: entry.state.taskId, runId: request.runId, turnId: request.turnId, interactionId: request.interactionId, answer, resolvedBy }) }
     finally { await entry.events }
+  }
+
+  private autoResolveInteraction(entry: Entry, event: Extract<AgentEvent, { type: 'interaction.requested' }>): void {
+    const option = singleNativeAllowOnce(event.interaction)
+    if (!option || !event.turnId || event.interaction.state !== 'pending' || event.interaction.expiresAt <= Date.now() || !this.owns(entry) || event.runId !== entry.state.runId || entry.state.activeTurn?.turnId !== event.turnId) return
+    const request: AgentInteractionRequest = { sessionId: entry.state.sessionId, runId: entry.state.runId, turnId: event.turnId, interactionId: event.interaction.interactionId, answer: { kind: 'approval', optionId: option.optionId } }
+    try { this.nativeDecisionOwner(request, 'auto') } catch { return }
+    const attempted = entry.autoInteractionAttempts ??= new Set<string>()
+    if (attempted.has(request.interactionId)) return
+    attempted.add(request.interactionId)
+    // This callback is outside entry.events: the resolver must await its own durable receipt.
+    // Failure never retries. Adapter uncertainty/expiry and journal failures retain their normal states.
+    void this.submitInteraction(request, 'auto').catch(() => {})
   }
 
   private require(ref: AgentSessionRef): Entry {
@@ -708,6 +742,7 @@ export class SessionManager {
   private enqueue(entry: Entry, incoming: AgentEvent): Promise<void> {
     // Capture input ownership now, before later turns can take over the event queue.
     const event = { ...incoming, clientMessageId: incoming.clientMessageId ?? entry.state.activeTurn?.clientMessageId }
+    let appended = false
     const operation = entry.events.then(async () => {
       if (!this.owns(entry) || entry.storageError || event.taskId !== entry.state.taskId || event.runId !== entry.state.runId || event.type === 'raw.log' || entry.eventIds.has(event.eventId)) return
       const isTurn = event.type !== 'agent.status.changed' || event.scope === 'turn'
@@ -716,6 +751,7 @@ export class SessionManager {
       await entry.journal.append(event)
       if (!this.owns(entry)) return
       this.apply(entry, event)
+      appended = true
       this.scheduleUpdate(entry)
     })
     entry.events = operation.catch(error => {
@@ -732,6 +768,7 @@ export class SessionManager {
       this.scheduleUpdate(entry)
       void entry.adapter?.stop(true).catch(() => {})
     })
+    if (event.type === 'interaction.requested') void operation.then(() => { if (appended) this.autoResolveInteraction(entry, event) }).catch(() => {})
     return operation
   }
 

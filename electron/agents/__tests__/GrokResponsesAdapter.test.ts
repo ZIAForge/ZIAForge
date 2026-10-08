@@ -77,6 +77,38 @@ describe('Grok Responses profile and native interaction ownership', () => {
     await expect(state.adapter.resolveInteraction({ taskId: 'task', turnId: turn.turnId, interactionId: approvalId, answer: { kind: 'approval', optionId: 'native-reject' } })).rejects.toThrow('stale')
     expect(state.requests.filter(request => request.url.includes('/approvals/'))).toHaveLength(1)
   })
+  it('keeps automatic consent local, preserves its provenance and refuses to retry an uncertain acknowledgement', async () => {
+    const event = { type: 'grok.approval', version: 1, response_id: id('1'), sequence_number: 1, approval: { id: approvalId, expires_in: 120, request: { sessionId: 'native-session', toolCall: { toolCallId: 'image-edit', kind: 'other', title: 'imagine-edit' }, options: [{ optionId: 'once', name: 'Yes, send once', kind: 'allow_once' }, { optionId: 'always', name: 'Yes', kind: 'allow_always' }] } } }
+    const stream = new ReadableStream<Uint8Array>({ start(controller) { controller.enqueue(new TextEncoder().encode(frame(created(id('1'))) + frame(event))) } })
+    const state = await fixture((url, body) => {
+      if (url.includes('/grok/approvals/')) { expect(body).toEqual({ optionId: 'once' }); throw new Error('connection closed before acknowledgement') }
+      return new Response(stream)
+    }, { connection: { id: 'grok-fixture', name: 'Grok fixture', baseUrl: 'https://fixture.invalid/v1', model: 'grok-test', enabled: true, hasApiKey: false, transport: 'responses', profile: 'grok-connector-v1', grok: { autoApproveNativePermissions: true } } })
+    const turn = await state.adapter.sendPrompt({ taskId: 'task', text: 'Edit the image' })
+    await vi.waitFor(() => expect(state.events.some(event => event.type === 'interaction.requested')).toBe(true))
+    const request = { taskId: 'task', runId: 'run', turnId: turn.turnId, interactionId: approvalId, resolvedBy: 'auto' as const, answer: { kind: 'approval' as const, optionId: 'once' } }
+    await expect(state.adapter.resolveInteraction({ ...request, answer: { kind: 'approval', optionId: 'always' } })).rejects.toThrow('not authorized')
+    await expect(state.adapter.resolveInteraction(request)).rejects.toThrow('connection closed')
+    expect(await terminal(state.events, turn.turnId)).toMatchObject({ status: 'error' })
+    expect(state.events.find(event => event.type === 'interaction.state.changed')).toMatchObject({ state: 'failed', resolvedBy: 'auto', answer: { kind: 'approval', optionId: 'once' } })
+    await expect(state.adapter.resolveInteraction(request)).rejects.toThrow('stale')
+    expect(state.requests.filter(request => request.url.includes('/approvals/'))).toHaveLength(1)
+    expect(state.requests[0].body?.instructions).toContain('owner enabled automatic one-time native permissions')
+    expect(state.requests[0].body?.grok).toEqual({ clientWorkspace: state.cwd, permissionMode: 'default', allowedTools: ['web_search', 'web_fetch', 'image_gen', 'image_edit', 'ask_user_question'] })
+    const resumed = new ResponsesAdapter({ ...state.options, resumeSessionId: state.adapter.getSessionId() }); adapters.push(resumed)
+    await expect(resumed.start()).rejects.toThrow('uncertain unfinished transaction')
+  })
+  it('retains legacy history identity for explicit false but refuses true without a new context', async () => {
+    const state = await fixture(() => wire(id('1')))
+    const turn = await state.adapter.sendPrompt({ taskId: 'task', text: 'Hello' })
+    await terminal(state.events, turn.turnId); await state.adapter.stop()
+    const resumeOptions = { ...state.options, resumeSessionId: state.adapter.getSessionId(), connection: { ...state.options.connection, grok: { ...state.options.connection.grok, autoApproveNativePermissions: false } } }
+    const resumed = new ResponsesAdapter(resumeOptions); adapters.push(resumed)
+    await expect(resumed.start()).resolves.toMatchObject({ sessionId: state.adapter.getSessionId() })
+    await resumed.stop()
+    const changed = new ResponsesAdapter({ ...resumeOptions, connection: { ...resumeOptions.connection, grok: { ...resumeOptions.connection.grok, autoApproveNativePermissions: true } } }); adapters.push(changed)
+    await expect(changed.start()).rejects.toThrow('trusted context')
+  })
   it('sends plan question outcomes separately and never replays a resolved answer', async () => {
     let finish!: () => void
     const question = { type: 'grok.question', version: 1, response_id: id('1'), sequence_number: 1, question: { id: questionId, request: { sessionId: 'native-session', toolCallId: 'question-call', mode: 'plan', expiresAt: new Date(Date.now() + 600000).toISOString(), questions: [{ question: 'What next?', options: [{ label: 'Discuss', description: 'Talk first' }], multiSelect: false }] } } }

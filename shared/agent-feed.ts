@@ -209,6 +209,7 @@ export function createFeedProjector() {
           if (!interaction) continue
           interaction.state = evt.state
           if (evt.answer !== undefined) interaction.answer = JSON.parse(JSON.stringify(evt.answer))
+          if (evt.resolvedBy !== undefined) interaction.resolvedBy = evt.resolvedBy
           if (evt.error !== undefined) interaction.error = evt.error
           message.revision = (message.revision ?? 0) + 1
           break

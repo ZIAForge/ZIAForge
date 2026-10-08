@@ -15,12 +15,21 @@ import { validateSessionCommand } from '../AgentSessionValidation'
 
 const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aXv8AAAAASUVORK5CYII=', 'base64')
 const interaction: GrokInteraction = { kind: 'question', interactionId: `question_${'a'.repeat(32)}`, responseId: `resp_${'b'.repeat(32)}`, state: 'pending', expiresAt: Date.now() + 600000, request: { sessionId: 'native', toolCallId: 'native-question', mode: 'default', questions: [{ question: 'Which option?', options: [{ label: 'One', description: '' }], multiSelect: false }] } }
+function approval(suffix = 'c'): Extract<GrokInteraction, { kind: 'approval' }> {
+  return { kind: 'approval', interactionId: `approval_${suffix.repeat(32)}`, responseId: interaction.responseId, state: 'pending', expiresAt: Date.now() + 120000, request: { sessionId: 'native', toolCall: { toolCallId: 'image-edit', kind: 'other', title: 'imagine-edit' }, options: [
+    { optionId: 'always', name: 'Allow once', kind: 'allow_always' },
+    { optionId: 'one-off', name: 'Yes, send once', kind: 'allow_once' },
+    { optionId: 'reject', name: 'No, and tell Grok what to do differently', kind: 'reject_once' },
+  ] } }
+}
+
 class Provider implements AgentAdapter {
   readonly start = vi.fn(async () => ({ sessionId: 'api-native' }))
   readonly stop = vi.fn(async () => {})
+  readonly interruptTurn = vi.fn(async () => { this.emit({ type: 'agent.status.changed', scope: 'turn', status: 'stopped', turnId: 'turn-one' }); return { turnId: 'turn-one' } })
   readonly sendPrompt = vi.fn<AgentAdapter['sendPrompt']>(async () => { this.emit({ type: 'agent.status.changed', scope: 'turn', status: 'running', turnId: 'turn-one' }); return { turnId: 'turn-one' } })
   readonly resolveApproval = vi.fn(async () => {})
-  readonly resolveInteraction = vi.fn<NonNullable<AgentAdapter['resolveInteraction']>>(async request => { this.emit({ type: 'interaction.state.changed', interactionId: request.interactionId, state: 'resolved', answer: request.answer, turnId: request.turnId }) })
+  readonly resolveInteraction = vi.fn<NonNullable<AgentAdapter['resolveInteraction']>>(async request => { this.emit({ type: 'interaction.state.changed', interactionId: request.interactionId, state: 'resolved', answer: request.answer, resolvedBy: request.resolvedBy, turnId: request.turnId }) })
   constructor(readonly options: CreateAdapterOptions) {}
   emit(payload: Record<string, unknown>) { this.options.onEvent?.({ eventId: randomUUID(), taskId: this.options.taskId, runId: this.options.runId!, timestamp: Date.now(), ...payload } as AgentEvent) }
   getStatus() { return 'running' as const }
@@ -51,14 +60,14 @@ describe('Grok session ownership, private image inputs and durable native answer
     const request: AgentInteractionRequest = { ...session, turnId: 'turn-one', interactionId: interaction.interactionId, answer: { kind: 'question', outcome: 'accepted', answers: { 'Which option?': ['One'] } } }
     providers[0].resolveInteraction.mockImplementation(async submitted => {
       const journal = await service.getJournal(session.taskId, session.runId).readEvents()
-      expect(journal.find(event => event.type === 'interaction.state.changed' && event.state === 'submitting')).toMatchObject({ answer: request.answer })
+      expect(journal.find(event => event.type === 'interaction.state.changed' && event.state === 'submitting')).toMatchObject({ answer: request.answer, resolvedBy: 'user' })
       providers[0].emit({ type: 'interaction.state.changed', turnId: submitted.turnId, interactionId: submitted.interactionId, state: 'resolved', answer: submitted.answer })
     })
     await expect(service.sessions.resolveInteraction({ ...request, turnId: 'another-turn' })).rejects.toThrow('stale')
     await service.sessions.resolveInteraction(request)
     await expect(service.sessions.resolveInteraction(request)).rejects.toThrow()
     expect(providers[0].resolveInteraction).toHaveBeenCalledTimes(1)
-    expect((await service.sessions.snapshot(session)).feed.flatMap(message => message.interactions ?? [])).toMatchObject([{ state: 'resolved', answer: request.answer }])
+    expect((await service.sessions.snapshot(session)).feed.flatMap(message => message.interactions ?? [])).toMatchObject([{ state: 'resolved', answer: request.answer, resolvedBy: 'user' }])
   })
   it('does not dispatch an answer when its journal write fails', async () => {
     const session = await service.sessions.create(config)
@@ -68,6 +77,81 @@ describe('Grok session ownership, private image inputs and durable native answer
     vi.spyOn(service.getJournal(session.taskId, session.runId), 'append').mockRejectedValueOnce(new Error('disk full'))
     await expect(service.sessions.resolveInteraction({ ...session, turnId: 'turn-one', interactionId: interaction.interactionId, answer: { kind: 'question', outcome: 'cancelled' } })).rejects.toThrow('disk full')
     expect(providers[0].resolveInteraction).not.toHaveBeenCalled()
+  })
+  it('automatically journals only one exact allow_once, preserving provenance through restart without replay', async () => {
+    config.apiConnection!.grok!.autoApproveNativePermissions = true
+    const session = await service.sessions.create(config)
+    await service.sessions.send({ ...session, clientMessageId: 'image-edit', text: 'Edit the image' })
+    const native = approval()
+    providers[0].resolveInteraction.mockImplementation(async submitted => {
+      const journal = await service.getJournal(session.taskId, session.runId).readEvents()
+      expect(journal.filter(event => event.type === 'interaction.state.changed')).toMatchObject([{ state: 'submitting', resolvedBy: 'auto', answer: { kind: 'approval', optionId: 'one-off' } }])
+      providers[0].emit({ type: 'interaction.state.changed', turnId: submitted.turnId, interactionId: submitted.interactionId, state: 'resolved', answer: submitted.answer, resolvedBy: submitted.resolvedBy })
+    })
+    providers[0].emit({ type: 'interaction.requested', interaction: native, turnId: 'turn-one' })
+    await vi.waitFor(async () => expect((await service.sessions.snapshot(session)).feed.flatMap(message => message.interactions ?? [])).toMatchObject([{ state: 'resolved', resolvedBy: 'auto', answer: { kind: 'approval', optionId: 'one-off' } }]))
+    providers[0].emit({ type: 'interaction.requested', interaction: native, turnId: 'turn-one' })
+    await service.sessions.snapshot(session)
+    expect(providers[0].resolveInteraction).toHaveBeenCalledTimes(1)
+    await service.sessions.shutdown(); service = create()
+    const restored = (await service.sessions.attach(config))!
+    expect(restored.feed.flatMap(message => message.interactions ?? [])).toMatchObject([{ state: 'resolved', resolvedBy: 'auto' }])
+    expect(restored.pendingInteractions).toEqual([])
+    expect(providers).toHaveLength(1)
+  })
+  it('leaves questions, local approvals, ambiguous options and expired or foreign-turn permissions manual', async () => {
+    config.apiConnection!.grok!.autoApproveNativePermissions = true
+    const session = await service.sessions.create(config)
+    await service.sessions.send({ ...session, clientMessageId: 'hello', text: 'Hello' })
+    const ambiguous = approval('d'); ambiguous.request.options.push({ optionId: 'another-once', name: 'Approve', kind: 'allow_once' })
+    const always = approval('e'); always.request.options = always.request.options.filter(option => option.kind !== 'allow_once')
+    for (const native of [interaction, ambiguous, always, { ...approval('f'), expiresAt: Date.now() - 1 }]) providers[0].emit({ type: 'interaction.requested', interaction: native, turnId: 'turn-one' })
+    providers[0].emit({ type: 'interaction.requested', interaction: approval('g'), turnId: 'foreign-turn' })
+    providers[0].emit({ type: 'permission.requested', turnId: 'turn-one', approvalId: 'local-write', command: 'write_file', decisionOptions: ['allow', 'deny'], riskLevel: 'medium' })
+    await service.sessions.snapshot(session)
+    expect(providers[0].resolveInteraction).not.toHaveBeenCalled()
+    expect(providers[0].resolveApproval).not.toHaveBeenCalled()
+    await service.sessions.resolveInteraction({ ...session, turnId: 'turn-one', interactionId: ambiguous.interactionId, answer: { kind: 'approval', optionId: 'another-once' } })
+    expect(providers[0].resolveInteraction).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ resolvedBy: 'user', answer: { kind: 'approval', optionId: 'another-once' } }))
+  })
+  it.each(['absent', 'false', 'read-only'] as const)('does not auto-approve for %s policy', async policy => {
+    if (policy !== 'absent') config.apiConnection!.grok!.autoApproveNativePermissions = policy !== 'false'
+    config.apiReadOnly = policy === 'read-only'
+    const session = await service.sessions.create(config)
+    await service.sessions.send({ ...session, clientMessageId: 'hello', text: 'Hello' })
+    providers[0].emit({ type: 'interaction.requested', interaction: approval(), turnId: 'turn-one' })
+    expect((await service.sessions.snapshot(session)).pendingInteractions).toMatchObject([{ state: 'pending' }])
+    expect(providers[0].resolveInteraction).not.toHaveBeenCalled()
+  })
+  it('fences Stop while an automatic answer journal write is pending, before any provider POST', async () => {
+    config.apiConnection!.grok!.autoApproveNativePermissions = true
+    const session = await service.sessions.create(config)
+    await service.sessions.send({ ...session, clientMessageId: 'hello', text: 'Hello' })
+    const journal = service.getJournal(session.taskId, session.runId), append = journal.append.bind(journal)
+    let release!: () => void, reached!: () => void
+    const held = new Promise<void>(resolve => { release = resolve }), writing = new Promise<void>(resolve => { reached = resolve })
+    vi.spyOn(journal, 'append').mockImplementation(async event => {
+      if (event.type === 'interaction.state.changed' && event.state === 'submitting') { reached(); await held }
+      return append(event)
+    })
+    providers[0].emit({ type: 'interaction.requested', interaction: approval(), turnId: 'turn-one' })
+    await writing
+    const stopped = service.sessions.interrupt({ ...session, turnId: 'turn-one' })
+    release(); await stopped
+    expect(providers[0].resolveInteraction).not.toHaveBeenCalled()
+    expect(providers[0].interruptTurn).toHaveBeenCalledTimes(1)
+    expect((await service.sessions.snapshot(session)).lastTurn?.status).toBe('interrupted')
+  })
+  it('stops on failed automatic answer storage without dispatching a provider request', async () => {
+    config.apiConnection!.grok!.autoApproveNativePermissions = true
+    const session = await service.sessions.create(config)
+    await service.sessions.send({ ...session, clientMessageId: 'hello', text: 'Hello' })
+    const journal = service.getJournal(session.taskId, session.runId), append = journal.append.bind(journal)
+    vi.spyOn(journal, 'append').mockImplementation(event => event.type === 'interaction.state.changed' && event.state === 'submitting' ? Promise.reject(new Error('disk full')) : append(event))
+    providers[0].emit({ type: 'interaction.requested', interaction: approval(), turnId: 'turn-one' })
+    await vi.waitFor(async () => expect((await service.sessions.snapshot(session)).sessionStatus).toBe('error'))
+    expect(providers[0].resolveInteraction).not.toHaveBeenCalled()
+    expect(providers[0].stop).toHaveBeenCalled()
   })
   it('keeps staged images under the original owner across restart, then allows explicit discard and Resume', async () => {
     const session = await service.sessions.create(config), filename = path.join(root, 'selected.png'); fs.writeFileSync(filename, png)
@@ -116,5 +200,6 @@ describe('Grok session ownership, private image inputs and durable native answer
     expect(() => validateSessionCommand('send', { ...ref, imageIds: [ref.imageIds[0], ref.imageIds[0]] })).toThrow()
     expect(() => validateSessionCommand('send', { ...ref, paths: ['/private/image.png'] })).toThrow()
     expect(() => validateSessionCommand('resolveInteraction', { ...session, turnId: 'turn-one', interactionId: interaction.interactionId, answer: { kind: 'question', outcome: 'accepted', answers: { 'Which option?': ['One'] } }, apiKey: 'never-accepted' })).toThrow()
+    expect(() => validateSessionCommand('resolveInteraction', { sessionId: session.sessionId, runId: session.runId, turnId: 'turn-one', interactionId: approval().interactionId, answer: { kind: 'approval', optionId: 'one-off' }, resolvedBy: 'auto' })).toThrow()
   })
 })

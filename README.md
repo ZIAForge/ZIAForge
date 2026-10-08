@@ -11,12 +11,12 @@
 An open-source desktop workspace for deliberate AI development, research and writing.<br />
 Use your installed AI CLIs and subscriptions, or connect an API you choose.
 
-[![Release](https://img.shields.io/badge/release-1.0.6-f97316)](https://github.com/ZIAForge/ZIAForge/releases/tag/v1.0.6)
+[![Release](https://img.shields.io/badge/release-1.0.7-f97316)](https://github.com/ZIAForge/ZIAForge/releases/tag/v1.0.7)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 [![Platforms](https://img.shields.io/badge/desktop-macOS%20%7C%20Windows%20%7C%20Linux-3f3f46)](#download)
 [![Languages](https://img.shields.io/badge/interface-56%20languages-3f3f46)](#languages-and-help)
 
-[**Website**](https://ziaforge.studio) · [**Download 1.0.6**](https://github.com/ZIAForge/ZIAForge/releases/tag/v1.0.6) · [**User guide**](docs/USER_GUIDE.md) · [**Documentation**](docs/README.md) · [**Contribute**](CONTRIBUTING.md)
+[**Website**](https://ziaforge.studio) · [**Download 1.0.7**](https://github.com/ZIAForge/ZIAForge/releases/tag/v1.0.7) · [**User guide**](docs/USER_GUIDE.md) · [**Documentation**](docs/README.md) · [**Contribute**](CONTRIBUTING.md)
 
 </div>
 
@@ -43,7 +43,7 @@ The application runs locally and keeps its task state, conversations, documents 
 
 ## Download
 
-Get the packages and `SHA256SUMS` from [**ZIAForge 1.0.6**](https://github.com/ZIAForge/ZIAForge/releases/tag/v1.0.6). Choose both the operating system **and** the CPU architecture; x64 and ARM64 packages are separate.
+Get the packages and `SHA256SUMS` from [**ZIAForge 1.0.7**](https://github.com/ZIAForge/ZIAForge/releases/tag/v1.0.7). Choose both the operating system **and** the CPU architecture; x64 and ARM64 packages are separate.
 
 | Your computer | Architecture | Packages |
 | --- | --- | --- |
@@ -54,11 +54,11 @@ Get the packages and `SHA256SUMS` from [**ZIAForge 1.0.6**](https://github.com/Z
 | Linux on Intel/AMD | x64 | DEB · RPM · AppImage · tar.gz · ZIP |
 | Linux on ARM | ARM64 | DEB · RPM · AppImage · tar.gz · ZIP |
 
-Source archives are also included. The [release notes](docs/releases/1.0.6.md) describe distribution and verification limits; [platform instructions](docs/PLATFORM_BUILDS.md) cover prerequisites and build routes. A generated package or cross-build does not establish native execution on every target.
+Source archives are also included. The [release notes](docs/releases/1.0.7.md) describe distribution and verification limits; [platform instructions](docs/PLATFORM_BUILDS.md) cover prerequisites and build routes. A generated package or cross-build does not establish native execution on every target.
 
 ### Install
 
-- **macOS:** requires macOS 13 or newer. Open the matching DMG and copy the complete `ZIAForge.app` into Applications, or extract the ZIP. Version 1.0.6 is unsigned and not notarized; macOS may require your explicit approval. Keep Gatekeeper enabled and verify the download before approving it.
+- **macOS:** requires macOS 13 or newer. Open the matching DMG and copy the complete `ZIAForge.app` into Applications, or extract the ZIP. Version 1.0.7 is unsigned and not notarized; macOS may require your explicit approval. Keep Gatekeeper enabled and verify the download before approving it.
 - **Windows:** run the matching installer, or extract the complete ZIP into a writable application directory. Install Git for Code tasks and put it on PATH. Keep the executable with its resources and native libraries. The packages are unsigned, so Windows may display a publisher warning.
 - **Ubuntu / Debian:** install the matching DEB through your package manager: `sudo apt install ./downloaded-package.deb`.
 - **RPM distributions:** install the matching RPM through your distribution's package manager, for example `sudo dnf install ./downloaded-package.rpm`.
@@ -229,7 +229,7 @@ Task state and history are local. Using a selected model sends the relevant prom
 
 API, Telegram and saved-instance credentials use the operating system's encrypted storage. Linux needs an unlocked Secret Service or KWallet backend; insecure plaintext fallbacks are refused. ZIAForge does not extract native provider credentials or edit their global authentication configuration.
 
-In Settings, use `ZIAForge/ZIAForge` as the trusted GitHub release repository and choose the **Stable / Preview** channel. New profiles default to Stable; automatic checks remain opt-in. Availability checks, downloads and installation have separate states. This unsigned 1.0.6 release is installed manually; automatic installation currently requires signed macOS packages and published updater metadata. Fully quit the app before replacing an installation.
+In Settings, use `ZIAForge/ZIAForge` as the trusted GitHub release repository and choose the **Stable / Preview** channel. New profiles default to Stable; automatic checks remain opt-in. Availability checks, downloads and installation have separate states. This unsigned 1.0.7 release is installed manually; automatic installation currently requires signed macOS packages and published updater metadata. Fully quit the app before replacing an installation.
 
 The Automations page currently retains UI definitions and counters; it is **not a recurring scheduler**. Actual plan execution/control is provided by the workflow engine, the local CLI and authenticated control API.
 

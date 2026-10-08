@@ -42,7 +42,20 @@ function ProviderFields({ value, onChange, disabled }: { value: ChatConfiguratio
 function Options({ value, onChange, disabled }: { value: ChatConfiguration; onChange: (next: ChatConfiguration) => void; disabled: boolean }) {
   const { t } = useTranslation()
   const { catalog, loading } = useModelCatalog(providerAgents[value.provider], value.apiConnectionId)
-  return <><AgentOptionsFields value={value} onChange={onChange} disabled={disabled} catalog={catalog} />{loading && <p role="status" className="mt-3 text-[10px] text-zinc-400">{t('agent_chat_loading_models')}</p>}</>
+  const [grokConnectionId, setGrokConnectionId] = useState<string>()
+  useEffect(() => {
+    if (value.provider !== 'api' || !value.apiConnectionId) return
+    let current = true
+    void Promise.resolve().then(() => window.ziafAPI.apiConnections.list()).then(items => {
+      if (current) setGrokConnectionId(items.find(item => item.id === value.apiConnectionId && item.transport === 'responses' && item.profile === 'grok-connector-v1')?.id)
+    }).catch(() => { if (current) setGrokConnectionId(undefined) })
+    return () => { current = false }
+  }, [value.provider, value.apiConnectionId])
+  return <><AgentOptionsFields value={value} onChange={onChange} disabled={disabled} catalog={catalog} />{loading && <p role="status" className="mt-3 text-[10px] text-zinc-400">{t('agent_chat_loading_models')}</p>}{value.provider === 'api' && grokConnectionId && grokConnectionId === value.apiConnectionId && <div className="mt-4 space-y-2 border-t border-zinc-700 pt-3 text-[11px] leading-relaxed">
+    <p className="font-medium text-zinc-200">{t('grok_auto_approve_permissions')}</p>
+    <p className="text-zinc-400">{t('grok_auto_approve_permissions_hint')}</p>
+    <button type="button" data-testid="agent-chat-grok-connection-settings" disabled={disabled} onClick={() => useStore.getState().setActiveTab('connections')} className="text-orange-400 hover:underline disabled:opacity-40">{t('api_open_connections')}</button>
+  </div>}</>
 }
 
 /** Compact proposals stay in the Composer; only an acknowledged mutation becomes current. */

@@ -84,6 +84,7 @@ function InteractionForm({ interaction, onResolve }: ProviderInteractionCardProp
       {interaction.request.toolCall.rawInput !== undefined && <pre dir="auto" className="max-h-48 overflow-auto whitespace-pre-wrap break-words rounded bg-zinc-950 p-2 text-[11px] text-zinc-400">{typeof interaction.request.toolCall.rawInput === 'string' ? interaction.request.toolCall.rawInput : JSON.stringify(interaction.request.toolCall.rawInput, null, 2)}</pre>}
       <div className="flex flex-wrap gap-2">{interaction.request.options.map(option => <button key={option.optionId} type="button" disabled={!actionable} className={button} data-testid={`provider-option-${interaction.interactionId}-${option.optionId}`} onClick={() => void submit({ kind: 'approval', optionId: option.optionId })}><span dir="auto">{option.name}</span></button>)}</div>
       {resolvedOption && <p dir="auto" className="text-xs text-zinc-300">{resolvedOption.name}</p>}
+      {interaction.state === 'resolved' && interaction.resolvedBy === 'auto' && <p data-testid="provider-interaction-auto-approved" className="text-xs text-emerald-300">{t('provider_interaction_auto_approved')}</p>}
     </> : <form onSubmit={event => { event.preventDefault(); void submit(questionAnswer()) }} className="space-y-4">
       {interaction.request.questions.map((question, index) => {
         const selected = own(shownAnswers, question.question) ?? []

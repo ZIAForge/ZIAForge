@@ -1,12 +1,13 @@
 /** Public connection metadata. Credentials are write-only and never returned over IPC. */
 export type ApiTransport = 'chat-completions' | 'responses'
 export type ApiProfile = 'openai-compatible' | 'codex-connector' | 'grok-connector-v1'
-export interface GrokConnectionOptions { contextWindow?: number; maxTurns?: number }
+export interface GrokConnectionOptions { contextWindow?: number; maxTurns?: number; autoApproveNativePermissions?: boolean }
 export function validGrokConnectionOptions(value: unknown): value is GrokConnectionOptions {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false
   const data = value as Record<string, unknown>
-  return Object.keys(data).every(key => key === 'contextWindow' || key === 'maxTurns')
+  return Object.keys(data).every(key => key === 'contextWindow' || key === 'maxTurns' || key === 'autoApproveNativePermissions')
     && (data.contextWindow === undefined || Number.isSafeInteger(data.contextWindow) && (data.contextWindow as number) > 0 && (data.contextWindow as number) <= 100_000_000)
+    && (data.autoApproveNativePermissions === undefined || typeof data.autoApproveNativePermissions === 'boolean')
     && (data.maxTurns === undefined || Number.isSafeInteger(data.maxTurns) && (data.maxTurns as number) >= 1 && (data.maxTurns as number) <= 100)
 }
 /** Sanitized discovery; no account identifiers, credentials, raw provider payloads or inferred quota. */

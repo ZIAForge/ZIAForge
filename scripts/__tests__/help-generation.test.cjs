@@ -16,6 +16,7 @@ test('one help source detects drift, escaping and stale translation approval', (
   const invoke = (...args) => spawnSync(process.execPath, [path.join(project, 'scripts/help/generate.cjs'), ...args], { cwd: project, encoding: 'utf8', timeout: 10000 })
   try {
     write('scripts/help/generate.cjs', fs.readFileSync(path.join(__dirname, '../help/generate.cjs'), 'utf8'))
+    write('package.json', { version: '1.2.3' })
     write('docs/help/translations/README.md', 'Translations are reviewed separately.\n')
     write('src/locales/en.json', { save: 'Save' })
     write('src/locales/ar.json', { save: 'حفظ', 'help.machineTranslationNotice': 'ترجمة آلية؛ لم يراجعها مترجم بشري.', 'help.sectionsLabel': 'أقسام الدليل' })
@@ -28,6 +29,7 @@ test('one help source detects drift, escaping and stale translation approval', (
     assert.equal(invoke().status, 0)
     assert.equal(invoke('--check').status, 0)
     const html = fs.readFileSync(path.join(project, 'website/guide.html'), 'utf8')
+    assert.ok(html.includes('ZIAFORGE / 1.2.3'))
     assert.ok(html.includes('&lt;script&gt;'))
     assert.ok(!html.includes('<script>'))
     fs.appendFileSync(path.join(project, 'docs/USER_GUIDE.md'), 'An independent edit must not be silently accepted.\n')
