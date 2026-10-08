@@ -1390,5 +1390,17 @@
   "video_save_error": "ไม่สามารถบันทึกวิดีโอได้: {error}",
   "video_save_cancelled": "ยกเลิกการบันทึกวิดีโอแล้ว",
   "video_saved": "บันทึกวิดีโอแล้ว",
-  "video_invalid": "ข้อมูลวิดีโอไม่ถูกต้อง"
+  "video_invalid": "ข้อมูลวิดีโอไม่ถูกต้อง",
+  "updates.check": "ตรวจสอบการอัปเดต",
+  "updates.update": "อัปเดตตอนนี้",
+  "updates.installedVersion": "เวอร์ชันที่ติดตั้ง",
+  "updates.availableVersion": "เวอร์ชันที่พร้อมใช้งาน",
+  "updates.localOnly": "จัดการการอัปเดตในแอปเดสก์ท็อปบนคอมพิวเตอร์เครื่องนี้",
+  "updates.manualInstall": "ไม่สามารถติดตั้งอัตโนมัติได้ที่นี่ ดาวน์โหลดแพ็กเกจหรือเปิดหน้ารุ่นเผยแพร่เพื่อติดตั้งด้วยตนเอง",
+  "updates.installNotice": "ทำงานที่กำลังดำเนินการให้เสร็จก่อนอัปเดต ZIAForge จะปิดและอาจเปิดโปรแกรมติดตั้งของระบบ",
+  "updates.release": "ดูรุ่นเผยแพร่",
+  "updates.settings": "การตั้งค่าการอัปเดต",
+  "updates.autoInstallNotice": "การติดตั้งต้องอาศัยการดำเนินการจากคุณเสมอ",
+  "updates.preparing": "กำลังเตรียมการอัปเดต…",
+  "updates.installing": "กำลังติดตั้งการอัปเดต…"
 }

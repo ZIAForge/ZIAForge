@@ -1390,5 +1390,17 @@
   "video_save_error": "无法保存视频：{error}",
   "video_save_cancelled": "已取消保存视频",
   "video_saved": "视频已保存",
-  "video_invalid": "视频数据无效"
+  "video_invalid": "视频数据无效",
+  "updates.check": "检查更新",
+  "updates.update": "立即更新",
+  "updates.installedVersion": "已安装版本",
+  "updates.availableVersion": "可用版本",
+  "updates.localOnly": "请在此计算机的桌面应用中管理更新。",
+  "updates.manualInstall": "此处无法自动安装。请下载安装包，或打开版本发布页面手动安装。",
+  "updates.installNotice": "更新前请完成正在进行的工作。ZIAForge 将关闭，并可能打开系统安装程序。",
+  "updates.release": "查看版本发布",
+  "updates.settings": "更新设置",
+  "updates.autoInstallNotice": "安装始终需要您主动操作。",
+  "updates.preparing": "正在准备更新…",
+  "updates.installing": "正在安装更新…"
 }

@@ -1390,5 +1390,17 @@
   "video_save_error": "ଭିଡିଓ ସେଭ୍ କରିହେଲା ନାହିଁ: {error}",
   "video_save_cancelled": "ଭିଡିଓ ସେଭ୍ ବାତିଲ୍ ହୋଇଛି",
   "video_saved": "ଭିଡିଓ ସେଭ୍ ହୋଇଛି",
-  "video_invalid": "ଭିଡିଓ ଡାଟା ଅବୈଧ"
+  "video_invalid": "ଭିଡିଓ ଡାଟା ଅବୈଧ",
+  "updates.check": "ଅପଡେଟ୍ ଯାଞ୍ଚ କରନ୍ତୁ",
+  "updates.update": "ଏବେ ଅପଡେଟ୍ କରନ୍ତୁ",
+  "updates.installedVersion": "ଇନଷ୍ଟଲ୍ ହୋଇଥିବା ସଂସ୍କରଣ",
+  "updates.availableVersion": "ଉପଲବ୍ଧ ସଂସ୍କରଣ",
+  "updates.localOnly": "ଏହି କମ୍ପ୍ୟୁଟରର ଡେସ୍କଟପ୍ ଆପରେ ଅପଡେଟ୍ ପରିଚାଳନା କରନ୍ତୁ।",
+  "updates.manualInstall": "ଏଠାରେ ସ୍ୱୟଂଚାଳିତ ଇନଷ୍ଟଲେସନ୍ ଉପଲବ୍ଧ ନାହିଁ। ପ୍ୟାକେଜ୍ ଡାଉନଲୋଡ୍ କରନ୍ତୁ କିମ୍ବା ନିଜେ ଇନଷ୍ଟଲ୍ କରିବାକୁ ରିଲିଜ୍ ପୃଷ୍ଠା ଖୋଲନ୍ତୁ।",
+  "updates.installNotice": "ଅପଡେଟ୍ ପୂର୍ବରୁ ଚାଲୁଥିବା କାମ ସାରନ୍ତୁ। ZIAForge ବନ୍ଦ ହେବ ଏବଂ ସିଷ୍ଟମ୍ ଇନଷ୍ଟଲର୍ ଖୋଲିପାରେ।",
+  "updates.release": "ରିଲିଜ୍ ଦେଖନ୍ତୁ",
+  "updates.settings": "ଅପଡେଟ୍ ସେଟିଂସ୍",
+  "updates.autoInstallNotice": "ଇନଷ୍ଟଲେସନ୍ ପାଇଁ ସର୍ବଦା ଆପଣଙ୍କ କାର୍ଯ୍ୟ ଆବଶ୍ୟକ।",
+  "updates.preparing": "ଅପଡେଟ୍ ପ୍ରସ୍ତୁତ ହେଉଛି…",
+  "updates.installing": "ଅପଡେଟ୍ ଇନଷ୍ଟଲ୍ ହେଉଛି…"
 }

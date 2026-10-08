@@ -25,6 +25,14 @@ export interface ControlAPI {
   assistantSend(request: { text: string; instanceId?: string }): Promise<AssistantState>;
   assistantStop(): Promise<void>;
 }
-export interface UpdateStatus { repository?: string; automatic?: boolean; state: 'idle' | 'checking' | 'available' | 'current' | 'downloading' | 'downloaded' | 'error'; version?: string; message?: string; progress?: number; configured: boolean; currentChannel: 'stable' | 'preview' }
+export interface UpdateStatus {
+  repository?: string; automatic?: boolean;
+  state: 'idle' | 'checking' | 'available' | 'current' | 'downloading' | 'downloaded' | 'preparing' | 'installing' | 'error';
+  currentVersion?: string; version?: string; releaseUrl?: string; assetName?: string;
+  canInstall?: boolean;
+  installKind?: 'mac-zip' | 'nsis' | 'appimage' | 'deb' | 'rpm' | 'manual' | 'signed';
+  message?: string; messageCode?: string; progress?: number;
+  configured: boolean; currentChannel: 'stable' | 'preview';
+}
 export interface UpdateConfig { repository: string; channel: 'stable' | 'preview'; automatic: boolean }
 export interface UpdatesAPI { status(): Promise<UpdateStatus>; configure(config: UpdateConfig): Promise<UpdateStatus>; check(): Promise<UpdateStatus>; download(): Promise<UpdateStatus>; install(): Promise<void> }

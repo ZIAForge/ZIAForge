@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: gu; served locale: gu; status: machine-translated. -->
 # ZIAForge વપરાશકર્તા માર્ગદર્શિકા
@@ -32,7 +32,7 @@ Requested locale: gu; served locale: gu; status: machine-translated. -->
 - [બ્રાઉઝર અને રિમોટ ઇન્સ્ટન્સ](#remote)
 - [OpenClaw, Hermes અને અન્ય બાહ્ય એજન્ટો](#external-agents)
 - [સ્થાનિક CLI અને ઓટોમેશન મર્યાદાઓ](#local-cli)
-- [સંસ્કરણ અને અપડેટ્સ](#updates)
+- [Version and updates](#updates)
 - [પુનઃપ્રારંભ અને પુનઃપ્રાપ્તિ](#restart)
 - [મુશ્કેલીનિવારણ](#troubleshooting)
 - [સમસ્યાઓની જાણ કરો અને પુરાવા તપાસો](#diagnostics)
@@ -418,17 +418,21 @@ ziaf ડિસ્પેચર સમાન ચાલતી એપ્લિકે
 
 <a id="updates"></a>
 
-## સંસ્કરણ અને અપડેટ્સ
+## Version and updates
 
-About બરાબર ચાલી રહેલ વર્ઝન બતાવે છે. સાર્વજનિક અપડેટ્સ માટે વિશ્વસનીય GitHub પ્રકાશન રીપોઝીટરી અને સ્થિર અથવા પૂર્વાવલોકન ચેનલની જરૂર પડે છે. તપાસવું, ડાઉનલોડ કરવું અને ઇન્સ્ટોલેશનની અલગ સ્થિતિઓ હોય છે; ભૂલનો અર્થ એ નથી કે અપડેટ ઇન્સ્ટોલ થઈ ગયું છે.
+> સંપૂર્ણ માર્ગદર્શિકા હજુ તમારી ઇન્ટરફેસ ભાષામાં અનુવાદિત નથી. અંગ્રેજી સંદર્ભ દર્શાવી રહ્યું છે.
 
-આપોઆપ ઇન્સ્ટોલેશન હસ્તાક્ષરિત macOS પ્રકાશનો માટે છે. હસ્તાક્ષર વગરના વિકાસ બિલ્ડ્સ આ પદ્ધતિ દ્વારા આપમેળે ઇન્સ્ટોલ થતા નથી. મેન્યુઅલ રિપ્લેસમેન્ટ માટે, વર્તમાન એપ્લિકેશનને સંપૂર્ણપણે બંધ કરો અને ચકાસાયેલ આર્ટિફેક્ટનો ઉપયોગ કરો.
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-સ્વચાલિત તપાસ સક્ષમ હોય ત્યારે તરત જ ચાલે છે, પછી દર છ કલાકે ચાલે છે.
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-સ્થિર પૂર્વાવલોકન પ્રકાશનોને બાકાત રાખે છે; પૂર્વાવલોકન વિકાસ પ્રકાશનોને પણ મંજૂરી આપે છે. સફળ તપાસ માત્ર ઉપલબ્ધ પ્રકાશન મેટાડેટા સ્થાપિત કરે છે. ડાઉનલોડ અને ઇન્સ્ટોલેશન માટે પ્લેટફોર્મ પેકેજ અને ગોઠવેલ પ્રકાશન ફીડની જરૂર છે. Linux DEB ડિલિવરી એ એક અલગ ઇન્સ્ટોલર પાથ છે; એવું માની લેશો નહીં કે DEB આપમેળે macOS અપડેટ પદ્ધતિ દ્વારા અપગ્રેડ થાય છે.
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-સંબંધિત સૂચનાઓ: [પ્રકાશન સજ્જતા](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+સંબંધિત સૂચનાઓ: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

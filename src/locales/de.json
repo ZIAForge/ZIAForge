@@ -1390,5 +1390,17 @@
   "video_save_error": "Video konnte nicht gespeichert werden: {error}",
   "video_save_cancelled": "Speichern des Videos abgebrochen",
   "video_saved": "Video gespeichert",
-  "video_invalid": "Ungültige Videodaten"
+  "video_invalid": "Ungültige Videodaten",
+  "updates.check": "Nach Updates suchen",
+  "updates.update": "Jetzt aktualisieren",
+  "updates.installedVersion": "Installierte Version",
+  "updates.availableVersion": "Verfügbare Version",
+  "updates.localOnly": "Verwalten Sie Updates in der Desktop-App auf diesem Computer.",
+  "updates.manualInstall": "Die automatische Installation ist hier nicht verfügbar. Laden Sie das Paket herunter oder öffnen Sie die Release-Seite zur manuellen Installation.",
+  "updates.installNotice": "Beenden Sie laufende Arbeiten vor dem Update. ZIAForge wird geschlossen und öffnet gegebenenfalls das Installationsprogramm des Systems.",
+  "updates.release": "Release anzeigen",
+  "updates.settings": "Update-Einstellungen",
+  "updates.autoInstallNotice": "Die Installation erfordert immer eine Aktion von Ihnen.",
+  "updates.preparing": "Update wird vorbereitet…",
+  "updates.installing": "Update wird installiert…"
 }

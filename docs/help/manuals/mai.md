@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: mai; served locale: mai; status: machine-translated. -->
 # ZIAForge प्रयोक्ता मार्गदर्शिका
@@ -32,7 +32,7 @@ Requested locale: mai; served locale: mai; status: machine-translated. -->
 - [ब्राउज़र आ दूरस्थ इंस्टेंस](#remote)
 - [OpenClaw, Hermes आ अन्य बाहरी एजेंट](#external-agents)
 - [स्थानीय CLI आ स्वचालन सीमा](#local-cli)
-- [संस्करण आ अपडेट](#updates)
+- [Version and updates](#updates)
 - [पुनः आरंभ आ पुनर्प्राप्ति](#restart)
 - [समस्या निवारण](#troubleshooting)
 - [समस्याक रिपोर्ट करू आ साक्ष्यक निरीक्षण करू](#diagnostics)
@@ -418,17 +418,21 @@ Automations इंटरफ़ेस वर्तमान मे प्रद�
 
 <a id="updates"></a>
 
-## संस्करण आ अपडेट
+## Version and updates
 
-About सटीक चलि रहल संस्करण देखबैत अछि। सार्वजनिक अपडेट लेल एकटा विश्वसनीय GitHub रिलीज़ रिपॉजिटरी आ एकटा स्थिर (stable) वा पूर्वावलोकन (preview) चैनल आवश्यक अछि। जांच करब, डाउनलोड करब आ इंस्टॉलेशनक अलग-अलग स्थिति होइत अछि; त्रुटिक अर्थ ई नहि अछि जे कोनो अपडेट इंस्टॉल भ गेल।
+> पूर्ण मार्गदर्शिका अखन अहाँक इंटरफेस भाषामे अनुवादित नहि अछि। अंग्रेजी संदर्भ देखाओल जा रहल अछि।
 
-स्वचालित इंस्टॉलेशन हस्ताक्षरित macOS रिलीज़ सभ लेल अछि। अहस्ताक्षरित विकास बिल्ड एहि तंत्रक माध्यम सँ स्वचालित रूप सँ इंस्टॉल नहि कयल जाइत अछि। मैनुअल प्रतिस्थापन लेल, वर्तमान ऐप कें पूरी तरह सँ छोड़ू (Quit करू) आ एकटा सत्यापित आर्टिफ़ैक्टक उपयोग करू।
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-स्वचालित जांच सक्षम भेला पर तुरंत चलैत अछि, फेर प्रत्येक छह घंटा पर।
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Stable पूर्वावलोकन रिलीज़ सभ कें बाहर रखैत अछि; preview विकास रिलीज़ सभक सेहो अनुमति दैत अछि। एकटा सफल जांच केवल उपलब्ध रिलीज़ मेटाडेटा स्थापित करैत अछि। डाउनलोड आ इंस्टॉलेशन लेल प्लेटफ़ॉर्म पैकेज आ संरचित रिलीज़ फ़ीडक आवश्यकता होइत अछि। Linux DEB वितरण एकटा अलग इंस्टॉलर पथ अछि; ई नहि मानू जे कोनो DEB स्वचालित रूप सँ macOS अपडेट तंत्र द्वारा अपग्रेड भ जाइत अछि।
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-संबंधित निर्देश: [रिलीज़ तत्परता](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+संबंधित निर्देश: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

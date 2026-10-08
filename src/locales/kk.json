@@ -1390,5 +1390,17 @@
   "video_save_error": "Бейнені сақтау мүмкін болмады: {error}",
   "video_save_cancelled": "Бейнені сақтау тоқтатылды",
   "video_saved": "Бейне сақталды",
-  "video_invalid": "Бейне деректері жарамсыз"
+  "video_invalid": "Бейне деректері жарамсыз",
+  "updates.check": "Жаңартуларды тексеру",
+  "updates.update": "Қазір жаңарту",
+  "updates.installedVersion": "Орнатылған нұсқа",
+  "updates.availableVersion": "Қолжетімді нұсқа",
+  "updates.localOnly": "Жаңартуларды осы компьютердегі жұмыс үстелі қолданбасында басқарыңыз.",
+  "updates.manualInstall": "Мұнда автоматты орнату қолжетімсіз. Қолмен орнату үшін пакетті жүктеп алыңыз немесе шығарылым бетін ашыңыз.",
+  "updates.installNotice": "Жаңартпас бұрын ағымдағы жұмысты аяқтаңыз. ZIAForge жабылады және жүйелік орнатқыш ашылуы мүмкін.",
+  "updates.release": "Шығарылымды көру",
+  "updates.settings": "Жаңарту параметрлері",
+  "updates.autoInstallNotice": "Орнату әрқашан сіздің әрекетіңізді талап етеді.",
+  "updates.preparing": "Жаңарту дайындалуда…",
+  "updates.installing": "Жаңарту орнатылуда…"
 }

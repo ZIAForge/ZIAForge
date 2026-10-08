@@ -1390,5 +1390,17 @@
   "video_save_error": "ذخیرهٔ ویدیو ممکن نشد: {error}",
   "video_save_cancelled": "ذخیرهٔ ویدیو لغو شد",
   "video_saved": "ویدیو ذخیره شد",
-  "video_invalid": "داده‌های ویدیو نامعتبر است"
+  "video_invalid": "داده‌های ویدیو نامعتبر است",
+  "updates.check": "بررسی به‌روزرسانی‌ها",
+  "updates.update": "اکنون به‌روزرسانی کن",
+  "updates.installedVersion": "نسخهٔ نصب‌شده",
+  "updates.availableVersion": "نسخهٔ موجود",
+  "updates.localOnly": "به‌روزرسانی‌ها را در برنامهٔ دسکتاپ همین رایانه مدیریت کنید.",
+  "updates.manualInstall": "نصب خودکار در اینجا در دسترس نیست. بسته را دریافت کنید یا برای نصب دستی صفحهٔ انتشار را باز کنید.",
+  "updates.installNotice": "پیش از به‌روزرسانی کارهای جاری را تمام کنید. ZIAForge بسته می‌شود و ممکن است نصب‌کنندهٔ سیستم باز شود.",
+  "updates.release": "مشاهدهٔ انتشار",
+  "updates.settings": "تنظیمات به‌روزرسانی",
+  "updates.autoInstallNotice": "نصب همیشه به اقدام شما نیاز دارد.",
+  "updates.preparing": "در حال آماده‌سازی به‌روزرسانی…",
+  "updates.installing": "در حال نصب به‌روزرسانی…"
 }

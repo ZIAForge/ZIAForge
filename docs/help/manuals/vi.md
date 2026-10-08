@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: vi; served locale: vi; status: machine-translated. -->
 # Hướng dẫn sử dụng ZIAForge
@@ -32,7 +32,7 @@ Bản tiếng Anh là chuẩn tắc. Trợ giúp được dịch máy được g
 - [Trình duyệt và các phiên bản từ xa](#remote)
 - [OpenClaw, Hermes và các tác nhân bên ngoài khác](#external-agents)
 - [CLI cục bộ và các giới hạn tự động hóa](#local-cli)
-- [Phiên bản và cập nhật](#updates)
+- [Version and updates](#updates)
 - [Khởi động lại và phục hồi](#restart)
 - [Khắc phục sự cố](#troubleshooting)
 - [Báo cáo sự cố và kiểm tra bằng chứng](#diagnostics)
@@ -418,17 +418,21 @@ Hướng dẫn liên quan: [Lệnh điều phối](../../CLI.md).
 
 <a id="updates"></a>
 
-## Phiên bản và cập nhật
+## Version and updates
 
-Mục Giới thiệu hiển thị chính xác phiên bản đang chạy. Các bản cập nhật công khai yêu cầu một kho lưu trữ phát hành GitHub đáng tin cậy cùng kênh ổn định hoặc xem trước. Quá trình kiểm tra, tải xuống và cài đặt có các trạng thái riêng biệt; xảy ra lỗi không có nghĩa là bản cập nhật đã được cài đặt.
+> Toàn bộ hướng dẫn chưa được dịch sang ngôn ngữ giao diện của bạn. Đang hiển thị bản tham chiếu tiếng Anh.
 
-Cài đặt tự động chỉ dành cho các bản phát hành macOS đã được ký. Các bản dựng phát triển chưa ký không được cài đặt tự động qua cơ chế này. Để thay thế thủ công, hãy thoát hoàn toàn ứng dụng hiện tại và sử dụng một tạo phẩm đã được xác minh.
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-Tính năng tự động kiểm tra sẽ chạy ngay khi được kích hoạt, sau đó cứ sáu giờ một lần.
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Kênh Ổn định loại trừ các bản phát hành xem trước; kênh Xem trước cho phép cả các bản phát hành phát triển. Việc kiểm tra thành công chỉ xác định siêu dữ liệu bản phát hành hiện có. Quá trình tải xuống và cài đặt cần gói nền tảng và nguồn cấp dữ liệu phát hành đã được định cấu hình. Việc phân phối gói Linux DEB là một đường dẫn trình cài đặt riêng; đừng cho rằng gói DEB sẽ tự động được nâng cấp bởi cơ chế cập nhật của macOS.
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-Hướng dẫn liên quan: [Mức độ sẵn sàng phát hành](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+Hướng dẫn liên quan: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

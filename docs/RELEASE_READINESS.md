@@ -1,5 +1,9 @@
 # Release engineering and provenance
 
+## 1.0.9 application updates
+
+Version **1.0.9** adds an official GitHub update source, version/progress controls and an explicit one-button download/install action for supported installations. See [1.0.9 notes](releases/1.0.9.md) and the [update contract](UPDATES.md). Normal Quit drains owned sessions before a detached installer can replace application files; user profiles and projects remain separate. OS authentication and trust prompts remain in effect.
+
 ## 1.0.8 Grok video
 
 Version **1.0.8** adds capability-gated native Grok video tools, authenticated MP4 retrieval into the private media store, an inline player and Save video. Existing native conversations migrate only at a new user turn, with bounded owned history and image context. See [1.0.8 notes](releases/1.0.8.md) for feature limits and verification scope. One frozen source commit supplies all six build-only platform targets; earlier releases and ledger entries remain immutable. New video UI messages cover all 56 catalogs, while the changed API Help section has an explicit English fallback in non-English guides.
@@ -54,7 +58,7 @@ The most recent dependency audit, performed on 2026-10-03, reported 17 high affe
 
 The packages are unsigned. macOS builds are not Developer ID signed or notarized; Windows installers do not have Authenticode signatures. Checksums verify that a download matches the published bytes, not that an independent authority has endorsed it. Install only assets obtained from the official repository and use the documented operating-system installation flow. Never disable a system security boundary globally to install the application.
 
-The application can check GitHub stable/preview releases. Automatic installation requires compatible signed packages and published updater metadata; the current unsigned release uses manual installation. The existing installation/profile must be retained when checking or when a download fails. Native subscription authentication and live model availability belong to each user’s provider account and are not certified by a packaging result.
+The application checks GitHub stable/preview releases and verifies the matching release manifest, package size and SHA-256. Supported installed layouts can update after normal Quit; development, read-only and unsupported portable layouts use the manual release path. Optional automatic checks/downloads never authorize installation on ordinary Quit. See [application updates](UPDATES.md) for platform boundaries and recovery. The existing installation/profile is retained when checking or when a download fails. Native subscription authentication and live model availability belong to each user’s provider account and are not certified by a packaging result.
 
 ## Maintainer sequence
 

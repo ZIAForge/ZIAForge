@@ -10,7 +10,7 @@ The platform packager produces separate artifacts for each operating system and 
 
 These are build targets, not a claim that every target has passed native testing. The local development environment has macOS Intel and Linux x64 Docker execution. ARM hardware and a Windows desktop are separate verification requirements. An emulated Linux ARM build is identified as emulated evidence by its operator, not physical ARM certification. A CI workflow definition is also not a successful hosted run.
 
-These commands produce unsigned artifacts. A development build and a stable release use different identity channels; a stable version does not imply macOS notarization, Windows Authenticode or new runtime certification. Signing and automatic updates are not configured by this pipeline. Publication is a separate authorized step. Do not replace an existing installation or dismiss a security prompt without first checking the artifact's source identity and checksum.
+These commands produce unsigned artifacts. A development build and a stable release use different identity channels; a stable version does not imply macOS notarization, Windows Authenticode or new runtime certification. Signing is not configured by this pipeline. The official release manifest and GitHub asset digests support the application updater described in [UPDATES.md](UPDATES.md). Publication is a separate authorized step. Do not replace an existing installation or dismiss a security prompt without first checking the artifact's source identity and checksum.
 
 ## Install a matching package
 

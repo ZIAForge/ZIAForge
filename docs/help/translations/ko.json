@@ -419,16 +419,21 @@
     },
     {
       "id": "updates",
-      "title": "버전 및 업데이트",
+      "title": "Version and updates",
       "paragraphs": [
-        "정보 창에 정확한 실행 버전이 표시됩니다. 공개 업데이트에는 신뢰할 수 있는 GitHub 릴리스 저장소와 안정 또는 미리보기 채널이 필요합니다. 확인, 다운로드 및 설치는 별도의 상태를 가집니다. 오류가 발생했다고 해서 업데이트가 설치된 것은 아닙니다.",
-        "자동 설치는 서명된 macOS 릴리스 전용입니다. 서명되지 않은 개발 빌드는 이 메커니즘을 통해 자동으로 설치되지 않습니다. 수동으로 교체하려면 현재 앱을 완전히 종료하고 검증된 아티팩트를 사용하십시오.",
-        "자동 확인은 활성화 시 즉시 실행되며, 이후 6시간마다 실행됩니다.",
-        "안정 채널은 미리보기 릴리스를 제외하며, 미리보기 채널은 개발 릴리스도 허용합니다. 확인 성공은 사용 가능한 릴리스 메타데이터만 설정할 뿐입니다. 다운로드 및 설치에는 플랫폼 패키지와 구성된 릴리스 피드가 필요합니다. Linux DEB 배포는 별도의 설치 경로입니다. DEB가 macOS 업데이트 메커니즘에 의해 자동으로 업그레이드된다고 가정하지 마십시오."
+        "Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.",
+        "When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.",
+        "Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.",
+        "Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.",
+        "Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only."
       ],
       "links": [
         {
-          "label": "릴리스 준비 상태",
+          "label": "Application update behavior and installation limits",
+          "path": "docs/UPDATES.md"
+        },
+        {
+          "label": "Release readiness",
           "path": "docs/RELEASE_READINESS.md"
         }
       ]

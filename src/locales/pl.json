@@ -1390,5 +1390,17 @@
   "video_save_error": "Nie udało się zapisać filmu: {error}",
   "video_save_cancelled": "Anulowano zapisywanie filmu",
   "video_saved": "Film zapisany",
-  "video_invalid": "Nieprawidłowe dane filmu"
+  "video_invalid": "Nieprawidłowe dane filmu",
+  "updates.check": "Sprawdź aktualizacje",
+  "updates.update": "Aktualizuj teraz",
+  "updates.installedVersion": "Zainstalowana wersja",
+  "updates.availableVersion": "Dostępna wersja",
+  "updates.localOnly": "Zarządzaj aktualizacjami w aplikacji komputerowej na tym komputerze.",
+  "updates.manualInstall": "Automatyczna instalacja jest tu niedostępna. Pobierz pakiet lub otwórz stronę wydania, aby zainstalować je ręcznie.",
+  "updates.installNotice": "Zakończ bieżącą pracę przed aktualizacją. ZIAForge zostanie zamknięty i może otworzyć instalator systemowy.",
+  "updates.release": "Zobacz wydanie",
+  "updates.settings": "Ustawienia aktualizacji",
+  "updates.autoInstallNotice": "Instalacja zawsze wymaga Twojego działania.",
+  "updates.preparing": "Przygotowywanie aktualizacji…",
+  "updates.installing": "Instalowanie aktualizacji…"
 }

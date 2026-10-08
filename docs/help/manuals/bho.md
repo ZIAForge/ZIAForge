@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: bho; served locale: bho; status: machine-translated. -->
 # ZIAForge प्रयोगकर्ता गाइड
@@ -32,7 +32,7 @@ Requested locale: bho; served locale: bho; status: machine-translated. -->
 - [ब्राउज़र आ दूरस्थ इंस्टेंस](#remote)
 - [OpenClaw, Hermes आ बाकी बाहरी एजेंट](#external-agents)
 - [स्थानीय CLI आ स्वचालन सीमा](#local-cli)
-- [संस्करण आ अपडेट](#updates)
+- [Version and updates](#updates)
 - [रीस्टार्ट आ रिकवरी](#restart)
 - [समस्या निवारण](#troubleshooting)
 - [समस्या के रिपोर्ट करीं आ सबूत के निरीक्षण करीं](#diagnostics)
@@ -418,17 +418,21 @@ Automations इंटरफ़ेस वर्तमान में प्र�
 
 <a id="updates"></a>
 
-## संस्करण आ अपडेट
+## Version and updates
 
-About सटीक चल रहल संस्करण देखावेला। सार्वजनिक अपडेट खातिर एगो विश्वसनीय GitHub रिलीज रिपॉजिटरी आ एगो स्थिर (stable) भा पूर्वावलोकन (preview) चैनल जरूरी बा। जाँच, डाउनलोड आ इंस्टॉलेशन के अलग-अलग स्थितियन बाड़ी सँ; कौनों त्रुटि के मतलब ई ना हवे कि अपडेट इंस्टॉल हो गइल बा।
+> पूरा गाइड अभी राउर इंटरफेस के भाषा में अनुवादित नइखे। अंग्रेजी संदर्भ देखावल जा रहल बा।
 
-स्वचालित इंस्टॉलेशन हस्ताक्षरित macOS रिलीज खातिर हवे। बिना हस्ताक्षर वाला डेवलपमेंट बिल्ड एह तंत्र के माध्यम से अपने-आप इंस्टॉल ना होला। हाथ से बदले खातिर, वर्तमान ऐप के पूरी तरह से बंद करीं आ एगो जाँचल-परखल आर्टिफ़ैक्ट के इस्तेमाल करीं।
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-सक्षम होखला पर स्वचालित जाँच तुरंत चलेला, फेर हर छह घंटा पर चलेला।
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-स्थिर चैनल पूर्वावलोकन रिलीज के बाहर राखेला; पूर्वावलोकन डेवलपमेंट रिलीज के भी अनुमति देवेला। एगो सफल जाँच खाली उपलब्ध रिलीज मेटाडेटा स्थापित करेला। डाउनलोड आ इंस्टॉलेशन खातिर प्लेटफ़ॉर्म पैकेज आ कॉन्फ़िगर कइल रिलीज फ़ीड जरूरी बा। Linux DEB डिलीवरी एगो अलग इंस्टॉलर पथ हवे; ई मत मान लीं कि DEB के macOS अपडेट तंत्र द्वारा अपने-आप अपग्रेड कइल जाला।
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-संबंधित निर्देश: [रिलीज तत्परता](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+संबंधित निर्देश: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

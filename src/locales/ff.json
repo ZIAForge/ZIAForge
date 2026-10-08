@@ -1390,5 +1390,17 @@
   "video_save_error": "Danndude wideyoo gasaani: {error}",
   "video_save_cancelled": "Danndugol wideyoo haaytinaama",
   "video_saved": "Wideyoo danndaama",
-  "video_invalid": "Keɓe wideyoo moƴƴaani"
+  "video_invalid": "Keɓe wideyoo moƴƴaani",
+  "updates.check": "Ƴeewto kesɗitine",
+  "updates.update": "Hesɗitin jooni",
+  "updates.installedVersion": "Yamre aafaande",
+  "updates.availableVersion": "Yamre woodnde",
+  "updates.localOnly": "Toppito kesɗitine e jaaɓnirgal ordinater ngal.",
+  "updates.manualInstall": "Aafgol hoore mum alaa ɗoo. Aawto pakkeeji oo walla uddit hello jaltugol ngam aafgol e juuɗe.",
+  "updates.installNotice": "Gasnu golle ɗe ngoni e waɗeede hade hesɗitinde. ZIAForge maa uddoo, tee ina waawi udditde aafnirgal yuɓɓo.",
+  "updates.release": "Yiy jaltugol",
+  "updates.settings": "Teelte kesɗitine",
+  "updates.autoInstallNotice": "Aafgol ina sokli e sahaa kala baɗal maa.",
+  "updates.preparing": "Nana heɓlita hesɗitinal…",
+  "updates.installing": "Nana aafa hesɗitinal…"
 }

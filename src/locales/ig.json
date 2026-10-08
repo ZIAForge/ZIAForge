@@ -1390,5 +1390,17 @@
   "video_save_error": "Enweghị ike ichekwa vidiyo: {error}",
   "video_save_cancelled": "Akagbuola ichekwa vidiyo",
   "video_saved": "Echekwara vidiyo",
-  "video_invalid": "Data vidiyo ezighi ezi"
+  "video_invalid": "Data vidiyo ezighi ezi",
+  "updates.check": "Lelee mmelite",
+  "updates.update": "Melite ugbu a",
+  "updates.installedVersion": "Ụdị etinyere",
+  "updates.availableVersion": "Ụdị dị",
+  "updates.localOnly": "Jikwaa mmelite n'ime ngwa desktọpụ na kọmputa a.",
+  "updates.manualInstall": "Ntinye akpaka adịghị ebe a. Budata ngwugwu ma ọ bụ mepee ibe mwepụta ka itinye ya n'onwe gị.",
+  "updates.installNotice": "Mechaa ọrụ na-aga n'ihu tupu imelite. ZIAForge ga-emechi ma nwee ike imepe ihe nrụnye sistemụ.",
+  "updates.release": "Lee mwepụta",
+  "updates.settings": "Ntọala mmelite",
+  "updates.autoInstallNotice": "Ntinye na-achọ mgbe niile ka i mee ihe.",
+  "updates.preparing": "A na-akwadebe mmelite…",
+  "updates.installing": "A na-etinye mmelite…"
 }

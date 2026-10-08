@@ -44,7 +44,7 @@ The application architect can display screenshots and use typed application tool
 
 `system.commands` includes `documentation.guide`, the canonical English help, with its source path and hash. Both the application architect and external MCP/API agents can read this same reference. It describes capabilities; it does not grant permission, approve a workflow gate or replace the owner's instruction.
 
-The Automations panel currently stores UI definitions/counters rather than proving a recurring scheduler. Actual workflow control exists through the workflow engine, local CLI and authenticated API. Telegram needs an owner-configured token/private numeric ID and independent connectivity validation. OpenClaw/Hermes need installed external clients. GitHub update availability, signed installation and DEB installation are distinct paths.
+The Automations panel currently stores UI definitions/counters rather than proving a recurring scheduler. Actual workflow control exists through the workflow engine, local CLI and authenticated API. Telegram needs an owner-configured token/private numeric ID and independent connectivity validation. OpenClaw/Hermes need installed external clients. GitHub release checks, verified downloads, prepared installation and confirmed restart are distinct states; see [UPDATES.md](UPDATES.md) for platform and local-owner boundaries.
 
 ## Where to read next
 

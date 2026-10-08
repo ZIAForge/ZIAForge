@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: nl; served locale: nl; status: machine-translated. -->
 # Gebruikershandleiding voor ZIAForge
@@ -32,7 +32,7 @@ Het Engels is toonaangevend. Automatisch vertaalde documentatie wordt afzonderli
 - [Browser en externe instanties](#remote)
 - [OpenClaw, Hermes en andere externe agents](#external-agents)
 - [Lokale CLI en automatiseringslimieten](#local-cli)
-- [Versie en updates](#updates)
+- [Version and updates](#updates)
 - [Herstarten en herstel](#restart)
 - [Probleemoplossing](#troubleshooting)
 - [Problemen melden en bewijs inspecteren](#diagnostics)
@@ -418,17 +418,21 @@ Gerelateerde instructies: [Dispatcher-opdrachten](../../CLI.md).
 
 <a id="updates"></a>
 
-## Versie en updates
+## Version and updates
 
-Info toont de exacte actieve versie. Openbare updates vereisen een vertrouwde GitHub-release-repository en een stabiel of preview-kanaal. Controleren, downloaden en installeren hebben afzonderlijke statussen; een fout betekent niet dat een update is geïnstalleerd.
+> De volledige gids is nog niet vertaald naar je interfacetaal. De Engelse referentie wordt getoond.
 
-Automatische installatie is bedoeld voor ondertekende macOS-releases. Niet-ondertekende ontwikkelbuilds worden niet automatisch geïnstalleerd via dit mechanisme. Sluit voor handmatige vervanging de huidige app volledig af en gebruik een geverifieerd artefact.
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-Automatische controle wordt direct uitgevoerd wanneer dit is ingeschakeld, en vervolgens om de zes uur.
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Stabiel sluit preview-releases uit; preview staat ook ontwikkelreleases toe. Een geslaagde controle stelt alleen de beschikbare release-metadata vast. Downloaden en installeren vereisen het platformpakket en de geconfigureerde releasefeed. Levering via Linux DEB is een afzonderlijk installatiepad; neem niet aan dat een DEB automatisch wordt bijgewerkt door het updatemechanisme van macOS.
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-Gerelateerde instructies: [Gereedheid voor release](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+Gerelateerde instructies: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

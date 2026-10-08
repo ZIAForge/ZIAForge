@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: my; served locale: my; status: machine-translated. -->
 # ZIAForge အသုံးပြုသူ လမ်းညွှန်
@@ -32,7 +32,7 @@ Requested locale: my; served locale: my; status: machine-translated. -->
 - [ဘရောက်ဆာနှင့် အဝေးထိန်း instance များ](#remote)
 - [OpenClaw၊ Hermes နှင့် အခြား ပြင်ပအေးဂျင့်များ](#external-agents)
 - [ဒေသတွင်း CLI နှင့် အလိုအလျောက်စနစ် ကန့်သတ်ချက်များ](#local-cli)
-- [ဗားရှင်းနှင့် အပ်ဒိတ်များ](#updates)
+- [Version and updates](#updates)
 - [ပြန်လည်စတင်ခြင်းနှင့် ပြန်လည်ရယူခြင်း](#restart)
 - [ပြဿနာဖြေရှင်းခြင်း](#troubleshooting)
 - [ပြဿနာများကို အစီရင်ခံခြင်းနှင့် သက်သေအထောက်အထားများကို စစ်ဆေးခြင်း](#diagnostics)
@@ -418,17 +418,21 @@ Automations မျက်နှာပြင်သည် လက်ရှိတွ�
 
 <a id="updates"></a>
 
-## ဗားရှင်းနှင့် အပ်ဒိတ်များ
+## Version and updates
 
-About သည် အတိအကျ အလုပ်လုပ်နေသည့် ဗားရှင်းကို ပြသသည်။ အများသုံး အပ်ဒိတ်များသည် ယုံကြည်စိတ်ချရသော GitHub ဖြန့်ချိရေး သိုလှောင်ခန်းနှင့် တည်ငြိမ်သော (stable) သို့မဟုတ် အကြိုကြည့်ရှုမှု (preview) လိုင်းတစ်ခု လိုအပ်သည်။ စစ်ဆေးခြင်း၊ ဒေါင်းလုဒ်လုပ်ခြင်းနှင့် ထည့်သွင်းခြင်းတို့တွင် သီးခြား အခြေအနေများ ရှိကြသည်; အမှားတစ်ခုသည် အပ်ဒိတ်တစ်ခု ထည့်သွင်းပြီးပြီဟု မဆိုလိုပါ။
+> လမ်းညွှန်အပြည့်အစုံကို သင်၏ အသုံးပြုမှုမျက်နှာပြင်ဘာသာစကားသို့ မပြန်ဆိုရသေးပါ။ အင်္ဂလိပ် ကိုးကားချက်ကို ပြသနေသည်။
 
-အလိုအလျောက် ထည့်သွင်းခြင်းသည် လက်မှတ်ရေးထိုးထားသော macOS ထုတ်ဝေမှုများအတွက် ဖြစ်သည်။ လက်မှတ်မထိုးထားသော ဖွံ့ဖြိုးတိုးတက်မှု build များကို ဤယန္တရားမှတစ်ဆင့် အလိုအလျောက် ထည့်သွင်းမည် မဟုတ်ပါ။ ကိုယ်တိုင် အစားထိုးရန်အတွက် လက်ရှိ အက်ပ်ကို အပြီးအပိုင် ပိတ်ပြီး အတည်ပြုထားသော artifact တစ်ခုကို အသုံးပြုပါ။
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-အလိုအလျောက် စစ်ဆေးခြင်းသည် ဖွင့်ထားသည့်အခါ ချက်ချင်း လည်ပတ်ပြီး ခြောက်နာရီတစ်ကြိမ် ဆက်လက်လည်ပတ်သည်။
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Stable သည် အကြိုကြည့်ရှုမှု ထုတ်ဝေမှုများကို ဖယ်ထုတ်ထားသည်; preview သည် ဖွံ့ဖြိုးတိုးတက်မှု ထုတ်ဝေမှုများကိုပါ ခွင့်ပြုသည်။ အောင်မြင်သော စစ်ဆေးမှုတစ်ခုသည် ရရှိနိုင်သော ထုတ်ဝေမှု မက်တာဒေတာကိုသာ သတ်မှတ်ပေးသည်။ ဒေါင်းလုဒ်လုပ်ခြင်းနှင့် ထည့်သွင်းခြင်းတို့အတွက် ပလက်ဖောင်း ပက်ကေ့ဂျ်နှင့် ပြင်ဆင်သတ်မှတ်ထားသော ဖြန့်ချိရေး feed လိုအပ်သည်။ Linux DEB ပေးပို့မှုသည် သီးခြား ထည့်သွင်းမှု လမ်းကြောင်းဖြစ်သည်; DEB ကို macOS အပ်ဒိတ် ယန္တရားဖြင့် အလိုအလျောက် အဆင့်မြှင့်တင်သည်ဟု မယူဆပါနှင့်။
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-ဆက်စပ်လမ်းညွှန်ချက်များ: [ထုတ်ဝေမှု အသင့်ဖြစ်မှု](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+ဆက်စပ်လမ်းညွှန်ချက်များ: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

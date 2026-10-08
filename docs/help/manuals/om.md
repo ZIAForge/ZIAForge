@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: om; served locale: om; status: machine-translated. -->
 # Qajeelfama fayyadamaa ZIAForge
@@ -32,7 +32,7 @@ Afaan Ingilizii isa bu'uuraati. Gargaarsi maashiniin hiikame hiika namaan gamaag
 - [Baafataa fi qindaa'inoota fagootti argaman](#remote)
 - [OpenClaw, Hermes fi ejensota alaa biroo](#external-agents)
 - [CLI naannoo fi daangaawwan of-hojjechiisaa](#local-cli)
-- [Gosa fi haaromsawwan](#updates)
+- [Version and updates](#updates)
 - [Irra deebisanii kaasuufi deebisanii dhaabuu](#restart)
 - [Rakkoo furuu](#troubleshooting)
 - [Rakkoowwan gabaasuu fi ragaa qorachuu](#diagnostics)
@@ -418,17 +418,21 @@ Qajeelfamoota walqabatan: [Ajajawwan raabsaa](../../CLI.md).
 
 <a id="updates"></a>
 
-## Gosa fi haaromsawwan
+## Version and updates
 
-Waa'ee (About) gosa sirrii hojjetamaa jiru agarsiisa. Haaromsonni uummataa kuusaa gadhiifama GitHub amanamaa fi sarara tasgabbaa'aa ykn dursee mul'atu barbaadu. Qorachuun, buusuun fi fe'uun haalawwan adda addaa qabu; dogoggorri tokko haaromsi fe'ameera jechuu miti.
+> Qajeelchi guutuun ammayyuu gara afaan hojii keessaniitti hin hiikamne. Wabii Afaan Ingilizii agarsiisaa jira.
 
-Fe'iinsi ofumaa gadhiifamoota macOS mallatteeffamaniif. Ijaarsi misoomaa hin mallatteeffamne karaa kana ofumaan hin fe'amu. Harkaatiin bakka buusuuf, saganticha ammaa guutummaatti cufaa meeshaa mirkanaa'e fayyadami.
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-Qorannoon ofumaa akkuma dandeessifameen, sana booda sa'aatii jaha jahaan adeemsifama.
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Tasgabbaa'aan gadhiifamoota dursee agarsiifaman hin dabalatu; dursee agarsiifamni ammoo gadhiifamoota misoomaas ni hayyama. Qorannoon milkaa'e meetaadaataa gadhiifama jiru qofa mirkaneessa. Buusuu fi fe'uun paakeejii sirnaa fi galtee gadhiifamaa qindaa'e barbaadu. Dhiheessiin Linux DEB daandii fe'aa addaati; DEB ofumaan deemsa haaromsa macOS tiin fooyya'a jettee hin yaadin.
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-Qajeelfamoota walqabatan: [Qophaa'ina gadhiifamaa](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+Qajeelfamoota walqabatan: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

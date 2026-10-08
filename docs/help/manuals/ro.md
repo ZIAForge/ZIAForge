@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: ro; served locale: ro; status: machine-translated. -->
 # Ghid de utilizare ZIAForge
@@ -32,7 +32,7 @@ Versiunea în engleză este canonică. Asistența tradusă automat este eticheta
 - [Browser și instanțe la distanță](#remote)
 - [OpenClaw, Hermes și alți agenți externi](#external-agents)
 - [CLI local și limitele de automatizare](#local-cli)
-- [Versiune și actualizări](#updates)
+- [Version and updates](#updates)
 - [Repornire și recuperare](#restart)
 - [Depanare](#troubleshooting)
 - [Raportați probleme și inspectați dovezile](#diagnostics)
@@ -418,17 +418,21 @@ Instrucțiuni asociate: [Comenzi ale dispecerului](../../CLI.md).
 
 <a id="updates"></a>
 
-## Versiune și actualizări
+## Version and updates
 
-Despre arată versiunea exactă care rulează. Actualizările publice necesită un depozit de versiuni GitHub de încredere și un canal stabil sau de previzualizare. Verificarea, descărcarea și instalarea au stări separate; o eroare nu înseamnă că o actualizare a fost instalată.
+> Ghidul complet nu este încă tradus în limba interfeței dumneavoastră. Se afișează versiunea de referință în limba engleză.
 
-Instalarea automată este destinată versiunilor semnate pentru macOS. Versiunile de dezvoltare nesemnate nu sunt instalate automat prin acest mecanism. Pentru înlocuirea manuală, închideți complet aplicația curentă și utilizați un artefact verificat.
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-Verificarea automată rulează imediat după activare, apoi la fiecare șase ore.
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Canalul stabil exclude versiunile de previzualizare; previzualizarea permite și versiuni de dezvoltare. O verificare reușită stabilește doar metadatele versiunii disponibile. Descărcarea și instalarea necesită pachetul specific platformei și fluxul de versiuni configurat. Livrarea pachetelor DEB pe Linux este o cale de instalare separată; nu presupuneți că un pachet DEB este actualizat automat prin mecanismul de actualizare pentru macOS.
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-Instrucțiuni asociate: [Pregătirea versiunii](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+Instrucțiuni asociate: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

@@ -1390,5 +1390,17 @@
   "video_save_error": "無法儲存影片：{error}",
   "video_save_cancelled": "已取消儲存影片",
   "video_saved": "影片已儲存",
-  "video_invalid": "影片資料無效"
+  "video_invalid": "影片資料無效",
+  "updates.check": "檢查更新",
+  "updates.update": "立即更新",
+  "updates.installedVersion": "已安裝版本",
+  "updates.availableVersion": "可用版本",
+  "updates.localOnly": "請在此電腦的桌面應用程式中管理更新。",
+  "updates.manualInstall": "此處無法自動安裝。請下載安裝套件，或開啟版本發布頁面手動安裝。",
+  "updates.installNotice": "更新前請完成進行中的工作。ZIAForge 將關閉，並可能開啟系統安裝程式。",
+  "updates.release": "查看版本發布",
+  "updates.settings": "更新設定",
+  "updates.autoInstallNotice": "安裝一律需要您主動操作。",
+  "updates.preparing": "正在準備更新…",
+  "updates.installing": "正在安裝更新…"
 }

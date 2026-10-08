@@ -1390,5 +1390,17 @@
   "video_save_error": "Không thể lưu video: {error}",
   "video_save_cancelled": "Đã hủy lưu video",
   "video_saved": "Đã lưu video",
-  "video_invalid": "Dữ liệu video không hợp lệ"
+  "video_invalid": "Dữ liệu video không hợp lệ",
+  "updates.check": "Kiểm tra bản cập nhật",
+  "updates.update": "Cập nhật ngay",
+  "updates.installedVersion": "Phiên bản đã cài đặt",
+  "updates.availableVersion": "Phiên bản có sẵn",
+  "updates.localOnly": "Quản lý cập nhật trong ứng dụng máy tính trên máy này.",
+  "updates.manualInstall": "Không thể cài đặt tự động tại đây. Tải gói hoặc mở trang phát hành để cài đặt thủ công.",
+  "updates.installNotice": "Hoàn tất công việc đang thực hiện trước khi cập nhật. ZIAForge sẽ đóng và có thể mở trình cài đặt hệ thống.",
+  "updates.release": "Xem bản phát hành",
+  "updates.settings": "Cài đặt cập nhật",
+  "updates.autoInstallNotice": "Việc cài đặt luôn cần thao tác của bạn.",
+  "updates.preparing": "Đang chuẩn bị cập nhật…",
+  "updates.installing": "Đang cài đặt bản cập nhật…"
 }

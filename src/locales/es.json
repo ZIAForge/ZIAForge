@@ -1390,5 +1390,17 @@
   "video_save_error": "No se pudo guardar el vídeo: {error}",
   "video_save_cancelled": "Se canceló el guardado del vídeo",
   "video_saved": "Vídeo guardado",
-  "video_invalid": "Datos de vídeo no válidos"
+  "video_invalid": "Datos de vídeo no válidos",
+  "updates.check": "Buscar actualizaciones",
+  "updates.update": "Actualizar ahora",
+  "updates.installedVersion": "Versión instalada",
+  "updates.availableVersion": "Versión disponible",
+  "updates.localOnly": "Gestiona las actualizaciones en la aplicación de escritorio de este equipo.",
+  "updates.manualInstall": "La instalación automática no está disponible aquí. Descarga el paquete o abre la página de la versión para instalarlo manualmente.",
+  "updates.installNotice": "Termina el trabajo en curso antes de actualizar. ZIAForge se cerrará y puede abrir el instalador del sistema.",
+  "updates.release": "Ver versión",
+  "updates.settings": "Ajustes de actualización",
+  "updates.autoInstallNotice": "La instalación siempre requiere una acción tuya.",
+  "updates.preparing": "Preparando actualización…",
+  "updates.installing": "Instalando actualización…"
 }

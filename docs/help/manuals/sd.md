@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: sd; served locale: sd; status: machine-translated. -->
 # ZIAForge واپرائيندڙ رهنمائي
@@ -32,7 +32,7 @@ Requested locale: sd; served locale: sd; status: machine-translated. -->
 - [برائوزر ۽ ريموٽ انسٽينسز](#remote)
 - [OpenClaw، Hermes ۽ ٻيا ٻاهرين ايجنٽ](#external-agents)
 - [مقامي CLI ۽ خودڪار نظام جون حدون](#local-cli)
-- [ورزن ۽ اپڊيٽس](#updates)
+- [Version and updates](#updates)
 - [ٻيهر شروع ڪرڻ ۽ بحالي](#restart)
 - [مسئلن جو حل](#troubleshooting)
 - [مسئلن جي رپورٽ ڏيو ۽ ثبوتن جو معائنو ڪريو](#diagnostics)
@@ -418,17 +418,21 @@ ziaf ڊسچيپر ساڳئي هلندڙ ايپ ۽ محفوظ ڪيل ورڪ فل�
 
 <a id="updates"></a>
 
-## ورزن ۽ اپڊيٽس
+## Version and updates
 
-About ۾ هلندڙ بلڪل صحيح ورزن ڏيکاريو وڃي ٿو. عوامي اپڊيٽس لاءِ هڪ قابل اعتماد GitHub رليز ريپوزٽري ۽ هڪ مستحڪم يا پريويو چينل گهربل آهي. چڪاس ڪرڻ، ڊائون لوڊ ڪرڻ ۽ انسٽال ڪرڻ جون الڳ الڳ حالتون آهن؛ ڪنهن خرابي جو مطلب اهو ناهي ته اپڊيٽ انسٽال ٿي وئي.
+> مڪمل رهنمائي اڃا تائين توهان جي انٽرفيس واري ٻوليءَ ۾ ترجمو نه ڪئي وئي آهي. انگريزي حوالو ڏيکاري رهيو آهي.
 
-خودڪار تنصيب تصديق ٿيل (signed) macOS رليزز لاءِ آهي. غير تصديق ٿيل ڊولپمينٽ بلڊز هن طريقي سان پاڻمرادو انسٽال نٿا ٿين. هٿ سان تبديل ڪرڻ لاءِ، موجوده ايپ کي مڪمل طور بند ڪريو ۽ تصديق ٿيل آرٽيفئڪٽ استعمال ڪريو.
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-پاڻمرادو چڪاس فعال ٿيڻ تي ترت، ۽ پوءِ هر ڇهن ڪلاڪن بعد هلندي آهي.
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-مستحڪم پريويو رليزز کي خارج ڪري ٿو؛ پريويو ڊولپمينٽ رليزز جي پڻ اجازت ڏئي ٿو. هڪ ڪامياب چڪاس صرف دستياب رليز جي ميٽا ڊيٽا جي تصديق ڪري ٿي. ڊائون لوڊ ۽ تنصيب لاءِ پليٽ فارم پيڪيج ۽ ترتيب ڏنل رليز فيڊ گهربل آهي. Linux DEB پهچائڻ هڪ الڳ انسٽالر واٽ آهي؛ اهو گمان نه ڪريو ته هڪ DEB پاڻمرادو macOS اپڊيٽ واري طريقي ذريعي اپ گريڊ ٿي ويندو.
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-لاڳاپيل هدايتون: [رليز جي تياري](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+لاڳاپيل هدايتون: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

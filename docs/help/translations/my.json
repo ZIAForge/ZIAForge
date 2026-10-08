@@ -419,16 +419,21 @@
     },
     {
       "id": "updates",
-      "title": "ဗားရှင်းနှင့် အပ်ဒိတ်များ",
+      "title": "Version and updates",
       "paragraphs": [
-        "About သည် အတိအကျ အလုပ်လုပ်နေသည့် ဗားရှင်းကို ပြသသည်။ အများသုံး အပ်ဒိတ်များသည် ယုံကြည်စိတ်ချရသော GitHub ဖြန့်ချိရေး သိုလှောင်ခန်းနှင့် တည်ငြိမ်သော (stable) သို့မဟုတ် အကြိုကြည့်ရှုမှု (preview) လိုင်းတစ်ခု လိုအပ်သည်။ စစ်ဆေးခြင်း၊ ဒေါင်းလုဒ်လုပ်ခြင်းနှင့် ထည့်သွင်းခြင်းတို့တွင် သီးခြား အခြေအနေများ ရှိကြသည်; အမှားတစ်ခုသည် အပ်ဒိတ်တစ်ခု ထည့်သွင်းပြီးပြီဟု မဆိုလိုပါ။",
-        "အလိုအလျောက် ထည့်သွင်းခြင်းသည် လက်မှတ်ရေးထိုးထားသော macOS ထုတ်ဝေမှုများအတွက် ဖြစ်သည်။ လက်မှတ်မထိုးထားသော ဖွံ့ဖြိုးတိုးတက်မှု build များကို ဤယန္တရားမှတစ်ဆင့် အလိုအလျောက် ထည့်သွင်းမည် မဟုတ်ပါ။ ကိုယ်တိုင် အစားထိုးရန်အတွက် လက်ရှိ အက်ပ်ကို အပြီးအပိုင် ပိတ်ပြီး အတည်ပြုထားသော artifact တစ်ခုကို အသုံးပြုပါ။",
-        "အလိုအလျောက် စစ်ဆေးခြင်းသည် ဖွင့်ထားသည့်အခါ ချက်ချင်း လည်ပတ်ပြီး ခြောက်နာရီတစ်ကြိမ် ဆက်လက်လည်ပတ်သည်။",
-        "Stable သည် အကြိုကြည့်ရှုမှု ထုတ်ဝေမှုများကို ဖယ်ထုတ်ထားသည်; preview သည် ဖွံ့ဖြိုးတိုးတက်မှု ထုတ်ဝေမှုများကိုပါ ခွင့်ပြုသည်။ အောင်မြင်သော စစ်ဆေးမှုတစ်ခုသည် ရရှိနိုင်သော ထုတ်ဝေမှု မက်တာဒေတာကိုသာ သတ်မှတ်ပေးသည်။ ဒေါင်းလုဒ်လုပ်ခြင်းနှင့် ထည့်သွင်းခြင်းတို့အတွက် ပလက်ဖောင်း ပက်ကေ့ဂျ်နှင့် ပြင်ဆင်သတ်မှတ်ထားသော ဖြန့်ချိရေး feed လိုအပ်သည်။ Linux DEB ပေးပို့မှုသည် သီးခြား ထည့်သွင်းမှု လမ်းကြောင်းဖြစ်သည်; DEB ကို macOS အပ်ဒိတ် ယန္တရားဖြင့် အလိုအလျောက် အဆင့်မြှင့်တင်သည်ဟု မယူဆပါနှင့်။"
+        "Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.",
+        "When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.",
+        "Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.",
+        "Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.",
+        "Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only."
       ],
       "links": [
         {
-          "label": "ထုတ်ဝေမှု အသင့်ဖြစ်မှု",
+          "label": "Application update behavior and installation limits",
+          "path": "docs/UPDATES.md"
+        },
+        {
+          "label": "Release readiness",
           "path": "docs/RELEASE_READINESS.md"
         }
       ]

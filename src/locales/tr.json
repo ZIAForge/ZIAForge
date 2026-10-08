@@ -1390,5 +1390,17 @@
   "video_save_error": "Video kaydedilemedi: {error}",
   "video_save_cancelled": "Videoyu kaydetme iptal edildi",
   "video_saved": "Video kaydedildi",
-  "video_invalid": "Geçersiz video verisi"
+  "video_invalid": "Geçersiz video verisi",
+  "updates.check": "Güncellemeleri denetle",
+  "updates.update": "Şimdi güncelle",
+  "updates.installedVersion": "Yüklü sürüm",
+  "updates.availableVersion": "Kullanılabilir sürüm",
+  "updates.localOnly": "Güncellemeleri bu bilgisayardaki masaüstü uygulamasından yönetin.",
+  "updates.manualInstall": "Otomatik kurulum burada kullanılamıyor. Elle kurmak için paketi indirin veya sürüm sayfasını açın.",
+  "updates.installNotice": "Güncellemeden önce devam eden işleri bitirin. ZIAForge kapanacak ve sistem yükleyicisini açabilir.",
+  "updates.release": "Sürümü görüntüle",
+  "updates.settings": "Güncelleme ayarları",
+  "updates.autoInstallNotice": "Kurulum her zaman sizin işlem yapmanızı gerektirir.",
+  "updates.preparing": "Güncelleme hazırlanıyor…",
+  "updates.installing": "Güncelleme yükleniyor…"
 }

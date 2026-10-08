@@ -1390,5 +1390,17 @@
   "video_save_error": "An kasa ajiye bidiyon: {error}",
   "video_save_cancelled": "An soke ajiyar bidiyon",
   "video_saved": "An ajiye bidiyon",
-  "video_invalid": "Bayanan bidiyon ba su inganta ba"
+  "video_invalid": "Bayanan bidiyon ba su inganta ba",
+  "updates.check": "Duba sabuntawa",
+  "updates.update": "Sabunta yanzu",
+  "updates.installedVersion": "Sigar da aka girka",
+  "updates.availableVersion": "Sigar da ke akwai",
+  "updates.localOnly": "Sarrafa sabuntawa a manhajar kwamfutar nan.",
+  "updates.manualInstall": "Ba a samun girkawa ta atomatik a nan. Sauke kunshin ko buɗe shafin sigar don girkawa da hannu.",
+  "updates.installNotice": "Kammala aikin da ke gudana kafin sabuntawa. ZIAForge zai rufe kuma yana iya buɗe mai girka na tsarin.",
+  "updates.release": "Duba sigar",
+  "updates.settings": "Saitunan sabuntawa",
+  "updates.autoInstallNotice": "Girkawa koyaushe yana buƙatar aikinka.",
+  "updates.preparing": "Ana shirya sabuntawa…",
+  "updates.installing": "Ana girka sabuntawa…"
 }

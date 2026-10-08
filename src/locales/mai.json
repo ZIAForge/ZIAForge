@@ -1390,5 +1390,17 @@
   "video_save_error": "वीडियो सहेजल नहि जा सकल: {error}",
   "video_save_cancelled": "वीडियो सहेजब रद्द कएल गेल",
   "video_saved": "वीडियो सहेजल गेल",
-  "video_invalid": "वीडियोक डेटा अमान्य अछि"
+  "video_invalid": "वीडियोक डेटा अमान्य अछि",
+  "updates.check": "अपडेट जाँचू",
+  "updates.update": "एखन अपडेट करू",
+  "updates.installedVersion": "इंस्टॉल कएल संस्करण",
+  "updates.availableVersion": "उपलब्ध संस्करण",
+  "updates.localOnly": "एहि कंप्यूटरक डेस्कटॉप ऐपमे अपडेट प्रबंधित करू।",
+  "updates.manualInstall": "एतय अपने-आप इंस्टॉल करबाक सुविधा उपलब्ध नहि अछि। पैकेज डाउनलोड करू वा स्वयं इंस्टॉल करबाक लेल रिलीज पृष्ठ खोलू।",
+  "updates.installNotice": "अपडेट करबासँ पहिने चलि रहल काज पूरा करू। ZIAForge बन्न होयत आ सिस्टम इंस्टॉलर खुजि सकैत अछि।",
+  "updates.release": "रिलीज देखू",
+  "updates.settings": "अपडेट सेटिंग",
+  "updates.autoInstallNotice": "इंस्टॉल करबाक लेल सदिखन अहाँक कार्रवाई आवश्यक अछि।",
+  "updates.preparing": "अपडेट तैयार भऽ रहल अछि…",
+  "updates.installing": "अपडेट इंस्टॉल भऽ रहल अछि…"
 }

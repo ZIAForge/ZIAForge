@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: ig; served locale: ig; status: machine-translated. -->
 # Akwụkwọ ntuziaka onye ọrụ ZIAForge
@@ -32,7 +32,7 @@ Bekee bụ nke kachasị mkpa. E ji akara dị iche mara enyemaka sụgharịr�
 - [Ihe nchọgharị na ihe ndị dịpụrụ adịpụ](#remote)
 - [OpenClaw, Hermes na ndị ọrụ mpụga ndị ọzọ](#external-agents)
 - [CLI mpaghara na oke akpaaka](#local-cli)
-- [Ụdị na mmelite](#updates)
+- [Version and updates](#updates)
 - [Malitegharịa ma gbakee](#restart)
 - [Nchọpụta nsogbu](#troubleshooting)
 - [Kpesa nsogbu ma nyochaa ihe akaebe](#diagnostics)
@@ -418,17 +418,21 @@ Ntuziaka ndị metụtara: [Iwu onye mgbasa ozi](../../CLI.md).
 
 <a id="updates"></a>
 
-## Ụdị na mmelite
+## Version and updates
 
-Maka na-egosi kpọmkwem ụdị na-agba ọsọ. Mmelite ọha chọrọ ebe nchekwa ntọhapụ GitHub a tụkwasịrị obi yana ọwa kwụsiri ike ma ọ bụ nke nlele. Nlele, nbudata na ntinye nwere ọnọdụ dị iche iche; njehie apụtaghị na etinyere mmelite.
+> Atụgharịbeghị ntuziaka zuru oke n'asụsụ interface gị. Na-egosi ntụaka Bekee.
 
-Ntinye na-akpaghị aka bụ maka mbipụta macOS abịanyere aka. Mbipụta mmepe a na-abịanyeghị aka anaghị etinye na-akpaghị aka site na usoro a. Maka ngbanwe aka, kwụsị ngwa dị ugbu a kpamkpam ma jiri ihe nkwenye a kwadoro.
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-Nlele na-akpaghị aka na-agba ozugbo mgbe agbanyere ya, wee na-agba kwa awa isii.
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Kwụsiri ike anaghị agụnye mbipụta nlele; nlele na-enye ohere mbipụta mmepe n'otu aka ahụ. Nlele gara nke ọma na-ewepụta naanị metadata ntọhapụ dịnụ. Nbudata na ntinye chọrọ ngwugwu ikpo okwu yana nri ntọhapụ ahaziri ahazi. Nnyefe Linux DEB bụ ụzọ ntinye dị iche; echela na a na-akwalite DEB na-akpaghị aka site na usoro mmelite macOS.
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-Ntuziaka ndị metụtara: [Nkwadebe ntọhapụ](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+Ntuziaka ndị metụtara: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: zh-CN; served locale: zh-CN; status: machine-translated. -->
 # ZIAForge 用户指南
@@ -32,7 +32,7 @@ Requested locale: zh-CN; served locale: zh-CN; status: machine-translated. -->
 - [浏览器与远程实例](#remote)
 - [OpenClaw、Hermes 及其他外部代理](#external-agents)
 - [本地 CLI 与自动化限制](#local-cli)
-- [版本与更新](#updates)
+- [Version and updates](#updates)
 - [重启与恢复](#restart)
 - [故障排除](#troubleshooting)
 - [报告问题与检查证据](#diagnostics)
@@ -418,17 +418,21 @@ ziaf 分派器控制着同一个运行中的应用程序和已保存的工作流
 
 <a id="updates"></a>
 
-## 版本与更新
+## Version and updates
 
-“关于”显示当前运行的确切版本。公开更新需要受信任的 GitHub 发布仓库以及稳定（stable）或预览（preview）通道。检查、下载和安装具有各自独立的状态；出现错误并不意味着更新已安装。
+> 完整指南尚未翻译成您的界面语言。正在显示英文参考版本。
 
-自动安装仅适用于已签名的 macOS 发布版本。未签名的开发构建版不会通过此机制自动安装。如需手动替换，请彻底退出当前应用程序并使用经过验证的产物。
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-启用后，自动检查会立即运行，随后每六小时运行一次。
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-稳定通道不包含预览版本；预览通道也允许开发版本。成功的检查仅确定可用的发布元数据。下载和安装需要对应的平台软件包和配置的发布源。Linux DEB 分发属于独立的安装程序路径；切勿假定 DEB 会通过 macOS 更新机制自动升级。
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-相关指令: [发布准备情况](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+相关指令: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

@@ -419,16 +419,21 @@
     },
     {
       "id": "updates",
-      "title": "వెర్షన్ మరియు అప్‌డేట్‌లు",
+      "title": "Version and updates",
       "paragraphs": [
-        "About ఖచ్చితమైన రన్నింగ్ వెర్షన్‌ను చూపుతుంది. పబ్లిక్ అప్‌డేట్‌లకు విశ్వసనీయమైన GitHub విడుదల రిపోజిటరీ మరియు స్థిరమైన లేదా ప్రివ్యూ ఛానెల్ అవసరం. తనిఖీ చేయడం, డౌన్‌లోడ్ చేయడం మరియు ఇన్‌స్టాలేషన్ ప్రత్యేక స్థితులను కలిగి ఉంటాయి; లోపం అంటే నవీకరణ ఇన్‌స్టాల్ చేయబడిందని అర్థం కాదు.",
-        "స్వయంచాలక ఇన్‌స్టాలేషన్ సైన్ చేసిన macOS విడుదలల కోసం మాత్రమే. సైన్ చేయని డెవలప్‌మెంట్ బిల్డ్‌లు ఈ విధానం ద్వారా స్వయంచాలకంగా ఇన్‌స్టాల్ చేయబడవు. మాన్యువల్ భర్తీ కోసం, ప్రస్తుత యాప్ నుండి పూర్తిగా నిష్క్రమించి, ధృవీకరించబడిన ఆర్టిఫాక్ట్‌ను ఉపయోగించండి.",
-        "స్వయంచాలక తనిఖీ ప్రారంభించబడిన వెంటనే అమలు అవుతుంది, ఆపై ప్రతి ఆరు గంటలకు ఒకసారి జరుగుతుంది.",
-        "Stable ప్రివ్యూ విడుదలలను మినహాయిస్తుంది; preview అభివృద్ధి విడుదలలను కూడా అనుమతిస్తుంది. విజయవంతమైన తనిఖీ అందుబాటులో ఉన్న విడుదల మెటాడేటాను మాత్రమే నిర్ధారిస్తుంది. డౌన్‌లోడ్ మరియు ఇన్‌స్టాలేషన్‌కు ప్లాట్‌ఫారమ్ ప్యాకేజీ మరియు కాన్ఫిగర్ చేయబడిన విడుదల ఫీడ్ అవసరం. Linux DEB డెలివరీ అనేది ప్రత్యేక ఇన్‌స్టాలర్ మార్గం; DEB అనేది macOS నవీకరణ విధానం ద్వారా స్వయంచాలకంగా అప్‌గ్రేడ్ చేయబడుతుందని భావించవద్దు."
+        "Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.",
+        "When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.",
+        "Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.",
+        "Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.",
+        "Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only."
       ],
       "links": [
         {
-          "label": "విడుదల సంసిద్ధత",
+          "label": "Application update behavior and installation limits",
+          "path": "docs/UPDATES.md"
+        },
+        {
+          "label": "Release readiness",
           "path": "docs/RELEASE_READINESS.md"
         }
       ]

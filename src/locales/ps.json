@@ -1390,5 +1390,17 @@
   "video_save_error": "ویډیو خوندي نه شوه: {error}",
   "video_save_cancelled": "د ویډیو خوندي کول لغوه شول",
   "video_saved": "ویډیو خوندي شوه",
-  "video_invalid": "د ویډیو ناسم معلومات"
+  "video_invalid": "د ویډیو ناسم معلومات",
+  "updates.check": "تازه‌کونې وګورئ",
+  "updates.update": "اوس تازه کړئ",
+  "updates.installedVersion": "نصب شوې نسخه",
+  "updates.availableVersion": "شته نسخه",
+  "updates.localOnly": "تازه‌کونې د دې کمپیوټر په ډېسکټاپ اپ کې اداره کړئ.",
+  "updates.manualInstall": "دلته اتومات نصب نشته. بسته ښکته کړئ یا د لاسي نصب لپاره د خپرونې پاڼه پرانیزئ.",
+  "updates.installNotice": "تر تازه کولو مخکې روان کار پای ته ورسوئ. ZIAForge به وتړل شي او ښايي د سیسټم نصبوونکی پرانیزي.",
+  "updates.release": "خپرونه وګورئ",
+  "updates.settings": "د تازه‌کونې امستنې",
+  "updates.autoInstallNotice": "نصب تل ستاسو اقدام ته اړتیا لري.",
+  "updates.preparing": "تازه‌کونه چمتو کېږي…",
+  "updates.installing": "تازه‌کونه نصبېږي…"
 }

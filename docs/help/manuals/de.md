@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: de; served locale: de; status: machine-translated. -->
 # ZIAForge-Benutzerhandbuch
@@ -32,7 +32,7 @@ Englisch ist verbindlich. Maschinell übersetzte Hilfe ist getrennt von durch Me
 - [Browser- und Remote-Instanzen](#remote)
 - [OpenClaw, Hermes und andere externe Agenten](#external-agents)
 - [Lokale CLI- und Automatisierungsgrenzen](#local-cli)
-- [Version und Updates](#updates)
+- [Version and updates](#updates)
 - [Neustart und Wiederherstellung](#restart)
 - [Fehlerbehebung](#troubleshooting)
 - [Probleme melden und Nachweise prüfen](#diagnostics)
@@ -418,17 +418,21 @@ Zugehörige Anweisungen: [Dispatcher-Befehle](../../CLI.md).
 
 <a id="updates"></a>
 
-## Version und Updates
+## Version and updates
 
-„Über“ zeigt die genaue laufende Version. Öffentliche Updates erfordern ein vertrauenswürdiges GitHub-Release-Repository und einen Stable- oder Preview-Kanal. Prüfung, Download und Installation haben separate Status; ein Fehler bedeutet nicht, dass ein Update installiert wurde.
+> Das vollständige Handbuch ist noch nicht in Ihre Benutzeroberflächensprache übersetzt. Angezeigt wird die englische Referenz.
 
-Die automatische Installation gilt für signierte macOS-Releases. Unsignierte Entwicklungs-Builds werden über diesen Mechanismus nicht automatisch installiert. Beenden Sie für einen manuellen Austausch die aktuelle App vollständig und verwenden Sie ein verifiziertes Artefakt.
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-Die automatische Überprüfung läuft sofort bei Aktivierung und danach alle sechs Stunden.
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-„Stable“ schließt Preview-Releases aus; „Preview“ lässt auch Entwicklungs-Releases zu. Eine erfolgreiche Prüfung stellt lediglich die verfügbaren Release-Metadaten fest. Download und Installation erfordern das Plattform-Paket und den konfigurierten Release-Feed. Die Bereitstellung von Linux DEB ist ein separater Installationspfad; nehmen Sie nicht an, dass ein DEB automatisch durch den macOS-Aktualisierungsmechanismus aktualisiert wird.
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-Zugehörige Anweisungen: [Release-Bereitschaft](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+Zugehörige Anweisungen: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

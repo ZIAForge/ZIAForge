@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: th; served locale: th; status: machine-translated. -->
 # คู่มือผู้ใช้ ZIAForge
@@ -32,7 +32,7 @@ Requested locale: th; served locale: th; status: machine-translated. -->
 - [เบราว์เซอร์และอินสแตนซ์ระยะไกล](#remote)
 - [OpenClaw, Hermes และเอเจนต์ภายนอกอื่นๆ](#external-agents)
 - [CLI ภายในเครื่องและขีดจำกัดของระบบอัตโนมัติ](#local-cli)
-- [เวอร์ชันและการอัปเดต](#updates)
+- [Version and updates](#updates)
 - [การเริ่มใหม่และการกู้คืน](#restart)
 - [การแก้ไขปัญหา](#troubleshooting)
 - [รายงานปัญหาและตรวจสอบหลักฐาน](#diagnostics)
@@ -418,17 +418,21 @@ Telegram จะถูกเปิดใช้งานได้โดยเจ�
 
 <a id="updates"></a>
 
-## เวอร์ชันและการอัปเดต
+## Version and updates
 
-About จะแสดงเวอร์ชันที่กำลังทำงานอยู่อย่างแม่นยำ การอัปเดตสาธารณะต้องใช้ที่เก็บการเผยแพร่ของ GitHub ที่เชื่อถือได้และแชนเนลที่เสถียร (stable) หรือพรีวิว (preview) การตรวจสอบ การดาวน์โหลด และการติดตั้งมีสถานะแยกจากกัน ข้อผิดพลาดไม่ได้หมายความว่าการอัปเดตได้รับการติดตั้งแล้ว
+> คู่มือฉบับเต็มยังไม่ได้รับการแปลเป็นภาษาของอินเทอร์เฟซของคุณ กำลังแสดงเอกสารอ้างอิงภาษาอังกฤษ
 
-การติดตั้งอัตโนมัติมีไว้สำหรับรุ่น macOS ที่มีการลงนาม บิลด์สำหรับการพัฒนาที่ไม่ได้ลงนามจะไม่ได้รับการติดตั้งโดยอัตโนมัติผ่านกลไกนี้ สำหรับการแทนที่ด้วยตนเอง ให้ออกจากแอปปัจจุบันโดยสมบูรณ์และใช้อาร์ติแฟกต์ที่ผ่านการตรวจสอบแล้ว
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-การตรวจสอบอัตโนมัติจะทำงานทันทีเมื่อเปิดใช้งาน จากนั้นจะทำงานทุกหกชั่วโมง
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Stable จะไม่รวมรุ่นพรีวิว ส่วน preview จะอนุญาตให้มีรุ่นสำหรับการพัฒนาด้วย การตรวจสอบที่สำเร็จจะสร้างเฉพาะข้อมูลเมทาดาทาของรุ่นที่มีอยู่เท่านั้น การดาวน์โหลดและการติดตั้งจำเป็นต้องมีแพ็กเกจของแพลตฟอร์มและฟีดการเผยแพร่ที่กำหนดค่าไว้ การส่งมอบ Linux DEB เป็นเส้นทางการติดตั้งแยกต่างหาก อย่าสรุปว่า DEB จะได้รับการอัปเกรดโดยอัตโนมัติผ่านกลไกการอัปเดตของ macOS
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-คำแนะนำที่เกี่ยวข้อง: [ความพร้อมของรุ่นเผยแพร่](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+คำแนะนำที่เกี่ยวข้อง: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

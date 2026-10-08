@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: jv; served locale: jv; status: machine-translated. -->
 # Pandhuan pangguna ZIAForge
@@ -32,7 +32,7 @@ Basa Inggris minangka babon resmi (kanonik). Pitulung asil jarwan mesin diwenehi
 - [Panjlajah lan instansi kadohan](#remote)
 - [OpenClaw, Hermes, lan agen eksternal liyane](#external-agents)
 - [CLI lokal lan watesan otomatisasi](#local-cli)
-- [Versi lan pembaruan](#updates)
+- [Version and updates](#updates)
 - [Mulai maneh lan pemulihan](#restart)
 - [Pamecahan masalah](#troubleshooting)
 - [Laporke masalah lan priksa bukti](#diagnostics)
@@ -418,17 +418,21 @@ Pituduh gegandhengan: [Prentah dispatcher](../../CLI.md).
 
 <a id="updates"></a>
 
-## Versi lan pembaruan
+## Version and updates
 
-Babagan nampilake versi lumaku sing persis. Pembaruan umum mbutuhake repositori rilis GitHub sing dipercaya lan saluran stabil utawa pratinjau. Mriksa, ngundhuh, lan masang duwe kahanan kapisah; kesalahan ora ateges pembaruan wis kapacak.
+> Pandhuan lengkap durung diterjemahake menyang basa tampilan sampeyan. Nampilake rujukan basa Inggris.
 
-Pemasangan otomatis kanggo rilis macOS sing ditandatangani. Rilis pangembangan sing ora ditandatangani ora dipasang kanthi otomatis lumantar mekanisme iki. Kanggo panggantian manual, pateni aplikasi saiki kanthi lengkap lan gunakake artifak sing wis diverifikasi.
+Open Settings → Updates and choose Check for updates. The official GitHub repository ZIAForge/ZIAForge and the Stable channel are configured by default. The panel shows the running version and any newer compatible release. Preview includes prereleases; Stable excludes them. Checking never installs an update.
 
-Pamriksan otomatis lumaku sanalika diaktifake, banjur saben nem jam.
+When an update is available, Update downloads the package for this operating system and architecture, verifies its published size and SHA-256, prepares the installer and requests a normal application restart. Save file edits first. Installation is armed only after application services stop, and the installer waits for the current process to exit. Your profile, settings, task history and project files are kept.
 
-Stabil ora kalebu rilis pratinjau; pratinjau ngidini rilis pangembangan uga. Pamriksan sing kasil mung nemtokake metadata rilis sing kasedhiya. Ngundhuh lan masang mbutuhake paket platform lan umpan rilis sing dikonfigurasi. Pangiriman Linux DEB iku jalur installer kapisah; aja nganggep DEB otomatis dianyari dening mekanisme pembaruan macOS.
+Supported installation paths are a writable macOS application bundle, the Windows installer, Linux AppImage and the distribution package manager for DEB/RPM. System installation or authentication prompts may still appear. A development checkout, a read-only or translocated macOS app, or an unsupported portable layout may require manual installation; the panel explains that case and links to the release. Move a macOS application out of the mounted disk image before using in-place updates.
 
-Pituduh gegandhengan: [Kesiapan rilis](../../RELEASE_READINESS.md).
+Automatic checking and downloading is optional. When enabled, it checks immediately and every six hours. Installing and restarting remains a separate owner action. A failed download or checksum check retains the existing installation and never runs the downloaded file.
+
+Downloaded package hashes establish that the files match the selected GitHub release. They do not replace code signing or notarization. The updater does not disable operating-system security checks. Repository and channel changes, downloads and installation are local owner actions; remote agents can read update status only.
+
+Pituduh gegandhengan: [Application update behavior and installation limits](../../UPDATES.md) · [Release readiness](../../RELEASE_READINESS.md).
 
 <a id="restart"></a>
 

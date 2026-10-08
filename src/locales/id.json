@@ -1390,5 +1390,17 @@
   "video_save_error": "Tidak dapat menyimpan video: {error}",
   "video_save_cancelled": "Penyimpanan video dibatalkan",
   "video_saved": "Video disimpan",
-  "video_invalid": "Data video tidak valid"
+  "video_invalid": "Data video tidak valid",
+  "updates.check": "Periksa pembaruan",
+  "updates.update": "Perbarui sekarang",
+  "updates.installedVersion": "Versi terpasang",
+  "updates.availableVersion": "Versi tersedia",
+  "updates.localOnly": "Kelola pembaruan di aplikasi desktop pada komputer ini.",
+  "updates.manualInstall": "Pemasangan otomatis tidak tersedia di sini. Unduh paket atau buka halaman rilis untuk memasang secara manual.",
+  "updates.installNotice": "Selesaikan pekerjaan yang sedang berlangsung sebelum memperbarui. ZIAForge akan ditutup dan mungkin membuka pemasang sistem.",
+  "updates.release": "Lihat rilis",
+  "updates.settings": "Pengaturan pembaruan",
+  "updates.autoInstallNotice": "Pemasangan selalu memerlukan tindakan Anda.",
+  "updates.preparing": "Menyiapkan pembaruan…",
+  "updates.installing": "Memasang pembaruan…"
 }

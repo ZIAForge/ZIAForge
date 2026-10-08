@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
+  "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
   "uiCanonicalSha256": "f01dd2cf51b407110ddb4ea842849a0becb7150d4f957847dd4c82f1da6bbfc3",
   "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
   "automatedChecks": [
@@ -13,8 +13,8 @@
   "locales": [
     {
       "locale": "am",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "6ae7d05f38f1399764057d3778eadcf54062e1b7a4d0b272d7ac202c8ea3d912",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "15997dc0a6153578392ce8286add6aa6f53ba266f9696fd1295647d98f488ae8",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -59,13 +59,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "ar",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "df88ec2bd35c3a5061d36c5b39f3c9951f9b0e51fa47b6547ae1dacc89be954d",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "d8dc55b8043c785ba36caf54ee96bd1922a51ab1e514d58a6c93041901b17a33",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -194,13 +195,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "az",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "4736007bdb8bae2e6ada5c762e9eef126121704b5f6016535999a0bf69faa471",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "ab92ef8c53905dbbce7d497ed5c973a8ddfe1c2ad36bdf527d84c0c7f63669eb",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -245,13 +247,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "bho",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "6145960f247b27576ecc514c8b608218ab8f9d62f9030f5b0d4d79d7cc3b685e",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "d5685cd56b5ec56b4edfd18d9568cc8fb750af1aa1b4d17dca4e147697581d27",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -296,13 +299,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "bn",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "86e6238df20e388e88e7e404bf718ece47c24fdf68490fc972a5bdb5b103adb3",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "de709672535aa71386858864b8087641501540026523404d049499d417f51235",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -347,13 +351,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "ceb",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "6ee34a093ba56b82607b3632181a24fe74f852cad851db71eb1db35d5a28b07e",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "3d87a1641a27fc20f83a0c9cde76b37040c708a9ce2a9f4fdc027aaed7d9145b",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -398,13 +403,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "de",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "fae6a46febde0bdcac81e9af535acfd9831ae7bbeef8cfc7abd9e68255dd1189",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "88a491a2fce4764fee6115bb92f7c169a9dfcace262abb95832f33bfddbd835a",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -503,13 +509,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "es",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "3814629f0ecea45510b8ca224ee7c5f5851b025cce9660923a36d0fe821a7202",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "85205ed2a32e8441f78a9572bec5d728380c1f32b4e1b9810a3b2ffb6b675b31",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -572,13 +579,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "fa",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "8d5075be878b6a829193baa4bc844ea529e07b5728b03cbab68c67fbcfe36c21",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "6d0b9a85c1f418b77eb02150a5fba9e8443f6065e142a306118a876a25f275b1",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -635,13 +643,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "ff",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "f4a5f0bbba70b333aa1ab5c6386006edd97967fd65909ab6ba055dc0319139fa",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "73f56781ae48333da904983dff61371dbc6e0f765ce691c8f32bc8ec605f67ba",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -698,13 +707,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "fr",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "fe839d74900f310d8ad4b2fc9df23af7c4a2cc45fa9e85b2ac2b8462015c3222",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "849befcca0699a3cd9a6b506fff46f7f7188d501a8ac6fd8930dd334322f7b8a",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -749,13 +759,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "gu",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "5cb5ee2a53c21aed77eb7cf2174476ddcb90977a9a46ce4a904794438e9babc8",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "ba6cca9483d24d487416fd1d0cc1784d40b5221239e96c5b1375aa10d0f90bcc",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -800,13 +811,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "ha",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "a279db74c890ca3b3214fbd0f96c028e63d0950f9e683278791fcd7f4fc6cfc3",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "147b06e72a2608928a097175f46949a331af5a449656ab99de55bd8108d01374",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -851,13 +863,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "hi",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "f3592a826788801e16a886590324167c0e60f817d17864fd89656e3f1b2bbd6a",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "1f19197d9553f17532436a43268a198d76e36898af50c35cdad24bcd4b835a02",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -902,13 +915,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "id",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "4d43c356f8bf37163179c906148d26fecf7cc1e5301b155afc6ae1147923377f",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "c758aa304ed20c2ce73472fa554b2f1c14d354e21a42e6dd16ecfd2e76ed7aa9",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -971,13 +985,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "ig",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "a62d1000b8e9aced0fddd2dd24d57ec9a9a62ee8a54fe4c02491d61d2dd1f27d",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "d347b6e662c0b32ea96cc4097b6a543b8ffa9fa7a44012f4ad33761e231c662c",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1022,13 +1037,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "it",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "e60ccaa3f1b6f77dce93ecd177ba88989c48f2444539d1a2c68e12e3a935042c",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "5bfa1cb477ec65277b8c4f08bfe53643a27b9a1b80eb21036e228af8d5a48180",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1073,13 +1089,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "ja-JP",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "d94f31a2a7afb1c9648aef6a0e793f62e345a8277a89f1226087e051cb51a997",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "0659a43d61440334605d3d0d1a47205dbe63dc502093aa5dc1bde17276ee2351",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1160,13 +1177,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "jv",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "74fddb31dcb9cc230ede5d9fcf210cffa2b53eb02bfdc42d503713ad4793b974",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "d4921409ce8271f5bda1989611e78203f6d9c1e3bcb1e1585c124b40e1593348",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1229,13 +1247,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "kk",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "8161e08ec274dedfe28c1a50aab1f18a28be0e405eb32a5bdaaca03587dce467",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "79618f863122ab51fa236e85a0b12bd368c25298adf67b050eca0efb6549fdda",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1280,13 +1299,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "km",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "0447c789ce7c19a3b0fd676f54e10a14ca5c14bd031beeedbfcaac9803b11330",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "3aff07b900be77cb12c9328c54f370bb989efa289f415eafa993985f61310aa1",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1331,13 +1351,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "kn",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "76f1ece14ac666ee0400483e50634318f3601e67a7763b1b8f50e28fe70a8a5f",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "e24a6794aa36ab1fc110e7105154fb0d0e4c4d422e5366597981fe94fc11a590",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1382,13 +1403,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "ko",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "a5757aa3a2db3dd1a65aafd87fcadd696263b9dd733a41ad9aa23e1140904211",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "12b2073690baafb18e863debedf16cad42b458ef0011bd28c07ceb81c825e17b",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1433,13 +1455,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "ku",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "7b8ee9615e5e4051519a5e8ded6b9278f7b1136cf931c973b03d0e18a1c2a78b",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "23efb69586aa9633825fdca6f98a6dc98ddbe0079cbd3f2b1e86fb417b8edfa8",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1484,13 +1507,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "mai",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "02381d65e743745a8555a3760c5ea0c5dd3a8f28b86373770dc568efc6703fc3",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "f1d05a5d698ead3c84544f22da6d6559644d930ab3f949d9e74419e629814a64",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1535,13 +1559,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "mg",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "0033490a14e643055b9431c2224c2d9273e7405b71fa0ef058fd0dc083881d6c",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "8de236cf8cd6215ffea5c17b55322cc3df0ca7176972c637a673f4828fffb7a0",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1586,13 +1611,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "ml",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "67d6ba4f8510cbf2dc5888cd1c4642ad0e49ffe9aa467430cd418ce59c8485ed",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "e93fb2d11e64d262a8227d1dab8378c6217ddaae1729d9874a9d89c39948077c",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1637,13 +1663,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "mr",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "84c6d6ec9f275e381aaef9829312a0552b6ac0ef8431390ed6ca5db4195f1dc2",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "1e521d9d3bdda76f031f233dbb7d30c5ced3552e8f1e8ef220b4531a7e2d3272",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1688,13 +1715,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "my",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "60ce92e456b1f6b4dd3b038b67269411604d10a143654d9217030acdcd98a675",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "ef56c3ee034c833f9ea05a55e123a29b4ce9598864ef7727aef97cf6c70c984f",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1739,13 +1767,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "ne",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "45ff44ee3df15c2469f277ec3fe31ccc44bccf5605e7d8de660ba91fcce04476",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "3d14726f79120597a20968700f17f8e1cc39897f2348a0e1adae875d7a8a4001",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1790,13 +1819,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "nl",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "04fc855519f116f701433d1469cc48b1db314d85c4fa059189ad10c566eb239d",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "9d8365bde78761c7355e51420b9f969f70989fe6aa69be163faf500e758856a7",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1859,13 +1889,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "om",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "95609bf39bc4baad12f2f3a60a94f8c0afae5c009812926d39c1e5d724704f96",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "a5e11daf6c4fbdb937b0b4d1dab9cf42ba69815d05f6ed45521d2c811e13fd45",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1910,13 +1941,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "or",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "7ec17f65f65af24908bf5bd661ed6bdb0db47537feb386d01ed030c7549c3dd4",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "45d4cf5e4dd41f0471c8beedddddd70d47cd89859aa4289a69a16d969b54667f",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -1961,13 +1993,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "pa",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "c5268399a8388eafa22243fa9c88ea095a0346da23f7a377e7e989ee326f4b50",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "0b9cceba5c96cdab0972ef1ad61eabaefa103df23a7c2822810d4d36d4ed5abb",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2012,13 +2045,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "pl",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "82c398627e7c7a7bd530ed1ae295b47abe007619745fe3fd1507181def9e15ab",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "0732bccc25608e159101e8b10c85934875f068562309f8194f6e0e4c0cd563d4",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2081,13 +2115,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "pnb",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "6e8ef2143878a33c569b1ca5353d661b9396b92b0f1a7224a3c3c5e615c38866",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "6f01990b39ec3640142ee984ef7fb2df1b3648032e1e835d4cc481851f3808e5",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2132,13 +2167,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "ps",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "4f052114edff99d1c5a6740efac972a3d756cdf6c3459c7a33a651d85030d0ab",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "d66473b53bbdd5f6cf17f4df89ac19c4f6c2dfab85b6d8cb2c9ca7ba74ac60ec",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2183,13 +2219,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "pt-BR",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "9830d302bf899112a008d1f39891f2072f374c4e44f4ff87313a6b183f26d38a",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "0e57a1483434559872818d30d8f47165169842fa804f27e0fb7e84bf4df9eebd",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2252,13 +2289,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "ro",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "95dd4a6131343abfc01b0a8015b69728ffe62869ddb04076253813e3bc421bdb",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "958ab46d5e9bec22493c9ea1e6d436c0ca2b225ff9911fc168928864ea20f28a",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2303,13 +2341,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "ru",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "6c5ebc846c479d65b5b753c398a797aa5fcd5d2e5c8793141c9b5ff55f6eee63",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "dd78fddfbc807a8fc4ae318787605d34e9a7cce6550e41b185f4271201b12fc3",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2396,13 +2435,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "sd",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "9963a24858e4d0fe087db5f14223d28f751a8c3ce1c2a4461e2cbe7d5be088a6",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "104242a9e73b7c6e31491930e8dd3f499241d72a78ff4b0cc77833a13d567853",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2447,13 +2487,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "so",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "1df13127de36efc4da936c3b0ac8d38983d14a09608a4d0711462f0962e33e63",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "875af69567ad15166f1a1eec50f4231a4ddfbba0e0b2dbd6d0857ccd005a1e39",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2498,13 +2539,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "su",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "bb1b82ac03baca96da61ebbfad97ffaf657d84ec0ddc057fc9dbcf94428cb87a",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "4b1fbdf5d0dcc615de66f608cb25e016f8590d50d0c793cf74a5514031c75390",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2549,13 +2591,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "ta",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "2b501d6218a2601ba8b32a7ea245afb1398d7b65999ca8708c074c9eecf8aa7c",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "2cb1ba7dc04372fc86153981ccefc1666ec23c3878fe6c58878a86fba405e321",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2600,13 +2643,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "te",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "94bfcbaf9e639ff76f0ae268efb652beafcb622b61e1e690af8c03da2a5c6354",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "62a6e80e39021219891fcb7f57ac67f82ddca1f50f24ae4a235fa423b160bb58",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2651,13 +2695,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "th",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "b8aa56fa0e34061943c1b714a94de0eb33253217e409ef865b9db857dc2d58bd",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "bd0027513d5222e9e70e5950686dd9333a1e6acc2cf65abb40c397f676de65ef",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2702,13 +2747,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "tl",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "39109afae01d17433f3342d5319e464eb728eb1ca397efc33271a56a33b6408c",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "aba7e209c1dbe7346715a979882d933f2d4d975b0cd66324dd709eff9c40fdc8",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2753,13 +2799,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "tr",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "5e77fc1c31965c6c7395ea1bd37df2b752c868cdd482a3922bb6d49d1b45d7c8",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "ff7908ea7913bdec8389aa5d2bcb5ca46acfa0388d99bbe020d53db0cd379dc8",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2804,13 +2851,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "uk",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "cb24307ef1cd4d839a23c7ed3400e056024efde1545b9267ae751028688ecede",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "3020272df24c7c08f16d213883b59b8e751c6dc6526a73f2aef8caa32f29370e",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2855,13 +2903,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "ur",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "826fb5a1ca87b7400a60da53aa27ba1ae208c3305169a9c2f1777204246d39d5",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "ef13135c9ca83c3b22a814103688561e0a5a6e661fffd5e1f6e5bb27eebe7be2",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2906,13 +2955,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "uz",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "6a69b420a88dd6325f02ff77458be223556a3d7998dbc7c74faed89b55e699af",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "d805a7dd4301d2e36949100387d0e7ca91abada286acacd5729f417f58abc999",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -2957,13 +3007,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "vi",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "9b550a74c664b60486cab4538089d9b0bf0964baf443f8ca5570374c206f18b5",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "0614d10ede6d1f9990d99164cef9d8172ee42475d9c17f9c9f68f55f469f2289",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -3026,13 +3077,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "yo",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "9f9f8dbd814a32d64e904ff1219b6ab5cbec1e8f1a4ad84ab31f116ff16d82e8",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "2741e0c430d0e48e3049c61c01706c2320aba944f84b2720c86d9a69ff847043",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -3077,13 +3129,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "zh-CN",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "b54595c73be209d40f0e385e65fc26635932a8bb10edae713b94d2cd7854ba8d",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "87d6051499cc6bc824ba8742bd559700149377bd2a60ab62fe2c2efcc813fbe7",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -3128,13 +3181,14 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     },
     {
       "locale": "zh-TW",
-      "sourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
-      "contentSha256": "4ba2858cff9a81e2781f43d0ee7218ce705246a363b2eda4c71a6b5216e6fa30",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "contentSha256": "e9030293f2a5af7cf336b926a0d8598e5938db6154b9019ec8a309b85e196240",
       "fieldCount": 250,
       "newUIKeys": 39,
       "method": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
@@ -3179,7 +3233,8 @@
       ],
       "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
       "englishFallbackSections": [
-        "api"
+        "api",
+        "updates"
       ]
     }
   ],
@@ -3650,5 +3705,16 @@
     "englishFallbackLocales": [],
     "nativeHumanReview": false,
     "method": "Contextual AI translations of eight short video-card labels and status/error messages in all 55 non-English interface locales, preserving {error}. No external provider requests. No native-language human review or full linguistic certification claimed."
-  }
+  },
+  "updateNotes": [
+    {
+      "sections": [
+        "updates"
+      ],
+      "method": "Canonical English update lifecycle instructions; unchanged translations retained and changed section explicitly served as English fallback.",
+      "sourceSha256": "c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2",
+      "previousSourceSha256": "1d8a8515cf743144e27893fc6fb1e85fc06b290f1744ab0ebc57665893e6d684",
+      "nativeHumanReview": false
+    }
+  ]
 }
