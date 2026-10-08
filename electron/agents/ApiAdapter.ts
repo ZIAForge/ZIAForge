@@ -107,7 +107,7 @@ export class ApiAdapter implements AgentAdapter {
   }
   async sendPrompt(request: SendPromptRequest): Promise<{ turnId: string }> {
     if (request.taskId !== this.options.taskId || request.runId && request.runId !== this.options.runId || this.status !== 'running' || this.stopped || this.active) throw new Error('API session is not ready for this turn')
-    if (request.attachments?.length) throw new Error('API attachments are not supported')
+    if (request.attachments?.length || request.inputImages?.length) throw new Error('API attachments are not supported')
     if (!request.text.trim() || request.text.length > 100_000) throw new Error('Invalid API prompt')
     const active: Active = { id: `turn-${randomUUID()}`, controller: new AbortController(), messages: [{ role: 'user', content: request.text }], finished: Promise.resolve(), interrupted: false }
     this.active = active

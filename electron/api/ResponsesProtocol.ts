@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto'
+import { GROK_RESPONSE_ID, GROK_STREAM_EVENTS, grokErrorDetails, grokImageArtifact, parseGrokEvent, type GrokEvent, type GrokImageArtifact } from './GrokProtocol'
 
 export const RESPONSES_LIMITS = Object.freeze({
   textBytes: 1024 * 1024,
@@ -27,6 +28,9 @@ export interface ResponsesStreamOptions {
   onHosted(event: ResponsesHostedEvent): void | Promise<void>
   onImage(itemId: string, base64: string): void | Promise<void>
   onResponseId(id: string): void | Promise<void>
+  /** Opt-in native v1 parser; generic and Codex streams keep their existing contract. */
+  onGrok?(event: GrokEvent): void | Promise<void>
+  onGrokArtifacts?(artifacts: GrokImageArtifact[]): void | Promise<void>
 }
 export interface ResponsesStreamResult { id: string; text: string; calls: ResponsesFunctionCall[]; usage?: ResponsesUsage }
 
@@ -161,6 +165,7 @@ export async function consumeResponsesStream(response: Response, options: Respon
   }
   const responseIdentity = async (value: unknown) => {
     const id = identity(value)
+    if (options.onGrok && !GROK_RESPONSE_ID.test(id)) invalid()
     if (responseId && responseId !== id) invalid()
     if (!responseId) { responseId = id; await options.onResponseId(id); check() }
   }
@@ -240,7 +245,7 @@ export async function consumeResponsesStream(response: Response, options: Respon
     if (!data.length) { eventName = ''; return }
     const content = data.join('\n'), name = eventName
     data = []; eventName = ''
-    if (name && !streamEvents.has(name)) return
+    if (name && !streamEvents.has(name) && !(options.onGrok && GROK_STREAM_EVENTS.has(name))) return
     if (content === '[DONE]') return
     let event: unknown
     try { event = JSON.parse(content) } catch { throw new Error('API returned invalid streaming JSON') }
@@ -248,8 +253,16 @@ export async function consumeResponsesStream(response: Response, options: Respon
     const type = typeof event.type === 'string' ? event.type : name
     if (name && type !== name) invalid()
     check()
-    if (type === 'error' || type === 'response.failed' || type === 'response.incomplete') throw new Error('API response failed or stopped before completing')
-    if (type === 'codex.tool') {
+    if (type === 'error' || type === 'response.failed' || type === 'response.incomplete') {
+      const details = options.onGrok ? grokErrorDetails(event.response ?? event.error ?? event) : ''
+      throw new Error(`API response failed or stopped before completing${details ? ` (${details})` : ''}`)
+    }
+    if (options.onGrok && GROK_STREAM_EVENTS.has(type)) {
+      const grok = parseGrokEvent(event, responseId)
+      hostedBytes += Buffer.byteLength(JSON.stringify(grok))
+      if (++hostedCount > 4096 || hostedBytes > 4 * 1024 * 1024) throw new Error('Grok progress exceeds its bounded stream limit')
+      await options.onGrok(grok); check()
+    } else if (type === 'codex.tool') {
       const hosted = hostedEnvelope(event)
       if (hosted) {
         hostedBytes += Buffer.byteLength(JSON.stringify(hosted))
@@ -259,6 +272,7 @@ export async function consumeResponsesStream(response: Response, options: Respon
     } else if (type === 'response.created' || type === 'response.in_progress') {
       if (!object(event.response)) invalid()
       await responseIdentity(event.response.id)
+      if (options.onGrok && (!object(event.response.grok) || event.response.grok.version !== 1)) invalid()
     } else if (type === 'response.output_item.added' || type === 'response.output_item.done') {
       await outputItem(event.item, event.output_index, type === 'response.output_item.done')
     } else if (type === 'response.output_text.delta' || type === 'response.output_text.done') {
@@ -278,6 +292,12 @@ export async function consumeResponsesStream(response: Response, options: Respon
         finalText = event.response.output_text
       }
       await responseIdentity(event.response.id)
+      if (options.onGrok) {
+        if (!object(event.response.grok) || event.response.grok.version !== 1 || !Array.isArray(event.response.grok.artifacts) || event.response.grok.artifacts.length > RESPONSES_LIMITS.images) invalid()
+        const artifacts = event.response.grok.artifacts.map(grokImageArtifact)
+        if (new Set(artifacts.map(artifact => artifact.id)).size !== artifacts.length) invalid()
+        await options.onGrokArtifacts?.(artifacts); check()
+      }
       const finalIds = new Set<string>()
       for (const value of event.response.output) {
         if (!object(value) || typeof value.type !== 'string') invalid()

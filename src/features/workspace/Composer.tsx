@@ -40,7 +40,7 @@ export interface ComposerProps {
   modelSelectionDisabled?: boolean
   onOpenModelSettings?: () => void
   configurationControls?: React.ReactNode
-  processState?: 'starting' | 'running' | 'approval' | 'interrupting' | 'ready' | 'unavailable'
+  processState?: 'starting' | 'running' | 'approval' | 'response' | 'interrupting' | 'ready' | 'unavailable'
   placeholder?: string
   selectedModel?: string
   onSelectModel?: (model: string) => void
@@ -56,6 +56,8 @@ export interface ComposerProps {
   // File attachments
   attachments?: ComposerAttachment[]
   onAttachmentsChange?: (attachments: ComposerAttachment[]) => void
+  /** Main-owned chooser for structured attachments; bypasses renderer file-path handling. */
+  onPickAttachments?: () => Promise<ComposerAttachment[]>
   // Active processes toolbar
   activeProcesses?: ActiveProcessItem[]
   onKillProcess?: (processId: string, pid?: number) => void
@@ -97,6 +99,7 @@ export const Composer: React.FC<ComposerProps> = ({
   isLoadingModels = false,
   attachments: controlledAttachments,
   onAttachmentsChange: onControlledAttachmentsChange,
+  onPickAttachments,
   activeProcesses = [],
   onKillProcess,
   onKeyDown: onExternalKeyDown,
@@ -115,6 +118,7 @@ export const Composer: React.FC<ComposerProps> = ({
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
   const [lastSendError, setLastSendError] = useState<string | null>(null)
+  const [isPicking, setIsPicking] = useState(false)
 
   // Refs
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -164,10 +168,12 @@ export const Composer: React.FC<ComposerProps> = ({
     },
     [isAttachmentsControlled, onControlledAttachmentsChange]
   )
+  const updateAttachmentsRef = useRef(updateAttachments)
+  updateAttachmentsRef.current = updateAttachments
 
   // Add files
   const handleFilesSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (disabled || !supportsAttachments) return
+    if (disabled || !supportsAttachments || onPickAttachments) return
     const files = e.target.files
     if (!files || files.length === 0) return
 
@@ -323,8 +329,8 @@ export const Composer: React.FC<ComposerProps> = ({
       />
 
       {processState && <div role="status" data-testid="composer-process-status" data-state={processState} className="flex items-center gap-2 px-1 text-xs text-zinc-400">
-        {['starting', 'running', 'interrupting'].includes(processState) ? <LoaderCircle aria-hidden="true" className="h-3 w-3 animate-spin text-[#ff6b00]" /> : <span aria-hidden="true" className={`h-1.5 w-1.5 rounded-full ${processState === 'ready' ? 'bg-emerald-400' : processState === 'approval' ? 'bg-amber-400' : 'bg-zinc-500'}`} />}
-        <span>{t(`composer_process_${processState}`)}</span>
+        {['starting', 'running', 'interrupting'].includes(processState) ? <LoaderCircle aria-hidden="true" className="h-3 w-3 animate-spin text-[#ff6b00]" /> : <span aria-hidden="true" className={`h-1.5 w-1.5 rounded-full ${processState === 'ready' ? 'bg-emerald-400' : processState === 'approval' || processState === 'response' ? 'bg-amber-400' : 'bg-zinc-500'}`} />}
+        <span>{t(processState === 'response' ? 'provider_interaction_waiting' : `composer_process_${processState}`)}</span>
       </div>}
 
       {/* Error Banner if transmission failed */}
@@ -361,7 +367,7 @@ export const Composer: React.FC<ComposerProps> = ({
           ref={fileInputRef}
           type="file"
           multiple
-          disabled={disabled || !supportsAttachments}
+          disabled={disabled || !supportsAttachments || Boolean(onPickAttachments)}
           onChange={handleFilesSelected}
           className="hidden"
           data-testid="composer-file-input"
@@ -373,8 +379,14 @@ export const Composer: React.FC<ComposerProps> = ({
             {/* Attachment Button */}
             <button
               type="button"
-              disabled={disabled || isSubmitting || !supportsAttachments}
-              onClick={() => fileInputRef.current?.click()}
+              disabled={disabled || isSubmitting || isPicking || !supportsAttachments}
+              onClick={() => {
+                if (!onPickAttachments) { fileInputRef.current?.click(); return }
+                setIsPicking(true)
+                void onPickAttachments().then(items => { if (mountedRef.current && items.length) updateAttachmentsRef.current([...(latestControlledAttachmentsRef.current ?? latestInternalAttachmentsRef.current), ...items]) })
+                  .catch(error => { if (mountedRef.current) setLastSendError(error instanceof Error ? error.message : String(error)) })
+                  .finally(() => { if (mountedRef.current) setIsPicking(false) })
+              }}
               className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-[#1e2024] disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer"
               title={t(supportsAttachments ? 'attach_files' : 'attachments_unavailable')}
               data-testid="composer-attach-button"

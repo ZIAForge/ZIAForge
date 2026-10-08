@@ -31,3 +31,7 @@ Images appear independently of collapsed tool output. Clicking a preview opens a
 ## Evidence
 
 Loopback protocol/Electron tests, real protected-file retrieval, live inference and packaged execution are separate results. Synthetic credentials and fixture output never certify a live endpoint. Retain private evidence outside source control. See [provider contracts](PROVIDER_EXTENSION.md) and [testing](TESTING.md).
+
+## Grok Connector v1
+
+Select the separate Grok Connector v1 profile with Responses to retain native questions, exact permission choices, model reasoning/context metadata and provider progress. Its file tools still execute in the local task workspace; hosted tools are explicitly bounded. See [the Grok profile contract](GROK_CONNECTOR.md) for image inputs, lifecycle, cancellation and availability limits. Existing OpenAI-compatible and Codex profiles are unchanged.

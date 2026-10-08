@@ -492,5 +492,18 @@ describe('EventJournal', () => {
     expect(feed[1]).toMatchObject({ id: 'reason', turnId: 't2', thinking: 'Reasoning', text: '', status: 'completed' })
   })
 
+  it('retains user image metadata while refusing cross-run or binary journal payloads', async () => {
+    const journal = new EventJournal(journalPath)
+    const media = { id: 'media-00000000-0000-4000-8000-000000000001', sourceRunId: 'run', mime: 'image/png' as const, bytes: 42, sha256: 'a'.repeat(64), width: 1, height: 1 }
+    const image = { id: 'input-image-00000000-0000-4000-8000-000000000001', name: 'pixel.png', mime: 'image/png' as const, bytes: 42, sha256: 'a'.repeat(64), width: 1, height: 1 }
+    const event: AgentEvent = { eventId: 'image-user', taskId: 'task', runId: 'run', timestamp: 1, type: 'message.started', role: 'user', messageId: 'user', inputImages: [image], media: [media] }
+    await journal.append(event)
+    expect((await journal.reconstructFeed())[0]).toMatchObject({ role: 'user', media: [media], inputImages: [image] })
+    await expect(journal.append({ ...event, media: [{ ...media, sourceRunId: 'another-run' }] })).rejects.toThrow('media')
+    await expect(journal.append({ ...event, inputImages: [{ ...image, dataUrl: 'data:image/png;base64,private' }] } as unknown as AgentEvent)).rejects.toThrow('media')
+    await expect(journal.append({ ...event, inputImages: [image, image] })).rejects.toThrow('media')
+    expect(await journal.readEvents()).toEqual([event])
+  })
+
 })
 

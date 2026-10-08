@@ -21,6 +21,8 @@ export interface MessageStartedEvent extends BaseAgentEvent {
   type: 'message.started'
   messageId: string
   role: AgentRole
+  inputImages?: import('./agent-input-images').AgentInputImageRef[]
+  media?: import('./agent-media').AgentMediaRef[]
 }
 
 export interface MessageDeltaEvent extends BaseAgentEvent {
@@ -89,6 +91,19 @@ export interface PermissionStateChangedEvent extends BaseAgentEvent {
   resolvedBy?: 'user' | 'auto' | 'timeout'
 }
 
+export interface InteractionRequestedEvent extends BaseAgentEvent {
+  type: 'interaction.requested'
+  interaction: import('./grok-interactions').GrokInteraction
+  parentMessageId?: string
+}
+export interface InteractionStateChangedEvent extends BaseAgentEvent {
+  type: 'interaction.state.changed'
+  interactionId: string
+  state: import('./grok-interactions').GrokInteractionState
+  answer?: import('./grok-interactions').GrokInteractionAnswer
+  error?: string
+}
+
 // 4. Verification & TDD Events
 export interface VerificationCompletedEvent extends BaseAgentEvent {
   type: 'verification.completed'
@@ -144,6 +159,8 @@ export type AgentEvent =
   | ToolCompletedEvent
   | PermissionRequestedEvent
   | PermissionStateChangedEvent
+  | InteractionRequestedEvent
+  | InteractionStateChangedEvent
   | VerificationCompletedEvent
   | WorkflowStepChangedEvent
   | AgentStatusChangedEvent
@@ -190,4 +207,7 @@ export interface ReconstructedMessage {
   revision?: number
   tools?: ReconstructedToolItem[]
   approvals?: ReconstructedApprovalItem[]
+  interactions?: import('./grok-interactions').GrokInteraction[]
+  inputImages?: import('./agent-input-images').AgentInputImageRef[]
+  media?: import('./agent-media').AgentMediaRef[]
 }

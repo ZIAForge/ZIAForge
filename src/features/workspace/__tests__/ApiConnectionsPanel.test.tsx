@@ -13,8 +13,9 @@ function fixture(connections = [legacy]) {
     list: vi.fn<ApiConnectionsAPI['list']>().mockResolvedValue(connections),
     save: vi.fn<ApiConnectionsAPI['save']>(async request => ({ ...request, id: request.id ?? 'new-connection', hasApiKey: true })),
     remove: vi.fn<ApiConnectionsAPI['remove']>().mockResolvedValue(undefined),
+    inspect: vi.fn<ApiConnectionsAPI['inspect']>().mockResolvedValue({ version: 1, fetchedAt: 1000, tools: ['image_gen'], imageInput: true, imageGeneration: true, imageEdit: true, videoAvailable: false, videoRestriction: 'Not enabled for this account', interactiveQuestions: true, reasoningSummaries: false, contextWindows: [32000, 64000], usage: { creditUsagePercent: null, periodEnd: null }, warnings: [] }),
   }
-  Object.defineProperty(window, 'ziafAPI', { configurable: true, writable: true, value: { apiConnections: api } })
+  Object.defineProperty(window, 'ziafAPI', { configurable: true, writable: true, value: { apiConnections: api, getAgentModelCatalog: vi.fn().mockResolvedValue({ status: 'ready', models: [{ id: 'fixture-model', label: 'Fixture', contextWindows: [32000], defaultContextWindow: 32000 }, { id: 'other-model', label: 'Other', contextWindows: [64000] }] }) } })
   return api
 }
 const transport = () => screen.getByTestId('api-connection-transport') as HTMLSelectElement
@@ -30,6 +31,39 @@ afterEach(() => {
 })
 
 describe('explicit API connection transport', () => {
+  it('offers explicit Grok discovery and only the selected model context choices without inventing usage', async () => {
+    const connection: ApiConnection = { ...legacy, transport: 'responses', profile: 'grok-connector-v1', grok: { maxTurns: 12 } }
+    const api = fixture([connection])
+    render(<ApiConnectionsPanel />)
+    await waitFor(() => expect(screen.getByTestId(`api-connection-${legacy.id}`)).not.toBeNull())
+    fireEvent.click(within(screen.getByTestId(`api-connection-${legacy.id}`)).getByRole('button', { name: 'Edit' }))
+    expect(profile().value).toBe('grok-connector-v1')
+    expect(api.inspect).not.toHaveBeenCalled()
+    await act(async () => fireEvent.click(screen.getByTestId(`api-grok-inspect-${legacy.id}`)))
+    expect(api.inspect).toHaveBeenCalledExactlyOnceWith({ id: legacy.id })
+    expect(screen.getByTestId('api-grok-credit-usage').textContent).toBe('No data')
+    expect(screen.getByText('Not enabled for this account')).not.toBeNull()
+    const choices = screen.getByTestId('api-grok-context-window') as HTMLSelectElement
+    expect(Array.from(choices.options, option => option.value)).toEqual(['', '32000'])
+    fireEvent.change(choices, { target: { value: '32000' } })
+    await submit()
+    expect(api.save.mock.calls[0][0]).toMatchObject({ profile: 'grok-connector-v1', grok: { contextWindow: 32000, maxTurns: 12 } })
+    expect(api.save.mock.calls[0][0]).not.toHaveProperty('apiKey')
+  })
+
+  it.each(['openai-compatible', 'chat-completions'])('clears Grok-only settings when explicitly selecting %s', async selection => {
+    const connection: ApiConnection = { ...legacy, transport: 'responses', profile: 'grok-connector-v1', grok: { contextWindow: 32000, maxTurns: 7 } }
+    const api = fixture([connection])
+    render(<ApiConnectionsPanel />)
+    await waitFor(() => expect(screen.getByTestId(`api-connection-${legacy.id}`)).not.toBeNull())
+    fireEvent.click(within(screen.getByTestId(`api-connection-${legacy.id}`)).getByRole('button', { name: 'Edit' }))
+    fireEvent.change(selection === 'chat-completions' ? transport() : profile(), { target: { value: selection } })
+    expect(screen.queryByTestId('api-grok-context-window')).toBeNull()
+    await submit()
+    expect(api.save.mock.calls[0][0].grok).toBeUndefined()
+    expect(api.save.mock.calls[0][0]).not.toHaveProperty('apiKey')
+  })
+
   it('sets up Responses as an unsaved draft and retains the saved key on explicit Save', async () => {
     const oldConnection: ApiConnection = { ...legacy, profile: 'codex-connector', allowCommands: true }
     const migrated: ApiConnection = { ...legacy, transport: 'responses', profile: 'openai-compatible', allowCommands: false }

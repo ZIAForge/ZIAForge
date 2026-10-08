@@ -379,6 +379,7 @@ function getApiProviderStore() {
   } })
 }
 handleIpc('api-connections:list', () => getApiProviderStore().list())
+handleIpc('api-connections:inspect', (_, request: { id: string }) => getApiProviderStore().inspect(request))
 handleIpc('api-connections:save', (_, request) => { assertNoProjectMutation(); return getApiProviderStore().save(request) })
 handleIpc('api-connections:remove', (_, request) => { assertNoProjectMutation(); return getApiProviderStore().remove(request) })
 
@@ -635,6 +636,37 @@ const sessionCommands: Omit<AgentSessionsAPI, 'onEvent'> = {
     validateSessionCommand('resolveApproval', request)
     return getAgentSessions().resolveApproval(request)
   },
+  async resolveInteraction(request) {
+    validateSessionCommand('resolveInteraction', request)
+    assertNoProjectMutation()
+    const session = await getAgentSessions().snapshot(request)
+    storedTaskContext(session.taskId)
+    assertWorkSessionLease(session.taskId, session.chatId)
+    return getAgentSessions().resolveInteraction(request)
+  },
+  async pickImages(request) {
+    validateSessionCommand('pickImages', request)
+    const session = await interactiveSession(request)
+    assertWorkSessionLease(session.taskId, session.chatId)
+    const sessions = getAgentSessions()
+    const owner = sessions.assertImagePickerOwner(request)
+    const inspection = await getApiProviderStore().inspect({ id: owner.apiConnectionId! })
+    if (!inspection.imageInput) throw new Error('This Grok connection does not advertise native image input')
+    sessions.assertImagePickerOwner(request)
+    if (!win) throw new Error('The native image picker requires an application window')
+    const selected = await dialog.showOpenDialog(win, { properties: ['openFile', 'multiSelections'], filters: [{ name: 'PNG / JPEG / WebP', extensions: ['png', 'jpg', 'jpeg', 'webp'] }] })
+    sessions.assertImagePickerOwner(request)
+    if (selected.canceled) return []
+    return sessions.stageImages(request, selected.filePaths)
+  },
+  async listImages(request) {
+    validateSessionCommand('listImages', request)
+    return getAgentSessions().listImages(request)
+  },
+  async discardImages(request) {
+    validateSessionCommand('discardImages', request)
+    return getAgentSessions().discardImages(request)
+  },
 }
 
 handleIpc('agent-session:create', async (_, request: Parameters<AgentSessionsAPI['create']>[0]) => {
@@ -659,6 +691,10 @@ handleIpc('agent-session:cancel-queued', async (_, request: Parameters<AgentSess
 handleIpc('agent-session:interrupt', (_, request: Parameters<AgentSessionsAPI['interrupt']>[0]) => sessionCommands.interrupt(request))
 handleIpc('agent-session:terminate', (_, request: Parameters<AgentSessionsAPI['terminate']>[0]) => sessionCommands.terminate(request))
 handleIpc('agent-session:resolve-approval', (_, request: Parameters<AgentSessionsAPI['resolveApproval']>[0]) => sessionCommands.resolveApproval(request))
+handleIpc('agent-session:resolve-interaction', (_, request: Parameters<NonNullable<AgentSessionsAPI['resolveInteraction']>>[0]) => sessionCommands.resolveInteraction!(request))
+handleIpc('agent-session:pick-images', (_, request: Parameters<NonNullable<AgentSessionsAPI['pickImages']>>[0]) => sessionCommands.pickImages!(request))
+handleIpc('agent-session:list-images', (_, request: Parameters<NonNullable<AgentSessionsAPI['listImages']>>[0]) => sessionCommands.listImages!(request))
+handleIpc('agent-session:discard-images', (_, request: Parameters<NonNullable<AgentSessionsAPI['discardImages']>>[0]) => sessionCommands.discardImages!(request))
 handleIpc('agent-media:read', (_, request: import('../shared/agent-media').AgentMediaRequest) => getAgentSessions().readMedia(request))
 handleIpc('agent-media:save', async (_, request: import('../shared/agent-media').AgentMediaRequest) => {
   const media = await getAgentSessions().readMedia(request)

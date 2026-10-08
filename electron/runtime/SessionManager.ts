@@ -1,13 +1,16 @@
 import { AgentMediaStore } from './AgentMediaStore'
-import { validMediaRef, type AgentMediaRequest } from '../../shared/agent-media'
-import type { ApiTransport, ApiProfile } from '../../shared/api-provider'
+import { AgentInputImageStore } from './AgentInputImageStore'
+import { validInputImageId, type AgentInputImageOwner } from '../../shared/agent-input-images'
+import { validMediaRef, type AgentMediaRequest, type AgentMediaRef } from '../../shared/agent-media'
+import { validGrokConnectionOptions, type ApiTransport, type ApiProfile, type GrokConnectionOptions } from '../../shared/api-provider'
+import { answerMatchesInteraction } from '../../shared/grok-interactions'
 import type { AgentExecutionOptions } from '../../shared/agent-models'
 import { effectivePermissionLabel, isPermissionLabel, validateReasoningEffort } from './AgentExecutionPolicy'
 import fs from 'node:fs'
 import path from 'node:path'
 import { createHash, randomUUID } from 'node:crypto'
 import type { AgentEvent, AgentStatusChangedEvent } from '../../shared/agent-events'
-import type { AgentApprovalRequest, AgentQueueControlRequest, AgentQueueCancelRequest, AgentChatIdentity, AgentSendReceipt, AgentSendRequest, AgentSessionRef, AgentSessionReconfigureRequest, AgentSessionDiagnostic, AgentSessionProvider, AgentSessionSnapshot, AgentSessionUpdate, AgentTurnRequest } from '../../shared/agent-session'
+import type { AgentApprovalRequest, AgentInteractionRequest, AgentQueueControlRequest, AgentQueueCancelRequest, AgentChatIdentity, AgentSendReceipt, AgentSendRequest, AgentSessionRef, AgentSessionReconfigureRequest, AgentSessionDiagnostic, AgentSessionProvider, AgentSessionSnapshot, AgentSessionUpdate, AgentTurnRequest } from '../../shared/agent-session'
 import { createFeedProjector } from '../../shared/agent-feed'
 import { AgentAdapterFactory, type AgentAdapter, type CreateAdapterOptions } from '../agents/AgentAdapterFactory'
 import { formatDiagnosticText } from './DiagnosticLog'
@@ -33,6 +36,7 @@ export interface TrustedAgentSessionConfig extends AgentChatIdentity, AgentExecu
   apiProfile?: ApiProfile
   apiBaseUrl?: string
   apiAllowCommands?: boolean
+  apiGrokConfig?: GrokConnectionOptions
   toolPolicy?: 'none'
   codexBinPath?: string
   claudeBinPath?: string
@@ -52,7 +56,7 @@ export interface SessionManagerOptions {
   getJournal(taskId: string, runId: string): EventJournal
   createAdapter?: (options: CreateAdapterOptions) => AgentAdapter
 }
-export type PersistedAgentLaunch = Pick<TrustedAgentSessionConfig, 'presetName' | 'model' | 'reasoningEffort' | 'permissions' | 'approvalPolicy' | 'sandbox' | 'claudePermissionMode' | 'agyPermissionMode' | 'apiConnectionId' | 'apiReadOnly' | 'toolPolicy' | 'apiTransport' | 'apiProfile' | 'apiBaseUrl' | 'apiAllowCommands'> & { provider: AgentSessionProvider }
+export type PersistedAgentLaunch = Pick<TrustedAgentSessionConfig, 'presetName' | 'model' | 'reasoningEffort' | 'permissions' | 'approvalPolicy' | 'sandbox' | 'claudePermissionMode' | 'agyPermissionMode' | 'apiConnectionId' | 'apiReadOnly' | 'toolPolicy' | 'apiTransport' | 'apiProfile' | 'apiBaseUrl' | 'apiAllowCommands' | 'apiGrokConfig'> & { provider: AgentSessionProvider }
 interface Metadata extends AgentChatIdentity, AgentSessionRef {
   version: 1
   provider?: AgentSessionProvider
@@ -93,6 +97,7 @@ interface Entry {
   messageQueue: QueueStore
   inputIds: Set<string>
   dispatching: boolean
+  interactionSubmissions?: Set<string>
   notification?: ReturnType<typeof setTimeout>
   storageError?: Error
   terminal?: boolean
@@ -109,6 +114,7 @@ export class SessionMetadataRecoveryError extends Error {
 }
 const safeId = /^[A-Za-z0-9_-]{1,160}$/
 const asError = (error: unknown): Error => error instanceof Error ? error : new Error(String(error))
+const grokConfigIdentity = (value?: GrokConnectionOptions): string => JSON.stringify([value?.contextWindow ?? null, value?.maxTurns ?? null])
 
 /** Interactive coordinator, owned by RunService. Provider callbacks only enter through its ordered journal pump. */
 export class SessionManager {
@@ -122,6 +128,7 @@ export class SessionManager {
   private closing = false
   private startedSession = false
   private mediaStore?: AgentMediaStore
+  private inputImageStore?: AgentInputImageStore
   constructor(private readonly options: SessionManagerOptions) {}
 
   // A legacy/CLI coordinator need not allocate API media storage. Keep the
@@ -129,12 +136,45 @@ export class SessionManager {
   private getMediaStore(): AgentMediaStore {
     return this.mediaStore ??= new AgentMediaStore(path.join(this.options.baseStorageDir, 'api-conversations', 'media'))
   }
+  private getInputImageStore(): AgentInputImageStore {
+    return this.inputImageStore ??= new AgentInputImageStore(path.join(this.options.baseStorageDir, 'api-conversations', 'input-images'))
+  }
+  private imageOwner(entry: Entry): AgentInputImageOwner {
+    if (entry.state.provider !== 'api' || entry.state.apiTransport !== 'responses' || entry.state.apiProfile !== 'grok-connector-v1' || !this.owns(entry)) throw new Error('Input images require an owned Grok Responses session')
+    return { taskId: entry.state.taskId, chatId: entry.state.chatId, sessionId: entry.state.sessionId, runId: entry.state.runId }
+  }
+  assertImagePickerOwner(ref: AgentSessionRef): AgentSessionSnapshot {
+    const entry = this.require(ref)
+    this.imageOwner(entry)
+    this.assertTaskAvailable(entry.state.taskId)
+    if (this.closing || entry.changing || entry.terminating || entry.storageError || entry.state.sessionStatus !== 'ready' || !entry.adapter || entry.state.activeTurn || entry.dispatching || entry.queue.length || entry.messageQueue.size) throw new Error('Wait for this Grok session to be ready before attaching images')
+    return this.view(entry)
+  }
+  async stageImages(ref: AgentSessionRef, nativeDialogPaths: readonly string[]) {
+    this.assertImagePickerOwner(ref)
+    const entry = this.require(ref), owner = this.imageOwner(entry)
+    const staged = await this.getInputImageStore().stage(owner, nativeDialogPaths)
+    try { this.assertImagePickerOwner(ref); if (this.require(ref) !== entry) throw new Error('Image owner changed') }
+    catch (error) { await this.getInputImageStore().discard(owner, staged.map(image => image.id)); throw error }
+    return staged
+  }
+  async listImages(ref: AgentSessionRef) {
+    const entry = this.require(ref), owner = this.imageOwner(entry)
+    const result = await this.getInputImageStore().list(owner)
+    if (this.require(ref) !== entry) throw new Error('Image owner changed')
+    return result
+  }
+  async discardImages(ref: AgentSessionRef & { imageIds: string[] }): Promise<void> {
+    const entry = this.require(ref), owner = this.imageOwner(entry)
+    if (entry.changing || entry.terminating || entry.dispatching || entry.queue.some(delivery => delivery.request.imageIds?.some(id => ref.imageIds.includes(id)))) throw new Error('Images are reserved by an active message delivery')
+    await this.getInputImageStore().discard(owner, ref.imageIds)
+  }
 
   /** Main-only, logical ownership checked against the visible current/ancestor feed. */
   async readMedia(request: AgentMediaRequest) {
     if (!request || typeof request !== 'object' || Array.isArray(request) || Object.keys(request).some(key => !['sessionId', 'runId', 'mediaId'].includes(key)) || typeof request.mediaId !== 'string') throw new Error('Invalid media request')
     const entry = this.require(request)
-    const ref = this.view(entry).feed.flatMap(message => message.tools ?? []).flatMap(tool => tool.media ?? []).find(ref => ref.id === request.mediaId)
+    const ref = this.view(entry).feed.flatMap(message => [...(message.media ?? []), ...(message.tools ?? []).flatMap(tool => tool.media ?? [])]).find(ref => ref.id === request.mediaId)
     if (!ref || !validMediaRef(ref)) throw new Error('Image is unavailable in this conversation')
     const bytes = await this.getMediaStore().read(entry.state.taskId, ref)
     if (this.require(request) !== entry) throw new Error('Media owner changed')
@@ -207,7 +247,8 @@ export class SessionManager {
   /** Frozen launch policy; main resolves only current trusted cwd, binary and environment. */
   persistedLaunch(ref: AgentSessionRef): PersistedAgentLaunch {
     const entry = this.require(ref)
-    return { ...this.frozenLaunch(entry) }
+    const launch = this.frozenLaunch(entry)
+    return { ...launch, ...(launch.apiGrokConfig ? { apiGrokConfig: { ...launch.apiGrokConfig } } : {}) }
   }
 
   private frozenLaunch(entry: Entry): PersistedAgentLaunch {
@@ -228,7 +269,7 @@ export class SessionManager {
   }
 
   private change(ref: AgentSessionRef, config: TrustedAgentSessionConfig, requestId: string | undefined, resume: boolean): Promise<AgentSessionSnapshot> {
-    const signature = JSON.stringify([ref.sessionId, ref.runId, config.taskId, config.chatId, config.provider, config.presetName, config.model, { reasoningEffort: config.reasoningEffort }, config.permissions, config.approvalPolicy, config.sandbox, config.claudePermissionMode, config.agyPermissionMode, config.apiConnectionId, config.apiReadOnly, config.apiTransport, config.apiProfile, config.apiBaseUrl, config.apiAllowCommands, config.toolPolicy, resume])
+    const signature = JSON.stringify([ref.sessionId, ref.runId, config.taskId, config.chatId, config.provider, config.presetName, config.model, { reasoningEffort: config.reasoningEffort }, config.permissions, config.approvalPolicy, config.sandbox, config.claudePermissionMode, config.agyPermissionMode, config.apiConnectionId, config.apiReadOnly, config.apiTransport, config.apiProfile, config.apiBaseUrl, config.apiAllowCommands, (config.apiProfile ?? config.apiConnection?.profile) === 'grok-connector-v1' ? grokConfigIdentity(config.apiGrokConfig ?? config.apiConnection?.grok) : null, config.toolPolicy, resume])
     const operationKey = `${ref.sessionId}:${resume ? 'resume' : 'reconfigure'}:${requestId ?? ref.runId}`
     const previous = this.transitions.get(operationKey)
     if (previous) return previous.signature === signature ? previous.promise : Promise.reject(new Error('Switch request identity was already used with another selection'))
@@ -246,6 +287,7 @@ export class SessionManager {
       await entry.events
       this.assertTaskAvailable(entry.state.taskId)
       if (entry.storageError || entry.messageQueue.blocked || (!resume && entry.messageQueue.size > 0) || entry.state.activeTurn || entry.dispatching || entry.queue.length) throw new Error('Session became busy; finish the active turn before changing it')
+      if (entry.state.apiProfile === 'grok-connector-v1' && (await this.getInputImageStore().list(this.imageOwner(entry))).length) throw new Error('Remove unsent input images before changing or resuming this session')
       this.pauseMessages(entry)
       if (entry.messageQueue.blocked) throw new Error('Message queue storage requires recovery before resuming')
       try { await entry.adapter?.stop(false) } catch (error) {
@@ -258,7 +300,7 @@ export class SessionManager {
       if (this.closing || !this.owns(entry)) throw new Error('Session service is shutting down or ownership changed')
       this.assertTaskAvailable(entry.state.taskId)
       this.options.registry.setAgentSessionPid(entry.state.sessionId, entry.state.runId, undefined)
-      const sameProvider = entry.state.provider === (config.provider ?? 'codex') && (entry.state.provider !== 'api' || entry.metadata.apiConnectionId === config.apiConnectionId && entry.state.model === config.model && (entry.metadata.launch?.apiReadOnly ?? false) === (config.apiReadOnly ?? false) && (entry.metadata.launch?.apiTransport ?? 'chat-completions') === (config.apiTransport ?? config.apiConnection?.transport ?? 'chat-completions') && (entry.metadata.launch?.apiProfile ?? 'openai-compatible') === (config.apiProfile ?? config.apiConnection?.profile ?? 'openai-compatible') && (entry.metadata.launch?.apiAllowCommands ?? false) === (config.apiAllowCommands ?? config.apiConnection?.allowCommands ?? false) && (!entry.metadata.launch?.apiBaseUrl || entry.metadata.launch.apiBaseUrl === config.apiConnection?.baseUrl))
+      const sameProvider = entry.state.provider === (config.provider ?? 'codex') && (entry.state.provider !== 'api' || entry.metadata.apiConnectionId === config.apiConnectionId && entry.state.model === config.model && (entry.metadata.launch?.apiReadOnly ?? false) === (config.apiReadOnly ?? false) && (entry.metadata.launch?.apiTransport ?? 'chat-completions') === (config.apiTransport ?? config.apiConnection?.transport ?? 'chat-completions') && (entry.metadata.launch?.apiProfile ?? 'openai-compatible') === (config.apiProfile ?? config.apiConnection?.profile ?? 'openai-compatible') && (entry.metadata.launch?.apiAllowCommands ?? false) === (config.apiAllowCommands ?? config.apiConnection?.allowCommands ?? false) && (entry.metadata.launch?.apiProfile !== 'grok-connector-v1' || grokConfigIdentity(entry.metadata.launch.apiGrokConfig) === grokConfigIdentity(config.apiGrokConfig ?? config.apiConnection?.grok)) && (!entry.metadata.launch?.apiBaseUrl || entry.metadata.launch.apiBaseUrl === config.apiConnection?.baseUrl))
       // Empty Codex/Claude sessions may not have a provider-side rollout yet.
       // Only a never-sent native conversation may safely start fresh.
       const hasNativeInput = entry.metadata.nativeHistoryInherited || entry.projector.messages().some(message => message.role === 'user')
@@ -294,12 +336,16 @@ export class SessionManager {
     if (provider === 'api' && (!config.apiConnectionId || config.apiConnection?.id !== config.apiConnectionId || !config.apiConnection.enabled)) throw new Error('A matching enabled API connection is required')
     if (provider === 'api') {
       config = { ...config, apiTransport: config.apiTransport ?? config.apiConnection!.transport ?? 'chat-completions', apiProfile: config.apiProfile ?? config.apiConnection!.profile ?? 'openai-compatible', apiBaseUrl: config.apiBaseUrl ?? config.apiConnection!.baseUrl, apiAllowCommands: config.apiAllowCommands ?? config.apiConnection!.allowCommands ?? false }
+      if (config.apiProfile === 'grok-connector-v1') {
+        config = { ...config, apiGrokConfig: config.apiGrokConfig ?? config.apiConnection!.grok ?? {} }
+        if (!validGrokConnectionOptions(config.apiGrokConfig) || grokConfigIdentity(config.apiGrokConfig) !== grokConfigIdentity(config.apiConnection!.grok)) throw new Error('Saved Grok configuration changed. Reconfigure explicitly before continuing.')
+      } else if (config.apiGrokConfig !== undefined) throw new Error('Native Grok configuration requires the Grok profile')
       if (config.apiTransport !== (config.apiConnection!.transport ?? 'chat-completions') || config.apiProfile !== (config.apiConnection!.profile ?? 'openai-compatible') || config.apiBaseUrl !== config.apiConnection!.baseUrl || config.apiAllowCommands !== (config.apiConnection!.allowCommands ?? false)) throw new Error('Saved API transport or endpoint changed. Reconfigure explicitly before continuing.')
     }
     validateReasoningEffort(provider, config.reasoningEffort)
     if (config.toolPolicy !== undefined && (config.toolPolicy !== 'none' || !['claude', 'api'].includes(provider))) throw new Error('This provider cannot enforce the requested tool-free policy')
     if (config.permissions !== undefined && !isPermissionLabel(config.permissions)) throw new Error('Invalid session access selection')
-    const launch: PersistedAgentLaunch = { reasoningEffort: config.reasoningEffort, permissions: config.permissions, provider, presetName: config.presetName, model: config.model, approvalPolicy: config.approvalPolicy, sandbox: config.sandbox, claudePermissionMode: config.claudePermissionMode, agyPermissionMode: config.agyPermissionMode, apiConnectionId: config.apiConnectionId, apiReadOnly: config.apiReadOnly, apiTransport: config.apiTransport, apiProfile: config.apiProfile, apiBaseUrl: config.apiBaseUrl, apiAllowCommands: config.apiAllowCommands, toolPolicy: config.toolPolicy }
+    const launch: PersistedAgentLaunch = { reasoningEffort: config.reasoningEffort, permissions: config.permissions, provider, presetName: config.presetName, model: config.model, approvalPolicy: config.approvalPolicy, sandbox: config.sandbox, claudePermissionMode: config.claudePermissionMode, agyPermissionMode: config.agyPermissionMode, apiConnectionId: config.apiConnectionId, apiReadOnly: config.apiReadOnly, apiTransport: config.apiTransport, apiProfile: config.apiProfile, apiBaseUrl: config.apiBaseUrl, apiAllowCommands: config.apiAllowCommands, ...(config.apiProfile === 'grok-connector-v1' ? { apiGrokConfig: { ...config.apiGrokConfig } } : {}), toolPolicy: config.toolPolicy }
     const metadata: Metadata = { version: 1, provider, apiConnectionId: config.apiConnectionId, taskId: config.taskId, chatId: config.chatId, sessionId, runId: `run-${randomUUID()}`, presetName: config.presetName, model: config.model, createdAt: Math.max(Date.now(), (previous?.metadata.createdAt ?? 0) + 1), launch, previousRunId: previous?.state.runId, handoff, nativeHistoryInherited: nativeReference !== undefined }
     const entry = this.makeEntry(metadata, previous?.messageQueue)
     if (previous) for (const id of previous.inputIds) entry.inputIds.add(id)
@@ -401,9 +447,11 @@ export class SessionManager {
   send(request: AgentSendRequest): Promise<AgentSendReceipt> {
     const entry = this.require(request)
     if (this.removalLocks.has(entry.state.taskId)) return Promise.reject(new Error('Project removal is in progress'))
-    if (!safeId.test(request.clientMessageId) || !request.text.trim() || request.text.length > 1_000_000) return Promise.reject(new Error('Invalid message identity or text'))
+    if (!safeId.test(request.clientMessageId) || typeof request.text !== 'string' || !request.text.trim() && !request.imageIds?.length || request.text.length > 1_000_000) return Promise.reject(new Error('Invalid message identity or text'))
+    if (request.imageIds !== undefined && (!Array.isArray(request.imageIds) || !request.imageIds.length || request.imageIds.length > 4 || new Set(request.imageIds).size !== request.imageIds.length || !request.imageIds.every(validInputImageId))) return Promise.reject(new Error('Select up to four distinct owned input images'))
+    if (request.imageIds?.length && (entry.state.provider !== 'api' || entry.state.apiProfile !== 'grok-connector-v1' || entry.state.apiTransport !== 'responses')) return Promise.reject(new Error('Input images require the Grok Responses profile'))
     const previous = entry.deliveries.get(request.clientMessageId)
-    if (previous) return previous.text === request.text ? previous.promise : Promise.reject(new Error('Message identity was already used with different content'))
+    if (previous) return previous.text === request.text && JSON.stringify(previous.request.imageIds ?? []) === JSON.stringify(request.imageIds ?? []) ? previous.promise : Promise.reject(new Error('Message identity was already used with different content'))
     if (entry.inputIds.has(request.clientMessageId)) return Promise.reject(new Error('This message identity already appears in saved history; inspect its outcome instead of sending it again'))
     if (entry.messageQueue.hasIdentity(request.clientMessageId)) return Promise.reject(new Error('Message identity belongs to the durable queue; it cannot be sent again'))
     if (entry.messageQueue.size || entry.messageQueue.blocked) return Promise.reject(new Error('Finish or cancel the saved message queue before sending directly'))
@@ -411,7 +459,7 @@ export class SessionManager {
     let resolve!: Delivery['resolve']
     let reject!: Delivery['reject']
     const promise = new Promise<AgentSendReceipt>((ok, fail) => { resolve = ok; reject = fail })
-    const delivery = { request: { ...request }, text: request.text, promise, resolve, reject }
+    const delivery = { request: { ...request, ...(request.imageIds ? { imageIds: [...request.imageIds] } : {}) }, text: request.text, promise, resolve, reject }
     entry.deliveries.set(request.clientMessageId, delivery)
     entry.queue.push(delivery)
     this.pump(entry)
@@ -421,6 +469,7 @@ export class SessionManager {
   async queue(request: AgentSendRequest): Promise<AgentSessionSnapshot> {
     const entry = this.require(request)
     this.assertTaskAvailable(entry.state.taskId)
+    if (request.imageIds?.length) throw new Error('Input images cannot enter the durable text-only queue')
     if (!safeId.test(request.clientMessageId) || typeof request.text !== 'string' || !request.text.trim() || request.text.length > 1_000_000) throw new Error('Invalid message identity or text')
     if (this.closing || entry.changing || entry.terminating || entry.storageError || entry.messageQueue.blocked || entry.state.sessionStatus !== 'ready' || !entry.adapter) throw new Error('Session is not ready to accept queued messages')
     if ((entry.deliveries.has(request.clientMessageId) || entry.inputIds.has(request.clientMessageId)) && !entry.messageQueue.hasIdentity(request.clientMessageId)) throw new Error('This message identity has already been used; it cannot be queued again')
@@ -478,14 +527,27 @@ export class SessionManager {
       const clientMessageId = delivery.request.clientMessageId
       const base = { taskId: entry.state.taskId, runId: entry.state.runId, timestamp: Date.now(), clientMessageId }
       try {
+        const imageRefs = delivery.request.imageIds?.length ? (await this.getInputImageStore().list(this.imageOwner(entry))).filter(image => delivery.request.imageIds!.includes(image.id)) : []
+        if (imageRefs.length !== (delivery.request.imageIds?.length ?? 0)) throw new Error('An attached input image is unavailable for this owner')
+        const inputImages = delivery.request.imageIds?.length ? await this.getInputImageStore().resolve(this.imageOwner(entry), delivery.request.imageIds) : undefined
+        const media: AgentMediaRef[] = []
+        for (const image of inputImages ?? []) {
+          if (!this.owns(entry) || entry.adapter !== adapter || this.closing || entry.terminating || entry.storageError || entry.state.sessionStatus !== 'ready') throw new Error('Image owner changed before caching')
+          const ref = await this.getMediaStore().storeBase64({ taskId: entry.state.taskId, runId: entry.state.runId }, image.dataUrl.slice(`data:${image.mime};base64,`.length))
+          const original = imageRefs.find(original => original.id === image.id)!
+          if (!validMediaRef(ref) || ref.sha256 !== original.sha256 || ref.mime !== original.mime || ref.bytes !== original.bytes) throw new Error('Private input image copy did not match its verified source')
+          media.push(ref)
+        }
+        if (!this.owns(entry) || entry.adapter !== adapter || this.closing || entry.terminating || entry.storageError || entry.state.sessionStatus !== 'ready') throw new Error('Image owner changed before message delivery')
         // Persist the input before invoking the provider, so fast output cannot overtake it.
-        await this.enqueue(entry, { ...base, eventId: randomUUID(), type: 'message.started', messageId: `user-${clientMessageId}`, role: 'user' })
+        await this.enqueue(entry, { ...base, eventId: randomUUID(), type: 'message.started', messageId: `user-${clientMessageId}`, role: 'user', ...(imageRefs.length ? { inputImages: imageRefs, media } : {}) })
         await this.enqueue(entry, { ...base, eventId: randomUUID(), type: 'message.delta', messageId: `user-${clientMessageId}`, deltaType: 'text', content: delivery.text })
         await this.enqueue(entry, { ...base, eventId: randomUUID(), type: 'message.completed', messageId: `user-${clientMessageId}`, finishReason: 'stop' })
         await this.enqueue(entry, { ...this.status(entry, 'starting', 'turn'), clientMessageId })
         this.assertTaskAvailable(entry.state.taskId)
         if (!this.owns(entry) || entry.adapter !== adapter || this.closing || entry.terminating || entry.state.sessionStatus !== 'ready') throw new Error('Session stopped before message delivery')
-        const result = await adapter.sendPrompt({ taskId: entry.state.taskId, runId: entry.state.runId, text: (entry.metadata.handoff ?? '') + delivery.text })
+        if (!this.owns(entry) || entry.adapter !== adapter || this.closing || entry.terminating || entry.storageError || entry.state.sessionStatus !== 'ready') throw new Error('Image owner changed before message delivery')
+        const result = await adapter.sendPrompt({ taskId: entry.state.taskId, runId: entry.state.runId, text: (entry.metadata.handoff ?? '') + delivery.text, ...(inputImages?.length ? { inputImages } : {}) })
         await entry.events
         if (!this.owns(entry) || entry.adapter !== adapter || entry.storageError) throw new Error('Session changed during message delivery')
         if (entry.state.activeTurn?.clientMessageId === clientMessageId && !entry.state.activeTurn.turnId) {
@@ -610,6 +672,22 @@ export class SessionManager {
     await entry.approvals.resolve(request.approvalId, request.decision)
     await entry.events
   }
+  async resolveInteraction(request: AgentInteractionRequest): Promise<void> {
+    const answer: AgentInteractionRequest['answer'] = JSON.parse(JSON.stringify(request.answer))
+    const entry = this.requireTurn(request)
+    await entry.events
+    if (this.requireTurn(request) !== entry || !entry.adapter?.resolveInteraction) throw new Error('Native interactions are unavailable for this session')
+    const interaction = this.view(entry).pendingInteractions?.find(item => item.interactionId === request.interactionId && item.turnId === request.turnId)
+    if (!interaction || interaction.state !== 'pending' || interaction.expiresAt <= Date.now() || !answerMatchesInteraction(interaction, answer)) throw new Error('Unknown, expired or invalid native interaction')
+    const submissions = entry.interactionSubmissions ??= new Set<string>()
+    if (submissions.has(request.interactionId)) throw new Error('This interaction answer has already been submitted')
+    submissions.add(request.interactionId)
+    await this.enqueue(entry, { eventId: randomUUID(), taskId: entry.state.taskId, runId: request.runId, turnId: request.turnId, timestamp: Date.now(), type: 'interaction.state.changed', interactionId: request.interactionId, state: 'submitting', answer })
+    // Journal acknowledgement and ownership are required before native side effects.
+    if (this.requireTurn(request) !== entry) throw new Error('Native interaction owner changed')
+    try { await entry.adapter.resolveInteraction({ taskId: entry.state.taskId, runId: request.runId, turnId: request.turnId, interactionId: request.interactionId, answer }) }
+    finally { await entry.events }
+  }
 
   private require(ref: AgentSessionRef): Entry {
     const entry = this.entries.get(ref.sessionId)
@@ -724,6 +802,7 @@ export class SessionManager {
     if (metadata.provider === 'api') {
       state.apiTransport = metadata.launch?.apiTransport ?? 'chat-completions'
       state.apiProfile = metadata.launch?.apiProfile ?? 'openai-compatible'
+      if (state.apiProfile === 'grok-connector-v1') state.apiGrokConfig = metadata.launch?.apiGrokConfig
     }
     const entry: Entry = { state, metadata, previousFeed: [], journal: this.options.getJournal(metadata.taskId, metadata.runId), projector: createFeedProjector(), approvals: new ApprovalRegistry(), events: Promise.resolve(), eventIds: new Set(), completedTurns: new Set(), usageRequests: new Set(), deliveries: new Map(), queue: [], messageQueue, inputIds: new Set(), dispatching: false }
     entry.approvals.onStateChanged(record => {
@@ -736,7 +815,8 @@ export class SessionManager {
 
   private view(entry: Entry): AgentSessionSnapshot {
     const feed = [...entry.previousFeed, ...entry.projector.messages()]
-    return JSON.parse(JSON.stringify({ ...entry.state, queue: entry.messageQueue.snapshot(), feed, pendingApprovals: feed.flatMap(message => (message.approvals ?? []).filter(approval => approval.state === 'pending' || approval.state === 'submitting').map(approval => ({ ...approval, turnId: message.turnId }))) })) as AgentSessionSnapshot
+    const pendingInteractions = feed.flatMap(message => (message.interactions ?? []).filter(interaction => interaction.state === 'pending' || interaction.state === 'submitting').map(interaction => ({ ...interaction, turnId: message.turnId })))
+    return JSON.parse(JSON.stringify({ ...entry.state, queue: entry.messageQueue.snapshot(), feed, pendingApprovals: feed.flatMap(message => (message.approvals ?? []).filter(approval => approval.state === 'pending' || approval.state === 'submitting').map(approval => ({ ...approval, turnId: message.turnId }))), ...(entry.state.apiProfile === 'grok-connector-v1' || feed.some(message => message.interactions?.length) ? { pendingInteractions } : {}) })) as AgentSessionSnapshot
   }
   private scheduleUpdate(entry: Entry): void {
     if (entry.notification) return
@@ -776,14 +856,15 @@ export class SessionManager {
     if (value.launch !== undefined) {
       const launch = value.launch
       if (!launch || typeof launch !== 'object' || Array.isArray(launch) || launch.provider !== (value.provider ?? 'codex') || launch.presetName !== value.presetName || launch.model !== value.model) invalid()
-      if (launch.apiTransport !== undefined && !['chat-completions', 'responses'].includes(launch.apiTransport) || launch.apiProfile !== undefined && !['openai-compatible', 'codex-connector'].includes(launch.apiProfile) || launch.apiAllowCommands !== undefined && typeof launch.apiAllowCommands !== 'boolean' || launch.apiBaseUrl !== undefined && (typeof launch.apiBaseUrl !== 'string' || launch.apiBaseUrl.length > 2000)) invalid()
+      if (launch.apiTransport !== undefined && !['chat-completions', 'responses'].includes(launch.apiTransport) || launch.apiProfile !== undefined && !['openai-compatible', 'codex-connector', 'grok-connector-v1'].includes(launch.apiProfile) || launch.apiAllowCommands !== undefined && typeof launch.apiAllowCommands !== 'boolean' || launch.apiBaseUrl !== undefined && (typeof launch.apiBaseUrl !== 'string' || launch.apiBaseUrl.length > 2000)) invalid()
+      if (launch.apiGrokConfig !== undefined && (launch.apiProfile !== 'grok-connector-v1' || !validGrokConnectionOptions(launch.apiGrokConfig))) invalid()
       if (launch.apiConnectionId !== value.apiConnectionId || (launch.apiReadOnly !== undefined && typeof launch.apiReadOnly !== 'boolean')) invalid()
       try { validateReasoningEffort(launch.provider, launch.reasoningEffort) } catch { invalid() }
       if (launch.toolPolicy === 'none' && !['claude', 'api'].includes(launch.provider)) invalid()
       if (launch.permissions !== undefined && !isPermissionLabel(launch.permissions)) invalid()
       const allowed: Record<string, readonly string[]> = { toolPolicy: ['none'], approvalPolicy: ['on-request', 'never', 'untrusted'], sandbox: ['read-only', 'workspace-write', 'danger-full-access'], claudePermissionMode: ['default', 'acceptEdits', 'plan', 'bypassPermissions', 'dontAsk'], agyPermissionMode: ['cli-settings', 'dangerously-skip'] }
       for (const [key, choices] of Object.entries(allowed)) if ((launch as unknown as Record<string, unknown>)[key] !== undefined && !choices.includes((launch as unknown as Record<string, string>)[key])) invalid()
-      if (Object.keys(launch).some(key => !['provider', 'presetName', 'model', 'reasoningEffort', 'permissions', 'apiConnectionId', 'apiReadOnly', 'apiTransport', 'apiProfile', 'apiBaseUrl', 'apiAllowCommands', ...Object.keys(allowed)].includes(key))) invalid()
+      if (Object.keys(launch).some(key => !['provider', 'presetName', 'model', 'reasoningEffort', 'permissions', 'apiConnectionId', 'apiReadOnly', 'apiTransport', 'apiProfile', 'apiBaseUrl', 'apiAllowCommands', 'apiGrokConfig', ...Object.keys(allowed)].includes(key))) invalid()
     }
     return value
   }

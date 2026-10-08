@@ -1,5 +1,13 @@
 # Release engineering and provenance
 
+## 1.0.6 Grok Connector integration
+
+Version **1.0.6** adds the explicit Grok Connector v1 Responses profile: advertised model/context settings, capability and usage inspection, native question and permission cards, cancellation, and private input-image attachments. Provider tools remain distinct from approved local workspace operations; connections and active turns retain their own identity. See [1.0.6 notes](releases/1.0.6.md) and the [Grok contract](GROK_CONNECTOR.md).
+
+Static checks, Help/locales consistency and the integrated current-build Electron fixture passed, including native decisions, image history/zoom, Stop, full restart and normal Quit with no renderer errors or surviving owned processes. The full unit run retained eight timing failures among 1,350 tests; the six affected files passed all 59 tests once rechecked serially without code or deadline changes. Separate live Electron-main acceptance passed read-only caller continuation, an exact native question answer, owned Stop and protected existing-image retrieval plus local replay. An earlier pre-header transport failure remains retained as uncertain, not counted as a pass. See the release notes for scope; native build-only outputs are separate evidence.
+
+Release preparation must freeze one clean source commit and reserve a new stable 1.0.6 family in the existing ledger. All six native targets use the compile/package-only workflow; no repeated other-OS runtime certification is implied. Published 1.0.5 and earlier reservations remain immutable. The new Grok controls have English/Russian text and English fallback in 54 other interface languages; the changed API Help section uses explicit English fallback in the 55 non-English guides. Audio/video and local API commands on Windows remain unavailable. Packages remain unsigned and manually installed.
+
 ## 1.0.5 Responses and image inspection
 
 Version **1.0.5** adds explicitly configured Responses connections, private generated-image cards with Save and a zoomable viewer, approved local command calls on supported hosts, and clearer connection migration. Existing connections retain Chat Completions until explicitly saved and applied to a chat. See [1.0.5 notes](releases/1.0.5.md) and [API contracts](API_CONNECTIONS.md).

@@ -55,6 +55,8 @@ export function createFeedProjector() {
             id: evt.messageId,
             turnId: evt.turnId,
             role: evt.role,
+            ...(evt.inputImages ? { inputImages: evt.inputImages } : {}),
+            ...(evt.media ? { media: evt.media } : {}),
             thinking: '',
             text: '',
             status: 'streaming',
@@ -195,6 +197,22 @@ export function createFeedProjector() {
             break
           }
         }
+      } else if (evt.type === 'interaction.requested') {
+        if ([...messagesMap.values()].some(message => message.interactions?.some(interaction => interaction.interactionId === evt.interaction.interactionId))) return
+        const target = getOrCreateAssistantMessage(evt.parentMessageId, evt.turnId, evt.timestamp, evt.eventId)
+        target.interactions ??= []
+        target.interactions.push(JSON.parse(JSON.stringify(evt.interaction)))
+        target.revision = (target.revision ?? 0) + 1
+      } else if (evt.type === 'interaction.state.changed') {
+        for (const message of messagesMap.values()) {
+          const interaction = message.interactions?.find(item => item.interactionId === evt.interactionId)
+          if (!interaction) continue
+          interaction.state = evt.state
+          if (evt.answer !== undefined) interaction.answer = JSON.parse(JSON.stringify(evt.answer))
+          if (evt.error !== undefined) interaction.error = evt.error
+          message.revision = (message.revision ?? 0) + 1
+          break
+        }
       } else if (evt.type === 'agent.status.changed' && ['completed', 'stopped', 'error'].includes(evt.status)) {
         for (const msg of messagesMap.values()) {
           if (msg.role !== 'assistant' || (evt.scope === 'turn' && evt.turnId && msg.turnId !== evt.turnId)) continue
@@ -208,6 +226,9 @@ export function createFeedProjector() {
           }
           for (const approval of msg.approvals ?? []) {
             if (approval.state === 'pending' || approval.state === 'submitting') { approval.state = 'expired'; changed = true }
+          }
+          for (const interaction of msg.interactions ?? []) {
+            if (interaction.state === 'pending' || interaction.state === 'submitting') { interaction.state = 'expired'; changed = true }
           }
           if (changed) msg.revision = (msg.revision ?? 0) + 1
         }
