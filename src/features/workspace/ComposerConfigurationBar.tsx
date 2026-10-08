@@ -25,9 +25,16 @@ function ProviderFields({ value, onChange, disabled }: { value: ChatConfiguratio
     void Promise.resolve().then(() => window.ziafAPI.apiConnections.list()).then(items => { if (current) setConnections(items) }).catch(() => { if (current) setError(true) })
     return () => { current = false }
   }, [value.provider])
+  const selectedConnection = connections.find(item => item.id === value.apiConnectionId)
   return <div className="space-y-3">
     <label className="block text-zinc-400">{t('coding_agent')}<select data-testid="agent-chat-provider" disabled={disabled} value={value.provider} onChange={event => onChange(configurationForProvider(event.target.value as AgentSessionProvider))} className="mt-2 w-full rounded-md border border-[#34363c] bg-[#111215] p-2.5 text-zinc-100">{Object.entries(providerAgents).map(([id, name]) => <option key={id} value={id}>{name}</option>)}</select></label>
     {value.provider === 'api' && <label className="block text-zinc-400">{t('agent_chat_api_connection')}<select data-testid="agent-chat-api-connection" disabled={disabled} value={value.apiConnectionId || ''} onChange={event => { const item = connections.find(connection => connection.id === event.target.value); onChange({ ...value, apiConnectionId: item?.id, model: item?.model || 'auto' }) }} className="mt-2 w-full rounded-md border border-[#34363c] bg-[#111215] p-2.5 text-zinc-100"><option value="">{t('agent_chat_select_connection')}</option>{value.apiConnectionId && !connections.some(item => item.id === value.apiConnectionId) && <option value={value.apiConnectionId}>{t('agent_chat_connection_unavailable')}</option>}{connections.map(item => <option key={item.id} value={item.id} disabled={!item.enabled}>{item.name}</option>)}</select>{(error || !connections.length) && <span className="mt-2 block text-amber-300">{t('agent_chat_connections_hint')}</span>}</label>}
+    {value.provider === 'api' && selectedConnection && <div className="space-y-2 text-xs text-zinc-400" data-testid="agent-chat-api-connection-protocol">
+      <p>{selectedConnection.transport === 'responses' ? 'Responses' : 'Chat Completions'}</p>
+      <p>{t(selectedConnection.transport === 'responses' ? 'api_responses_hint' : 'api_chat_completions_hint')}</p>
+      <button type="button" className="text-orange-400 hover:underline" disabled={disabled} onClick={() => useStore.getState().setActiveTab('connections')}>{t('api_open_connections')}</button>
+      <p>{t('api_connection_apply_hint')}</p>
+    </div>}
   </div>
 }
 

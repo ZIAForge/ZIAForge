@@ -246,16 +246,19 @@
     },
     {
       "id": "api",
-      "title": "API 接続",
+      "title": "API connections",
       "paragraphs": [
-        "「接続」では、明示的に選択した OpenAI 互換エンドポイントを追加します。名前、ベース URL、モデル、および必要に応じてキーを入力します。多くのサーバーでは末尾が URL /v1 であるベース URL が必要です。お使いのエンドポイントのドキュメントを確認してください。",
-        "ループバックHTTPを除き、HTTPSが必要です。URLに認証情報を埋め込まず、プレーンなエンドポイントを使用してください。キーはサポートされているOSの暗号化を使用し、UIには返されません。エンドポイントを変更する場合はキーの再入力が必要です。キーフィールドを空のままにすると保存済みのキーが保持され、「保存したキーを削除」で明示的にクリアされます。",
-        "API 呼び出しでは CLI サブスクリプションは使用されません。ツールやモデルはネイティブセッションとは異なり、モデル検出が成功しても推論ができることの証明にはなりません。トークン使用量は、プロバイダーが実際にそれを返した場合にのみ表示されます。",
-        "認証情報はタスク本文やプリセットの指示ではなく、「接続」で保持してください。読み取り専用レビュアーは許可された API ファイルツールのみを受け取り、レポートアーキテクトにはツールがありません。サポートされていないツール呼び出しは、暗黙的に実行されるのではなく拒否されます。サーバーによって推論パラメーター、ツールのサポート、モデル一覧が異なるため、エラーはお使いのエンドポイント独自の規約と照合してください。"
+        "Connections adds an explicitly selected OpenAI-compatible endpoint. Enter a name, base URL, model and a key if needed. Select Chat Completions for existing integrations or Responses for function rounds, provider tool progress and generated images. Existing connections retain Chat Completions until you change them explicitly. For an existing connection, Set up Responses opens a draft for that same endpoint; review the profile and click Save connection. Choose Codex connector only for a gateway that supports its extension. The saved key is retained when the endpoint is unchanged and the key field stays blank.",
+        "HTTPS is required except for loopback HTTP. Use a plain endpoint without credentials, queries or fragments. Redirects are refused. Keys use supported OS encryption and are never returned to the UI. Changing the endpoint requires re-entering or clearing its key. Leaving the key field blank preserves a saved key.",
+        "Workspace file tools execute in the backend-resolved local task folder, with relative paths and checks against traversal and links. Every file write needs explicit approval and an unchanged expected revision. Read-only sessions expose only read tools. In Responses, Allow local commands separately enables approved executable/argument calls on macOS and Linux. Command supervision is unavailable on Windows; the adapter does not advertise that tool there. Commands always require owner approval and are not an operating-system sandbox.",
+        "The Codex connector profile identifies that gateway’s Responses tool-progress extension. Native provider tools execute on the server, separately from caller tools on your computer. Local read-only permissions do not constrain the server. A connector cannot be selected for a report-only architect that requires all tools disabled: unsupported isolation fails rather than silently allowing native tools. Select an endpoint that can enforce the required policy.",
+        "Generated PNG, JPEG and WebP results appear as separate image cards, with Save image, outside collapsed tool output. Images are validated and kept in private application storage; model-supplied URLs and Markdown images are not fetched automatically. Opening saved history, retrying an image read and saving a cached image do not request a new generation. Results are bounded to 32 MiB and 32 million pixels per image, with a 128 MiB private cache. Preserve needed images before manually clearing the private cache if it becomes full. Click a chat image to open the image viewer. Zoom in or out, choose Actual size (100%) or Fit to window, and drag to inspect a detail. Escape or Close image viewer returns to the chat. Viewing and zooming reuse the loaded private image; they do not request a new generation.",
+        "Responses conversations retain the acknowledged response identity and exact function call IDs. Interrupted inputs are not automatically resent. An uncertain local edit or command is not rerun after restart; preserve the history and explicitly create a new context after inspection. Changes to a saved transport or endpoint require explicit reconfiguration. Provider status, cancellation and expiry failures are reported without hiding them behind a CLI fallback. The chat header shows the protocol pinned to that run. After saving connection changes, open the chat’s CLI / API selector and click Apply, even if the same connection is already selected. This creates a new run with the saved configuration and retains chat history. Saving a connection alone does not migrate active chats. Older text-only image links remain text; switching protocol does not regenerate or import previous results.",
+        "API connections use their configured endpoint and authentication, separately from native CLI subscriptions. Some gateways use subscriptions internally; ZIAForge does not copy native authentication into an API. Models, tool policies, reasoning parameters and billing depend on the endpoint. Discovery alone does not prove inference. Keep keys in Connections, never in task prose or screenshots."
       ],
       "links": [
         {
-          "label": "API 接続",
+          "label": "API connections",
           "path": "docs/API_CONNECTIONS.md"
         }
       ]

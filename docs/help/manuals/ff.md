@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: ff; served locale: ff; status: machine-translated. -->
 # Ñemmborde kuutoro ZIAForge
@@ -23,7 +23,7 @@ Gila e anniya haa e njeñtudi khesɗitinaandi. Ñemmborde gollal ngam Code, Work
 - [Presets, modeliiji e jaɓal](#models)
 - [Yeewtereeji, Dartin e doggol ngol](#chat)
 - [Piille, Git e timmugol](#files)
-- [Ceŋorɗe API](#api)
+- [API connections](#api)
 - [Teelteel, ɗemɗe e artirgol deenangol](#settings)
 - [Ƴam wallitoowo Ballal](#help-assistant)
 - [Wallitoowo e Telegram](#assistant-control)
@@ -256,17 +256,25 @@ Tinndinooje jokkondirɗe: [Nanondiral bayloowo teeltaaɗo](../../../shared/edito
 
 <a id="api"></a>
 
-## Ceŋorɗe API
+## API connections
 
-Ceŋorɗe ina ɓeyda nokku jokkondiral jaɓɗo OpenAI cuɓaaɗo no laaɓti. Naatnu innde, URL tuugnorɗo, model e coktirgal so ina haani. Sarwordeeji keewɗi ina ɗaɓɓi URL tuugnorɗo joofiroowo /v1; ƴeew binndanɗe nokku jokkondiral maa.
+> Koolol timmungol ngol firaaka tawo e ɗemngal jaɓɓorgal maa. Koolol Engele ngol ina holliree no tuugnorgal ni.
 
-HTTPS ina waɗɗii so wonaa loopback HTTP tan. Huutoro nokku jokkondiral laaɓɗo mo alaa seedanteeje naatnaaɗe e nder URL. Coktirɗe ɗee ina kuutoroo cokirgal OS jaɓangal kadi ngartirtaake e UI. Waylude nokku jokkondiral ina ɗaɓɓi naatnude coktirgal mum kadi. Woppude nokku coktirgal ko meere ina reena coktirgal danndaangal; Momtu coktirgal danndaangal ngal ina momta ngal no laaɓti.
+Connections adds an explicitly selected OpenAI-compatible endpoint. Enter a name, base URL, model and a key if needed. Select Chat Completions for existing integrations or Responses for function rounds, provider tool progress and generated images. Existing connections retain Chat Completions until you change them explicitly. For an existing connection, Set up Responses opens a draft for that same endpoint; review the profile and click Save connection. Choose Codex connector only for a gateway that supports its extension. The saved key is retained when the endpoint is unchanged and the key field stays blank.
 
-Noddaangooji API kuutortaako abonmaaji CLI. Kuutorɗe e modeliiji ina ceerti e golle neeniije, kadi keɓgol model no moƴƴi hollitaani wonde miijagol ngol gasii. Kuutorgol token feeñata tan ko so tawii jokkondirɗo oo hollitii ɗum tigi rigi.
+HTTPS is required except for loopback HTTP. Use a plain endpoint without credentials, queries or fragments. Redirects are refused. Keys use supported OS encryption and are never returned to the UI. Changing the endpoint requires re-entering or clearing its key. Leaving the key field blank preserves a saved key.
 
-Reenu seedanteeje e nder Ceŋorɗe, wonaa e nder konngi golle walla jamirooje preset. Ƴeewtooɓe tarooɓe tan keɓata tan ko kuutorɗe fiilde API ɗe ɓe njamiroo; mahoowo jaŋtol ngol alaa kuutorgol hay gootol. Noddaangooji kuutorgol ɗi njaɓaaka ina njaɓŋitee wonaa waɗeede e nder suuɗaare. Sarwordeeji ina ceerti e pormeeteeruuji miijo, ballal kuutorɗe e doggol modeliiji; yerondir juumre e nanondiral nokku jokkondiral maa tigi rigi.
+Workspace file tools execute in the backend-resolved local task folder, with relative paths and checks against traversal and links. Every file write needs explicit approval and an unchanged expected revision. Read-only sessions expose only read tools. In Responses, Allow local commands separately enables approved executable/argument calls on macOS and Linux. Command supervision is unavailable on Windows; the adapter does not advertise that tool there. Commands always require owner approval and are not an operating-system sandbox.
 
-Tinndinooje jokkondirɗe: [Ceŋorɗe API](../../API_CONNECTIONS.md).
+The Codex connector profile identifies that gateway’s Responses tool-progress extension. Native provider tools execute on the server, separately from caller tools on your computer. Local read-only permissions do not constrain the server. A connector cannot be selected for a report-only architect that requires all tools disabled: unsupported isolation fails rather than silently allowing native tools. Select an endpoint that can enforce the required policy.
+
+Generated PNG, JPEG and WebP results appear as separate image cards, with Save image, outside collapsed tool output. Images are validated and kept in private application storage; model-supplied URLs and Markdown images are not fetched automatically. Opening saved history, retrying an image read and saving a cached image do not request a new generation. Results are bounded to 32 MiB and 32 million pixels per image, with a 128 MiB private cache. Preserve needed images before manually clearing the private cache if it becomes full. Click a chat image to open the image viewer. Zoom in or out, choose Actual size (100%) or Fit to window, and drag to inspect a detail. Escape or Close image viewer returns to the chat. Viewing and zooming reuse the loaded private image; they do not request a new generation.
+
+Responses conversations retain the acknowledged response identity and exact function call IDs. Interrupted inputs are not automatically resent. An uncertain local edit or command is not rerun after restart; preserve the history and explicitly create a new context after inspection. Changes to a saved transport or endpoint require explicit reconfiguration. Provider status, cancellation and expiry failures are reported without hiding them behind a CLI fallback. The chat header shows the protocol pinned to that run. After saving connection changes, open the chat’s CLI / API selector and click Apply, even if the same connection is already selected. This creates a new run with the saved configuration and retains chat history. Saving a connection alone does not migrate active chats. Older text-only image links remain text; switching protocol does not regenerate or import previous results.
+
+API connections use their configured endpoint and authentication, separately from native CLI subscriptions. Some gateways use subscriptions internally; ZIAForge does not copy native authentication into an API. Models, tool policies, reasoning parameters and billing depend on the endpoint. Discovery alone does not prove inference. Keep keys in Connections, never in task prose or screenshots.
+
+Tinndinooje jokkondirɗe: [API connections](../../API_CONNECTIONS.md).
 
 <a id="settings"></a>
 

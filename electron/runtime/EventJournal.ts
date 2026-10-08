@@ -3,6 +3,7 @@ import path from 'node:path'
 import readline from 'node:readline'
 import { createFeedProjector } from '../../shared/agent-feed'
 import { assertPrivateFile, ensurePrivateDirectory } from './privateStorage'
+import { validMediaRef } from '../../shared/agent-media'
 import {
   AgentEvent,
   ReconstructedToolItem,
@@ -94,6 +95,7 @@ export class EventJournal {
    */
   async appendBatch(events: AgentEvent[]): Promise<void> {
     if (events.length === 0) return
+    for (const event of events) if (!validMediaEvent(event)) throw new Error('Invalid or oversized media event')
 
     const rawPayload = events.map((evt) => JSON.stringify(evt)).join('\n') + '\n'
 
@@ -141,7 +143,7 @@ export class EventJournal {
 
       try {
         const parsed = JSON.parse(trimmed) as AgentEvent
-        if (parsed && typeof parsed === 'object' && parsed.eventId && parsed.type) {
+        if (parsed && typeof parsed === 'object' && parsed.eventId && parsed.type && validMediaEvent(parsed)) {
           events.push(parsed)
         }
       } catch {
@@ -179,7 +181,7 @@ export class EventJournal {
       let parsed: AgentEvent | null = null
       try {
         const json = JSON.parse(trimmed)
-        if (json && typeof json === 'object' && json.eventId && json.type) {
+        if (json && typeof json === 'object' && json.eventId && json.type && validMediaEvent(json as AgentEvent)) {
           parsed = json as AgentEvent
         }
       } catch {
@@ -206,4 +208,11 @@ export class EventJournal {
     for (const event of events) projector.apply(event)
     return projector.messages()
   }
+}
+
+/** New binary results are metadata only; old non-media journals stay compatible. */
+function validMediaEvent(event: AgentEvent): boolean {
+  if (event.type === 'tool.started' && event.executor !== undefined && !['caller', 'provider'].includes(event.executor)) return false
+  if (event.type !== 'tool.completed' || event.media === undefined) return true
+  return Array.isArray(event.media) && event.media.length <= 4 && event.media.every(ref => validMediaRef(ref) && ref.sourceRunId === event.runId) && Buffer.byteLength(JSON.stringify(event)) <= 16 * 1024
 }

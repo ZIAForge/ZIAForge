@@ -1,6 +1,7 @@
 /** @vitest-environment happy-dom */
 import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { Storage } from 'happy-dom'
 import type { WorkflowAPI, WorkflowPlan, WorkflowSnapshot } from '../../../../shared/workflow'
 import { useStore, type Settings, type Task } from '../../../store'
 import { validatePlan } from '../../../../electron/workflow/WorkflowValidation'
@@ -61,7 +62,7 @@ const props = { onClose: () => {}, onOpenChat: () => {} }
 
 describe('ExecutablePlanPanel ownership and authoritative workflow state', () => {
   beforeEach(() => {
-    localStorage.clear()
+    vi.stubGlobal('localStorage', new Storage())
     useStore.setState({ settings: { uiLanguage: 'en', defaultCodingPreset: 'Coding', defaultReviewPreset: 'Review' } as Settings,
       presets: [
         { name: 'Coding', agent: 'Codex', model: 'fixture', permissions: 'Workspace write' },
@@ -69,7 +70,7 @@ describe('ExecutablePlanPanel ownership and authoritative workflow state', () =>
         { name: 'Review', agent: 'Codex', model: 'fixture', permissions: 'Read only' },
       ] })
   })
-  afterEach(() => { cleanup(); useStore.setState(initialStore) })
+  afterEach(() => { cleanup(); useStore.setState(initialStore); vi.unstubAllGlobals() })
 
   it('keeps new Forge decisions in the conversation and restores unsaved Code plan edits after closing the panel', async () => {
     const value = snapshot()
@@ -358,7 +359,7 @@ describe('ExecutablePlanPanel ownership and authoritative workflow state', () =>
     render(<ExecutablePlanPanel task={task('task-a')} onClose={() => {}} onOpenChat={open} />)
     await ready()
     fireEvent.click(screen.getByRole('button', { name: /Original step/ }))
-    expect(screen.getByTestId('workflow-source-first').textContent).toContain('approved')
+    expect(screen.getByTestId('workflow-source-first').textContent).toContain('Approved')
     expect(screen.getByTestId('workflow-source-second').textContent).toContain('Unchecked input')
     fireEvent.click(screen.getByRole('button', { name: 'Open source chat' }))
     expect(open).toHaveBeenCalledWith('wf-review-two', 'Review: Other')
@@ -368,7 +369,7 @@ describe('ExecutablePlanPanel ownership and authoritative workflow state', () =>
     completed.finalization = { id: 'finalize-one', status: 'blocked', inputFingerprint: 'b'.repeat(64), error: 'Remote unavailable', receipt: { status: 'blocked', operations: [] } }
     act(() => test.push(completed))
     expect(screen.getByTestId('workflow-finalization').textContent).toContain('Remote unavailable')
-    expect(screen.getByTestId('workflow-status').textContent).toBe('blocked')
+    expect(screen.getByTestId('workflow-status').textContent).toBe('Blocked')
   })
 
   it('resets plan and pending ownership on task change, ignoring the previous task save response', async () => {
@@ -407,7 +408,7 @@ describe('ExecutablePlanPanel ownership and authoritative workflow state', () =>
     expect(test.api.save).toHaveBeenCalledTimes(1)
     expect(test.api.start).toHaveBeenCalledTimes(2)
     for (const [request] of test.api.start.mock.calls) expect(request.revision).toBe(2)
-    expect(screen.getByTestId('workflow-status').textContent).toBe('running')
+    expect(screen.getByTestId('workflow-status').textContent).toBe('Working')
   })
 
   it('updates a clean editor before starting a newer incoming plan revision', async () => {
@@ -476,9 +477,9 @@ describe('ExecutablePlanPanel ownership and authoritative workflow state', () =>
     test.api.pause.mockImplementationOnce(() => response.promise)
     fireEvent.click(screen.getByTestId('workflow-pause'))
     expect((screen.getByTestId('workflow-pause') as HTMLButtonElement).disabled).toBe(true)
-    expect(screen.getByTestId('workflow-status').textContent).toBe('running')
+    expect(screen.getByTestId('workflow-status').textContent).toBe('Working')
     await act(async () => response.resolve({ ...active, status: 'paused', sequence: 4 }))
-    expect(screen.getByTestId('workflow-status').textContent).toBe('paused')
+    expect(screen.getByTestId('workflow-status').textContent).toBe('Paused')
     expect(start().disabled).toBe(false)
     expect(screen.queryByTestId('workflow-pause')).toBeNull()
   })

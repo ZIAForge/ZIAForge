@@ -118,6 +118,7 @@ export function createFeedProjector() {
           callId: evt.toolCallId,
           toolName: evt.toolName,
           input: evt.input,
+          executor: evt.executor,
           status: 'running',
         })
       } else if (evt.type === 'tool.output.delta') {
@@ -146,6 +147,7 @@ export function createFeedProjector() {
             tool.exitCode = evt.exitCode
             tool.signal = evt.signal
             tool.outcome = evt.outcome
+            tool.media = evt.media
 
             if (evt.isError || evt.outcome === 'failed') {
               tool.status = 'error'

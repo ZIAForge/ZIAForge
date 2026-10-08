@@ -45,6 +45,7 @@ export interface ToolStartedEvent extends BaseAgentEvent {
   toolName: string
   input?: unknown
   parentMessageId?: string
+  executor?: 'caller' | 'provider'
 }
 
 export interface ToolOutputDeltaEvent extends BaseAgentEvent {
@@ -62,6 +63,7 @@ export interface ToolCompletedEvent extends BaseAgentEvent {
   exitCode?: number
   signal?: string
   outcome?: 'completed' | 'failed' | 'cancelled' | 'declined'
+  media?: import('./agent-media').AgentMediaRef[]
 }
 
 // 3. Permission & Approval Events
@@ -162,6 +164,8 @@ export interface ReconstructedToolItem {
   exitCode?: number
   signal?: string
   outcome?: ToolCompletedEvent['outcome']
+  executor?: 'caller' | 'provider'
+  media?: import('./agent-media').AgentMediaRef[]
 }
 
 export interface ReconstructedApprovalItem {

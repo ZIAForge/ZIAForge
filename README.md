@@ -11,12 +11,12 @@
 An open-source desktop workspace for deliberate AI development, research and writing.<br />
 Use your installed AI CLIs and subscriptions, or connect an API you choose.
 
-[![Release](https://img.shields.io/badge/release-1.0.3-f97316)](https://github.com/ZIAForge/ZIAForge/releases/tag/v1.0.3)
+[![Release](https://img.shields.io/badge/release-1.0.5-f97316)](https://github.com/ZIAForge/ZIAForge/releases/tag/v1.0.5)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 [![Platforms](https://img.shields.io/badge/desktop-macOS%20%7C%20Windows%20%7C%20Linux-3f3f46)](#download)
 [![Languages](https://img.shields.io/badge/interface-56%20languages-3f3f46)](#languages-and-help)
 
-[**Website**](https://ziaforge.studio) · [**Download 1.0.3**](https://github.com/ZIAForge/ZIAForge/releases/tag/v1.0.3) · [**User guide**](docs/USER_GUIDE.md) · [**Documentation**](docs/README.md) · [**Contribute**](CONTRIBUTING.md)
+[**Website**](https://ziaforge.studio) · [**Download 1.0.5**](https://github.com/ZIAForge/ZIAForge/releases/tag/v1.0.5) · [**User guide**](docs/USER_GUIDE.md) · [**Documentation**](docs/README.md) · [**Contribute**](CONTRIBUTING.md)
 
 </div>
 
@@ -43,7 +43,7 @@ The application runs locally and keeps its task state, conversations, documents 
 
 ## Download
 
-Get the packages and `SHA256SUMS` from [**ZIAForge 1.0.3**](https://github.com/ZIAForge/ZIAForge/releases/tag/v1.0.3). Choose both the operating system **and** the CPU architecture; x64 and ARM64 packages are separate.
+Get the packages and `SHA256SUMS` from [**ZIAForge 1.0.5**](https://github.com/ZIAForge/ZIAForge/releases/tag/v1.0.5). Choose both the operating system **and** the CPU architecture; x64 and ARM64 packages are separate.
 
 | Your computer | Architecture | Packages |
 | --- | --- | --- |
@@ -54,11 +54,11 @@ Get the packages and `SHA256SUMS` from [**ZIAForge 1.0.3**](https://github.com/Z
 | Linux on Intel/AMD | x64 | DEB · RPM · AppImage · tar.gz · ZIP |
 | Linux on ARM | ARM64 | DEB · RPM · AppImage · tar.gz · ZIP |
 
-Source archives are also included. The [release notes](docs/releases/1.0.3.md) describe distribution and verification limits; [platform instructions](docs/PLATFORM_BUILDS.md) cover prerequisites and build routes. A generated package or cross-build does not establish native execution on every target.
+Source archives are also included. The [release notes](docs/releases/1.0.5.md) describe distribution and verification limits; [platform instructions](docs/PLATFORM_BUILDS.md) cover prerequisites and build routes. A generated package or cross-build does not establish native execution on every target.
 
 ### Install
 
-- **macOS:** requires macOS 13 or newer. Open the matching DMG and copy the complete `ZIAForge.app` into Applications, or extract the ZIP. Version 1.0.3 is unsigned and not notarized; macOS may require your explicit approval. Keep Gatekeeper enabled and verify the download before approving it.
+- **macOS:** requires macOS 13 or newer. Open the matching DMG and copy the complete `ZIAForge.app` into Applications, or extract the ZIP. Version 1.0.5 is unsigned and not notarized; macOS may require your explicit approval. Keep Gatekeeper enabled and verify the download before approving it.
 - **Windows:** run the matching installer, or extract the complete ZIP into a writable application directory. Install Git for Code tasks and put it on PATH. Keep the executable with its resources and native libraries. The packages are unsigned, so Windows may display a publisher warning.
 - **Ubuntu / Debian:** install the matching DEB through your package manager: `sudo apt install ./downloaded-package.deb`.
 - **RPM distributions:** install the matching RPM through your distribution's package manager, for example `sudo dnf install ./downloaded-package.rpm`.
@@ -143,7 +143,9 @@ ZIAForge uses **structured provider interfaces** rather than scraping an interac
 | Codex | Native App Server stdio | Your installed CLI's login |
 | Claude Code | Persistent stream-json | Your installed CLI's login |
 | Antigravity | Supported headless stream-json | Your installed CLI's login |
-| API | OpenAI-compatible streaming Chat Completions | Your explicitly configured endpoint and optional API key |
+| API | Explicit streaming Chat Completions or Responses | Your explicitly configured endpoint and optional API key |
+
+Responses connections support caller workspace tools, separately approved local commands on macOS/Linux, provider progress cards and private generated-image previews with Save and an expandable viewer (zoom, 100%, fit and pan). Server tools operate remotely; they never dispatch local commands. Windows local API commands are not yet available. Existing API connections keep Chat Completions until explicitly changed. Use **Set up Responses** in Connections, save, then **Apply** the same connection in the chat. The chat header shows its pinned protocol; history is retained.
 
 Native subscription access and API billing are separate choices. Model availability and limits belong to the selected provider and account. An unsupported CLI version fails visibly before prompt delivery; ZIAForge does not silently switch transport or provider.
 
@@ -207,7 +209,7 @@ The interface offers **56 languages**, including right-to-left layouts. Telegram
 
 Open **Help** for searchable product instructions, or ask the separate **Help assistant** using a saved connected AI preset. It answers from the current canonical guide and links its sections. It has no application command executor or live project context; the application architect is a separate feature.
 
-English is the canonical help source. The other 55 guides are currently **machine-translated and labelled as such**, with source hashes and a separate human-review status. Offline Markdown manuals and HTML guides are generated from the same package. Contributions from native speakers are welcome.
+English is the canonical help source. The other 55 guides are currently **machine-translated and labelled as such**, with source hashes and a separate human-review status. Newly changed sections may explicitly show the English reference while unchanged translations retain their provenance. Offline Markdown manuals and HTML guides are generated from the same package. Contributions from native speakers are welcome.
 
 [English guide](docs/USER_GUIDE.md) · [Language coverage and manuals](docs/help/LOCALES.md) · [Help maintenance](docs/HELP_MAINTENANCE.md) · [Localization](docs/LOCALIZATION.md)
 
@@ -225,7 +227,7 @@ Task state and history are local. Using a selected model sends the relevant prom
 
 API, Telegram and saved-instance credentials use the operating system's encrypted storage. Linux needs an unlocked Secret Service or KWallet backend; insecure plaintext fallbacks are refused. ZIAForge does not extract native provider credentials or edit their global authentication configuration.
 
-In Settings, use `ZIAForge/ZIAForge` as the trusted GitHub release repository and choose the **Stable / Preview** channel. New profiles default to Stable; automatic checks remain opt-in. Availability checks, downloads and installation have separate states. This unsigned 1.0.3 release is installed manually; automatic installation currently requires signed macOS packages and published updater metadata. Fully quit the app before replacing an installation.
+In Settings, use `ZIAForge/ZIAForge` as the trusted GitHub release repository and choose the **Stable / Preview** channel. New profiles default to Stable; automatic checks remain opt-in. Availability checks, downloads and installation have separate states. This unsigned 1.0.5 release is installed manually; automatic installation currently requires signed macOS packages and published updater metadata. Fully quit the app before replacing an installation.
 
 The Automations page currently retains UI definitions and counters; it is **not a recurring scheduler**. Actual plan execution/control is provided by the workflow engine, the local CLI and authenticated control API.
 

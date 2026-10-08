@@ -14,6 +14,10 @@ export interface ResolvedApiConnection extends ApiConnection { apiKey?: string }
 interface StoredConnection extends Omit<ApiConnection, 'hasApiKey'> { version: 1; encryptedKey?: string }
 const idPattern = /^[a-zA-Z0-9_-]{1,160}$/
 const label = (value: unknown): value is string => typeof value === 'string' && value.trim().length > 0 && value.length <= 200 && ![...value].some(char => char.charCodeAt(0) < 32)
+function validateTransport(value: Pick<ApiConnection, 'transport' | 'profile' | 'allowCommands'>): void {
+  if (value.transport !== undefined && !['chat-completions', 'responses'].includes(value.transport) || value.profile !== undefined && !['openai-compatible', 'codex-connector'].includes(value.profile) || value.allowCommands !== undefined && typeof value.allowCommands !== 'boolean') throw new Error('Invalid API transport configuration')
+  if ((value.profile === 'codex-connector' || value.allowCommands) && value.transport !== 'responses') throw new Error('Native tool progress and local commands require Responses transport')
+}
 
 export function validateApiBaseUrl(input: string): string {
   if (typeof input !== 'string' || input.length > 2000) throw new Error('Invalid API base URL')
@@ -30,11 +34,12 @@ export class ApiProviderStore implements ApiConnectionsAPI {
   private closing = false
   constructor(private readonly options: { directory: string; secrets: SecretStorage }) { ensurePrivateDirectory(options.directory) }
   private filename(id: string): string { if (!idPattern.test(id)) throw new Error('Invalid API connection ID'); return path.join(this.options.directory, `${id}.json`) }
-  private public(value: StoredConnection): ApiConnection { return { id: value.id, name: value.name, baseUrl: value.baseUrl, model: value.model, enabled: value.enabled, hasApiKey: Boolean(value.encryptedKey) } }
+  private public(value: StoredConnection): ApiConnection { return { id: value.id, name: value.name, baseUrl: value.baseUrl, model: value.model, enabled: value.enabled, hasApiKey: Boolean(value.encryptedKey), ...(value.transport !== undefined ? { transport: value.transport } : {}), ...(value.profile !== undefined ? { profile: value.profile } : {}), ...(value.allowCommands !== undefined ? { allowCommands: value.allowCommands } : {}) } }
   private async read(id: string): Promise<StoredConnection> {
     const value = await readPrivateMetadata(this.filename(id)) as StoredConnection
     if (!value || value.version !== 1 || value.id !== id || !label(value.name) || !label(value.model) || typeof value.enabled !== 'boolean' || (value.encryptedKey !== undefined && (typeof value.encryptedKey !== 'string' || value.encryptedKey.length > 32768))) throw new Error('Invalid stored API connection')
     validateApiBaseUrl(value.baseUrl)
+    validateTransport(value)
     return value
   }
   async list(): Promise<ApiConnection[]> {
@@ -45,7 +50,8 @@ export class ApiProviderStore implements ApiConnectionsAPI {
   save(request: SaveApiConnection): Promise<ApiConnection> {
     if (this.closing) return Promise.reject(new Error('API connection storage is shutting down'))
     const action = this.queue.catch(() => {}).then(async () => {
-      if (!request || typeof request !== 'object' || Array.isArray(request) || Object.keys(request).some(key => !['id', 'name', 'baseUrl', 'model', 'enabled', 'apiKey'].includes(key)) || !label(request.name) || !label(request.model) || typeof request.enabled !== 'boolean' || (request.apiKey !== undefined && (typeof request.apiKey !== 'string' || request.apiKey.length > 16384 || /[\r\n\0]/.test(request.apiKey)))) throw new Error('Invalid API connection configuration')
+      if (!request || typeof request !== 'object' || Array.isArray(request) || Object.keys(request).some(key => !['id', 'name', 'baseUrl', 'model', 'enabled', 'apiKey', 'transport', 'profile', 'allowCommands'].includes(key)) || !label(request.name) || !label(request.model) || typeof request.enabled !== 'boolean' || (request.apiKey !== undefined && (typeof request.apiKey !== 'string' || request.apiKey.length > 16384 || /[\r\n\0]/.test(request.apiKey)))) throw new Error('Invalid API connection configuration')
+      validateTransport(request)
       const id = request.id ?? `api-${randomUUID()}`
       const file = this.filename(id)
       let previous: StoredConnection | undefined
@@ -56,7 +62,8 @@ export class ApiProviderStore implements ApiConnectionsAPI {
         if (request.apiKey && !this.options.secrets.isEncryptionAvailable()) throw new Error('Secure OS credential storage is unavailable; no API key was saved')
         encryptedKey = request.apiKey ? this.options.secrets.encryptString(request.apiKey).toString('base64') : undefined
       }
-      const value: StoredConnection = { version: 1, id, name: request.name.trim(), baseUrl: validateApiBaseUrl(request.baseUrl), model: request.model.trim(), enabled: request.enabled, encryptedKey }
+      const value: StoredConnection = { version: 1, id, name: request.name.trim(), baseUrl: validateApiBaseUrl(request.baseUrl), model: request.model.trim(), enabled: request.enabled, encryptedKey, transport: request.transport ?? previous?.transport, profile: request.profile ?? previous?.profile, allowCommands: request.allowCommands ?? previous?.allowCommands }
+      validateTransport(value)
       await replacePrivateMetadata(file, value)
       return this.public(value)
     })

@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: km; served locale: km; status: machine-translated. -->
 # សៀវភៅណែនាំអ្នកប្រើប្រាស់ ZIAForge
@@ -23,7 +23,7 @@ Requested locale: km; served locale: km; status: machine-translated. -->
 - [ការកំណត់ជាមុន ម៉ូឌែល និងការចូលប្រើប្រាស់](#models)
 - [ការជជែក, Stop និងជួរ (queue)](#chat)
 - [ឯកសារ, Git និងការបញ្ចប់](#files)
-- [ការតភ្ជាប់ API](#api)
+- [API connections](#api)
 - [ការកំណត់ ភាសា និងការកំណត់ឡើងវិញដោយសុវត្ថិភាព](#settings)
 - [សួរសំណួរទៅកាន់ជំនួយការ Help](#help-assistant)
 - [ជំនួយការ និង Telegram](#assistant-control)
@@ -256,17 +256,25 @@ Open folder ប្រើប្រាស់បរិបទកិច្ចកា�
 
 <a id="api"></a>
 
-## ការតភ្ជាប់ API
+## API connections
 
-Connections បន្ថែម endpoint ដែលឆបគ្នាជាមួយ OpenAI ដែលបានជ្រើសរើសយ៉ាងច្បាស់លាស់។ បញ្ចូលឈ្មោះ, URL មូលដ្ឋាន, ម៉ូឌែល និងកូនសោប្រសិនបើចាំបាច់។ ម៉ាស៊ីនមេជាច្រើនទាមទារ URL មូលដ្ឋានដែលបញ្ចប់ដោយ /v1 សូមពិគ្រោះជាមួយឯកសារជំនួយ endpoint របស់អ្នក។
+> មគ្គុទ្ទេសក៍ពេញលេញមិនទាន់ត្រូវបានបកប្រែជាភាសាចំណុចប្រទាក់របស់អ្នកនៅឡើយទេ។ កំពុងបង្ហាញឯកសារយោងជាភាសាអង់គ្លេស។
 
-HTTPS ត្រូវបានទាមទារ លើកលែងតែ loopback HTTP។ ប្រើ endpoint ធម្មតាដោយគ្មានព័ត៌មានសម្ងាត់បង្កប់នៅក្នុង URL ឡើយ។ កូនសោប្រើប្រាស់ការអ៊ិនគ្រីប OS ដែលគាំទ្រ ហើយមិនត្រូវបានបញ្ជូនត្រឡប់ទៅ UI វិញទេ។ ការផ្លាស់ប្តូរ endpoint តម្រូវឱ្យបញ្ចូលកូនសោរបស់វាឡើងវិញ។ ការទុកប្រអប់កូនសោឱ្យនៅទទេនឹងរក្សាទុកកូនសោដែលបានរក្សាទុក។ Remove the saved key ជម្រះវាចោលយ៉ាងច្បាស់លាស់។
+Connections adds an explicitly selected OpenAI-compatible endpoint. Enter a name, base URL, model and a key if needed. Select Chat Completions for existing integrations or Responses for function rounds, provider tool progress and generated images. Existing connections retain Chat Completions until you change them explicitly. For an existing connection, Set up Responses opens a draft for that same endpoint; review the profile and click Save connection. Choose Codex connector only for a gateway that supports its extension. The saved key is retained when the endpoint is unchanged and the key field stays blank.
 
-ការហៅ API មិនប្រើការជាវ CLI ទេ។ ឧបករណ៍ និងម៉ូឌែលមានភាពខុសគ្នាពីវគ្គដើម ហើយការរកឃើញម៉ូឌែលជោគជ័យមិនបញ្ជាក់ពីដំណើរការ inference នោះទេ។ ការប្រើប្រាស់ token បង្ហាញតែនៅពេលដែលអ្នកផ្តល់សេវាផ្តល់វាត្រឡប់មកវិញពិតប្រាកដប៉ុណ្ណោះ។
+HTTPS is required except for loopback HTTP. Use a plain endpoint without credentials, queries or fragments. Redirects are refused. Keys use supported OS encryption and are never returned to the UI. Changing the endpoint requires re-entering or clearing its key. Leaving the key field blank preserves a saved key.
 
-រក្សាទុកព័ត៌មានសម្ងាត់នៅក្នុង Connections ជាជាងក្នុងអត្ថបទកិច្ចការ ឬការណែនាំកំណត់ជាមុន។ អ្នកពិនិត្យបែប Read-only ទទួលបានតែឧបករណ៍ឯកសារ API ដែលបានអនុញ្ញាតរបស់ពួកគេប៉ុណ្ណោះ។ ស្ថាបត្យកររបាយការណ៍គឺគ្មានឧបករណ៍ឡើយ។ ការហៅឧបករណ៍ដែលមិនគាំទ្រត្រូវបានបដិសេធជាជាងការប្រតិបត្តិដោយស្ងាត់ៗ។ ម៉ាស៊ីនមេមានភាពខុសគ្នាត្រង់ប៉ារ៉ាម៉ែត្រគិតពិចារណា ការគាំទ្រឧបករណ៍ និងបញ្ជីរាយនាមម៉ូឌែល សូមប្រៀបធៀបកំហុសជាមួយនឹងកិច្ចសន្យាផ្ទាល់របស់ endpoint របស់អ្នក។
+Workspace file tools execute in the backend-resolved local task folder, with relative paths and checks against traversal and links. Every file write needs explicit approval and an unchanged expected revision. Read-only sessions expose only read tools. In Responses, Allow local commands separately enables approved executable/argument calls on macOS and Linux. Command supervision is unavailable on Windows; the adapter does not advertise that tool there. Commands always require owner approval and are not an operating-system sandbox.
 
-ការណែនាំពាក់ព័ន្ធ: [ការតភ្ជាប់ API](../../API_CONNECTIONS.md).
+The Codex connector profile identifies that gateway’s Responses tool-progress extension. Native provider tools execute on the server, separately from caller tools on your computer. Local read-only permissions do not constrain the server. A connector cannot be selected for a report-only architect that requires all tools disabled: unsupported isolation fails rather than silently allowing native tools. Select an endpoint that can enforce the required policy.
+
+Generated PNG, JPEG and WebP results appear as separate image cards, with Save image, outside collapsed tool output. Images are validated and kept in private application storage; model-supplied URLs and Markdown images are not fetched automatically. Opening saved history, retrying an image read and saving a cached image do not request a new generation. Results are bounded to 32 MiB and 32 million pixels per image, with a 128 MiB private cache. Preserve needed images before manually clearing the private cache if it becomes full. Click a chat image to open the image viewer. Zoom in or out, choose Actual size (100%) or Fit to window, and drag to inspect a detail. Escape or Close image viewer returns to the chat. Viewing and zooming reuse the loaded private image; they do not request a new generation.
+
+Responses conversations retain the acknowledged response identity and exact function call IDs. Interrupted inputs are not automatically resent. An uncertain local edit or command is not rerun after restart; preserve the history and explicitly create a new context after inspection. Changes to a saved transport or endpoint require explicit reconfiguration. Provider status, cancellation and expiry failures are reported without hiding them behind a CLI fallback. The chat header shows the protocol pinned to that run. After saving connection changes, open the chat’s CLI / API selector and click Apply, even if the same connection is already selected. This creates a new run with the saved configuration and retains chat history. Saving a connection alone does not migrate active chats. Older text-only image links remain text; switching protocol does not regenerate or import previous results.
+
+API connections use their configured endpoint and authentication, separately from native CLI subscriptions. Some gateways use subscriptions internally; ZIAForge does not copy native authentication into an API. Models, tool policies, reasoning parameters and billing depend on the endpoint. Discovery alone does not prove inference. Keep keys in Connections, never in task prose or screenshots.
+
+ការណែនាំពាក់ព័ន្ធ: [API connections](../../API_CONNECTIONS.md).
 
 <a id="settings"></a>
 

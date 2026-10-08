@@ -437,7 +437,7 @@ function StructuredChatSession({ taskId, chatId, presetName, provider = 'codex',
   return (
     <div className="flex min-h-0 flex-1 flex-col h-full" data-testid={`structured-${currentConfiguration.provider}-chat`} data-provider={currentConfiguration.provider} data-session-status={snapshot?.sessionStatus || 'absent'}>
       <div className="flex items-center justify-between border-b border-[#1e2024] px-5 py-2 text-xs text-zinc-400">
-        <span className="min-w-0 truncate text-zinc-500">{currentConfiguration.provider} · {currentConfiguration.model}</span>
+        <span className="min-w-0 truncate text-zinc-500">{currentConfiguration.provider} · {currentConfiguration.model}{snapshot?.provider === 'api' && <span data-testid="agent-chat-api-transport" title={t('api_active_transport_hint')}> · {snapshot.apiTransport === 'responses' ? 'Responses' : 'Chat Completions'}{snapshot.apiProfile === 'codex-connector' ? ` · ${uiText('Codex connector')}` : ''}</span>}</span>
         <div className="ml-3 flex shrink-0 items-center gap-4"><button type="button" data-testid="agent-cli-logs-toggle" aria-expanded={logsOpen} onClick={() => setLogsOpen(value => !value)} className="hover:text-white">{t('agent_chat_logs')}</button><span role="status" data-testid="agent-session-status">{t(statusLabel)}</span></div>
       </div>
       {managedByPlan && <p data-testid="agent-chat-plan-owned" className="px-5 py-2 text-xs text-zinc-400">{t('agent_chat_managed_by_plan')}{onOpenCodeDiscussion && <button type="button" data-testid="code-execution-discuss" className="ml-3 text-orange-400 underline" onClick={onOpenCodeDiscussion}>{uiText("Forge")}</button>}</p>}
@@ -455,6 +455,7 @@ function StructuredChatSession({ taskId, chatId, presetName, provider = 'codex',
       <ConversationFeed
         className="min-h-0"
         messages={snapshot?.feed || []}
+        mediaOwner={snapshot ? { sessionId: snapshot.sessionId, runId: snapshot.runId } : undefined}
         workflowTitle={managedByPlan ? workflowTitle : undefined}
         workflowKind={managedByPlan ? workflowKind : undefined}
         onResolveApproval={snapshot?.capabilities.interactiveApprovals ? resolveApproval : undefined}

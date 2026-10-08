@@ -659,6 +659,21 @@ handleIpc('agent-session:cancel-queued', async (_, request: Parameters<AgentSess
 handleIpc('agent-session:interrupt', (_, request: Parameters<AgentSessionsAPI['interrupt']>[0]) => sessionCommands.interrupt(request))
 handleIpc('agent-session:terminate', (_, request: Parameters<AgentSessionsAPI['terminate']>[0]) => sessionCommands.terminate(request))
 handleIpc('agent-session:resolve-approval', (_, request: Parameters<AgentSessionsAPI['resolveApproval']>[0]) => sessionCommands.resolveApproval(request))
+handleIpc('agent-media:read', (_, request: import('../shared/agent-media').AgentMediaRequest) => getAgentSessions().readMedia(request))
+handleIpc('agent-media:save', async (_, request: import('../shared/agent-media').AgentMediaRequest) => {
+  const media = await getAgentSessions().readMedia(request)
+  const extension = media.mime === 'image/jpeg' ? 'jpg' : media.mime === 'image/webp' ? 'webp' : 'png'
+  const choice = await dialog.showSaveDialog({ defaultPath: `ZIAForge-image.${extension}`, filters: [{ name: 'Image', extensions: [extension] }] })
+  if (choice.canceled || !choice.filePath) return { cancelled: true }
+  // Dialog selection belongs to the human; recheck current session after the dialog.
+  const current = await getAgentSessions().readMedia(request)
+  const handle = await fs.promises.open(choice.filePath, fs.constants.O_WRONLY | fs.constants.O_CREAT | fs.constants.O_NOFOLLOW | fs.constants.O_NONBLOCK, 0o600)
+  try {
+    if (!(await handle.stat()).isFile()) throw new Error('Image destination must be a regular file')
+    await handle.truncate(0); await handle.writeFile(current.bytes); await handle.sync()
+  } finally { await handle.close() }
+  return { cancelled: false }
+})
 
 let workflowHost: ReturnType<typeof createWorkflowHost> | undefined
 async function resolveReportArchitectLaunch(request: Parameters<WorkflowAgentRunnerOptions['resolveLaunch']>[0], frozen?: Parameters<WorkflowAgentRunnerOptions['resolveLaunch']>[1]) {

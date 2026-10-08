@@ -13,6 +13,49 @@ const services: RunService[] = [], roots: string[] = [], servers: http.Server[] 
 afterEach(async () => { await Promise.all(services.splice(0).map(service => service.sessions.shutdown())); for (const server of servers.splice(0)) { server.closeAllConnections(); await new Promise<void>(resolve => server.close(() => resolve())) }
 roots.splice(0).forEach(root => fs.rmSync(root, { recursive: true, force: true })) })
 describe('API vertical session integration', () => {
+  it('keeps image bytes private and authorizes current/ancestor media without another provider request', async () => {
+    const root = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'ziaf-responses-media-'))); roots.push(root)
+    const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aXioAAAAASUVORK5CYII=', 'base64')
+    let requests = 0
+    const server = http.createServer((request, response) => { request.resume(); request.on('end', () => {
+      requests++
+      const item = { id: 'image-fixture', type: 'image_generation_call', result: png.toString('base64') }
+      response.end(`data: ${JSON.stringify({ type: 'response.created', response: { id: 'resp-fixture' } })}\n\ndata: ${JSON.stringify({ type: 'response.output_item.done', item, output_index: 0 })}\n\ndata: ${JSON.stringify({ type: 'response.completed', response: { id: 'resp-fixture', status: 'completed', output: [item] } })}\n\n`)
+    }) })
+    servers.push(server); await new Promise<void>(resolve => server.listen(0, '127.0.0.1', resolve))
+    const config: TrustedAgentSessionConfig = { taskId: 'task', chatId: 'chat-main', presetName: '', cwd: root, provider: 'api', model: 'media-model', apiConnectionId: 'media-api', apiReadOnly: true, apiConnection: { id: 'media-api', name: 'Media fixture', model: 'media-model', enabled: true, hasApiKey: false, transport: 'responses', baseUrl: `http://127.0.0.1:${(server.address() as { port: number }).port}/v1` } }
+    const create = () => { const service = new RunService({ sessionRegistry: new SessionRegistry(), processSupervisor: new ProcessSupervisor(), baseStorageDir: path.join(root, 'state') }); services.push(service); return service }
+    const first = create(), original = await first.sessions.create(config)
+    expect(original).toMatchObject({ apiTransport: 'responses', apiProfile: 'openai-compatible' })
+    await first.sessions.send({ ...original, text: 'Return an image', clientMessageId: 'image-input' })
+    await vi.waitFor(async () => expect((await first.sessions.snapshot(original)).lastTurn?.status).toBe('completed'))
+    const completed = await first.sessions.snapshot(original)
+    const media = completed.feed.flatMap(message => message.tools ?? []).flatMap(tool => tool.media ?? [])
+    expect(media).toHaveLength(1)
+    const request = { sessionId: original.sessionId, runId: original.runId, mediaId: media[0].id }
+    expect(Buffer.from((await first.sessions.readMedia(request)).bytes)).toEqual(png)
+    await expect(first.sessions.readMedia({ ...request, mediaId: 'foreign-image' })).rejects.toThrow('unavailable')
+    await expect(first.sessions.readMedia({ ...request, runId: 'other-run' })).rejects.toThrow('stale')
+    expect(JSON.stringify(completed)).not.toContain(png.toString('base64'))
+    const journal = fs.readFileSync(first.getJournal(original.taskId, original.runId).filePath, 'utf8')
+    expect(journal).not.toContain(png.toString('base64'))
+    await first.sessions.shutdown()
+    const second = create(), attached = await second.sessions.attach(config)
+    expect(attached).toMatchObject({ sessionStatus: 'disconnected', apiTransport: 'responses', apiProfile: 'openai-compatible' })
+    expect(Buffer.from((await second.sessions.readMedia(request)).bytes)).toEqual(png)
+    expect(requests).toBe(1)
+    const resumed = await second.sessions.resume(attached!, config)
+    expect(resumed.runId).not.toBe(original.runId)
+    await expect(second.sessions.readMedia(request)).rejects.toThrow('stale')
+    expect(Buffer.from((await second.sessions.readMedia({ ...request, runId: resumed.runId })).bytes)).toEqual(png)
+    expect(requests).toBe(1)
+    const pin = second.sessions.persistedLaunch(resumed)
+    expect(pin).toMatchObject({ apiTransport: 'responses', apiBaseUrl: config.apiConnection!.baseUrl, apiAllowCommands: false })
+    await second.sessions.terminate(resumed)
+    await expect(second.sessions.resume(resumed, { ...config, apiConnection: { ...config.apiConnection!, baseUrl: 'https://changed.invalid/v1' } })).rejects.toThrow('changed')
+    expect(requests).toBe(1)
+  })
+
   it('journals actual usage, owns no PID and restores local context after complete service restart', async () => {
     const root = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'ziaf-api-session-'))); roots.push(root)
     const requests: Array<{ messages: Array<{ role: string; content: string }>; model: string }> = []
@@ -21,6 +64,7 @@ describe('API vertical session integration', () => {
     const config: TrustedAgentSessionConfig = { taskId: 'task', chatId: 'chat-main', presetName: '', cwd: root, provider: 'api', model: 'actual-model', apiConnectionId: 'connection', apiReadOnly: true, apiConnection: { id: 'connection', name: 'Private fixture', baseUrl: `http://127.0.0.1:${(server.address() as { port: number }).port}/v1`, enabled: true, hasApiKey: true, apiKey: 'fixture-key-never-persist', model: 'stored-default' } }
     const create = () => { const registry = new SessionRegistry(); const service = new RunService({ sessionRegistry: registry, processSupervisor: new ProcessSupervisor(), baseStorageDir: path.join(root, 'state') }); services.push(service); return { service, registry } }
     const first = create(), original = await first.service.sessions.create(config)
+    expect(original).toMatchObject({ apiTransport: 'chat-completions', apiProfile: 'openai-compatible' })
     expect(first.registry.getAgentSession(original.sessionId)?.pid).toBeUndefined()
     expect(original.capabilities).toMatchObject({ interruptTurn: true, interactiveApprovals: false })
     const send = async (service: RunService, session: AgentSessionSnapshot, text: string, clientMessageId: string) => { await service.sessions.send({ ...session, text, clientMessageId }); await vi.waitFor(async () => expect((await service.sessions.snapshot(session)).lastTurn?.status).toBe('completed')); return service.sessions.snapshot(session) }

@@ -6,58 +6,86 @@
     "am": {
       "status": "machine-translated",
       "contentFile": "translations/am.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "ar": {
       "status": "machine-translated",
       "contentFile": "translations/ar.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "az": {
       "status": "machine-translated",
       "contentFile": "translations/az.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "bho": {
       "status": "machine-translated",
       "contentFile": "translations/bho.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "bn": {
       "status": "machine-translated",
       "contentFile": "translations/bn.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "ceb": {
       "status": "machine-translated",
       "contentFile": "translations/ceb.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "de": {
       "status": "machine-translated",
       "contentFile": "translations/de.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "en": {
       "status": "source",
@@ -68,386 +96,578 @@
     "es": {
       "status": "machine-translated",
       "contentFile": "translations/es.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "fa": {
       "status": "machine-translated",
       "contentFile": "translations/fa.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "ff": {
       "status": "machine-translated",
       "contentFile": "translations/ff.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "fr": {
       "status": "machine-translated",
       "contentFile": "translations/fr.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "gu": {
       "status": "machine-translated",
       "contentFile": "translations/gu.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "ha": {
       "status": "machine-translated",
       "contentFile": "translations/ha.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "hi": {
       "status": "machine-translated",
       "contentFile": "translations/hi.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "id": {
       "status": "machine-translated",
       "contentFile": "translations/id.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "ig": {
       "status": "machine-translated",
       "contentFile": "translations/ig.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "it": {
       "status": "machine-translated",
       "contentFile": "translations/it.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "ja-JP": {
       "status": "machine-translated",
       "contentFile": "translations/ja-JP.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "jv": {
       "status": "machine-translated",
       "contentFile": "translations/jv.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "kk": {
       "status": "machine-translated",
       "contentFile": "translations/kk.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "km": {
       "status": "machine-translated",
       "contentFile": "translations/km.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "kn": {
       "status": "machine-translated",
       "contentFile": "translations/kn.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "ko": {
       "status": "machine-translated",
       "contentFile": "translations/ko.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "ku": {
       "status": "machine-translated",
       "contentFile": "translations/ku.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "mai": {
       "status": "machine-translated",
       "contentFile": "translations/mai.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "mg": {
       "status": "machine-translated",
       "contentFile": "translations/mg.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "ml": {
       "status": "machine-translated",
       "contentFile": "translations/ml.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "mr": {
       "status": "machine-translated",
       "contentFile": "translations/mr.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "my": {
       "status": "machine-translated",
       "contentFile": "translations/my.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "ne": {
       "status": "machine-translated",
       "contentFile": "translations/ne.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "nl": {
       "status": "machine-translated",
       "contentFile": "translations/nl.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "om": {
       "status": "machine-translated",
       "contentFile": "translations/om.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "or": {
       "status": "machine-translated",
       "contentFile": "translations/or.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "pa": {
       "status": "machine-translated",
       "contentFile": "translations/pa.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "pl": {
       "status": "machine-translated",
       "contentFile": "translations/pl.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "pnb": {
       "status": "machine-translated",
       "contentFile": "translations/pnb.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "ps": {
       "status": "machine-translated",
       "contentFile": "translations/ps.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "pt-BR": {
       "status": "machine-translated",
       "contentFile": "translations/pt-BR.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "ro": {
       "status": "machine-translated",
       "contentFile": "translations/ro.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "ru": {
       "status": "machine-translated",
       "contentFile": "translations/ru.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "sd": {
       "status": "machine-translated",
       "contentFile": "translations/sd.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "so": {
       "status": "machine-translated",
       "contentFile": "translations/so.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "su": {
       "status": "machine-translated",
       "contentFile": "translations/su.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "ta": {
       "status": "machine-translated",
       "contentFile": "translations/ta.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "te": {
       "status": "machine-translated",
       "contentFile": "translations/te.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "th": {
       "status": "machine-translated",
       "contentFile": "translations/th.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "tl": {
       "status": "machine-translated",
       "contentFile": "translations/tl.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "tr": {
       "status": "machine-translated",
       "contentFile": "translations/tr.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "uk": {
       "status": "machine-translated",
       "contentFile": "translations/uk.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "ur": {
       "status": "machine-translated",
       "contentFile": "translations/ur.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "uz": {
       "status": "machine-translated",
       "contentFile": "translations/uz.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "vi": {
       "status": "machine-translated",
       "contentFile": "translations/vi.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "yo": {
       "status": "machine-translated",
       "contentFile": "translations/yo.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "zh-CN": {
       "status": "machine-translated",
       "contentFile": "translations/zh-CN.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     },
     "zh-TW": {
       "status": "machine-translated",
       "contentFile": "translations/zh-TW.json",
-      "translatedSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947",
+      "translatedSourceSha256": "132e99f829c744c67a5160004c5a9db678393731d2e56b8eab14a0b4fd6df903",
       "translationMethod": "Antigravity native CLI; configured default model, low effort; structured full-text translation; no human language review",
       "reviewedSourceSha256": null,
-      "reviewer": null
+      "reviewer": null,
+      "englishFallbackSections": [
+        "api"
+      ],
+      "retainedTranslationSourceSha256": "19977b173c646929e3b4afd5f8a5c30639cc32ca620657d7c2aed5e71419b947"
     }
   }
 }

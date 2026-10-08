@@ -2,6 +2,7 @@
 import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import type { AgentSessionSnapshot, AgentSessionsAPI, AgentSessionUpdate } from '../../../../shared/agent-session'
+import type { AgentMediaRef } from '../../../../shared/agent-media'
 import type { Settings } from '../../../store'
 import { useStore } from '../../../store'
 import { StructuredChat } from '../StructuredChat'
@@ -64,6 +65,19 @@ const applySettings = () => fireEvent.click(screen.getByTestId('agent-chat-apply
 const savedHistory: AgentSessionSnapshot['feed'] = [{ id: 'earlier-answer', role: 'assistant', text: 'Earlier answer', status: 'completed', revision: 1, thinking: '', tools: [], approvals: [], timestamp: 1 }]
 
 describe('StructuredChat', () => {
+  it('shows the protocol pinned to the run and updates only after an acknowledged session change', async () => {
+    const state = fixture({ provider: 'api', presetName: '', apiConnectionId: 'saved-api', apiTransport: 'chat-completions', apiProfile: 'openai-compatible' })
+    render(<StructuredChat {...state.props} />)
+    await ready()
+    expect(screen.getByTestId('agent-chat-api-transport').textContent).toContain('Chat Completions')
+    state.api.reconfigure.mockResolvedValue({ ...state.base, provider: 'api', runId: 'responses-run', presetName: '', apiConnectionId: 'saved-api', apiTransport: 'responses', apiProfile: 'codex-connector' })
+    fireEvent.click(screen.getByTestId('composer-provider-button'))
+    await act(async () => applySettings())
+    expect(state.api.reconfigure).toHaveBeenCalledTimes(1)
+    expect(screen.getByTestId('agent-chat-api-transport').textContent).toContain('Responses')
+    expect(screen.getByTestId('agent-chat-api-transport').textContent).toContain('Codex connector')
+  })
+
   beforeEach(() => {
     const stored = new Map<string, string>()
     vi.stubGlobal('localStorage', {
@@ -74,6 +88,46 @@ describe('StructuredChat', () => {
     Object.defineProperty(window, 'ziafAPI', { configurable: true, writable: true, value: { getAgentModels: vi.fn().mockResolvedValue(['fixture-model']), getAgentModelCatalog: vi.fn(async ({ agent }: { agent: string }) => ({ agent, status: 'ready', source: 'cli', command: agent, queriedAt: 1, models: [{ id: 'fixture-model', label: 'Fixture' }] })) } })
   })
   afterEach(() => { cleanup(); vi.unstubAllGlobals() })
+
+  it('reads inherited media through the current chat owner after Resume and saves without replaying a turn', async () => {
+    const bytes = new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10])
+    const media: AgentMediaRef = { id: 'media-33333333-3333-4333-8333-333333333333', sourceRunId: 'run-before-recovery', mime: 'image/png', bytes: bytes.byteLength, sha256: 'c'.repeat(64), width: 2, height: 1 }
+    const feed: AgentSessionSnapshot['feed'] = [{ id: 'inherited-image', role: 'assistant', text: '', thinking: '', status: 'completed', timestamp: 1, revision: 1, tools: [{ callId: 'provider-image', toolName: 'image_generation', executor: 'provider', status: 'completed', media: [media] }] }]
+    const test = fixture({ sessionStatus: 'disconnected', resumeAvailable: true, feed })
+    const resumed = { ...test.base, runId: 'run-2', feed }
+    test.api.resume.mockResolvedValue(resumed)
+    const read = vi.fn().mockResolvedValue({ bytes, mime: 'image/png' }), save = vi.fn().mockResolvedValue({ cancelled: false })
+    Object.defineProperty(window, 'ziafAPI', { configurable: true, writable: true, value: { ...window.ziafAPI, agentMedia: { read, save } } })
+    vi.stubGlobal('IntersectionObserver', undefined)
+    const urlDescriptors = Object.fromEntries(['createObjectURL', 'revokeObjectURL'].map(key => [key, Object.getOwnPropertyDescriptor(URL, key)]))
+    let index = 0
+    const revoke = vi.fn()
+    Object.defineProperty(URL, 'createObjectURL', { configurable: true, value: vi.fn(() => `blob:chat-media-${++index}`) })
+    Object.defineProperty(URL, 'revokeObjectURL', { configurable: true, value: revoke })
+    let view: ReturnType<typeof render> | undefined
+    try {
+      view = render(<StructuredChat {...test.props} />)
+      await ready()
+      await waitFor(() => expect(screen.getByTestId(`generated-image-${media.id}`)).not.toBeNull())
+      expect(read).toHaveBeenCalledExactlyOnceWith({ sessionId: test.base.sessionId, runId: 'run-1', mediaId: media.id })
+      await act(async () => fireEvent.click(screen.getByTestId('agent-session-resume')))
+      await waitFor(() => expect(read).toHaveBeenCalledTimes(2))
+      expect(read).toHaveBeenLastCalledWith({ sessionId: test.base.sessionId, runId: 'run-2', mediaId: media.id })
+      await waitFor(() => expect((screen.getByTestId(`generated-image-${media.id}`) as HTMLImageElement).src).toBe('blob:chat-media-2'))
+      expect(revoke).toHaveBeenCalledWith('blob:chat-media-1')
+      await act(async () => fireEvent.click(screen.getByTestId(`generated-media-save-${media.id}`)))
+      expect(save).toHaveBeenCalledExactlyOnceWith({ sessionId: test.base.sessionId, runId: 'run-2', mediaId: media.id })
+      expect(screen.getByText('Image saved')).not.toBeNull()
+      expect(test.api.send).not.toHaveBeenCalled(); expect(test.api.queue).not.toHaveBeenCalled()
+      expect(feed[0].tools?.[0].media?.[0].sourceRunId).toBe('run-before-recovery')
+    } finally {
+      view?.unmount()
+      for (const key of ['createObjectURL', 'revokeObjectURL']) {
+        if (urlDescriptors[key]) Object.defineProperty(URL, key, urlDescriptors[key])
+        else Reflect.deleteProperty(URL, key)
+      }
+    }
+  })
 
   it('shows a failed turn on a ready connection without replaying it or blocking the next request', async () => {
     const lastTurn = { turnId: 'denied-turn', clientMessageId: 'denied-input', status: 'failed' as const, error: 'CLI denied the command. Review permissions before sending again.' }

@@ -1,5 +1,6 @@
 import type { ApprovalDecision, ReconstructedApprovalItem, ReconstructedMessage } from './agent-events'
 import type { AgentExecutionOptions } from './agent-models'
+import type { ApiProfile, ApiTransport } from './api-provider'
 
 export type AgentSessionProvider = 'codex' | 'claude' | 'antigravity' | 'api'
 
@@ -54,6 +55,9 @@ export interface AgentSessionSnapshot extends AgentChatIdentity, AgentSessionRef
   presetName: string
   model?: string
   apiConnectionId?: string
+  /** Effective protocol pinned to this run, not the connection's latest settings. */
+  apiTransport?: ApiTransport
+  apiProfile?: ApiProfile
   /** Actual reported usage only; absent when the provider has not reported it. */
   usage?: { inputTokens: number; outputTokens: number; totalTokens: number; requests: number }
   resumeAvailable?: boolean

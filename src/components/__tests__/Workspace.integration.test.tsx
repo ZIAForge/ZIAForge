@@ -613,7 +613,7 @@ describe('Workspace Integration Tests', () => {
 
     // File tab for plan.json should be opened in central tabs
     await waitFor(() => {
-      expect(screen.getByTestId('central-tab-file-plan.json')).not.toBeNull()
+      expect(screen.getByTestId('central-tab-file-/tmp/worktree-task-1-plan.json')).not.toBeNull()
     })
     expect(useStore.getState().mockFileContents['plan.json']).toBeDefined()
     expect(window.ziafAPI.writeFile).toHaveBeenCalledWith(
@@ -1680,6 +1680,7 @@ describe('Workspace Integration Tests', () => {
       settings: {
         ...useStore.getState().settings!,
         useMockData: false,
+        uiLanguage: 'en',
       },
     })
 
@@ -1689,8 +1690,8 @@ describe('Workspace Integration Tests', () => {
     const telemetryBar = screen.getByTestId('stdout-telemetry-bar')
     expect(telemetryBar).not.toBeNull()
     expect(screen.getByText('Stdout telemetry stream')).not.toBeNull()
-    expect(screen.getByText(/• 0 lines/i)).not.toBeNull()
-    expect(screen.getByText('Ожидание вывода CLI интерфейса...')).not.toBeNull()
+    expect(screen.getByText('• Log lines: 0')).not.toBeNull()
+    expect(screen.getByText('Waiting for CLI output...')).not.toBeNull()
 
     // Switch to custom chat tab
     const newChatBtn = screen.getByTestId('btn-new-chat')
@@ -1698,7 +1699,7 @@ describe('Workspace Integration Tests', () => {
 
     // Telemetry bar and placeholder still visible in custom chat tab
     expect(screen.getByTestId('stdout-telemetry-bar')).not.toBeNull()
-    expect(screen.getByText('Ожидание вывода CLI интерфейса...')).not.toBeNull()
+    expect(screen.getByText('Waiting for CLI output...')).not.toBeNull()
   })
 
   it('auto-starts idle task when sending message from custom tab and delivers user message', async () => {
@@ -1773,6 +1774,7 @@ describe('Workspace Integration Tests', () => {
       settings: {
         ...useStore.getState().settings!,
         useMockData: false,
+        uiLanguage: 'en',
       },
     })
 
@@ -1795,7 +1797,7 @@ describe('Workspace Integration Tests', () => {
 
     // Custom tab displays error message badge
     await waitFor(() => {
-      expect(screen.getAllByText(/⚠️ Не удалось запустить задачу "Failing Task"/i).length).toBeGreaterThanOrEqual(1)
+      expect(screen.getAllByText(/Could not start task Failing Task\. Check its status\./).length).toBeGreaterThanOrEqual(1)
     })
 
     // The message was NOT sent to PTY

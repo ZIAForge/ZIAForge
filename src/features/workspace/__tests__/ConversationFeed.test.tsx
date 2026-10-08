@@ -732,7 +732,7 @@ describe('ConversationFeed Component (happy-dom)', () => {
       useStore.setState({
         settings: {
           ...useStore.getState().settings,
-          uiLanguage: 'de' as unknown as Settings['uiLanguage'],
+          uiLanguage: 'unsupported-test-locale' as unknown as Settings['uiLanguage'],
         } as Settings,
       })
     })
