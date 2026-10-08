@@ -20,6 +20,16 @@ export function grokModelMetadata(value: unknown): Partial<AgentModelCatalog['mo
   }
 }
 
+/** Only verified, enabled deployment capabilities can add these two native tools. */
+export function grokVideoTools(capabilities: unknown): Array<'image_to_video' | 'reference_to_video'> {
+  const cap = object(capabilities), video = object(object(cap.media).video)
+  if (cap.version !== 1 || !Array.isArray(cap.nativeTools) || cap.nativeTools.length > 256) throw new Error('Unsupported Grok Connector capability contract')
+  const names = cap.nativeTools.map(item => text(object(item).name))
+  if (names.some(name => !name || !/^[a-zA-Z0-9_-]+$/.test(name))) throw new Error('Invalid Grok Connector tool catalog')
+  if (video.available !== true || video.enabled !== true || video.verified !== true) return []
+  return (['image_to_video', 'reference_to_video'] as const).filter(name => names.includes(name))
+}
+
 export function grokInspection(capabilities: unknown, usage: unknown, models: unknown, usageAvailable: boolean): GrokConnectorInspection {
   const cap = object(capabilities)
   if (cap.version !== 1 || !Array.isArray(cap.nativeTools) || cap.nativeTools.length > 256) throw new Error('Unsupported Grok Connector capability contract')
@@ -32,7 +42,7 @@ export function grokInspection(capabilities: unknown, usage: unknown, models: un
   const contextWindows = [...new Set(modelList.flatMap(item => grokModelMetadata(item).contextWindows ?? []))].sort((a, b) => a - b)
   const credit = limits.creditUsagePercent
   const imageGeneration = images.available === true && images.verified === true
-  const videoAvailable = video.available === true && video.enabled === true && video.verified === true
+  const videoAvailable = grokVideoTools(capabilities).length > 0
   return {
     version: 1, fetchedAt: Date.now(), cliVersion: text(cap.cliVersion), tools,
     imageInput: cap.imageInput === true, imageGeneration,

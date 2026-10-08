@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { answerMatchesInteraction } from '../../../shared/grok-interactions'
-import { consumeResponsesStream, type ResponsesStreamOptions } from '../ResponsesProtocol'
+import { consumeResponsesStream, consumeGrokResponseResult, type ResponsesStreamOptions } from '../ResponsesProtocol'
 import { parseGrokEvent } from '../GrokProtocol'
 
 const responseId = `resp_${'1'.repeat(32)}`
@@ -60,7 +60,19 @@ describe('Grok Connector v1 protocol and exact native decisions', () => {
     expect((await consumeResponsesStream(new Response(frame(created) + frame({ ...approval, version: 999 }) + frame(completed)), callbacks)).calls).toEqual([])
     expect(callbacks.onHosted).not.toHaveBeenCalled()
   })
-  it('rejects unsupported media and oversized question metadata before UI projection', () => {
+  it('parses the same bounded MP4 metadata in SSE and completed poll results, refusing foreign URLs and formats', async () => {
+    const artifact = { id: `file_${'5'.repeat(32)}`, object: 'file', kind: 'video', mime_type: 'video/mp4', bytes: 128 * 1024 * 1024, sha256: 'a'.repeat(64), api_url: `/v1/files/file_${'5'.repeat(32)}/content`, filename: 'native.mp4' }
+    const callbacks = { ...options(), onGrokArtifacts: vi.fn() }
+    const final = { ...completed.response, grok: { version: 1, artifacts: [artifact] } }
+    await consumeResponsesStream(new Response(frame(created) + frame({ type: 'grok.artifact', ...base, artifact }) + frame({ type: 'response.completed', response: final })), callbacks)
+    await consumeGrokResponseResult(final, callbacks)
+    expect(callbacks.onGrokArtifacts).toHaveBeenCalledTimes(2)
+    expect(callbacks.onGrokArtifacts.mock.calls[0][0]).toEqual(callbacks.onGrokArtifacts.mock.calls[1][0])
+    expect(callbacks.onGrokArtifacts.mock.calls[0][0]).toEqual([{ id: artifact.id, kind: 'video', mime: 'video/mp4', bytes: artifact.bytes, sha256: artifact.sha256 }])
+    for (const override of [{ bytes: artifact.bytes + 1 }, { bytes: 0 }, { mime_type: 'video/webm' }, { api_url: 'https://foreign.invalid/private.mp4' }, { api_url: artifact.api_url + '?token=secret' }, { sha256: 'bad' }]) expect(() => parseGrokEvent({ type: 'grok.artifact', ...base, artifact: { ...artifact, ...override } }, responseId)).toThrow()
+    await expect(consumeGrokResponseResult({ ...final, grok: { version: 2, artifacts: [artifact] } }, callbacks)).rejects.toThrow()
+  })
+  it('rejects incomplete media metadata and oversized question metadata before UI projection', () => {
     expect(() => parseGrokEvent({ type: 'grok.artifact', ...base, artifact: { id: `file_${'5'.repeat(32)}`, object: 'file', kind: 'video', mime_type: 'video/mp4', bytes: 20, sha256: 'a'.repeat(64) } }, responseId)).toThrow()
     const oversized = JSON.parse(JSON.stringify(question))
     oversized.question.request.questions[0].options[0].preview = 'a'.repeat(65537)

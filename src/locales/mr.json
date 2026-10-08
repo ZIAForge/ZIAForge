@@ -1382,5 +1382,13 @@
   "grok_auto_approve_permissions": "Automatically approve one-time provider permissions",
   "grok_auto_approve_permissions_hint": "For new or reconfigured chats using this connection. Selects only a one-time permission offered by Grok. Questions and local file or command approvals still need your answer; read-only chats keep manual provider permissions.",
   "provider_interaction_auto_approved": "Approved automatically: one-time provider permission",
-  "grok_auto_approve_enabled": "One-time Grok permissions: automatic"
+  "grok_auto_approve_enabled": "One-time Grok permissions: automatic",
+  "video_generated": "तयार केलेला व्हिडिओ",
+  "video_unavailable": "व्हिडिओ उपलब्ध नाही",
+  "video_load_error": "व्हिडिओ लोड करता आला नाही: {error}",
+  "video_save": "व्हिडिओ जतन करा",
+  "video_save_error": "व्हिडिओ जतन करता आला नाही: {error}",
+  "video_save_cancelled": "व्हिडिओ जतन करणे रद्द केले",
+  "video_saved": "व्हिडिओ जतन केला",
+  "video_invalid": "व्हिडिओचा डेटा अवैध आहे"
 }

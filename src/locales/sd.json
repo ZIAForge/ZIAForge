@@ -1382,5 +1382,13 @@
   "grok_auto_approve_permissions": "Automatically approve one-time provider permissions",
   "grok_auto_approve_permissions_hint": "For new or reconfigured chats using this connection. Selects only a one-time permission offered by Grok. Questions and local file or command approvals still need your answer; read-only chats keep manual provider permissions.",
   "provider_interaction_auto_approved": "Approved automatically: one-time provider permission",
-  "grok_auto_approve_enabled": "One-time Grok permissions: automatic"
+  "grok_auto_approve_enabled": "One-time Grok permissions: automatic",
+  "video_generated": "ٺاهيل وڊيو",
+  "video_unavailable": "وڊيو موجود ناهي",
+  "video_load_error": "وڊيو لوڊ نه ٿي سگهي: {error}",
+  "video_save": "وڊيو محفوظ ڪريو",
+  "video_save_error": "وڊيو محفوظ نه ٿي سگهي: {error}",
+  "video_save_cancelled": "وڊيو محفوظ ڪرڻ منسوخ ڪيو ويو",
+  "video_saved": "وڊيو محفوظ ٿي وئي",
+  "video_invalid": "وڊيو جي ڊيٽا غلط آهي"
 }

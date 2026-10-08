@@ -1382,5 +1382,13 @@
   "grok_auto_approve_permissions": "Automatically approve one-time provider permissions",
   "grok_auto_approve_permissions_hint": "For new or reconfigured chats using this connection. Selects only a one-time permission offered by Grok. Questions and local file or command approvals still need your answer; read-only chats keep manual provider permissions.",
   "provider_interaction_auto_approved": "Approved automatically: one-time provider permission",
-  "grok_auto_approve_enabled": "One-time Grok permissions: automatic"
+  "grok_auto_approve_enabled": "One-time Grok permissions: automatic",
+  "video_generated": "Horonan-tsary noforonina",
+  "video_unavailable": "Tsy misy ny horonan-tsary",
+  "video_load_error": "Tsy afaka nampiditra ny horonan-tsary: {error}",
+  "video_save": "Tehirizo ny horonan-tsary",
+  "video_save_error": "Tsy afaka nitahiry ny horonan-tsary: {error}",
+  "video_save_cancelled": "Nofoanana ny fitahirizana horonan-tsary",
+  "video_saved": "Voatahiry ny horonan-tsary",
+  "video_invalid": "Tsy manan-kery ny angon-drakitra horonan-tsary"
 }

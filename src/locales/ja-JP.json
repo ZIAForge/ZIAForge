@@ -1382,5 +1382,13 @@
   "grok_auto_approve_permissions": "Automatically approve one-time provider permissions",
   "grok_auto_approve_permissions_hint": "For new or reconfigured chats using this connection. Selects only a one-time permission offered by Grok. Questions and local file or command approvals still need your answer; read-only chats keep manual provider permissions.",
   "provider_interaction_auto_approved": "Approved automatically: one-time provider permission",
-  "grok_auto_approve_enabled": "One-time Grok permissions: automatic"
+  "grok_auto_approve_enabled": "One-time Grok permissions: automatic",
+  "video_generated": "生成された動画",
+  "video_unavailable": "動画を利用できません",
+  "video_load_error": "動画を読み込めませんでした: {error}",
+  "video_save": "動画を保存",
+  "video_save_error": "動画を保存できませんでした: {error}",
+  "video_save_cancelled": "動画の保存をキャンセルしました",
+  "video_saved": "動画を保存しました",
+  "video_invalid": "動画データが無効です"
 }

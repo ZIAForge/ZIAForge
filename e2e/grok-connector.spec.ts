@@ -178,3 +178,108 @@ for (const autoApproveNativePermissions of [false, true]) {
     }
   })
 }
+
+// Retained real MP4 supplied privately by the release owner; never copied into the repository.
+test('Grok video uses one protected download, plays, seeks and saves after full Quit without inference', async ({ app }, testInfo) => {
+  const videoPath = process.env.ZIAFORGE_E2E_GROK_VIDEO_FILE
+  test.skip(!videoPath, 'Set ZIAFORGE_E2E_GROK_VIDEO_FILE to the retained MP4 outside Git')
+  test.setTimeout(180_000)
+  const server = await startGrokFixture({ videoPath })
+  const snapshot = () => app.window.evaluate(() => window.ziafAPI.agentSessions.attach({ taskId: 'task-e2e', chatId: 'chat-main' }))
+  const openTask = () => app.window.getByRole('button', { name: 'E2E Workspace', exact: true }).click()
+  const postCount = () => server.records.filter(item => item.method === 'POST').length
+  const downloads = () => server.records.filter(item => item.path === `/v1/files/${server.video!.id}/content`)
+  const expectedSha = '5e01ab26de87313798048c0692033dc674443edf3c98a9848598a77b01786729'
+  const sourceVersion = (JSON.parse(await fs.readFile(new URL('../package.json', import.meta.url), 'utf8')) as { version: string }).version
+  const currentBuild = async () => {
+    const identity = await app.window.evaluate(() => window.ziafAPI.getAppVersion())
+    expect(identity.version).toBe(sourceVersion)
+    await expect(app.window.getByRole('button', { name: `Version ${identity.fullVersion}`, exact: true })).toBeVisible()
+    return identity
+  }
+  try {
+    expect(server.video).toMatchObject({ bytes: 3_633_201, sha256: expectedSha })
+    const initialBuild = await currentBuild()
+    await app.window.getByRole('button', { name: 'Connections', exact: true }).first().click()
+    await app.window.getByTestId('api-connection-name').fill('Local Grok video fixture')
+    await app.window.getByTestId('api-connection-url').fill(server.baseUrl)
+    await app.window.getByTestId('api-connection-key').fill(server.apiKey!)
+    await app.window.getByTestId('api-connection-model').fill('grok-fixture')
+    await app.window.getByTestId('api-connection-transport').selectOption('responses')
+    await app.window.getByTestId('api-connection-profile').selectOption('grok-connector-v1')
+    await app.window.getByTestId('api-grok-max-turns').fill('9')
+    await app.window.getByTestId('api-connection-save').click()
+    await expect(app.window.getByTestId('api-connection-saved')).toBeVisible()
+    const [connection] = await app.window.evaluate(() => window.ziafAPI.apiConnections.list())
+    expect(connection).toMatchObject({ transport: 'responses', profile: 'grok-connector-v1', hasApiKey: true })
+    expect(JSON.stringify(connection)).not.toContain(server.apiKey!)
+    await app.window.getByTestId(`api-grok-inspect-${connection.id}`).click()
+    const capabilities = app.window.getByTestId('api-grok-capabilities')
+    await expect(capabilities.getByText('Video generation', { exact: true }).locator('..')).toContainText('Reported available')
+    await app.window.getByTestId(`api-connection-${connection.id}`).getByRole('button', { name: 'Edit', exact: true }).click()
+    await app.window.getByTestId('api-grok-context-window').selectOption('32000')
+    await app.window.getByTestId('api-connection-save').click()
+    await expect(app.window.getByTestId('api-connection-saved')).toBeVisible()
+    await app.window.screenshot({ path: testInfo.outputPath('video-01-capabilities.png'), fullPage: true })
+
+    await openTask()
+    await app.window.getByTestId('composer-preset-button').click()
+    await app.window.getByTestId('composer-custom-option').click()
+    await app.window.getByTestId('composer-provider-button').click()
+    await app.window.getByTestId('agent-chat-provider').selectOption('api')
+    await app.window.getByTestId('agent-chat-api-connection').selectOption(connection.id)
+    await app.window.getByTestId('agent-chat-apply').click()
+    expect(server.generationCount()).toBe(0)
+    await app.window.getByTestId('composer-input').fill('Show the retained six-second reference video.')
+    await app.window.getByTestId('composer-send-button').click()
+    await expect.poll(async () => (await snapshot())?.lastTurn?.status, { timeout: 30_000 }).toBe('completed')
+    const completed = (await snapshot())!
+    const generated = completed.feed.flatMap(message => (message.tools ?? []).flatMap(tool => tool.media ?? []))
+    expect(generated).toHaveLength(1)
+    const media = generated[0]
+    expect(media).toMatchObject({ mime: 'video/mp4', bytes: server.video!.bytes, sha256: expectedSha, width: 848, height: 480 })
+    expect(downloads()).toEqual([{ method: 'GET', path: `/v1/files/${server.video!.id}/content`, authorized: true }])
+    expect(server.generationCount()).toBe(1); expect(postCount()).toBe(1); expect(server.errors).toEqual([])
+    const figure = () => app.window.getByTestId(`generated-media-${media.id}`)
+    const video = () => app.window.getByTestId(`generated-video-${media.id}`)
+    const decode = async () => {
+      await figure().scrollIntoViewIfNeeded()
+      await expect(video()).toHaveCount(1)
+      await expect.poll(() => video().evaluate((node: HTMLVideoElement) => node.readyState >= 2 && node.videoWidth > 0 && node.error === null), { timeout: 20_000 }).toBe(true)
+      expect(await video().evaluate((node: HTMLVideoElement) => ({ width: node.videoWidth, height: node.videoHeight, controls: node.controls, autoplay: node.autoplay, local: node.currentSrc.startsWith('blob:') }))).toEqual({ width: 848, height: 480, controls: true, autoplay: false, local: true })
+      expect(await video().evaluate((node: HTMLVideoElement) => node.duration)).toBeCloseTo(6.041667, 2)
+    }
+    await decode()
+    await video().evaluate(async (node: HTMLVideoElement) => { node.muted = true; await node.play() })
+    await expect.poll(() => video().evaluate((node: HTMLVideoElement) => !node.paused && node.currentTime > 0.1)).toBe(true)
+    await video().evaluate((node: HTMLVideoElement) => node.pause())
+    expect(await video().evaluate((node: HTMLVideoElement) => node.paused)).toBe(true)
+    await video().evaluate((node: HTMLVideoElement) => { node.currentTime = 3 })
+    await expect.poll(() => video().evaluate((node: HTMLVideoElement) => !node.seeking && Math.abs(node.currentTime - 3) < 0.1)).toBe(true)
+    await app.window.screenshot({ path: testInfo.outputPath('video-02-play-pause-seek.png'), fullPage: true })
+    const save = async (name: string) => {
+      const filePath = testInfo.outputPath(name)
+      await app.electronApp.evaluate(({ dialog }, target) => { dialog.showSaveDialog = (async () => ({ canceled: false, filePath: target })) as typeof dialog.showSaveDialog }, filePath)
+      await app.window.getByTestId(`generated-media-save-${media.id}`).click()
+      await expect(figure().getByRole('status')).toHaveText('Video saved')
+      expect(createHash('sha256').update(await fs.readFile(filePath)).digest('hex')).toBe(expectedSha)
+    }
+    await save('saved-video-before-quit.mp4')
+    expect(downloads()).toHaveLength(1); expect(postCount()).toBe(1)
+    await app.restart(); await openTask()
+    expect(await currentBuild()).toEqual(initialBuild)
+    const replay = (await snapshot())!
+    expect(replay.sessionId).toBe(completed.sessionId)
+    expect(replay.feed).toEqual(completed.feed)
+    await decode()
+    await save('saved-video-after-quit.mp4')
+    expect(downloads()).toHaveLength(1); expect(postCount()).toBe(1); expect(server.generationCount()).toBe(1)
+    expect(server.errors).toEqual([])
+    expect((await app.transcript()).filter(item => item.event === 'prompt' || item.event === 'pty-shell-start')).toEqual([])
+    await app.window.screenshot({ path: testInfo.outputPath('video-03-full-quit-local-cache.png'), fullPage: true })
+    await testInfo.attach('grok-video-snapshot.json', { body: JSON.stringify(replay, null, 2), contentType: 'application/json' })
+  } finally {
+    await testInfo.attach('grok-video-local-transport.json', { body: JSON.stringify({ scope: 'Deterministic loopback transport with retained external MP4 and synthetic bearer; decoder/cache checks are not new live inference', video: server.video, generations: server.generationCount(), errors: server.errors, records: server.records }, null, 2), contentType: 'application/json' })
+    await server.close()
+  }
+})

@@ -120,6 +120,102 @@ describe('Grok Responses profile and native interaction ownership', () => {
     expect(await terminal(state.events, turn.turnId)).toMatchObject({ status: 'completed' })
     expect(state.requests.filter(request => request.url.includes('/questions/'))).toHaveLength(1)
   })
+  it('delivers one verified protected MP4 for duplicate SSE/final artifacts without a second download', async () => {
+    const bytes = Buffer.from('synthetic transport bytes; the private sink validates the container'), sha256 = createHash('sha256').update(bytes).digest('hex'), fileId = `file_${'d'.repeat(32)}`
+    const artifact = { id: fileId, object: 'file', kind: 'video', mime_type: 'video/mp4', bytes: bytes.length, sha256, api_url: `/v1/files/${fileId}/content`, owner_url: `/api/artifacts/${fileId}/content` }
+    const capabilities = { version: 1, nativeTools: [{ name: 'image_to_video' }, { name: 'reference_to_video' }], media: { video: { available: true, enabled: true, verified: true } } }
+    const sink = vi.fn(async () => ({ id: 'media-11111111-1111-4111-8111-111111111111', sourceRunId: 'run', mime: 'video/mp4' as const, bytes: bytes.length, sha256, width: 16, height: 16, durationMs: 1000 }))
+    const state = await fixture(url => {
+      if (url.endsWith('/grok/capabilities')) return Response.json(capabilities)
+      if (url.endsWith('/content')) return new Response(bytes, { headers: { 'content-type': 'video/mp4', 'content-length': String(bytes.length) } })
+      return wire(id('1'), [], [{ type: 'grok.artifact', version: 1, response_id: id('1'), sequence_number: 1, artifact }, { type: 'grok.artifact', version: 1, response_id: id('1'), sequence_number: 2, artifact }], [artifact])
+    }, { storeVideo: sink })
+    const turn = await state.adapter.sendPrompt({ taskId: 'task', text: 'Animate the reference' })
+    expect(await terminal(state.events, turn.turnId)).toMatchObject({ status: 'completed' })
+    expect(state.requests.find(request => request.url.endsWith('/responses'))?.body?.grok).toMatchObject({ allowedTools: ['web_search', 'web_fetch', 'image_gen', 'image_edit', 'ask_user_question', 'image_to_video', 'reference_to_video'], permissionMode: 'default' })
+    expect(sink).toHaveBeenCalledExactlyOnceWith(bytes, expect.any(AbortSignal))
+    expect(state.requests.filter(request => request.url.endsWith('/content'))).toHaveLength(1)
+    expect(state.events.filter(event => event.type === 'tool.completed' && event.media)).toMatchObject([{ outcome: 'completed', media: [{ mime: 'video/mp4', sha256 }] }])
+    expect(JSON.stringify(state.events)).not.toContain(bytes.toString('base64'))
+  })
+  it.each(['unverified', 'read-only'] as const)('refuses video delivery for %s native capabilities', async mode => {
+    const fileId = `file_${'e'.repeat(32)}`, artifact = { id: fileId, object: 'file', kind: 'video', mime_type: 'video/mp4', bytes: 30, sha256: 'a'.repeat(64), api_url: `/v1/files/${fileId}/content` }
+    const sink = vi.fn()
+    const state = await fixture(url => url.endsWith('/grok/capabilities') ? Response.json({ version: 1, nativeTools: [{ name: 'image_to_video' }], media: { video: { available: true, enabled: true, verified: false } } }) : wire(id('1'), [], [], [artifact]), { storeVideo: sink, readOnly: mode === 'read-only' })
+    const turn = await state.adapter.sendPrompt({ taskId: 'task', text: 'Review' })
+    expect(await terminal(state.events, turn.turnId)).toMatchObject({ status: 'error', error: expect.stringContaining('without verified video capability') })
+    expect(state.requests.filter(request => request.url.endsWith('/content'))).toHaveLength(0)
+    expect(sink).not.toHaveBeenCalled()
+  })
+  it.each(['completed', 'failed'] as const)('does not certify a native video %s observation as a delivered file', async status => {
+    const state = await fixture(() => wire(id('1'), [{ id: 'message', type: 'message', role: 'assistant', content: [{ type: 'output_text', text: 'Done' }] }], [{ type: 'grok.tool', version: 1, response_id: id('1'), sequence_number: 1, tool: { id: 'video-call', name: 'image_to_video', status } }]))
+    const turn = await state.adapter.sendPrompt({ taskId: 'task', text: 'Video' })
+    expect(await terminal(state.events, turn.turnId)).toMatchObject(status === 'completed' ? { status: 'error', error: expect.stringContaining('without a verified MP4 artifact') } : { status: 'completed' })
+    expect(state.events.filter(event => event.type === 'tool.completed' && event.media)).toHaveLength(0)
+  })
+  it('keeps pending caller outputs on their original profile and hands off visible history only on the next changed native turn', async () => {
+    let enabled = false, round = 0, discovery = 0
+    const image = { mime: 'image/png' as const, dataUrl: 'data:image/png;base64,aGlzdG9yeS1yYXN0ZXI=' }
+    const historyContext = vi.fn(async () => ({ text: 'user: Make a blue square. assistant: The square is ready.', images: [image] }))
+    const state = await fixture((url, body) => {
+      if (url.endsWith('/grok/capabilities')) { discovery++; return Response.json({ version: 1, nativeTools: [{ name: 'image_to_video' }], media: { video: { available: true, enabled, verified: true } } }) }
+      round++
+      if (round === 1) { enabled = true; return wire(id('1'), [{ id: 'fc_one', type: 'function_call', status: 'completed', call_id: 'native.pending/one', name: 'list_files', arguments: '{"path":"."}' }]) }
+      if (round === 2) {
+        expect(body).toMatchObject({ previous_response_id: id('1'), input: [{ type: 'function_call_output', call_id: 'native.pending/one' }] })
+        expect((body?.grok as { allowedTools: string[] }).allowedTools).not.toContain('image_to_video')
+        expect(discovery).toBe(1)
+        return wire(id('2'))
+      }
+      expect(body?.previous_response_id).toBeUndefined()
+      expect((body?.grok as { allowedTools: string[] }).allowedTools).toContain('image_to_video')
+      expect(JSON.stringify(body?.input)).toContain('Make a blue square')
+      expect(JSON.stringify(body?.input)).toContain(image.dataUrl)
+      expect(JSON.stringify(body?.input)).not.toContain('function_call_output')
+      return Response.json(completed(id('3')).response)
+    }, { storeVideo: vi.fn(), historyContext })
+    const first = await state.adapter.sendPrompt({ taskId: 'task', text: 'Inspect' }); expect(await terminal(state.events, first.turnId)).toMatchObject({ status: 'completed' })
+    await state.adapter.stop()
+    const resumed = new ResponsesAdapter({ ...state.options, resumeSessionId: state.adapter.getSessionId() }); adapters.push(resumed); await resumed.start()
+    const next = await resumed.sendPrompt({ taskId: 'task', text: 'Animate that square' })
+    expect(await terminal(state.events, next.turnId)).toMatchObject({ status: 'completed' })
+    expect(round).toBe(3); expect(discovery).toBe(2); expect(historyContext).toHaveBeenCalledTimes(1)
+  })
+  it('keeps the old native context recoverable when Stop interrupts a changed-profile history handoff', async () => {
+    let enabled = false, round = 0, release!: () => void, entered!: () => void
+    const waiting = new Promise<void>(resolve => { entered = resolve }), held = new Promise<void>(resolve => { release = resolve })
+    const historyContext = vi.fn(async () => { entered(); await held; return { text: 'Earlier accepted visible context' } })
+    const state = await fixture((url, body) => {
+      if (url.endsWith('/grok/capabilities')) return Response.json({ version: 1, nativeTools: [{ name: 'image_to_video' }], media: { video: { available: true, enabled, verified: true } } })
+      if (++round > 1) { expect(body?.previous_response_id).toBeUndefined(); expect(JSON.stringify(body?.input)).toContain('Earlier accepted visible context') }
+      return wire(id(String(round)))
+    }, { storeVideo: vi.fn(), historyContext })
+    const first = await state.adapter.sendPrompt({ taskId: 'task', text: 'Hello' }); await terminal(state.events, first.turnId)
+    const file = path.join(state.options.historyDirectory, `${state.adapter.getSessionId()}.json`), before = JSON.parse(fs.readFileSync(file, 'utf8'))
+    enabled = true
+    const stopped = await state.adapter.sendPrompt({ taskId: 'task', text: 'Follow up' })
+    await waiting; await state.adapter.interruptTurn(stopped.turnId); release()
+    expect(await terminal(state.events, stopped.turnId)).toMatchObject({ status: 'stopped' })
+    expect(JSON.parse(fs.readFileSync(file, 'utf8'))).toMatchObject({ lastResponseId: before.lastResponseId, nativeDefinition: before.nativeDefinition })
+    expect(round).toBe(1)
+    const retried = await state.adapter.sendPrompt({ taskId: 'task', text: 'Continue explicitly' }); expect(await terminal(state.events, retried.turnId)).toMatchObject({ status: 'completed' })
+    expect(historyContext).toHaveBeenCalledTimes(2); expect(round).toBe(2)
+  })
+  it('cancels video download on Stop without caching or publishing partial media', async () => {
+    const fileId = `file_${'f'.repeat(32)}`, artifact = { id: fileId, object: 'file', kind: 'video', mime_type: 'video/mp4', bytes: 30, sha256: 'a'.repeat(64), api_url: `/v1/files/${fileId}/content` }
+    const sink = vi.fn(), cancelled = vi.fn()
+    const state = await fixture(url => {
+      if (url.endsWith('/grok/capabilities')) return Response.json({ version: 1, nativeTools: [{ name: 'image_to_video' }], media: { video: { available: true, enabled: true, verified: true } } })
+      if (url.endsWith('/content')) return new Response(new ReadableStream<Uint8Array>({ cancel: cancelled }), { headers: { 'content-type': 'video/mp4' } })
+      return wire(id('1'), [], [], [artifact])
+    }, { storeVideo: sink })
+    const turn = await state.adapter.sendPrompt({ taskId: 'task', text: 'Video' })
+    await vi.waitFor(() => expect(state.requests.some(request => request.url.endsWith('/content'))).toBe(true))
+    await state.adapter.interruptTurn(turn.turnId)
+    expect(await terminal(state.events, turn.turnId)).toMatchObject({ status: 'stopped' })
+    expect(sink).not.toHaveBeenCalled(); expect(cancelled).toHaveBeenCalledTimes(1)
+    expect(state.events.filter(event => event.type === 'tool.completed' && event.media)).toHaveLength(0)
+  })
   it('verifies native image metadata against one standard image callback without a second GET', async () => {
     const bytes = Buffer.from('fixture raster bytes'), sha256 = createHash('sha256').update(bytes).digest('hex'), artifactId = `file_${'c'.repeat(32)}`
     const artifact = { id: artifactId, object: 'file', kind: 'image', mime_type: 'image/png', bytes: bytes.length, sha256, api_url: `/v1/files/${artifactId}/content`, owner_url: `/api/artifacts/${artifactId}/content` }

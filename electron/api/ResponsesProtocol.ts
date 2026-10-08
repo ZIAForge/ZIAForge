@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto'
-import { GROK_RESPONSE_ID, GROK_STREAM_EVENTS, grokErrorDetails, grokImageArtifact, parseGrokEvent, type GrokEvent, type GrokImageArtifact } from './GrokProtocol'
+import { GROK_RESPONSE_ID, GROK_STREAM_EVENTS, grokErrorDetails, grokArtifact, parseGrokEvent, type GrokEvent, type GrokArtifact } from './GrokProtocol'
 
 export const RESPONSES_LIMITS = Object.freeze({
   textBytes: 1024 * 1024,
@@ -30,7 +30,7 @@ export interface ResponsesStreamOptions {
   onResponseId(id: string): void | Promise<void>
   /** Opt-in native v1 parser; generic and Codex streams keep their existing contract. */
   onGrok?(event: GrokEvent): void | Promise<void>
-  onGrokArtifacts?(artifacts: GrokImageArtifact[]): void | Promise<void>
+  onGrokArtifacts?(artifacts: GrokArtifact[]): void | Promise<void>
 }
 export interface ResponsesStreamResult { id: string; text: string; calls: ResponsesFunctionCall[]; usage?: ResponsesUsage }
 
@@ -294,7 +294,7 @@ export async function consumeResponsesStream(response: Response, options: Respon
       await responseIdentity(event.response.id)
       if (options.onGrok) {
         if (!object(event.response.grok) || event.response.grok.version !== 1 || !Array.isArray(event.response.grok.artifacts) || event.response.grok.artifacts.length > RESPONSES_LIMITS.images) invalid()
-        const artifacts = event.response.grok.artifacts.map(grokImageArtifact)
+        const artifacts = event.response.grok.artifacts.map(grokArtifact)
         if (new Set(artifacts.map(artifact => artifact.id)).size !== artifacts.length) invalid()
         await options.onGrokArtifacts?.(artifacts); check()
       }
@@ -370,4 +370,12 @@ export async function consumeResponsesStream(response: Response, options: Respon
     await reader.cancel().catch(() => {})
     reader.releaseLock()
   }
+}
+
+/** A completed JSON result (including a GET poll) shares the streaming validators and callbacks. */
+export async function consumeGrokResponseResult(value: unknown, options: ResponsesStreamOptions): Promise<ResponsesStreamResult> {
+  if (!options.onGrok || !object(value) || !GROK_RESPONSE_ID.test(value.id as string)) throw new Error('Invalid Grok response result')
+  const body = JSON.stringify({ type: 'response.completed', response: value })
+  if (Buffer.byteLength(body) > RESPONSES_LIMITS.transportBytes) throw new Error('Grok result exceeds its bounded transport limit')
+  return consumeResponsesStream(new Response(`data: ${body}\n\n`), options)
 }

@@ -1382,5 +1382,13 @@
   "grok_auto_approve_permissions": "Automatically approve one-time provider permissions",
   "grok_auto_approve_permissions_hint": "For new or reconfigured chats using this connection. Selects only a one-time permission offered by Grok. Questions and local file or command approvals still need your answer; read-only chats keep manual provider permissions.",
   "provider_interaction_auto_approved": "Approved automatically: one-time provider permission",
-  "grok_auto_approve_enabled": "One-time Grok permissions: automatic"
+  "grok_auto_approve_enabled": "One-time Grok permissions: automatic",
+  "video_generated": "Nabuong video",
+  "video_unavailable": "Hindi available ang video",
+  "video_load_error": "Hindi ma-load ang video: {error}",
+  "video_save": "I-save ang video",
+  "video_save_error": "Hindi ma-save ang video: {error}",
+  "video_save_cancelled": "Kinansela ang pag-save ng video",
+  "video_saved": "Na-save ang video",
+  "video_invalid": "Hindi wastong data ng video"
 }
