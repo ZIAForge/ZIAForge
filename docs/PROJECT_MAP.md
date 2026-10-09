@@ -12,6 +12,7 @@ Read [the user guide](USER_GUIDE.md) for the product vocabulary, [../AGENTS.md](
 | Public contracts | `shared/legacy-ipc.ts`, `shared/agent-session.ts`, `shared/workflow.ts`, `shared/code-flow.ts`, `shared/work-flow.ts`, `shared/control.ts`, `shared/editor.ts` | Typed arguments, snapshots, state and event identities shared by UI, CLI and control |
 | Renderer | `src/components/`, `src/store.ts`, `src/i18n.ts`, `src/locales/` | User decisions, drafts, navigation, projection, locale text and presentation; never filesystem authority |
 | Provider sessions | `electron/agents/`, `electron/runtime/SessionManager.ts`, `ProviderLaunch.ts`, `EventJournal.ts`, `ApprovalRegistry.ts` | Version-gated structured transports, native resume, exactly-once delivery identities, approvals, replay and cleanup |
+| API connectors and private files | `electron/api/`, `electron/agents/ClaudeMessagesAdapter.ts`, `electron/runtime/AgentArtifactStore.ts`, `AgentInputDocumentStore.ts` | Explicit endpoint/profile grants, caller/native separation, owned attachments and immutable download references |
 | Code/Forge | `electron/workflow/WorkflowEngine.ts`, `CodeFlowDialogue.ts`, `CodeFlowProtocol.ts`, `CodeFlowPrompts.ts`, `MultiModelPipeline.ts`, `WorkflowHost.ts` | Code preparation, discussion, foundation revisions, accepted implementation and review cycles |
 | Work | `electron/workflow/WorkTaskEngine.ts`, `WorkTaskHost.ts`, `WorkTaskProtocol.ts`, `WorkTaskPrompts.ts`, `WorkArtifacts.ts` | Auto/Brainstorm/Deep/Research/Write phases, questions, input copies, sources and document versions |
 | Verification/review | `VerificationRunner.ts`, `WorkflowAgentRunner.ts`, `ReviewAggregation.ts`, `ReviewTeamStore.ts`, `shared/review-team.ts` | Real check receipts, bounded process groups, independent report sources and anonymous report-only architect |
@@ -42,6 +43,8 @@ The editor enables full syntax up to 8 MiB, 256 KiB windows for larger text, opt
 
 The application architect can display screenshots and use typed application tools; displaying an image is not model vision. Native Codex/Antigravity assistant execution needs local-owner permission. The report-only review architect currently requires a verified Claude/API tool-free path.
 
+Claude Connector v1 uses an explicit Anthropic Messages profile and origin without `/v1`. Caller tools operate locally; selected native tools operate in the connector's server workspace. Native pickers stage private image/PDF/text inputs, and generated files use Save-only version cards with verified private bytes. Completed continuation retains its owned response and pinned definition; cold-history import is explicit and lossy, and interrupted tools or decisions are never replayed. See [the Claude connector contract](CLAUDE_CONNECTOR_V1.md) for permissions, limits and cancellation boundaries.
+
 `system.commands` includes `documentation.guide`, the canonical English help, with its source path and hash. Both the application architect and external MCP/API agents can read this same reference. It describes capabilities; it does not grant permission, approve a workflow gate or replace the owner's instruction.
 
 The Automations panel currently stores UI definitions/counters rather than proving a recurring scheduler. Actual workflow control exists through the workflow engine, local CLI and authenticated API. Telegram needs an owner-configured token/private numeric ID and independent connectivity validation. OpenClaw/Hermes need installed external clients. GitHub release checks, verified downloads, prepared installation and confirmed restart are distinct states; see [UPDATES.md](UPDATES.md) for platform and local-owner boundaries.
@@ -49,7 +52,7 @@ The Automations panel currently stores UI definitions/counters rather than provi
 ## Where to read next
 
 - [Code workflows and Forge gates](WORKFLOWS.md) · [Work modes](WORK_WORKFLOWS.md) · [Code prompt profiles](CODE_WORKFLOW_PROMPTS.md)
-- [Provider compatibility](PROVIDER_COMPATIBILITY.md) · [Provider extension](PROVIDER_EXTENSION.md) · [API connections](API_CONNECTIONS.md)
+- [Provider compatibility](PROVIDER_COMPATIBILITY.md) · [Provider extension](PROVIDER_EXTENSION.md) · [API connections](API_CONNECTIONS.md) · [Claude Connector v1](CLAUDE_CONNECTOR_V1.md)
 - [Queues](MESSAGE_QUEUE.md) · [Recovery](DATA_RECOVERY.md) · [App control, Telegram, MCP](AGENT_CONTROL.md) · [Local CLI](CLI.md)
 - [Testing and inspection](TESTING.md) · [macOS packaging](MACOS_BUILD.md) · [Release readiness](RELEASE_READINESS.md)
 - [Help maintenance](HELP_MAINTENANCE.md) · [Localization](LOCALIZATION.md) · [Documentation index](README.md)

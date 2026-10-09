@@ -1,7 +1,8 @@
 /** @vitest-environment happy-dom */
 import { act, cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import type { GrokInteraction, GrokInteractionAnswer } from '../../../../shared/grok-interactions'
+import type { GrokInteraction } from '../../../../shared/grok-interactions'
+import type { ProviderInteractionAnswer } from '../../../../shared/provider-interactions'
 import { useStore, type Settings } from '../../../store'
 import { ProviderInteractionCard } from '../ProviderInteractionCard'
 import { ConversationFeed } from '../ConversationFeed'
@@ -39,7 +40,7 @@ describe('provider-native interactions', () => {
   })
 
   it('preserves exact native question text and labels across multi-select and a written answer', async () => {
-    const resolve = vi.fn<(_: string, answer: GrokInteractionAnswer) => Promise<void>>().mockResolvedValue(undefined)
+    const resolve = vi.fn<(_: string, answer: ProviderInteractionAnswer) => Promise<void>>().mockResolvedValue(undefined)
     render(<ProviderInteractionCard interaction={question()} onResolve={resolve} />)
     const groups = screen.getAllByRole('group')
     expect((screen.getByRole('button', { name: 'Send answer' }) as HTMLButtonElement).disabled).toBe(true)
@@ -53,7 +54,7 @@ describe('provider-native interactions', () => {
   })
 
   it('keeps cancellation distinct and exposes the two alternative outcomes only in plan mode', async () => {
-    const resolve = vi.fn<(_: string, answer: GrokInteractionAnswer) => Promise<void>>().mockResolvedValue(undefined)
+    const resolve = vi.fn<(_: string, answer: ProviderInteractionAnswer) => Promise<void>>().mockResolvedValue(undefined)
     const view = render(<ProviderInteractionCard interaction={question()} onResolve={resolve} />)
     expect(screen.queryByRole('button', { name: 'Skip interview' })).toBeNull()
     await act(async () => fireEvent.click(screen.getByRole('button', { name: 'Cancel question' })))

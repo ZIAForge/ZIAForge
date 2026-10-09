@@ -47,6 +47,18 @@ afterEach(() => {
 })
 
 describe('owned generated raster media', () => {
+  it('accepts owned GIF preview bytes with their exact typed-array view and rejects false GIF signatures', async () => {
+    const gif = new Uint8Array(Buffer.from('R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==', 'base64'))
+    const ref: AgentMediaRef = { ...media, mime: 'image/gif', width: 1, height: 1, bytes: gif.length }
+    const blob = safeMediaBlob(ref, { bytes: gif, mime: 'image/gif' })
+    expect(blob.type).toBe('image/gif'); expect(new Uint8Array(await blob.arrayBuffer())).toEqual(gif)
+    expect(() => safeMediaBlob(ref, { bytes: new Uint8Array(gif.length), mime: 'image/gif' })).toThrow('Invalid generated image data')
+    const api = fixture(); api.read.mockResolvedValue({ bytes: gif, mime: 'image/gif' })
+    const view = render(<GeneratedMedia media={ref} owner={owner} />)
+    await waitFor(() => expect(image().src).toBe('blob:owned-image-1'))
+    expect(api.read).toHaveBeenCalledExactlyOnceWith({ ...owner, mediaId: ref.id })
+    view.unmount(); expect(revokeURL).toHaveBeenCalledExactlyOnceWith('blob:owned-image-1')
+  })
   it('renders owned MP4 with native controls, saves it through IPC and never opens the image zoom dialog', async () => {
     const bytes = new Uint8Array([0, 0, 0, 24, 102, 116, 121, 112, 105, 115, 111, 109, 0, 0, 0, 0, 105, 115, 111, 109, 109, 112, 52, 50])
     const videoRef: AgentMediaRef = { ...media, mime: 'video/mp4', bytes: bytes.length, durationMs: 6000 }

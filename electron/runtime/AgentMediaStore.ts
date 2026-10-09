@@ -35,7 +35,9 @@ export function rasterInfo(bytes: Buffer): Pick<AgentImageRef, 'mime' | 'width' 
     if (kind === 'VP8X') { width = 1 + bytes.readUIntLE(24, 3); height = 1 + bytes.readUIntLE(27, 3) }
     else if (kind === 'VP8 ' && bytes.subarray(23, 26).equals(Buffer.from([157, 1, 42]))) { width = bytes.readUInt16LE(26) & 16383; height = bytes.readUInt16LE(28) & 16383 }
     else if (kind === 'VP8L' && bytes[20] === 47) { const packed = bytes.readUInt32LE(21); width = (packed & 16383) + 1; height = ((packed >>> 14) & 16383) + 1 }
-  } else throw new Error('Only PNG, JPEG and WebP image results are supported')
+  } else if (bytes.length >= 13 && ['GIF87a', 'GIF89a'].includes(bytes.toString('ascii', 0, 6))) {
+    mime = 'image/gif'; width = bytes.readUInt16LE(6); height = bytes.readUInt16LE(8)
+  } else throw new Error('Only PNG, JPEG, GIF and WebP image results are supported')
   if (!width || !height || width > 32768 || height > 32768 || width * height > 32_000_000) throw new Error('Image dimensions exceed the display limit')
   return { mime, width, height }
 }

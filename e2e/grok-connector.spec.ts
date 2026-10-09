@@ -85,7 +85,7 @@ for (const autoApproveNativePermissions of [false, true]) {
       if (autoApproveNativePermissions) {
         const pending = (await snapshot())!.pendingInteractions!.find(item => item.interactionId === server.ids.reject)!
         expect(pending.kind).toBe('approval')
-        if (pending.kind !== 'approval') throw new Error('Expected native approval')
+        if (pending.provider === 'claude' || pending.kind !== 'approval') throw new Error('Expected Grok native approval')
         expect(pending.request.options.filter(option => option.kind === 'allow_once')).toHaveLength(2)
       }
       await reject.getByRole('button', { name: 'Reject this operation once', exact: true }).click()

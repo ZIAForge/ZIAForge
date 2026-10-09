@@ -35,6 +35,8 @@ export function safeMediaBlob(media: AgentMediaRef, result: Awaited<ReturnType<A
     ? [137, 80, 78, 71, 13, 10, 26, 10].every((value, index) => bytes[index] === value)
     : media.mime === 'image/jpeg'
       ? bytes.length >= 3 && bytes[0] === 255 && bytes[1] === 216 && bytes[2] === 255
+      : media.mime === 'image/gif'
+        ? bytes.length >= 13 && [71, 73, 70, 56].every((value, index) => bytes[index] === value) && [55, 57].includes(bytes[4]) && bytes[5] === 97
       : bytes.length >= 12 && [82, 73, 70, 70].every((value, index) => bytes[index] === value) && [87, 69, 66, 80].every((value, index) => bytes[index + 8] === value)
   if (!matches) throw invalid()
   // Copy the view into an owned ArrayBuffer, including sliced/IPC-backed views.

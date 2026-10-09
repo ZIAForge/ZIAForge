@@ -91,7 +91,7 @@ export class ResponsesAdapter implements AgentAdapter {
     if (options.connection.transport !== 'responses') throw new Error('Responses transport must be selected explicitly')
     if (options.toolPolicy !== undefined && options.toolPolicy !== 'none') throw new Error('Invalid API tool policy')
     const profile = options.connection.profile ?? 'openai-compatible'
-    if (!['openai-compatible', 'codex-connector', 'grok-connector-v1'].includes(profile)) throw new Error('Invalid Responses profile')
+    if (profile !== 'openai-compatible' && profile !== 'codex-connector' && profile !== 'grok-connector-v1') throw new Error('Invalid Responses profile')
     if (profile === 'codex-connector' && options.toolPolicy === 'none') throw new Error('Codex connector cannot guarantee a tool-free session')
     if (profile === 'grok-connector-v1' && options.toolPolicy === 'none') throw new Error('Grok connector cannot guarantee a tool-free session')
     if (profile !== 'grok-connector-v1' && options.connection.grok !== undefined) throw new Error('Grok native configuration requires the explicit Grok profile')
@@ -306,6 +306,7 @@ export class ResponsesAdapter implements AgentAdapter {
     this.emit({ type: 'interaction.state.changed', turnId: active.id, interactionId: interaction.interactionId, state, ...(interaction.answer ? { answer: interaction.answer } : {}), ...(interaction.resolvedBy ? { resolvedBy: interaction.resolvedBy } : {}), ...(error ? { error } : {}) })
   }
   async resolveInteraction(request: ResolveInteractionRequest): Promise<void> {
+    if (request.answer.provider === 'claude') throw new Error('Claude decisions require the Claude Messages profile')
     const active = this.active, pending = active?.interactions.get(request.interactionId), interaction = pending?.interaction
     if (this.identity.profile !== 'grok-connector-v1' || request.taskId !== this.options.taskId || request.runId !== undefined && request.runId !== this.options.runId || !active || request.turnId !== active.id || !interaction || interaction.state !== 'pending' || interaction.responseId !== active.responseId || active.controller.signal.aborted) throw new Error('Unknown or stale Grok interaction')
     if (interaction.expiresAt <= Date.now()) { this.interactionState(active, interaction, 'expired'); throw new Error('Grok interaction expired') }

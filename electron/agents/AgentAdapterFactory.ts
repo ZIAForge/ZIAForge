@@ -1,3 +1,6 @@
+import { ClaudeMessagesAdapter } from './ClaudeMessagesAdapter'
+import { AgentArtifactStore } from '../runtime/AgentArtifactStore'
+import type { AgentArtifactMetadata, AgentArtifactRef } from '../../shared/agent-artifacts'
 import { ResponsesAdapter } from './ResponsesAdapter'
 import { AgentMediaStore } from '../runtime/AgentMediaStore'
 import type { AgentMediaRef, AgentImageRef } from '../../shared/agent-media'
@@ -94,9 +97,10 @@ export interface CreateAdapterOptions {
   apiHistoryDirectory?: string
   apiResumeSessionId?: string
   apiReadOnly?: boolean
+  apiStoreArtifact?: (metadata: AgentArtifactMetadata, bytes: Buffer, signal: AbortSignal) => Promise<AgentArtifactRef>
   apiStoreMedia?: (itemId: string, encoded: string, signal: AbortSignal) => Promise<AgentMediaRef>
   apiStoreVideo?: (bytes: Buffer, signal: AbortSignal) => Promise<AgentMediaRef>
-  apiHistoryContext?: () => Promise<{ text: string; images?: Array<{ mime: AgentImageRef['mime']; dataUrl: string }> }>
+  apiHistoryContext?: () => Promise<{ text: string; images?: Array<{ mime: Exclude<AgentImageRef['mime'], 'image/gif'>; dataUrl: string }> }>
   toolPolicy?: 'none'
   spawnProcess?: (command: string, args: string[], options: SpawnOptions) => ChildProcess
 
@@ -310,6 +314,10 @@ export class AgentAdapterFactory {
 
     if (provider === 'api') {
       if (!options.apiConnection || !options.apiHistoryDirectory) throw new Error('A resolved API connection and private history directory are required')
+      if (options.apiConnection.transport === 'anthropic-messages') {
+        const store = new AgentArtifactStore(path.join(options.apiHistoryDirectory, 'artifacts'))
+        return new ClaudeMessagesAdapter({ taskId: options.taskId, runId, worktreePath: options.worktreePath, connection: options.apiConnection, historyDirectory: options.apiHistoryDirectory, resumeSessionId: options.apiResumeSessionId, readOnly: options.apiReadOnly, toolPolicy: options.toolPolicy, model: options.model, reasoningEffort: options.reasoningEffort, onEvent: options.onEvent, onRawLog: options.onRawLog, storeArtifact: options.apiStoreArtifact ?? ((metadata, bytes, signal) => store.store({ taskId: options.taskId, runId }, metadata, bytes, signal)) })
+      }
       if (options.apiConnection.transport === 'responses') {
         const mediaStore = new AgentMediaStore(path.join(options.apiHistoryDirectory, 'media'))
         return new ResponsesAdapter({ taskId: options.taskId, runId, worktreePath: options.worktreePath, connection: options.apiConnection, historyDirectory: options.apiHistoryDirectory, resumeSessionId: options.apiResumeSessionId, readOnly: options.apiReadOnly, toolPolicy: options.toolPolicy, model: options.model, reasoningEffort: options.reasoningEffort, onEvent: options.onEvent, onRawLog: options.onRawLog, storeMedia: options.apiStoreMedia ?? ((_itemId, encoded, signal) => mediaStore.storeBase64({ taskId: options.taskId, runId }, encoded, signal)), storeVideo: options.apiStoreVideo ?? ((bytes, signal) => mediaStore.storeVideo({ taskId: options.taskId, runId }, bytes, signal)), historyContext: options.apiHistoryContext })

@@ -1,11 +1,13 @@
+import { ClaudeInteractionCard } from './ClaudeInteractionCard'
+import type { ProviderInteraction, ProviderInteractionAnswer } from '../../../shared/provider-interactions'
 import { useEffect, useRef, useState } from 'react'
 import { MessageCircle, ShieldAlert } from 'lucide-react'
 import { useTranslation } from '../../i18n'
 import { answerMatchesInteraction, type GrokInteraction, type GrokInteractionAnswer } from '../../../shared/grok-interactions'
 
 export interface ProviderInteractionCardProps {
-  interaction: GrokInteraction
-  onResolve?: (interactionId: string, answer: GrokInteractionAnswer) => Promise<void>
+  interaction: ProviderInteraction
+  onResolve?: (interactionId: string, answer: ProviderInteractionAnswer) => Promise<void>
 }
 
 const own = <T,>(record: Record<string, T>, key: string): T | undefined => Object.hasOwn(record, key) ? record[key] : undefined
@@ -13,10 +15,11 @@ const button = 'rounded border border-zinc-700 px-3 py-2 text-xs text-zinc-200 h
 
 /** Provider-owned decisions are separate from local tool allow/deny cards. */
 export function ProviderInteractionCard(props: ProviderInteractionCardProps) {
-  return <InteractionForm key={`${props.interaction.responseId}:${props.interaction.interactionId}`} {...props} />
+  if (props.interaction.provider === 'claude') return <ClaudeInteractionCard key={`${props.interaction.responseId}:${props.interaction.interactionId}`} interaction={props.interaction} onResolve={props.onResolve} />
+  return <InteractionForm key={`${props.interaction.responseId}:${props.interaction.interactionId}`} interaction={props.interaction} onResolve={props.onResolve} />
 }
 
-function InteractionForm({ interaction, onResolve }: ProviderInteractionCardProps) {
+function InteractionForm({ interaction, onResolve }: { interaction: GrokInteraction; onResolve?: (interactionId: string, answer: GrokInteractionAnswer) => Promise<void> }) {
   const { t } = useTranslation()
   const [answers, setAnswers] = useState<Record<string, string[]>>({})
   const [notes, setNotes] = useState<Record<string, string>>({})

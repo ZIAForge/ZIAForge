@@ -21,7 +21,9 @@ export interface MessageStartedEvent extends BaseAgentEvent {
   type: 'message.started'
   messageId: string
   role: AgentRole
+  inputDocuments?: import('./agent-input-documents').AgentInputDocumentRef[]
   inputImages?: import('./agent-input-images').AgentInputImageRef[]
+  artifacts?: import('./agent-artifacts').AgentArtifactRef[]
   media?: import('./agent-media').AgentMediaRef[]
 }
 
@@ -65,6 +67,7 @@ export interface ToolCompletedEvent extends BaseAgentEvent {
   exitCode?: number
   signal?: string
   outcome?: 'completed' | 'failed' | 'cancelled' | 'declined'
+  artifacts?: import('./agent-artifacts').AgentArtifactRef[]
   media?: import('./agent-media').AgentMediaRef[]
 }
 
@@ -93,14 +96,14 @@ export interface PermissionStateChangedEvent extends BaseAgentEvent {
 
 export interface InteractionRequestedEvent extends BaseAgentEvent {
   type: 'interaction.requested'
-  interaction: import('./grok-interactions').GrokInteraction
+  interaction: import('./provider-interactions').ProviderInteraction
   parentMessageId?: string
 }
 export interface InteractionStateChangedEvent extends BaseAgentEvent {
   type: 'interaction.state.changed'
   interactionId: string
-  state: import('./grok-interactions').GrokInteractionState
-  answer?: import('./grok-interactions').GrokInteractionAnswer
+  state: import('./provider-interactions').ProviderInteractionState
+  answer?: import('./provider-interactions').ProviderInteractionAnswer
   resolvedBy?: 'auto' | 'user'
   error?: string
 }
@@ -183,6 +186,7 @@ export interface ReconstructedToolItem {
   signal?: string
   outcome?: ToolCompletedEvent['outcome']
   executor?: 'caller' | 'provider'
+  artifacts?: import('./agent-artifacts').AgentArtifactRef[]
   media?: import('./agent-media').AgentMediaRef[]
 }
 
@@ -208,7 +212,9 @@ export interface ReconstructedMessage {
   revision?: number
   tools?: ReconstructedToolItem[]
   approvals?: ReconstructedApprovalItem[]
-  interactions?: import('./grok-interactions').GrokInteraction[]
+  interactions?: import('./provider-interactions').ProviderInteraction[]
+  inputDocuments?: import('./agent-input-documents').AgentInputDocumentRef[]
   inputImages?: import('./agent-input-images').AgentInputImageRef[]
+  artifacts?: import('./agent-artifacts').AgentArtifactRef[]
   media?: import('./agent-media').AgentMediaRef[]
 }

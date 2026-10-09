@@ -3,6 +3,7 @@ import os from 'node:os'
 import path from 'node:path'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { AgentInputImageStore } from '../AgentInputImageStore'
+import { AgentMediaStore, rasterInfo } from '../AgentMediaStore'
 import { MAX_INPUT_IMAGE_BYTES, MAX_INPUT_IMAGE_CACHE_BYTES, validInputImageRef, type AgentInputImageOwner } from '../../../shared/agent-input-images'
 
 const roots: string[] = []
@@ -21,6 +22,23 @@ afterEach(() => {
 })
 
 describe('private input image custody', () => {
+  it('retains native-picked GIF input and its private preview across restart with bounded raster headers', async () => {
+    const { root, directory, store, source } = setup(), gif = Buffer.from('R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==', 'base64')
+    const selected = source('selected.gif', gif), [ref] = await store.stage(owner, [selected])
+    expect(validInputImageRef(ref)).toBe(true)
+    expect(ref).toMatchObject({ mime: 'image/gif', width: 1, height: 1, bytes: gif.length })
+    fs.unlinkSync(selected)
+    expect(await new AgentInputImageStore(directory).resolve(owner, [ref.id])).toEqual([{ id: ref.id, mime: 'image/gif', dataUrl: `data:image/gif;base64,${gif.toString('base64')}` }])
+    const previewDirectory = path.join(root, 'preview'), preview = new AgentMediaStore(previewDirectory)
+    const media = await preview.storeBase64({ taskId: owner.taskId, runId: owner.runId }, gif.toString('base64'))
+    expect(media).toMatchObject({ mime: 'image/gif', width: 1, height: 1 })
+    expect(await new AgentMediaStore(previewDirectory).read(owner.taskId, media)).toEqual(gif)
+    const oversized = Buffer.from(gif); oversized.writeUInt16LE(32768, 6); oversized.writeUInt16LE(32768, 8)
+    expect(() => rasterInfo(oversized)).toThrow('dimensions')
+    const zero = Buffer.from(gif); zero.writeUInt16LE(0, 6)
+    expect(() => rasterInfo(zero)).toThrow('dimensions')
+    expect(() => rasterInfo(gif.subarray(0, 12))).toThrow('Only PNG')
+  })
   it('copies selected bytes privately and restores only metadata after store restart without rereading the source', async () => {
     const { root, directory, store, source } = setup()
     const selected = source('selected.png')
@@ -100,7 +118,7 @@ describe('private input image custody', () => {
     fs.symlinkSync(target, linked)
     await expect(store.stage(owner, [linked])).rejects.toThrow('symbolic link')
     await expect(store.stage(owner, [root])).rejects.toThrow('regular')
-    await expect(store.stage(owner, [source('fake.png', Buffer.from('<svg/>'))])).rejects.toThrow('PNG, JPEG and WebP')
+    await expect(store.stage(owner, [source('fake.png', Buffer.from('<svg/>'))])).rejects.toThrow('PNG, JPEG, GIF and WebP')
     const bomb = Buffer.from(png); bomb.writeUInt32BE(32768, 16); bomb.writeUInt32BE(32768, 20)
     await expect(store.stage(owner, [source('bomb.png', bomb)])).rejects.toThrow('dimensions')
     await expect(store.stage(owner, [target], AbortSignal.abort())).rejects.toThrow()

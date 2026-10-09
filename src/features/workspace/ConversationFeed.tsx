@@ -1,3 +1,4 @@
+import { GeneratedArtifacts } from './GeneratedArtifacts'
 import { uiText } from '../../uiText'
 import React, { useState, useEffect, useRef, useMemo } from 'react'
 import {
@@ -23,7 +24,7 @@ import type {
 import type { FeedItem } from '../../store'
 import { MemoApprovalCard } from './ApprovalCard'
 import { ProviderInteractionCard } from './ProviderInteractionCard'
-import type { GrokInteractionAnswer } from '../../../shared/grok-interactions'
+import type { ProviderInteractionAnswer } from '../../../shared/provider-interactions'
 import { MarkdownMessage } from '../../components/MarkdownMessage'
 import { WorkflowMessageText } from './WorkflowMessageText'
 import { GeneratedMedia, type AgentMediaOwner } from './GeneratedMedia'
@@ -33,7 +34,7 @@ export interface ConversationFeedProps {
   feedItems?: FeedItem[]
   answeredPromptIds?: Record<string, string>
   onResolveApproval?: (approvalId: string, decision: 'allow' | 'deny') => void | Promise<void>
-  onResolveInteraction?: (interactionId: string, answer: GrokInteractionAnswer) => Promise<void>
+  onResolveInteraction?: (interactionId: string, answer: ProviderInteractionAnswer) => Promise<void>
   actionableInteractionIds?: readonly string[]
   onStopTool?: (callId: string, command?: string) => void
   onReviewWithModel?: (model: string, diff?: string) => void
@@ -290,7 +291,7 @@ interface MessageBubbleProps {
   workflowKind?: 'work'
   message: ReconstructedMessage
   onResolveApproval?: (approvalId: string, decision: 'allow' | 'deny') => void | Promise<void>
-  onResolveInteraction?: (interactionId: string, answer: GrokInteractionAnswer) => Promise<void>
+  onResolveInteraction?: (interactionId: string, answer: ProviderInteractionAnswer) => Promise<void>
   actionableInteractionIds?: readonly string[]
   onStopTool?: (callId: string, command?: string) => void
   mediaOwner?: AgentMediaOwner
@@ -326,6 +327,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
           <div className="rounded-xl bg-[#ff6b00]/10 border border-[#ff6b00]/25 p-3 text-zinc-200 leading-relaxed text-xs shadow-sm text-left whitespace-pre-wrap select-text break-words">
             {workflowTitle ? <WorkflowMessageText message={message} title={workflowTitle} kind={workflowKind} /> : message.text}
           </div>
+          {message.inputDocuments?.map(document => <div key={document.id} className="rounded-lg border border-zinc-700 px-3 py-2 text-left text-xs text-zinc-400">{document.name} · {document.mime === 'application/pdf' ? 'PDF' : 'TXT'} · {Math.ceil(document.bytes / 1024)} KB</div>)}
           {message.media?.length ? <div className="space-y-3 text-left" data-testid={`media-block-${message.id}`}>{message.media.map(media => <GeneratedMedia key={media.id} media={media} owner={mediaOwner} label={t('grok_input_image')} />)}</div> : null}
           {message.status === 'error' && (
             <div className="text-xs text-red-400" data-testid={`message-send-error-${message.id}`}>
@@ -433,6 +435,10 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
           {(message.tools ?? []).flatMap(tool => (tool.media ?? []).map(media => <GeneratedMedia key={`${tool.callId}:${media.id}`} media={media} owner={mediaOwner} />))}
         </div>}
 
+        <GeneratedArtifacts owner={mediaOwner} artifacts={[...(message.artifacts ?? []), ...(message.tools ?? []).flatMap(tool => tool.artifacts ?? [])]} onSave={async artifactId => {
+          if (!mediaOwner || !window.ziafAPI?.agentArtifacts) throw new Error(t('artifact_unavailable'))
+          return window.ziafAPI.agentArtifacts.save({ ...mediaOwner, artifactId })
+        }} />
         {/* 3. Approvals / Permission requests (if present) */}
         {message.approvals && message.approvals.length > 0 && (
           <div

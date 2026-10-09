@@ -30,6 +30,7 @@ export interface SendPromptRequest {
   text: string
   attachments?: string[]
   /** Main-resolved private image bytes. Never accepts renderer paths or URLs. */
+  inputDocuments?: ReadonlyArray<{ id: string; name: string; mime: 'application/pdf' | 'text/plain'; data: string }>
   inputImages?: ReadonlyArray<{ id: string; mime: import('./agent-input-images').AgentInputImageRef['mime']; dataUrl: string }>
 }
 
@@ -44,7 +45,7 @@ export interface ResolveInteractionRequest {
   runId?: string
   turnId: string
   interactionId: string
-  answer: import('./grok-interactions').GrokInteractionAnswer
+  answer: import('./provider-interactions').ProviderInteractionAnswer
   /** Main-owned provenance, never accepted from renderer IPC. */
   resolvedBy?: 'auto' | 'user'
 }

@@ -1,5 +1,9 @@
 # Release engineering and provenance
 
+## 1.0.10 Claude Connector
+
+Version **1.0.10** adds an explicit Claude Connector v1 profile using Anthropic Messages, separate local caller and remote native tools, exact question/permission decisions, private document attachments, immutable downloadable file revisions and owned continuation. See [release notes](releases/1.0.10.md) and the [connector contract](CLAUDE_CONNECTOR_V1.md). Existing connection protocols remain pinned until explicitly reconfigured. One frozen source supplies the six platform packages; static, fixture, live-provider and package-integrity evidence remain separate.
+
 ## 1.0.9 application updates
 
 Version **1.0.9** adds an official GitHub update source, version/progress controls and an explicit one-button download/install action for supported installations. See [1.0.9 notes](releases/1.0.9.md) and the [update contract](UPDATES.md). Normal Quit drains owned sessions before a detached installer can replace application files; user profiles and projects remain separate. OS authentication and trust prompts remain in effect.

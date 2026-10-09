@@ -76,7 +76,7 @@ const signatures: Record<string, CommandSignature> = {
   'agentSessions.cancelQueued': signature('[SessionRef & {clientMessageId:string}]', 'AgentSessionSnapshot', 'Dismisses the queued/uncertain record; does not undo a delivered provider request.'),
   'agentSessions.interrupt': signature('[SessionRef & {turnId:string}]', 'void', 'Use current activeTurn.turnId and interruptTurn capability; ACK does not prove cleanup/completion.'),
   'agentSessions.terminate': signature('[SessionRef]', 'void', 'Ends this owned provider session, preserving journal history.'),
-  'agentSessions.resolveInteraction': signature('[SessionRef & {turnId:string,interactionId:string,answer:GrokInteractionAnswer}]', 'void', "Current Grok question or permission only. Require the human's explicit answer or exact offered optionId. Never infer approval; questions do not authorize commands."),
+  'agentSessions.resolveInteraction': signature('[SessionRef & {turnId:string,interactionId:string,answer:ProviderInteractionAnswer}]', 'void', "Current Grok or Claude question or permission only. Require the human's explicit answer and the matching provider-specific decision shape. Never infer approval; questions do not authorize commands."),
   'agentSessions.resolveApproval': signature('[SessionRef & {turnId:string,approvalId:string,decision:"allow"|"deny"}]', 'void', 'Use a current pending approval and explicit human decision; never grant permissions by inference.'),
   'reviewTeams.list': signature('[]', 'ReviewTeamPreset[]'),
   'reviewTeams.save': signature('[{team:ReviewTeamPreset}]', 'ReviewTeamPreset', 'Sources are resolved/frozen. Reviewers run independently; architect receives only anonymous reports and cannot waive blocking/missing evidence.'),

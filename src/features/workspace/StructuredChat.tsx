@@ -1,3 +1,5 @@
+import { FileText } from 'lucide-react'
+import { validInputDocumentId, validInputDocumentRef, type AgentInputDocumentRef } from '../../../shared/agent-input-documents'
 import { uiText } from '../../uiText'
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import type { AgentSessionProvider, AgentSessionSnapshot, AgentSessionsAPI } from '../../../shared/agent-session'
@@ -10,7 +12,12 @@ import type { ChatConfiguration } from './agentConfiguration'
 import type { AgentExecutionOptions } from '../../../shared/agent-models'
 import { ComposerConfigurationBar } from './ComposerConfigurationBar'
 import { CliLogPane } from './CliLogPane'
-import { answerMatchesInteraction, type GrokInteractionAnswer } from '../../../shared/grok-interactions'
+import { answerMatchesInteraction, type ProviderInteractionAnswer } from '../../../shared/provider-interactions'
+
+type InputAttachmentRef = AgentInputImageRef | AgentInputDocumentRef
+const validAttachmentRef = (value: unknown): value is InputAttachmentRef => validInputImageRef(value) || validInputDocumentRef(value)
+const validAttachmentId = (value: unknown): value is string => validInputImageId(value) || validInputDocumentId(value)
+const connectorAttachments = (profile?: string) => profile === 'grok-connector-v1' || profile === 'claude-connector-v1'
 
 interface Draft {
   text: string
@@ -44,7 +51,7 @@ function readDraft(key: string): Draft {
           'id' in stored.pending && typeof stored.pending.id === 'string' &&
           'text' in stored.pending && typeof stored.pending.text === 'string') {
         const ids = 'imageIds' in stored.pending ? stored.pending.imageIds : undefined
-        if (ids === undefined || Array.isArray(ids) && ids.length <= MAX_INPUT_IMAGES && ids.every(validInputImageId) && new Set(ids).size === ids.length) {
+        if (ids === undefined || Array.isArray(ids) && ids.length <= MAX_INPUT_IMAGES && ids.every(validAttachmentId) && new Set(ids).size === ids.length) {
           draft.pending = { id: stored.pending.id, text: stored.pending.text, ...(ids?.length ? { imageIds: ids } : {}) }
         }
       }
@@ -136,9 +143,9 @@ function StructuredChatSession({ taskId, chatId, presetName, provider = 'codex',
   const [mutation, setMutation] = useState<'resume' | 'reconfigure' | null>(null)
   const mutationRef = useRef<{ runId: string; buffered: Map<string, AgentSessionSnapshot> } | null>(null)
   const [logsOpen, setLogsOpen] = useState(false)
-  const [imageState, setImageState] = useState<{ owner: string; items: AgentInputImageRef[] }>({ owner: '', items: [] })
+  const [imageState, setImageState] = useState<{ owner: string; items: InputAttachmentRef[] }>({ owner: '', items: [] })
   const imageStateRef = useRef(imageState)
-  const imageMetadata = useRef(new Map<string, AgentInputImageRef>())
+  const imageMetadata = useRef(new Map<string, InputAttachmentRef>())
   const imageRevision = useRef(0)
   const imageOperation = useRef(false)
   const [imageBusy, setImageBusy] = useState(false)
@@ -231,29 +238,34 @@ function StructuredChatSession({ taskId, chatId, presetName, provider = 'codex',
   selectionIdentityRef.current = selectionIdentity
   const imageOwner = snapshot ? JSON.stringify([snapshot.sessionId, snapshot.runId]) : ''
   const currentImages = imageState.owner === imageOwner ? imageState.items : []
-  const commitImages = (owner: string, items: AgentInputImageRef[]) => {
+  const commitImages = (owner: string, items: InputAttachmentRef[]) => {
     const next = { owner, items }
     imageRevision.current += 1; imageStateRef.current = next; setImageState(next)
   }
+  const [selectedClaudeConnection, setSelectedClaudeConnection] = useState(false)
   const attachedSessionId = snapshot?.sessionId
   useEffect(() => {
-    setSelectedGrokConnection(false)
+    setSelectedGrokConnection(false); setSelectedClaudeConnection(false)
     if (attachedSessionId || unsavedConfiguration.provider !== 'api' || !unsavedConfiguration.apiConnectionId) return
     let cancelled = false
     void Promise.resolve().then(() => window.ziafAPI.apiConnections.list()).then(connections => {
-      if (!cancelled) setSelectedGrokConnection(connections.some(item => item.id === unsavedConfiguration.apiConnectionId && item.enabled && item.transport === 'responses' && item.profile === 'grok-connector-v1'))
+      if (!cancelled) {
+        setSelectedGrokConnection(connections.some(item => item.id === unsavedConfiguration.apiConnectionId && item.enabled && connectorAttachments(item.profile)))
+        setSelectedClaudeConnection(connections.some(item => item.id === unsavedConfiguration.apiConnectionId && item.enabled && item.transport === 'anthropic-messages' && item.profile === 'claude-connector-v1'))
+      }
     }).catch(() => {})
     return () => { cancelled = true }
   }, [attachedSessionId, unsavedConfiguration.provider, unsavedConfiguration.apiConnectionId])
   useEffect(() => {
-    if (!snapshot || snapshot.apiProfile !== 'grok-connector-v1' || !api?.listImages) { setImageLoading(false); setImageError(null); return }
+    if (!snapshot || !connectorAttachments(snapshot.apiProfile) || !api?.listImages) { setImageLoading(false); setImageError(null); return }
     let cancelled = false
     const owner = imageOwner, revision = imageRevision.current
     const reference = { sessionId: snapshot.sessionId, runId: snapshot.runId }
     setImageLoading(true); setImageError(null)
-    void api.listImages(reference).then(items => {
+    void Promise.all([api.listImages(reference), snapshot.apiProfile === 'claude-connector-v1' ? api.listDocuments?.(reference) ?? [] : []]).then(groups => {
+      const items: InputAttachmentRef[] = groups.flat()
       if (cancelled || imageRevision.current !== revision) return
-      if (!items.every(validInputImageRef)) throw new Error(t('grok_images_invalid'))
+      if (!items.every(validAttachmentRef)) throw new Error(t('grok_images_invalid'))
       imageMetadata.current = new Map(items.map(item => [item.id, item]))
       const next = { owner, items }; imageStateRef.current = next; setImageState(next)
     }).catch(error => { if (!cancelled) setImageError(errorMessage(error)) }).finally(() => { if (!cancelled) setImageLoading(false) })
@@ -262,7 +274,12 @@ function StructuredChatSession({ taskId, chatId, presetName, provider = 'codex',
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [api, imageOwner, snapshot?.apiProfile, imageRefresh])
 
-  const pickImages = async (): Promise<ComposerAttachment[]> => {
+  const discardAttachments = async (reference: { sessionId: string; runId: string }, ids: string[]) => {
+    const imageIds = ids.filter(validInputImageId), documentIds = ids.filter(validInputDocumentId)
+    if (imageIds.length) { if (!api?.discardImages) throw new Error(t('attachments_unavailable')); await api.discardImages({ ...reference, imageIds }) }
+    if (documentIds.length) { if (!api?.discardDocuments) throw new Error(t('attachments_unavailable')); await api.discardDocuments({ ...reference, documentIds }) }
+  }
+  const pickImages = async (documents = false): Promise<ComposerAttachment[]> => {
     if (!api?.pickImages || managedByPlan || isAttaching || sendInFlight.current || queueOperationRef.current || mutationRef.current || isTerminating || imageOperation.current || imageLoading) return []
     const currentDraft = readDraft(draftKey)
     if (currentDraft.pending?.imageIds?.length || currentDraft.queuePending) throw new Error(t('grok_images_pending_send'))
@@ -280,16 +297,17 @@ function StructuredChatSession({ taskId, chatId, presetName, provider = 'codex',
         if (current.taskId !== taskId || current.chatId !== chatId) throw new Error(t('agent_chat_changed_elsewhere'))
         applySnapshot(current, true)
       }
-      if (current.apiProfile !== 'grok-connector-v1' || !current.capabilities.attachments) throw new Error(t('attachments_unavailable'))
+      if (!connectorAttachments(current.apiProfile) || !current.capabilities.attachments) throw new Error(t('attachments_unavailable'))
       const reference = { sessionId: current.sessionId, runId: current.runId }
       const owner = JSON.stringify([current.sessionId, current.runId])
-      const items = await api.pickImages(reference)
+      const items = documents ? await api.pickDocuments?.(reference) ?? [] : await api.pickImages(reference)
       const latest = snapshotRef.current
       if (!mountedRef.current || latest?.sessionId !== current.sessionId || latest.runId !== current.runId || selectionIdentityRef.current !== selectedIdentity) {
-        if (items.length) await api.discardImages?.({ ...reference, imageIds: items.map(item => item.id) })
+        if (items.length) await discardAttachments(reference, items.map(item => item.id))
         return []
       }
-      if (!items.every(validInputImageRef)) throw new Error(t('grok_images_invalid'))
+      if ((imageStateRef.current.owner === owner ? imageStateRef.current.items.length : 0) + items.length > MAX_INPUT_IMAGES) { await discardAttachments(reference, items.map(item => item.id)); throw new Error(t('grok_images_invalid')) }
+      if (!items.every(validAttachmentRef)) throw new Error(t('grok_images_invalid'))
       if (imageStateRef.current.owner !== owner) commitImages(owner, [])
       for (const item of items) imageMetadata.current.set(item.id, item)
       imageRevision.current += 1
@@ -307,7 +325,7 @@ function StructuredChatSession({ taskId, chatId, presetName, provider = 'codex',
     if (!removed.length) { commitImages(imageOwner, attachments.map(item => imageMetadata.current.get(item.id)!)); return }
     if (!api?.discardImages || readDraft(draftKey).pending?.imageIds?.some(id => removed.some(item => item.id === id))) { setImageError(t('grok_images_pending_send')); return }
     imageOperation.current = true; setImageBusy(true); setImageError(null)
-    void api.discardImages({ sessionId: current.sessionId, runId: current.runId, imageIds: removed.map(item => item.id) }).then(() => {
+    void discardAttachments({ sessionId: current.sessionId, runId: current.runId }, removed.map(item => item.id)).then(() => {
       if (!mountedRef.current || snapshotRef.current?.sessionId !== current.sessionId || snapshotRef.current?.runId !== current.runId) return
       const removedIds = new Set(removed.map(item => item.id))
       for (const id of removedIds) imageMetadata.current.delete(id)
@@ -320,7 +338,7 @@ function StructuredChatSession({ taskId, chatId, presetName, provider = 'codex',
     if (!api?.discardImages || !current || !pending?.imageIds?.length || imageOperation.current || sendInFlight.current || mutationRef.current || current.activeTurn) return
     imageOperation.current = true; setImageBusy(true); setImageError(null)
     try {
-      await api.discardImages({ sessionId: current.sessionId, runId: current.runId, imageIds: pending.imageIds })
+      await discardAttachments({ sessionId: current.sessionId, runId: current.runId }, pending.imageIds)
       const latest = readDraft(draftKey)
       if (latest.pending?.id === pending.id) writeDraft(draftKey, { ...latest, pending: undefined })
       if (mountedRef.current && snapshotRef.current?.sessionId === current.sessionId && snapshotRef.current?.runId === current.runId) {
@@ -364,7 +382,8 @@ function StructuredChatSession({ taskId, chatId, presetName, provider = 'codex',
         runId: current.runId,
         clientMessageId: pending.id,
         text,
-        ...(imageIds.length ? { imageIds } : {}),
+        ...(imageIds.some(validInputImageId) ? { imageIds: imageIds.filter(validInputImageId) } : {}),
+        ...(imageIds.some(validInputDocumentId) ? { documentIds: imageIds.filter(validInputDocumentId) } : {}),
       })
       if (receipt.sessionId !== current.sessionId || receipt.runId !== current.runId || receipt.clientMessageId !== pending.id) {
         throw new Error(t('agent_send_receipt_mismatch'))
@@ -390,7 +409,7 @@ function StructuredChatSession({ taskId, chatId, presetName, provider = 'codex',
           for (const id of imageIds) imageMetadata.current.delete(id)
         }
         // The provider ACK stays accepted even if local cache cleanup fails.
-        try { await api.discardImages?.({ sessionId: current.sessionId, runId: current.runId, imageIds }) }
+        try { await discardAttachments({ sessionId: current.sessionId, runId: current.runId }, imageIds) }
         catch (error) { if (mountedRef.current && snapshotRef.current?.runId === current.runId) setImageError(`${t('grok_images_cleanup_failed')} ${errorMessage(error)}`) }
       }
       // A coalesced update may not have reached this renderer before the receipt.
@@ -536,11 +555,11 @@ function StructuredChatSession({ taskId, chatId, presetName, provider = 'codex',
     await api.resolveApproval({ sessionId: current.sessionId, runId: current.runId, turnId, approvalId, decision })
   }
 
-  const resolveInteraction = async (interactionId: string, answer: GrokInteractionAnswer) => {
+  const resolveInteraction = async (interactionId: string, answer: ProviderInteractionAnswer) => {
     const current = snapshotRef.current
     const interaction = current?.pendingInteractions?.find(item => item.interactionId === interactionId)
     const turnId = interaction?.turnId || current?.activeTurn?.turnId
-    if (!api?.resolveInteraction || !current || current.apiProfile !== 'grok-connector-v1' ||
+    if (!api?.resolveInteraction || !current || !connectorAttachments(current.apiProfile) ||
         current.sessionId !== snapshot?.sessionId || current.runId !== snapshot?.runId ||
         current.sessionStatus !== 'ready' || !interaction || interaction.state !== 'pending' || interaction.expiresAt <= Date.now() ||
         !turnId || current.activeTurn?.turnId !== turnId || current.activeTurn.status === 'interrupting' ||
@@ -583,7 +602,7 @@ function StructuredChatSession({ taskId, chatId, presetName, provider = 'codex',
   const configurationBusy = sessionBusy || hasQueue || Boolean(draft.queuePending) || imageBusy || imageLoading || currentImages.length > 0 || Boolean(draft.pending?.imageIds?.length)
   const showQueueButton = !managedByPlan && Boolean(snapshot && (activeTurn || hasQueue || isUnavailable || draft.queuePending))
   const canQueue = !draft.pending?.imageIds?.length && !currentImages.length && !imageBusy && !imageLoading && !imageError && !connectionError && !isAttaching && !isSending && !isQueueBusy && !isTerminating && !mutation && snapshot?.sessionStatus === 'ready'
-  const actionableInteractionIds = api?.resolveInteraction && snapshot?.apiProfile === 'grok-connector-v1' && snapshot.sessionStatus === 'ready' && activeTurn?.turnId && activeTurn.status !== 'interrupting' && !pendingInterrupt && !mutation && !isTerminating
+  const actionableInteractionIds = api?.resolveInteraction && snapshot && connectorAttachments(snapshot.apiProfile) && snapshot.sessionStatus === 'ready' && activeTurn?.turnId && activeTurn.status !== 'interrupting' && !pendingInterrupt && !mutation && !isTerminating
     ? (snapshot.pendingInteractions ?? []).filter(item => item.state === 'pending' && (!item.turnId || item.turnId === activeTurn.turnId)).map(item => item.interactionId) : []
   const waitingForProviderDecision = snapshot?.pendingInteractions?.some(item => item.state === 'pending' || item.state === 'submitting')
   const currentConfiguration: ChatConfiguration = snapshot ? { presetName: snapshot.presetName, provider: snapshot.provider, model: snapshot.model || 'auto', apiConnectionId: snapshot.apiConnectionId, permissions: snapshot.permissions, reasoningEffort: snapshot.reasoningEffort } : hasConfigurationOverride ? configuration : baseConfiguration
@@ -601,7 +620,7 @@ function StructuredChatSession({ taskId, chatId, presetName, provider = 'codex',
   return (
     <div className="flex min-h-0 flex-1 flex-col h-full" data-testid={`structured-${currentConfiguration.provider}-chat`} data-provider={currentConfiguration.provider} data-session-status={snapshot?.sessionStatus || 'absent'}>
       <div className="flex items-center justify-between border-b border-[#1e2024] px-5 py-2 text-xs text-zinc-400">
-        <span className="min-w-0 truncate text-zinc-500">{currentConfiguration.provider} · {currentConfiguration.model}{snapshot?.provider === 'api' && <span data-testid="agent-chat-api-transport" title={t('api_active_transport_hint')}> · {snapshot.apiTransport === 'responses' ? 'Responses' : 'Chat Completions'}{snapshot.apiProfile === 'grok-connector-v1' ? ` · ${t('grok_connector_profile')}` : snapshot.apiProfile === 'codex-connector' ? ` · ${uiText('Codex connector')}` : ''}</span>}</span>
+        <span className="min-w-0 truncate text-zinc-500">{currentConfiguration.provider} · {currentConfiguration.model}{snapshot?.provider === 'api' && <span data-testid="agent-chat-api-transport" title={t('api_active_transport_hint')}> · {snapshot.apiTransport === 'anthropic-messages' ? 'Anthropic Messages' : snapshot.apiTransport === 'responses' ? 'Responses' : 'Chat Completions'}{snapshot.apiProfile === 'grok-connector-v1' ? ` · ${t('grok_connector_profile')}` : snapshot.apiProfile === 'codex-connector' ? ` · ${uiText('Codex connector')}` : ''}</span>}</span>
         <div className="ml-3 flex shrink-0 items-center gap-4"><button type="button" data-testid="agent-cli-logs-toggle" aria-expanded={logsOpen} onClick={() => setLogsOpen(value => !value)} className="hover:text-white">{t('agent_chat_logs')}</button><span role="status" data-testid="agent-session-status">{t(statusLabel)}</span></div>
       </div>
       {snapshot?.apiProfile === 'grok-connector-v1' && snapshot.apiGrokConfig && <p data-testid="agent-chat-grok-config" className="flex flex-wrap gap-x-3 px-5 py-1 text-[11px] text-zinc-500">{snapshot.apiGrokConfig.contextWindow !== undefined && <span>{t('grok_context_window')}: {snapshot.apiGrokConfig.contextWindow}</span>}{snapshot.apiGrokConfig.maxTurns !== undefined && <span>{t('grok_max_turns')}: {snapshot.apiGrokConfig.maxTurns}</span>}{snapshot.apiGrokConfig.autoApproveNativePermissions && snapshot.permissions !== 'Read only' && <span data-testid="agent-chat-grok-auto-approve">{t('grok_auto_approve_enabled')}</span>}</p>}
@@ -639,6 +658,7 @@ function StructuredChatSession({ taskId, chatId, presetName, provider = 'codex',
       {logsOpen && <CliLogPane entries={snapshot?.diagnostics || []} />}
       {snapshot?.usage && <p data-testid="agent-usage" className="shrink-0 px-5 py-1 text-[10px] text-zinc-500">{t('agent_usage_current_run')}: {t('agent_usage_input')} {snapshot.usage.inputTokens} · {t('agent_usage_output')} {snapshot.usage.outputTokens} · {t('agent_usage_total')} {snapshot.usage.totalTokens}</p>}
       <div className="shrink-0 border-t border-[#1e2024] p-4">
+        {(snapshot?.apiProfile === 'claude-connector-v1' || !snapshot && selectedClaudeConnection) && <button type="button" data-testid="agent-attach-documents" disabled={!canSend || imageBusy || currentImages.length >= MAX_INPUT_IMAGES || Boolean(draft.pending) || managedByPlan} onClick={() => void pickImages(true).then(items => { const current = snapshotRef.current; if (items.length && current && mountedRef.current) { const owner = JSON.stringify([current.sessionId, current.runId]); if (imageStateRef.current.owner === owner) commitImages(owner, [...imageStateRef.current.items, ...items.map(item => imageMetadata.current.get(item.id)!)]) } }).catch(error => setImageError(errorMessage(error)))} className="mb-2 flex items-center gap-2 rounded-lg border border-zinc-700 px-3 py-2 text-xs text-zinc-300 hover:bg-zinc-800 disabled:opacity-40"><FileText size={14} />{t('claude_attach_documents')}</button>}
         <Composer
           value={draft.text}
           onChange={text => { draftEditRevisions.set(draftKey, (draftEditRevisions.get(draftKey) || 0) + 1); writeDraft(draftKey, { ...readDraft(draftKey), text, initialized: true }) }}
@@ -653,10 +673,10 @@ function StructuredChatSession({ taskId, chatId, presetName, provider = 'codex',
           canSend={Boolean(canSend)}
           canInterrupt={canInterrupt}
           supportsInterrupt={!managedByPlan && (snapshot?.capabilities.interruptTurn ?? false)}
-          supportsAttachments={Boolean(api?.pickImages && !managedByPlan && !imageBusy && !imageLoading && !sessionBusy && !hasQueue && !draft.queuePending && !draft.pending?.imageIds?.length && currentImages.length < MAX_INPUT_IMAGES && (snapshot ? snapshot.apiProfile === 'grok-connector-v1' && snapshot.sessionStatus === 'ready' && snapshot.capabilities.attachments : selectedGrokConnection))}
+          supportsAttachments={Boolean(api?.pickImages && !managedByPlan && !imageBusy && !imageLoading && !sessionBusy && !hasQueue && !draft.queuePending && !draft.pending?.imageIds?.length && currentImages.length < MAX_INPUT_IMAGES && (snapshot ? connectorAttachments(snapshot.apiProfile) && snapshot.sessionStatus === 'ready' && snapshot.capabilities.attachments : selectedGrokConnection))}
           attachments={currentImages.map(item => ({ id: item.id, name: item.name, size: item.bytes }))}
           onAttachmentsChange={changeImages}
-          onPickAttachments={pickImages}
+          onPickAttachments={() => pickImages()}
           modelSelectionDisabled={managedByPlan || Boolean(mutation)}
           configurationControls={<ComposerConfigurationBar reportedError={visibleError} current={currentConfiguration} presets={presets} busy={configurationBusy} applying={Boolean(mutation)} disabled={managedByPlan} onApply={next => changeSession('reconfigure', next)} />}
           selectedModel={`${currentConfiguration.presetName || currentConfiguration.provider} · ${currentConfiguration.model}`}

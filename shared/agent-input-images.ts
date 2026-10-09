@@ -9,7 +9,7 @@ export interface AgentInputImageOwner {
 export interface AgentInputImageRef {
   id: string
   name: string
-  mime: 'image/png' | 'image/jpeg' | 'image/webp'
+  mime: 'image/png' | 'image/jpeg' | 'image/gif' | 'image/webp'
   bytes: number
   width: number
   height: number
@@ -42,7 +42,7 @@ export function validInputImageRef(value: unknown): value is AgentInputImageRef 
   return Object.keys(ref).length === keys.length && Object.keys(ref).every(key => keys.includes(key)) &&
     validInputImageId(ref.id) && typeof ref.name === 'string' && ref.name.length > 0 && ref.name.length <= 160 &&
     ref.name.trim() === ref.name && !['.', '..'].includes(ref.name) && !unsafeName.test(ref.name) &&
-    ['image/png', 'image/jpeg', 'image/webp'].includes(ref.mime) &&
+    ['image/png', 'image/jpeg', 'image/gif', 'image/webp'].includes(ref.mime) &&
     Number.isSafeInteger(ref.bytes) && ref.bytes > 0 && ref.bytes <= MAX_INPUT_IMAGE_BYTES &&
     Number.isSafeInteger(ref.width) && Number.isSafeInteger(ref.height) && ref.width > 0 && ref.height > 0 &&
     ref.width <= 32768 && ref.height <= 32768 && ref.width * ref.height <= 32_000_000 &&

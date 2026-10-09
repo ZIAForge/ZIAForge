@@ -1,7 +1,7 @@
 /** @vitest-environment happy-dom */
 import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import type { ApiConnection, ApiConnectionsAPI } from '../../../../shared/api-provider'
+import { normalizeClaudeConnectionOptions, type ApiConnection, type ApiConnectionsAPI, type ClaudeConnectorInspection } from '../../../../shared/api-provider'
 import { useStore, type Settings } from '../../../store'
 import { uiKey } from '../../../uiText'
 import { ApiConnectionsPanel } from '../ApiConnectionsPanel'
@@ -31,6 +31,59 @@ afterEach(() => {
 })
 
 describe('explicit API connection transport', () => {
+  const claudeDiscovery: ClaudeConnectorInspection = {
+    provider: 'claude', version: 1, fetchedAt: 1000,
+    tools: [{ name: 'Read', available: true, enabled: true, verified: false }, { name: 'CronCreate', available: true, enabled: false, verified: false }],
+    models: [{ id: 'fixture-model', label: 'Fixture Claude', reasoningEfforts: ['high'], supportsAdaptiveThinking: true, supportsManualThinking: false, maxOutputTokens: 8192, contextWindows: [], inputModalities: ['text'] }],
+    callerTools: { available: true, enabled: true, verified: true }, imageInput: { available: true, enabled: false, verified: false }, documentInput: { available: true, enabled: true, verified: false, mediaTypes: ['application/pdf'] }, artifacts: { available: true, enabled: true, verified: true },
+    thinking: { available: true, display: ['summarized', 'omitted'] }, history: { liveSessionContinuation: true, ownedIdleResume: true, restartResume: true },
+    usage: { available: false, experimental: true, checkedAt: null, windows: [], renewsAt: null, renewalSource: 'unavailable' },
+    status: { connected: true, active: 0, queued: 0, nativeActive: null, awaitingTools: 0, concurrency: 8, queueLimit: 32, ownedSessions: 1 }, warnings: [],
+  }
+  it('restores Claude settings and advertises only discovered model controls and enabled native tools', async () => {
+    const connection: ApiConnection = { ...legacy, baseUrl: 'https://claude.invalid', transport: 'anthropic-messages', profile: 'claude-connector-v1', claude: normalizeClaudeConnectionOptions({ permissionMode: 'plan', maxTurns: 7 }) }
+    const api = fixture([connection]); api.inspect.mockResolvedValue(claudeDiscovery)
+    render(<ApiConnectionsPanel />)
+    await waitFor(() => expect(screen.getByTestId(`api-connection-${connection.id}`)).not.toBeNull())
+    fireEvent.click(within(screen.getByTestId(`api-connection-${connection.id}`)).getByRole('button', { name: 'Edit' }))
+    expect(transport().value).toBe('anthropic-messages'); expect(profile().value).toBe('claude-connector-v1')
+    expect(screen.queryByTestId(`api-connection-responses-${connection.id}`)).toBeNull()
+    expect((screen.getByTestId('api-claude-permissions') as HTMLSelectElement).value).toBe('plan')
+    expect((screen.getByTestId('api-claude-max-turns') as HTMLInputElement).value).toBe('7')
+    expect(api.inspect).not.toHaveBeenCalled()
+    expect(Array.from((screen.getByTestId('api-claude-thinking') as HTMLSelectElement).options, option => option.value)).toEqual(['', 'disabled'])
+    await act(async () => fireEvent.click(screen.getByTestId(`api-claude-inspect-${connection.id}`)))
+    expect(screen.getByTestId('api-claude-capabilities').textContent).toContain(uiKey('claude_limits_unknown'))
+    expect(Array.from((screen.getByTestId('api-claude-thinking') as HTMLSelectElement).options, option => option.value)).toEqual(['', 'disabled', 'adaptive'])
+    expect(screen.queryByTestId('api-claude-tool-CronCreate')).toBeNull()
+    expect(screen.queryByTestId('api-claude-tool-Read')).toBeNull()
+    fireEvent.change(screen.getByTestId('api-claude-mode'), { target: { value: 'native' } })
+    fireEvent.click(screen.getByTestId('api-claude-tool-Read'))
+    fireEvent.change(screen.getByTestId('api-claude-thinking'), { target: { value: 'adaptive' } })
+    fireEvent.change(screen.getByTestId('api-claude-thinking-display'), { target: { value: 'omitted' } })
+    await submit()
+    expect(api.save.mock.calls[0][0]).toMatchObject({ transport: 'anthropic-messages', profile: 'claude-connector-v1', claude: { mode: 'native', nativeTools: ['Read'], permissionMode: 'plan', maxTokens: 4096, maxTurns: 7, thinking: { type: 'adaptive', display: 'omitted' }, historyMode: 'reject' } })
+    expect(api.save.mock.calls[0][0]).not.toHaveProperty('apiKey')
+  })
+  it('keeps an invalid schema draft unsaved, accepts corrected JSON and resets Claude-only options on profile change', async () => {
+    const connection: ApiConnection = { ...legacy, baseUrl: 'https://claude.invalid', transport: 'anthropic-messages', profile: 'claude-connector-v1', claude: normalizeClaudeConnectionOptions() }
+    const api = fixture([connection]); render(<ApiConnectionsPanel />)
+    await waitFor(() => expect(screen.getByTestId(`api-connection-${connection.id}`)).not.toBeNull())
+    fireEvent.click(within(screen.getByTestId(`api-connection-${connection.id}`)).getByRole('button', { name: 'Edit' }))
+    fireEvent.change(screen.getByTestId('api-claude-output-schema'), { target: { value: '{broken' } })
+    await submit(); expect(api.save).not.toHaveBeenCalled()
+    expect((screen.getByTestId('api-claude-output-schema') as HTMLTextAreaElement).value).toBe('{broken')
+    fireEvent.change(screen.getByTestId('api-claude-output-schema'), { target: { value: '{"type":"object"}' } })
+    fireEvent.change(screen.getByTestId('api-claude-history'), { target: { value: 'context' } })
+    await submit()
+    expect(api.save.mock.calls[0][0]).toMatchObject({ claude: { outputSchema: { type: 'object' }, historyMode: 'context' } })
+    fireEvent.click(within(screen.getByTestId(`api-connection-${connection.id}`)).getByRole('button', { name: 'Edit' }))
+    fireEvent.change(profile(), { target: { value: 'grok-connector-v1' } })
+    expect(transport().value).toBe('responses'); expect(screen.queryByTestId('api-claude-fields')).toBeNull()
+    await submit()
+    expect(api.save.mock.calls[1][0].claude).toBeUndefined()
+    expect(api.save.mock.calls[1][0].profile).toBe('grok-connector-v1')
+  })
   it('offers explicit Grok discovery and only the selected model context choices without inventing usage', async () => {
     const connection: ApiConnection = { ...legacy, transport: 'responses', profile: 'grok-connector-v1', grok: { maxTurns: 12 } }
     const api = fixture([connection])

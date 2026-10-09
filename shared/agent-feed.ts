@@ -55,6 +55,8 @@ export function createFeedProjector() {
             id: evt.messageId,
             turnId: evt.turnId,
             role: evt.role,
+            ...(evt.inputDocuments ? { inputDocuments: evt.inputDocuments } : {}),
+            ...(evt.artifacts ? { artifacts: evt.artifacts } : {}),
             ...(evt.inputImages ? { inputImages: evt.inputImages } : {}),
             ...(evt.media ? { media: evt.media } : {}),
             thinking: '',
@@ -150,6 +152,7 @@ export function createFeedProjector() {
             tool.signal = evt.signal
             tool.outcome = evt.outcome
             tool.media = evt.media
+            tool.artifacts = evt.artifacts
 
             if (evt.isError || evt.outcome === 'failed') {
               tool.status = 'error'
@@ -209,7 +212,7 @@ export function createFeedProjector() {
           if (!interaction) continue
           interaction.state = evt.state
           if (evt.answer !== undefined) interaction.answer = JSON.parse(JSON.stringify(evt.answer))
-          if (evt.resolvedBy !== undefined) interaction.resolvedBy = evt.resolvedBy
+          if (evt.resolvedBy !== undefined && (interaction.provider !== 'claude' || evt.resolvedBy === 'user')) interaction.resolvedBy = evt.resolvedBy
           if (evt.error !== undefined) interaction.error = evt.error
           message.revision = (message.revision ?? 0) + 1
           break

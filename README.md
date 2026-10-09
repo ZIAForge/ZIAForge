@@ -11,12 +11,12 @@
 An open-source desktop workspace for deliberate AI development, research and writing.<br />
 Use your installed AI CLIs and subscriptions, or connect an API you choose.
 
-[![Release](https://img.shields.io/badge/release-1.0.9-f97316)](https://github.com/ZIAForge/ZIAForge/releases/tag/v1.0.9)
+[![Release](https://img.shields.io/badge/release-1.0.10-f97316)](https://github.com/ZIAForge/ZIAForge/releases/tag/v1.0.10)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 [![Platforms](https://img.shields.io/badge/desktop-macOS%20%7C%20Windows%20%7C%20Linux-3f3f46)](#download)
 [![Languages](https://img.shields.io/badge/interface-56%20languages-3f3f46)](#languages-and-help)
 
-[**Website**](https://ziaforge.studio) · [**Download 1.0.9**](https://github.com/ZIAForge/ZIAForge/releases/tag/v1.0.9) · [**User guide**](docs/USER_GUIDE.md) · [**Documentation**](docs/README.md) · [**Contribute**](CONTRIBUTING.md)
+[**Website**](https://ziaforge.studio) · [**Download 1.0.10**](https://github.com/ZIAForge/ZIAForge/releases/tag/v1.0.10) · [**User guide**](docs/USER_GUIDE.md) · [**Documentation**](docs/README.md) · [**Contribute**](CONTRIBUTING.md)
 
 </div>
 
@@ -35,7 +35,7 @@ The application runs locally and keeps its task state, conversations, documents 
 | 🧭 **Forge development** | Discuss the product and stack, accept versioned foundations, edit the implementation checklist and control advancement. |
 | 🛠️ **Five Code workflows** | Choose Auto, Fix a bug, Spec first, Requirements first or Multi-model for a registered Git repository. |
 | 📝 **Five Work workflows** | Use Auto, Brainstorm, Deep Brainstorm, Research or Write in an ordinary folder, with inputs, questions and versioned documents. |
-| 🔌 **Your models and tools** | Use supported installed Codex, Claude Code and Antigravity CLIs, or an explicitly configured OpenAI-compatible API connection. |
+| 🔌 **Your models and tools** | Use supported installed Codex, Claude Code and Antigravity CLIs, an explicitly configured compatible API, or Claude Connector v1 through Anthropic Messages. |
 | 👥 **Independent review** | Select individual reviewers or save a parallel review team with an anonymous, report-only architect. |
 | 📁 **A practical workspace** | Keep task-local chats, Markdown results, syntax-aware file editing, large-file windows, Git changes and the correct working folder together. |
 | 🌐 **Remote operation** | Open the authenticated application UI in a browser, switch saved instances, use a private Telegram bot or connect external agents through MCP. |
@@ -43,7 +43,7 @@ The application runs locally and keeps its task state, conversations, documents 
 
 ## Download
 
-Get the packages and `SHA256SUMS` from [**ZIAForge 1.0.9**](https://github.com/ZIAForge/ZIAForge/releases/tag/v1.0.9). Choose both the operating system **and** the CPU architecture; x64 and ARM64 packages are separate.
+Get the packages and `SHA256SUMS` from [**ZIAForge 1.0.10**](https://github.com/ZIAForge/ZIAForge/releases/tag/v1.0.10). Choose both the operating system **and** the CPU architecture; x64 and ARM64 packages are separate.
 
 | Your computer | Architecture | Packages |
 | --- | --- | --- |
@@ -54,11 +54,11 @@ Get the packages and `SHA256SUMS` from [**ZIAForge 1.0.9**](https://github.com/Z
 | Linux on Intel/AMD | x64 | DEB · RPM · AppImage · tar.gz · ZIP |
 | Linux on ARM | ARM64 | DEB · RPM · AppImage · tar.gz · ZIP |
 
-Source archives are also included. The [release notes](docs/releases/1.0.9.md) describe distribution and verification limits; [platform instructions](docs/PLATFORM_BUILDS.md) cover prerequisites and build routes. A generated package or cross-build does not establish native execution on every target.
+Source archives are also included. The [release notes](docs/releases/1.0.10.md) describe distribution and verification limits; [platform instructions](docs/PLATFORM_BUILDS.md) cover prerequisites and build routes. A generated package or cross-build does not establish native execution on every target.
 
 ### Install
 
-- **macOS:** requires macOS 13 or newer. Open the matching DMG and copy the complete `ZIAForge.app` into Applications, or extract the ZIP. Version 1.0.9 is unsigned and not notarized; macOS may require your explicit approval. Keep Gatekeeper enabled and verify the download before approving it.
+- **macOS:** requires macOS 13 or newer. Open the matching DMG and copy the complete `ZIAForge.app` into Applications, or extract the ZIP. Version 1.0.10 is unsigned and not notarized; macOS may require your explicit approval. Keep Gatekeeper enabled and verify the download before approving it.
 - **Windows:** run the matching installer, or extract the complete ZIP into a writable application directory. Install Git for Code tasks and put it on PATH. Keep the executable with its resources and native libraries. The packages are unsigned, so Windows may display a publisher warning.
 - **Ubuntu / Debian:** install the matching DEB through your package manager: `sudo apt install ./downloaded-package.deb`.
 - **RPM distributions:** install the matching RPM through your distribution's package manager, for example `sudo dnf install ./downloaded-package.rpm`.
@@ -143,11 +143,13 @@ ZIAForge uses **structured provider interfaces** rather than scraping an interac
 | Codex | Native App Server stdio | Your installed CLI's login |
 | Claude Code | Persistent stream-json | Your installed CLI's login |
 | Antigravity | Supported headless stream-json | Your installed CLI's login |
-| API | Explicit streaming Chat Completions or Responses | Your explicitly configured endpoint and optional API key |
+| API | Explicit streaming Chat Completions, Responses or Claude Connector v1 Anthropic Messages | Your explicitly configured endpoint and optional API key |
 
 Responses connections support caller workspace tools, separately approved local commands on macOS/Linux, provider progress cards and private generated-image previews with Save and an expandable viewer (zoom, 100%, fit and pan). Server tools operate remotely; they never dispatch local commands. Windows local API commands are not yet available. Existing API connections keep Chat Completions until explicitly changed. Use **Set up Responses** in Connections, save, then **Apply** the same connection in the chat. The chat header shows its pinned protocol; history is retained.
 
 The explicit **Grok Connector v1** Responses profile adds native question and permission cards, advertised context-window choices, capability/usage inspection and private input images. Answers continue the same owned turn; Stop cancels it without replaying an uncertain decision. Choose images through the system file dialog and inspect accepted or generated images with the existing Save and zoom controls. Provider tools stay separate from local workspace tools. Verified video-capable Grok servers also support conversational image-to-video and reference-to-video, an inline MP4 player and Save video. Standalone audio generation and tool-free Help/report-architect sessions remain unavailable. See the [Grok connection guide](docs/GROK_CONNECTOR.md).
+
+The explicit **Claude Connector v1** profile uses Anthropic Messages and a connector origin without `/v1`. Caller mode operates in the local task folder with separate approvals; provider-native mode runs selected tools in the server workspace and supplies no local tools. Native questions and permissions require the owner's decisions by default. System pickers support PNG/JPEG/GIF/WebP images, PDF and UTF-8 text. Server-created files appear as Save-only cards with immutable versions; saving reuses verified private bytes and a native destination dialog. Owned continuation preserves its pinned configuration, while interrupted tools and decisions are never replayed after restart. Cold-history import is explicit and lossy. These file artifacts do not imply native image, video or audio generation. See the [Claude connection guide](docs/CLAUDE_CONNECTOR_V1.md).
 
 Native subscription access and API billing are separate choices. Model availability and limits belong to the selected provider and account. An unsupported CLI version fails visibly before prompt delivery; ZIAForge does not silently switch transport or provider.
 

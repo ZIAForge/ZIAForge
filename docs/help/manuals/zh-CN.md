@@ -1,4 +1,4 @@
-<!-- Generated from docs/help/en.json; source SHA-256 c62aae118737b0c8aa69a75571d08fc21a8b86d7f369e8cf3d293550fff266f2. Do not edit this output.
+<!-- Generated from docs/help/en.json; source SHA-256 eaf22fddcc4ae04e49389249e9b06c0e4c060d2a1470f8ecbc39c46cb96868d3. Do not edit this output.
 Run node scripts/help/generate.cjs after changing the canonical help.
 Requested locale: zh-CN; served locale: zh-CN; status: machine-translated. -->
 # ZIAForge 用户指南
@@ -23,7 +23,7 @@ Requested locale: zh-CN; served locale: zh-CN; status: machine-translated. -->
 - [预设、模型与访问权限](#models)
 - [对话、“停止”与队列](#chat)
 - [文件、Git 与完成](#files)
-- [API connections](#api)
+- [API 连接](#api)
 - [设置、语言与安全重置](#settings)
 - [咨询帮助助手](#help-assistant)
 - [助手与 Telegram](#assistant-control)
@@ -256,41 +256,49 @@ Work 不创建 Git 分支，也没有 Git 定稿流程。请从选定文件夹�
 
 <a id="api"></a>
 
-## API connections
+## API 连接
 
-> 完整指南尚未翻译成您的界面语言。正在显示英文参考版本。
+“连接”用于添加显式选定的 API 端点。输入名称、基础 URL、模型以及密钥（如需）。对于现有兼容集成，选择 Chat Completions；对于函数轮次和提供方媒体，选择 Responses；对于该连接器，选择带有 Claude Connector v1 的 Anthropic Messages。现有连接将保留 Chat Completions，直到您显式更改它们。对于现有连接，“设置 Responses”会打开针对该同一端点的草稿；查看配置文件并点击“保存连接”。仅在网关支持所选扩展时，才选择 Codex 连接器、Grok Connector v1 或 Claude Connector v1。当端点未更改且密钥字段保持留空时，将保留已保存的密钥。
 
-Connections adds an explicitly selected OpenAI-compatible endpoint. Enter a name, base URL, model and a key if needed. Select Chat Completions for existing integrations or Responses for function rounds, provider tool progress and generated images. Existing connections retain Chat Completions until you change them explicitly. For an existing connection, Set up Responses opens a draft for that same endpoint; review the profile and click Save connection. Choose Codex connector or Grok Connector v1 only for a gateway that supports that extension. The saved key is retained when the endpoint is unchanged and the key field stays blank.
+除环回 HTTP 外，必须使用 HTTPS。请使用不含凭据、查询参数或片段标识符的纯端点。重定向会被拒绝。密钥采用受支持的 OS 加密，且绝不会返回给 UI。更改端点需要重新输入或清除其密钥。密钥字段留空将保留已保存的密钥。
 
-HTTPS is required except for loopback HTTP. Use a plain endpoint without credentials, queries or fragments. Redirects are refused. Keys use supported OS encryption and are never returned to the UI. Changing the endpoint requires re-entering or clearing its key. Leaving the key field blank preserves a saved key.
+工作区文件工具在后端解析的本地任务文件夹中执行，采用相对路径，并具有防路径遍历和防链接检查。每次文件写入都需要显式批准以及未更改的预期修订版本。只读会话仅公开读取工具。在 Responses 和 Claude 调用方模式下，“允许本地命令”在 macOS 和 Linux 上单独启用经批准的可执行文件/参数调用。命令监管在 Windows 上不可用；适配器在该系统上不通告该工具。命令始终需要所有者批准，且不构成操作系统沙箱。
 
-Workspace file tools execute in the backend-resolved local task folder, with relative paths and checks against traversal and links. Every file write needs explicit approval and an unchanged expected revision. Read-only sessions expose only read tools. In Responses, Allow local commands separately enables approved executable/argument calls on macOS and Linux. Command supervision is unavailable on Windows; the adapter does not advertise that tool there. Commands always require owner approval and are not an operating-system sandbox.
+Codex 连接器配置文件可识别该网关的 Responses 工具进度扩展。原生提供方工具在服务器上执行，与计算机上的调用方工具相互独立。本地只读权限无法约束服务器。对于要求禁用所有工具的仅报告架构师，无法选择连接器：不支持的隔离将会失败，而不是静默允许原生工具。请选择能够强制执行所需策略的端点。
 
-The Codex connector profile identifies that gateway’s Responses tool-progress extension. Native provider tools execute on the server, separately from caller tools on your computer. Local read-only permissions do not constrain the server. A connector cannot be selected for a report-only architect that requires all tools disabled: unsupported isolation fails rather than silently allowing native tools. Select an endpoint that can enforce the required policy.
+生成的 PNG、JPEG 和 WebP 结果会在折叠的工具输出外部显示为独立的图像卡片，并带有“保存图像”。图像会经过验证并保存在私有应用程序存储中；模型提供的 URL 和 Markdown 图像不会自动获取。打开已保存的历史记录、重试图像读取以及保存缓存图像均不会请求新的生成。每张图像的结果限制为 32 MiB 和 32 百万像素，并共享 512 MiB 的私有媒体缓存。如果私有缓存已满，请在手动清理之前保留所需的图像。点击聊天图像可打开图像查看器。放大或缩小，选择“实际大小”（100%）或“适应窗口”，然后拖动以查看细节。按 Escape 键或点击“关闭图像查看器”可返回聊天。查看和缩放会复用已加载的私有图像；它们不会请求新的生成。
 
-Generated PNG, JPEG and WebP results appear as separate image cards, with Save image, outside collapsed tool output. Images are validated and kept in private application storage; model-supplied URLs and Markdown images are not fetched automatically. Opening saved history, retrying an image read and saving a cached image do not request a new generation. Results are bounded to 32 MiB and 32 million pixels per image, with a shared 512 MiB private media cache. Preserve needed images before manually clearing the private cache if it becomes full. Click a chat image to open the image viewer. Zoom in or out, choose Actual size (100%) or Fit to window, and drag to inspect a detail. Escape or Close image viewer returns to the chat. Viewing and zooming reuse the loaded private image; they do not request a new generation.
+Responses 对话会保留已确认的响应标识和确切的函数调用 ID。中断的输入不会自动重新发送。不确定的本地编辑或命令在重启后不会重新运行；请在检查后保留历史记录并显式创建新上下文。对已保存的传输协议或端点的更改需要显式重新配置。提供方状态、取消和过期失败均会直接报告，而不会将其隐藏在 CLI 回退机制之后。聊天标题栏会显示固定到该次运行的协议。保存连接更改后，打开聊天的 CLI / API 选择器并点击“应用”，即使已选中相同的连接也是如此。这将使用已保存的配置创建新的运行并保留聊天历史记录。仅保存连接本身不会迁移活动聊天。较旧的纯文本图像链接仍保持为文本；切换协议不会重新生成或导入先前的结果。
 
-Responses conversations retain the acknowledged response identity and exact function call IDs. Interrupted inputs are not automatically resent. An uncertain local edit or command is not rerun after restart; preserve the history and explicitly create a new context after inspection. Changes to a saved transport or endpoint require explicit reconfiguration. Provider status, cancellation and expiry failures are reported without hiding them behind a CLI fallback. The chat header shows the protocol pinned to that run. After saving connection changes, open the chat’s CLI / API selector and click Apply, even if the same connection is already selected. This creates a new run with the saved configuration and retains chat history. Saving a connection alone does not migrate active chats. Older text-only image links remain text; switching protocol does not regenerate or import previous results.
+API 连接使用其配置的端点和身份验证，与原生 CLI 订阅相互独立。某些网关在内部使用订阅；ZIAForge 不会将原生身份验证复制到 API 中。模型、工具策略、推理参数和计费均取决于端点。仅凭发现并不足以证明具备推理能力。请将密钥保存在“连接”中，切勿放入任务正文或屏幕截图中。
 
-API connections use their configured endpoint and authentication, separately from native CLI subscriptions. Some gateways use subscriptions internally; ZIAForge does not copy native authentication into an API. Models, tool policies, reasoning parameters and billing depend on the endpoint. Discovery alone does not prove inference. Keep keys in Connections, never in task prose or screenshots.
+对于 Grok Connector v1，保存显式的 Responses 连接并使用“检查连接器”来读取其通告的功能、模型和用量，而无需运行推理。模型推理级别和上下文窗口选项来自目录。可选的原生轮次限制为 1–100。缺失的配额百分比仍保持未知；用量周期结束并非订阅付款或到期日期。在每个现有聊天中应用连接更改后，更改才会在此处生效。
 
-For Grok Connector v1, save an explicit Responses connection and use Inspect connector to read its advertised capabilities, models and usage without running inference. Model reasoning levels and context window choices come from the catalog. The optional native turn limit is 1–100. Missing quota percentages remain unknown; the usage period end is not a subscription payment or expiration date. Apply connection changes in each existing chat before they take effect there.
+Grok 问题以卡片形式显示，带有确切的原生问题和选项标签。选择所要求的答案或输入自定义回复，然后发送一次。方案访谈可提供讨论或跳过操作。提供方权限卡片显示确切的原生选项，默认情况下需要您进行选择。这些不同于本地文件/命令批准。停止、过期或重启会使旧卡片失效；不确定的提交不会自动重试。
 
-Grok questions appear as cards with the exact native question and option labels. Choose the requested answers or enter a custom response, then send once. Plan interviews can offer discussion or skip actions. Provider permission cards show the exact native choices and require your selection by default. These differ from local file/command approvals. Stop, expiry or restart makes old cards inactive; an uncertain submission is not repeated automatically.
+在“连接”中，Grok 连接可以启用“自动批准一次性提供方权限”；此选项默认处于关闭状态。这适用于新聊天，或在您通过“应用”显式重新配置之后的现有聊天。仅保存连接本身不会更改正在运行的聊天。启用后，ZIAForge 仅会自动提交由 Grok 提供的单个明确且未过期的一次性权限，并在发送前记录该自动决策。卡片会标明自动批准。问题以及本地文件或命令批准仍需要您的回复。只读聊天保留手动提供方权限。持久权限绝不会被自动选择；缺失或模糊的一次性选项仍须手动处理。旧的或不确定的提交绝不会被自动重放或重试。
 
-In Connections, a Grok connection can enable Automatically approve one-time provider permissions; it is off by default. This applies to new chats or an existing chat after you explicitly reconfigure it with Apply. Saving the connection alone does not change a running chat. When enabled, ZIAForge automatically submits only one unambiguous, unexpired one-time permission offered by Grok and records that automatic decision before sending it. The card identifies an automatic approval. Questions and local file or command approvals still require your answer. Read-only chats keep manual provider permissions. Persistent permissions are never selected automatically; missing or ambiguous one-time choices remain manual. Old or uncertain submissions are never replayed or retried automatically.
+在 Grok 聊天中，附件按钮会打开系统选择器以选择 PNG、JPEG 和 WebP。每条消息允许附加四张图像，每张图像最大 16 MiB，合计最大 20 MiB，每张图像限制为 32 百万像素。私有草稿副本具有 128 MiB 的预算，并归属于该次聊天运行。它们仅在您发送时才会传输。失败或不确定的发送将保留其草稿身份。图像消息无法使用纯文本队列。在更改或恢复运行之前，请移除或显式放弃待处理的图像草稿；放弃草稿不会撤回已发送的消息。已接受的图像消息会保留私有图像卡片，以供日后检查、缩放和保存。
 
-In a Grok chat, the attachment button opens the system picker for PNG, JPEG and WebP. Four images are allowed per message, up to 16 MiB each and 20 MiB combined, with 32 million pixels per image. Private draft copies have a 128 MiB budget and belong to that chat run. They are transmitted only when you send. Failed or uncertain sends retain their draft identities. Image messages cannot use the text-only queue. Remove or explicitly discard a pending image draft before changing or resuming its run; discarding a draft does not undo an already delivered message. Accepted image messages retain private image cards for later inspection, zoom and saving.
+Grok 提供方工具仅限于受支持的网页检索、图像、交互式问题以及受功能门控的视频生成。本地项目工具仍在计算机上后端选定的任务文件夹中执行。只读审查不包括提供方图像/视频生成与编辑、问题、本地写入和命令。无工具的帮助会话和仅报告架构师会话无法使用此连接器配置文件。不提供音频生成、转录和实时语音功能；MP4 可包含其正常音轨。仅凭发现工具本身并不是获得可用结果的证据。
 
-Grok provider tools are restricted to supported web retrieval, images, interactive questions and capability-gated video generation. Local project tools still execute on the computer in the backend-selected task folder. Read-only review excludes provider image/video generation and editing, questions, local writes and commands. Tool-free Help and report-only architect sessions cannot use this connector profile. Audio generation, transcription and realtime voice are not offered; an MP4 may contain its normal audio track. A discovered tool alone is not evidence of a usable result.
+对于视频，请使用可写的 Grok 聊天，附加参考图像或继续创建了参考图像的聊天，并描述动作及所需参数。若要显式选择较早的图像，请使用“保存图像”并附加已保存的文件。查看或保存图像不会重新生成它。没有单独的视频参数表单：请求通过对话及其原生问题/权限卡片进行。在新的用户轮次开始之前，ZIAForge 仅会启用连接器通告为可用、已启用且经核验的视频工具。发现失败将导致该轮次无法使用视频功能。原生功能的变化可能会在保留本地聊天的同时，使用可见历史记录和符合条件的缓存图像启动新的提供方上下文；中断的操作不会被重放。如果图像无法满足附件限制，交接将报告该遗漏；请显式附加所需的参考图像。
 
-For video, use a writable Grok chat, attach a reference image or continue the chat that created one, and describe the motion and desired parameters. To choose an older image explicitly, use Save image and attach the saved file. Viewing or saving the image does not regenerate it. There is no separate video-parameter form: the request uses the conversation and its native questions/permission cards. Before a new user turn, ZIAForge enables only video tools that the connector advertises as available, enabled and verified. Discovery failure leaves video unavailable for that turn. Changes in native capabilities can start a new provider context with your visible history and eligible cached images while keeping the local chat; interrupted operations are not replayed. If an image cannot fit the attachment limits, the handoff reports that omission; attach the intended reference explicitly.
+该连接器提供 image_to_video，需要参考图像、6 或 10 秒时长以及 480p/720p 预设。其 reference_to_video 模式支持 1–15 秒以及宽高比 1:1、16:9、9:16、4:3、3:4、3:2 或 2:3；智能体在需要时可先生成参考图像。请在聊天中提出所需设置。ZIAForge 未公开独立的 /grok/media 端点或其自动选择器。预设和受支持的参数属于提供方能力，并不保证确切的像素高度、帧时序或每种艺术效果。
 
-The connector offers image_to_video with a required reference image, 6 or 10 seconds and 480p/720p presets. Its reference_to_video mode supports 1–15 seconds and aspect ratios 1:1, 16:9, 9:16, 4:3, 3:4, 3:2 or 2:3; the agent may generate a reference first when needed. Request the intended settings in chat. ZIAForge does not expose the separate /grok/media endpoint or its auto selector. Presets and supported parameters are provider capabilities, not a guarantee of exact pixel height, frame timing or every artistic result.
+已完成的 Grok 视频仅在受保护的 MP4 文件下载完毕且其 MIME、大小、SHA-256 和结构经过核验后才会显示。提示视频已就绪的文本、图像回退或存储链接均不是可播放的视频。错误会保持可见，而不会请求替补生成。使用视频卡片控件进行播放、暂停、跳转或调节声音（如有）。播放不会自动开始。“保存视频”会打开系统目标位置对话框。在完全退出/重启应用程序后，已保存的聊天历史记录仍会保留私有 MP4；播放和保存均使用本地字节，无需推理或再次从提供方下载。在共享的 512 MiB 媒体缓存内，单个视频限制为 128 MiB。在手动清理已满的缓存之前，请保存所需的媒体。计算机必须支持该视频编解码器；不支持或损坏的文件会显示错误。
 
-A completed Grok video appears only after the protected MP4 file is downloaded and its MIME, size, SHA-256 and structure are checked. Text saying a video is ready, an image fallback or a storage link is not a playable video. Errors remain visible without requesting a replacement generation. Use the video card controls to play, pause, seek or adjust sound when present. Playback does not start automatically. Save video opens the system destination dialog. Saved chat history retains the private MP4 after a full application Quit/restart; playback and saving use local bytes without inference or another provider download. Videos are limited to 128 MiB each within the shared 512 MiB media cache. Save needed media before manually clearing a full cache. The computer must support the video codec; unsupported or damaged files show an error.
+对于 Claude Connector v1，选择 Anthropic Messages 并输入连接器的 HTTPS 源（不含 /v1）。保存后，使用“检查连接器”来读取通告的工具、模型选项、状态和用量，而无需进行推理。选择调用方或提供方原生执行、显式原生工具选择、原生权限模式、轮次/输出限制以及受支持的思考控制项；还提供可选的 JSON 输出模式和冷历史记录模式。默认使用调用方模式、手动原生权限且无原生工具。缺失的用量值仍保持未知；用量重置并非付款或订阅到期日期。连接器的 API 密钥与其原生订阅身份验证保持独立。在每个现有聊天中应用保存的更改后，更改才会生效。
 
-相关指令: [API connections](../../API_CONNECTIONS.md) · [Grok Connector v1](../../GROK_CONNECTOR.md).
+Claude 调用方工具在本地任务文件夹中运行，对写入和受支持的命令具有单独的批准要求。在调用方模式下，只有显式选中的 WebSearch 和 WebFetch 才能以原生方式运行。提供方原生模式在连接器的服务器工作区中运行选定的工具，并且不提供本地文件或命令工具。向服务器描述本地文件夹并不会授予对它的访问权限。只读会话会拒绝原生编辑或可执行工具；无工具会话要求不使用任何原生工具。服务器工具进度卡片绝不会在计算机上执行其内容。原生工具可用性与原生权限模式是分开的设置。
+
+Claude 原生权限卡片在被请求时需要显式的允许或拒绝决定。它们不能替换工具输入，也不能授予本地文件/命令批准。问题会显示所提供的确切文本和选择规则；选择答案或输入自定义回复，然后提交一次。Grok 自动权限选项不适用于 Claude。过期、“停止”、重启或不确定的交付会使旧卡片失效。继续操作将保留所属的响应和固定的配置；中断的请求、工具和答案不会被重放。冷历史记录上下文模式是一种显式的有损导入，而不是原生会话的恢复。当所属操作的响应已知时，“停止”会取消该操作；它不会撤销已完成的效果或停止不相关的服务。不确定的取消仍保持可见。
+
+在 Claude 聊天中，系统附件选择器接受 PNG、JPEG、GIF 和 WebP 图像，以及 PDF 和 UTF-8 文本文件。编辑器拥有四个共享附件槽位。图像和 PDF 每份允许 16 MiB；文本文档允许 1 MiB。图像允许 32 百万像素。图像草稿和文档草稿各自合计允许 20 MiB，并拥有独立的 128 MiB 私有存储预算。请求还具有 32 MiB 的解码后合计上限，编码请求开销可能会使其降低。私有副本归属于当前聊天运行，并且仅在您发送时才会传输。失败或不确定的发送保留其草稿身份；附件消息无法进入纯文本队列。在更改或恢复运行之前，请移除或显式放弃待处理的附件。已接受的图像仍可用于私有预览和保存；文档不会作为 PDF 或 HTML 嵌入。
+
+Claude 服务器工具可以创建可下载的文件。文件卡片在受保护的内容下载完毕且核验了其 MIME、确切大小及 SHA-256 后才会显示。它位于折叠的工具输出外部，显示名称、大小、类型以及所提供的修订版本或替换元数据。使用“保存”在系统对话框中选择目标位置。较新的不可变版本会使较早的版本依然可用。在独立的 1 GiB 私有制品缓存中，单个文件允许最大 128 MiB；在手动清理已满的缓存之前，请保存所需的文件。已缓存的历史记录和保存操作不会请求推理或再次下载。所有制品卡片均仅限保存，包括 PDF；HTML、SVG 和未知格式仍作为常规下载项，绝不会被执行。模型提供的 URL 和 Markdown 图像不会自动获取。服务器工具生成的文件并不意味着 Claude 具备原生照片、视频、音频或语音生成能力。
+
+相关指令: [API 连接](../../API_CONNECTIONS.md) · [Grok Connector v1](../../GROK_CONNECTOR.md) · [Claude Connector v1](../../CLAUDE_CONNECTOR_V1.md).
 
 <a id="settings"></a>
 

@@ -9,7 +9,7 @@ export interface AgentSessionRef { sessionId: string; runId: string }
 export interface AgentSessionCreateRequest extends AgentChatIdentity, AgentExecutionOptions { presetName?: string; model?: string; provider?: AgentSessionProvider; apiConnectionId?: string; requestId?: string }
 export interface AgentSessionReconfigureRequest extends AgentSessionRef, AgentExecutionOptions { presetName: string; model?: string; provider?: AgentSessionProvider; apiConnectionId?: string; requestId?: string }
 export interface AgentSessionDiagnostic { id: string; timestamp: number; level: 'info' | 'warning' | 'error'; source: 'session' | 'stdout' | 'stderr'; message: string }
-export interface AgentSendRequest extends AgentSessionRef { clientMessageId: string; text: string; imageIds?: string[] }
+export interface AgentSendRequest extends AgentSessionRef { clientMessageId: string; text: string; imageIds?: string[]; documentIds?: string[] }
 export interface AgentQueueControlRequest extends AgentSessionRef { paused: boolean }
 export interface AgentQueueCancelRequest extends AgentSessionRef { clientMessageId: string }
 export interface AgentQueuedMessage {
@@ -29,7 +29,7 @@ export interface AgentMessageQueue {
 }
 export interface AgentTurnRequest extends AgentSessionRef { turnId: string }
 export interface AgentApprovalRequest extends AgentTurnRequest { approvalId: string; decision: ApprovalDecision }
-export interface AgentInteractionRequest extends AgentTurnRequest { interactionId: string; answer: import('./grok-interactions').GrokInteractionAnswer }
+export interface AgentInteractionRequest extends AgentTurnRequest { interactionId: string; answer: import('./provider-interactions').ProviderInteractionAnswer }
 export interface AgentSendReceipt extends AgentSessionRef {
   clientMessageId: string
   turnId?: string
@@ -59,6 +59,7 @@ export interface AgentSessionSnapshot extends AgentChatIdentity, AgentSessionRef
   /** Effective protocol pinned to this run, not the connection's latest settings. */
   apiTransport?: ApiTransport
   apiProfile?: ApiProfile
+  apiClaudeConfig?: import('./api-provider').ClaudeConnectionOptions
   apiGrokConfig?: import('./api-provider').ApiConnection['grok']
   /** Actual reported usage only; absent when the provider has not reported it. */
   usage?: { inputTokens: number; outputTokens: number; totalTokens: number; requests: number }
@@ -73,7 +74,7 @@ export interface AgentSessionSnapshot extends AgentChatIdentity, AgentSessionRef
   error?: string
   feed: ReconstructedMessage[]
   pendingApprovals: Array<ReconstructedApprovalItem & { turnId?: string }>
-  pendingInteractions?: Array<import('./grok-interactions').GrokInteraction & { turnId?: string }>
+  pendingInteractions?: Array<import('./provider-interactions').ProviderInteraction & { turnId?: string }>
 }
 /** Ordered, coalesced snapshots projected in memory after journal writes finish. */
 export interface AgentSessionUpdate { snapshot: AgentSessionSnapshot }
@@ -96,5 +97,8 @@ export interface AgentSessionsAPI {
   pickImages?(request: AgentSessionRef): Promise<import('./agent-input-images').AgentInputImageRef[]>
   listImages?(request: AgentSessionRef): Promise<import('./agent-input-images').AgentInputImageRef[]>
   discardImages?(request: AgentSessionRef & { imageIds: string[] }): Promise<void>
+  pickDocuments?(request: AgentSessionRef): Promise<import('./agent-input-documents').AgentInputDocumentRef[]>
+  listDocuments?(request: AgentSessionRef): Promise<import('./agent-input-documents').AgentInputDocumentRef[]>
+  discardDocuments?(request: AgentSessionRef & { documentIds: string[] }): Promise<void>
   onEvent(callback: (update: AgentSessionUpdate) => void): () => void
 }

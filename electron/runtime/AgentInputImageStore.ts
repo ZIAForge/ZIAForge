@@ -78,7 +78,7 @@ export class AgentInputImageStore {
         signal?.throwIfAborted()
         let bytes: Buffer
         try { bytes = await readBoundedFile(filename, MAX_INPUT_IMAGE_BYTES) }
-        catch { throw new Error('Could not read the selected image. Choose a regular PNG, JPEG or WebP file up to 16 MiB, not a symbolic link.') }
+        catch { throw new Error('Could not read the selected image. Choose a regular PNG, JPEG, GIF or WebP file up to 16 MiB, not a symbolic link.') }
         total += bytes.length
         if (total > MAX_INPUT_IMAGE_BATCH_BYTES) throw new Error('Attached images must total at most 20 MiB')
         const info = rasterInfo(bytes)

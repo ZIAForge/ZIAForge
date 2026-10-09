@@ -644,6 +644,22 @@ const sessionCommands: Omit<AgentSessionsAPI, 'onEvent'> = {
     assertWorkSessionLease(session.taskId, session.chatId)
     return getAgentSessions().resolveInteraction(request)
   },
+  async pickDocuments(request) {
+    validateSessionCommand('pickDocuments', request)
+    const session = await interactiveSession(request)
+    assertWorkSessionLease(session.taskId, session.chatId)
+    const sessions = getAgentSessions(), owner = sessions.assertDocumentPickerOwner(request)
+    const inspection = await getApiProviderStore().inspect({ id: owner.apiConnectionId! })
+    if (inspection.provider !== 'claude' || !inspection.documentInput.available || !inspection.documentInput.enabled) throw new Error('This connection does not advertise document input')
+    sessions.assertDocumentPickerOwner(request)
+    if (!win) throw new Error('The native document picker requires an application window')
+    const selected = await dialog.showOpenDialog(win, { properties: ['openFile', 'multiSelections'], filters: [{ name: 'PDF / Text', extensions: ['pdf', 'txt', 'md', 'csv', 'json', 'log'] }] })
+    sessions.assertDocumentPickerOwner(request)
+    if (selected.canceled) return []
+    return sessions.stageDocuments(request, selected.filePaths)
+  },
+  async listDocuments(request) { validateSessionCommand('listDocuments', request); return getAgentSessions().listDocuments(request) },
+  async discardDocuments(request) { validateSessionCommand('discardDocuments', request); return getAgentSessions().discardDocuments(request) },
   async pickImages(request) {
     validateSessionCommand('pickImages', request)
     const session = await interactiveSession(request)
@@ -651,10 +667,10 @@ const sessionCommands: Omit<AgentSessionsAPI, 'onEvent'> = {
     const sessions = getAgentSessions()
     const owner = sessions.assertImagePickerOwner(request)
     const inspection = await getApiProviderStore().inspect({ id: owner.apiConnectionId! })
-    if (!inspection.imageInput) throw new Error('This Grok connection does not advertise native image input')
+    if (inspection.provider === 'claude' ? !inspection.imageInput.available || !inspection.imageInput.enabled : !inspection.imageInput) throw new Error('This connection does not advertise native image input')
     sessions.assertImagePickerOwner(request)
     if (!win) throw new Error('The native image picker requires an application window')
-    const selected = await dialog.showOpenDialog(win, { properties: ['openFile', 'multiSelections'], filters: [{ name: 'PNG / JPEG / WebP', extensions: ['png', 'jpg', 'jpeg', 'webp'] }] })
+    const selected = await dialog.showOpenDialog(win, { properties: ['openFile', 'multiSelections'], filters: [{ name: inspection.provider === 'claude' ? 'PNG / JPEG / WebP / GIF' : 'PNG / JPEG / WebP', extensions: ['png', 'jpg', 'jpeg', 'webp', ...(inspection.provider === 'claude' ? ['gif'] : [])] }] })
     sessions.assertImagePickerOwner(request)
     if (selected.canceled) return []
     return sessions.stageImages(request, selected.filePaths)
@@ -692,6 +708,9 @@ handleIpc('agent-session:interrupt', (_, request: Parameters<AgentSessionsAPI['i
 handleIpc('agent-session:terminate', (_, request: Parameters<AgentSessionsAPI['terminate']>[0]) => sessionCommands.terminate(request))
 handleIpc('agent-session:resolve-approval', (_, request: Parameters<AgentSessionsAPI['resolveApproval']>[0]) => sessionCommands.resolveApproval(request))
 handleIpc('agent-session:resolve-interaction', (_, request: Parameters<NonNullable<AgentSessionsAPI['resolveInteraction']>>[0]) => sessionCommands.resolveInteraction!(request))
+handleIpc('agent-session:pick-documents', (_, request: Parameters<NonNullable<AgentSessionsAPI['pickDocuments']>>[0]) => sessionCommands.pickDocuments!(request))
+handleIpc('agent-session:list-documents', (_, request: Parameters<NonNullable<AgentSessionsAPI['listDocuments']>>[0]) => sessionCommands.listDocuments!(request))
+handleIpc('agent-session:discard-documents', (_, request: Parameters<NonNullable<AgentSessionsAPI['discardDocuments']>>[0]) => sessionCommands.discardDocuments!(request))
 handleIpc('agent-session:pick-images', (_, request: Parameters<NonNullable<AgentSessionsAPI['pickImages']>>[0]) => sessionCommands.pickImages!(request))
 handleIpc('agent-session:list-images', (_, request: Parameters<NonNullable<AgentSessionsAPI['listImages']>>[0]) => sessionCommands.listImages!(request))
 handleIpc('agent-session:discard-images', (_, request: Parameters<NonNullable<AgentSessionsAPI['discardImages']>>[0]) => sessionCommands.discardImages!(request))
@@ -699,7 +718,7 @@ handleIpc('agent-media:read', (_, request: import('../shared/agent-media').Agent
 handleIpc('agent-media:save', async (_, request: import('../shared/agent-media').AgentMediaRequest) => {
   const media = await getAgentSessions().readMedia(request)
   const kind = media.mime === 'video/mp4' ? 'video' : 'image'
-  const extension = media.mime === 'video/mp4' ? 'mp4' : media.mime === 'image/jpeg' ? 'jpg' : media.mime === 'image/webp' ? 'webp' : 'png'
+  const extension = media.mime === 'video/mp4' ? 'mp4' : media.mime === 'image/jpeg' ? 'jpg' : media.mime === 'image/webp' ? 'webp' : media.mime === 'image/gif' ? 'gif' : 'png'
   const choice = await dialog.showSaveDialog({ defaultPath: `ZIAForge-${kind}.${extension}`, filters: [{ name: kind === 'video' ? 'Video' : 'Image', extensions: [extension] }] })
   if (choice.canceled || !choice.filePath) return { cancelled: true }
   // Dialog selection belongs to the human; recheck current session after the dialog.
@@ -707,6 +726,20 @@ handleIpc('agent-media:save', async (_, request: import('../shared/agent-media')
   const handle = await fs.promises.open(choice.filePath, fs.constants.O_WRONLY | fs.constants.O_CREAT | fs.constants.O_NOFOLLOW | fs.constants.O_NONBLOCK, 0o600)
   try {
     if (!(await handle.stat()).isFile()) throw new Error('Media destination must be a regular file')
+    await handle.truncate(0); await handle.writeFile(current.bytes); await handle.sync()
+  } finally { await handle.close() }
+  return { cancelled: false }
+})
+
+handleIpc('agent-artifact:read', (_, request: import('../shared/agent-artifacts').AgentArtifactRequest) => getAgentSessions().readArtifact(request))
+handleIpc('agent-artifact:save', async (_, request: import('../shared/agent-artifacts').AgentArtifactRequest) => {
+  const artifact = await getAgentSessions().readArtifact(request)
+  const choice = await dialog.showSaveDialog({ defaultPath: artifact.filename })
+  if (choice.canceled || !choice.filePath) return { cancelled: true }
+  const current = await getAgentSessions().readArtifact(request)
+  const handle = await fs.promises.open(choice.filePath, fs.constants.O_WRONLY | fs.constants.O_CREAT | fs.constants.O_NOFOLLOW | fs.constants.O_NONBLOCK, 0o600)
+  try {
+    if (!(await handle.stat()).isFile()) throw new Error('Artifact destination must be a regular file')
     await handle.truncate(0); await handle.writeFile(current.bytes); await handle.sync()
   } finally { await handle.close() }
   return { cancelled: false }
