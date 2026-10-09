@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import type { ClaudeConnectionOptions, ClaudeConnectorInspection } from '../../../shared/api-provider'
+import { CLAUDE_DEFAULT_MAX_TOKENS, type ClaudeConnectionOptions, type ClaudeConnectorInspection } from '../../../shared/api-provider'
 import { useTranslation } from '../../i18n'
 
 const control = 'mt-1 w-full rounded-lg border border-zinc-700 bg-[#111317] p-2 text-sm text-white disabled:opacity-50'
@@ -14,7 +14,7 @@ export function ClaudeConnectionFields({ value = {}, onChange, disabled, inspect
   const selected = value.nativeTools ?? []
   const tools = inspection?.tools ?? []
   const permittedInMode = (name: string) => value.mode === 'native' || ['WebSearch', 'WebFetch'].includes(name)
-  const maxTokens = value.maxTokens ?? 4096
+  const maxTokens = value.maxTokens ?? CLAUDE_DEFAULT_MAX_TOKENS
   const thinkingType = value.thinking?.type ?? ''
   const thinkingTypes = ['', 'disabled', ...(model?.supportsAdaptiveThinking === true ? ['adaptive'] : []), ...(model?.supportsManualThinking === true ? ['enabled'] : [])]
   const display = inspection?.thinking.display ?? []

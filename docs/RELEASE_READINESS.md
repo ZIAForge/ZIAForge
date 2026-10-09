@@ -1,5 +1,9 @@
 # Release engineering and provenance
 
+## 1.0.11 Claude long requests
+
+Version **1.0.11** aligns Claude request deadlines with the connector, preserves useful terminal error codes and increases the output-token default for new connections without migrating saved settings. See [release notes](releases/1.0.11.md) and the [connector contract](CLAUDE_CONNECTOR_V1.md). Six native package jobs remain build-only; original interrupted tasks are not replayed during verification.
+
 ## 1.0.10 Claude Connector
 
 Version **1.0.10** adds an explicit Claude Connector v1 profile using Anthropic Messages, separate local caller and remote native tools, exact question/permission decisions, private document attachments, immutable downloadable file revisions and owned continuation. See [release notes](releases/1.0.10.md) and the [connector contract](CLAUDE_CONNECTOR_V1.md). Existing connection protocols remain pinned until explicitly reconfigured. One frozen source supplies the six platform packages; static, fixture, live-provider and package-integrity evidence remain separate.

@@ -1,6 +1,8 @@
 /** Public connection metadata. Credentials are write-only and never returned over IPC. */
 export type ApiTransport = 'chat-completions' | 'responses' | 'anthropic-messages'
 export type ApiProfile = 'openai-compatible' | 'codex-connector' | 'grok-connector-v1' | 'claude-connector-v1'
+/** Product default for new connections; explicit saved budgets are never migrated. */
+export const CLAUDE_DEFAULT_MAX_TOKENS = 128_000
 export interface ClaudeConnectionOptions {
   mode?: 'caller' | 'native'
   permissionMode?: 'manual' | 'plan' | 'acceptEdits' | 'dontAsk'
@@ -35,7 +37,7 @@ export function validClaudeConnectionOptions(value: unknown): value is ClaudeCon
     const thinking = value.thinking
     if (!record(thinking) || Object.keys(thinking).some(key => !['type', 'budget_tokens', 'display'].includes(key)) || typeof thinking.type !== 'string' || !['adaptive', 'enabled', 'disabled'].includes(thinking.type)) return false
     if (thinking.display !== undefined && (thinking.type === 'disabled' || typeof thinking.display !== 'string' || !['summarized', 'omitted'].includes(thinking.display))) return false
-    if (thinking.type === 'enabled' ? !integer(thinking.budget_tokens, 1024, ((value.maxTokens as number | undefined) ?? 4096) - 1) : thinking.budget_tokens !== undefined) return false
+    if (thinking.type === 'enabled' ? !integer(thinking.budget_tokens, 1024, ((value.maxTokens as number | undefined) ?? CLAUDE_DEFAULT_MAX_TOKENS) - 1) : thinking.budget_tokens !== undefined) return false
   }
   return true
 }
@@ -43,7 +45,7 @@ export function validClaudeConnectionOptions(value: unknown): value is ClaudeCon
 export type NormalizedClaudeConnectionOptions = ClaudeConnectionOptions & Required<Pick<ClaudeConnectionOptions, 'mode' | 'permissionMode' | 'nativeTools' | 'maxTurns' | 'maxTokens' | 'historyMode'>>
 export function normalizeClaudeConnectionOptions(value: ClaudeConnectionOptions = {}): NormalizedClaudeConnectionOptions {
   if (!validClaudeConnectionOptions(value)) throw new Error('Invalid Claude Connector settings')
-  return structuredClone({ mode: value.mode ?? 'caller', permissionMode: value.permissionMode ?? 'manual', nativeTools: value.nativeTools ?? [], maxTurns: value.maxTurns ?? 30, maxTokens: value.maxTokens ?? 4096, historyMode: value.historyMode ?? 'reject', ...(value.thinking !== undefined ? { thinking: value.thinking } : {}), ...(value.outputSchema !== undefined ? { outputSchema: value.outputSchema } : {}) })
+  return structuredClone({ mode: value.mode ?? 'caller', permissionMode: value.permissionMode ?? 'manual', nativeTools: value.nativeTools ?? [], maxTurns: value.maxTurns ?? 30, maxTokens: value.maxTokens ?? CLAUDE_DEFAULT_MAX_TOKENS, historyMode: value.historyMode ?? 'reject', ...(value.thinking !== undefined ? { thinking: value.thinking } : {}), ...(value.outputSchema !== undefined ? { outputSchema: value.outputSchema } : {}) })
 }
 export interface GrokConnectionOptions { contextWindow?: number; maxTurns?: number; autoApproveNativePermissions?: boolean }
 export function validGrokConnectionOptions(value: unknown): value is GrokConnectionOptions {

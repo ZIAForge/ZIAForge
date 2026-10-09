@@ -41,7 +41,7 @@ describe('explicit API connection transport', () => {
     status: { connected: true, active: 0, queued: 0, nativeActive: null, awaitingTools: 0, concurrency: 8, queueLimit: 32, ownedSessions: 1 }, warnings: [],
   }
   it('restores Claude settings and advertises only discovered model controls and enabled native tools', async () => {
-    const connection: ApiConnection = { ...legacy, baseUrl: 'https://claude.invalid', transport: 'anthropic-messages', profile: 'claude-connector-v1', claude: normalizeClaudeConnectionOptions({ permissionMode: 'plan', maxTurns: 7 }) }
+    const connection: ApiConnection = { ...legacy, baseUrl: 'https://claude.invalid', transport: 'anthropic-messages', profile: 'claude-connector-v1', claude: normalizeClaudeConnectionOptions({ permissionMode: 'plan', maxTurns: 7, maxTokens: 4096 }) }
     const api = fixture([connection]); api.inspect.mockResolvedValue(claudeDiscovery)
     render(<ApiConnectionsPanel />)
     await waitFor(() => expect(screen.getByTestId(`api-connection-${connection.id}`)).not.toBeNull())

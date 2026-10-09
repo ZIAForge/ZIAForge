@@ -4,6 +4,14 @@ import type { ClaudeApprovalRequest, ClaudeQuestionRequest } from '../../shared/
 export const CLAUDE_RESPONSE_ID = /^resp_[a-f0-9]{32}$/
 export const CLAUDE_FILE_ID = /^file_[a-f0-9]{32}$/
 export const CLAUDE_LIMITS = Object.freeze({ transportBytes: 16 * 1024 * 1024, frameBytes: 2 * 1024 * 1024, contentBytes: 8 * 1024 * 1024, blocks: 256, calls: 16, artifactBytes: 128 * 1024 * 1024, artifacts: 32 })
+export type ClaudeTerminalErrorCode = 'max_output_tokens' | 'native_timeout'
+/** Only reviewed machine codes cross into the UI; provider error bodies remain private. */
+export class ClaudeTerminalError extends Error {
+  constructor(readonly code: ClaudeTerminalErrorCode, readonly responseId?: string) {
+    super(code === 'max_output_tokens' ? 'Claude reached the model output token limit (max_output_tokens); partial output was not committed. Increase the connection output-token limit before starting a new conversation.' : 'Claude exceeded its native turn deadline (native_timeout); partial output was not committed.')
+    this.name = 'ClaudeTerminalError'
+  }
+}
 export interface ClaudeArtifactMetadata { id: string; kind: 'image' | 'video' | 'audio' | 'file'; filename: string; mime_type: string; bytes: number; sha256: string; api_url: string; revision?: number; supersedes_file_id?: string }
 export type ClaudeContent = { type: 'text'; text: string; citations?: unknown[] } | { type: 'thinking'; thinking: string; signature?: string } | { type: 'redacted_thinking'; data: string } | { type: 'tool_use'; id: string; name: string; input: Record<string, unknown> }
 export type ClaudeExtension =
@@ -115,7 +123,10 @@ export async function consumeClaudeMessagesStream(response: Response, options: C
     const value = parseJson(data.join('\n'))
     if (!claudeObject(value) || typeof value.type !== 'string' || name && name !== value.type || ended) invalid()
     if (value.type === 'ping') return
-    if (value.type === 'error') throw new Error('Claude reported a terminal Messages stream error; partial output was not committed')
+    if (value.type === 'error') {
+      if (claudeObject(value.error) && (value.error.code === 'max_output_tokens' || value.error.code === 'native_timeout')) throw new ClaudeTerminalError(value.error.code, rid || undefined)
+      throw new Error('Claude reported a terminal Messages stream error; partial output was not committed')
+    }
     if (value.type.startsWith('claude.')) {
       if (!started) invalid()
       await bindId(responseId(value.response_id))
@@ -192,6 +203,7 @@ export async function consumeClaudeMessagesStream(response: Response, options: C
     buffer += decoder.decode(); if (buffer.trim()) await frame(buffer)
     if (!ended || !rid) invalid()
     const content = blocks.map(block => block.content), calls = content.filter((part): part is Extract<ClaudeContent, { type: 'tool_use' }> => part.type === 'tool_use')
+    if (stopReason === 'max_tokens') throw new ClaudeTerminalError('max_output_tokens', rid)
     if (calls.length > CLAUDE_LIMITS.calls || new Set(calls.map(call => call.id)).size !== calls.length || (calls.length > 0) !== (stopReason === 'tool_use') || !['end_turn', 'tool_use', 'stop_sequence'].includes(stopReason)) throw new Error('Claude Messages result is incomplete or has inconsistent tool calls')
     return { id, responseId: rid, content, text: content.filter((part): part is Extract<ClaudeContent, { type: 'text' }> => part.type === 'text').map(part => part.text).join(''), stopReason, calls, usage: { inputTokens, outputTokens, totalTokens: inputTokens + outputTokens }, artifacts: [...artifacts.values()] }
   } finally { options.signal.removeEventListener('abort', abort); await reader.cancel().catch(() => {}); reader.releaseLock() }

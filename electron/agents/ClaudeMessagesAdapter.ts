@@ -10,7 +10,7 @@ import type { AgentAdapter, AgentCapabilities } from './AgentAdapterFactory'
 import type { ApiAdapterOptions } from './ApiAdapter'
 import { validateApiBaseUrl } from '../api/ApiProviderStore'
 import { API_READ_TOOLS, API_WRITE_TOOL, ApiFileTools } from '../api/ApiFileTools'
-import { CLAUDE_RESPONSE_ID, claudeObject, consumeClaudeMessagesStream, downloadClaudeArtifact, readClaudeJson, type ClaudeArtifactMetadata, type ClaudeContent, type ClaudeExtension } from '../api/ClaudeMessagesProtocol'
+import { CLAUDE_RESPONSE_ID, ClaudeTerminalError, claudeObject, consumeClaudeMessagesStream, downloadClaudeArtifact, readClaudeJson, type ClaudeArtifactMetadata, type ClaudeContent, type ClaudeExtension, type ClaudeTerminalErrorCode } from '../api/ClaudeMessagesProtocol'
 import { assertPrivateFile, readPrivateMetadata, replacePrivateMetadata, writePrivateMetadata } from '../runtime/privateStorage'
 import { API_COMMAND_TOOL, LOCAL_COMMAND_SUPPORTED, LocalCommandTool } from './LocalCommandTool'
 
@@ -25,6 +25,7 @@ interface History {
 }
 interface Active {
   id: string; controller: AbortController; finished: Promise<void>; interrupted: boolean; dispatched: boolean; responseId?: string; awaitingResponse: boolean; sideEffects: boolean; uncertain: boolean
+  abortCause?: 'deadline' | 'interaction' | 'user'; terminalErrorCode?: ClaudeTerminalErrorCode
   approval?: { id: string; resolve(value: ApprovalDecision): void }; caller?: string
   interactions: Map<string, { interaction: ClaudeInteraction; timer?: ReturnType<typeof setTimeout>; acknowledgement?: Promise<void> }>
   hosted: Map<string, { id: string; name: string; completed: boolean }>
@@ -61,6 +62,7 @@ export class ClaudeMessagesAdapter implements AgentAdapter {
   private active?: Active
   private starting?: Promise<{ sessionId: string }>
   private startupController?: AbortController
+  private requestTimeoutMs?: number
   private stopped = false
   constructor(private readonly options: ClaudeMessagesAdapterOptions) {
     if (options.connection.transport !== 'anthropic-messages' || options.connection.profile !== 'claude-connector-v1' || !options.connection.enabled) throw new Error('An enabled Claude Connector v1 Messages profile is required')
@@ -144,8 +146,17 @@ export class ClaudeMessagesAdapter implements AgentAdapter {
     const thinking = this.controls.thinking
     if (thinking?.type === 'adaptive' && model.supports_adaptive_thinking !== true) throw new Error('The selected Claude model does not advertise adaptive thinking')
     if (thinking?.type === 'enabled' && model.supports_manual_thinking !== true) throw new Error('The selected Claude model does not advertise manual thinking budgets')
+    const capabilities = await get('claude/capabilities')
+    if (!claudeObject(capabilities) || capabilities.version !== 1 || capabilities.provider !== 'claude') throw new Error('Invalid Claude capability contract')
+    if (capabilities.limits !== undefined) {
+      if (!claudeObject(capabilities.limits)) throw new Error('Invalid Claude capability limits')
+      const budget = capabilities.limits.turnTimeoutMs
+      if (budget !== undefined) {
+        if (!Number.isSafeInteger(budget) || (budget as number) < 1 || (budget as number) > 3_600_000) throw new Error('Invalid Claude native turn deadline')
+        if (this.options.timeoutMs === undefined) this.requestTimeoutMs = (budget as number) + 5_000
+      }
+    }
     if (this.controls.nativeTools.length) {
-      const capabilities = await get('claude/capabilities')
       const toolName = (value: unknown): value is string => typeof value === 'string' && /^[A-Za-z_][A-Za-z0-9_.:-]{0,149}$/.test(value)
       if (!claudeObject(capabilities) || capabilities.version !== 1 || capabilities.provider !== 'claude' || !Array.isArray(capabilities.toolCatalog) || capabilities.toolCatalog.length > 256 || !capabilities.toolCatalog.every(toolName) || new Set(capabilities.toolCatalog).size !== capabilities.toolCatalog.length || !Array.isArray(capabilities.discoveredTools) || capabilities.discoveredTools.length > 256 || capabilities.discoveredTools.some(tool => !claudeObject(tool) || !toolName(tool.name))) throw new Error('Invalid Claude native tool discovery')
       const catalog = new Set(capabilities.toolCatalog), discovered = capabilities.discoveredTools as Array<Record<string, unknown>>, names = new Set(discovered.map(tool => tool.name))
@@ -191,7 +202,10 @@ export class ClaudeMessagesAdapter implements AgentAdapter {
     return { turnId: active.id }
   }
   private async run(active: Active, initialContent: Array<Record<string, unknown>>): Promise<void> {
-    const timeout = setTimeout(() => active.controller.abort(), this.options.timeoutMs ?? 600_000)
+    let timeout: ReturnType<typeof setTimeout> | undefined
+    const armDeadline = (ms: number) => { clearTimeout(timeout); timeout = setTimeout(() => this.abort(active, 'deadline'), ms) }
+    // Explicit test/owner overrides and older servers retain their original whole-turn budget.
+    if (this.requestTimeoutMs === undefined) armDeadline(this.options.timeoutMs ?? 600_000)
     let failed: string | undefined, completed = false, interrupted = false, count = 0, previous = this.history.lastResponseId
     let content = initialContent
     try {
@@ -200,6 +214,7 @@ export class ClaudeMessagesAdapter implements AgentAdapter {
         this.history.pending = { turnId: active.id, state: 'requesting', calls: [] }; await this.persist()
         const messageId = `${active.id}-${round}`; this.emit({ type: 'message.started', turnId: active.id, messageId, role: 'assistant' })
         active.responseId = undefined; active.awaitingResponse = true; active.dispatched = true
+        if (this.requestTimeoutMs !== undefined) armDeadline(this.requestTimeoutMs)
         const response = await (this.options.fetch ?? fetch)(`${this.origin}/v1/messages`, { method: 'POST', headers: this.headers(), body: JSON.stringify({ ...this.definition, stream: true, messages: [{ role: 'user', content }], ...(previous ? { previous_response_id: previous } : {}) }), signal: active.controller.signal, redirect: 'error' })
         if (!response.ok) { if ([400, 401, 403, 404, 409, 413, 429].includes(response.status)) active.awaitingResponse = false; let code = ''; try { const body = await readClaudeJson(response, 32_768); if (claudeObject(body) && claudeObject(body.error) && typeof body.error.code === 'string' && /^[a-z0-9_]{1,100}$/.test(body.error.code)) code = `: ${body.error.code}` } catch { /* Raw error bodies never enter the log. */ } throw new Error(`Claude Messages returned HTTP ${response.status}${code}`) }
         const result = await consumeClaudeMessagesStream(response, {
@@ -235,7 +250,12 @@ export class ClaudeMessagesAdapter implements AgentAdapter {
         previous = result.responseId
       }
       if (!completed) throw new Error('Claude caller round limit reached')
-    } catch (error) { interrupted = active.interrupted && !active.uncertain && this.status !== 'error'; failed = interrupted ? 'Interrupted by user' : active.controller.signal.aborted ? 'Claude request timed out or was cancelled' : this.safeError(error); active.controller.abort() }
+    } catch (error) {
+      if (error instanceof ClaudeTerminalError && error.responseId !== undefined && error.responseId === active.responseId) active.terminalErrorCode = error.code
+      interrupted = active.interrupted && active.abortCause === 'user' && !active.uncertain && this.status !== 'error'
+      failed = interrupted ? 'Interrupted by user' : active.abortCause === 'deadline' ? 'Claude request deadline exceeded; partial output was not committed' : active.abortCause === 'interaction' ? 'Claude owner question or permission expired; the turn was cancelled' : this.safeError(error)
+      active.controller.abort()
+    }
     finally {
       let cancellationConfirmed = !active.dispatched
       clearTimeout(timeout)
@@ -243,7 +263,7 @@ export class ClaudeMessagesAdapter implements AgentAdapter {
       if (active.approval) { this.emit({ type: 'permission.state.changed', turnId: active.id, approvalId: active.approval.id, state: 'expired' }); active.approval.resolve('deny'); active.approval = undefined }
       if (!completed && this.commandTool && active.sideEffects) { try { await this.commandTool.dispose() } catch { active.uncertain = true; failed = 'Local Claude command cleanup could not be confirmed' } }
       if (!completed && active.awaitingResponse) {
-        cancellationConfirmed = Boolean(active.responseId && await this.cancelResponse(active.responseId))
+        cancellationConfirmed = Boolean(active.responseId && await this.cancelResponse(active.responseId, active.terminalErrorCode))
         if (!cancellationConfirmed) { active.uncertain = true; failed = `${failed ?? 'Claude request failed'}. Cancellation could not be confirmed; inspect the remote turn before continuing` }
       }
       // Any dispatched, incomplete transaction must be inspected, never automatically resent or resumed.
@@ -326,7 +346,7 @@ export class ClaudeMessagesAdapter implements AgentAdapter {
     if (event.type === 'claude.approval' && !this.controls.nativeTools.includes(event.request.toolName) || event.type === 'claude.question' && !this.controls.nativeTools.includes('AskUserQuestion')) throw new Error('Claude requested an interaction outside this session native grant')
     const base = { provider: 'claude' as const, interactionId: event.id, responseId: event.responseId, state: 'pending' as const, expiresAt: Date.now() + (event.type === 'claude.approval' ? event.expiresIn * 1000 : this.options.timeoutMs ?? 600_000) }
     const interaction: ClaudeInteraction = event.type === 'claude.approval' ? { ...base, kind: 'approval', request: event.request } : { ...base, kind: 'question', request: event.request }
-    const timer = setTimeout(() => { if (interaction.state === 'pending') { this.interactionState(active, interaction, 'expired'); active.controller.abort() } }, Math.max(1, interaction.expiresAt - Date.now()))
+    const timer = setTimeout(() => { if (interaction.state === 'pending') { this.interactionState(active, interaction, 'expired'); this.abort(active, 'interaction') } }, Math.max(1, interaction.expiresAt - Date.now()))
     active.interactions.set(event.id, { interaction, timer }); this.emit({ type: 'interaction.requested', turnId: active.id, parentMessageId: messageId, interaction })
     this.emit({ type: 'agent.status.changed', scope: 'turn', turnId: active.id, status: 'waiting_for_approval' })
   }
@@ -342,23 +362,27 @@ export class ClaudeMessagesAdapter implements AgentAdapter {
     this.emit({ type: 'tool.started', turnId: active.id, toolCallId, toolName: 'artifact', parentMessageId: messageId, executor: 'provider' })
     this.emit({ type: 'tool.completed', turnId: active.id, toolCallId, output: { filename: metadata.filename, bytes: metadata.bytes }, outcome: 'completed', artifacts: [ref] })
   }
-  private async cancelResponse(responseId: string): Promise<boolean> {
+  private abort(active: Active, cause: NonNullable<Active['abortCause']>): void {
+    if (!active.controller.signal.aborted) active.abortCause = cause
+    active.controller.abort()
+  }
+  private async cancelResponse(responseId: string, terminalErrorCode?: ClaudeTerminalErrorCode): Promise<boolean> {
     if (!CLAUDE_RESPONSE_ID.test(responseId)) return false
     try {
       const response = await (this.options.fetch ?? fetch)(`${this.origin}/v1/responses/${responseId}/cancel`, { method: 'POST', headers: this.headers(), signal: AbortSignal.timeout(15_000), redirect: 'error' })
       const receipt = await readClaudeJson(response, 1024 * 1024)
-      return response.ok && claudeObject(receipt) && receipt.id === responseId && (receipt.status === 'cancelled' || receipt.status === 'completed' && claudeObject(receipt.claude) && receipt.claude.requires_action === false)
+      return response.ok && claudeObject(receipt) && receipt.id === responseId && (receipt.status === 'cancelled' || receipt.status === 'completed' && claudeObject(receipt.claude) && receipt.claude.requires_action === false || terminalErrorCode !== undefined && receipt.status === 'failed' && claudeObject(receipt.error) && receipt.error.code === terminalErrorCode && claudeObject(receipt.claude) && receipt.claude.requires_action === false)
     } catch { return false }
   }
   async interruptTurn(expectedTurnId?: string): Promise<{ turnId: string }> {
     const active = this.active
     if (!active || expectedTurnId && expectedTurnId !== active.id) throw new Error('No matching active Claude turn')
-    active.interrupted = true; active.controller.abort(); await active.finished
+    active.interrupted = true; this.abort(active, 'user'); await active.finished
     return { turnId: active.id }
   }
   async stop(): Promise<void> {
     this.stopped = true; this.startupController?.abort()
-    if (this.active) { this.active.interrupted = true; this.active.controller.abort(); await this.active.finished }
+    if (this.active) { this.active.interrupted = true; this.abort(this.active, 'user'); await this.active.finished }
     await this.starting?.catch(() => {}); await this.commandTool?.dispose()
     this.status = 'stopped'; this.emit({ type: 'agent.status.changed', scope: 'session', status: 'stopped' })
   }

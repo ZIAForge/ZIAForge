@@ -29,7 +29,7 @@ async function terminal(events: AgentEvent[], turnId: string, timeout = 4000) {
   await vi.waitFor(() => expect(events.some(event => event.type === 'agent.status.changed' && event.scope === 'turn' && event.turnId === turnId && ['completed', 'error', 'stopped'].includes(event.status))).toBe(true), { timeout })
   return [...events].reverse().find(event => event.type === 'agent.status.changed' && event.scope === 'turn' && event.turnId === turnId)
 }
-afterEach(async () => { await Promise.all(adapters.splice(0).map(adapter => adapter.stop())); vi.restoreAllMocks(); roots.splice(0).forEach(root => fs.rmSync(root, { recursive: true, force: true })) })
+afterEach(async () => { vi.useRealTimers(); await Promise.all(adapters.splice(0).map(adapter => adapter.stop())); vi.restoreAllMocks(); roots.splice(0).forEach(root => fs.rmSync(root, { recursive: true, force: true })) })
 describe('Claude Messages caller and native execution boundaries', () => {
   it('requires an enabled discovered native tool as well as profile membership before starting a request', async () => {
     const handler = vi.fn(() => claudeWire(1, [{ type: 'text', text: 'Done' }]))
@@ -44,7 +44,7 @@ describe('Claude Messages caller and native execution boundaries', () => {
   })
   it('uses explicit per-model manual thinking discovery without model-name inference', async () => {
     const handler = vi.fn(() => claudeWire(1, [{ type: 'text', text: 'Done' }]))
-    const connection: ClaudeMessagesAdapterOptions['connection'] = { id: 'fixture', name: 'Thinking', baseUrl: 'https://fixture.invalid', model: 'fixture-model', enabled: true, hasApiKey: false, transport: 'anthropic-messages', profile: 'claude-connector-v1', claude: { thinking: { type: 'enabled', budget_tokens: 1024 } } }
+    const connection: ClaudeMessagesAdapterOptions['connection'] = { id: 'fixture', name: 'Thinking', baseUrl: 'https://fixture.invalid', model: 'fixture-model', enabled: true, hasApiKey: false, transport: 'anthropic-messages', profile: 'claude-connector-v1', claude: { maxTokens: 4096, thinking: { type: 'enabled', budget_tokens: 1024 } } }
     await expect(fixture(handler, { connection }, { model: { resolved_model: 'claude-opus-4-6', supports_adaptive_thinking: true, supports_manual_thinking: null } })).rejects.toThrow('does not advertise manual')
     await expect(fixture(handler, { connection }, { model: { supports_adaptive_thinking: false, supports_manual_thinking: false } })).rejects.toThrow('does not advertise manual')
     expect(handler).not.toHaveBeenCalled()
@@ -67,6 +67,7 @@ describe('Claude Messages caller and native execution boundaries', () => {
     const state = await fixture(() => ++count === 1 ? claudeWire(1, [{ type: 'thinking', thinking: 'Public summary', signature: 'opaque-preserved' }, { type: 'tool_use', id: 'native.original/id', name: 'list_files', input: { path: '.' } }]) : claudeWire(count, [{ type: 'text', text: 'Done' }]))
     const turn = await state.adapter.sendPrompt({ taskId: 'task', text: 'List files' }); expect(await terminal(state.events, turn.turnId)).toMatchObject({ status: 'completed' })
     expect(state.requests[0].system).toContain(state.cwd); expect(state.requests[0].claude).toMatchObject({ mode: 'caller', nativeTools: [] })
+    expect(state.requests[0]).toMatchObject({ max_tokens: 128000 })
     expect(state.requests[0].tools.every(tool => tool.input_schema)).toBe(true)
     expect(state.requests[1]).toMatchObject({ previous_response_id: responseId(1), messages: [{ role: 'user', content: [{ type: 'tool_result', tool_use_id: 'native.original/id', content: expect.stringContaining('entries') }] }] })
     const saved = fs.readFileSync(state.history, 'utf8'); expect(saved).toContain('opaque-preserved'); expect(saved).not.toContain('private-fixture-key'); expect(JSON.stringify(state.events)).not.toContain('opaque-preserved')
@@ -154,6 +155,63 @@ describe('Claude Messages caller and native execution boundaries', () => {
       expect(await terminal(state.events, turn.turnId)).toMatchObject({ status: 'error', error: expect.stringContaining('unresolved native activity') })
       expect(JSON.parse(fs.readFileSync(state.history, 'utf8'))).toMatchObject({ lastResponseId: null, messages: [], pending: { state: 'uncertain' } })
       expect(state.urls.filter(url => url.endsWith('/cancel'))).toHaveLength(1)
+    }
+  })
+  it('honors the advertised per-request budget across heartbeats beyond ten minutes and a later caller round', async () => {
+    let controller!: ReadableStreamDefaultController<Uint8Array>, round = 0
+    const push = (event: unknown) => controller.enqueue(new TextEncoder().encode(claudeFrame(event)))
+    const records = (n: number) => claudeRecords(n, n === 1 ? [{ type: 'tool_use', id: 'late-list', name: 'list_files', input: { path: '.' } }] : [{ type: 'text', text: 'Done' }])
+    const state = await fixture(() => new Response(new ReadableStream<Uint8Array>({ start(value) { controller = value; push(records(++round)[0]) } }), { headers: { 'Content-Type': 'text/event-stream' } }), {}, { capabilities: { version: 1, provider: 'claude', limits: { turnTimeoutMs: 900_000 } } })
+    expect(state.urls).toContain('https://fixture.invalid/v1/claude/capabilities')
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'Date'] })
+    const turn = await state.adapter.sendPrompt({ taskId: 'task', text: 'Take time to list' })
+    for (const n of [1, 2]) {
+      await vi.waitFor(() => expect(state.requests).toHaveLength(n))
+      for (let heartbeat = 0; heartbeat < 7; heartbeat++) { push({ type: 'ping' }); await vi.advanceTimersByTimeAsync(90_000) }
+      expect(state.adapter.getStatus()).toBe('running')
+      expect(state.events.some(event => event.type === 'agent.status.changed' && event.scope === 'turn' && ['error', 'completed', 'stopped'].includes(event.status))).toBe(false)
+      for (const record of records(n).slice(1)) push(record)
+      controller.close()
+    }
+    expect(await terminal(state.events, turn.turnId)).toMatchObject({ status: 'completed' })
+    expect(state.requests[1].previous_response_id).toBe(responseId(1)); expect(state.urls.some(url => url.endsWith('/cancel'))).toBe(false)
+  })
+  it('fails closed at the advertised deadline while retaining explicit and legacy timeout behavior', async () => {
+    for (const scenario of [{ budget: 1000, timeout: undefined, deadline: 6000 }, { budget: 3_600_000, timeout: 10_000, deadline: 10_000 }, { budget: undefined, timeout: undefined, deadline: 600_000 }]) {
+      const state = await fixture(() => new Response(new ReadableStream<Uint8Array>({ start(controller) { controller.enqueue(new TextEncoder().encode(claudeFrame(claudeRecords(1, [])[0]))) } }), { headers: { 'Content-Type': 'text/event-stream' } }), { timeoutMs: scenario.timeout }, { capabilities: { version: 1, provider: 'claude', ...(scenario.budget !== undefined ? { limits: { turnTimeoutMs: scenario.budget } } : {}) } })
+      vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'Date'] })
+      const turn = await state.adapter.sendPrompt({ taskId: 'task', text: 'Wait' })
+      await vi.waitFor(() => expect(JSON.parse(fs.readFileSync(state.history, 'utf8')).pending?.responseId).toBe(responseId(1)))
+      await vi.advanceTimersByTimeAsync(scenario.deadline)
+      expect(await terminal(state.events, turn.turnId)).toMatchObject({ status: 'error', error: 'Claude request deadline exceeded; partial output was not committed' })
+      expect(state.urls.filter(url => url.endsWith('/cancel'))).toHaveLength(1)
+      expect(JSON.parse(fs.readFileSync(state.history, 'utf8'))).toMatchObject({ pending: { state: 'uncertain' } })
+      await expect(state.adapter.sendPrompt({ taskId: 'task', text: 'Do not replay' })).rejects.toThrow('not ready')
+      vi.useRealTimers()
+    }
+  })
+  it('keeps the owner question expiry distinct from a longer advertised request deadline', async () => {
+    const questionId = `question_${'d'.repeat(32)}`
+    const state = await fixture(() => new Response(new ReadableStream<Uint8Array>({ start(controller) {
+      for (const event of [claudeRecords(1, [])[0], { type: 'claude.question', version: 1, response_id: responseId(1), question: { id: questionId, request: { questions: [{ question: 'Continue?', options: [{ label: 'Yes' }, { label: 'No' }] }] } } }]) controller.enqueue(new TextEncoder().encode(claudeFrame(event)))
+    } }), { headers: { 'Content-Type': 'text/event-stream' } }), { connection: { id: 'fixture', name: 'Native', baseUrl: 'https://fixture.invalid', model: 'fixture-model', enabled: true, hasApiKey: false, transport: 'anthropic-messages', profile: 'claude-connector-v1', claude: { mode: 'native', nativeTools: ['AskUserQuestion'] } } }, { capabilities: { version: 1, provider: 'claude', limits: { turnTimeoutMs: 900_000 }, toolCatalog: ['AskUserQuestion'], discoveredTools: [{ name: 'AskUserQuestion', available: true, enabled: true }] } })
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'Date'] })
+    const turn = await state.adapter.sendPrompt({ taskId: 'task', text: 'Ask and wait' })
+    await vi.waitFor(() => expect(state.events.some(event => event.type === 'interaction.requested')).toBe(true))
+    await vi.advanceTimersByTimeAsync(600_001)
+    expect(await terminal(state.events, turn.turnId)).toMatchObject({ status: 'error', error: 'Claude owner question or permission expired; the turn was cancelled' })
+    expect(state.events.some(event => event.type === 'interaction.state.changed' && event.interactionId === questionId && event.state === 'expired')).toBe(true)
+  })
+  it('reports max output failure and accepts terminal cleanup only for an exact matching failed response', async () => {
+    for (const matching of [true, false]) {
+      const state = await fixture(() => new Response([claudeRecords(1, [])[0], { type: 'error', error: { code: 'max_output_tokens', message: 'private provider content' } }].map(claudeFrame).join(''), { headers: { 'Content-Type': 'text/event-stream' } }))
+      const performFetch = state.options.fetch!
+      state.options.fetch = (async (url, init) => String(url).endsWith('/cancel') ? Response.json({ id: responseId(matching ? 1 : 2), status: 'failed', error: { code: 'max_output_tokens' }, claude: { requires_action: false } }) : performFetch(url, init)) as typeof fetch
+      const turn = await state.adapter.sendPrompt({ taskId: 'task', text: 'Large answer' }), end = await terminal(state.events, turn.turnId)
+      expect(end).toMatchObject({ status: 'error', error: expect.stringContaining('max_output_tokens') })
+      expect(JSON.stringify(end).includes('Cancellation could not be confirmed')).toBe(!matching)
+      expect(JSON.stringify(state.events)).not.toContain('private provider content')
+      expect(JSON.parse(fs.readFileSync(state.history, 'utf8'))).toMatchObject({ lastResponseId: null, pending: { state: 'uncertain' } }); expect(state.requests).toHaveLength(1)
     }
   })
 })

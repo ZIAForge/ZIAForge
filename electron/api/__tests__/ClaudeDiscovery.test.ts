@@ -19,7 +19,7 @@ const models = { data: [{ id: 'fixture-model', display_name: 'Fixture model', re
 
 describe('Claude Connector discovery and saved options', () => {
   it('defaults to caller execution without native tools or silent history import', () => {
-    expect(normalizeClaudeConnectionOptions()).toEqual({ mode: 'caller', nativeTools: [], permissionMode: 'manual', maxTurns: 30, maxTokens: 4096, historyMode: 'reject' })
+    expect(normalizeClaudeConnectionOptions()).toEqual({ mode: 'caller', nativeTools: [], permissionMode: 'manual', maxTurns: 30, maxTokens: 128000, historyMode: 'reject' })
     expect(normalizeClaudeConnectionOptions({ nativeTools: undefined }).nativeTools).toEqual([])
     const original = { nativeTools: ['Read'], outputSchema: { type: 'object', properties: { result: { type: 'string' } } } }
     const normalized = normalizeClaudeConnectionOptions(original)
@@ -29,7 +29,7 @@ describe('Claude Connector discovery and saved options', () => {
   it('validates bounded options and refuses native escalation, malformed thinking and non-JSON schemas', () => {
     expect(validClaudeConnectionOptions({ mode: 'native', permissionMode: 'acceptEdits', nativeTools: ['Read'], maxTokens: 8192, maxTurns: 100, thinking: { type: 'enabled', budget_tokens: 2048, display: 'summarized' }, historyMode: 'context' })).toBe(true)
     const cyclic: Record<string, unknown> = {}; cyclic.self = cyclic
-    for (const value of [{ mode: ['caller'] }, { permissionMode: 'bypassPermissions' }, { allowedTools: ['Bash'] }, { nativeTools: ['Read', 'Read'] }, { nativeTools: ['Bash(*)'] }, { maxTurns: 101 }, { maxTokens: 128001 }, { maxTokens: 1.5 }, { thinking: { type: 'enabled', budget_tokens: 4096 } }, { thinking: { type: 'adaptive', budget_tokens: 1024 } }, { thinking: { type: 'disabled', display: 'omitted' } }, { outputSchema: cyclic }, { outputSchema: { invalid: undefined } }, { outputSchema: { huge: 'x'.repeat(131073) } }]) expect(validClaudeConnectionOptions(value)).toBe(false)
+    for (const value of [{ mode: ['caller'] }, { permissionMode: 'bypassPermissions' }, { allowedTools: ['Bash'] }, { nativeTools: ['Read', 'Read'] }, { nativeTools: ['Bash(*)'] }, { maxTurns: 101 }, { maxTokens: 128001 }, { maxTokens: 1.5 }, { maxTokens: 4096, thinking: { type: 'enabled', budget_tokens: 4096 } }, { thinking: { type: 'enabled', budget_tokens: 128000 } }, { thinking: { type: 'adaptive', budget_tokens: 1024 } }, { thinking: { type: 'disabled', display: 'omitted' } }, { outputSchema: cyclic }, { outputSchema: { invalid: undefined } }, { outputSchema: { huge: 'x'.repeat(131073) } }]) expect(validClaudeConnectionOptions(value)).toBe(false)
   })
   it('preserves model-declared capabilities without inventing missing thinking or token budgets', () => {
     expect(claudeModelMetadata(models.data[0])).toEqual({ label: 'Fixture model', supportedReasoningEfforts: ['low', 'high'], contextWindows: [] })

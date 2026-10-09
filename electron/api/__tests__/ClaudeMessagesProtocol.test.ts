@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto'
 import { describe, expect, it, vi } from 'vitest'
-import { consumeClaudeMessagesStream, downloadClaudeArtifact, type ClaudeArtifactMetadata } from '../ClaudeMessagesProtocol'
+import { ClaudeTerminalError, consumeClaudeMessagesStream, downloadClaudeArtifact, type ClaudeArtifactMetadata } from '../ClaudeMessagesProtocol'
 import { claudeFrame, claudeRecords, claudeWire, responseId } from './claudeFixture'
 const callbacks = () => ({ signal: new AbortController().signal, onText: vi.fn(), onThinking: vi.fn(), onResponseId: vi.fn(), onExtension: vi.fn() })
 describe('Claude Messages protocol', () => {
@@ -30,5 +30,19 @@ describe('Claude Messages protocol', () => {
     await expect(downloadClaudeArtifact('https://fixture.invalid', { ...metadata, api_url: 'https://foreign.invalid/steal' }, 'private-key', new AbortController().signal, fetcher)).rejects.toThrow()
     await expect(downloadClaudeArtifact('https://fixture.invalid', { ...metadata, sha256: '0'.repeat(64) }, 'private-key', new AbortController().signal, fetcher)).rejects.toThrow('integrity')
     expect(fetcher).toHaveBeenCalledTimes(2)
+  })
+  it('retains only reviewed terminal codes and their bound response identity without exposing provider error bodies', async () => {
+    for (const code of ['max_output_tokens', 'native_timeout'] as const) {
+      const error = { type: 'error', error: { code, type: 'api_error', message: 'private provider content', signature: 'private-signature' } }
+      for (const bound of [true, false]) {
+        const records = [...(bound ? [claudeRecords(1, [])[0]] : []), error]
+        const failure = await consumeClaudeMessagesStream(new Response(records.map(claudeFrame).join(''), { headers: { 'Content-Type': 'text/event-stream' } }), callbacks()).catch(value => value)
+        expect(failure).toBeInstanceOf(ClaudeTerminalError)
+        expect(failure).toMatchObject({ code, responseId: bound ? responseId(1) : undefined })
+        expect(failure.message).toContain(code); expect(failure.message).not.toContain('private')
+      }
+    }
+    const limited = claudeRecords(1, [{ type: 'text', text: 'Partial' }]).map(record => record.type === 'message_delta' ? { ...record, delta: { stop_reason: 'max_tokens' } } : record)
+    await expect(consumeClaudeMessagesStream(new Response(limited.map(claudeFrame).join(''), { headers: { 'Content-Type': 'text/event-stream' } }), callbacks())).rejects.toMatchObject({ code: 'max_output_tokens', responseId: responseId(1) })
   })
 })
